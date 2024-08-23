@@ -45,6 +45,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.activity.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.DashboardActivity"
             android:exported="false" />
         <activity
@@ -57,7 +60,7 @@
             android:name=".ui.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name=".ui.activity.ChildMissingActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="true"
             android:screenOrientation="portrait"></activity>
