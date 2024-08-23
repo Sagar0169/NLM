@@ -11,5 +11,8 @@
     <color name="darkBlue">#141B5D</color>
     <color name="light_gray">#E0E0E0</color> <!-- Customize the color code as per your design -->
     <color name="text_gray">#555555</color> <!-- Text color to match the design -->
+    <color name="gray_300">#dbdbdb</color>
+    <color name="your_checked_color">#141B5D</color>
+    <color name="your_unchecked_color">#dbdbdb</color>
 
 </resources>
