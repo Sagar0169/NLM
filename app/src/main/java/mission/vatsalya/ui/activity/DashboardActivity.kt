@@ -41,6 +41,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
 //            showCustomDialog()
         }
+        mBinding?.leftDrawerMenu?.tvform1?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, ChildMissingActivity::class.java)
+            startActivity(intent)
+//            showCustomDialog()
+        }
 
     }
 
