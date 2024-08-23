@@ -1,5 +1,7 @@
 package mission.vatsalya.ui.activity
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +27,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
 
+
+        mBinding?.contentNav?.ivDrawer?.setOnClickListener {
+            toggleLeftDrawer()
+        }
+        mBinding?.leftDrawerMenu?.tvform4?.setOnClickListener{
+            val intent = Intent(this@DashboardActivity, EditProfile::class.java)
+            startActivity(intent)
+        }
 
         mBinding?.contentNav?.tvMyChildMissing?.setOnClickListener {
             showCustomDialog()
@@ -69,4 +79,12 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             mBinding?.drawerLayout?.openDrawer(GravityCompat.START)
         }
     }
+
+    @SuppressLint("MissingSuperCall")
+    override fun  onBackPressed() {
+       finishAffinity()
+         // This will close the app and all the activities in the task.
+    }
+
+
 }

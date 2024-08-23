@@ -134,7 +134,7 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/etEmployeeId"
+                        android:id="@+id/etName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.34"
@@ -190,7 +190,7 @@
                         android:enabled="false"
                         android:fontFamily="@font/poppins_regular"
                         android:singleLine="true"
-                        android:text="NA"
+
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -243,7 +243,7 @@
                         android:inputType="phone"
                         android:maxLength="10"
                         android:singleLine="true"
-                        android:text="NA"
+
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -292,7 +292,7 @@
                         android:inputType="phone"
                         android:maxLength="10"
                         android:singleLine="true"
-                        android:text="NA"
+
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -341,7 +341,7 @@
                         android:inputType="phone"
                         android:maxLength="10"
                         android:singleLine="true"
-                        android:text="NA"
+
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="14sp" />

@@ -65,6 +65,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 //                    otpVerify(typedOTP)
                     val intent = Intent(this@OtpActivity, DashboardActivity::class.java)
                     startActivity(intent)
+                    finish()
 
                 } else {
                     toast(getString(R.string.please_enter_correct_otp))
