@@ -25,27 +25,7 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
     override fun initView() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
-        mBinding!!.etMobile.setText("+91")
-        mBinding!!.etMobile.text?.let { mBinding!!.etMobile.setSelection(it.length) }
-
-
-        mBinding!!.etMobile.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                // Ensure that the prefix +91 is always present
-                if (!s.toString().startsWith("+91")) {
-                    mBinding!!.etMobile.setText("+91")
-                    mBinding!!.etMobile.text?.let { mBinding!!.etMobile.setSelection(it.length) }
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Not needed
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Not needed
-            }
-        })
+      
     }
 
     override fun setVariables() {

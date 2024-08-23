@@ -1,6 +1,11 @@
 package mission.vatsalya.ui.activity
 
+import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
+import android.view.Window
+import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -21,9 +26,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding = viewDataBinding
 
 
-//        mBinding?.contentNav?.ivBackPress?.setOnClickListener {
-//            toggleLeftDrawer()
-//        }
+        mBinding?.contentNav?.tvMyChildMissing?.setOnClickListener {
+            showCustomDialog()
+        }
 
     }
 
@@ -32,6 +37,30 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     override fun setObservers() {
     }
+
+    private fun showCustomDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_caution) // Replace with your dialog layout file name
+
+        val tvPocsoLink: TextView = dialog.findViewById(R.id.tvPocsoLink)
+        val btnProceed: Button = dialog.findViewById(R.id.btnProceed)
+
+        // Handle the click on the POCSO Act link
+        tvPocsoLink.setOnClickListener {
+            Log.d("CustomDialog", "POCSO Act 2012 link clicked")
+        }
+
+        // Handle the click on the Proceed button
+        btnProceed.setOnClickListener {
+            dialog.dismiss()
+            // Continue with the proceed action
+        }
+
+        dialog.show()
+    }
+
 
     private fun toggleLeftDrawer() {
         if (mBinding?.drawerLayout?.isDrawerOpen(GravityCompat.START) == true) {
