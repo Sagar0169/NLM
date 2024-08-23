@@ -1,8 +1,13 @@
 package mission.vatsalya.ui.activity
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
@@ -14,6 +19,7 @@ import mission.vatsalya.R
 import mission.vatsalya.databinding.ActivityChildMissingBinding
 import mission.vatsalya.databinding.ActivityLoginBinding
 import mission.vatsalya.ui.fragment.BasicDetailsFragment
+import mission.vatsalya.ui.fragment.FacialAttributesFragment
 import mission.vatsalya.utilities.BaseActivity
 
 class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
@@ -30,7 +36,7 @@ class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
         // Set default fragment
 
             loadFragment(BasicDetailsFragment())
-
+        showCustomDialog()
     }
 
     override fun setVariables() {
@@ -54,6 +60,29 @@ class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
             onBackPressedDispatcher.onBackPressed()
         }
     }
+    private fun showCustomDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_caution) // Replace with your dialog layout file name
+
+        val tvPocsoLink: TextView = dialog.findViewById(R.id.tvPocsoLink)
+        val btnProceed: Button = dialog.findViewById(R.id.btnProceed)
+
+        // Handle the click on the POCSO Act link
+        tvPocsoLink.setOnClickListener {
+            Log.d("CustomDialog", "POCSO Act 2012 link clicked")
+        }
+
+        // Handle the click on the Proceed button
+        btnProceed.setOnClickListener {
+            dialog.dismiss()
+            // Continue with the proceed action
+        }
+
+        dialog.show()
+    }
+
     private fun setupTabLayout() {
         mBinding?.tabLayout?.apply {
             addTab(newTab().setText("Basic Details"))
@@ -72,7 +101,7 @@ class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
                         0 -> loadFragment(BasicDetailsFragment())
-//                        1 -> loadFragment(FragmentTwo())
+                        1 -> loadFragment(FacialAttributesFragment())
 //                        2 -> loadFragment(FragmentThree())
 //                        3 -> loadFragment(FragmentFour())
 //                        4 -> loadFragment(FragmentFive())
