@@ -20,6 +20,7 @@
         android:background="@drawable/headear_back_small">
 
         <LinearLayout
+           android:layout_toStartOf="@+id/llEditImage"
             android:id="@+id/ll1"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
@@ -33,17 +34,17 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/ic_back" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/tvWelcome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@mipmap/logo"
+                android:text="Edit Profile"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_20"
                 android:textStyle="bold" />
         </LinearLayout>
-    </RelativeLayout>
         <RelativeLayout
             android:id="@+id/llEditImage"
             android:layout_width="wrap_content"
@@ -90,8 +91,10 @@
                 android:text="Edit"
                 android:textColor="@color/white"
                 android:textSize="15sp"
-              />
+                />
         </RelativeLayout>
+    </RelativeLayout>
+
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
