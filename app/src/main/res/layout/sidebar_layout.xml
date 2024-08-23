@@ -18,58 +18,63 @@
             android:layout_height="wrap_content"
             android:background="@color/darkBlue"
             android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <View
+                android:id="@+id/vv1"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:id="@+id/vv1"/>
+                android:layout_height="30dp" />
 
             <LinearLayout
-                android:layout_marginBottom="25dp"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_marginHorizontal="16dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="25dp"
                 android:orientation="horizontal">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivp1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/home_person" />
+
                 <LinearLayout
-                    android:padding="5dp"
-                    android:layout_weight="0.9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="vertical">
+                    android:layout_weight="0.9"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rohan"
                         android:fontFamily="@font/roboto_bold"
+                        android:text="Rohan"
                         android:textColor="@color/white" />
+
                     <TextView
                         android:id="@+id/tvName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+919123456789"
                         android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/white"/>
+                        android:text="+919123456789"
+                        android:textColor="@color/white" />
                 </LinearLayout>
+
                 <ImageView
                     android:id="@+id/ivEdit"
-                    android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:src="@drawable/edit" />
             </LinearLayout>
 
         </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/ll"
             android:layout_width="match_parent"
@@ -79,41 +84,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rl">
 
-        <TextView
-            android:drawableStart="@drawable/ic_home"
-            android:id="@+id/tvHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:drawablePadding="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:paddingVertical="10dp"
-            android:text="@string/home"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            />
-
-        <View
-            android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="10dp"
-            android:background="@color/black" />
             <TextView
-                android:drawableStart="@drawable/img_4"
+                android:id="@+id/tvHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/ic_home"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:paddingVertical="10dp"
+                android:text="@string/home"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/black" />
+
+            <TextView
                 android:id="@+id/tvform1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/img_4"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/roboto_regular"
                 android:paddingVertical="10dp"
                 android:text="@string/my_child_is_missing"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-               />
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/view2"
@@ -121,20 +125,20 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@color/black" />
+
             <TextView
-                android:drawableStart="@drawable/img_4"
                 android:id="@+id/tvform2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/img_4"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/roboto_regular"
                 android:paddingVertical="10dp"
                 android:text="@string/i_have_sighted_a_child"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/view3"
@@ -142,20 +146,20 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@color/black" />
+
             <TextView
-                android:drawableStart="@drawable/img_3"
                 android:id="@+id/tvform3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/img_3"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/roboto_regular"
                 android:paddingVertical="10dp"
                 android:text="@string/i_am_searching_for_a_child"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/view5"
@@ -163,20 +167,20 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@color/black" />
+
             <TextView
-                android:drawableStart="@drawable/baseline_person_24"
                 android:id="@+id/tvform4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/baseline_person_24"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/roboto_regular"
                 android:paddingVertical="10dp"
                 android:text="Profile"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/view6"
@@ -184,19 +188,20 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@color/black" />
-            <TextView android:drawableStart="@drawable/lock"
+
+            <TextView
                 android:id="@+id/tvChangePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/lock"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/roboto_regular"
                 android:paddingVertical="10dp"
                 android:text="@string/change_pasword"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-              />
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/view4"
@@ -206,5 +211,22 @@
                 android:background="@color/black" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:paddingVertical="10dp"
+            android:text="@string/logout"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/logout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

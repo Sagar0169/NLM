@@ -31,7 +31,16 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.contentNav?.ivDrawer?.setOnClickListener {
             toggleLeftDrawer()
         }
-        mBinding?.leftDrawerMenu?.tvform4?.setOnClickListener{
+        mBinding?.leftDrawerMenu?.tvform4?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, EditProfile::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        mBinding?.leftDrawerMenu?.ivEdit?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, EditProfile::class.java)
             startActivity(intent)
         }
@@ -81,9 +90,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     }
 
     @SuppressLint("MissingSuperCall")
-    override fun  onBackPressed() {
-       finishAffinity()
-         // This will close the app and all the activities in the task.
+    override fun onBackPressed() {
+        finishAffinity()
+        // This will close the app and all the activities in the task.
     }
 
 
