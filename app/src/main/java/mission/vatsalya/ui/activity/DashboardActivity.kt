@@ -37,7 +37,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
 
         mBinding?.contentNav?.tvMyChildMissing?.setOnClickListener {
-            showCustomDialog()
+            val intent = Intent(this@DashboardActivity, ChildMissingActivity::class.java)
+            startActivity(intent)
+//            showCustomDialog()
         }
 
     }
