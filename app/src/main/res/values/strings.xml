@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Vatsalya</string>
+    <string name="Ok">Ok\n</string>
+    <string name="please_enter_correct_otp">Please enter correct otp</string>
+    <string name="please_enter_correct_Mobile">Please enter correct Mobile Number</string>
+    <string name="login_successful">Login Successful</string>
+
+    <string name="please_enter_otp">Please enter otp\n</string>
+    <string name="not_registered_please_register_as_citizen"> <font color='red'><u>Not Registered?</u></font> Please Register as Citizen</string>
+    <string name="already_login">Already Registered? <font color='blue'><u>Login</u></font></string>
+    <string name="i_accept_the_terms_and_conditions_as_mentioned_on_this_portal">I accept the <font color='blue'><u>Terms and Conditions</u></font> as mentioned on this portal</string>
+</resources>
