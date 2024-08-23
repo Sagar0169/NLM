@@ -9,4 +9,6 @@
     <string name="not_registered_please_register_as_citizen"> <font color='red'><u>Not Registered?</u></font> Please Register as Citizen</string>
     <string name="already_login">Already Registered? <font color='blue'><u>Login</u></font></string>
     <string name="i_accept_the_terms_and_conditions_as_mentioned_on_this_portal">I accept the <font color='blue'><u>Terms and Conditions</u></font> as mentioned on this portal</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

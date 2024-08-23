@@ -24,6 +24,7 @@ picasso = "2.71828"
 rxandroid = "2.1.1"
 rxkotlin = "2.4.0"
 viewpager2 = "1.0.0"
+runtimeSavedInstanceState = "1.0.0-alpha11"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,6 +54,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "adapterR
 retrofit2-adapter-rxjava2 = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "adapterRxjava2" }
 rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid" }
 rxkotlin = { module = "io.reactivex.rxjava2:rxkotlin", version.ref = "rxkotlin" }
+androidx-runtime-saved-instance-state = { group = "androidx.compose.runtime", name = "runtime-saved-instance-state", version.ref = "runtimeSavedInstanceState" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
