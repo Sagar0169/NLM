@@ -79,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rl">
 
         <TextView
-
+            android:drawableStart="@drawable/ic_home"
             android:id="@+id/tvHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             android:layout_marginHorizontal="10dp"
             android:background="@color/black" />
             <TextView
-
+                android:drawableStart="@drawable/img_4"
                 android:id="@+id/tvform1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:background="@color/black" />
             <TextView
-
+                android:drawableStart="@drawable/img_4"
                 android:id="@+id/tvform2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:background="@color/black" />
             <TextView
-
+                android:drawableStart="@drawable/img_3"
                 android:id="@+id/tvform3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:background="@color/black" />
             <TextView
-
+                android:drawableStart="@drawable/baseline_person_24"
                 android:id="@+id/tvform4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/roboto_regular"
                 android:paddingVertical="10dp"
-                android:text="@string/profile_management"
+                android:text="Profile"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 />
@@ -183,7 +183,7 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@color/black" />
-            <TextView
+            <TextView android:drawableStart="@drawable/lock"
                 android:id="@+id/tvChangePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -1,5 +1,7 @@
 package mission.vatsalya.ui.activity
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,9 +23,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding = viewDataBinding
 
 
-//        mBinding?.contentNav?.ivBackPress?.setOnClickListener {
-//            toggleLeftDrawer()
-//        }
+        mBinding?.contentNav?.ivDrawer?.setOnClickListener {
+            toggleLeftDrawer()
+        }
+        mBinding?.leftDrawerMenu?.tvform4?.setOnClickListener{
+            val intent = Intent(this@DashboardActivity, EditProfile::class.java)
+            startActivity(intent)
+        }
+
 
     }
 
@@ -40,4 +47,12 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             mBinding?.drawerLayout?.openDrawer(GravityCompat.START)
         }
     }
+
+    @SuppressLint("MissingSuperCall")
+    override fun  onBackPressed() {
+       finishAffinity()
+         // This will close the app and all the activities in the task.
+    }
+
+
 }
