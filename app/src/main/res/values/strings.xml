@@ -9,6 +9,15 @@
     <string name="not_registered_please_register_as_citizen"> <font color='red'><u>Not Registered?</u></font> Please Register as Citizen</string>
     <string name="already_login">Already Registered? <font color='blue'><u>Login</u></font></string>
     <string name="i_accept_the_terms_and_conditions_as_mentioned_on_this_portal">I accept the <font color='blue'><u>Terms and Conditions</u></font> as mentioned on this portal</string>
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Dashboard</string>
+    <string name="my_child_is_missing">My Child is Missing</string>
+    <string name="i_have_sighted_a_child">I Have Sighted A Child</string>
+    <string name="i_am_searching_for_a_child">I am searching for a child</string>
+    <string name="profile_management">Profile management</string>
+    <string name="change_pasword">Change pasword</string>
+    <string name="logout">Logout</string>
+    <string name="choose_file">Choose File</string>
+    <string name="how_you_are_being_harrassed">How you are being\nharassed?</string>
+    <string name="pocso_act_2012"><u>POCSO Act 2012</u></string>
 </resources>

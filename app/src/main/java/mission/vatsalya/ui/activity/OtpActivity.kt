@@ -1,6 +1,7 @@
 package mission.vatsalya.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.CountDownTimer
 import android.text.Editable
@@ -62,6 +63,9 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
             if (typedOTP.isNotEmpty()) {
                 if (typedOTP.length == 6) {
 //                    otpVerify(typedOTP)
+                    val intent = Intent(this@OtpActivity, DashboardActivity::class.java)
+                    startActivity(intent)
+                    finish()
 
                 } else {
                     toast(getString(R.string.please_enter_correct_otp))

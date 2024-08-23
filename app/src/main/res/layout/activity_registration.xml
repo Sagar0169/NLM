@@ -97,6 +97,8 @@
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:maxLength="50"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -111,17 +113,43 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <EditText
-                    android:id="@+id/etMobile"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:maxLength="10"
-                    android:inputType="phone"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_7">
+
+                    <!-- Fixed Country Code +91 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/back_number_gray"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:text="+91"
+                        android:textColor="#555555"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- EditText for Mobile Number -->
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etMobile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="Enter Your 10 Digit Mobile Number"
+                        android:inputType="phone"
+                        android:textColorHint="@color/grey"
+                        android:maxLength="10"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tvPhoneNumber"
@@ -141,6 +169,8 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:maxLength="10"
                     android:inputType="phone"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -165,6 +195,8 @@
                     android:inputType="textEmailAddress"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
                     android:singleLine="true" />
 
                 <TextView
@@ -184,6 +216,8 @@
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:maxLength="100"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
                     android:inputType="textMultiLine"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_20" />
@@ -206,6 +240,7 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:hint="-- Select State --"
+                    android:enabled="false"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -231,6 +266,7 @@
                     android:hint="-- Select District --"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
+                    android:enabled="false"
                     android:singleLine="true"
                     android:textColorHint="#6B6B6B" />
 
@@ -253,6 +289,8 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:maxLength="50"
                     android:inputType="phone"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -282,7 +320,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".4"
                         android:gravity="center"
+                        android:background="@drawable/back_number_gray"
                         android:padding="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_14"
                         android:text="Choose File" />
 
                     <View
@@ -296,6 +337,8 @@
                         android:layout_weight="1.6"
                         android:gravity="center"
                         android:padding="@dimen/dp_10"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/sp_14"
                         android:text="No File Chosen" />
 
                 </LinearLayout>
@@ -361,24 +404,39 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/dp_5">
+                    android:orientation="horizontal">
 
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_7">
+
+                    <!-- Fixed Country Code +91 -->
                     <CheckBox
                         android:id="@+id/cbTermsAndConditions"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="match_parent"
+                        android:buttonTint="@color/grey"
+                        />
 
                     <TextView
                         android:id="@+id/tvTermsAndConditions"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:text="@string/i_accept_the_terms_and_conditions_as_mentioned_on_this_portal"
                         android:textColor="@color/black"
-                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
                         android:textSize="@dimen/sp_14" />
-                </LinearLayout>
 
+                </LinearLayout>
                 <TextView
                     android:id="@+id/tvSendOtp"
                     android:layout_width="match_parent"
