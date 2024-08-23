@@ -258,7 +258,7 @@ open class CustomBindingAdapter {
 //                            .glideBaseOptions(R.drawable.ic_image_placeholder)
 //                }
 //                if (isWithoutCache) {
-//                    //TODO: Uncomment code if want to remove cache
+//
 //                    /*Glide.with(view.getContext())
 //                        .load(imageUrl)
 //                        .diskCacheStrategy(DiskCacheStrategy.NONE)
