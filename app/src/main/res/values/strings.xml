@@ -6,7 +6,7 @@
     <string name="login_successful">Login Successful</string>
 
     <string name="please_enter_otp">Please enter otp\n</string>
-    <string name="not_registered_please_register_as_citizen"> <font color='red'><u>Not Registered?</u></font> Please Register as Citizen</string>
+    <string name="not_registered_please_register_as_citizen"> <font color='blue'><u>Not Registered</u>?</font> Please Register as Citizen</string>
     <string name="already_login">Already Registered? <font color='blue'><u>Login</u></font></string>
     <string name="i_accept_the_terms_and_conditions_as_mentioned_on_this_portal">I accept the <font color='blue'><u>Terms and Conditions</u></font> as mentioned on this portal</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -37,4 +37,80 @@ Contact information entered can be made available to law enforcement agencies if
 I understand that uploading any obscene or indecent picture/video will attract serious criminal liability.</string>
     <string name="i_accept_the_terms"> <font color='red'>*</font>I accept the Terms and Conditions as mentioned on this portal</string>
     <string name="gender">Gender<font color='red'>*</font></string>
+
+    <string name="usage_terms_and_conditions_sighted">PLEASE READ THESE PORTAL USAGE TERMS AND CONDITIONS CAREFULLY BEFORE USING THIS PORTAL.\n
+\n
+Uploading information about sighted/found child\n
+The information entered by me has been provided in good faith.\nI have satisfied myself that the child may be abandoned run away trafficked kidnapped or missing and is in need of assistance care and protection.\n
+Contact information entered can be made available to law enforcement agencies if required.\nI have taken precaution not to disclose the facts/details of the offence if any committed by such child.\nI have also taken precaution not to disclose any information regarding victim or suspected victim of child sexual abuse.\nI understand that uploading any obscene or indecent picture/video will attract serious criminal liability.</string>
+    <string-array name="year_array">
+        <item>Year</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+    </string-array>
+
+    <string-array name="month_array">
+        <item>Month</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+
+
+    <string-array name="feet_array">
+        <item>Feet</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="inches_array">
+        <item>Inches</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+    <string name="submit">Submit</string>
+    <string name="save">Save</string>
+
 </resources>
+

@@ -140,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:hint="Enter Your 10 Digit Mobile Number"
+                        android:hint="Enter 10 Digit No."
                         android:inputType="phone"
                         android:maxLength="10"
                         android:textColorHint="@color/grey"

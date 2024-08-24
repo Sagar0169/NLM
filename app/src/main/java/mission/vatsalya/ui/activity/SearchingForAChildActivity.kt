@@ -8,62 +8,58 @@ import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import mission.vatsalya.R
 import mission.vatsalya.databinding.ActivityChildMissingBinding
-import mission.vatsalya.databinding.ActivityLoginBinding
+import mission.vatsalya.databinding.ActivitySearchingForAchildBinding
 import mission.vatsalya.ui.fragment.BasicDetailsFragment
-import mission.vatsalya.ui.fragment.ConfirmationFragments
 import mission.vatsalya.ui.fragment.FacialAttributesFragment
-import mission.vatsalya.ui.fragment.FamilyDetailsFragment
-import mission.vatsalya.ui.fragment.FirDetailsFragment
-import mission.vatsalya.ui.fragment.LocationDetailsFragment
-import mission.vatsalya.ui.fragment.PhysicalAttributesFragment
-import mission.vatsalya.ui.fragment.UploadMediaFragment
+import mission.vatsalya.ui.fragment.QuickSearchFragment
+import mission.vatsalya.ui.fragment.TextSeachFragment
 import mission.vatsalya.utilities.BaseActivity
 
-class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
-
-    private var mBinding: ActivityChildMissingBinding? = null
-
+class SearchingForAChildActivity() : BaseActivity<ActivitySearchingForAchildBinding>() {
     override val layoutId: Int
-        get() = R.layout.activity_child_missing
+        get() = R.layout.activity_searching_for_achild
+
+    private var mBinding: ActivitySearchingForAchildBinding?=null
 
     override fun initView() {
-        mBinding = viewDataBinding
+        mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         setupTabLayout()
         // Set default fragment
 
-        loadFragment(BasicDetailsFragment())
+        loadFragment(QuickSearchFragment())
         showCustomDialog()
     }
 
     override fun setVariables() {
+
     }
 
     override fun setObservers() {
-    }
 
+    }
     inner class ClickActions {
 
         fun login(view: View) {
-            val intent = Intent(this@ChildMissingActivity, OtpActivity::class.java)
-            startActivity(intent)
+
 
         }
-
         fun register(view: View) {
-            val intent = Intent(this@ChildMissingActivity, RegistrationActivity::class.java)
-            startActivity(intent)
+
         }
 
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
     }
-
     private fun showCustomDialog() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -89,29 +85,16 @@ class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
 
     private fun setupTabLayout() {
         mBinding?.tabLayout?.apply {
-            addTab(newTab().setText("Basic Details"))
-            addTab(newTab().setText("Facial Attributes"))
-            addTab(newTab().setText("Physical Attributes"))
-            addTab(newTab().setText("Family Details"))
-            addTab(newTab().setText("Location details"))
-            addTab(newTab().setText("Upload Media"))
+            addTab(newTab().setText("Quick Search"))
+            addTab(newTab().setText("Text Search"))
 
-            addTab(newTab().setText("Fir detail"))
-
-            addTab(newTab().setText("Confirmation"))
 
 
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
-                        0 -> loadFragment(BasicDetailsFragment())
-                        1 -> loadFragment(FacialAttributesFragment())
-                        2 -> loadFragment(PhysicalAttributesFragment())
-                        3 -> loadFragment(FamilyDetailsFragment())
-                        4 -> loadFragment(LocationDetailsFragment())
-                        5 -> loadFragment(UploadMediaFragment())
-                        6 -> loadFragment(FirDetailsFragment())
-                        7 -> loadFragment(ConfirmationFragments())
+                        0 -> loadFragment(QuickSearchFragment())
+                        1 -> loadFragment(TextSeachFragment())
                     }
                 }
 
@@ -131,4 +114,6 @@ class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
             .replace(R.id.frameLayout, fragment)
             .commit()
     }
+
+
 }

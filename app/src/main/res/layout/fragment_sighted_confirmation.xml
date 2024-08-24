@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="ClickAction"
+            type="mission.vatsalya.ui.fragment.SightedConfirmationFragment.ClickActions" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.BasicDetailsFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/llParent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+
+
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvHead"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/dp_20"-->
+                <!--                    android:text="Hospital for assessment/issue of UDID card/ diability certtificate "-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="@dimen/sp_20" />-->
+
+
+
+
+
+                <TextView
+                    android:id="@+id/tvIdProof"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/play_bold"
+                    android:layout_gravity="center"
+                    android:text="Usage Terms and Conditions"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_20" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightGrey"/>
+
+                <LinearLayout
+                    android:id="@+id/llApplicantPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:paddingHorizontal="@dimen/dp_15"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:fontFamily="@font/opensans_regular"
+                        android:text="@string/usage_terms_and_conditions_sighted"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+
+                    android:background="@color/lightGrey"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:orientation="horizontal">
+
+                    <!-- Fixed Country Code +91 -->
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/cbTermsAndConditions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:buttonIconTint="@color/white"
+                        app:buttonTint="@color/darkBlue" />
+
+                    <TextView
+                        android:id="@+id/tvTermsAndConditions"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/i_accept_the_terms_and_conditions_as_mentioned_on_this_portal"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_14" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvSendBtnLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@drawable/curve_fill_blue"
+                    android:clickable="true"
+                    android:onClick="@{ClickAction::submit}"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:paddingVertical="@dimen/dp_10"
+                    android:text="Submit"
+                    android:textColor="@color/white" />
+
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </FrameLayout>
+</layout>

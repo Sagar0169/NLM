@@ -33,6 +33,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.SightedChildActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SearchingForAChildActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.EditProfile"
             android:exported="false" />
         <activity
@@ -63,7 +72,7 @@
             android:name=".ui.activity.ChildMissingActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

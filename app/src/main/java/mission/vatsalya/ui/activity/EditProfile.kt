@@ -40,16 +40,18 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
 
         }
         fun edit(view: View){
-          mBinding?.tvEdit?.setOnClickListener {
-              mBinding?.etName?.isEnabled=true
-              mBinding?.etName?.requestFocus()
-              val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-              imm.showSoftInput(mBinding?.etName, InputMethodManager.SHOW_IMPLICIT)
-              mBinding?.etEmail?.isEnabled=true
-              mBinding?.etphoneNumber?.isEnabled=true
-              mBinding?.etContactNumber?.isEnabled=true
-              mBinding?.etPinCode?.isEnabled=true
-          }
+            mBinding?.tvEdit?.setOnClickListener {
+                mBinding?.etName?.isEnabled=true
+                mBinding?.etName?.requestFocus()
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(mBinding?.etName, InputMethodManager.SHOW_IMPLICIT)
+                mBinding?.etEmail?.isEnabled=true
+                mBinding?.etphoneNumber?.isEnabled=true
+                mBinding?.etMobile?.isEnabled=true
+                mBinding?.rbMale?.isEnabled=true
+                mBinding?.rbFemale?.isEnabled=true
+
+            }
         }
         fun dob(view: View){
 

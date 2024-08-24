@@ -35,6 +35,13 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, EditProfile::class.java)
             startActivity(intent)
         }
+
+        mBinding?.leftDrawerMenu?.tvChangePassword?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, ChangePasswordActivity::class.java)
+            startActivity(intent)
+        }
+
+
         mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, LoginActivity::class.java)
             startActivity(intent)
@@ -50,14 +57,34 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
 //            showCustomDialog()
         }
-        mBinding?.leftDrawerMenu?.tvform1?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, ChildMissingActivity::class.java)
+
+        mBinding?.contentNav?.tvEnterDetails?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, SightedChildActivity::class.java)
             startActivity(intent)
 //            showCustomDialog()
         }
 
-    }
+        mBinding?.leftDrawerMenu?.tvform1?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, ChildMissingActivity::class.java)
+            startActivity(intent)
 
+        }
+        mBinding?.leftDrawerMenu?.tvform2?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, SightedChildActivity::class.java)
+            startActivity(intent)
+
+        }
+        mBinding?.leftDrawerMenu?.tvform3?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, SearchingForAChildActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.contentNav?.tvSearchChild?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, SearchingForAChildActivity::class.java)
+            startActivity(intent)
+
+        }
+
+    }
     override fun setVariables() {
     }
 
