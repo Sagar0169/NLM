@@ -5,7 +5,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.fragment.BasicDetailsFragment.ClickActions" />
+            type="mission.vatsalya.ui.fragment.PhysicalAttributesFragment.ClickActions" />
 
     </data>
 
@@ -39,281 +39,14 @@
                 <!--                    android:textColor="@color/black"-->
                 <!--                    android:textSize="@dimen/sp_20" />-->
 
-                <TextView
-                    android:id="@+id/tvTypeOfID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Child Name"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
 
-                <TextView
-                    android:id="@+id/etTypeOfID"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:clickable="false"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint="Missing Child's Name  "
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true" />
-
-                <TextView
-                    android:id="@+id/tvAadhar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Date of Birth"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:clickable="false"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint="DD/MM/YYYY"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Age"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:layout_weight="1"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Year"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Months"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true" />
-
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Height"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:layout_weight="1"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Feet"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Inches"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true" />
-
-
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/gender"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:checked="true"
-                        android:paddingEnd="@dimen/dp_5"
-                        android:text="Male"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_15"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:paddingEnd="@dimen/dp_5"
-                        android:text="Female"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14" />
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_15"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:paddingEnd="@dimen/dp_5"
-                        android:text="Transgender"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14" />
-                </RadioGroup>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Differently Abled(Physical/Mental)"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:checked="true"
-                        android:paddingEnd="@dimen/dp_5"
-                        android:text="Yes"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_15"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:paddingEnd="@dimen/dp_5"
-                        android:text="No"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14" />
-                </RadioGroup>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Mentally Ill"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:checked="true"
-                        android:paddingEnd="@dimen/dp_5"
-                        android:text="Yes"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14" />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_15"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:paddingEnd="@dimen/dp_5"
-                        android:text="No"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14" />
-                </RadioGroup>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Date of Missing"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:clickable="false"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint="DD/MM/YYYY"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Relationship"
+                    android:text="Complexion"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -335,7 +68,187 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Description"
+                    android:text="Build"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Please Select"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Neck Type"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Please Select"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Top Wear"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Please Select"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Top Wear Color"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Please Select"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Bottom Wear"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Please Select"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Bottom Wear Color"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Please Select"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Foot Wear"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Please Select"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Foot Wear Color"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Please Select"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Identification Marks"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -348,12 +261,14 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Describe how the child was lost"
+                    android:hint="Any Identification mark on child?"
                     android:minLines="3"
 
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
-                     />
+                    />
+
+
 
 
 

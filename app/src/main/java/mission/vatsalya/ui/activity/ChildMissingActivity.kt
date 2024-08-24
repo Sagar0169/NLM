@@ -19,7 +19,13 @@ import mission.vatsalya.R
 import mission.vatsalya.databinding.ActivityChildMissingBinding
 import mission.vatsalya.databinding.ActivityLoginBinding
 import mission.vatsalya.ui.fragment.BasicDetailsFragment
+import mission.vatsalya.ui.fragment.ConfirmationFragments
 import mission.vatsalya.ui.fragment.FacialAttributesFragment
+import mission.vatsalya.ui.fragment.FamilyDetailsFragment
+import mission.vatsalya.ui.fragment.FirDetailsFragment
+import mission.vatsalya.ui.fragment.LocationDetailsFragment
+import mission.vatsalya.ui.fragment.PhysicalAttributesFragment
+import mission.vatsalya.ui.fragment.UploadMediaFragment
 import mission.vatsalya.utilities.BaseActivity
 
 class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
@@ -102,9 +108,12 @@ class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
                     when (tab?.position) {
                         0 -> loadFragment(BasicDetailsFragment())
                         1 -> loadFragment(FacialAttributesFragment())
-//                        2 -> loadFragment(FragmentThree())
-//                        3 -> loadFragment(FragmentFour())
-//                        4 -> loadFragment(FragmentFive())
+                        2 -> loadFragment(PhysicalAttributesFragment())
+                        3 -> loadFragment(FamilyDetailsFragment())
+                        4 -> loadFragment(LocationDetailsFragment())
+                        5 -> loadFragment(UploadMediaFragment())
+                        6 -> loadFragment(FirDetailsFragment())
+                        7 -> loadFragment(ConfirmationFragments())
                     }
                 }
 

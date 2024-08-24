@@ -35,6 +35,15 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, EditProfile::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        mBinding?.leftDrawerMenu?.ivEdit?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, EditProfile::class.java)
+            startActivity(intent)
+        }
 
         mBinding?.contentNav?.tvMyChildMissing?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, ChildMissingActivity::class.java)

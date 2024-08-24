@@ -20,6 +20,23 @@
     <string name="choose_file">Choose File</string>
     <string name="how_you_are_being_harrassed">How you are being\nharassed?</string>
     <string name="pocso_act_2012"><u>POCSO Act 2012</u></string>
+    <string name="usage_terms_and_conditions">PLEASE READ THESE PORTAL USAGE TERMS AND CONDITIONS CAREFULLY BEFORE USING THIS PORTAL.\n
+\n
+1. Uploading of Missing Child Information (Parent/Legal Guardian)\n
+
+The information entered is provided in good faith and is correct to the best of my knowledge and belief.\n
+I understand that the information provided by me shall be scrutinized by a moderator of the portal before it is published/uploaded in the website.\n
+Contact information entered can be made available to law enforcement agencies if required.\n
+It is my responsibility to share the information of the recovery of the child as soon as possible with the (Administrators of the portal for due closure).\n
+I understand that uploading any obscene or indecent picture/video will attract serious criminal liability.\n\n
+2. Uploading of Missing Child Information (Other than Parent/Legal Guardian)\n
+
+The information entered is provided in good faith and is correct to the best of my knowledge and belief.\n
+I have ensured that the details of parents/legal guardian entered by me are correct.\n
+Contact information entered can be made available to law enforcement agencies if required.\n
+I understand that uploading any obscene or indecent picture/video will attract serious criminal liability.</string>
+    <string name="i_accept_the_terms"> <font color='red'>*</font>I accept the Terms and Conditions as mentioned on this portal</string>
+    <string name="gender">Gender<font color='red'>*</font></string>
     <string name="save">Save</string>
     <string name="submit">Submit</string>
 </resources>
