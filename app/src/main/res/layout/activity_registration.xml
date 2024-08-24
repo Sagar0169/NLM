@@ -290,6 +290,7 @@
                     android:maxLength="50"
                     android:inputType="phone"
                     android:textColor="@color/black"
+                    android:textColorHint="#6B6B6B"
                     android:textSize="@dimen/sp_16"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
