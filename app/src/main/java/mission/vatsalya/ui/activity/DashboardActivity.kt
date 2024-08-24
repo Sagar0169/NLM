@@ -41,6 +41,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
 //            showCustomDialog()
         }
+        mBinding?.contentNav?.tvSearchChild?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, SearchingForAChildActivity::class.java)
+            startActivity(intent)
+//            showCustomDialog()
+        }
 
     }
 

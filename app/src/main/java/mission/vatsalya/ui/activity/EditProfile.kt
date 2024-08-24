@@ -47,8 +47,10 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
               imm.showSoftInput(mBinding?.etName, InputMethodManager.SHOW_IMPLICIT)
               mBinding?.etEmail?.isEnabled=true
               mBinding?.etphoneNumber?.isEnabled=true
-              mBinding?.etContactNumber?.isEnabled=true
-              mBinding?.etPinCode?.isEnabled=true
+              mBinding?.etMobile?.isEnabled=true
+              mBinding?.rbMale?.isEnabled=true
+              mBinding?.rbFemale?.isEnabled=true
+
           }
         }
         fun dob(view: View){
