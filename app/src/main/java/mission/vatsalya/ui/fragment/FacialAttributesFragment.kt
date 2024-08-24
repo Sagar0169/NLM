@@ -1,5 +1,6 @@
 package mission.vatsalya.ui.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,6 +17,8 @@ import mission.vatsalya.utilities.BaseFragment
 
 class FacialAttributesFragment : BaseFragment<FragmentFacialAttributesBinding>(){
     private var mBinding: FragmentFacialAttributesBinding?=null
+    private var listener: OnNextButtonClickListener? = null
+
 
 
     override val layoutId: Int
@@ -31,6 +34,9 @@ class FacialAttributesFragment : BaseFragment<FragmentFacialAttributesBinding>()
 
     override fun setObservers() {
     }
+    interface OnNextButtonClickListener {
+        fun onNextButtonClick()
+    }
     inner class ClickActions {
 
         fun login(view: View) {
@@ -44,6 +50,19 @@ class FacialAttributesFragment : BaseFragment<FragmentFacialAttributesBinding>()
         fun backPress(view: View) {
 
         }
+        fun next(view: View) {
+            listener?.onNextButtonClick()
+
+        }
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as? OnNextButtonClickListener
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
     }
 
 }

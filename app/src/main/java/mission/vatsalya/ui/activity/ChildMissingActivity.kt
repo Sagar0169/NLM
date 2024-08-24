@@ -20,10 +20,24 @@ import mission.vatsalya.ui.fragment.FamilyDetailsFragment
 import mission.vatsalya.ui.fragment.FirDetailsFragment
 import mission.vatsalya.ui.fragment.LocationDetailsFragment
 import mission.vatsalya.ui.fragment.PhysicalAttributesFragment
+import mission.vatsalya.ui.fragment.SightedBackgroundFragment
+import mission.vatsalya.ui.fragment.SightedBasicDetailsFragment
+import mission.vatsalya.ui.fragment.SightedConfirmationFragment
+import mission.vatsalya.ui.fragment.SightedFacialAttributesFragment
+import mission.vatsalya.ui.fragment.SightedLocationDetailsFragment
+import mission.vatsalya.ui.fragment.SightedPhysicalAttributeFragment
+import mission.vatsalya.ui.fragment.SightedUploadFragment
 import mission.vatsalya.ui.fragment.UploadMediaFragment
 import mission.vatsalya.utilities.BaseActivity
 
-class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
+class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() ,
+    BasicDetailsFragment.OnNextButtonClickListener,
+    FacialAttributesFragment.OnNextButtonClickListener,
+    PhysicalAttributesFragment.OnNextButtonClickListener,
+    FamilyDetailsFragment.OnNextButtonClickListener,
+    LocationDetailsFragment.OnNextButtonClickListener,
+    UploadMediaFragment.OnNextButtonClickListener,
+    FirDetailsFragment.OnNextButtonClickListener{
 
     private var mBinding: ActivityChildMissingBinding? = null
 
@@ -130,5 +144,17 @@ class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameLayout, fragment)
             .commit()
+    }
+
+    fun moveToNextTab() {
+        val currentTab = mBinding?.tabLayout?.selectedTabPosition ?: 0
+        val nextTab = currentTab + 1
+        if (nextTab < (mBinding?.tabLayout?.tabCount ?: 0)) {
+            mBinding?.tabLayout?.getTabAt(nextTab)?.select()
+        }
+    }
+
+    override fun onNextButtonClick() {
+        moveToNextTab()
     }
 }

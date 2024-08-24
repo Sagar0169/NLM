@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import mission.vatsalya.R
 import mission.vatsalya.databinding.ActivityChildMissingBinding
 import mission.vatsalya.databinding.FragmentBasicDetailsBinding
 import mission.vatsalya.databinding.FragmentConfirmationBinding
 import mission.vatsalya.databinding.FragmentLocationDetailsBinding
 import mission.vatsalya.databinding.FragmentUploadMediaBinding
+import mission.vatsalya.ui.activity.DashboardActivity
 import mission.vatsalya.ui.activity.OtpActivity
 import mission.vatsalya.ui.activity.RegistrationActivity
 import mission.vatsalya.utilities.BaseFragment
@@ -36,6 +38,10 @@ class ConfirmationFragments : BaseFragment<FragmentConfirmationBinding>(){
     inner class ClickActions {
 
         fun login(view: View) {
+                val intent = Intent(requireContext(), DashboardActivity::class.java)
+                startActivity(intent)
+                Toast.makeText(requireContext(),"Missing Child Form Filled Successfully", Toast.LENGTH_SHORT).show()
+
 
 
         }
