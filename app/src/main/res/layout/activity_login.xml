@@ -54,17 +54,18 @@
                     android:layout_below="@+id/ivEmblem"
                     android:orientation="vertical">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvWelcome"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivLogo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="20dp"
                         android:layout_gravity="center"
-                        android:layout_marginHorizontal="@dimen/dp_20"
-                        android:text="Vatsalya"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/sp_20"
-                        app:fontFamily="@font/poppins_bold" />
+                        android:layout_below="@+id/ivEmblem"
+                        android:src="@mipmap/logo"
+                        android:elevation="6dp"
+                        android:contentDescription="@null" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvContent"

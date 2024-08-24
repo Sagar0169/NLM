@@ -49,9 +49,11 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <TextView
+                <EditText
                     android:id="@+id/etTypeOfID"
                     android:layout_width="match_parent"
+                    android:textColor="@color/black"
+                    android:textColorHint="#6B6B6B"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
@@ -80,6 +82,8 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
+                    android:textColor="@color/black"
+                    android:textColorHint="#6B6B6B"
                     android:hint="DD/MM/YYYY"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:maxLength="50"
@@ -103,6 +107,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
+                        android:textColor="@color/black"
+                        android:textColorHint="#6B6B6B"
                         android:layout_weight="1"
                         android:background="@drawable/curve_all_corner_grey"
                         android:clickable="false"
@@ -117,7 +123,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-
+                        android:textColor="@color/black"
+                        android:textColorHint="#6B6B6B"
                         android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_grey"
                         android:clickable="false"
@@ -147,6 +154,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
+                        android:textColor="@color/black"
+                        android:textColorHint="#6B6B6B"
                         android:layout_weight="1"
                         android:background="@drawable/curve_all_corner_grey"
                         android:clickable="false"
@@ -161,6 +170,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textColorHint="#6B6B6B"
 
                         android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_grey"
@@ -192,7 +203,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
-                        android:checked="true"
                         android:paddingEnd="@dimen/dp_5"
                         android:text="Male"
                         android:textColor="@color/black"
@@ -235,7 +245,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
-                        android:checked="true"
                         android:paddingEnd="@dimen/dp_5"
                         android:text="Yes"
                         android:textColor="@color/black"
@@ -269,8 +278,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
-                        android:checked="true"
                         android:paddingEnd="@dimen/dp_5"
+
                         android:text="Yes"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_14" />
@@ -303,6 +312,8 @@
                     android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
                     android:hint="DD/MM/YYYY"
+                    android:textColor="@color/black"
+                    android:textColorHint="#6B6B6B"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
@@ -327,6 +338,8 @@
                     android:hint="Please Select"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:maxLength="50"
+                    android:textColor="@color/black"
+                    android:textColorHint="#6B6B6B"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -344,7 +357,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:layout_marginBottom="@dimen/dp_10"
-
+                    android:textColor="@color/black"
+                    android:textColorHint="#6B6B6B"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
