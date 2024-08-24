@@ -29,11 +29,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         fun login(view: View) {
             val intent = Intent(this@LoginActivity, OtpActivity::class.java)
             startActivity(intent)
-
+             finish()
         }
         fun register(view: View) {
             val intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
             startActivity(intent)
+
         }
 
         fun backPress(view: View) {
