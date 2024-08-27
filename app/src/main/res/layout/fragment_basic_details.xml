@@ -56,6 +56,7 @@
                     android:textColorHint="#6B6B6B"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
+                    android:textSize="@dimen/sp_16"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
@@ -80,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:clickable="false"
+                    android:clickable="true"
                     android:fontFamily="@font/opensans_regular"
                     android:textColor="@color/black"
                     android:textColorHint="#6B6B6B"
@@ -103,38 +104,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
+                    <Spinner
+                        android:id="@+id/spinnerYear"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
-                        android:textColor="@color/black"
-                        android:textColorHint="#6B6B6B"
                         android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Year"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true" />
-                    <TextView
-                        android:layout_width="match_parent"
+                        android:spinnerMode="dropdown"
+                        android:dropDownWidth="match_parent"
+                        android:popupBackground="@android:color/white"
+                        android:dropDownHorizontalOffset="0dp"
+                        android:entries="@array/year_array"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerMonth"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:textColorHint="#6B6B6B"
                         android:layout_marginTop="@dimen/dp_7"
+                        android:layout_weight="1"
                         android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Months"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true" />
+                        android:spinnerMode="dropdown"
+                        android:dropDownWidth="match_parent"
+                        android:popupBackground="@android:color/white"
+                        android:dropDownHorizontalOffset="0dp"
+                        android:entries="@array/month_array"/>
 
                 </LinearLayout>
                 <TextView
@@ -150,39 +145,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:textColor="@color/black"
-                        android:textColorHint="#6B6B6B"
-                        android:layout_weight="1"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Feet"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:textColorHint="#6B6B6B"
 
+                    <Spinner
+                        android:id="@+id/spinnerFeet"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Inches"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true" />
+                        android:spinnerMode="dropdown"
+                        android:dropDownWidth="match_parent"
+                        android:popupBackground="@android:color/white"
+                        android:dropDownHorizontalOffset="0dp"
+                        android:entries="@array/feet_array"/>
+
+                    <Spinner
+                        android:id="@+id/spinnerInches"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:layout_weight="1"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:spinnerMode="dropdown"
+                        android:dropDownWidth="match_parent"
+                        android:popupBackground="@android:color/white"
+                        android:dropDownHorizontalOffset="0dp"
+                        android:entries="@array/inches_array"/>
 
 
                 </LinearLayout>
@@ -328,21 +317,19 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <TextView
+                <Spinner
+                    android:id="@+id/spinnerRelation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/dp_5"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:clickable="false"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    android:maxLength="50"
-                    android:textColor="@color/black"
-                    android:textColorHint="#6B6B6B"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true" />
+                    android:spinnerMode="dropdown"
+                    android:dropDownWidth="match_parent"
+                    android:popupBackground="@android:color/white"
+                    android:dropDownHorizontalOffset="0dp"
+                    android:entries="@array/inches_relation"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -361,6 +348,7 @@
                     android:textColorHint="#6B6B6B"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
+                    android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/opensans_regular"
                     android:hint="Describe how the child was lost"
                     android:minLines="3"

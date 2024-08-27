@@ -147,6 +147,13 @@ Contact information entered can be made available to law enforcement agencies if
         <item>10</item>
         <item>11</item>
     </string-array>
+    <string-array name="inches_relation">
+        <item>Please Select</item>
+        <item>Parent</item>
+        <item>Legal Guardian</item>
+        <item>Other</item>
+
+    </string-array>
     <string name="submit">Submit</string>
     <string name="save">Save</string>
     <string name="search_a_missing_child">Search a Missing Child</string>
