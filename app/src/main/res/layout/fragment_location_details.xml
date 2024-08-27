@@ -110,6 +110,7 @@
                     android:clickable="false"
                     android:textColor="@color/black"
                     android:textColorHint="#6B6B6B"
+                    android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/opensans_regular"
                     android:hint="Enter Pin "
                     android:maxLength="50"
@@ -128,6 +129,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_16"
                     android:layout_marginTop="@dimen/dp_7"
                     android:textColor="@color/black"
                     android:textColorHint="#6B6B6B"

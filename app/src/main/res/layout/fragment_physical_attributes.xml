@@ -276,6 +276,7 @@
                     android:layout_marginTop="@dimen/dp_7"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
                     android:textColorHint="#6B6B6B"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
