@@ -26,8 +26,12 @@ class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttrib
         fun onNextButtonClick()
     }
 
-    private val relationList = listOf(
-        "Parent", "Legal Guardian", "Other",
+    private val hairLength = listOf(
+        "Short", "Medium", "Long","No Hair"
+    )
+
+    private val hairColor = listOf(
+        "Short", "Medium", "Long","No Hair"
     )
 
     override val layoutId: Int

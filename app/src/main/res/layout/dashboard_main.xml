@@ -39,15 +39,14 @@
                     android:layout_marginStart="10dp"
                     android:src="@drawable/ic_drawer" />
 
+
                 <ImageView
                     android:id="@+id/tvWelcome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/logo"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_20"
-                    android:textStyle="bold" />
+                    android:src="@drawable/ic_title"
+                    android:scaleType="centerCrop"
+                    android:layout_marginHorizontal="50dp"/>
             </LinearLayout>
 
 

@@ -44,11 +44,10 @@
                     android:id="@+id/tvWelcome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/logo"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_20"
-                    android:textStyle="bold" />
+                    android:src="@drawable/ic_title"
+                    android:scaleType="centerCrop"
+                    android:paddingVertical="5dp"
+                    android:layout_marginHorizontal="50dp"/>
             </LinearLayout>
 
 
@@ -394,10 +393,10 @@
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:inputType="phone"
-                    android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
+                    android:maxLength="6"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 

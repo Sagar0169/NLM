@@ -1,5 +1,6 @@
 package mission.vatsalya.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,31 +9,35 @@ import androidx.recyclerview.widget.RecyclerView
 import mission.vatsalya.R
 import mission.vatsalya.ui.activity.RegistrationActivity
 
-class StateAdapter(private val stateList: List<String>,private val callBackItem: RegistrationActivity) :
-    RecyclerView.Adapter<StateAdapter.StateViewHolder>() {
+class StateAdapter(
+    private val stateList: List<String>,
+    private val context: Context,
+    private val onItemClicked: (String) -> Unit // Lambda for item clicks
+) : RecyclerView.Adapter<StateAdapter.ViewHolder>() {
 
-    // ViewHolder class to hold the view elements
-    class StateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvStateName: TextView = itemView.findViewById(R.id.tvStateName)
-    }
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textView: TextView = view.findViewById(R.id.tvStateName)
 
-    // Inflate the item layout and create the holder
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StateViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_state, parent, false)
-        return StateViewHolder(itemView)
-    }
+        fun bind(state: String) {
+            textView.text = state
 
-    // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: StateViewHolder, position: Int) {
-        val stateName = stateList[position]
-        holder.tvStateName.text = stateName
-
-        holder.tvStateName.setOnClickListener {
-            callBackItem.onClickItem(stateName)
+            // Set click listener for the item
+            itemView.setOnClickListener {
+                onItemClicked(state) // Call the lambda function with the selected item
+            }
         }
     }
 
-    // Return the total number of items
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_state, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(stateList[position])
+    }
+
     override fun getItemCount(): Int {
         return stateList.size
     }
