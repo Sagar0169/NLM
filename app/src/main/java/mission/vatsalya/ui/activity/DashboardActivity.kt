@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -82,6 +83,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, SearchingForAChildActivity::class.java)
             startActivity(intent)
 
+        }
+        mBinding?.leftDrawerMenu?.tvPrivacyPolicy?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, AboutUsActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvTermsAndConditions?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, AboutUsActivity::class.java)
+            startActivity(intent)
         }
 
     }

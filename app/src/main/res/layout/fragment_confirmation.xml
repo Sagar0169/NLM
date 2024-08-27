@@ -123,6 +123,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
+                    android:onClick="@{ClickAction::login}"
 
                     android:text="Submit"
 

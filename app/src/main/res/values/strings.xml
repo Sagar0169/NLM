@@ -1,10 +1,48 @@
+<!DOCTYPE resources [
+<!ENTITY app_name "Vatsalya">
+]>
 <resources>
     <string name="app_name">Vatsalya</string>
     <string name="Ok">Ok\n</string>
     <string name="please_enter_correct_otp">Please enter correct otp</string>
     <string name="please_enter_correct_Mobile">Please enter correct Mobile Number</string>
     <string name="login_successful">Login Successful</string>
+    <string name="text_select">Select</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_done">Done</string>
+    <string name="text_add_video">Video</string>
+    <string name="error_valid_medai_format">Please upload valid Image or Video file format.</string>
+    <string name="error_valid_pdf_format">Please upload valid PDF file format.</string>
+    <string name="message_camera_unabletocapture">Unable to capture from camera</string>
+    <string name="message_camera_unabletoopen">Unable to open camera</string>
+    <string name="message_camera_prepareimage">Unable to prepare image</string>
+    <string name="message_camera_preparevideo">Unable to prepare video</string>
+    <string name="error_valid_image_size">Image size must be up to 5 MB.</string>
+    <string name="error_valid_video_size">Video size must be up to 10 MB.</string>
+    <string name="message_video_duration">Video duration should between 1 to 20 second/s</string>
+    <string name="request_read_storage_permission">&app_name;
+        needs Camera and storage permission.</string>
+    <string name="text_video_gallery">Video Gallery</string>
+    <string-array name="select_media_text">
+        <item>@string/text_add_photo</item>
+        <item>@string/text_photo_gallery</item>
 
+    </string-array>
+    <string-array name="select_video_media_text">
+        <item>@string/text_add_video</item>
+        <item>@string/text_video_gallery</item>
+    </string-array>
+    <string-array name="select_media_doc_text">
+        <item>@string/text_add_photo</item>
+        <item>@string/text_add_document</item>
+    </string-array>
+    <string-array name="select_photo_media_text">
+        <item>@string/text_add_photo</item>
+        <item>@string/text_photo_gallery</item>
+    </string-array>
+    <string name="text_add_document">Document</string>
+    <string name="text_add_photo">Photo</string>
+    <string name="text_photo_gallery">Photo Gallery</string>
     <string name="please_enter_otp">Please enter otp\n</string>
     <string name="not_registered_please_register_as_citizen"> <font color='blue'><u>Not Registered</u>?</font> Please Register as Citizen</string>
     <string name="already_login">Already Registered? <font color='blue'><u>Login</u></font></string>
@@ -109,8 +147,17 @@ Contact information entered can be made available to law enforcement agencies if
         <item>10</item>
         <item>11</item>
     </string-array>
+    <string-array name="inches_relation">
+        <item>Please Select</item>
+        <item>Parent</item>
+        <item>Legal Guardian</item>
+        <item>Other</item>
+
+    </string-array>
     <string name="submit">Submit</string>
     <string name="save">Save</string>
+    <string name="search_a_missing_child">Search a Missing Child</string>
+    <string name="message_permission_not_granted">Permission not granted</string>
 
 </resources>
 
