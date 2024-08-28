@@ -32,7 +32,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import mission.vatsalya.R
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import java.io.*
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -1900,4 +1904,49 @@ fun getUniqueIDWhitRandomString(): String {
         }
         return ""
     }
+    fun getFileType(filePath: String): Pair<Boolean, String?> {
+        val supportedExtensions = listOf("pdf", "png", "jpg")
+
+        // Get the file extension
+        val fileExtension = filePath.substringAfterLast('.', "").lowercase()
+
+        // Check if the extension is in the list of supported extensions
+        val isSupported = supportedExtensions.contains(fileExtension)
+
+        // Return the result and the file extension
+        return Pair(isSupported, if (isSupported) fileExtension else null)
+    }
+    suspend fun getFileSizeFromUrl(url: String): Long? {
+        return withContext(Dispatchers.IO) {
+            val client = OkHttpClient()
+
+            val request = Request.Builder()
+                .url(url)
+                .head()
+                .build()
+
+            try {
+                client.newCall(request).execute().use { response ->
+                    if (response.isSuccessful) {
+                        return@withContext response.header("Content-Length")?.toLongOrNull()
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
+            return@withContext null
+        }
+    }
+    fun formatFileSize(bytes: Long): String {
+        val kilobytes = bytes / 1024.0
+        val megabytes = kilobytes / 1024.0
+
+        return when {
+            megabytes >= 1 -> String.format("%.2f MB", megabytes)
+            kilobytes >= 1 -> String.format("%.2f KB", kilobytes)
+            else -> String.format("%d bytes", bytes)
+        }
+    }
+
 }

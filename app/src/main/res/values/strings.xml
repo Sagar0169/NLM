@@ -158,6 +158,9 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="save">Save</string>
     <string name="search_a_missing_child">Search a Missing Child</string>
     <string name="message_permission_not_granted">Permission not granted</string>
+    <string name="camera_permission">You need to enable camera access and storage permission to access this</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
 

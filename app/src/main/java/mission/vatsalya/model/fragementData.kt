@@ -1,5 +1,7 @@
 package mission.vatsalya.model
 
+import java.io.Serializable
+
 data class SightedChildData(
     var dateOfSighting: String? = "DD/MM/YYYY",
     var year: String? = null,
@@ -58,4 +60,16 @@ data class LocationData(
     var address: String? = null,
 )
 
+
+data class UploadDocumentResponse(
+    val _result: UploadDocumentsData,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+): Serializable
+data class UploadDocumentsData(
+    val document_name: String?,
+    val documents_url: String?,
+    val id: Int?,
+): Serializable
 

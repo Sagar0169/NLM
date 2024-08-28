@@ -16,6 +16,9 @@ class SightedUploadFragment : BaseFragment<FragmentSightedUploadBinding>() {
     private lateinit var relationAdapter: RelationshipAdapter
     private var layoutManager: LinearLayoutManager? = null
     private var listener: OnNextButtonClickListener? = null
+    private var openCameraValue :Int ?= 0
+
+
 
     interface OnNextButtonClickListener {
         fun onNextButtonClick()
@@ -31,7 +34,9 @@ class SightedUploadFragment : BaseFragment<FragmentSightedUploadBinding>() {
     override fun init() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+
     }
+
 
     override fun setVariables() {
     }
