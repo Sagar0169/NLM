@@ -274,6 +274,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
+                    android:id="@+id/etIdentification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
