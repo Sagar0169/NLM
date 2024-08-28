@@ -51,6 +51,8 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvState"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -75,6 +77,8 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvDistrict"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -99,6 +103,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvPoliceStation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -149,6 +154,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -156,7 +162,6 @@
                     android:textColor="@color/black"
                     android:textColorHint="#6B6B6B"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
                     android:hint="DD/MM/YYYY"
                     android:drawableEnd="@drawable/ic_arrow_down"

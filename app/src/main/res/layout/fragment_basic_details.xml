@@ -77,6 +77,8 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvDob"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -294,6 +296,8 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvDOM"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -317,19 +321,23 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <Spinner
-                    android:id="@+id/spinnerRelation"
+                <TextView
+                    android:id="@+id/tvRelation"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="@dimen/dp_5"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:spinnerMode="dropdown"
-                    android:dropDownWidth="match_parent"
-                    android:popupBackground="@android:color/white"
-                    android:dropDownHorizontalOffset="0dp"
-                    android:entries="@array/inches_relation"/>
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Please Select"
+                    android:textColor="@color/black"
+                    android:textColorHint="#6B6B6B"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
