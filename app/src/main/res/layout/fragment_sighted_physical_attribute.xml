@@ -49,6 +49,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvComplexion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -56,8 +57,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -72,6 +74,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvBuild"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -79,8 +82,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -95,6 +99,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvNeckType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -102,8 +107,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -118,6 +124,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvTopWear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -125,8 +132,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -141,6 +149,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvTopWearColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -148,7 +157,8 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
+                    android:textColor="@color/grey"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -164,6 +174,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvBottomWear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -171,7 +182,8 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
+                    android:textColor="@color/grey"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -187,6 +199,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvBottomWearColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -194,7 +207,8 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
+                    android:textColor="@color/grey"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -210,6 +224,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvFootWear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -217,9 +232,10 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
+                    android:textColor="@color/grey"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
 
@@ -233,6 +249,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvFootWearColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -240,10 +257,11 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
+                    android:textColor="@color/grey"
                     android:singleLine="true" />
 
                 <TextView

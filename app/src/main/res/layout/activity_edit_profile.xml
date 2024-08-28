@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="ClickAction"
             type="mission.vatsalya.ui.activity.EditProfile.ClickActions" />
     </data>
+
     <RelativeLayout
         android:id="@+id/rlParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
+
         <RelativeLayout
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
@@ -20,18 +23,19 @@
             android:background="@drawable/headear_back_small">
 
             <LinearLayout
-                android:layout_toStartOf="@+id/llEditImage"
                 android:id="@+id/ll1"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_toStartOf="@+id/llEditImage"
+                android:orientation="horizontal">
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivBackPress"
-                    android:onClick="@{ClickAction::backPress}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:onClick="@{ClickAction::backPress}"
                     android:src="@drawable/ic_back" />
 
                 <TextView
@@ -39,12 +43,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Edit Profile"
+                    android:text="Profile"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_20"
                     android:textStyle="bold" />
             </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/llEditImage"
                 android:layout_width="wrap_content"
@@ -83,15 +88,17 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ivUserImage"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/dp_5"
+                    android:drawableEnd="@drawable/ic_edit"
+                    android:drawablePadding="@dimen/dp_5"
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_regular"
                     android:onClick="@{ClickAction::edit}"
                     android:singleLine="true"
                     android:text="Edit"
+                    android:paddingHorizontal="@dimen/dp_25"
+                    android:paddingVertical="@dimen/dp_10"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
-                    />
+                    android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -101,8 +108,8 @@
             android:layout_height="0dp"
             android:layout_below="@id/rlToolbar"
 
-            android:layout_marginTop="-50dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="-50dp"
             android:scrollbars="none">
 
             <LinearLayout
@@ -137,17 +144,18 @@
 
                 <EditText
                     android:id="@+id/etName"
-                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
+                    android:enabled="false"
                     android:maxLength="50"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="Rohan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
 
                 <TextView
                     android:id="@+id/tvMobile"
@@ -162,9 +170,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/dp_7">
+                    android:orientation="horizontal">
 
                     <!-- Fixed Country Code +91 -->
                     <TextView
@@ -180,20 +188,20 @@
                         android:textStyle="bold" />
 
                     <!-- EditText for Mobile Number -->
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/etMobile"
                         android:layout_width="0dp"
-                        android:enabled="false"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:hint="Enter Your 10 Digit Mobile Number"
+                        android:enabled="false"
                         android:inputType="phone"
-                        android:textColorHint="@color/grey"
                         android:maxLength="10"
+                        android:padding="8dp"
+                        android:text="9568880197"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16"
-                        android:padding="8dp" />
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
 
                 </LinearLayout>
 
@@ -209,19 +217,20 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
-                    android:enabled="false"
                     android:id="@+id/etphoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:maxLength="10"
+                    android:enabled="false"
                     android:inputType="phone"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16"
+                    android:maxLength="10"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:text="9568880197"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
 
                 <TextView
                     android:id="@+id/tvEmail"
@@ -235,52 +244,53 @@
 
                 <EditText
                     android:id="@+id/etEmail"
-                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:maxLength="80"
+                    android:enabled="false"
                     android:inputType="textEmailAddress"
+                    android:maxLength="80"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:text="rohan@gmail.com"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16"
-                    android:singleLine="true" />
+                    android:textSize="@dimen/sp_16" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvAdd"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/dp_7"-->
-<!--                    android:fontFamily="@font/opensans_semibold"-->
-<!--                    android:text="Address"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="@dimen/sp_16" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvAdd"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/dp_7"-->
+                <!--                    android:fontFamily="@font/opensans_semibold"-->
+                <!--                    android:text="Address"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="@dimen/sp_16" />-->
 
-<!--                <EditText-->
-<!--                    android:id="@+id/etAddress"-->
-<!--                    android:enabled="false"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/dp_7"-->
-<!--                    android:background="@drawable/curve_all_corner_grey"-->
-<!--                    android:maxLength="100"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="@dimen/sp_16"-->
-<!--                    android:inputType="textMultiLine"-->
-<!--                    android:paddingHorizontal="@dimen/dp_10"-->
-<!--                    android:paddingVertical="@dimen/dp_20" />-->
+                <!--                <EditText-->
+                <!--                    android:id="@+id/etAddress"-->
+                <!--                    android:enabled="false"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/dp_7"-->
+                <!--                    android:background="@drawable/curve_all_corner_grey"-->
+                <!--                    android:maxLength="100"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="@dimen/sp_16"-->
+                <!--                    android:inputType="textMultiLine"-->
+                <!--                    android:paddingHorizontal="@dimen/dp_10"-->
+                <!--                    android:paddingVertical="@dimen/dp_20" />-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvState"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/dp_7"-->
-<!--                    android:fontFamily="@font/opensans_semibold"-->
-<!--                    android:text="State"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="@dimen/sp_16" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvState"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/dp_7"-->
+                <!--                    android:fontFamily="@font/opensans_semibold"-->
+                <!--                    android:text="State"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="@dimen/sp_16" />-->
 
 
                 <TextView
@@ -307,12 +317,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight=".4"
-                        android:gravity="center"
                         android:background="@drawable/back_number_gray"
+                        android:gravity="center"
                         android:padding="@dimen/dp_10"
+                        android:text="Choose File"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14"
-                        android:text="Choose File" />
+                        android:textSize="@dimen/sp_14" />
 
                     <View
                         android:layout_width="@dimen/dp_1"
@@ -325,9 +335,9 @@
                         android:layout_weight="1.6"
                         android:gravity="center"
                         android:padding="@dimen/dp_10"
+                        android:text="No File Chosen"
                         android:textColor="@color/grey"
-                        android:textSize="@dimen/sp_14"
-                        android:text="No File Chosen" />
+                        android:textSize="@dimen/sp_14" />
 
                 </LinearLayout>
 
@@ -339,7 +349,6 @@
                     android:text="Upload JPG,PNG,Pdf Files Under 5MB"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_13" />
-
 
 
                 <TextView
@@ -369,29 +378,29 @@
 
                         <RadioButton
                             android:id="@+id/rbMale"
-                            android:enabled="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:checked="true"
+                            android:enabled="false"
                             android:paddingEnd="@dimen/dp_5"
                             android:text="Yes"
-                            app:buttonTint="@color/darkBlue"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_14" />
+                            android:textSize="@dimen/sp_14"
+                            app:buttonTint="@color/darkBlue" />
 
                         <RadioButton
                             android:id="@+id/rbFemale"
-                            android:enabled="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_15"
                             android:layout_marginTop="@dimen/dp_7"
+                            android:enabled="false"
                             android:paddingEnd="@dimen/dp_5"
                             android:text="No"
-                            app:buttonTint="@color/darkBlue"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_14" />
+                            android:textSize="@dimen/sp_14"
+                            app:buttonTint="@color/darkBlue" />
                     </RadioGroup>
                 </LinearLayout>
 
@@ -401,36 +410,36 @@
                     android:orientation="horizontal">
 
 
-
-
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/dp_7">
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:orientation="horizontal">
 
                     <!-- Fixed Country Code +91 -->
 
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/tvSendOtp"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:clickable="true"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_15"
                     android:layout_marginBottom="@dimen/dp_15"
                     android:background="@drawable/curve_fill_blue"
+                    android:clickable="true"
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
                     android:text="@string/save"
+                    android:visibility="gone"
+                    android:onClick="@{ClickAction::save}"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
 

@@ -36,6 +36,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, EditProfile::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvHome?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, DashboardActivity::class.java)
+            startActivity(intent)
+        }
 
         mBinding?.leftDrawerMenu?.tvChangePassword?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, ChangePasswordActivity::class.java)

@@ -49,6 +49,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvHairLength"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -56,8 +57,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -72,6 +74,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvHairColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -79,7 +82,8 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
+                    android:textColor="@color/grey"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -95,6 +99,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvEyeType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -102,8 +107,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -118,6 +124,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvEyeColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -125,7 +132,8 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
+                    android:textColor="@color/grey"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -141,6 +149,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvEarsType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -148,7 +157,8 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:textColor="@color/grey"
+                    android:text="Please Select"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -164,6 +174,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvEarsSize"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -171,7 +182,8 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:textColor="@color/grey"
+                    android:text="Please Select"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -187,6 +199,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvLipsType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -194,8 +207,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -210,6 +224,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvLipsColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -217,8 +232,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -233,6 +249,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvFrontTeeth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -240,8 +257,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -256,6 +274,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvSpectaclesType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -263,8 +282,9 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -279,6 +299,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvSpectaclesColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -288,7 +309,8 @@
                     android:clickable="false"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
+                    android:textColor="@color/grey"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
