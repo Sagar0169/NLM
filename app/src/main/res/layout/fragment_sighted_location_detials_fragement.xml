@@ -51,15 +51,17 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -73,15 +75,17 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Please Select"
+                    android:text="Please Select"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:maxLength="50"
+                    android:textColor="@color/grey"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true" />
@@ -105,8 +109,9 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Enter Pin "
-                    android:maxLength="50"
+                    android:hint="Enter Pin"
+                    android:maxLength="6"
+                    android:inputType="number"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"

@@ -49,6 +49,7 @@
             android:maxLength="50"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16"
+            android:textColorHint="@color/grey"
             android:paddingHorizontal="@dimen/dp_10"
             android:paddingVertical="@dimen/dp_5"
             android:singleLine="true" />

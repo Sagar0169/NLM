@@ -213,6 +213,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <RadioGroup
+                    android:id="@+id/rbGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -241,6 +242,36 @@
                         android:textSize="@dimen/sp_14"
                         app:buttonTint="@color/darkBlue" />
                 </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tvDisability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Disability Details"
+                    android:textColor="@color/black"
+                    android:visibility="gone"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:id="@+id/etDisability"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint="Enter Disability Details"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
+                    android:visibility="gone"
+                    android:textColorHint="@color/grey"
+                    android:minLines="3"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5" />
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -415,7 +446,7 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint="Sighted Child Description"
+                    android:hint="Describe how child was lost"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
                     android:textColorHint="@color/grey"

@@ -1,12 +1,19 @@
-package mission.vatsalya.ui. activity
+package mission.vatsalya.ui.activity
 
 import android.content.Context
 import android.content.Intent
 import android.provider.MediaStore
+import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.ObservableInt
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,6 +24,8 @@ import mission.vatsalya.utilities.PermissionHelper
 import mission.vatsalya.R
 import mission.vatsalya.databinding.ActivityEditProfileBinding
 import mission.vatsalya.utilities.BaseActivity
+import mission.vatsalya.utilities.showView
+
 import mission.vatsalya.utilities.Constants.MEDIA_PAGE_FLAG_REGISTER_PROFILE
 import mission.vatsalya.utilities.Constants.REQUEST_CAMERA_IMAGE_RESULT
 import mission.vatsalya.utilities.Constants.REQUEST_CAMERA_PERMISSION
@@ -55,24 +64,53 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
     }
     inner class ClickActions {
 
-        fun save(view: View){
-
+        fun save(view: View) {
+            Toast.makeText(
+                this@EditProfile,
+                "Details Saved Successfully.",
+                Toast.LENGTH_SHORT
+            ).show()
+            val intent = Intent(this@EditProfile, DashboardActivity::class.java)
+            startActivity(intent)
         }
         fun uploadDocument(view: View){
 
         }
         fun edit(view: View){
             mBinding?.tvEdit?.setOnClickListener {
-                mBinding?.etName?.isEnabled=true
-                mBinding?.etName?.requestFocus()
+                Toast.makeText(
+                    this@EditProfile,
+                    "You can now edit highlighted fields.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                mBinding?.tvWelcome?.text = "Edit Profile"
+
+                mBinding?.etName?.apply {
+                    isEnabled = true
+                    requestFocus()
+                    setSelection(text.length) // Move cursor to the end of the text
+                }
+                mBinding?.etEmail?.apply {
+                    isEnabled = true
+                    setSelection(text.length) // Move cursor to the end of the text
+                }
+                mBinding?.etphoneNumber?.apply {
+                    isEnabled = true
+                    setSelection(text.length) // Move cursor to the end of the text
+                }
+
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(mBinding?.etName, InputMethodManager.SHOW_IMPLICIT)
-                mBinding?.etEmail?.isEnabled=true
-                mBinding?.etphoneNumber?.isEnabled=true
-                mBinding?.etMobile?.isEnabled=true
-                mBinding?.rbMale?.isEnabled=true
-                mBinding?.rbFemale?.isEnabled=true
 
+                mBinding?.rbMale?.isEnabled = true
+                mBinding?.rbFemale?.isEnabled = true
+                mBinding!!.tvSendOtp.showView()
+                mBinding?.etName?.background =
+                    ContextCompat.getDrawable(this@EditProfile, R.drawable.curve_all_corner_black)
+                mBinding?.etEmail?.background =
+                    ContextCompat.getDrawable(this@EditProfile, R.drawable.curve_all_corner_black)
+                mBinding?.etphoneNumber?.background =
+                    ContextCompat.getDrawable(this@EditProfile, R.drawable.curve_all_corner_black)
             }
         }
         fun dob(view: View){
