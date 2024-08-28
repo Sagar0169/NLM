@@ -310,6 +310,7 @@
                         android:gravity="center"
                         android:background="@drawable/back_number_gray"
                         android:padding="@dimen/dp_10"
+                        android:onClick="@{ClickAction::uploadDoc}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_14"
                         android:text="Choose File" />
@@ -320,6 +321,7 @@
                         android:background="#909090" />
 
                     <TextView
+                        android:id="@+id/tvDoc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.6"

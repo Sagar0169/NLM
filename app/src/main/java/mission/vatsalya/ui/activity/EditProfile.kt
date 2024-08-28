@@ -1,8 +1,10 @@
-package mission.vatsalya.ui.activity
+package mission.vatsalya.ui. activity
 
 import android.content.Context
 import android.content.Intent
+import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.ObservableInt
@@ -21,9 +23,11 @@ import mission.vatsalya.utilities.Constants.REQUEST_CAMERA_PERMISSION
 import mission.vatsalya.utilities.Constants.REQUEST_CAMERA_PERMISSION_MEDIA
 import mission.vatsalya.utilities.Constants.REQUEST_CAMERA_VIDEO_RESULT
 import mission.vatsalya.utilities.Constants.REQUEST_CODE_DOC
+import mission.vatsalya.utilities.Constants.REQUEST_CODE_DOC_PDF
 import mission.vatsalya.utilities.Constants.REQUEST_WRITE_STORAGE_PERMISSION_DOC
 import mission.vatsalya.utilities.FileUtils
 import mission.vatsalya.utilities.FileUtils.saveDocFile
+import okhttp3.MultipartBody
 import java.io.File
 
 class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
@@ -33,6 +37,7 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
     lateinit var imagePicker: ImagePickerHelper
     var observerSnackBarInt = ObservableInt()
     var imagePhoto: File? = null
+    var isFrom: Int? = 0
 
     override fun initView() {
         mBinding = viewDataBinding
@@ -75,9 +80,15 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
         }
         fun profileCamera(view: View){
             imagePicker.showImageMediaDialog(MEDIA_PAGE_FLAG_REGISTER_PROFILE)
+            isFrom=1
         }
 
         fun uploadProfile(view: View){
+
+        }
+        fun uploadDoc(view: View){
+            imagePicker.attachPDF(REQUEST_CODE_DOC_PDF)
+            isFrom=0
 
         }
 
@@ -87,20 +98,33 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
     }
         fun observeEvents() {
             imagePicker.onMediaDataGet.observe(this@EditProfile) { pojoMediaData ->
-                if (pojoMediaData != null) {
-                    loadProfileImage(pojoMediaData.mediaCompressFile)
+                if (pojoMediaData != null ) {
+                    if(isFrom==1)
+                    {
+                        loadProfileImage(pojoMediaData.mediaCompressFile)
+                    }
+                    else{
+                        Log.d("Image upload","yes")
+                        Log.d("File Name",pojoMediaData.mediaCompressFile.name)
+                    }
 //                    mBinding.tvSize.text = pojoMediaData.mediaCompressFile.extension
+
                 }
+
             }
         }
         private fun loadProfileImage(file: File) {
             imagePhoto = file
             val requestOptions = glideCenterCropOptions(R.drawable.place_hold_banner)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-            mBinding?.ivUserImage?.let {
-                Glide.with(this@EditProfile).load(file).apply(requestOptions).transform(CircleCrop())
-                    .into(it)
-            }
+
+                mBinding?.ivUserImage?.let {
+                    Glide.with(this@EditProfile).load(file).apply(requestOptions).transform(CircleCrop())
+                        .into(it)
+                }
+
+
+
         }
         private fun glideBaseOptions(drawable: Int): RequestOptions {
             return RequestOptions().placeholder(drawable)
@@ -124,23 +148,53 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
                             this, fileUri,
                             fileData[0], TextUtils.equals(fileData[1], "1")
                         )
-                        imagePicker.setUpSelectedMediaData(
-                            docFile,
-                            TextUtils.equals(fileData[1], "1")
-                        )
+                        if (isFrom==1){
+                            imagePicker.setUpSelectedMediaData(
+                                docFile,
+                                TextUtils.equals(fileData[1], "1")
+                            )
+                        }
+                        else{
+                            mBinding?.tvDoc?.text=fileData[0]
+                        }
+
+
                         //mViewModel.attachMedia(docFile, TextUtils.equals(fileData[1], "1"));
                     }
                 }
             }
         } else if (requestCode == REQUEST_CAMERA_IMAGE_RESULT) {
             if (resultCode == RESULT_OK) {
-                imagePicker.setUpCameraMediaResult(true)
+                if (isFrom==1)
+                {
+                    imagePicker.setUpCameraMediaResult(true)
+                }
+
+
             }
         } else if (requestCode == REQUEST_CAMERA_VIDEO_RESULT) {
             if (resultCode == RESULT_OK) {
                 imagePicker.setUpCameraMediaResult(false)
             }
         }
+        else if (requestCode == REQUEST_WRITE_STORAGE_PERMISSION_DOC) {
+            if (resultCode == RESULT_OK) {
+                data?.data?.let { uri ->
+                    val projection = arrayOf(
+                        MediaStore.MediaColumns.DISPLAY_NAME,
+                        MediaStore.MediaColumns.SIZE
+                    )
+                    val cursor = contentResolver.query(uri, projection, null, null, null)
+                    cursor?.use {
+                        if (it.moveToFirst()) {
+                            val documentName =
+                                it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
+                                mBinding?.tvDoc?.text =documentName
+
+                        }
+            }}}
+        }
+
         if (requestCode == 100) {
             if (resultCode == RESULT_OK) {
                 finish()
@@ -178,7 +232,7 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
             } else if (flag == 0) {
                 //checkPermissionForDownloadPdf();
             }
-        } else if (requestCode == REQUEST_WRITE_STORAGE_PERMISSION_DOC) {
+        } else if (requestCode == REQUEST_CODE_DOC_PDF) {
             val flag = PermissionHelper.checkPermissionResult(
                 permissions,
                 grantResults,
@@ -187,6 +241,19 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
             )
             if (flag == 1) {
                 imagePicker.selectImageOrVideo()
+            } else if (flag == 0) {
+                //checkPermissionForDownloadPdf();
+            }
+        }
+        else if (requestCode == REQUEST_WRITE_STORAGE_PERMISSION_DOC) {
+            val flag = PermissionHelper.checkPermissionResult(
+                permissions,
+                grantResults,
+                R.string.request_read_storage_permission,
+                this
+            )
+            if (flag == 1) {
+                imagePicker.selectDoc()
             } else if (flag == 0) {
                 //checkPermissionForDownloadPdf();
             }

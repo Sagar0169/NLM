@@ -54,6 +54,7 @@ class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() ,
         showCustomDialog()
     }
 
+
     override fun setVariables() {
     }
 
