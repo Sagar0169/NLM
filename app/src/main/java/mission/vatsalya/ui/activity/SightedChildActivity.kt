@@ -15,6 +15,11 @@ import com.google.android.material.tabs.TabLayout
 import mission.vatsalya.R
 import mission.vatsalya.databinding.ActivitySightedChildBinding
 import mission.vatsalya.download_manager.AndroidDownloader
+import mission.vatsalya.model.BackgroundData
+import mission.vatsalya.model.FacialAttributeData
+import mission.vatsalya.model.LocationData
+import mission.vatsalya.model.PhysicalAttributesData
+import mission.vatsalya.model.SightedChildData
 import mission.vatsalya.ui.fragment.BasicDetailsFragment
 import mission.vatsalya.ui.fragment.ConfirmationFragments
 import mission.vatsalya.ui.fragment.FacialAttributesFragment
@@ -40,8 +45,13 @@ class SightedChildActivity : BaseActivity<ActivitySightedChildBinding>(),
     SightedBackgroundFragment.OnNextButtonClickListener,
     SightedLocationDetailsFragment.OnNextButtonClickListener,
     SightedUploadFragment.OnNextButtonClickListener,
-    SightedConfirmationFragment.OnNextButtonClickListener
-{
+    SightedConfirmationFragment.OnNextButtonClickListener {
+    var sightedChildData = SightedChildData()
+    var facialAttributeData = FacialAttributeData()
+    var physicalAttributesData = PhysicalAttributesData()
+    var backgroundData = BackgroundData()
+    var locationData = LocationData()
+
     private var mBinding: ActivitySightedChildBinding? = null
 
     override val layoutId: Int
@@ -102,8 +112,38 @@ class SightedChildActivity : BaseActivity<ActivitySightedChildBinding>(),
     }
 
     override fun onNextButtonClick() {
+        // Collect data from current fragment
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
+        if (currentFragment is SightedBasicDetailsFragment) {
+            sightedChildData = currentFragment.getData()
+        } else if (currentFragment is SightedFacialAttributesFragment) {
+            facialAttributeData = currentFragment.getData()
+        } else if (currentFragment is SightedPhysicalAttributeFragment) {
+            physicalAttributesData = currentFragment.getData()
+        } else if (currentFragment is SightedBackgroundFragment) {
+            backgroundData = currentFragment.getData()
+        }else if (currentFragment is SightedLocationDetailsFragment) {
+            locationData = currentFragment.getData()
+        }
         moveToNextTab()
     }
+
+    fun onTabClicks() {
+        // Collect data from current fragment
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
+        if (currentFragment is SightedBasicDetailsFragment) {
+            sightedChildData = currentFragment.getData()
+        } else if (currentFragment is SightedFacialAttributesFragment) {
+            facialAttributeData = currentFragment.getData()
+        } else if (currentFragment is SightedPhysicalAttributeFragment) {
+            physicalAttributesData = currentFragment.getData()
+        } else if (currentFragment is SightedBackgroundFragment) {
+            backgroundData = currentFragment.getData()
+        }else if (currentFragment is SightedLocationDetailsFragment) {
+            locationData = currentFragment.getData()
+        }
+    }
+
 
     override fun onBackPressed() {
         val currentTab = mBinding?.tabLayout?.selectedTabPosition ?: 0
@@ -131,13 +171,41 @@ class SightedChildActivity : BaseActivity<ActivitySightedChildBinding>(),
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
-                        0 -> loadFragment(SightedBasicDetailsFragment())
-                        1 -> loadFragment(SightedFacialAttributesFragment())
-                        2 -> loadFragment(SightedPhysicalAttributeFragment())
-                        3 -> loadFragment(SightedBackgroundFragment())
-                        4 -> loadFragment(SightedLocationDetailsFragment())
-                        5 -> loadFragment(SightedUploadFragment())
-                        6 -> loadFragment(SightedConfirmationFragment())
+                        0 -> {
+                            onTabClicks()
+                            loadFragment(SightedBasicDetailsFragment())
+                        }
+
+                        1 -> {
+                            onTabClicks()
+                            loadFragment(SightedFacialAttributesFragment())
+
+                        }
+
+                        2 -> {
+                            onTabClicks()
+                            loadFragment(SightedPhysicalAttributeFragment())
+                        }
+
+                        3 -> {
+                            onTabClicks()
+                            loadFragment(SightedBackgroundFragment())
+                        }
+
+                        4 -> {
+                            onTabClicks()
+                            loadFragment(SightedLocationDetailsFragment())
+                        }
+
+                        5 -> {
+                            onTabClicks()
+                            loadFragment(SightedUploadFragment())
+                        }
+
+                        6 -> {
+                            onTabClicks()
+                            loadFragment(SightedConfirmationFragment())
+                        }
                     }
                 }
 
@@ -153,12 +221,19 @@ class SightedChildActivity : BaseActivity<ActivitySightedChildBinding>(),
     }
 
     private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
         if (fragment is SightedBasicDetailsFragment) {
-            transaction.replace(R.id.frameLayout, fragment)
-        } else {
-            transaction.replace(R.id.frameLayout, fragment)
+            fragment.setData(sightedChildData)
+        } else if (fragment is SightedFacialAttributesFragment) {
+            fragment.setData(facialAttributeData)
+        } else if (fragment is SightedPhysicalAttributeFragment) {
+            fragment.setData(physicalAttributesData)
+        } else if (fragment is SightedBackgroundFragment) {
+            fragment.setData(backgroundData)
+        }else if (fragment is SightedLocationDetailsFragment) {
+            fragment.setData(locationData)
         }
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameLayout, fragment)
         transaction.commit()
     }
 

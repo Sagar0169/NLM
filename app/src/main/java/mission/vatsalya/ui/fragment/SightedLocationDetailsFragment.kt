@@ -12,12 +12,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import mission.vatsalya.R
 import mission.vatsalya.databinding.FragmentSightedLocationDetialsFragementBinding
+import mission.vatsalya.model.FacialAttributeData
+import mission.vatsalya.model.LocationData
 import mission.vatsalya.ui.adapter.RelationshipAdapter
 import mission.vatsalya.ui.adapter.StateAdapter
 import mission.vatsalya.utilities.BaseFragment
 
 
 class SightedLocationDetailsFragment : BaseFragment<FragmentSightedLocationDetialsFragementBinding>() {
+
+    private var locationData: LocationData? = null
+
+    // Call this method before displaying the fragment
+    fun setData(data: LocationData) {
+        locationData = data
+    }
+
+    fun getData(): LocationData {
+        return locationData?.apply {
+            state = mBinding!!.tvState.text.toString()
+            district= mBinding!!.tvDistrict.text.toString()
+            pin = mBinding!!.etPin.text.toString()
+            address = mBinding!!.etAddress.text.toString()
+
+
+        } ?: LocationData()
+    }
+
+
+
+
     private var mBinding: FragmentSightedLocationDetialsFragementBinding? = null
     private var isSelected: Boolean? = false
     private lateinit var relationAdapter: RelationshipAdapter
@@ -49,6 +73,25 @@ class SightedLocationDetailsFragment : BaseFragment<FragmentSightedLocationDetia
     override fun init() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+
+        locationData?.let {
+            // Helper function to set text and color
+            fun setTextViewWithCondition(textView: TextView, text: String?) {
+                textView.text = text
+                if (text == "Please Select") {
+                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
+                } else {
+                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                }
+            }
+
+            // Set text and color for each field
+            setTextViewWithCondition(mBinding!!.tvState, it.state)
+            setTextViewWithCondition(mBinding!!.tvDistrict, it.district)
+            setTextViewWithCondition(mBinding!!.etPin, it.pin)
+            setTextViewWithCondition(mBinding!!.etAddress, it.address)
+
+        }
         mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
         mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
     }

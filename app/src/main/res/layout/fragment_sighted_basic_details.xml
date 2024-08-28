@@ -163,6 +163,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <RadioGroup
+                    android:id="@+id/rbGenderGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -213,7 +214,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <RadioGroup
-                    android:id="@+id/rbGroup"
+                    android:id="@+id/rbGroupDifferently"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -283,6 +284,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <RadioGroup
+                    android:id="@+id/rbMentally"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -439,6 +441,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
+                    android:id="@+id/etDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
