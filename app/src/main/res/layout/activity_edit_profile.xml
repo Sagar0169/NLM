@@ -60,6 +60,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivCamera"
+                    android:clickable="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@id/ivUserImage"
@@ -93,10 +94,10 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_regular"
                     android:onClick="@{ClickAction::edit}"
-                    android:singleLine="true"
-                    android:text="Edit"
                     android:paddingHorizontal="@dimen/dp_25"
                     android:paddingVertical="@dimen/dp_10"
+                    android:singleLine="true"
+                    android:text="Edit"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -188,7 +189,7 @@
                         android:textStyle="bold" />
 
                     <!-- EditText for Mobile Number -->
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/etMobile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -250,6 +251,7 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:enabled="false"
                     android:inputType="textEmailAddress"
+
                     android:maxLength="80"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -313,6 +315,8 @@
                     android:weightSum="2">
 
                     <TextView
+                        android:enabled="false"
+
                         android:id="@+id/tvChooseFile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -321,6 +325,7 @@
                         android:gravity="center"
                         android:padding="@dimen/dp_10"
                         android:text="Choose File"
+                        android:onClick="@{ClickAction::uploadDoc}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_14" />
 
@@ -330,6 +335,7 @@
                         android:background="#909090" />
 
                     <TextView
+                        android:id="@+id/tvDoc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.6"
@@ -426,6 +432,7 @@
 
                 <TextView
                     android:id="@+id/tvSendOtp"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

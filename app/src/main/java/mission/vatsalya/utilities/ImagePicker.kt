@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Log
 import android.widget.ListAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ObservableInt
@@ -55,7 +56,7 @@ open class ImagePicker(
     }
 
     fun selectMediaDocDialog() {
-        val builder = AlertDialog.Builder(mActivity)
+        val builder = AlertDialog.Builder(mActivity,R.style.WhiteAlertDialogTheme)
         builder.setCancelable(false)
         builder.setTitle(getString(R.string.text_select))
         val items = mActivity.resources.getStringArray(R.array.select_media_doc_text)
@@ -148,6 +149,7 @@ open class ImagePicker(
         if (isImage) {
             showImageMediaDialog()
         } else {
+
             setUpDocSelection()
         }
     }
@@ -158,14 +160,16 @@ open class ImagePicker(
     }
 
     private fun setUpDocSelection() {
-        if (isPermissionWithGranted(
-                arrayOf<String?>(Manifest.permission.READ_EXTERNAL_STORAGE),
-                REQUEST_WRITE_STORAGE_PERMISSION_DOC_PDF,
-                mActivity
-            )
-        ) {
-            selectDoc()
-        }
+        selectDoc()
+//        if (isPermissionWithGranted(
+//                arrayOf<String?>(Manifest.permission.READ_EXTERNAL_STORAGE),
+//                REQUEST_WRITE_STORAGE_PERMISSION_DOC,
+//                mActivity
+//            )
+//        ) {
+//
+//            selectDoc()
+//        }
     }
 
     private fun setUpMediaSelection(isWithPermission: Boolean) {
@@ -216,13 +220,14 @@ open class ImagePicker(
     }
 
     fun selectDoc() {
+
         val intent = Intent()
         intent.type = "application/pdf"
         intent.action = Intent.ACTION_GET_CONTENT
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         mActivity.startActivityForResult(
             Intent.createChooser(intent, "Select PDF"),
-            REQUEST_CODE_DOC_PDF
+            REQUEST_WRITE_STORAGE_PERMISSION_DOC
         )
     }
 

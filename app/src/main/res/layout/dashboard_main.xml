@@ -26,6 +26,8 @@
             android:background="@drawable/headear_back_small">
 
             <LinearLayout
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:id="@+id/ll1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
