@@ -18,6 +18,8 @@ import mission.vatsalya.databinding.FragmentSightedBackgroundBinding
 import mission.vatsalya.databinding.FragmentSightedBasicDetailsBinding
 import mission.vatsalya.databinding.FragmentSightedFacialAttributesBinding
 import mission.vatsalya.databinding.FragmentSightedPhysicalAttributeBinding
+import mission.vatsalya.model.BackgroundData
+import mission.vatsalya.model.FacialAttributeData
 import mission.vatsalya.ui.adapter.RelationshipAdapter
 import mission.vatsalya.ui.adapter.StateAdapter
 import mission.vatsalya.ui.fragment.SightedBasicDetailsFragment.OnNextButtonClickListener
@@ -25,6 +27,25 @@ import mission.vatsalya.utilities.BaseFragment
 
 
 class SightedBackgroundFragment : BaseFragment<FragmentSightedBackgroundBinding>() {
+
+    private var backgroundData: BackgroundData? = null
+
+    // Call this method before displaying the fragment
+    fun setData(data: BackgroundData) {
+        backgroundData = data
+    }
+
+    fun getData(): BackgroundData {
+        return backgroundData?.apply {
+            primaryLang = mBinding!!.tvPrimaryLang.text.toString()
+            otherLang = mBinding!!.tvOtherLang.text.toString()
+        } ?: BackgroundData()
+    }
+
+
+
+
+
     private var mBinding: FragmentSightedBackgroundBinding? = null
     private var isSelected: Boolean? = false
     private lateinit var relationAdapter: RelationshipAdapter
@@ -51,6 +72,22 @@ class SightedBackgroundFragment : BaseFragment<FragmentSightedBackgroundBinding>
     override fun init() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+        backgroundData?.let {
+            // Helper function to set text and color
+            fun setTextViewWithCondition(textView: TextView, text: String?) {
+                textView.text = text
+                if (text == "Please Select") {
+                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
+                } else {
+                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                }
+            }
+
+            // Set text and color for each field
+            setTextViewWithCondition(mBinding!!.tvPrimaryLang, it.primaryLang)
+            setTextViewWithCondition(mBinding!!.tvOtherLang, it.otherLang)
+
+        }
         mBinding!!.tvPrimaryLang.setOnClickListener { showBottomSheetDialog("Primary") }
         mBinding!!.tvOtherLang.setOnClickListener { showBottomSheetDialog("Other") }
     }

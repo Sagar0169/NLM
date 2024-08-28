@@ -17,6 +17,8 @@ import mission.vatsalya.R
 import mission.vatsalya.databinding.FragmentSightedBasicDetailsBinding
 import mission.vatsalya.databinding.FragmentSightedFacialAttributesBinding
 import mission.vatsalya.databinding.FragmentSightedPhysicalAttributeBinding
+import mission.vatsalya.model.FacialAttributeData
+import mission.vatsalya.model.PhysicalAttributesData
 import mission.vatsalya.ui.adapter.RelationshipAdapter
 import mission.vatsalya.ui.adapter.StateAdapter
 import mission.vatsalya.ui.fragment.SightedBasicDetailsFragment.OnNextButtonClickListener
@@ -24,6 +26,34 @@ import mission.vatsalya.utilities.BaseFragment
 
 
 class SightedPhysicalAttributeFragment : BaseFragment<FragmentSightedPhysicalAttributeBinding>() {
+
+
+    private var physicalAttributesData: PhysicalAttributesData? = null
+
+    // Call this method before displaying the fragment
+    fun setData(data: PhysicalAttributesData) {
+        physicalAttributesData = data
+    }
+
+    fun getData(): PhysicalAttributesData {
+        return physicalAttributesData?.apply {
+            complexion = mBinding!!.tvComplexion.text.toString()
+            build = mBinding!!.tvBuild.text.toString()
+            neckType = mBinding!!.tvNeckType.text.toString()
+            topWear = mBinding!!.tvTopWear.text.toString()
+            topWearColor = mBinding!!.tvTopWearColor.text.toString()
+            bottomWear = mBinding!!.tvBottomWear.text.toString()
+            bottomWearColor = mBinding!!.tvBottomWearColor.text.toString()
+            footWear = mBinding!!.tvFootWear.text.toString()
+            footWearColor = mBinding!!.tvFootWearColor.text.toString()
+            identification = mBinding!!.etIdentification.text.toString()
+
+        } ?: PhysicalAttributesData()
+    }
+
+
+
+
     private var mBinding: FragmentSightedPhysicalAttributeBinding? = null
     private var isSelected: Boolean? = false
     private lateinit var relationAdapter: RelationshipAdapter
@@ -110,6 +140,29 @@ class SightedPhysicalAttributeFragment : BaseFragment<FragmentSightedPhysicalAtt
     override fun init() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+        physicalAttributesData?.let {
+            // Helper function to set text and color
+            fun setTextViewWithCondition(textView: TextView, text: String?) {
+                textView.text = text
+                if (text == "Please Select") {
+                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
+                } else {
+                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                }
+            }
+
+            // Set text and color for each field
+            setTextViewWithCondition(mBinding!!.tvComplexion, it.complexion)
+            setTextViewWithCondition(mBinding!!.tvBuild, it.build)
+            setTextViewWithCondition(mBinding!!.tvNeckType, it.neckType)
+            setTextViewWithCondition(mBinding!!.tvTopWear, it.topWear)
+            setTextViewWithCondition(mBinding!!.tvTopWearColor, it.topWearColor)
+            setTextViewWithCondition(mBinding!!.tvBottomWear, it.bottomWear)
+            setTextViewWithCondition(mBinding!!.tvBottomWearColor, it.bottomWearColor)
+            setTextViewWithCondition(mBinding!!.tvFootWear, it.footWear)
+            setTextViewWithCondition(mBinding!!.tvFootWearColor, it.footWearColor)
+            setTextViewWithCondition(mBinding!!.etIdentification, it.identification)
+        }
 
         mBinding!!.tvComplexion.setOnClickListener { showBottomSheetDialog("Complexion") }
         mBinding!!.tvBuild.setOnClickListener { showBottomSheetDialog("Build") }

@@ -18,6 +18,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import mission.vatsalya.R
 import mission.vatsalya.databinding.FragmentSightedBasicDetailsBinding
 import mission.vatsalya.databinding.FragmentSightedFacialAttributesBinding
+import mission.vatsalya.model.FacialAttributeData
+import mission.vatsalya.model.SightedChildData
 import mission.vatsalya.ui.adapter.RelationshipAdapter
 import mission.vatsalya.ui.adapter.StateAdapter
 import mission.vatsalya.ui.fragment.SightedBasicDetailsFragment.OnNextButtonClickListener
@@ -25,6 +27,32 @@ import mission.vatsalya.utilities.BaseFragment
 
 
 class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttributesBinding>() {
+
+    private var facialAttributeData: FacialAttributeData? = null
+
+    // Call this method before displaying the fragment
+    fun setData(data: FacialAttributeData) {
+        facialAttributeData = data
+    }
+
+    fun getData(): FacialAttributeData {
+        return facialAttributeData?.apply {
+            hariLength = mBinding!!.tvHairLength.text.toString()
+            hairColor = mBinding!!.tvHairColor.text.toString()
+            eyeType = mBinding!!.tvEyeType.text.toString()
+            eyeColor = mBinding!!.tvEyeColor.text.toString()
+            earsType = mBinding!!.tvEarsType.text.toString()
+            earsSize = mBinding!!.tvEarsSize.text.toString()
+            lipsType = mBinding!!.tvLipsType.text.toString()
+            lipsColor = mBinding!!.tvLipsColor.text.toString()
+            frontTeeth = mBinding!!.tvFrontTeeth.text.toString()
+            spectacleTypes = mBinding!!.tvSpectaclesType.text.toString()
+            spectacleColor = mBinding!!.tvSpectaclesColor.text.toString()
+
+        } ?: FacialAttributeData()
+    }
+
+
     private var mBinding: FragmentSightedFacialAttributesBinding? = null
     private var isSelected: Boolean? = false
     private lateinit var relationAdapter: RelationshipAdapter
@@ -50,7 +78,7 @@ class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttrib
     )
 
     private val eyeColor = listOf(
-        "Black", "Brown", "Blue", "Reddish", "Green","Other"
+        "Black", "Brown", "Blue", "Reddish", "Green", "Other"
     )
 
     private val earsType = listOf(
@@ -62,7 +90,7 @@ class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttrib
     )
 
     private val lipsType = listOf(
-        "Wrinkled", "Drooping", "Thin", "Uneven", "Flat Upper lip", "Full lips","Cleft Lips"
+        "Wrinkled", "Drooping", "Thin", "Uneven", "Flat Upper lip", "Full lips", "Cleft Lips"
     )
 
     private val lipsColor = listOf(
@@ -70,7 +98,7 @@ class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttrib
     )
 
     private val frontTeeth = listOf(
-        "Normal", "Broken", "One missing", "Two missing","No teeth"
+        "Normal", "Broken", "One missing", "Two missing", "No teeth"
     )
     private val spectaclesType = listOf(
         "Round Frame", "Rectangle Frame", "No Frame"
@@ -84,14 +112,36 @@ class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttrib
     )
 
 
-
-
     override val layoutId: Int
         get() = R.layout.fragment_sighted_facial_attributes
 
     override fun init() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+        facialAttributeData?.let {
+            // Helper function to set text and color
+            fun setTextViewWithCondition(textView: TextView, text: String?) {
+                textView.text = text
+                if (text == "Please Select") {
+                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
+                } else {
+                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                }
+            }
+
+            // Set text and color for each field
+            setTextViewWithCondition(mBinding!!.tvHairLength, it.hariLength)
+            setTextViewWithCondition(mBinding!!.tvHairColor, it.hairColor)
+            setTextViewWithCondition(mBinding!!.tvEyeType, it.eyeType)
+            setTextViewWithCondition(mBinding!!.tvEyeColor, it.eyeColor)
+            setTextViewWithCondition(mBinding!!.tvEarsType, it.earsType)
+            setTextViewWithCondition(mBinding!!.tvEarsSize, it.earsSize)
+            setTextViewWithCondition(mBinding!!.tvLipsType, it.lipsType)
+            setTextViewWithCondition(mBinding!!.tvLipsColor, it.lipsColor)
+            setTextViewWithCondition(mBinding!!.tvFrontTeeth, it.frontTeeth)
+            setTextViewWithCondition(mBinding!!.tvSpectaclesType, it.spectacleTypes)
+            setTextViewWithCondition(mBinding!!.tvSpectaclesColor, it.spectacleColor)
+        }
 
         // Set click listeners for each TextView
         mBinding!!.tvHairLength.setOnClickListener { showBottomSheetDialog("hairLength") }
@@ -105,6 +155,8 @@ class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttrib
         mBinding!!.tvFrontTeeth.setOnClickListener { showBottomSheetDialog("frontTeeth") }
         mBinding!!.tvSpectaclesType.setOnClickListener { showBottomSheetDialog("spectaclesType") }
         mBinding!!.tvSpectaclesColor.setOnClickListener { showBottomSheetDialog("spectaclesColor") }
+
+
     }
 
     private fun showBottomSheetDialog(type: String) {
@@ -132,46 +184,57 @@ class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttrib
                 selectedList = hairLength
                 selectedTextView = mBinding!!.tvHairLength
             }
+
             "hairColor" -> {
                 selectedList = hairColor
                 selectedTextView = mBinding!!.tvHairColor
             }
+
             "eyeType" -> {
                 selectedList = eyeType
                 selectedTextView = mBinding!!.tvEyeType
             }
+
             "eyeColor" -> {
                 selectedList = eyeColor
                 selectedTextView = mBinding!!.tvEyeColor
             }
+
             "earsType" -> {
                 selectedList = earsType
                 selectedTextView = mBinding!!.tvEarsType
             }
+
             "earsSize" -> {
                 selectedList = earsSize
                 selectedTextView = mBinding!!.tvEarsSize
             }
+
             "lipsType" -> {
                 selectedList = lipsType
                 selectedTextView = mBinding!!.tvLipsType
             }
+
             "lipsColor" -> {
                 selectedList = lipsColor
                 selectedTextView = mBinding!!.tvLipsColor
             }
+
             "frontTeeth" -> {
                 selectedList = frontTeeth
                 selectedTextView = mBinding!!.tvFrontTeeth
             }
+
             "spectaclesType" -> {
                 selectedList = spectaclesType
                 selectedTextView = mBinding!!.tvSpectaclesType
             }
+
             "spectaclesColor" -> {
                 selectedList = spectaclesColor
                 selectedTextView = mBinding!!.tvSpectaclesColor
             }
+
             else -> return
         }
 
@@ -183,7 +246,8 @@ class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttrib
             bottomSheetDialog.dismiss()
         }
 
-        rvBottomSheet.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rvBottomSheet.adapter = stateAdapter
         bottomSheetDialog.setContentView(view)
 
@@ -195,7 +259,12 @@ class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttrib
         // Set a dismiss listener to reset the view visibility
         bottomSheetDialog.setOnDismissListener {
             rotatedDrawable = rotateDrawable(drawable, 0f)
-            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                rotatedDrawable,
+                null
+            )
         }
 
         // Show the bottom sheet

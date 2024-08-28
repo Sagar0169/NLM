@@ -46,6 +46,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+        mBinding!!.tvSkip.setOnClickListener{
+            val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
