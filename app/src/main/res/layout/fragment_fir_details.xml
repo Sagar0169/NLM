@@ -138,7 +138,6 @@
                     android:hint="FIR No."
                     android:textColor="@color/black"
                     android:textColorHint="#6B6B6B"
-                    android:drawableEnd="@drawable/ic_arrow_down"
 
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
