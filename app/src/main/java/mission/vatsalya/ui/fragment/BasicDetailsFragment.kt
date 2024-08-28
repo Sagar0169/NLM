@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -23,50 +24,169 @@ import mission.vatsalya.databinding.ActivityChildMissingBinding
 import mission.vatsalya.databinding.FragmentBasicDetailsBinding
 import mission.vatsalya.ui.activity.OtpActivity
 import mission.vatsalya.ui.activity.RegistrationActivity
+import mission.vatsalya.ui.adapter.RelationshipAdapter
 import mission.vatsalya.ui.adapter.StateAdapter
 import mission.vatsalya.ui.fragment.SightedBasicDetailsFragment.OnNextButtonClickListener
 import mission.vatsalya.utilities.BaseFragment
+import mission.vatsalya.utilities.hideView
+import mission.vatsalya.utilities.showView
 import java.util.Calendar
 
 class BasicDetailsFragment : BaseFragment<FragmentBasicDetailsBinding>(){
     private var mBinding: FragmentBasicDetailsBinding?=null
+    private var isSelected: Boolean? = false
+    private lateinit var relationAdapter: RelationshipAdapter
+    private var layoutManager: LinearLayoutManager? = null
     private var listener: OnNextButtonClickListener? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
 
+
+    interface OnNextButtonClickListener {
+        fun onNextButtonClick()
+    }
+
     private val relationList = listOf(
-         "Parent", "Legal Guardian", "Other",
+        "Parent", "Legal Guardian", "Other",
     )
 
     override val layoutId: Int
         get() = R.layout.fragment_basic_details
 
     override fun init() {
-        mBinding=viewDataBinding
+        mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+//        callAdapter()
 
+
+        mBinding!!.rbGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.rbDaYes -> {
+                    // Show the TextView if "Yes" is selected
+                    mBinding!!.tvDisability.showView()
+                    mBinding!!.etDisability.showView()
+                }
+
+                R.id.rbDaNo -> {
+                    // Hide the TextView if "No" is selected
+                    mBinding!!.tvDisability.hideView()
+                    mBinding!!.etDisability.hideView()
+                }
+            }
+        }
+
+
+        mBinding!!.tvDateOfSighting.setOnClickListener {
+            showDatePicker(mBinding!!.tvDateOfSighting)
+        }
         setupSpinner(mBinding!!.spinnerYear, R.array.year_array)
         setupSpinner(mBinding!!.spinnerMonth, R.array.month_array)
         setupSpinner(mBinding!!.spinnerFeet, R.array.feet_array)
         setupSpinner(mBinding!!.spinnerInches, R.array.inches_array)
-        mBinding!!.tvRelation.setOnClickListener { showBottomSheetDialog("Relation") }
 
-        mBinding!!.tvDOM.setOnClickListener{
-            showDatePicker(mBinding!!.tvDOM)
+        mBinding!!.rlRelationship.setOnClickListener {
+            if (isSelected == false) {
+                isSelected = true
+                mBinding!!.ivArrowDown.isVisible = true
+                mBinding?.ivArrowUp?.isVisible = false
+                showBottomSheetDialog()
+//                mBinding?.llRelation?.isVisible = true
+
+            } else {
+                isSelected = false
+                mBinding?.ivArrowDown?.isVisible = false
+                mBinding?.ivArrowUp?.isVisible = true
+//                mBinding?.llRelation?.isVisible = false
+
+            }
+
         }
-        mBinding!!.tvDob.setOnClickListener{
-            showDatePicker(mBinding!!.tvDob)
+        mBinding!!.ivArrowUp.setOnClickListener {
+            isSelected = true
+            mBinding?.ivArrowDown?.isVisible = true
+            mBinding?.ivArrowUp?.isVisible = false
+            showBottomSheetDialog()
+//            mBinding?.llRelation?.isVisible = true
+        }
+        mBinding!!.ivArrowDown.setOnClickListener {
+            isSelected = false
+            mBinding?.ivArrowDown?.isVisible = false
+            mBinding?.ivArrowUp?.isVisible = true
+//            mBinding?.llRelation?.isVisible = false
         }
     }
 
-    override fun setVariables() {
+    fun onClickItem(selectedItem: String) {
+        mBinding!!.tvSelect.text = selectedItem
+        mBinding!!.tvSelect.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.black
+            )
+        )
+        mBinding?.llRelation?.isVisible = false
+        mBinding?.ivArrowDown?.isVisible = false
+        mBinding?.ivArrowUp?.isVisible = true
     }
 
-    override fun setObservers() {
+
+    private fun showBottomSheetDialog() {
+        bottomSheetDialog = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
+        view.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT // Set height to 80% of the screen
+        )
+
+        // Properly find the RecyclerView from the inflated view
+        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
+        val close = view.findViewById<TextView>(R.id.tvClose)
+
+        close.setOnClickListener{
+            bottomSheetDialog.dismiss()
+        }
+
+        // Set up the adapter based on the type
+
+        stateAdapter = StateAdapter(relationList, requireContext()) { selectedItem ->
+            // Handle state item click
+            mBinding!!.tvSelect.text = selectedItem
+            mBinding!!.tvSelect.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.black
+                )
+            )
+            mBinding?.llRelation?.isVisible = false
+            mBinding?.ivArrowDown?.isVisible = false
+            mBinding?.ivArrowUp?.isVisible = true
+            bottomSheetDialog.dismiss()
+        }
+        rvBottomSheet.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.adapter = stateAdapter
+        bottomSheetDialog.setContentView(view)
+
+        // Set a dismiss listener to reset the view visibility
+        bottomSheetDialog.setOnDismissListener {
+            isSelected = false
+            mBinding?.ivArrowDown?.isVisible = false
+            mBinding?.ivArrowUp?.isVisible = true
+        }
+
+
+        // Show the bottom sheet
+        bottomSheetDialog.show()
     }
-    interface OnNextButtonClickListener {
-        fun onNextButtonClick()
-    }
+
+
+//    private fun callAdapter() {
+//        relationAdapter = RelationshipAdapter(relationList, this)
+//        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+//        mBinding!!.rvRelation.layoutManager = layoutManager
+//        mBinding!!.rvRelation.adapter = relationAdapter
+//    }
+
     private fun setupSpinner(spinner: Spinner, arrayResId: Int) {
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
@@ -98,33 +218,7 @@ class BasicDetailsFragment : BaseFragment<FragmentBasicDetailsBinding>(){
         }
     }
 
-    inner class ClickActions {
 
-        fun login(view: View) {
-
-
-        }
-        fun register(view: View) {
-
-        }
-
-        fun backPress(view: View) {
-
-        }
-        fun next(view: View) {
-            listener?.onNextButtonClick()
-
-        }
-    }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        listener = context as? OnNextButtonClickListener
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
     private fun showDatePicker(textView: TextView) {
         // Get current date
         val calendar = Calendar.getInstance()
@@ -151,80 +245,38 @@ class BasicDetailsFragment : BaseFragment<FragmentBasicDetailsBinding>(){
         // Show the dialog
         datePickerDialog.show()
     }
-    private fun showBottomSheetDialog(type: String) {
-        bottomSheetDialog = BottomSheetDialog(requireContext())
-        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
-        view.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
 
-        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
-        val close = view.findViewById<TextView>(R.id.tvClose)
-
-        close.setOnClickListener {
-            bottomSheetDialog.dismiss()
-        }
-
-        // Define a variable for the selected list and TextView
-        val selectedList: List<String>
-        val selectedTextView: TextView
-
-        // Initialize based on type
-        when (type) {
-            "Relation" -> {
-                selectedList = relationList
-                selectedTextView = mBinding!!.tvRelation
-            }
-
-
-            else -> return
-        }
-
-        // Set up the adapter
-        stateAdapter = StateAdapter(selectedList, requireContext()) { selectedItem ->
-            // Handle state item click
-            selectedTextView.text = selectedItem
-            selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-            bottomSheetDialog.dismiss()
-        }
-
-        rvBottomSheet.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        rvBottomSheet.adapter = stateAdapter
-        bottomSheetDialog.setContentView(view)
-
-        // Rotate drawable
-        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_arrow_down)
-        var rotatedDrawable = rotateDrawable(drawable, 180f)
-        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
-
-        // Set a dismiss listener to reset the view visibility
-        bottomSheetDialog.setOnDismissListener {
-            rotatedDrawable = rotateDrawable(drawable, 0f)
-            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
-                null,
-                null,
-                rotatedDrawable,
-                null
-            )
-        }
-
-        // Show the bottom sheet
-        bottomSheetDialog.show()
+    override fun setVariables() {
     }
 
+    override fun setObservers() {
+    }
 
-    private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
-        drawable?.mutate() // Mutate the drawable to avoid affecting other instances
+    inner class ClickActions {
 
-        val rotateDrawable = RotateDrawable()
-        rotateDrawable.drawable = drawable
-        rotateDrawable.fromDegrees = 0f
-        rotateDrawable.toDegrees = angle
-        rotateDrawable.level = 10000 // Needed to apply the rotation
+        fun login(view: View) {
 
-        return rotateDrawable
+
+        }
+
+        fun next(view: View) {
+            listener?.onNextButtonClick()
+
+        }
+
+        fun backPress(view: View) {
+
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as? OnNextButtonClickListener
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
     }
 
 }
