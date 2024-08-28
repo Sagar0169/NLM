@@ -46,7 +46,7 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        imagePicker = ImagePickerHelper(this,observerSnackBarInt )
+        imagePicker = ImagePickerHelper(this, observerSnackBarInt)
         observeEvents()
     }
 
@@ -66,7 +66,7 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
                 "Details Saved Successfully.",
                 Toast.LENGTH_SHORT
             ).show()
-            val intent = Intent(this@EditProfile,DashboardActivity::class.java)
+            val intent = Intent(this@EditProfile, DashboardActivity::class.java)
             startActivity(intent)
         }
 
@@ -109,17 +109,17 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
                     ContextCompat.getDrawable(this@EditProfile, R.drawable.curve_all_corner_black)
                 mBinding?.etphoneNumber?.background =
                     ContextCompat.getDrawable(this@EditProfile, R.drawable.curve_all_corner_black)
-
             }
         }
+
 
         fun dob(view: View) {
 
         }
-        fun profileCamera(view: View){
+
+        fun profileCamera(view: View) {
             imagePicker.showImageMediaDialog(MEDIA_PAGE_FLAG_REGISTER_PROFILE)
-
-
+        }
 
         fun uploadProfile(view: View) {
 
@@ -129,32 +129,36 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
             onBackPressedDispatcher.onBackPressed()
         }
     }
-        fun observeEvents() {
-            imagePicker.onMediaDataGet.observe(this@EditProfile) { pojoMediaData ->
-                if (pojoMediaData != null) {
-                    loadProfileImage(pojoMediaData.mediaCompressFile)
-//                    mBinding.tvSize.text = pojoMediaData.mediaCompressFile.extension
-                }
-            }
-        }
-        private fun loadProfileImage(file: File) {
-            imagePhoto = file
-            val requestOptions = glideCenterCropOptions(R.drawable.place_hold_banner)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-            mBinding?.ivUserImage?.let {
-                Glide.with(this@EditProfile).load(file).apply(requestOptions).transform(CircleCrop())
-                    .into(it)
-            }
-        }
-        private fun glideBaseOptions(drawable: Int): RequestOptions {
-            return RequestOptions().placeholder(drawable)
-                .error(drawable).dontAnimate()
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-        }
 
-        private fun glideCenterCropOptions(drawable: Int): RequestOptions {
-            return glideBaseOptions(drawable).centerCrop()
+    fun observeEvents() {
+        imagePicker.onMediaDataGet.observe(this@EditProfile) { pojoMediaData ->
+            if (pojoMediaData != null) {
+                loadProfileImage(pojoMediaData.mediaCompressFile)
+//                    mBinding.tvSize.text = pojoMediaData.mediaCompressFile.extension
+            }
         }
+    }
+
+    private fun loadProfileImage(file: File) {
+        imagePhoto = file
+        val requestOptions = glideCenterCropOptions(R.drawable.place_hold_banner)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+        mBinding?.ivUserImage?.let {
+            Glide.with(this@EditProfile).load(file).apply(requestOptions).transform(CircleCrop())
+                .into(it)
+        }
+    }
+
+    private fun glideBaseOptions(drawable: Int): RequestOptions {
+        return RequestOptions().placeholder(drawable)
+            .error(drawable).dontAnimate()
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+    }
+
+    private fun glideCenterCropOptions(drawable: Int): RequestOptions {
+        return glideBaseOptions(drawable).centerCrop()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_DOC) {
