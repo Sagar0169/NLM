@@ -104,6 +104,8 @@ class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {
 
                 mBinding?.rbMale?.isEnabled = true
                 mBinding?.rbFemale?.isEnabled = true
+                mBinding?.ivCamera?.isClickable=true
+                mBinding?.tvChooseFile?.isEnabled=true
                 mBinding!!.tvSendOtp.showView()
                 mBinding?.etName?.background =
                     ContextCompat.getDrawable(this@EditProfile, R.drawable.curve_all_corner_black)

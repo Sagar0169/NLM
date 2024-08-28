@@ -60,6 +60,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivCamera"
+                    android:clickable="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@id/ivUserImage"
@@ -314,6 +315,8 @@
                     android:weightSum="2">
 
                     <TextView
+                        android:enabled="false"
+
                         android:id="@+id/tvChooseFile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -322,6 +325,7 @@
                         android:gravity="center"
                         android:padding="@dimen/dp_10"
                         android:text="Choose File"
+                        android:onClick="@{ClickAction::uploadDoc}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_14" />
 
@@ -331,6 +335,7 @@
                         android:background="#909090" />
 
                     <TextView
+                        android:id="@+id/tvDoc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.6"
