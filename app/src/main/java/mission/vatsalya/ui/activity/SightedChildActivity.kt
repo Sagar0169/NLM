@@ -9,10 +9,12 @@ import android.view.Window
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import mission.vatsalya.R
 import mission.vatsalya.databinding.ActivitySightedChildBinding
+import mission.vatsalya.download_manager.AndroidDownloader
 import mission.vatsalya.ui.fragment.BasicDetailsFragment
 import mission.vatsalya.ui.fragment.ConfirmationFragments
 import mission.vatsalya.ui.fragment.FacialAttributesFragment
@@ -77,7 +79,9 @@ class SightedChildActivity : BaseActivity<ActivitySightedChildBinding>(),
 
         // Handle the click on the POCSO Act link
         tvPocsoLink.setOnClickListener {
-            Log.d("CustomDialog", "POCSO Act 2012 link clicked")
+            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
+            val downloader = AndroidDownloader(this)
+            downloader.downloadFile("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")
         }
 
         // Handle the click on the Proceed button
