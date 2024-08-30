@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.fragment.QuickSearchFragment.ClickActions" />
+            type="com.nlm.ui.fragment.QuickSearchFragment.ClickActions" />
     </data>
 
     <FrameLayout

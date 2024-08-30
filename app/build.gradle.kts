@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "mission.vatsalya"
+    namespace = "nlm"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "mission.vatsalya"
+        applicationId = "com.nlm"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

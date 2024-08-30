@@ -6,7 +6,7 @@
 
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.fragment.SightedFacialAttributesFragment.ClickActions" />
+            type="com.nlm.ui.fragment.SightedFacialAttributesFragment.ClickActions" />
 
     </data>
 

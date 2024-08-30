@@ -35,34 +35,34 @@
         </intent>
     </queries>
     <application
-        android:name=".utilities.Vatsalya"
+        android:name="com.nlm.utilities.Nlm"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_app_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Vatsalya"
+        android:theme="@style/Theme.Nlm"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.AboutUsActivity"
+            android:name="com.nlm.ui.activity.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SightedChildActivity"
+            android:name="com.nlm.ui.activity.SightedChildActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ChangePasswordActivity"
+            android:name="com.nlm.ui.activity.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SearchingForAChildActivity"
+            android:name="com.nlm.ui.activity.SearchingForAChildActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.EditProfile"
+            android:name="com.nlm.ui.activity.EditProfile"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SplashActivity"
+            android:name="com.nlm.ui.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,29 +71,29 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".download_manager.DownloadCompletedReceiver"
+            android:name="com.nlm.download_manager.DownloadCompletedReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name="com.nlm.ui.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.DashboardActivity"
+            android:name="com.nlm.ui.activity.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.RegistrationActivity"
+            android:name="com.nlm.ui.activity.RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.OtpActivity"
+            android:name="com.nlm.ui.activity.OtpActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name="com.nlm.ui.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ChildMissingActivity"
+            android:name="com.nlm.ui.activity.ChildMissingActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="true"
             android:screenOrientation="portrait" />

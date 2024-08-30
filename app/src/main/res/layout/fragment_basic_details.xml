@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.fragment.BasicDetailsFragment.ClickActions" />
+            type="com.nlm.ui.fragment.BasicDetailsFragment.ClickActions" />
 
     </data>
 

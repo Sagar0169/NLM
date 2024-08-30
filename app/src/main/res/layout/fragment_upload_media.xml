@@ -5,7 +5,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.fragment.UploadMediaFragment.ClickActions" />
+            type="com.nlm.ui.fragment.UploadMediaFragment.ClickActions" />
 
     </data>
 

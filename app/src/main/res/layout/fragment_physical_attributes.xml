@@ -6,7 +6,7 @@
 
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.fragment.PhysicalAttributesFragment.ClickActions" />
+            type="com.nlm.ui.fragment.PhysicalAttributesFragment.ClickActions" />
 
     </data>
 

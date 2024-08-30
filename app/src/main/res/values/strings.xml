@@ -1,8 +1,8 @@
 <!DOCTYPE resources [
-<!ENTITY app_name "Vatsalya">
+<!ENTITY app_name "NLM">
 ]>
 <resources>
-    <string name="app_name">Vatsalya</string>
+    <string name="app_name">NLM</string>
     <string name="Ok">Ok\n</string>
     <string name="please_enter_correct_otp">Please enter correct otp</string>
     <string name="please_enter_correct_Mobile">Please enter correct Mobile Number</string>

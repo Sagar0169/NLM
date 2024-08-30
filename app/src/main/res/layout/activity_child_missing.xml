@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.activity.ChildMissingActivity.ClickActions" />
+            type="com.nlm.ui.activity.ChildMissingActivity.ClickActions" />
 
     </data>
 

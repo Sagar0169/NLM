@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.fragment.ConfirmationFragments.ClickActions" />
+            type="com.nlm.ui.fragment.ConfirmationFragments.ClickActions" />
 
     </data>
 

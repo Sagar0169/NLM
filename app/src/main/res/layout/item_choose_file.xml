@@ -10,51 +10,80 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout android:id="@+id/llItem"
-            xmlns:android="http://schemas.android.com/apk/res/android"
+
+        <LinearLayout
+            android:id="@+id/llUpload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginHorizontal="@dimen/dp_10"
+            android:orientation="vertical"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/curve_all_corner_grey"
-            android:weightSum="2"
-            android:layout_marginTop="@dimen/dp_7">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tvChooseFile"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:gravity="center"
-                android:background="@drawable/back_number_gray"
-                android:padding="@dimen/dp_10"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_14"
-                android:text="Choose File"
-                android:clickable="true" />
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivPic"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_60"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/place_holder_images"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_weight="8.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDocumentName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_12" />
+
+                    <TextView
+                        android:id="@+id/tvDocumentSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5">
+
+                    <ImageView
+                        android:id="@+id/ivDelete"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:src="@drawable/ic_delete" />
+
+                </RelativeLayout>
+            </LinearLayout>
 
             <View
-                android:layout_width="@dimen/dp_1"
-                android:layout_height="match_parent"
-                android:background="#909090" />
-
-            <TextView
-                android:id="@+id/tvFileName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.2"
-                android:gravity="center"
-                android:padding="@dimen/dp_10"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/sp_14"
-                android:text="No File Chosen" />
-
-
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/dp_5"
+                android:background="@color/grey" />
         </LinearLayout>
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

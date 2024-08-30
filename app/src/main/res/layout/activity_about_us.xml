@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.activity.AboutUsActivity.ClickActions" />
+            type="com.nlm.ui.activity.AboutUsActivity.ClickActions" />
     </data>
 
     <RelativeLayout

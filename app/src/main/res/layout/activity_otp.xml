@@ -7,7 +7,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="mission.vatsalya.ui.activity.OtpActivity.ClickActions" />
+            type="com.nlm.ui.activity.OtpActivity.ClickActions" />
 
     </data>
 
