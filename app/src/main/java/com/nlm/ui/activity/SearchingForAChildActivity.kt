@@ -12,8 +12,8 @@ import com.nlm.download_manager.AndroidDownloader
 import com.nlm.ui.fragment.QuickSearchFragment
 import com.nlm.ui.fragment.TextSeachFragment
 import com.nlm.utilities.BaseActivity
-import nlm.R
-import nlm.databinding.ActivitySearchingForAchildBinding
+import com.nlm.R
+import com.nlm.databinding.ActivitySearchingForAchildBinding
 
 class SearchingForAChildActivity() : BaseActivity<ActivitySearchingForAchildBinding>() {
     override val layoutId: Int

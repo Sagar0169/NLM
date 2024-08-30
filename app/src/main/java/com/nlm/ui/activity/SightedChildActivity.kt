@@ -22,8 +22,8 @@ import com.nlm.ui.fragment.SightedLocationDetailsFragment
 import com.nlm.ui.fragment.SightedPhysicalAttributeFragment
 import com.nlm.ui.fragment.SightedUploadFragment
 import com.nlm.utilities.BaseActivity
-import nlm.R
-import nlm.databinding.ActivitySightedChildBinding
+import com.nlm.R
+import com.nlm.databinding.ActivitySightedChildBinding
 
 
 class SightedChildActivity : BaseActivity<ActivitySightedChildBinding>(),

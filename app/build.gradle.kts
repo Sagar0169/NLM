@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "nlm"
+    namespace = "com.nlm"
     compileSdk = 34
 
     defaultConfig {

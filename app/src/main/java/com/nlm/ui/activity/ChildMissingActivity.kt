@@ -21,8 +21,8 @@ import com.nlm.ui.fragment.PhysicalAttributesFragment
 import com.nlm.ui.fragment.SightedUploadFragment
 import com.nlm.ui.fragment.UploadMediaFragment
 import com.nlm.utilities.BaseActivity
-import nlm.R
-import nlm.databinding.ActivityChildMissingBinding
+import com.nlm.R
+import com.nlm.databinding.ActivityChildMissingBinding
 
 class ChildMissingActivity : BaseActivity<ActivityChildMissingBinding>() ,
     BasicDetailsFragment.OnNextButtonClickListener,

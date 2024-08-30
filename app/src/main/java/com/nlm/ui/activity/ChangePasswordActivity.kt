@@ -8,8 +8,8 @@ import android.widget.ImageView
 import android.widget.Toast
 
 import com.nlm.utilities.BaseActivity
-import nlm.R
-import nlm.databinding.ActivityChangePasswordBinding
+import com.nlm.R
+import com.nlm.databinding.ActivityChangePasswordBinding
 
 class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
     private var mBinding: ActivityChangePasswordBinding? = null

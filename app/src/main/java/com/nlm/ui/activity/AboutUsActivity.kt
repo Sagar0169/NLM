@@ -5,8 +5,8 @@ import android.view.View
 import android.webkit.WebViewClient
 
 import com.nlm.utilities.BaseActivity
-import nlm.R
-import nlm.databinding.ActivityAboutUsBinding
+import com.nlm.R
+import com.nlm.databinding.ActivityAboutUsBinding
 
 class AboutUsActivity() : BaseActivity<ActivityAboutUsBinding>() {
     private var mBinding: ActivityAboutUsBinding? = null

@@ -1,6 +1,4 @@
-<!DOCTYPE resources [
-<!ENTITY app_name "NLM">
-]>
+<!DOCTYPE resources [<!ENTITY app_name "NLM">]>
 <resources>
     <string name="app_name">NLM</string>
     <string name="Ok">Ok\n</string>

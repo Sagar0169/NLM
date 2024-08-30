@@ -19,6 +19,7 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <queries>
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -34,8 +35,9 @@
             <action android:name="android.speech.RecognitionService" />
         </intent>
     </queries>
+
     <application
-        android:name="com.nlm.utilities.Nlm"
+        android:name=".utilities.Nlm"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -47,22 +49,25 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name="com.nlm.ui.activity.AboutUsActivity"
+            android:name=".ui.activity.UserActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.SightedChildActivity"
+            android:name=".ui.activity.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.ChangePasswordActivity"
+            android:name=".ui.activity.SightedChildActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.SearchingForAChildActivity"
+            android:name=".ui.activity.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.EditProfile"
+            android:name=".ui.activity.SearchingForAChildActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.SplashActivity"
+            android:name=".ui.activity.EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,33 +75,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver
-            android:name="com.nlm.download_manager.DownloadCompletedReceiver"
+            android:name=".download_manager.DownloadCompletedReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
+
         <activity
-            android:name="com.nlm.ui.activity.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.DashboardActivity"
+            android:name=".ui.activity.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.RegistrationActivity"
+            android:name=".ui.activity.RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.OtpActivity"
+            android:name=".ui.activity.OtpActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name="com.nlm.ui.activity.ChildMissingActivity"
+            android:name=".ui.activity.ChildMissingActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

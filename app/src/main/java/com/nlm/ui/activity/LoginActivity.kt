@@ -3,8 +3,8 @@ package com.nlm.ui.activity
 import android.content.Intent
 import android.view.View
 import com.nlm.utilities.BaseActivity
-import nlm.R
-import nlm.databinding.ActivityLoginBinding
+import com.nlm.R
+import com.nlm.databinding.ActivityLoginBinding
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 

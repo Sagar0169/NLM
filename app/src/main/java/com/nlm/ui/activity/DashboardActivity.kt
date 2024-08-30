@@ -9,8 +9,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.GravityCompat
 import com.nlm.utilities.BaseActivity
-import nlm.R
-import nlm.databinding.ActivityDashboardBinding
+import com.nlm.R
+import com.nlm.databinding.ActivityDashboardBinding
 
 class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     private var mBinding: ActivityDashboardBinding? = null

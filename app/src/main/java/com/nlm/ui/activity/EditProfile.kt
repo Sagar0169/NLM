@@ -29,8 +29,8 @@ import com.nlm.utilities.Constants.REQUEST_CODE_DOC_PDF
 import com.nlm.utilities.Constants.REQUEST_WRITE_STORAGE_PERMISSION_DOC
 import com.nlm.utilities.FileUtils
 import com.nlm.utilities.FileUtils.saveDocFile
-import nlm.R
-import nlm.databinding.ActivityEditProfileBinding
+import com.nlm.R
+import com.nlm.databinding.ActivityEditProfileBinding
 import java.io.File
 
 class EditProfile() : BaseActivity<ActivityEditProfileBinding>() {

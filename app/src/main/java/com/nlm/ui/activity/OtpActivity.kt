@@ -15,8 +15,8 @@ import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.utilities.toast
-import nlm.R
-import nlm.databinding.ActivityOtpBinding
+import com.nlm.R
+import com.nlm.databinding.ActivityOtpBinding
 import java.util.concurrent.TimeUnit
 
 class OtpActivity : BaseActivity<ActivityOtpBinding>() {

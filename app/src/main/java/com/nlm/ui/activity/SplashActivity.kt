@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import com.nlm.utilities.BaseActivity
-import nlm.R
-import nlm.databinding.ActivitySplashBinding
+import com.nlm.R
+import com.nlm.databinding.ActivitySplashBinding
 
 class SplashActivity() : BaseActivity<ActivitySplashBinding>() {
     override val layoutId: Int

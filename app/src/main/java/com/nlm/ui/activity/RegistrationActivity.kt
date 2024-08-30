@@ -11,8 +11,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseActivity
-import nlm.R
-import nlm.databinding.ActivityRegistrationBinding
+import com.nlm.R
+import com.nlm.databinding.ActivityRegistrationBinding
 
 class RegistrationActivity : BaseActivity<ActivityRegistrationBinding>() {
     private var mBinding: ActivityRegistrationBinding? = null
