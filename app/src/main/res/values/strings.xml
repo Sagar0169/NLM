@@ -217,6 +217,11 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="total_visit">Total Visit</string>
     <string name="no_of_states_covered">No. of states Covered</string>
     <string name="total_no_of_reports_submitted_by_nlm">Total No. of Reports Submitted By NLM</string>
+    <string name="mobile_veterinary_unit">Mobile Veterinary Unit</string>
+    <string name="state_level">State Level</string>
+    <string name="district_level">District Level</string>
+    <string name="block_level">Block Level</string>
+    <string name="farmer_level">Farmer Level</string>
 
 </resources>
 

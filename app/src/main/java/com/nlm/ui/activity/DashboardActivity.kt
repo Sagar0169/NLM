@@ -34,7 +34,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.leftDrawerMenu?.tvMasterImplementingAgency?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, ImplementingAgencyMasterActivity::class.java)
             startActivity(intent)
-            finish()
+        }
+        mBinding?.leftDrawerMenu?.tvMobileVeterinaryUnits?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, MobileVeterinaryActivity::class.java)
+            startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.ivEdit?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, EditProfile::class.java)
