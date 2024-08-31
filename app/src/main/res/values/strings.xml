@@ -177,6 +177,25 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="mobile_other">Mobile Other</string>
     <string name="password">Password*</string>
     <string name="allowed_file_jpeg_jpg_and_png_under_5mb">Allowed File : jpeg, jpg and png Under 5MB</string>
+    <string name="implementing_agency">Implementing Agency</string>
+    <string name="name_and_location_of_ia">Name and Location of IA</string>
+    <string name="director_dg_ceo_name">Director / DG / CEO - Name*</string>
+    <string name="other_staff">Other Staff:</string>
+    <string name="no_regular_employee_deputation">No. Regular employee/deputation</string>
+    <string name="no_manpower_deputed">No.manpower Deputed</string>
+    <string name="frozen_semen_production_laboratory_for_goat">Frozen Semen production\nlaboratory for goat</string>
+    <string name="liquid_semen_production_laboratory_for_sheep">Liquid semen production\nlaboratory for sheep</string>
+    <string name="actual_production_since_inception">Actual Production\nsince inception</string>
+    <string name="no_doses_of_semen_distributed_within_states">No doses of semen\ndistributed Within States</string>
+    <string name="no_doses_of_semen_distributed_in_neighboring_states">No doses of semen distributed\nin Neighboring States</string>
+    <string name="availability_of_liquid_nitrogen">Availability of Liquid\nNitrogen</string>
+    <string name="breeding_farms">Breeding Farms</string>
+    <string name="goat_breeding_farm">Goat Breeding Farm</string>
+    <string name="training_centers">Training Centers</string>
+    <string name="number_of_cattle_ai_centres_equipped_with_goat_frozen_semen">Number of Cattle AI Centres\nEquipped with Goat Frozen\nSemen</string>
+    <string name="total_ai_performed_by_the_states">Total AI Performed\nby the states</string>
+    <string name="name_of_the_official">Name of the Official</string>
+    <string name="designation_nlsia">Designation</string>
 
 </resources>
 

@@ -49,6 +49,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.NLSIAForm"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.National_Live_Stock_IA"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.UserActivity"
             android:exported="false" />
         <activity
