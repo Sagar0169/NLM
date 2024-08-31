@@ -1,6 +1,6 @@
-package com.nlm.ui.fragment
+package com.nlm.ui.activity
 
-import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.view.View
@@ -10,50 +10,40 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.nlm.ui.adapter.RelationshipAdapter
-import com.nlm.ui.adapter.StateAdapter
-import com.nlm.utilities.BaseFragment
 import com.nlm.R
-import com.nlm.databinding.FragmentLocationDetailsBinding
+import com.nlm.databinding.ActivityAddImplementingAgencyBinding
+import com.nlm.ui.adapter.StateAdapter
+import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.toast
 
-class LocationDetailsFragment : BaseFragment<FragmentLocationDetailsBinding>(){
-    private var mBinding: FragmentLocationDetailsBinding?=null
-    private var isSelected: Boolean? = false
-    private lateinit var relationAdapter: RelationshipAdapter
-    private var layoutManager: LinearLayoutManager? = null
-    private var listener: OnNextButtonClickListener? = null
+class AddImplementingAgency : BaseActivity<ActivityAddImplementingAgencyBinding>() {
+    private var mBinding: ActivityAddImplementingAgencyBinding? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
-    interface OnNextButtonClickListener {
-        fun onNextButtonClick()
-    }
-
     private val stateList = listOf(
-        "Alabama", "Alaska", "Arizona", "Arkansas", "California",
-        "Colorado", "Connecticut", "Delaware", "Florida", "Georgia",
-        "Colorado", "Connecticut", "Delaware", "Florida", "Georgia",
-        "Colorado", "Connecticut", "Delaware", "Florida", "Georgia",
-        "Colorado", "Connecticut", "Delaware", "Florida", "Georgia"
-    )
-    private val districtList = listOf(
-        // Andhra Pradesh
-        "Anantapur", "Chittoor", "East Godavari", "Guntur", "Krishna",
-        "Kurnool", "Nellore", "Prakasam", "Srikakulam", "Visakhapatnam",
-        "Vizianagaram", "West Godavari", "YSR Kadapa",
+        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+        "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+        "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
+        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep",
+        "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
     )
 
     override val layoutId: Int
-        get() = R.layout.fragment_location_details
+        get() = R.layout.activity_add_implementing_agency
 
-    override fun init() {
+    override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
-        mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
+        mBinding!!.tvDesignation.setOnClickListener { showBottomSheetDialog("Designation") }
+
     }
 
     private fun showBottomSheetDialog(type: String) {
-        bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
         view.layoutParams = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -78,28 +68,29 @@ class LocationDetailsFragment : BaseFragment<FragmentLocationDetailsBinding>(){
                 selectedTextView = mBinding!!.tvState
             }
 
-            "District" -> {
-                selectedList = districtList
-                selectedTextView = mBinding!!.tvDistrict
+            "Designation" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.tvDesignation
             }
+
             else -> return
         }
 
         // Set up the adapter
-        stateAdapter = StateAdapter(selectedList, requireContext()) { selectedItem ->
+        stateAdapter = StateAdapter(selectedList, this) { selectedItem ->
             // Handle state item click
             selectedTextView.text = selectedItem
-            selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
             bottomSheetDialog.dismiss()
         }
 
         rvBottomSheet.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvBottomSheet.adapter = stateAdapter
         bottomSheetDialog.setContentView(view)
 
         // Rotate drawable
-        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_arrow_down)
+        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
         var rotatedDrawable = rotateDrawable(drawable, 180f)
         selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
 
@@ -118,7 +109,6 @@ class LocationDetailsFragment : BaseFragment<FragmentLocationDetailsBinding>(){
         bottomSheetDialog.show()
     }
 
-
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
         drawable?.mutate() // Mutate the drawable to avoid affecting other instances
 
@@ -131,37 +121,25 @@ class LocationDetailsFragment : BaseFragment<FragmentLocationDetailsBinding>(){
         return rotateDrawable
     }
 
+
     override fun setVariables() {
     }
 
     override fun setObservers() {
     }
 
+
     inner class ClickActions {
-
-        fun login(view: View) {
-
-
-        }
-
-        fun next(view: View) {
-            listener?.onNextButtonClick()
-
-        }
-
         fun backPress(view: View) {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
+        fun submit(view: View) {
+            toast("Agency Added Successfully")
+//            val intent =
+//                Intent(this@AddImplementingAgency, ImplementingAgencyMasterActivity::class.java)
+//            startActivity(intent)
+            finish()
         }
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        listener = context as? OnNextButtonClickListener
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
-
 }

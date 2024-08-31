@@ -18,8 +18,8 @@ import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
-import nlm.R
-import nlm.databinding.FragmentQuickSearchBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentQuickSearchBinding
 import java.util.Calendar
 
 

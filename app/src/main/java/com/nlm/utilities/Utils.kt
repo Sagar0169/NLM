@@ -34,7 +34,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import nlm.R
+import com.nlm.R
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.*

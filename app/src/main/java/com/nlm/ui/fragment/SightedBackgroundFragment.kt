@@ -14,8 +14,8 @@ import com.nlm.model.BackgroundData
 import com.nlm.ui.adapter.RelationshipAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentSightedBackgroundBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentSightedBackgroundBinding
 
 
 class SightedBackgroundFragment : BaseFragment<FragmentSightedBackgroundBinding>() {

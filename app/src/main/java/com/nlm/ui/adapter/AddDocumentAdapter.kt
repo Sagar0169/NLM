@@ -6,21 +6,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.nlm.R
 import com.nlm.callBack.DeleteItemCallBack
 import com.nlm.callBack.SizeItemCallBack
-
+import com.nlm.databinding.AddDocsItemBinding
 import com.nlm.model.UploadDocumentsData
 import com.nlm.utilities.Utility.formatFileSize
 import com.nlm.utilities.Utility.getFileSizeFromUrl
 import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
-import com.nlm.R
-import com.nlm.databinding.AddDocsItemBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class AddDocumentAdapter(
     val isFrom: Int,

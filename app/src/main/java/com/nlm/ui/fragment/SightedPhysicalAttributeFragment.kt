@@ -14,8 +14,8 @@ import com.nlm.model.PhysicalAttributesData
 import com.nlm.ui.adapter.RelationshipAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentSightedPhysicalAttributeBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentSightedPhysicalAttributeBinding
 
 
 class SightedPhysicalAttributeFragment : BaseFragment<FragmentSightedPhysicalAttributeBinding>() {

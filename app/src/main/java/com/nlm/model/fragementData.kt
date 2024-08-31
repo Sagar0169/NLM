@@ -3,6 +3,20 @@ package com.nlm.model
 import android.net.Uri
 import java.io.Serializable
 
+
+data class NodalOfficer(
+    val state: String,
+    val agencyName: String,
+    val nodalOfficerName: String,
+    val nodalOfficerEmail: String,
+    val created: String,
+    val mobileNumber: String,    // New field
+    val designation: String      // New field
+): Serializable
+
+
+
+
 data class SightedChildData(
     var dateOfSighting: String? = "DD/MM/YYYY",
     var year: String? = null,

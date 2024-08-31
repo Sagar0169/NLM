@@ -31,7 +31,7 @@ import com.nlm.utilities.Constants.FILE_PATH_THUMBNAIL
 import com.nlm.utilities.Constants.FILE_SEPERATOR
 import com.nlm.utilities.Constants.VALID_IMAGE_FILE_SIZE_KB
 import com.nlm.utilities.Constants.VALID_VIDEO_FILE_SIZE_KB
-import nlm.R
+import com.nlm.R
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream

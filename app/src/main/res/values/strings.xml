@@ -42,7 +42,7 @@
     <string name="text_add_photo">Photo</string>
     <string name="text_photo_gallery">Photo Gallery</string>
     <string name="please_enter_otp">Please enter otp\n</string>
-    <string name="not_registered_please_register_as_citizen"> <font color='blue'><u>Not Registered</u>?</font> Please Register as Citizen</string>
+    <string name="forget_password"> <font color='blue'><u>Forget Password</u>?</font></string>
     <string name="already_login">Already Registered? <font color='blue'><u>Login</u></font></string>
     <string name="i_accept_the_terms_and_conditions_as_mentioned_on_this_portal">I accept the <font color='blue'><u>Terms and Conditions</u></font> as mentioned on this portal</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -159,6 +159,64 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="camera_permission">You need to enable camera access and storage permission to access this</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="select">Select</string>
+    <string name="group">Group</string>
+    <string name="role">Role*</string>
+    <string name="state">State</string>
+    <string name="district">District</string>
+    <string name="designation">Designation</string>
+    <string name="organisation">Organisation</string>
+    <string name="status">Status</string>
+    <string name="name">Name*</string>
+    <string name="na">NA</string>
+    <string name="list_of_users">List Of Users</string>
+    <string name="add_new_user">Add New User</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="mobile">Mobile</string>
+    <string name="mobile_other">Mobile Other</string>
+    <string name="password">Password*</string>
+    <string name="allowed_file_jpeg_jpg_and_png_under_5mb">Allowed File : jpeg, jpg and png Under 5MB</string>
+    <string name="users">Users</string>
+    <string name="all_users">All users</string>
+    <string name="livestock_health_disease">Livestock Health Disease</string>
+    <string name="vaccination_programme">Vaccination Programme</string>
+    <string name="implementing_agency">Implementing Agency</string>
+    <string name="locations">Locations</string>
+    <string name="ascad">ASCAD</string>
+    <string name="mobile_veterinary_units">Mobile veterinary Units</string>
+    <string name="national_livestock_mission">National Livestock Mission</string>
+    <string name="implementing_agency_format1">Implementing Agency (Format1)</string>
+    <string name="rsplaboratory_semen_format2">RspLaboratory Semen (Format2)</string>
+    <string name="state_semen_bank_format3">State Semen Bank (Format3)</string>
+    <string name="artificial_insemination_format4">Artificial Insemination (Format4)</string>
+    <string name="import_of_exotic_goat_format5">Import of Exotic Goat (Format5)</string>
+    <string name="assistance_for_qfps_format6">Assistance For Qfps (Format6)</string>
+    <string name="fps_plan_storage_format7">Fps plan Storage (Format7)</string>
+    <string name="fps_from_non_forest_format8">Fps From Non Forest (Format8)</string>
+    <string name="fps_from_forest_land_format9">Fps From Forest Land (Format9)</string>
+    <string name="assistance_for_ea_format10">Assistance For EA (Format10)</string>
+    <string name="nlm_edp_format11">NLM EDP (Format11)</string>
+    <string name="national_dairy_development">National Dairy Development</string>
+    <string name="milk_union_visit_report">Milk Union Visit Report</string>
+    <string name="dairy_plant_visit_report">Dairy Plant Visit Report</string>
+    <string name="dcs_bms_center_visit_report">DCS/BMS Center Visit report</string>
+    <string name="state_center_lab_visit_report">State Center Lab Visit Report</string>
+    <string name="milk_processing">Milk Processing</string>
+    <string name="milk_product_marketing">Milk Product Marketing</string>
+    <string name="productivity_enhancement_services">Productivity Enhancement Services</string>
+    <string name="state_implementing_agency">State Implementing Agency</string>
+    <string name="ai_center">AI center</string>
+    <string name="semen_station">Semen Station</string>
+    <string name="rashtriya_gokul_mission">Rashtriya Gokul Mission</string>
+    <string name="training_centers">Training Centers</string>
+    <string name="bull_mother_farms">Bull Mother Farms</string>
+    <string name="breed_multiplication">Breed Multiplication</string>
+    <string name="vitro_fertilization">Vitro Fertilization</string>
+    <string name="no_of_scheme_covered_4">No. of scheme Covered 4</string>
+    <string name="total_visit">Total Visit</string>
+    <string name="no_of_states_covered">No. of states Covered</string>
+    <string name="total_no_of_reports_submitted_by_nlm">Total No. of Reports Submitted By NLM</string>
 
 </resources>
 

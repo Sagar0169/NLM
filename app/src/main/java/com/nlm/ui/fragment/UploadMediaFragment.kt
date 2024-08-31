@@ -12,8 +12,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.ui.adapter.ChooseFileAdapter
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentUploadMediaBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentUploadMediaBinding
 
 class UploadMediaFragment : BaseFragment<FragmentUploadMediaBinding>(),ChooseFileAdapter.OnFileSelectListener{
     private var mBinding: FragmentUploadMediaBinding?=null

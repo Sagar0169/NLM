@@ -13,13 +13,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.nlm.R
+import com.nlm.databinding.FragmentBasicDetailsBinding
 import com.nlm.ui.adapter.RelationshipAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
-import nlm.R
-import nlm.databinding.FragmentBasicDetailsBinding
 import java.util.Calendar
 
 class BasicDetailsFragment : BaseFragment<FragmentBasicDetailsBinding>(){

@@ -14,8 +14,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.ui.adapter.RelationshipAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentFirDetailsBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentFirDetailsBinding
 import java.util.Calendar
 
 class FirDetailsFragment : BaseFragment<FragmentFirDetailsBinding>(){

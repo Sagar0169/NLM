@@ -3,11 +3,10 @@ package com.nlm.ui.fragment
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
-
+import com.nlm.R
+import com.nlm.databinding.FragmentConfirmationBinding
 import com.nlm.ui.activity.DashboardActivity
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentConfirmationBinding
 
 class ConfirmationFragments : BaseFragment<FragmentConfirmationBinding>(){
     private var mBinding: FragmentConfirmationBinding?=null

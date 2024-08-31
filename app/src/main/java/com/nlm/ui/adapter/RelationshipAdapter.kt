@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.nlm.R
 import com.nlm.ui.fragment.SightedBasicDetailsFragment
-import nlm.R
 
 class RelationshipAdapter(private val relationList: List<String>,private val callBackItem: SightedBasicDetailsFragment) :
     RecyclerView.Adapter<RelationshipAdapter.RelationshipViewHolder>() {
