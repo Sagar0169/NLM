@@ -131,6 +131,14 @@
                     android:textColor="@color/black"
                     android:padding="@dimen/dp_5"
                     android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tvMasterImplementingAgency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Implementing Agency"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/dp_5"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <View

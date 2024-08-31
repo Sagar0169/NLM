@@ -39,8 +39,7 @@ class NodalOfficerDetailActivity : BaseActivity<ActivityNodalOfficerDetailBindin
     override fun initView() {
         binding = viewDataBinding
         binding?.clickAction = ClickActions()
-        val isFrom = intent?.getIntExtra("isFrom",0)
-        toast(isFrom.toString())
+        val isFrom = intent?.getIntExtra("isFrom", 0)
 
         when (isFrom) {
             1 -> {
@@ -193,8 +192,18 @@ class NodalOfficerDetailActivity : BaseActivity<ActivityNodalOfficerDetailBindin
         // Show or hide the drawable end for the TextView
         if (isEditMode) {
             // Show the drawable end (assuming drawable is defined)
-            binding!!.tvState.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
-            binding!!.tvDesignation.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0)
+            binding!!.tvState.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_arrow_down,
+                0
+            )
+            binding!!.tvDesignation.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_arrow_down,
+                0
+            )
         } else {
             // Hide the drawable end
             binding!!.tvState.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
@@ -212,6 +221,7 @@ class NodalOfficerDetailActivity : BaseActivity<ActivityNodalOfficerDetailBindin
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+
         fun submit(view: View) {
             toast("Agency Added Successfully")
 //            val intent =

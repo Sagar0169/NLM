@@ -18,7 +18,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     inner class ClickActions {
 
         fun login(view: View) {
-            val intent = Intent(this@LoginActivity, ImplementingAgencyMasterActivity::class.java)
+            val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
             startActivity(intent)
         }
 
