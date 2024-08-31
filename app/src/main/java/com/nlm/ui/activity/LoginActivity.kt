@@ -18,13 +18,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     inner class ClickActions {
 
         fun login(view: View) {
-            val intent = Intent(this@LoginActivity, OtpActivity::class.java)
+            val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
             startActivity(intent)
         }
 
         fun register(view: View) {
-            val intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
+//            startActivity(intent)
 
         }
 
