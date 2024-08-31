@@ -19,8 +19,8 @@ import com.nlm.utilities.Utility.getFileSizeFromUrl
 import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
-import nlm.R
-import nlm.databinding.AddDocsItemBinding
+import com.nlm.R
+import com.nlm.databinding.AddDocsItemBinding
 
 class AddDocumentAdapter(
     val isFrom: Int,
