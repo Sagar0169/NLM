@@ -42,7 +42,7 @@
     <string name="text_add_photo">Photo</string>
     <string name="text_photo_gallery">Photo Gallery</string>
     <string name="please_enter_otp">Please enter otp\n</string>
-    <string name="not_registered_please_register_as_citizen"> <font color='blue'><u>Not Registered</u>?</font> Please Register as Citizen</string>
+    <string name="forget_password"> <font color='blue'><u>Forget Password</u>?</font></string>
     <string name="already_login">Already Registered? <font color='blue'><u>Login</u></font></string>
     <string name="i_accept_the_terms_and_conditions_as_mentioned_on_this_portal">I accept the <font color='blue'><u>Terms and Conditions</u></font> as mentioned on this portal</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
