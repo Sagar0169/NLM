@@ -25,20 +25,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.contentNav?.ivDrawer?.setOnClickListener {
             toggleLeftDrawer()
         }
-        mBinding?.leftDrawerMenu?.tvform4?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, EditProfile::class.java)
-            startActivity(intent)
-        }
-        mBinding?.leftDrawerMenu?.tvHome?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, DashboardActivity::class.java)
-            startActivity(intent)
-        }
-
-        mBinding?.leftDrawerMenu?.tvChangePassword?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, ChangePasswordActivity::class.java)
-            startActivity(intent)
-        }
-
 
         mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, LoginActivity::class.java)
@@ -48,38 +34,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.leftDrawerMenu?.ivEdit?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, EditProfile::class.java)
             startActivity(intent)
-        }
-
-        mBinding?.contentNav?.tvMyChildMissing?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, ChildMissingActivity::class.java)
-            startActivity(intent)
-//            showCustomDialog()
-        }
-
-        mBinding?.contentNav?.tvEnterDetails?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, SightedChildActivity::class.java)
-            startActivity(intent)
-//            showCustomDialog()
-        }
-
-        mBinding?.leftDrawerMenu?.tvform1?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, ChildMissingActivity::class.java)
-            startActivity(intent)
-
-        }
-        mBinding?.leftDrawerMenu?.tvform2?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, SightedChildActivity::class.java)
-            startActivity(intent)
-
-        }
-        mBinding?.leftDrawerMenu?.tvform3?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, SearchingForAChildActivity::class.java)
-            startActivity(intent)
-        }
-        mBinding?.contentNav?.tvSearchChild?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, SearchingForAChildActivity::class.java)
-            startActivity(intent)
-
         }
         mBinding?.leftDrawerMenu?.tvPrivacyPolicy?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, AboutUsActivity::class.java)
@@ -97,30 +51,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     override fun setObservers() {
     }
 
-    private fun showCustomDialog() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.dialog_caution) // Replace with your dialog layout file name
-
-        val tvPocsoLink: TextView = dialog.findViewById(R.id.tvPocsoLink)
-        val btnProceed: Button = dialog.findViewById(R.id.btnProceed)
-
-        // Handle the click on the POCSO Act link
-        tvPocsoLink.setOnClickListener {
-            Log.d("CustomDialog", "POCSO Act 2012 link clicked")
-        }
-
-        // Handle the click on the Proceed button
-        btnProceed.setOnClickListener {
-            dialog.dismiss()
-            // Continue with the proceed action
-        }
-
-        dialog.show()
-    }
-
-
     private fun toggleLeftDrawer() {
         if (mBinding?.drawerLayout?.isDrawerOpen(GravityCompat.START) == true) {
             mBinding?.drawerLayout?.closeDrawer(GravityCompat.END)
@@ -134,6 +64,4 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         finishAffinity()
         // This will close the app and all the activities in the task.
     }
-
-
 }

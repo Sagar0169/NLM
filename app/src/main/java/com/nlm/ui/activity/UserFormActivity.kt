@@ -17,7 +17,6 @@ class UserFormActivity : BaseActivity<ActivityUserFormBinding>() {
     private var mBinding: ActivityUserFormBinding? = null
     private lateinit var bottomSheetAdapter: BottomSheetAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
-    private var layoutManager: LinearLayoutManager? = null
 
     private val group = listOf(
         "Short", "Medium", "Long", "No Hair"
