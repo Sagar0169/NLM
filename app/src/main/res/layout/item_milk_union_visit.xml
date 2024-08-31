@@ -55,19 +55,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="@string/state"
+                        android:text="Name Of Milk Union"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvState"
+                        android:id="@+id/tvNameOfMilkUnion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
                         android:drawablePadding="@dimen/dp_5"
+                        android:maxLines="2"
                         android:fontFamily="@font/poppins_regular"
-                        android:singleLine="true"
-                        android:text="@string/na"
+                        android:singleLine="false"
+                        android:text="NA"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -83,12 +84,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Nodal Officer Name"
+                        android:text="District"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvNodalOfficeName"
+                        android:id="@+id/tvDistrict"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
@@ -112,12 +113,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Nodal Officer Email"
+                        android:text="Created Date"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvExperience"
+                        android:id="@+id/tvCreatedDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
@@ -149,20 +150,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Agency Name"
+                        android:text="State"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvAgencyName"
+                        android:id="@+id/tvState"
                         android:layout_width="wrap_content"
-                        android:layout_height="26dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
-                        android:ellipsize="end"
                         android:fontFamily="@font/poppins_regular"
-                        android:lines="2"
                         android:maxLines="2"
-                        android:text="	West Bengal Cooperative Milk Producers Federation Ltd."
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:text="NA"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -179,12 +180,12 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
 
-                        android:text="Created"
+                        android:text="Created by"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCreated"
+                        android:id="@+id/tvCreatedBy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"

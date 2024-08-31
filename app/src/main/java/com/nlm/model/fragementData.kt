@@ -14,6 +14,14 @@ data class NodalOfficer(
     val designation: String      // New field
 ): Serializable
 
+data class MilkUnionVisit(
+    val state: String,
+    val nameOfMilkUnion: String,
+    val district: String,
+    val createdBy: String,
+    val createdDate: String,
+): Serializable
+
 
 
 

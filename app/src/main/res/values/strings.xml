@@ -217,6 +217,23 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="total_visit">Total Visit</string>
     <string name="no_of_states_covered">No. of states Covered</string>
     <string name="total_no_of_reports_submitted_by_nlm">Total No. of Reports Submitted By NLM</string>
+    <string name="milk_processing_plants_including_milk_powder_plant">Milk Processing Plants \n(including Milk Powder Plant)</string>
+    <string name="daily_average_milk_procurement_in_tkgpd">Daily Average Milk Procurement (in TKgPD)</string>
+    <string name="daily_average_milk_milk_product_sale_in_tlpd"><![CDATA[Daily Average Milk & Milk Product Sale (in TLPD)]]></string>
+    <string name="field_visit_report_should_be_clear_and_">
+        <ul> <li>Field visit report should be clear and concise.</li>\n
+        <li>Introduction with Visit Team details </li>\n
+        <li>Sample district/village details </li>\n
+        <li>Visit to Village Level DCS/BMC centre </li>\n
+        <li>Visit to Dairy Plant and Milk Union </li>\n
+            <li>Visit to Dairy Federation </li>\n
+            <li>Available assets, date/month of installation, current status etc. with photographs </li>\n
+        <li>Record discussion with all stakeholders particularly milk producers </li>\n
+       <li> Records checked and facts noted </li>\n
+       <li> Report needs to be in chronological order of the analysis. </li>\n
+       <li> Observations, Recommendation and Conclusion </li>\n
+       <li> Sample facts and records to support major observations needs to annexed</li></ul>
+    </string>
 
 </resources>
 

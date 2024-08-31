@@ -64,7 +64,7 @@
             android:name=".ui.activity.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SightedChildActivity"
+            android:name=".ui.activity.AddMilkUnionVisit"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ChangePasswordActivity"
@@ -109,10 +109,9 @@
             android:name=".ui.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ChildMissingActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:exported="true"
-            android:screenOrientation="portrait" />
+            android:name=".ui.activity.MilkUnionVisitNDDActivity"
+            android:exported="false"
+            />
 
         <provider
             android:name="androidx.core.content.FileProvider"
