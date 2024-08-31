@@ -14,8 +14,8 @@ import com.nlm.model.LocationData
 import com.nlm.ui.adapter.RelationshipAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentSightedLocationDetialsFragementBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentSightedLocationDetialsFragementBinding
 
 
 class SightedLocationDetailsFragment : BaseFragment<FragmentSightedLocationDetialsFragementBinding>() {

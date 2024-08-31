@@ -2,10 +2,9 @@ package com.nlm.ui.fragment
 
 import android.content.Context
 import android.view.View
-
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentFamilyDetailsBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentFamilyDetailsBinding
 
 class FamilyDetailsFragment : BaseFragment<FragmentFamilyDetailsBinding>(){
     private var mBinding: FragmentFamilyDetailsBinding?=null

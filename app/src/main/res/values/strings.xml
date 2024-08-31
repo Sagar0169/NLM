@@ -159,6 +159,24 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="camera_permission">You need to enable camera access and storage permission to access this</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="select">Select</string>
+    <string name="group">Group</string>
+    <string name="role">Role*</string>
+    <string name="state">State</string>
+    <string name="district">District</string>
+    <string name="designation">Designation</string>
+    <string name="organisation">Organisation</string>
+    <string name="status">Status</string>
+    <string name="name">Name*</string>
+    <string name="na">NA</string>
+    <string name="list_of_users">List Of Users</string>
+    <string name="add_new_user">Add New User</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="mobile">Mobile</string>
+    <string name="mobile_other">Mobile Other</string>
+    <string name="password">Password*</string>
+    <string name="allowed_file_jpeg_jpg_and_png_under_5mb">Allowed File : jpeg, jpg and png Under 5MB</string>
 
 </resources>
 

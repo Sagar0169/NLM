@@ -16,8 +16,8 @@ import com.nlm.model.FileItem
 import com.nlm.ui.adapter.ChooseFileAdapter
 import com.nlm.ui.adapter.RelationshipAdapter
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentSightedUploadBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentSightedUploadBinding
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream

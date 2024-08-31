@@ -14,8 +14,8 @@ import com.nlm.model.FacialAttributeData
 import com.nlm.ui.adapter.RelationshipAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentSightedFacialAttributesBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentSightedFacialAttributesBinding
 
 
 class SightedFacialAttributesFragment : BaseFragment<FragmentSightedFacialAttributesBinding>() {

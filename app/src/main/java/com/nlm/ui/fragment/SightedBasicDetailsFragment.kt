@@ -19,8 +19,8 @@ import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
-import nlm.R
-import nlm.databinding.FragmentSightedBasicDetailsBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentSightedBasicDetailsBinding
 import java.util.Calendar
 
 

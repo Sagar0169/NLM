@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-
+import com.nlm.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import nlm.R;
 
 /**
  * Created by Sachin Nariya on 12-08-2022.

@@ -10,12 +10,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-
+import com.nlm.R
+import com.nlm.databinding.FragmentFacialAttributesBinding
 import com.nlm.ui.adapter.RelationshipAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentFacialAttributesBinding
 
 class FacialAttributesFragment : BaseFragment<FragmentFacialAttributesBinding>() {
     private var mBinding: FragmentFacialAttributesBinding? = null

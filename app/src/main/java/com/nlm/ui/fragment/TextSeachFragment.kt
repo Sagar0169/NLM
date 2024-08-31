@@ -2,8 +2,8 @@ package com.nlm.ui.fragment
 
 import android.view.View
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentTextSeachBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentTextSeachBinding
 
 
 class TextSeachFragment() : BaseFragment<FragmentTextSeachBinding>() {

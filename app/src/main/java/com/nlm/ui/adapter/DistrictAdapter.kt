@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.nlm.R
 import com.nlm.ui.activity.RegistrationActivity
-import nlm.R
 
 class DistrictAdapter(private val districtList: List<String>, private val callBackItem: RegistrationActivity, private val callBackItemDistrict: RegistrationActivity) :
     RecyclerView.Adapter<DistrictAdapter.DistrictViewHolder>() {

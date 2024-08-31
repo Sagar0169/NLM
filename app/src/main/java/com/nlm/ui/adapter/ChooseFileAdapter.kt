@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import nlm.R
-import nlm.databinding.ItemChooseFileBinding
+import com.nlm.R
+import com.nlm.databinding.ItemChooseFileBinding
 import com.nlm.model.FileItem
 
 class ChooseFileAdapter(

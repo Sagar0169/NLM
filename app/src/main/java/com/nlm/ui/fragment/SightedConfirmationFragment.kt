@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.ui.activity.DashboardActivity
 import com.nlm.ui.adapter.RelationshipAdapter
 import com.nlm.utilities.BaseFragment
-import nlm.R
-import nlm.databinding.FragmentSightedConfirmationBinding
+import com.nlm.R
+import com.nlm.databinding.FragmentSightedConfirmationBinding
 
 
 class SightedConfirmationFragment : BaseFragment<FragmentSightedConfirmationBinding>() {

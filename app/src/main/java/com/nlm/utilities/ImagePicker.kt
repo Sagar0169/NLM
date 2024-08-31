@@ -31,7 +31,7 @@ import com.nlm.utilities.FileUtils.getVideoDuration
 import com.nlm.utilities.FileUtils.validFileSize
 import com.nlm.utilities.FileUtils.validFileType
 import com.nlm.utilities.PermissionHelper.isPermissionWithGranted
-import nlm.R
+import com.nlm.R
 import java.io.File
 
 /**

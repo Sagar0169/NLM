@@ -15,7 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
-import nlm.R
+import com.nlm.R
 
 
 object PermissionHelper {

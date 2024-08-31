@@ -28,11 +28,11 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.snackbar.Snackbar
+import com.nlm.R
 import com.nlm.repository.Repository
 import com.nlm.rx.SchedulerProvider
 import com.nlm.services.MyService
 import io.reactivex.disposables.CompositeDisposable
-import nlm.R
 import java.io.File
 import java.util.Locale
 import java.util.concurrent.Executor

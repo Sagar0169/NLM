@@ -8,36 +8,37 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 
-class StateAdapter(
-    private val stateList: List<String>,
+class BottomSheetAdapter(
     private val context: Context,
+    private val list: List<String>,
     private val onItemClicked: (String) -> Unit // Lambda for item clicks
-) : RecyclerView.Adapter<StateAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<BottomSheetAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.tvStateName)
 
-        fun bind(state: String) {
-            textView.text = state
+        fun bind(text: String) {
+            textView.text = text
 
             // Set click listener for the item
             itemView.setOnClickListener {
-                onItemClicked(state) // Call the lambda function with the selected item
+                onItemClicked(text) // Call the lambda function with the selected item
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_state, parent, false)
+            .inflate(R.layout.item_bottom_sheet, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(stateList[position])
+        val item = list[position]
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int {
-        return stateList.size
+        return list.size
     }
 }

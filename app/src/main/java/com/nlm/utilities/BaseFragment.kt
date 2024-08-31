@@ -15,7 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import nlm.R
+import com.nlm.R
 import java.util.Locale
 import java.util.regex.Matcher
 import java.util.regex.Pattern

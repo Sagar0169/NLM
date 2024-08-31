@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import nlm.R
+import com.nlm.R
 
 fun Context.toast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_LONG ).show()
