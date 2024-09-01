@@ -21,6 +21,13 @@ data class MilkUnionVisit(
     val createdBy: String,
     val createdDate: String,
 ): Serializable
+data class DairyPlantVisit(
+    val state: String,
+    val fssaiLicenseNo: String,
+    val district: String,
+    val created: String,
+    val location: String,
+): Serializable
 
 
 

@@ -239,6 +239,10 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="district_level">District Level</string>
     <string name="block_level">Block Level</string>
     <string name="farmer_level">Farmer Level</string>
+    <string name="total_bmc_no_capacity"><![CDATA[Total BMC No. & Capacity]]></string>
+    <string name="frequency_per_day_weekly_monthly_6monthly"><![CDATA[Frequency< (Per day/Weekly/Monthly/ 6Monthly)]]></string>
+    <string name="remarks_by_nlm_including_photographs_of_site_asset"><![CDATA[Remarks by NLM including photographs of site & asset]]></string>
+    <string name="verification_of_tendering_process_sample_purchase_order_copies_photographs"><![CDATA[Verification of Tendering process (Sample purchase order copies & photographs)]]></string>
 
 </resources>
 

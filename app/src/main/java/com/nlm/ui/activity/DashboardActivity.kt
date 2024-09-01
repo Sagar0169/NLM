@@ -55,6 +55,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, MilkUnionVisitNDDActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvDairyPlantVisitReport?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, DairyPlantVisitNDDActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     override fun setVariables() {

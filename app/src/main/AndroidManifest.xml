@@ -70,6 +70,12 @@
             android:name=".ui.activity.AddMilkUnionVisit"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.DairyPlantVisitNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddDairyPlantVisit"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ChangePasswordActivity"
             android:exported="false" />
         <activity
