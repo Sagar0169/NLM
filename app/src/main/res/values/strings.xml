@@ -239,6 +239,31 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="district_level">District Level</string>
     <string name="block_level">Block Level</string>
     <string name="farmer_level">Farmer Level</string>
+    <string name="total_bmc_no_capacity"><![CDATA[Total BMC No. & Capacity]]></string>
+    <string name="frequency_per_day_weekly_monthly_6monthly"><![CDATA[Frequency< (Per day/Weekly/Monthly/ 6Monthly)]]></string>
+    <string name="remarks_by_nlm_including_photographs_of_site_asset"><![CDATA[Remarks by NLM including photographs of site & asset]]></string>
+    <string name="verification_of_tendering_process_sample_purchase_order_copies_photographs"><![CDATA[Verification of Tendering process (Sample purchase order copies & photographs)]]></string>
+    <string name="name_and_location_of_ia">Name and Location of IA</string>
+    <string name="director_dg_ceo_name">Director / DG / CEO - Name*</string>
+    <string name="other_staff">Other Staff:</string>
+    <string name="no_regular_employee_deputation">No. Regular employee/deputation</string>
+    <string name="no_manpower_deputed">No.manpower Deputed</string>
+    <string name="frozen_semen_production_laboratory_for_goat">Frozen Semen production\nlaboratory for goat</string>
+    <string name="liquid_semen_production_laboratory_for_sheep">Liquid semen production\nlaboratory for sheep</string>
+    <string name="actual_production_since_inception">Actual Production\nsince inception</string>
+    <string name="no_doses_of_semen_distributed_within_states">No doses of semen\ndistributed Within States</string>
+    <string name="no_doses_of_semen_distributed_in_neighboring_states">No doses of semen distributed\nin Neighboring States</string>
+    <string name="availability_of_liquid_nitrogen">Availability of Liquid\nNitrogen</string>
+    <string name="breeding_farms">Breeding Farms</string>
+    <string name="goat_breeding_farm">Goat Breeding Farm</string>
+    <string name="number_of_cattle_ai_centres_equipped_with_goat_frozen_semen">Number of Cattle AI Centres\nEquipped with Goat Frozen\nSemen</string>
+    <string name="total_ai_performed_by_the_states">Total AI Performed\nby the states</string>
+    <string name="name_of_the_official">Name of the Official</string>
+    <string name="designation_nlsia">Designation</string>
+    <string name="reporting_mechanism_to_state_govt">Reporting Mechanism\nto State Govt.</string>
+    <string name="submission_of_quarterly_progress_report_and_annual_progress_report_in_the_prescribed_time_frame">Submission of quarterly progress\nreport and annual progress\nreport in the prescribed\ntime frame</string>
+    <string name="ai_performed_since_converted">AI performed\n(since converted)</string>
+    <string name="availability_of_green_fodder_area_production"><![CDATA[Availability of green fodder - Area & Production:]]></string>
 
 </resources>
 

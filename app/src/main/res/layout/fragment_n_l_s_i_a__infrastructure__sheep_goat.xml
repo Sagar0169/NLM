@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="ClickAction"
+            type="com.nlm.ui.fragment.NLSIA_Infrastructure_Sheep_goat.ClickActions" />
+    </data>
+
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.NLSIA_Infrastructure_Sheep_goat">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/llParent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/dp_10">
+
+
+                <TableLayout
+                    android:layout_marginVertical="10dp"
+                    android:id="@+id/tableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="1, 2"
+
+                    android:background="@color/white"
+
+                    android:shrinkColumns="1, 2">
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:background="@color/darkBlue"
+                            android:text="Particulars"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:background="@color/darkBlue"
+                            android:text="Number"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:background="@color/darkBlue"
+                            android:text="Location"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="@string/frozen_semen_production_laboratory_for_goat"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:inputType="number"
+                            android:maxLength="5"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text"
+                            />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="@string/liquid_semen_production_laboratory_for_sheep"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:text="Production Capacity"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="@string/actual_production_since_inception"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="@string/no_doses_of_semen_distributed_within_states"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="@string/no_doses_of_semen_distributed_in_neighboring_states"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="@string/availability_of_liquid_nitrogen"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/breeding_farms"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/goat_breeding_farm"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/training_centers"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/dp_8"
+                            android:text="@string/number_of_cattle_ai_centres_equipped_with_goat_frozen_semen"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/total_ai_performed_by_the_states"
+                            android:background="@color/white"
+                            android:textColor="@android:color/black" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:maxLength="5"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+
+                            android:textColor="@color/black"
+                            android:background="@android:drawable/edit_text" />
+                    </TableRow>
+                </TableLayout>
+                <TextView
+                    android:id="@+id/tvSendOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/dp_50"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@drawable/curve_fill_blue"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_medium"
+
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:paddingVertical="@dimen/dp_10"
+                    android:text="Next"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</layout>

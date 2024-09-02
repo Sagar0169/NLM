@@ -70,6 +70,12 @@
             android:name=".ui.activity.ImplementingAgencyMasterActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.NLSIAForm"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.National_Live_Stock_IA"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.UserActivity"
             android:exported="false" />
         <activity
@@ -77,6 +83,12 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.AddMilkUnionVisit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.DairyPlantVisitNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddDairyPlantVisit"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ChangePasswordActivity"

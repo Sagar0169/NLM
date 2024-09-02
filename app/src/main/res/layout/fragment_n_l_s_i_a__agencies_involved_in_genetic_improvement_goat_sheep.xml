@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="ClickAction"
+            type="com.nlm.ui.fragment.NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep.ClickActions" />
+    </data>
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:scrollbars="none">
+
+    <LinearLayout
+        android:id="@+id/llParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dp_10">
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="2021-22"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <TableLayout
+            android:layout_marginVertical="10dp"
+            android:id="@+id/tableLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1, 2"
+
+            android:background="@color/white"
+
+            android:shrinkColumns="1, 2">
+
+            <TableRow
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/darkBlue"
+                    android:text="Name of District"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/darkBlue"
+                    android:text="Location of AI Centre"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/darkBlue"
+                    android:text="@string/ai_performed_since_converted"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text"
+                    />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text"
+                    />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text" />
+            </TableRow>
+
+
+
+
+        </TableLayout>
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="2022-23"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <TableLayout
+            android:layout_marginVertical="10dp"
+            android:id="@+id/tableLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1, 2"
+
+            android:background="@color/white"
+
+            android:shrinkColumns="1, 2">
+
+            <TableRow
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/darkBlue"
+                    android:text="Name of District"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/darkBlue"
+                    android:text="Location of AI Centre"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/darkBlue"
+                    android:text="@string/ai_performed_since_converted"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text"
+                    />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text"
+                    />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text" />
+            </TableRow>
+
+
+
+
+        </TableLayout>
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="2023-24"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <TableLayout
+            android:layout_marginVertical="10dp"
+            android:id="@+id/tableLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1, 2"
+
+            android:background="@color/white"
+
+            android:shrinkColumns="1, 2">
+
+            <TableRow
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/darkBlue"
+                    android:text="Name of District"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/darkBlue"
+                    android:text="Location of AI Centre"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:background="@color/darkBlue"
+                    android:text="@string/ai_performed_since_converted"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text"
+                    />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text"
+                    />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text" />
+            </TableRow>
+
+
+
+
+        </TableLayout>
+        <TextView
+            android:id="@+id/tvSendOtp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/curve_fill_blue"
+            android:clickable="true"
+            android:fontFamily="@font/poppins_medium"
+
+            android:paddingHorizontal="@dimen/dp_20"
+            android:paddingVertical="@dimen/dp_10"
+            android:text="Next"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+    </LinearLayout>
+    </ScrollView>
+    </RelativeLayout>
+</layout>
