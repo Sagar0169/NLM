@@ -51,6 +51,15 @@ class NodalOfficerDetailActivity : BaseActivity<ActivityNodalOfficerDetailBindin
 
                 binding!!.btnSave.showView()
             }
+
+            2 -> {
+                binding!!.btnEditSave.hideView()
+            }
+            3 -> {
+                binding!!.btnEditSave.text ="Save"
+                isEditMode = true
+                updateEditModeUI()
+            }
         }
 
 
@@ -78,22 +87,23 @@ class NodalOfficerDetailActivity : BaseActivity<ActivityNodalOfficerDetailBindin
     }
 
     private fun toggleEditMode() {
-        isEditMode = !isEditMode
-        updateEditModeUI()
-
-        // If saving, capture the edited data
-        if (!isEditMode) {
-            // Capture the updated data and do something with it (e.g., save to database)
-            val updatedNodalOfficer = NodalOfficer(
-                state = binding!!.tvState.text.toString(),
-                agencyName = binding!!.etAgencyName.text.toString(),
-                nodalOfficerName = binding!!.etNodalOfficerName.text.toString(),
-                nodalOfficerEmail = binding!!.etNodalOfficerEmail.text.toString(),
-                created = binding!!.etCreated.text.toString(),
-                mobileNumber = binding!!.etMobileNumber.text.toString(),
-                designation = binding!!.tvDesignation.text.toString()
-            )
-        }
+        toast("Saved")
+//        isEditMode = !isEditMode
+//        updateEditModeUI()
+//
+//        // If saving, capture the edited data
+//        if (!isEditMode) {
+//            // Capture the updated data and do something with it (e.g., save to database)
+//            val updatedNodalOfficer = NodalOfficer(
+//                state = binding!!.tvState.text.toString(),
+//                agencyName = binding!!.etAgencyName.text.toString(),
+//                nodalOfficerName = binding!!.etNodalOfficerName.text.toString(),
+//                nodalOfficerEmail = binding!!.etNodalOfficerEmail.text.toString(),
+//                created = binding!!.etCreated.text.toString(),
+//                mobileNumber = binding!!.etMobileNumber.text.toString(),
+//                designation = binding!!.tvDesignation.text.toString()
+//            )
+//        }
     }
 
     private fun showBottomSheetDialog(type: String) {
@@ -187,7 +197,7 @@ class NodalOfficerDetailActivity : BaseActivity<ActivityNodalOfficerDetailBindin
         binding!!.etCreated.isEnabled = isEditMode
 
         // Change button text based on the mode
-        binding!!.btnEditSave.text = if (isEditMode) "Save" else "Edit"
+        binding!!.btnEditSave.text ="Save"
 
         // Show or hide the drawable end for the TextView
         if (isEditMode) {

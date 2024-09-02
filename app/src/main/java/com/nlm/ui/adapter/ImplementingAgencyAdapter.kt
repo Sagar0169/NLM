@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
@@ -21,6 +22,8 @@ class ImplementingAgencyAdapter(private val implementingAgencyList: List<NodalOf
         val tvNodalOfficerEmail: TextView = itemView.findViewById(R.id.tvNodalOfficerEmail)
         val tvCreated: TextView = itemView.findViewById(R.id.tvCreated)
         val tvAgencyName: TextView = itemView.findViewById(R.id.tvAgencyName)
+        val ivView: ImageView = itemView.findViewById(R.id.ivView)
+        val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
     }
 
 
@@ -44,9 +47,16 @@ class ImplementingAgencyAdapter(private val implementingAgencyList: List<NodalOf
         holder.tvAgencyName.text = item.agencyName
 
 
-        holder.itemView.setOnClickListener {
+        holder.ivView.setOnClickListener {
             val intent = Intent(holder.itemView.context, NodalOfficerDetailActivity::class.java)
             intent.putExtra("nodalOfficer", item)
+            intent.putExtra("isFrom", 2)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.ivEdit.setOnClickListener {
+            val intent = Intent(holder.itemView.context, NodalOfficerDetailActivity::class.java)
+            intent.putExtra("nodalOfficer", item)
+            intent.putExtra("isFrom", 3)
             holder.itemView.context.startActivity(intent)
         }
 //
