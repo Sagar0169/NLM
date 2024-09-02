@@ -14,16 +14,6 @@
         android:elevation="@dimen/dp_3"
         android:paddingBottom="@dimen/dp_5">
 
-        <View
-            android:id="@+id/viw"
-            android:layout_width="5dp"
-            android:layout_height="0dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginEnd="@dimen/dp_5"
-            android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/tvSendMail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/llParent"
@@ -31,12 +21,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_10"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/viw"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -93,7 +82,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
                         android:drawablePadding="@dimen/dp_5"
-                        android:fontFamily="@font/poppins_regular"                        android:singleLine="true"
+                        android:fontFamily="@font/poppins_regular"
+                        android:singleLine="true"
                         android:text="@string/na"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -107,7 +97,7 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvNodalOfficerEmail"
+                        android:id="@+id/tvNodalOfficersEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
@@ -117,7 +107,7 @@
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvExperience"
+                        android:id="@+id/tvNodalOfficerEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
@@ -130,7 +120,6 @@
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -156,13 +145,13 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvAgencyName"
                         android:layout_width="wrap_content"
-                        android:layout_height="26dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
                         android:ellipsize="end"
                         android:fontFamily="@font/poppins_regular"
                         android:lines="2"
                         android:maxLines="2"
-                        android:text="	West Bengal Cooperative Milk Producers Federation Ltd."
+                        android:text="West Bengal Cooperative Milk Producers Federation Ltd."
                         android:textColor="@color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -198,41 +187,54 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvSendMail"
+        <LinearLayout
+            android:id="@+id/llActions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/curve_fill_blue"
-            android:paddingHorizontal="@dimen/dp_20"
-            android:paddingVertical="@dimen/dp_5"
-            android:text="View"
-            android:visibility="gone"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_15"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvSendWhatsapp"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llParent"
-            app:tint="@color/black" />
-
-        <TextView
-            android:id="@+id/tvSendWhatsapp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/curve_fill_blue"
-            android:paddingHorizontal="@dimen/dp_20"
-            android:paddingVertical="@dimen/dp_5"
-            android:text="Edit"
-            android:visibility="gone"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_15"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvSendMail"
-            app:layout_constraintTop_toBottomOf="@id/llParent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llParent">
+
+            <!-- View Icon -->
+
+
+            <ImageView
+                android:id="@+id/ivView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="View"
+                android:layout_marginHorizontal="@dimen/dp_5"
+                android:src="@drawable/ic_view"
+                android:padding="@dimen/dp_4"
+                app:tint="@color/black" />
+
+            <!-- Edit Icon -->
+            <ImageView
+                android:id="@+id/ivEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Edit"
+                android:layout_marginHorizontal="@dimen/dp_5"
+                android:src="@drawable/edit_icon"
+                android:padding="@dimen/dp_4"
+
+                app:tint="@color/black" />
+
+            <!-- Delete Icon -->
+            <ImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Delete"
+                android:layout_marginHorizontal="@dimen/dp_5"
+                android:padding="@dimen/dp_4"
+                android:src="@drawable/ic_deleted"
+                app:tint="@color/black" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

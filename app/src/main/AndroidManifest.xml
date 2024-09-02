@@ -52,6 +52,15 @@
             android:name=".ui.activity.RspLabSemen"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.ViewStateMobileVeterinaryUnit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddNewMobileVeterinaryUnit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.StateMobileVeterinaryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.MobileVeterinaryActivity"
             android:exported="false" />
         <activity
@@ -128,7 +137,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.MilkUnionVisitNDDActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
 
         <provider
             android:name="androidx.core.content.FileProvider"

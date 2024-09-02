@@ -12,7 +12,22 @@ data class NodalOfficer(
     val created: String,
     val mobileNumber: String,    // New field
     val designation: String      // New field
-): Serializable
+) : Serializable
+
+data class Indicator(
+    val indicatorNumber: String,
+    val indicatorText: String
+) : Serializable
+
+data class OnlyCreated(
+    val state: String,
+    val created: String,
+    val district: String? = null,
+    val block: String? = null,
+    val village: String? = null,
+
+) : Serializable
+
 
 data class MilkUnionVisit(
     val state: String,
@@ -28,7 +43,6 @@ data class DairyPlantVisit(
     val created: String,
     val location: String,
 ): Serializable
-
 
 
 
@@ -96,12 +110,13 @@ data class UploadDocumentResponse(
     val _resultflag: Int,
     val message: String,
     val statuscode: Int
-): Serializable
+) : Serializable
+
 data class UploadDocumentsData(
     val document_name: String?,
     val documents_url: String?,
     val id: Int?,
-): Serializable
+) : Serializable
 
 
 data class FileItem(val fileName: String, val fileUri: Uri?)
