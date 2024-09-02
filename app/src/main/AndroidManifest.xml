@@ -76,6 +76,21 @@
             android:name=".ui.activity.AddDairyPlantVisit"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.AddDCSCenterVisit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.StateCenterLabVisitNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.MilkProcessingNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.MilkProductMarkettingNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.DCSCenterVisitNDDActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ChangePasswordActivity"
             android:exported="false" />
         <activity

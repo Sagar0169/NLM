@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.AddDairyPlantVisit.ClickActions" />
+            type="com.nlm.ui.activity.AddDCSCenterVisit.ClickActions" />
     </data>
 
     <RelativeLayout
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Add Dairy Plant Visit"
+                android:text="Add DCS Center Visit Report"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -82,7 +82,6 @@
             android:layout_below="@id/tabLayout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tabLayout" />
-
 
 
     </RelativeLayout>

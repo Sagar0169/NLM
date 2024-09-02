@@ -55,12 +55,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="FSSAI License No"
+                        android:text="Name Processing Plant"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvFssai"
+                        android:id="@+id/tvNameOfProcessingPlant"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
@@ -84,12 +84,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="District"
+                        android:text="State"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDistrict"
+                        android:id="@+id/tvState"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
@@ -113,12 +113,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Location Of Dairy Plant"
+                        android:text="Created"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvlocation"
+                        android:id="@+id/tvCreated"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
@@ -150,12 +150,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="State"
+                        android:text="Name Milk Union"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvState"
+                        android:id="@+id/tvNameofMilkUnion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
@@ -180,12 +180,12 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
 
-                        android:text="Created"
+                        android:text="District"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCreatedBy"
+                        android:id="@+id/tvDistrict"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
