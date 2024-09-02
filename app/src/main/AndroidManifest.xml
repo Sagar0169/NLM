@@ -49,6 +49,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.MobileVeterinaryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.AddImplementingAgency"
             android:exported="false" />
         <activity
@@ -70,7 +73,13 @@
             android:name=".ui.activity.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SightedChildActivity"
+            android:name=".ui.activity.AddMilkUnionVisit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.DairyPlantVisitNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddDairyPlantVisit"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ChangePasswordActivity"
@@ -115,10 +124,9 @@
             android:name=".ui.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ChildMissingActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:exported="true"
-            android:screenOrientation="portrait" />
+            android:name=".ui.activity.MilkUnionVisitNDDActivity"
+            android:exported="false"
+            />
 
         <provider
             android:name="androidx.core.content.FileProvider"

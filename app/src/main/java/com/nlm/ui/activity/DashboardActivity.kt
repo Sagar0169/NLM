@@ -34,7 +34,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.leftDrawerMenu?.tvMasterImplementingAgency?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, ImplementingAgencyMasterActivity::class.java)
             startActivity(intent)
-            finish()
+        }
+        mBinding?.leftDrawerMenu?.tvMobileVeterinaryUnits?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, MobileVeterinaryActivity::class.java)
+            startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.ivEdit?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, EditProfile::class.java)
@@ -50,6 +53,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
         mBinding?.leftDrawerMenu?.tvImplementingAgency?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, NLSIAForm::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvMilkUnionVisitReport?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, MilkUnionVisitNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvDairyPlantVisitReport?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, DairyPlantVisitNDDActivity::class.java)
             startActivity(intent)
         }
 

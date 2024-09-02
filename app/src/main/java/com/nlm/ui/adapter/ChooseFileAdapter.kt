@@ -68,17 +68,5 @@ class ChooseFileAdapter(
 
     override fun getItemCount(): Int = items.size
 
-//    fun addItem() {
-//        if (items.size < 5) {
-//            items.add("No File Chosen")
-//            notifyItemInserted(items.size - 1)
-//        }
-//    }
-//
-//    fun removeItem(position: Int) {
-//        if (items.size > 1) {
-//            items.removeAt(position)
-//            notifyItemRemoved(position)
-//        }
-//    }
+
 }

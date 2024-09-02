@@ -181,7 +181,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="all_users">All users</string>
     <string name="livestock_health_disease">Livestock Health Disease</string>
     <string name="vaccination_programme">Vaccination Programme</string>
-
+    <string name="implementing_agency">Implementing Agency</string>
     <string name="locations">Locations</string>
     <string name="ascad">ASCAD</string>
     <string name="mobile_veterinary_units">Mobile veterinary Units</string>
@@ -209,6 +209,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="ai_center">AI center</string>
     <string name="semen_station">Semen Station</string>
     <string name="rashtriya_gokul_mission">Rashtriya Gokul Mission</string>
+    <string name="training_centers">Training Centers</string>
     <string name="bull_mother_farms">Bull Mother Farms</string>
     <string name="breed_multiplication">Breed Multiplication</string>
     <string name="vitro_fertilization">Vitro Fertilization</string>
@@ -216,7 +217,32 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="total_visit">Total Visit</string>
     <string name="no_of_states_covered">No. of states Covered</string>
     <string name="total_no_of_reports_submitted_by_nlm">Total No. of Reports Submitted By NLM</string>
-    <string name="implementing_agency">Implementing Agency</string>
+    <string name="milk_processing_plants_including_milk_powder_plant">Milk Processing Plants \n(including Milk Powder Plant)</string>
+    <string name="daily_average_milk_procurement_in_tkgpd">Daily Average Milk Procurement (in TKgPD)</string>
+    <string name="daily_average_milk_milk_product_sale_in_tlpd"><![CDATA[Daily Average Milk & Milk Product Sale (in TLPD)]]></string>
+    <string name="field_visit_report_should_be_clear_and_">
+        <ul> <li>Field visit report should be clear and concise.</li>\n
+        <li>Introduction with Visit Team details </li>\n
+        <li>Sample district/village details </li>\n
+        <li>Visit to Village Level DCS/BMC centre </li>\n
+        <li>Visit to Dairy Plant and Milk Union </li>\n
+            <li>Visit to Dairy Federation </li>\n
+            <li>Available assets, date/month of installation, current status etc. with photographs </li>\n
+        <li>Record discussion with all stakeholders particularly milk producers </li>\n
+       <li> Records checked and facts noted </li>\n
+       <li> Report needs to be in chronological order of the analysis. </li>\n
+       <li> Observations, Recommendation and Conclusion </li>\n
+       <li> Sample facts and records to support major observations needs to annexed</li></ul>
+    </string>
+    <string name="mobile_veterinary_unit">Mobile Veterinary Unit</string>
+    <string name="state_level">State Level</string>
+    <string name="district_level">District Level</string>
+    <string name="block_level">Block Level</string>
+    <string name="farmer_level">Farmer Level</string>
+    <string name="total_bmc_no_capacity"><![CDATA[Total BMC No. & Capacity]]></string>
+    <string name="frequency_per_day_weekly_monthly_6monthly"><![CDATA[Frequency< (Per day/Weekly/Monthly/ 6Monthly)]]></string>
+    <string name="remarks_by_nlm_including_photographs_of_site_asset"><![CDATA[Remarks by NLM including photographs of site & asset]]></string>
+    <string name="verification_of_tendering_process_sample_purchase_order_copies_photographs"><![CDATA[Verification of Tendering process (Sample purchase order copies & photographs)]]></string>
     <string name="name_and_location_of_ia">Name and Location of IA</string>
     <string name="director_dg_ceo_name">Director / DG / CEO - Name*</string>
     <string name="other_staff">Other Staff:</string>
@@ -230,7 +256,6 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="availability_of_liquid_nitrogen">Availability of Liquid\nNitrogen</string>
     <string name="breeding_farms">Breeding Farms</string>
     <string name="goat_breeding_farm">Goat Breeding Farm</string>
-    <string name="training_centers">Training Centers</string>
     <string name="number_of_cattle_ai_centres_equipped_with_goat_frozen_semen">Number of Cattle AI Centres\nEquipped with Goat Frozen\nSemen</string>
     <string name="total_ai_performed_by_the_states">Total AI Performed\nby the states</string>
     <string name="name_of_the_official">Name of the Official</string>
