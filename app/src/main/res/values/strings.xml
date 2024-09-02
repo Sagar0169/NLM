@@ -181,7 +181,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="all_users">All users</string>
     <string name="livestock_health_disease">Livestock Health Disease</string>
     <string name="vaccination_programme">Vaccination Programme</string>
-    <string name="implementing_agency">Implementing Agency</string>
+
     <string name="locations">Locations</string>
     <string name="ascad">ASCAD</string>
     <string name="mobile_veterinary_units">Mobile veterinary Units</string>
@@ -209,7 +209,6 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="ai_center">AI center</string>
     <string name="semen_station">Semen Station</string>
     <string name="rashtriya_gokul_mission">Rashtriya Gokul Mission</string>
-    <string name="training_centers">Training Centers</string>
     <string name="bull_mother_farms">Bull Mother Farms</string>
     <string name="breed_multiplication">Breed Multiplication</string>
     <string name="vitro_fertilization">Vitro Fertilization</string>
@@ -236,6 +235,10 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="total_ai_performed_by_the_states">Total AI Performed\nby the states</string>
     <string name="name_of_the_official">Name of the Official</string>
     <string name="designation_nlsia">Designation</string>
+    <string name="reporting_mechanism_to_state_govt">Reporting Mechanism\nto State Govt.</string>
+    <string name="submission_of_quarterly_progress_report_and_annual_progress_report_in_the_prescribed_time_frame">Submission of quarterly progress\nreport and annual progress\nreport in the prescribed\ntime frame</string>
+    <string name="ai_performed_since_converted">AI performed\n(since converted)</string>
+    <string name="availability_of_green_fodder_area_production"><![CDATA[Availability of green fodder - Area & Production:]]></string>
 
 </resources>
 

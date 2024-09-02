@@ -48,6 +48,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, AboutUsActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvImplementingAgency?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, NLSIAForm::class.java)
+            startActivity(intent)
+        }
 
     }
     override fun setVariables() {

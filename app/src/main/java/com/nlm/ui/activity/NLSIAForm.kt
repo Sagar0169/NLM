@@ -13,10 +13,15 @@ import com.nlm.model.PhysicalAttributesData
 import com.nlm.model.SightedChildData
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.fragment.NLSIAFormIA
+import com.nlm.ui.fragment.NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep
 import com.nlm.ui.fragment.NLSIA_Composition_of_Advisory_committee
+import com.nlm.ui.fragment.NLSIA_Constraints_faced_by_IA
+import com.nlm.ui.fragment.NLSIA_Feed_fodder
+import com.nlm.ui.fragment.NLSIA_Fodder_Seed
 import com.nlm.ui.fragment.NLSIA_GoverningBody_Board_Of_Directors
 import com.nlm.ui.fragment.NLSIA_Infrastructure_Sheep_goat
 import com.nlm.ui.fragment.NLSIA_PMC
+import com.nlm.ui.fragment.NLSIA_Reporting_System
 import com.nlm.ui.fragment.SightedBackgroundFragment
 import com.nlm.ui.fragment.SightedBasicDetailsFragment
 import com.nlm.ui.fragment.SightedConfirmationFragment
@@ -135,6 +140,9 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
             addTab(newTab().setText("Project Monitoring Committee (PMC)"))
             addTab(newTab().setText("Reporting System"))
             addTab(newTab().setText("Funds Received"))
+            addTab(newTab().setText("Constraints faced by IA in implementation of the project (elaborate)"))
+            addTab(newTab().setText("Feed Fodder Situation in the State"))
+            addTab(newTab().setText("Fodder Seed procurement and Distribution"))
 
 
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -168,12 +176,24 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
 
                         5 -> {
                             onTabClicks()
-                            loadFragment(SightedUploadFragment())
+                            loadFragment(NLSIA_Reporting_System())
                         }
 
                         6 -> {
                             onTabClicks()
-                            loadFragment(SightedConfirmationFragment())
+                            loadFragment(NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep())
+                        }
+                        7 -> {
+                            onTabClicks()
+                            loadFragment(NLSIA_Constraints_faced_by_IA())
+                        }
+                        8-> {
+                            onTabClicks()
+                            loadFragment(NLSIA_Feed_fodder())
+                        }
+                        9-> {
+                            onTabClicks()
+                            loadFragment(NLSIA_Fodder_Seed())
                         }
                     }
                 }

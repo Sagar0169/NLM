@@ -5,14 +5,13 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.NLSIA_GoverningBody_Board_Of_Directors.ClickActions" />
+            type="com.nlm.ui.fragment.NLSIA_Reporting_System.ClickActions" />
     </data>
-
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.NLSIA_GoverningBody_Board_Of_Directors">
+        tools:context=".ui.fragment.NLSIA_Reporting_System">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -39,74 +38,51 @@
 
             android:shrinkColumns="1, 2">
 
-            <TableRow
+<!--            <TableRow-->
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="@string/name_of_the_official"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:background="@color/darkBlue"-->
+<!--                    android:text="Details"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textStyle="bold" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="@string/designation_nlsia"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:background="@color/darkBlue"-->
+<!--                    android:text="No. Regular employee/deputation"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textStyle="bold" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="Organization"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-            </TableRow>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:background="@color/darkBlue"-->
+<!--                    android:text="No manpower Deputed"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textStyle="bold" />-->
+<!--            </TableRow>-->
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Frequency of Monitoring "
+                    android:background="@color/white"
+                    android:textColor="@android:color/black" />
+
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,15 +91,6 @@
                     android:textColor="@color/black"
                     android:background="@android:drawable/edit_text"
                     />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:maxLength="5"
-                    android:inputType="number"
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -138,14 +105,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
+                    android:text="@string/reporting_mechanism_to_state_govt"
+                    android:background="@color/white"
+                    android:textColor="@android:color/black" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -158,12 +124,93 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Regularity"
+                    android:background="@color/white"
+                    android:textColor="@android:color/black" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text" />
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/submission_of_quarterly_progress_report_and_annual_progress_report_in_the_prescribed_time_frame"
+                    android:background="@color/white"
+                    android:textColor="@android:color/black" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+
+                    android:textColor="@color/black"
+                    android:background="@android:drawable/edit_text" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:padding="8dp"
 
                     android:textColor="@color/black"
                     android:background="@android:drawable/edit_text" />
             </TableRow>
         </TableLayout>
+        <TextView
+            android:id="@+id/tvPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="Studies / Surveys conducted:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <EditText
+            android:hint="Enter Remarks"
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey"
+            android:inputType="textPassword"
+            android:maxLength="80"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_5"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
         <TextView
             android:id="@+id/tvSendOtp"
             android:layout_width="match_parent"
@@ -175,7 +222,6 @@
             android:background="@drawable/curve_fill_blue"
             android:clickable="true"
             android:fontFamily="@font/poppins_medium"
-
             android:paddingHorizontal="@dimen/dp_20"
             android:paddingVertical="@dimen/dp_10"
             android:text="Next"
