@@ -49,6 +49,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.RSPLab"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.RspLabSemen"
             android:exported="false" />
         <activity
@@ -137,8 +140,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.MilkUnionVisitNDDActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

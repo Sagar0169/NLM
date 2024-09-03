@@ -52,7 +52,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvImplementingAgency?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, NLSIAForm::class.java)
+            val intent = Intent(this@DashboardActivity, National_Live_Stock_IA::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvMilkUnionVisitReport?.setOnClickListener {
@@ -64,7 +64,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvRspLaboratorySemen?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, RspLabSemen::class.java)
+            val intent = Intent(this@DashboardActivity, RSPLab::class.java)
             startActivity(intent)
         }
 
