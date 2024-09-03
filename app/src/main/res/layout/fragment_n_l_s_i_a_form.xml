@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of State"
+                    android:text="@string/name_of_state"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -267,7 +267,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:inputType="textPassword"
+
                     android:maxLength="80"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"

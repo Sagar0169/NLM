@@ -24,9 +24,22 @@ data class OnlyCreated(
     val created: String,
     val district: String? = null,
     val block: String? = null,
-    val village: String? = null,
-
+    val village:String?=null,
 ) : Serializable
+
+data class OnlyCreatedNlm(
+    val state: String,
+    val created: String,
+    val district: String? = null,
+    val block: String? = null,
+    val phone: String? = null,
+
+
+    val year_of_est: String? = null,
+    val name: String? = null,
+
+    ) : Serializable
+
 
 
 data class MilkUnionVisit(

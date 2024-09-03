@@ -269,6 +269,17 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="month_of_installati_on_make"><![CDATA[Month of installati on & make]]></string>
     <string name="glasswares_chemicals"><![CDATA[Glasswares & Chemicals]]></string>
     <string name="civil_work_including_electrical_interiors"><![CDATA[Civil Work (including electrical & Interiors)]]></string>
+    <string name="name_of_state">Name of State</string>
+    <string name="composition_of_governing_body_board_of_directors_of_regional_semen_bank">Composition of Governing Body / Board of Directors of Regional semen bank:</string>
+    <string name="rsp_labotary_semen">Rsp Labotary Semen</string>
+    <string name="location">Location*</string>
+    <string name="adress">Adress*</string>
+    <string name="pin_codes">Pin Codes*</string>
+    <string name="phone_no">Phone No.</string>
+    <string name="year_of_establishment">Year of Establishment</string>
+    <string name="area_of_goat_sheep_station_acres">Area of Goat/Sheep Station (Acres)</string>
+    <string name="basic_information">Basic Information</string>
+    <string name="major_clients_of_semen_quantity_supplied"><![CDATA[Major clients of semen& Quantity supplied:]]></string>
 
 </resources>
 
