@@ -100,7 +100,22 @@
             android:name=".ui.activity.MilkProcessingNDDActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MilkProductMarkettingNDDActivity"
+            android:name=".ui.activity.MilkProductMarketingNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ProductivityEnhancementServicesNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddProductivityEnhancementServices"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddStateCenterLabtVisit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddMilkProcessing"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddMilkProductMarketing"
             android:exported="false" />
         <activity
             android:name=".ui.activity.DCSCenterVisitNDDActivity"

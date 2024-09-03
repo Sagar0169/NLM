@@ -2,11 +2,6 @@ package com.nlm.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.app.Dialog
-import android.util.Log
-import android.view.Window
-import android.widget.Button
-import android.widget.TextView
 import androidx.core.view.GravityCompat
 import com.nlm.utilities.BaseActivity
 import com.nlm.R
@@ -76,7 +71,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvMilkProductMarketing?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, MilkProductMarkettingNDDActivity::class.java)
+            val intent = Intent(this@DashboardActivity, MilkProductMarketingNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvProductivityEnhancementServices?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, ProductivityEnhancementServicesNDDActivity::class.java)
             startActivity(intent)
         }
 

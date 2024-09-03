@@ -4,21 +4,12 @@ import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
-import com.nlm.databinding.ActivityImplementingAgencyMasterBinding
-import com.nlm.databinding.ActivityMilkProcessingNddBinding
 import com.nlm.databinding.ActivityMilkProductMarketingNddBinding
-import com.nlm.databinding.ActivityMilkUnionVisitNddBinding
-import com.nlm.model.MilkProcessing
 import com.nlm.model.MilkProductMarketing
-import com.nlm.model.MilkUnionVisit
-import com.nlm.model.NodalOfficer
-import com.nlm.ui.adapter.ImplementingAgencyAdapter
-import com.nlm.ui.adapter.ndd.MilkProcessingAdapter
 import com.nlm.ui.adapter.ndd.MilkProductMarketingAdapter
-import com.nlm.ui.adapter.ndd.MilkUnionVisitAdapter
 import com.nlm.utilities.BaseActivity
 
-class MilkProductMarkettingNDDActivity : BaseActivity<ActivityMilkProductMarketingNddBinding>() {
+class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketingNddBinding>() {
     private var mBinding: ActivityMilkProductMarketingNddBinding? = null
     private lateinit var adapter: MilkProductMarketingAdapter
     private lateinit var list: List<MilkProductMarketing>
@@ -77,7 +68,7 @@ MilkProductMarketing(
         implementingAgency()
 
         mBinding!!.fabAdd.setOnClickListener{
-            val intent = Intent(this@MilkProductMarkettingNDDActivity,AddMilkUnionVisit::class.java).putExtra("isFrom",1)
+            val intent = Intent(this@MilkProductMarketingNDDActivity,AddMilkProductMarketing::class.java).putExtra("isFrom",1)
             startActivity(intent)
         }
     }

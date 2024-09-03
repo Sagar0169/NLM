@@ -51,6 +51,14 @@ data class MilkProductMarketing(
     val district: String,
     val created: String,
 ): Serializable
+data class ProductivityEnhancementServices(
+    val dcs: String,
+    val tehsil: String,
+    val revenue: String,
+    val state: String,
+    val district: String,
+    val created: String,
+): Serializable
 data class StateCenterVisit(
     val state: String,
     val district: String,

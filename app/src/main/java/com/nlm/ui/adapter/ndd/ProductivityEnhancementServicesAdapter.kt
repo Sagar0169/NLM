@@ -6,30 +6,32 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.ItemMilkUnionVisitBinding
-import com.nlm.databinding.ItemStateCenterVisitBinding
-import com.nlm.model.MilkUnionVisit
-import com.nlm.model.StateCenterVisit
+import com.nlm.databinding.ItemMilkProcessingBinding
+import com.nlm.databinding.ItemMilkProductMarketingBinding
+import com.nlm.databinding.ItemProductivityEnhancementServicesBinding
+import com.nlm.model.MilkProcessing
+import com.nlm.model.MilkProductMarketing
+import com.nlm.model.ProductivityEnhancementServices
+import com.nlm.ui.activity.AddMilkProductMarketing
 import com.nlm.ui.activity.AddMilkUnionVisit
-import com.nlm.ui.activity.AddStateCenterLabtVisit
-import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.ui.activity.AddProductivityEnhancementServices
 
-class StateCenterLabVisitAdapter(
-    private val implementingAgencyList: List<StateCenterVisit>) :
+class ProductivityEnhancementServicesAdapter(
+    private val implementingAgencyList: List<ProductivityEnhancementServices>) :
 
-    RecyclerView.Adapter<StateCenterLabVisitAdapter.Viewholder>() {
+    RecyclerView.Adapter<ProductivityEnhancementServicesAdapter.Viewholder>() {
 
     // ViewHolder class to hold the view elements
-    class Viewholder(val mBinding:ItemStateCenterVisitBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    class Viewholder(val mBinding:ItemProductivityEnhancementServicesBinding) : RecyclerView.ViewHolder(mBinding.root) {
 
     }
 
 
     // Inflate the item layout and create the holder
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Viewholder {
-        val mBinding :ItemStateCenterVisitBinding = DataBindingUtil.inflate(
+        val mBinding :ItemProductivityEnhancementServicesBinding = DataBindingUtil.inflate(
             LayoutInflater.from(viewGroup.context),
-            R.layout.item_state_center_visit,
+            R.layout.item_productivity_enhancement_services,
             viewGroup,
             false
         )
@@ -39,15 +41,17 @@ class StateCenterLabVisitAdapter(
     // Bind the data to the views in each item
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
         val item = implementingAgencyList[position]
+        holder.mBinding.tvDcs.text = item.dcs
         holder.mBinding.tvState.text = item.state
         holder.mBinding.tvDistrict.text = item.district
         holder.mBinding.tvCreated.text = item.created
-        holder.mBinding.tvLocation.text = item.location
+        holder.mBinding.tvTehsil.text = item.tehsil
+        holder.mBinding.tvRevenue.text = item.revenue
 
 
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, AddStateCenterLabtVisit::class.java)
+            val intent = Intent(holder.itemView.context, AddProductivityEnhancementServices::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)
         }
