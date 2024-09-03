@@ -9,40 +9,40 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
-import com.nlm.databinding.ActivityNationalLiveStockIaBinding
-import com.nlm.databinding.ActivityRspLabSemenBinding
+import com.nlm.databinding.ActivityDashboardBinding
 import com.nlm.databinding.ActivityRsplabBinding
-import com.nlm.databinding.ActivityStateMobileVeterinaryBinding
+import com.nlm.databinding.ActivityStateSemenBankListBinding
 import com.nlm.model.OnlyCreatedNlm
 import com.nlm.ui.adapter.NSLP_IA_Adapter
 import com.nlm.utilities.BaseActivity
 
-class RSPLab : BaseActivity<ActivityRsplabBinding>(){
+class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
+    private var mBinding: ActivityStateSemenBankListBinding? = null
+
     override val layoutId: Int
-        get() = R.layout.activity_rsplab
-    private var mBinding: ActivityRsplabBinding? = null
+        get() = R.layout.activity_state_semen_bank_list
     private lateinit var implementingAdapter: NSLP_IA_Adapter
 
     private lateinit var nodalOfficerList: List<OnlyCreatedNlm>
     private var layoutManager: LinearLayoutManager? = null
     override fun initView() {
         mBinding = viewDataBinding
-        mBinding?.clickAction = ClickActions()
+        mBinding?.clickAction=ClickActions()
         nodalOfficerList = listOf(
             OnlyCreatedNlm(
-                "HARYANA",
+                "DELHI",
                 "2024-08-27",
-                "AMBALA",
+                "NORTH",
                 "",
-                "234242342432","2017","tesd"
+                "234242342432","1977","Voluptas inventore n"
 
             ),
             OnlyCreatedNlm(
-                "GUJARAT",
+                "N/A",
                 "2024-08-23",
-                "JUNAGADH",
+                "N/A",
                 "",
-                "9996543218","2017","test2"
+                "895353543535453","2000","Ab voluptatem cum deserunt fugiat cupiditate omnis quis magni"
 
             ),
             OnlyCreatedNlm(
@@ -74,15 +74,9 @@ class RSPLab : BaseActivity<ActivityRsplabBinding>(){
         implementingAgency()
 
         mBinding!!.fabAddAgency.setOnClickListener{
-            val intent = Intent(this@RSPLab,RspLabSemen::class.java).putExtra("isFrom",1)
+            val intent = Intent(this@StateSemenBankList,StateSemenBank::class.java).putExtra("isFrom",1)
             startActivity(intent)
         }
-    }
-    private fun implementingAgency() {
-        implementingAdapter = NSLP_IA_Adapter(nodalOfficerList,0)
-        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding!!.rvRspLabView.layoutManager = layoutManager
-        mBinding!!.rvRspLabView.adapter = implementingAdapter
     }
 
     override fun setVariables() {
@@ -93,11 +87,18 @@ class RSPLab : BaseActivity<ActivityRsplabBinding>(){
 
     }
     inner class ClickActions {
-        fun backPress(view: View) {
-            onBackPressedDispatcher.onBackPressed()
+        fun backPress(view: View){
+            onBackPressed()
         }
 
+
+
+
     }
-
-
+    private fun implementingAgency() {
+        implementingAdapter = NSLP_IA_Adapter(nodalOfficerList,2)
+        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        mBinding!!.rvStateSemenLabView.layoutManager = layoutManager
+        mBinding!!.rvStateSemenLabView.adapter = implementingAdapter
+    }
 }

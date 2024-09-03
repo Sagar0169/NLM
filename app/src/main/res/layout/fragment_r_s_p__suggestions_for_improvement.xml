@@ -122,7 +122,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="Next"
+                    android:text="Submit"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </LinearLayout>

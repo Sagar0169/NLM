@@ -67,6 +67,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, RSPLab::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvStateSemenBank?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, StateSemenBankList::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvArtificialInsemination?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, Artificial_Insemination_List::class.java)
+            startActivity(intent)
+        }
  mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, DCSCenterVisitNDDActivity::class.java)
             startActivity(intent)

@@ -16,6 +16,7 @@ import com.nlm.model.OnlyCreatedNlm
 import com.nlm.ui.activity.NLSIAForm
 import com.nlm.ui.activity.NodalOfficerDetailActivity
 import com.nlm.ui.activity.RspLabSemen
+import com.nlm.ui.activity.StateSemenBank
 import com.nlm.ui.adapter.AddDocumentAdapter.MyViewHolder
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -105,6 +106,33 @@ if (isFrom==1)
             intent.putExtra("nodalOfficer", item)
             intent.putExtra("isFrom", 3)
             holder.itemView.context.startActivity(intent)
+        }
+    }
+    else if (isFrom==2){
+
+            holder.mBinding.tvState.text = item.state
+            holder.mBinding.districtName.text = item.district
+            holder.mBinding.tvBlock.text = "Location"
+            holder.mBinding.name.text = item.name
+            holder.mBinding.phoneNumber.text = item.phone
+            holder.mBinding.tvDate.text = item.created
+            holder.mBinding.llDistrict.showView()
+            holder.mBinding.llFarmer.showView()
+
+            holder.mBinding.llYear.showView()
+            holder.mBinding.tvYearofe.text=item.year_of_est
+            holder.mBinding.ivView.setOnClickListener {
+                val intent = Intent(holder.itemView.context, StateSemenBank::class.java)
+                intent.putExtra("nodalOfficer", item)
+                intent.putExtra("isFrom", 2)
+                holder.itemView.context.startActivity(intent)
+            }
+            holder.mBinding.ivEdit.setOnClickListener {
+                val intent = Intent(holder.itemView.context, StateSemenBank::class.java)
+                intent.putExtra("nodalOfficer", item)
+                intent.putExtra("isFrom", 3)
+                holder.itemView.context.startActivity(intent)
+
         }
     }
 }
