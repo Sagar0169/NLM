@@ -84,7 +84,7 @@ StateCenterVisit(
         implementingAgency()
 
         mBinding!!.fabAdd.setOnClickListener{
-            val intent = Intent(this@StateCenterLabVisitNDDActivity,AddMilkUnionVisit::class.java).putExtra("isFrom",1)
+            val intent = Intent(this@StateCenterLabVisitNDDActivity,AddStateCenterLabtVisit::class.java).putExtra("isFrom",1)
             startActivity(intent)
         }
     }

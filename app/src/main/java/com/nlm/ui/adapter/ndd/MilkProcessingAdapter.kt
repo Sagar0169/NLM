@@ -10,6 +10,7 @@ import com.nlm.databinding.ItemMilkProcessingBinding
 import com.nlm.databinding.ItemMilkUnionVisitBinding
 import com.nlm.model.MilkProcessing
 import com.nlm.model.MilkUnionVisit
+import com.nlm.ui.activity.AddMilkProcessing
 import com.nlm.ui.activity.AddMilkUnionVisit
 import com.nlm.ui.activity.NodalOfficerDetailActivity
 
@@ -47,7 +48,7 @@ class MilkProcessingAdapter(
 
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, AddMilkUnionVisit::class.java)
+            val intent = Intent(holder.itemView.context, AddMilkProcessing::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)
         }

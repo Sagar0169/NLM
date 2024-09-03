@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.MilkProductMarketingNDDActivity.ClickActions" />
+            type="com.nlm.ui.activity.NlmEdpActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,57 +21,60 @@
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
             android:paddingBottom="10dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivBackPress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:onClick="@{ClickAction::backPress}"
                 android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHeading"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/tvHeading" />
 
             <TextView
                 android:id="@+id/tvHeading"
-                android:layout_width="wrap_content"
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="Milk Product Marketing"
+                android:text="List of NLM EDP"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:textAlignment="center"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivBackPress"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvNlmEdp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
-            app:layout_constraintTop_toBottomOf="@id/rlToolbar"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rlToolbar" />
 
         <!-- Floating Action Button -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAdd"
+            android:id="@+id/fabAddAgency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_add"
-            android:contentDescription="Add New Milk Union Visit Report"
             android:backgroundTint="@color/black"
+            android:contentDescription="Add New Agency"
+            android:src="@drawable/ic_add"
             app:fabSize="normal"
-            app:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@android:color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

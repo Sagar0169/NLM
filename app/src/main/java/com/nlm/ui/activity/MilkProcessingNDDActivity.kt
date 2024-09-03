@@ -91,7 +91,7 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
         implementingAgency()
 
         mBinding!!.fabAdd.setOnClickListener{
-            val intent = Intent(this@MilkProcessingNDDActivity,AddMilkUnionVisit::class.java).putExtra("isFrom",1)
+            val intent = Intent(this@MilkProcessingNDDActivity,AddMilkProcessing::class.java).putExtra("isFrom",1)
             startActivity(intent)
         }
     }
