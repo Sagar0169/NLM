@@ -67,6 +67,22 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, RSPLab::class.java)
             startActivity(intent)
         }
+ mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, DCSCenterVisitNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvStateCenterLabVisitReport?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, StateCenterLabVisitNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvMilkProcessing?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, MilkProcessingNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvMilkProductMarketing?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, MilkProductMarkettingNDDActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     override fun setVariables() {

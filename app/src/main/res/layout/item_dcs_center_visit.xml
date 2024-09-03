@@ -55,12 +55,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="FSSAI License No"
+                        android:text="FSSAI Lic No"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvFssai"
+                        android:id="@+id/tvfssai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
@@ -84,12 +84,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="District"
+                        android:text="Date Of Validity"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDistrict"
+                        android:id="@+id/tvDOV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
@@ -113,12 +113,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Location Of Dairy Plant"
+                        android:text="State"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvlocation"
+                        android:id="@+id/tvState"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
@@ -150,12 +150,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="State"
+                        android:text="Name Of DCS"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvState"
+                        android:id="@+id/tvNameOfDCS"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
@@ -185,7 +185,34 @@
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCreatedBy"
+                        android:id="@+id/tvCreated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_3"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:fontFamily="@font/poppins_regular"
+                        android:singleLine="true"
+                        android:text="@string/na"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="District"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDistrict"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"

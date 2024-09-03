@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.AddDairyPlantVisit.ClickActions" />
+            type="com.nlm.ui.activity.MilkProcessingNDDActivity.ClickActions" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white"
-        tools:context=".ui.activity.NodalOfficerDetailActivity">
-
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
@@ -23,9 +20,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
             android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivBackPress"
@@ -43,47 +40,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Add Dairy Plant Visit"
+                android:text="Milk Processing"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/darkBlue"
-            android:layout_below="@id/rlToolbar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rlToolbar"
-            app:tabIndicatorColor="@color/orange"
-            app:tabSelectedTextColor="@color/orange"
-            app:tabTextColor="@color/white"
-            app:tabIndicatorFullWidth="true"
-            app:tabMode="fixed"
-            app:tabGravity="fill" />
 
-
-
-
-        <FrameLayout
-            android:id="@+id/frameLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/tabLayout"
+            android:layout_marginHorizontal="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            app:layout_constraintTop_toBottomOf="@id/rlToolbar"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Floating Action Button -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_add"
+            android:contentDescription="Add New Milk Union Visit Report"
+            android:backgroundTint="@color/black"
+            app:fabSize="normal"
+            app:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabLayout" />
-
-
-
-    </RelativeLayout>
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

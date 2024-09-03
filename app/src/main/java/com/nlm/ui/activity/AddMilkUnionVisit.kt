@@ -38,7 +38,7 @@ class AddMilkUnionVisit : BaseActivity<ActivityAddMilkUnionVisitBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State") }
+//        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State") }
 //        mBinding!!.tvDesignation.setOnClickListener { showBottomSheetDialog("Designation") }
 
     }
