@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.National_Live_Stock_IA.ClickActions" />
+            type="com.nlm.ui.activity.MilkProcessingNDDActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Implementing Agency"
+                android:text="Milk Processing"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -50,10 +50,8 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvImplementingaegency"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
@@ -62,13 +60,13 @@
 
         <!-- Floating Action Button -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddAgency"
+            android:id="@+id/fabAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/ic_add"
-            android:contentDescription="Add New Agency"
+            android:contentDescription="Add New Milk Union Visit Report"
             android:backgroundTint="@color/black"
             app:fabSize="normal"
             app:tint="@android:color/white"

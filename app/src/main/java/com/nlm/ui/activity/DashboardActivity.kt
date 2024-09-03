@@ -2,11 +2,6 @@ package com.nlm.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.app.Dialog
-import android.util.Log
-import android.view.Window
-import android.widget.Button
-import android.widget.TextView
 import androidx.core.view.GravityCompat
 import com.nlm.utilities.BaseActivity
 import com.nlm.R
@@ -85,7 +80,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvImplementingAgency?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, NLSIAForm::class.java)
+            val intent = Intent(this@DashboardActivity, National_Live_Stock_IA::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvMilkUnionVisitReport?.setOnClickListener {
@@ -94,6 +89,30 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
         mBinding?.leftDrawerMenu?.tvDairyPlantVisitReport?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, DairyPlantVisitNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvRspLaboratorySemen?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, RSPLab::class.java)
+            startActivity(intent)
+        }
+ mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, DCSCenterVisitNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvStateCenterLabVisitReport?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, StateCenterLabVisitNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvMilkProcessing?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, MilkProcessingNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvMilkProductMarketing?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, MilkProductMarketingNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvProductivityEnhancementServices?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, ProductivityEnhancementServicesNDDActivity::class.java)
             startActivity(intent)
         }
 

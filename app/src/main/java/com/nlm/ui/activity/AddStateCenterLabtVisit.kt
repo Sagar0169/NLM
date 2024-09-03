@@ -16,16 +16,19 @@ import com.nlm.R
 import com.nlm.databinding.ActivityAddDairyPlantVisitBinding
 import com.nlm.databinding.ActivityAddImplementingAgencyBinding
 import com.nlm.databinding.ActivityAddMilkUnionVisitBinding
+import com.nlm.databinding.ActivityAddStateCenterLabVisitBinding
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.ui.fragment.ndd.dcs.FirstDCSFragment
 import com.nlm.ui.fragment.ndd.dcs.SecondDCSFragment
 import com.nlm.ui.fragment.ndd.dpv.FirstDPVFragment
 import com.nlm.ui.fragment.ndd.dpv.SecondDPVFragment
+import com.nlm.ui.fragment.ndd.scl.FirstSCLFragment
+import com.nlm.ui.fragment.ndd.scl.SecondSCLFragment
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.toast
 
-class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>() {
-    private var mBinding: ActivityAddDairyPlantVisitBinding? = null
+class AddStateCenterLabtVisit : BaseActivity<ActivityAddStateCenterLabVisitBinding>() {
+    private var mBinding: ActivityAddStateCenterLabVisitBinding? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
     private val stateList = listOf(
@@ -40,7 +43,7 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>() {
     )
 
     override val layoutId: Int
-        get() = R.layout.activity_add_dairy_plant_visit
+        get() = R.layout.activity_add_state_center_lab_visit
 
     override fun initView() {
         mBinding = viewDataBinding
@@ -51,7 +54,7 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>() {
         setupTabLayout()
         // Set default fragment
 
-        loadFragment(FirstDPVFragment())
+        loadFragment(FirstSCLFragment())
 
     }
 
@@ -101,8 +104,8 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>() {
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
-                        0 -> loadFragment(FirstDPVFragment())
-                        1 -> loadFragment(SecondDPVFragment())
+                        0 -> loadFragment(FirstSCLFragment())
+                        1 -> loadFragment(SecondSCLFragment())
                     }
                 }
 

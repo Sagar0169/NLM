@@ -52,6 +52,7 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
 
     override fun initView() {
        mBinding=viewDataBinding
+        mBinding?.clickAction=ClickActions()
         setupTabLayout()
         loadFragment(NLSIAFormIA())
 
@@ -67,7 +68,7 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
     }
     inner class ClickActions {
         fun backPress(view: View){
-            onBackPressedDispatcher.onBackPressed()
+           onBackPressedDispatcher.onBackPressed()
         }
 
 
@@ -136,8 +137,8 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
             addTab(newTab().setText("Implementing Agency"))
             addTab(newTab().setText("Available infrastructure for Sheep / Goat Genetic Improvement"))
             addTab(newTab().setText("Composition of Governing Body / Board of Directors of Regional semen bank"))
-            addTab(newTab().setText("Composition of Advisory committee (if any)"))
-            addTab(newTab().setText("Project Monitoring Committee (PMC)"))
+//            addTab(newTab().setText("Composition of Advisory committee (if any)"))
+//            addTab(newTab().setText("Project Monitoring Committee (PMC)"))
             addTab(newTab().setText("Reporting System"))
             addTab(newTab().setText("Funds Received"))
             addTab(newTab().setText("Constraints faced by IA in implementation of the project (elaborate)"))
@@ -164,34 +165,34 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
                             loadFragment(NLSIA_GoverningBody_Board_Of_Directors())
                         }
 
+//                        3 -> {
+//                            onTabClicks()
+//                            loadFragment(NLSIA_Composition_of_Advisory_committee())
+//                        }
+//
+//                        4 -> {
+//                            onTabClicks()
+//                            loadFragment(NLSIA_PMC())
+//                        }
+
                         3 -> {
-                            onTabClicks()
-                            loadFragment(NLSIA_Composition_of_Advisory_committee())
-                        }
-
-                        4 -> {
-                            onTabClicks()
-                            loadFragment(NLSIA_PMC())
-                        }
-
-                        5 -> {
                             onTabClicks()
                             loadFragment(NLSIA_Reporting_System())
                         }
 
-                        6 -> {
+                        4 -> {
                             onTabClicks()
                             loadFragment(NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep())
                         }
-                        7 -> {
+                        5 -> {
                             onTabClicks()
                             loadFragment(NLSIA_Constraints_faced_by_IA())
                         }
-                        8-> {
+                        6-> {
                             onTabClicks()
                             loadFragment(NLSIA_Feed_fodder())
                         }
-                        9-> {
+                        7-> {
                             onTabClicks()
                             loadFragment(NLSIA_Fodder_Seed())
                         }

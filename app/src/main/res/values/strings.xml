@@ -243,6 +243,8 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="frequency_per_day_weekly_monthly_6monthly"><![CDATA[Frequency< (Per day/Weekly/Monthly/ 6Monthly)]]></string>
     <string name="remarks_by_nlm_including_photographs_of_site_asset"><![CDATA[Remarks by NLM including photographs of site & asset]]></string>
     <string name="verification_of_tendering_process_sample_purchase_order_copies_photographs"><![CDATA[Verification of Tendering process (Sample purchase order copies & photographs)]]></string>
+    <string name="feedback_promptness_quality_of_service"><![CDATA[Feedback-Promptness & Quality of service]]></string>
+    <string name="name_of_the_retail_shop_milk_parlour_visited">Name of the Retail Shop\n/Milk Parlour Visited</string>
     <string name="name_and_location_of_ia">Name and Location of IA</string>
     <string name="director_dg_ceo_name">Director / DG / CEO - Name*</string>
     <string name="other_staff">Other Staff:</string>
@@ -264,6 +266,20 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="submission_of_quarterly_progress_report_and_annual_progress_report_in_the_prescribed_time_frame">Submission of quarterly progress\nreport and annual progress\nreport in the prescribed\ntime frame</string>
     <string name="ai_performed_since_converted">AI performed\n(since converted)</string>
     <string name="availability_of_green_fodder_area_production"><![CDATA[Availability of green fodder - Area & Production:]]></string>
+    <string name="month_of_installati_on_make"><![CDATA[Month of installati on & make]]></string>
+    <string name="glasswares_chemicals"><![CDATA[Glasswares & Chemicals]]></string>
+    <string name="civil_work_including_electrical_interiors"><![CDATA[Civil Work (including electrical & Interiors)]]></string>
+    <string name="name_of_state">Name of State</string>
+    <string name="composition_of_governing_body_board_of_directors_of_regional_semen_bank">Composition of Governing Body / Board of Directors of Regional semen bank:</string>
+    <string name="rsp_labotary_semen">Rsp Labotary Semen</string>
+    <string name="location">Location*</string>
+    <string name="adress">Adress*</string>
+    <string name="pin_codes">Pin Codes*</string>
+    <string name="phone_no">Phone No.</string>
+    <string name="year_of_establishment">Year of Establishment</string>
+    <string name="area_of_goat_sheep_station_acres">Area of Goat/Sheep Station (Acres)</string>
+    <string name="basic_information">Basic Information</string>
+    <string name="major_clients_of_semen_quantity_supplied"><![CDATA[Major clients of semen& Quantity supplied:]]></string>
 
 </resources>
 

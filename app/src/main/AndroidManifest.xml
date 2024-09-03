@@ -49,6 +49,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.RSPLab"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.RspLabSemen"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.AddNlmAssistanceForQFSPActivity"
             android:exported="false" />
         <activity
@@ -125,6 +131,36 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.AddDairyPlantVisit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddDCSCenterVisit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.StateCenterLabVisitNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.MilkProcessingNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.MilkProductMarketingNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ProductivityEnhancementServicesNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddProductivityEnhancementServices"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddStateCenterLabtVisit"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddMilkProcessing"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddMilkProductMarketing"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.DCSCenterVisitNDDActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ChangePasswordActivity"

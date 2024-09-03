@@ -28,6 +28,20 @@ data class OnlyCreated(
 
     ) : Serializable
 
+data class OnlyCreatedNlm(
+    val state: String,
+    val created: String,
+    val district: String? = null,
+    val block: String? = null,
+    val phone: String? = null,
+
+
+    val year_of_est: String? = null,
+    val name: String? = null,
+
+    ) : Serializable
+
+
 
 data class NlmEdp(
     val comment: String,
@@ -54,7 +68,35 @@ data class MilkUnionVisit(
     val createdBy: String,
     val createdDate: String,
 ) : Serializable
-
+data class MilkProcessing(
+    val nameOfProcessingPlant: String,
+    val nameOfMilkUnion: String,
+    val state: String,
+    val district: String,
+    val created: String,
+): Serializable
+data class MilkProductMarketing(
+    val nameOfRetailShop: String,
+    val nameOfMilkUnion: String,
+    val dateOfInspection: String,
+    val state: String,
+    val district: String,
+    val created: String,
+): Serializable
+data class ProductivityEnhancementServices(
+    val dcs: String,
+    val tehsil: String,
+    val revenue: String,
+    val state: String,
+    val district: String,
+    val created: String,
+): Serializable
+data class StateCenterVisit(
+    val state: String,
+    val district: String,
+    val created: String,
+    val location: String,
+): Serializable
 data class DairyPlantVisit(
     val state: String,
     val fssaiLicenseNo: String,
@@ -62,6 +104,14 @@ data class DairyPlantVisit(
     val created: String,
     val location: String,
 ) : Serializable
+data class DcsCenterVisit(
+    val fssai: String,
+    val dateOfValidity: String,
+    val nameOfDCS: String,
+    val state: String,
+    val district: String,
+    val created: String,
+): Serializable
 
 
 data class SightedChildData(

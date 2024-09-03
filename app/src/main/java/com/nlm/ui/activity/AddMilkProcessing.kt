@@ -7,25 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.tabs.TabLayout
 import com.nlm.R
-import com.nlm.databinding.ActivityAddDairyPlantVisitBinding
 import com.nlm.databinding.ActivityAddImplementingAgencyBinding
+import com.nlm.databinding.ActivityAddMilkProcessingBinding
 import com.nlm.databinding.ActivityAddMilkUnionVisitBinding
 import com.nlm.ui.adapter.StateAdapter
-import com.nlm.ui.fragment.ndd.dcs.FirstDCSFragment
-import com.nlm.ui.fragment.ndd.dcs.SecondDCSFragment
-import com.nlm.ui.fragment.ndd.dpv.FirstDPVFragment
-import com.nlm.ui.fragment.ndd.dpv.SecondDPVFragment
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.toast
 
-class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>() {
-    private var mBinding: ActivityAddDairyPlantVisitBinding? = null
+class AddMilkProcessing : BaseActivity<ActivityAddMilkProcessingBinding>() {
+    private var mBinding: ActivityAddMilkProcessingBinding? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
     private val stateList = listOf(
@@ -40,18 +34,13 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>() {
     )
 
     override val layoutId: Int
-        get() = R.layout.activity_add_dairy_plant_visit
+        get() = R.layout.activity_add_milk_processing
 
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
 //        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State") }
-//        mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("State") }
 //        mBinding!!.tvDesignation.setOnClickListener { showBottomSheetDialog("Designation") }
-        setupTabLayout()
-        // Set default fragment
-
-        loadFragment(FirstDPVFragment())
 
     }
 
@@ -88,38 +77,5 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>() {
 //            startActivity(intent)
             finish()
         }
-    }
-    private fun setupTabLayout() {
-        mBinding?.tabLayout?.apply {
-            addTab(newTab().setText("Part 1"))
-            addTab(newTab().setText("Part 2"))
-
-            // If you have only two tabs and want to ensure they occupy the entire width:
-            tabMode = TabLayout.MODE_FIXED
-            tabGravity = TabLayout.GRAVITY_FILL
-
-            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    when (tab?.position) {
-                        0 -> loadFragment(FirstDPVFragment())
-                        1 -> loadFragment(SecondDPVFragment())
-                    }
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-                    // Optional: handle tab unselected
-                }
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-                    // Optional: handle tab reselected
-                }
-            })
-        }
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, fragment)
-            .commit()
     }
 }
