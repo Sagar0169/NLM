@@ -108,6 +108,30 @@ class AddNewMobileVeterinaryUnit : BaseActivity<ActivityAddNewMobileVeterinaryUn
                 mBinding!!.llFarmer.showView()
 
             }
+            5 -> {
+                mBinding!!.tvHeading.text = "Add New State Vaccination Programme"
+
+            }
+            6 -> {
+                mBinding!!.tvHeading.text = "Add New District Vaccination Programme"
+                mBinding!!.llDistrict.showView()
+
+            }
+            7 -> {
+                mBinding!!.tvHeading.text = "Add New Beneficiary/farmer Vaccination Programme"
+                mBinding!!.llDistrict.showView()
+                mBinding!!.llFarmer.showView()
+
+            }
+            8 -> {
+                mBinding!!.tvHeading.text = "Add New ASCAD State"
+
+            }
+            9 -> {
+                mBinding!!.tvHeading.text = "Add New ASCAD District"
+                mBinding!!.llDistrict.showView()
+
+            }
         }
 
         addNewMobileUnitAdapter()

@@ -39,6 +39,39 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, MobileVeterinaryActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvVaccinationProgramme?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, VaccinationProgrammerActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvAscad?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, AscadActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvNlmEdp?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, NlmEdpActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvAssistanceForEa?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, NlmAssistanceForEa::class.java).putExtra("isFrom",1)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvFpsFromForest?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, NlmFpForestLandActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvFpsFromNonForest?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, NlmFpForestLandActivity::class.java).putExtra("isFrom",1)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvFpsPlanStorage?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, NlmFspPlantStorageActivity::class.java).putExtra("isFrom",1)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvAssistanceQfps?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, NlmAssistanceForQFSPActivity::class.java).putExtra("isFrom",1)
+            startActivity(intent)
+        }
+
         mBinding?.leftDrawerMenu?.ivEdit?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, EditProfile::class.java)
             startActivity(intent)

@@ -49,6 +49,42 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.AddNlmAssistanceForQFSPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.NlmAssistanceForQFSPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddNewFspPlantStorageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.NlmFspPlantStorageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddNlmFpForestLandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.NlmFpForestLandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddNewAssistanceForEaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.NlmAssistanceForEa"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddNlmEdpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.NlmEdpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AscadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.VaccinationProgrammerActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ViewStateMobileVeterinaryUnit"
             android:exported="false" />
         <activity

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp"
+        android:background="@android:color/white"
+        android:radius="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FAE2BC"
+            android:padding="16dp">
+
+            <!-- Permit Number and State Name -->
+            <LinearLayout
+                android:id="@+id/llComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvComment"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Comment Progress :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvCommentChange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Delhi"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/llCreated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llComment"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCreated"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Created :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2024-08-28"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Icons for View, Edit, Delete -->
+            <LinearLayout
+                android:id="@+id/llActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-5dp"
+                android:layout_below="@id/llCreated"
+                android:orientation="horizontal">
+
+                <!-- View Icon -->
+
+
+                <ImageView
+                    android:id="@+id/ivView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="View"
+                    android:padding="@dimen/dp_5"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/ic_view"
+                    app:tint="@color/black" />
+
+                <!-- Edit Icon -->
+                <ImageView
+                    android:id="@+id/ivEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Edit"
+                    android:padding="@dimen/dp_5"
+
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/edit_icon"
+                    app:tint="@color/black" />
+
+                <!-- Delete Icon -->
+                <ImageView
+                    android:id="@+id/ivDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Delete"
+                    android:padding="@dimen/dp_5"
+
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/ic_deleted"
+                    app:tint="@color/black" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

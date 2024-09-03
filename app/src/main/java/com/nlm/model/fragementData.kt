@@ -26,7 +26,25 @@ data class OnlyCreated(
     val block: String? = null,
     val village: String? = null,
 
-) : Serializable
+    ) : Serializable
+
+
+data class NlmEdp(
+    val comment: String,
+    val created: String,
+
+    ) : Serializable
+
+data class NlmFpForest(
+    val state: String,
+    val district: String,
+    val location: String,
+    val agencyName: String,
+    val areaCovered: String,
+    val created: String,
+    val organogram: String = "O",
+    val technicalCompetence: String = "O",
+    ) : Serializable
 
 
 data class MilkUnionVisit(
@@ -35,15 +53,15 @@ data class MilkUnionVisit(
     val district: String,
     val createdBy: String,
     val createdDate: String,
-): Serializable
+) : Serializable
+
 data class DairyPlantVisit(
     val state: String,
     val fssaiLicenseNo: String,
     val district: String,
     val created: String,
     val location: String,
-): Serializable
-
+) : Serializable
 
 
 data class SightedChildData(

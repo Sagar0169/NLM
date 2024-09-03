@@ -69,6 +69,22 @@ class OnlyCreatedAdapter(private val onlyCreated: List<OnlyCreated>, private val
                 holder.llFarmer.showView()
                 holder.tvFarmer.text = item.village
             }
+            6 -> {
+                holder.llDistrict.showView()
+                holder.tvDistrict.text = item.district
+            }
+            7 -> {
+                holder.llDistrict.showView()
+                holder.tvDistrict.text = item.district
+                holder.llFarmer.showView()
+                holder.tvFarmer.text = item.village
+            }
+            9 -> {
+                holder.llDistrict.showView()
+                holder.tvDistrict.text = item.district
+            }
+
+
         }
 
         holder.ivView.setOnClickListener {
