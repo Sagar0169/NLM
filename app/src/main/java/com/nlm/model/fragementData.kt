@@ -41,6 +41,17 @@ data class OnlyCreatedNlm(
 
     ) : Serializable
 
+data class ArtificialInsemenation(
+    val state: String,
+    val created: String,
+    val district: String? = null,
+    val liquid_nitrogen: String? = null,
+    val frozen_semen_straws: String? = null,
+    val cryocans: String? = null,
+
+    ) : Serializable
+
+
 
 
 data class NlmEdp(

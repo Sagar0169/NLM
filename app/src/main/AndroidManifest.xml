@@ -49,6 +49,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.Artificial_Insemination_List"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.Artificial_Insemination"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.StateSemenBank"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.StateSemenBankList"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.RSPLab"
             android:exported="false" />
         <activity
