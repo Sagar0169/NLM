@@ -103,6 +103,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, Artificial_Insemination_List::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvImportExoticGoat?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, Import_Of_ExoticGoat_List::class.java)
+            startActivity(intent)
+        }
  mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, DCSCenterVisitNDDActivity::class.java)
             startActivity(intent)
@@ -121,6 +125,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
         mBinding?.leftDrawerMenu?.tvProductivityEnhancementServices?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, ProductivityEnhancementServicesNDDActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvBullMotherFarms?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, Bull_Of_Mothers_List::class.java)
             startActivity(intent)
         }
 

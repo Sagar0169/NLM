@@ -52,8 +52,20 @@ data class ArtificialInsemenation(
     ) : Serializable
 
 
+data class ImportOfGoat(
+    val Number_Of_Farmers: String,
+    val created: String,
 
 
+    ) : Serializable
+data class Bull_Mothers(
+    val Name_of_State: String,
+    val Location: String,
+    val Submit_As: String,
+    val Created_On: String,
+
+
+    ) : Serializable
 data class NlmEdp(
     val comment: String,
     val created: String,

@@ -49,6 +49,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.SemenStation"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.Bull_Of_Mothers_List"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.Bull_Mother_Farms"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.Import_Of_ExoticGoat_List"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ImportOfExoticGoat"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.Artificial_Insemination_List"
             android:exported="false" />
         <activity
