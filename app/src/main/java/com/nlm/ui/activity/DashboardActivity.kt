@@ -67,6 +67,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
 
+        mBinding?.leftDrawerMenu?.tvVitroFertilization?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, RGMVitroFertilizationActivity::class.java)
+            startActivity(intent)
+        }
+
         mBinding?.leftDrawerMenu?.ivEdit?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, EditProfile::class.java)
             startActivity(intent)
