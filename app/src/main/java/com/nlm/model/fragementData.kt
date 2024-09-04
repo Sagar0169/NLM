@@ -19,13 +19,19 @@ data class Indicator(
     val indicatorText: String
 ) : Serializable
 
+data class RGMVitro(
+    val state: String,
+    val created: String,
+    val status: String? = null,
+) : Serializable
+
+
 data class OnlyCreated(
     val state: String,
     val created: String,
     val district: String? = null,
     val block: String? = null,
     val village: String? = null,
-
     ) : Serializable
 
 data class OnlyCreatedNlm(

@@ -64,6 +64,12 @@
             android:name=".ui.activity.ImportOfExoticGoat"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.AddRGMVitroFertilizatonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.RGMVitroFertilizationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.Artificial_Insemination_List"
             android:exported="false" />
         <activity
