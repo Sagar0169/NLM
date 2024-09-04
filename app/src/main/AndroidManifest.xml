@@ -151,6 +151,18 @@
             android:name=".ui.activity.StateCenterLabVisitNDDActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.BreedMultiplicationRGMActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddBreedMultiplication"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.TrainingCentersRGMActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddTrainingCenters"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.MilkProcessingNDDActivity"
             android:exported="false" />
         <activity

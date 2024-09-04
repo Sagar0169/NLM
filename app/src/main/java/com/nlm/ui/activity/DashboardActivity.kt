@@ -123,6 +123,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, ProductivityEnhancementServicesNDDActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvBreedMultiplication?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, BreedMultiplicationRGMActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvTrainingCenters?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, TrainingCentersRGMActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     override fun setVariables() {
