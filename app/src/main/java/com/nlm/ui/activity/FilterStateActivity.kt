@@ -186,6 +186,86 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etCommentProgress.showView()
 
             }
+            25->{
+
+                binding!!.tvStateTitleNDD.showView()
+                binding!!.tvStateNDD.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvNameofMilkUnion.showView()
+                binding!!.etNameofMilkUnion.showView()
+
+            }
+            26->{
+                binding!!.tvStateTitleNDD.showView()
+                binding!!.tvStateNDD.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvfssaiLicNo.showView()
+                binding!!.etfssaiLicNo.showView()
+
+
+            }
+            27->{
+                binding!!.tvStateTitleNDD.showView()
+                binding!!.tvStateNDD.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvfssaiLicNo.showView()
+                binding!!.etfssaiLicNo.showView()
+                binding!!.tvnameOfDcs.showView()
+                binding!!.etnameOfDcs.showView()
+            }
+            28->{
+                binding!!.tvStateTitleNDD.showView()
+                binding!!.tvStateNDD.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvLocationNDD.showView()
+                binding!!.etLocationNDD.showView()
+            }
+            29->{
+                binding!!.tvTitleNDD.showView()
+                binding!!.etTitleNDD.showView()
+                binding!!.tvStatus.showView()
+
+            }
+            30->{
+                binding!!.tvStateTitleNDD.showView()
+                binding!!.tvStateNDD.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.etNameofRetailShop.showView()
+                binding!!.tvNameofRetailShop.showView()
+                binding!!.tvNameOfMPCFederation.showView()
+                binding!!.etNameOfMPCFederation.showView()
+                binding!!.tvDateOfInspection.showView()
+                binding!!.etDateOfInspection.showView()
+
+            }
+            31->{
+                binding!!.tvTitleNDD.showView()
+                binding!!.etTitleNDD.showView()
+                binding!!.tvStatus.showView()
+
+            }
+            32->{
+                binding!!.tvStateTitleNDD.showView()
+                binding!!.tvStateNDD.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvTitleVillageName.showView()
+                binding!!.etVillageName.showView()
+            }
+            33->{
+                binding!!.tvNameOfBeneficiaery.showView()
+                binding!!.etNameOfBeneficiary.showView()
+
+            }
+
+
+
+
 
 
             else -> {
@@ -200,6 +280,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.grey))
         binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.grey))
         binding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
+        binding!!.tvStateNDD.setOnClickListener { showBottomSheetDialog("StateNDD") }
         binding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
         binding!!.tvStatus.setOnClickListener { showBottomSheetDialog("Status") }
         binding!!.tvReadingMaterial.setOnClickListener { showBottomSheetDialog("Reading") }
@@ -231,6 +312,10 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             "State" -> {
                 selectedList = stateList
                 selectedTextView = binding!!.tvState
+            }
+            "StateNDD" -> {
+                selectedList = stateList
+                selectedTextView = binding!!.tvStateNDD
             }
 
             "District" -> {

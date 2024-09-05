@@ -92,7 +92,301 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
+<!--            name of milk union-->
+            <TextView
+                android:id="@+id/tvNameofMilkUnion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Name of Milk Union"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
 
+            <EditText
+                android:id="@+id/etNameofMilkUnion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/tvfssaiLicNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="FSSAI Lic.No"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etfssaiLicNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/tvNameOfBeneficiaery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Name Of The Beneficiary"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etNameOfBeneficiary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+ <TextView
+                android:id="@+id/tvnameOfDcs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Name Of DCS"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etnameOfDcs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+<TextView
+                android:id="@+id/tvLocationNDD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Location"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etLocationNDD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+<TextView
+                android:id="@+id/tvTitleNDD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Location"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etTitleNDD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+<TextView
+                android:id="@+id/tvNameofRetailShop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Name of the Retail Shop/Milk Parlour Visited"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etNameofRetailShop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+<TextView
+                android:id="@+id/tvNameOfMPCFederation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Name of the Milk Union/MPC/Federation"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etNameOfMPCFederation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+<TextView
+                android:id="@+id/tvDateOfInspection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Date of Inspection"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etDateOfInspection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/tvStateTitleNDD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="State"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvStateNDD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:background="@drawable/curve_all_corner_grey"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:fontFamily="@font/opensans_regular"
+                android:maxLength="50"
+
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:text="Please Select"
+                android:textColor="@color/black"
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/tvTitleState"
                 android:layout_width="wrap_content"
