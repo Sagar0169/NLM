@@ -87,6 +87,7 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDateOfPesticide"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -191,6 +192,8 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDateOfAntibiotic"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -296,6 +299,8 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDateOfHeavyMetal"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -401,6 +406,8 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDateOfMicrobiological"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -506,6 +513,8 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDateOfFattyAcidProfile"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -611,6 +620,8 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDateOfProteinEstimation"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -716,6 +727,8 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDateOfAflatoxins"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -821,6 +834,8 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDateOfOthers"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"

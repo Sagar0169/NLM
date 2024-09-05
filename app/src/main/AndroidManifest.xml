@@ -58,6 +58,31 @@
             android:name=".ui.activity.RGMAiCenterActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.List_of_RGM_IA"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.RGM_State_Implementing_Agency"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.Semen_Station_List"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SemenStation"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.Bull_Of_Mothers_List"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.Bull_Mother_Farms"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.Import_Of_ExoticGoat_List"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.ImportOfExoticGoat"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.AddRGMVitroFertilizatonActivity"
             android:exported="false" />
         <activity
@@ -148,6 +173,9 @@
             android:name=".ui.activity.UserActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.UserFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.AboutUsActivity"
             android:exported="false" />
         <activity
@@ -164,6 +192,18 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.StateCenterLabVisitNDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.BreedMultiplicationRGMActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddBreedMultiplication"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.TrainingCentersRGMActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddTrainingCenters"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MilkProcessingNDDActivity"

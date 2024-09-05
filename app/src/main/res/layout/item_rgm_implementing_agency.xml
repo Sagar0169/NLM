@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+
+
+        <RelativeLayout
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/curve_all_corner_white"
+            android:padding="16dp">
+
+            <!-- Permit Number and State Name -->
+            <LinearLayout
+                android:id="@+id/llId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Id"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Id :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="NA"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/llId"
+                android:id="@+id/llName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Name :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="NA"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llCreated"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Status:"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvStatusData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="NA"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llCreated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llName"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCreated"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Created :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2024-08-28"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Icons for View, Edit, Delete -->
+            <LinearLayout
+                android:id="@+id/llActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-5dp"
+                android:layout_below="@id/llStatus"
+                android:orientation="horizontal">
+
+                <!-- View Icon -->
+
+
+                <ImageView
+                    android:id="@+id/ivView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="View"
+                    android:padding="@dimen/dp_5"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/ic_view"
+                    app:tint="@color/black" />
+
+                <!-- Edit Icon -->
+                <ImageView
+                    android:id="@+id/ivEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Edit"
+                    android:padding="@dimen/dp_5"
+
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/edit_icon"
+                    app:tint="@color/black" />
+
+                <!-- Delete Icon -->
+                <ImageView
+                    android:id="@+id/ivDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Delete"
+                    android:padding="@dimen/dp_5"
+
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/ic_deleted"
+                    app:tint="@color/black" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+</layout>

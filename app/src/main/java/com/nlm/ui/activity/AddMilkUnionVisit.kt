@@ -15,6 +15,7 @@ import com.nlm.databinding.ActivityAddImplementingAgencyBinding
 import com.nlm.databinding.ActivityAddMilkUnionVisitBinding
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.hideView
 import com.nlm.utilities.toast
 
 class AddMilkUnionVisit : BaseActivity<ActivityAddMilkUnionVisitBinding>() {
@@ -38,8 +39,13 @@ class AddMilkUnionVisit : BaseActivity<ActivityAddMilkUnionVisitBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-//        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State") }
-//        mBinding!!.tvDesignation.setOnClickListener { showBottomSheetDialog("Designation") }
+        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State")
+        mBinding!!.ivArrowUpDState.hideView()
+        }
+        mBinding!!.etDistrict.setOnClickListener { showBottomSheetDialog("District")
+            mBinding!!.ivArrowUpDIstrict.hideView()
+
+        }
 
     }
 
@@ -69,9 +75,9 @@ class AddMilkUnionVisit : BaseActivity<ActivityAddMilkUnionVisitBinding>() {
                 selectedTextView = mBinding!!.etState
             }
 
-            "Designation" -> {
+            "District" -> {
                 selectedList = stateList
-                selectedTextView = mBinding!!.etState
+                selectedTextView = mBinding!!.etDistrict
             }
 
             else -> return

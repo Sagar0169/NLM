@@ -6,18 +6,14 @@
 
     </data>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:elevation="4dp"
-        android:background="@android:color/white"
-        android:radius="8dp">
+
 
         <RelativeLayout
+            android:layout_margin="8dp"
+            android:elevation="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FAE2BC"
+            android:background="@drawable/curve_all_corner_white"
             android:padding="16dp">
 
             <!-- Permit Number and State Name -->
@@ -234,5 +230,5 @@
             </LinearLayout>
 
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+
 </layout>
