@@ -9,55 +9,49 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
-import com.nlm.databinding.ActivityBullMotherFarmsBinding
 import com.nlm.databinding.ActivityBullOfMothersListBinding
+import com.nlm.databinding.ActivitySemenStationListBinding
 import com.nlm.model.Bull_Mothers
-import com.nlm.model.ImportOfGoat
 import com.nlm.ui.adapter.Bull_Of_Mothers_Adapter
-import com.nlm.ui.adapter.Import_Of_Goat_Adapter
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.BaseFragment
 
-class Bull_Of_Mothers_List : BaseActivity<ActivityBullOfMothersListBinding>() {
-    private var mBinding: ActivityBullOfMothersListBinding? = null
+class Semen_Station_List : BaseActivity<ActivitySemenStationListBinding>(){
+    private var mBinding: ActivitySemenStationListBinding? = null
 
     override val layoutId: Int
-        get() = R.layout.activity_bull_of_mothers_list
+        get() = R.layout.activity_semen_station_list
+
     private lateinit var implementingAdapter: Bull_Of_Mothers_Adapter
     private var layoutManager: LinearLayoutManager? = null
     private lateinit var nodalOfficerList: List<Bull_Mothers>
+
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction=ClickActions()
         nodalOfficerList = listOf(
             Bull_Mothers(
-                "GOA",
-                "Ut incididunt corporis et dolore",
+                "LADAKH",
+                "Perspiciatis esse nihil ullam dolor sit duis velit tempora occaecat cupiditate deserunt dolorem est a esse",
                 "Submitted",
                 "04-09-2024",
-                ""
+                "Done"
             ),
             Bull_Mothers(
-                "MEGHALAYA",
-                "Et cupidatat eiusmod magna quaerat quia cumque tempora veniam reprehenderit distinctio Enim quis fugiat est est soluta nihil fugit qui",
+                "UTTAR PRADESH",
+                "Eiusmod aut ea soluta iusto quidem",
                 "Submitted",
                 "03-09-2024",
-                ""),
-            Bull_Mothers(
-                "PUNJAB",
-                "Voluptatum culpa laboriosam magnam nobis non quasi amet voluptate in nisi quisquam rem ut ab",
-                "Submitted",
-                "03-09-2024",
-                ""
-            ),
+                "Done"),
+
         )
         implementingAgency()
 
         mBinding!!.fabAddAgency.setOnClickListener{
-            val intent = Intent(this@Bull_Of_Mothers_List,Bull_Mother_Farms::class.java).putExtra("isFrom",1)
+            val intent = Intent(this@Semen_Station_List,SemenStation::class.java).putExtra("isFrom",1)
             startActivity(intent)
         }
     }
-
     override fun setVariables() {
 
     }
@@ -71,7 +65,7 @@ class Bull_Of_Mothers_List : BaseActivity<ActivityBullOfMothersListBinding>() {
         }
     }
     private fun implementingAgency() {
-        implementingAdapter = Bull_Of_Mothers_Adapter(nodalOfficerList,1)
+        implementingAdapter = Bull_Of_Mothers_Adapter(nodalOfficerList,0)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvArtificialInsemination.layoutManager = layoutManager
         mBinding!!.rvArtificialInsemination.adapter = implementingAdapter

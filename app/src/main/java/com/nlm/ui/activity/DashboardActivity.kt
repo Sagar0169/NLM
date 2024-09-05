@@ -136,6 +136,22 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, Bull_Of_Mothers_List::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvSemenStation?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, Semen_Station_List::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, List_of_RGM_IA::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, List_of_RGM_IA::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, UserActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     override fun setVariables() {

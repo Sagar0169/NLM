@@ -6,15 +6,14 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.Bull_Of_Mothers_List.ClickActions" />
+            type="com.nlm.ui.activity.Semen_Station_List.ClickActions" />
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.activity.Bull_Of_Mothers_List">
+        tools:context=".ui.activity.Semen_Station_List">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
@@ -44,7 +43,7 @@
                 android:layout_marginTop="20dp"
                 android:textAlignment="center"
                 android:layout_marginEnd="@dimen/dp_10"
-                android:text="Bull Mother Farms"
+                android:text="List of SEMEN STATION"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -82,4 +81,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@android:color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

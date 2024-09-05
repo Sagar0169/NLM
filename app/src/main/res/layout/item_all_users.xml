@@ -11,125 +11,172 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_margin="8dp"
-            android:elevation="4dp"
             android:background="@drawable/curve_all_corner_white"
             android:padding="16dp">
 
             <!-- Permit Number and State Name -->
+
             <LinearLayout
-                android:id="@+id/llState"
+
+                android:id="@+id/llName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/state_name"
+                    android:id="@+id/name"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Name of State:"
+                    android:text="Name :"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvState_Name"
+                    android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="N/A"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/llState"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/Location"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Location:"
-                    android:fontFamily="@font/poppins_bold"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="N/A"
+                    android:text="NA"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/llSubmit_as"
+                android:id="@+id/llUserName"
                 android:layout_width="wrap_content"
+                android:layout_below="@id/llName"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/llLocation"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/Submit_as"
+                    android:id="@+id/Username"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Submit As:"
+                    android:text="Username :"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvSubmit_as"
+                    android:id="@+id/tvUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="N/A"
+                    android:text="NA"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/llForm_status"
+                android:id="@+id/llEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/llSubmit_as"
+                android:layout_below="@id/llUserName"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/Form_status"
+                    android:id="@+id/Email"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Form Status:"
+                    android:text="Email:"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvForm_status"
+                    android:id="@+id/tvEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="N/A"
+                    android:text="NA"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llEmail"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/Type"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Type:"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
+                <TextView
+                    android:id="@+id/tvType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="NA"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llType"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/Role"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Role:"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
+                <TextView
+                    android:id="@+id/tvRole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="NA"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llRole"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Status:"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvStatusData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="NA"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/llCreated"
+                android:layout_below="@id/llStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/llForm_status"
+
                 android:orientation="horizontal">
 
                 <TextView
@@ -145,7 +192,7 @@
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2024-08-23"
+                    android:text="2024-08-28"
                     android:fontFamily="@font/poppins_regular"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:textColor="@android:color/black"
@@ -154,6 +201,7 @@
 
             <!-- Icons for View, Edit, Delete -->
             <LinearLayout
+
                 android:id="@+id/llActions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
