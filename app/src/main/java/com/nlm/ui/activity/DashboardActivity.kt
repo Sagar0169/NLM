@@ -132,6 +132,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, ProductivityEnhancementServicesNDDActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvBreedMultiplication?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, BreedMultiplicationRGMActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvTrainingCenters?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, TrainingCentersRGMActivity::class.java)
+            startActivity(intent)
+        }
         mBinding?.leftDrawerMenu?.tvBullMotherFarms?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, Bull_Of_Mothers_List::class.java)
             startActivity(intent)
