@@ -58,12 +58,15 @@ if (isFrom==1)
     holder.mBinding.tvState.text = item.state
 //        holder.mBinding.districtName.text = item.district
     holder.mBinding.name.text = item.name
+    holder.mBinding.tvBlock.text = "Name/Location"
+    holder.mBinding.tvYear.text = "Created By"
+    holder.mBinding.tvYearofe.text = item.created_by
 //        holder.mBinding.phoneNumber.text = item.phone
     holder.mBinding.tvDate.text = item.created
     holder.mBinding.llDistrict.hideView()
     holder.mBinding.llFarmer.hideView()
 
-    holder.mBinding.llYear.hideView()
+
 
 
 
