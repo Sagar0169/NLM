@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ClickAction"
+            type="com.nlm.ui.activity.FilterStateActivity.ClickActions" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.activity.NodalOfficerDetailActivity">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rlToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/job_details_bg1"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivBackPress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:onClick="@{ClickAction::backPress}"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Apply Filter"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tvTitleAiName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Name of AI Center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etAiName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/tvTitleState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Name of State"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:background="@drawable/curve_all_corner_grey"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:fontFamily="@font/opensans_regular"
+                android:maxLength="50"
+
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:text="Please Select"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleDistrict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="District"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvDistrict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:background="@drawable/curve_all_corner_grey"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:fontFamily="@font/opensans_regular"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:text="Please Select"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleNodalName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Nodal Officer Name"
+                android:textColor="@color/black"
+
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etNodalName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Nodal Officer Name"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleNodalEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Nodal Officer Email"
+                android:textColor="@color/black"
+
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etNodalOfficerEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Nodal Officer Email"
+                android:inputType="textPersonName"
+
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleBlock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Block"
+                android:textColor="@color/black"
+
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etBlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Block"
+                android:inputType="textEmailAddress"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleVillageName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Village Name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etVillageName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Village Name"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Status"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:background="@drawable/curve_all_corner_grey"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:fontFamily="@font/opensans_regular"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:text="Please Select"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleLocAi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Location of AI Centre"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etLocAi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleNoa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Name of Organization"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etNoa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Name of Organization"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleOrganogram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Organogram"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etOrganogram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Enter Organogram"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleTechnicalCompetance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Technical Competance"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etTechnicalCompetance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Enter Technical Competance"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleLocationAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Location/Address"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etLocationAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Enter Location/Address"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleCapacityofPlant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Capacity of Plant"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etCapacityofPlant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Enter Capacity of Plant"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleNameofAgency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Name of Agency"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etNameofAgency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Enter Name of Agency"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleAreaCovered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Area Covered"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etAreaCovered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Enter Area Covered"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleReadingMaterial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Development of Reading Material"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvReadingMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:background="@drawable/curve_all_corner_grey"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:fontFamily="@font/opensans_regular"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:text="Please Select"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvTitleCommentProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Comment Progress"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etCommentProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Enter Comment Progress"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <!-- Buttons Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black"
+                    android:onClick="@{ClickAction::submit}"
+                    android:text="Apply Filter"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

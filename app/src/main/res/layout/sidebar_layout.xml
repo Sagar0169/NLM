@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -18,9 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/darkBlue"
+            android:orientation="vertical"
             android:paddingHorizontal="@dimen/dp_15"
-            android:paddingVertical="@dimen/dp_5"
-            android:orientation="vertical">
+            android:paddingVertical="@dimen/dp_5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,16 +48,16 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:text="Rohan"
-                        android:textSize="@dimen/sp_16"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/ivEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
                     android:layout_gravity="center"
+                    android:padding="5dp"
                     android:src="@drawable/edit" />
             </LinearLayout>
 
@@ -66,503 +66,573 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
+            android:layout_above="@id/tvLogout"
             android:layout_below="@id/rlHeading"
-            android:layout_above="@id/tvLogout">
-
-        <LinearLayout
-            android:id="@+id/llBody"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rlHeading">
-
-            <TextView
-                android:id="@+id/tvDashboard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingVertical="10dp"
-                android:text="@string/home"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/ic_home" />
-
-            <View
-                android:id="@+id/view1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tvUsers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingVertical="10dp"
-                android:paddingEnd="@dimen/dp_5"
-                android:textColor="@color/black"
-                android:text="@string/users"
-                android:textSize="16sp"
-                app:drawableEndCompat="@drawable/ic_arrow_down"
-                app:drawableStartCompat="@drawable/img_4"
-                tools:ignore="RtlSymmetry" />
+            android:fillViewport="true">
 
             <LinearLayout
-                android:id="@+id/llUsers"
+                android:id="@+id/llBody"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_20"
+                android:layout_height="0dp"
                 android:orientation="vertical"
-                android:visibility="visible">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rlHeading">
 
                 <TextView
+                    android:id="@+id/tvDashboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingVertical="10dp"
+                    android:text="@string/home"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:drawableStartCompat="@drawable/ic_home" />
 
+                <View
+                    android:id="@+id/view1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/all_users"
-                    android:textColor="@color/black"
-                    android:padding="@dimen/dp_5"
-                    android:textSize="16sp" />
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/black" />
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/rlRelationship"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:elevation="5dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/tvRegisterCategory">-->
+
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvSelect"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@drawable/curve_all_corner_grey"-->
+<!--                        android:paddingHorizontal="10dp"-->
+<!--                        android:paddingVertical="10dp"-->
+<!--                        android:text="Please Select"-->
+<!--                        android:textColor="@color/grey"-->
+<!--                        android:textSize="14sp" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ivArrowDown"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginHorizontal="20dp"-->
+<!--                        android:elevation="2sp"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:rotation="180"-->
+<!--                        android:src="@drawable/ic_arrow_down"-->
+<!--                        android:visibility="gone" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ivArrowUp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginHorizontal="20dp"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:src="@drawable/ic_arrow_down"-->
+<!--                        android:visibility="visible" />-->
+<!--                </RelativeLayout>-->
+
                 <TextView
-                    android:id="@+id/tvMasterImplementingAgency"
+                    android:id="@+id/tvUsers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Implementing Agency"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingVertical="10dp"
+                    android:text="@string/users"
                     android:textColor="@color/black"
-                    android:padding="@dimen/dp_5"
+                    android:textSize="16sp"
+                    android:paddingEnd="10dp"
+                    app:drawableEndCompat="@drawable/ic_arrow_down"
+                    app:drawableStartCompat="@drawable/img_4"
+                    tools:ignore="RtlSymmetry" />
+
+                <LinearLayout
+                    android:id="@+id/llUsers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/all_users"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvMasterImplementingAgency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="Implementing Agency"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvLivestockHealthDisease"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingVertical="10dp"
+                    android:text="@string/livestock_health_disease"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:paddingEnd="10dp"
+                    app:drawableEndCompat="@drawable/ic_arrow_down"
+                    app:drawableStartCompat="@drawable/ic_sightedchild" />
+
+                <LinearLayout
+                    android:id="@+id/llLivestockHealthDisease"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvVaccinationProgramme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/vaccination_programme"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvMobileVeterinaryUnits"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/mobile_veterinary_units"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvAscad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/ascad"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvNationalLiveStockMission"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingVertical="10dp"
+                    android:text="@string/national_livestock_mission"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:paddingEnd="10dp"
+                    app:drawableEndCompat="@drawable/ic_arrow_down"
+
+                    app:drawableStartCompat="@drawable/img_3" />
+
+                <LinearLayout
+                    android:id="@+id/llNationalLivestockMission"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvImplementingAgency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/implementing_agency_format1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvRspLaboratorySemen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/rsplaboratory_semen_format2"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvStateSemenBank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/state_semen_bank_format3"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvArtificialInsemination"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/artificial_insemination_format4"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvImportExoticGoat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/import_of_exotic_goat_format5"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvAssistanceQfps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/assistance_for_qfps_format6"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvFpsPlanStorage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/fps_plan_storage_format7"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvFpsFromNonForest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/fps_from_non_forest_format8"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvFpsFromForest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/fps_from_forest_land_format9"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvAssistanceForEa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/assistance_for_ea_format10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvNlmEdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/nlm_edp_format11"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvNationalDairyDevelopment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingVertical="10dp"
+                    android:text="@string/national_dairy_development"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:paddingEnd="10dp"
+                    app:drawableEndCompat="@drawable/ic_arrow_down"
+                    app:drawableStartCompat="@drawable/baseline_person_24" />
+
+                <LinearLayout
+                    android:id="@+id/llNationalDairyDevelopment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvMilkUnionVisitReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/milk_union_visit_report"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvDairyPlantVisitReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/dairy_plant_visit_report"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvDcsBmsCenterVisitReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/dcs_bms_center_visit_report"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvStateCenterLabVisitReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/state_center_lab_visit_report"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvMilkProcessing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/milk_processing"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvMilkProductMarketing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/milk_product_marketing"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvProductivityEnhancementServices"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/productivity_enhancement_services"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvRashtriyaGokulMission"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingVertical="10dp"
+                    android:text="@string/rashtriya_gokul_mission"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:paddingEnd="10dp"
+                    app:drawableEndCompat="@drawable/ic_arrow_down"
+                    app:drawableStartCompat="@drawable/lock" />
+
+                <LinearLayout
+                    android:id="@+id/llRashtriyaGokulMission"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_20"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvStateImplementingAgency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/state_implementing_agency"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvAiCenter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/ai_center"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvSemenStation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/semen_station"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvTrainingCenters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/training_centers"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvBullMotherFarms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/bull_mother_farms"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvBreedMultiplication"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/breed_multiplication"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvVitroFertilization"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/vitro_fertilization"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvTermsAndConditions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawableStart="@drawable/about_nav"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingVertical="10dp"
+                    android:text="Terms and condition"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/view7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvPrivacyPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:drawableStart="@drawable/privacy_nav"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingVertical="5dp"
+                    android:text="Privacy Policy"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/view8"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/black" />
+
             </LinearLayout>
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="@dimen/dp_2"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tvLivestockHealthDisease"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingVertical="10dp"
-                android:text="@string/livestock_health_disease"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/ic_sightedchild" />
-
-            <LinearLayout
-                android:id="@+id/llLivestockHealthDisease"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <TextView
-                    android:id="@+id/tvVaccinationProgramme"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/vaccination_programme"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvMobileVeterinaryUnits"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/mobile_veterinary_units"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvAscad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/ascad"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tvNationalLiveStockMission"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingVertical="10dp"
-                android:text="@string/national_livestock_mission"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/img_3" />
-
-            <LinearLayout
-                android:id="@+id/llNationalLivestockMission"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <TextView
-                    android:id="@+id/tvImplementingAgency"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/implementing_agency_format1"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvRspLaboratorySemen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/rsplaboratory_semen_format2"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvStateSemenBank"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/state_semen_bank_format3"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            <TextView
-                    android:id="@+id/tvArtificialInsemination"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/artificial_insemination_format4"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            <TextView
-                    android:id="@+id/tvImportExoticGoat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/import_of_exotic_goat_format5"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            <TextView
-                    android:id="@+id/tvAssistanceQfps"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/assistance_for_qfps_format6"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            <TextView
-                    android:id="@+id/tvFpsPlanStorage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/fps_plan_storage_format7"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            <TextView
-                    android:id="@+id/tvFpsFromNonForest"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/fps_from_non_forest_format8"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            <TextView
-                    android:id="@+id/tvFpsFromForest"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/fps_from_forest_land_format9"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            <TextView
-                    android:id="@+id/tvAssistanceForEa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/assistance_for_ea_format10"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-             <TextView
-                    android:id="@+id/tvNlmEdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/nlm_edp_format11"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view5"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tvNationalDairyDevelopment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingVertical="10dp"
-                android:text="@string/national_dairy_development"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/baseline_person_24" />
-
-            <LinearLayout
-                android:id="@+id/llNationalDairyDevelopment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <TextView
-                    android:id="@+id/tvMilkUnionVisitReport"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/milk_union_visit_report"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvDairyPlantVisitReport"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/dairy_plant_visit_report"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvDcsBmsCenterVisitReport"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/dcs_bms_center_visit_report"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvStateCenterLabVisitReport"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/state_center_lab_visit_report"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvMilkProcessing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/milk_processing"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvMilkProductMarketing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/milk_product_marketing"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvProductivityEnhancementServices"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/productivity_enhancement_services"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/tvRashtriyaGokulMission"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingVertical="10dp"
-                android:text="@string/rashtriya_gokul_mission"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/lock" />
-
-            <LinearLayout
-                android:id="@+id/llRashtriyaGokulMission"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_20"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <TextView
-                    android:id="@+id/tvStateImplementingAgency"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/state_implementing_agency"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvAiCenter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/ai_center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvSemenStation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/semen_station"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvTrainingCenters"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/training_centers"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvBullMotherFarms"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/bull_mother_farms"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvBreedMultiplication"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/breed_multiplication"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvVitroFertilization"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/vitro_fertilization"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@color/black" />
-            <TextView
-                android:drawableStart="@drawable/about_nav"
-                android:id="@+id/tvTermsAndConditions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingVertical="10dp"
-                android:text="Terms and condition"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                />
-
-            <View
-                android:id="@+id/view7"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@color/black" />
-            <TextView
-                android:drawableStart="@drawable/privacy_nav"
-                android:id="@+id/tvPrivacyPolicy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingVertical="5dp"
-                android:text="Privacy Policy"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                />
-
-            <View
-                android:id="@+id/view8"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@color/black" />
-
-        </LinearLayout>
         </ScrollView>
 
         <TextView
             android:id="@+id/tvLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="10dp"
             android:drawablePadding="10dp"
             android:fontFamily="@font/roboto_regular"
             android:paddingVertical="10dp"
             android:text="@string/logout"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:textAlignment="viewEnd"
             android:textColor="@color/grey"
             android:textSize="18sp" />

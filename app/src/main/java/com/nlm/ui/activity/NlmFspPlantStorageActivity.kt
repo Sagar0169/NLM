@@ -27,6 +27,13 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@NlmFspPlantStorageActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 14)
+            startActivity(intent)
+        }
 
     }
 

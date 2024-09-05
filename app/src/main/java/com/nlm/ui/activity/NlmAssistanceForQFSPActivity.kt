@@ -27,6 +27,13 @@ class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspac
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@NlmAssistanceForQFSPActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 13)
+            startActivity(intent)
+        }
 
     }
 

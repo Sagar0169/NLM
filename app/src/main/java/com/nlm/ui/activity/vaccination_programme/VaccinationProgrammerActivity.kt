@@ -22,6 +22,7 @@ class VaccinationProgrammerActivity : BaseActivity<ActivityVaccinationProgrammer
             onBackPressedDispatcher.onBackPressed()
         }
 
+
         fun state(view: View) {
             val intent = Intent(
                 this@VaccinationProgrammerActivity,

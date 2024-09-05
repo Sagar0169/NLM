@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/mobile_veterinary_unit"
+                android:text="ASCAD"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"

@@ -6,27 +6,30 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityMobileVeterinaryBinding
+import com.nlm.databinding.ActivityRgmaiCenterAcitivityBinding
 import com.nlm.databinding.ActivityRgmvitroFertilizationBinding
 import com.nlm.databinding.ActivityStateMobileVeterinaryBinding
 import com.nlm.model.NodalOfficer
 import com.nlm.model.OnlyCreated
 import com.nlm.model.RGMVitro
+import com.nlm.model.RgmAi
 import com.nlm.ui.adapter.ImplementingAgencyAdapter
 import com.nlm.ui.adapter.OnlyCreatedAdapter
 import com.nlm.ui.adapter.RGMVItroAdapter
+import com.nlm.ui.adapter.RgmAiAdapter
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
-class RGMVitroFertilizationActivity : BaseActivity<ActivityRgmvitroFertilizationBinding>() {
-    private var mBinding: ActivityRgmvitroFertilizationBinding? = null
-    private lateinit var onlyCreatedAdapter: RGMVItroAdapter
-    private lateinit var onlyCreated: List<RGMVitro>
+class RGMAiCenterActivity : BaseActivity<ActivityRgmaiCenterAcitivityBinding>() {
+    private var mBinding: ActivityRgmaiCenterAcitivityBinding? = null
+    private lateinit var onlyCreatedAdapter: RgmAiAdapter
+    private lateinit var onlyCreated: List<RgmAi>
     private var layoutManager: LinearLayoutManager? = null
     private var isFrom: Int = 0
 
     override val layoutId: Int
-        get() = R.layout.activity_rgmvitro_fertilization
+        get() = R.layout.activity_rgmai_center_acitivity
 
 
     inner class ClickActions {
@@ -36,9 +39,9 @@ class RGMVitroFertilizationActivity : BaseActivity<ActivityRgmvitroFertilization
 
         fun filter(view: View) {
             val intent = Intent(
-                this@RGMVitroFertilizationActivity,
+                this@RGMAiCenterActivity,
                 FilterStateActivity::class.java
-            ).putExtra("isFrom", 11)
+            ).putExtra("isFrom", 12)
             startActivity(intent)
         }
 
@@ -50,49 +53,33 @@ class RGMVitroFertilizationActivity : BaseActivity<ActivityRgmvitroFertilization
         mBinding?.clickAction = ClickActions()
 
         onlyCreated = listOf(
-            RGMVitro(
-                "Bihar",
-                "2024-08-28", "Active"
-            ),
-            RGMVitro(
-                "LADAKH",
-                "2024-08-28", "Active"
-            ),
+            RgmAi(
+                "Flynn Santiago",
+                "TELANGANA",
+                "Mulugu",
+                "Dolorem sit omnis odit aut aliquid ullam similique esse voluptatem Itaque in Nam dignissimos nesciunt",
+                "02-09-2024",
+                "Submitted",
+                "02-09-2024",
 
-            RGMVitro(
-                "DELHI",
-                "2024-08-28", "Active"
-            ),
+                ),
+            RgmAi(
+                "ass",
+                "UTTAR PRADESH",
+                "GHAZIABAD",
+                "Shalimar Garden",
+                "14-08-2024",
+                "Submitted",
+                "16-08-2024",
 
-            RGMVitro(
-                "JAMMU AND KASHMIR",
-                "2024-08-28", "Active"
-            ),
-
-            RGMVitro(
-                "KERALA",
-                "2024-08-28", "Active"
-            ),
-
-            RGMVitro(
-                "ARUNACHAL PRADESH",
-                "2024-08-28", "Active"
-            ),
-
-
-            RGMVitro(
-                "GOA",
-                "2024-08-28", "Active"
-            ),
-
-
-            )
+                ),
+        )
 
 
 
         mBinding!!.fabAddAgency.setOnClickListener {
             val intent =
-                Intent(this, AddRGMVitroFertilizatonActivity::class.java).putExtra("isFrom", isFrom)
+                Intent(this, AddRgmAiCenterAcitivity::class.java).putExtra("isFrom", isFrom)
             startActivity(intent)
         }
 
@@ -102,7 +89,7 @@ class RGMVitroFertilizationActivity : BaseActivity<ActivityRgmvitroFertilization
     }
 
     private fun onlyCreatedAdapter() {
-        onlyCreatedAdapter = RGMVItroAdapter(onlyCreated, isFrom)
+        onlyCreatedAdapter = RgmAiAdapter(onlyCreated, isFrom)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvMobileVeterinaryUnit.layoutManager = layoutManager
         mBinding!!.rvMobileVeterinaryUnit.adapter = onlyCreatedAdapter

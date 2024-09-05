@@ -154,7 +154,7 @@
 
 
                     <ImageView
-                        android:id="@+id/ivArrowUpDate"
+                        android:id="@+id/ivArrowUpDState"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -187,7 +187,7 @@
 
 
                     <TextView
-                        android:id="@+id/tvSelect"
+                        android:id="@+id/etDistrict"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/curve_all_corner_grey"
@@ -211,7 +211,7 @@
                         android:visibility="gone" />
 
                     <ImageView
-                        android:id="@+id/ivArrowUp"
+                        android:id="@+id/ivArrowUpDIstrict"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -315,6 +315,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
+                    android:id="@+id/etDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"

@@ -17,6 +17,7 @@ import com.nlm.utilities.BaseFragment
 import com.nlm.R
 import com.nlm.databinding.FragmentFirstDcsBinding
 import com.nlm.databinding.FragmentFirstDpvBinding
+import com.nlm.utilities.hideView
 import java.util.Calendar
 
 class FirstDPVFragment : BaseFragment<FragmentFirstDpvBinding>(){
@@ -63,6 +64,13 @@ class FirstDPVFragment : BaseFragment<FragmentFirstDpvBinding>(){
 //        mBinding!!.tvDate.setOnClickListener {
 //            showDatePicker(mBinding!!.tvDate)
 //        }
+        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State")
+            mBinding!!.ivArrowUpDState.hideView()
+        }
+        mBinding!!.etDistrict.setOnClickListener { showBottomSheetDialog("District")
+            mBinding!!.ivArrowUpDIstrict.hideView()
+
+        }
 
     }
 
@@ -87,19 +95,16 @@ class FirstDPVFragment : BaseFragment<FragmentFirstDpvBinding>(){
 
         // Initialize based on type
         when (type) {
-//            "State" -> {
-//                selectedList = stateList
-//                selectedTextView = mBinding!!.tvState
-//            }
-//
-//            "District" -> {
-//                selectedList = districtList
-//                selectedTextView = mBinding!!.tvDistrict
-//            }
-//            "Police_Station" -> {
-//                selectedList = policeStationList
-//                selectedTextView = mBinding!!.tvPoliceStation
-//            }
+            "State" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.etState
+            }
+
+            "District" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.etDistrict
+            }
+
             else -> return
         }
 

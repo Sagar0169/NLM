@@ -133,7 +133,7 @@
 
 
                             <ImageView
-                                android:id="@+id/ivArrowUpDate"
+                                android:id="@+id/ivArrowUpDState"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -175,6 +175,7 @@
 
 
                             <ImageView
+                                android:id="@+id/ivArrowUpDIstrict"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -280,6 +281,7 @@
 
 
                     <TextView
+                        android:id="@+id/etControllingAgency"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/curve_all_corner_grey"
@@ -291,6 +293,7 @@
 
 
                     <ImageView
+                        android:id="@+id/ivArrowC"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
