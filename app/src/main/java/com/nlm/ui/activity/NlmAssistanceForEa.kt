@@ -34,6 +34,13 @@ class NlmAssistanceForEa : BaseActivity<ActivityNlmAssistanceforEaBinding>() {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@NlmAssistanceForEa,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 16)
+            startActivity(intent)
+        }
 
     }
 

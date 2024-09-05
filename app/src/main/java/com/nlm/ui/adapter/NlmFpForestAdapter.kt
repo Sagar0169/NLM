@@ -53,6 +53,7 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
 
         when (isFrom) {
             1 -> {
+                holder.tvNameOfOrganisation.text = "Name of Agency"
                 holder.ivView.setOnClickListener {
                     val intent = Intent(
                         holder.itemView.context,
@@ -98,6 +99,7 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
             4 -> {
                 holder.tvCapacityPlant.text = "Technical Competance"
                 holder.tvOrganogam.text = "Organogram"
+                holder.tvNameOfOrganisation.text = "Name of Organization"
                 holder.tvStateName.text = item.state
                 holder.tvAgencyName.text = item.agencyName
                 holder.tvDistricts.text = item.district
@@ -123,7 +125,7 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
 
             else -> {
                 holder.tvCapacityPlant.text = "Capacity Of Plant"
-                holder.tvNameOfOrganisation.text = "Name Of Organization"
+                holder.tvNameOfOrganisation.text = "Name Implementing Agency"
                 holder.tvStateName.text = item.state
                 holder.tvLocation.text = item.location
                 holder.tvArea.text = item.areaCovered

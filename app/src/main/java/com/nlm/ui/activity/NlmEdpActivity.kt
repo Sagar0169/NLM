@@ -33,6 +33,13 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>() {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@NlmEdpActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 17)
+            startActivity(intent)
+        }
 
     }
 

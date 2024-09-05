@@ -23,6 +23,11 @@ class ImplementingAgencyMasterActivity : BaseActivity<ActivityImplementingAgency
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+        fun filter(view: View) {
+            val intent =
+                Intent(this@ImplementingAgencyMasterActivity, FilterStateActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 

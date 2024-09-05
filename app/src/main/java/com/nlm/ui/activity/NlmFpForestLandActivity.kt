@@ -26,6 +26,13 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>() {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@NlmFpForestLandActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 15)
+            startActivity(intent)
+        }
 
     }
 

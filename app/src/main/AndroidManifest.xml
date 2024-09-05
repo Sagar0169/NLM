@@ -49,6 +49,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.FilterStateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddRgmAiCenterAcitivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.RGMAiCenterActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.AddRGMVitroFertilizatonActivity"
             android:exported="false" />
         <activity

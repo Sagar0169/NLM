@@ -25,6 +25,17 @@ data class RGMVitro(
     val status: String? = null,
 ) : Serializable
 
+data class RgmAi(
+    val name: String,
+    val state: String,
+    val district: String,
+    val location: String,
+    val dateOfVisit: String,
+    val submit: String? = null,
+    val created: String,
+
+) : Serializable
+
 
 data class OnlyCreated(
     val state: String,
