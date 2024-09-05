@@ -40,8 +40,7 @@ data class OnlyCreatedNlm(
     val district: String? = null,
     val block: String? = null,
     val phone: String? = null,
-
-
+    val created_by: String? = null,
     val year_of_est: String? = null,
     val name: String? = null,
 
