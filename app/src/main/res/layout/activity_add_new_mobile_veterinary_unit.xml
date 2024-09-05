@@ -37,7 +37,7 @@
 
             <TextView
                 android:id="@+id/tvHeading"
-                android:layout_width="400dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
@@ -89,9 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
                         android:drawableEnd="@drawable/ic_arrow_down"
-                        android:enabled="false"
                         android:maxLength="50"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
@@ -123,9 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
                         android:drawableEnd="@drawable/ic_arrow_down"
-                        android:enabled="false"
                         android:maxLength="50"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"

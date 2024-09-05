@@ -133,21 +133,17 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvState"
+                    <EditText
+                        android:id="@+id/etRemark"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:clickable="false"
-                        android:text="Please Select"
-                        android:layout_marginVertical="@dimen/dp_10"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:enabled="false"
-                        android:textColor="@color/black"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/et_background"
+                        android:hint=""
+                        android:textSize="@dimen/sp_16"
+                        android:textColorHint="@color/grey"
+                        android:padding="8dp"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -79,6 +79,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
                 <TextView
+                    android:id="@+id/tvState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/curve_all_corner_grey"
@@ -104,6 +105,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
                 <TextView
+                    android:id="@+id/tvDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/curve_all_corner_grey"
@@ -208,6 +210,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
                 <TextView
+                    android:id="@+id/tvLand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/curve_all_corner_grey"
@@ -233,6 +236,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
                 <TextView
+                    android:id="@+id/tvAgency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/curve_all_corner_grey"
