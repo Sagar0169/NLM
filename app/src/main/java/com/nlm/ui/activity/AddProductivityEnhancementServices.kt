@@ -3,6 +3,11 @@ package com.nlm.ui.activity
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityAddMilkProcessingBinding
@@ -10,6 +15,7 @@ import com.nlm.databinding.ActivityAddMilkProductMarketingBinding
 import com.nlm.databinding.ActivityAddProductivityEnhancemmentServicesBinding
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.hideView
 import com.nlm.utilities.toast
 
 class AddProductivityEnhancementServices : BaseActivity<ActivityAddProductivityEnhancemmentServicesBinding>() {
@@ -33,9 +39,80 @@ class AddProductivityEnhancementServices : BaseActivity<ActivityAddProductivityE
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-//        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State") }
-//        mBinding!!.tvDesignation.setOnClickListener { showBottomSheetDialog("Designation") }
+        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State")
+            mBinding!!.ivArrowUpDState.hideView()
+        }
+        mBinding!!.etDistrict.setOnClickListener { showBottomSheetDialog("District")
+            mBinding!!.ivArrowUpDIstrict.hideView()
 
+        }
+
+    }
+    private fun showBottomSheetDialog(type: String) {
+        bottomSheetDialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
+        view.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
+        val close = view.findViewById<TextView>(R.id.tvClose)
+
+        close.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        // Define a variable for the selected list and TextView
+        val selectedList: List<String>
+        val selectedTextView: TextView
+
+        // Initialize based on type
+        when (type) {
+            "State" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.etState
+            }
+
+            "District" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.etDistrict
+            }
+
+            else -> return
+        }
+
+        // Set up the adapter
+        stateAdapter = StateAdapter(selectedList, this) { selectedItem ->
+            // Handle state item click
+            selectedTextView.text = selectedItem
+            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
+            bottomSheetDialog.dismiss()
+        }
+
+        rvBottomSheet.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.adapter = stateAdapter
+        bottomSheetDialog.setContentView(view)
+
+        // Rotate drawable
+        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
+        var rotatedDrawable = rotateDrawable(drawable, 180f)
+        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+
+        // Set a dismiss listener to reset the view visibility
+        bottomSheetDialog.setOnDismissListener {
+            rotatedDrawable = rotateDrawable(drawable, 0f)
+            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                rotatedDrawable,
+                null
+            )
+        }
+
+        // Show the bottom sheet
+        bottomSheetDialog.show()
     }
 
 

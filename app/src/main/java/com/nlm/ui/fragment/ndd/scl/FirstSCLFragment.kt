@@ -18,6 +18,7 @@ import com.nlm.R
 import com.nlm.databinding.FragmentFirstDcsBinding
 import com.nlm.databinding.FragmentFirstDpvBinding
 import com.nlm.databinding.FragmentFirstSclBinding
+import com.nlm.utilities.hideView
 import java.util.Calendar
 
 class FirstSCLFragment : BaseFragment<FragmentFirstSclBinding>(){
@@ -61,9 +62,16 @@ class FirstSCLFragment : BaseFragment<FragmentFirstSclBinding>(){
 //        mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
 //        mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
 //        mBinding!!.tvPoliceStation.setOnClickListener { showBottomSheetDialog("Police_Station") }
-//        mBinding!!.tvDate.setOnClickListener {
+//        mBinding!!.etDate.setOnClickListener {
 //            showDatePicker(mBinding!!.tvDate)
 //        }
+        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State")
+            mBinding!!.ivArrowUpDState.hideView()
+        }
+        mBinding!!.etDistrict.setOnClickListener { showBottomSheetDialog("District")
+            mBinding!!.ivArrowUpDIstrict.hideView()
+
+        }
 
     }
 
@@ -88,19 +96,16 @@ class FirstSCLFragment : BaseFragment<FragmentFirstSclBinding>(){
 
         // Initialize based on type
         when (type) {
-//            "State" -> {
-//                selectedList = stateList
-//                selectedTextView = mBinding!!.tvState
-//            }
-//
-//            "District" -> {
-//                selectedList = districtList
-//                selectedTextView = mBinding!!.tvDistrict
-//            }
-//            "Police_Station" -> {
-//                selectedList = policeStationList
-//                selectedTextView = mBinding!!.tvPoliceStation
-//            }
+            "State" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.etState
+            }
+
+            "District" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.etDistrict
+            }
+
             else -> return
         }
 

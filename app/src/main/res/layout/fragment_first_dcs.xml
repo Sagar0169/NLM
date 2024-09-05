@@ -37,7 +37,7 @@
                 android:textSize="@dimen/sp_16" />
 
             <EditText
-                android:id="@+id/etNameOfMilkUnion"
+                android:id="@+id/etNameOfDCS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_7"
@@ -87,7 +87,7 @@
 
 
                 <ImageView
-                    android:id="@+id/ivArrowUpDate"
+                    android:id="@+id/ivArrowUpDState"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -120,7 +120,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvSelect"
+                    android:id="@+id/etDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/curve_all_corner_grey"
@@ -144,7 +144,7 @@
                     android:visibility="gone" />
 
                 <ImageView
-                    android:id="@+id/ivArrowUp"
+                    android:id="@+id/ivArrowUpDIstrict"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -784,7 +784,6 @@
                         android:layout_marginVertical="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_grey"
                         android:fontFamily="@font/opensans_regular"
-                        android:hint="Enter Total"
                         android:maxLength="50"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
