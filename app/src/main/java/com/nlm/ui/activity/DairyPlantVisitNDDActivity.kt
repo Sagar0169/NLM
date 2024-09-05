@@ -29,6 +29,13 @@ class DairyPlantVisitNDDActivity : BaseActivity<ActivityDairyPlantVisitNddBindin
         fun backPress(view: View) {
             finish()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@DairyPlantVisitNDDActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 26)
+            startActivity(intent)
+        }
     }
 
 

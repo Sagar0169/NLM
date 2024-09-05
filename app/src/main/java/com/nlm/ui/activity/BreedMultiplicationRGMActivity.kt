@@ -28,6 +28,13 @@ class BreedMultiplicationRGMActivity : BaseActivity<ActivityBreedMultiplicationR
         fun backPress(view: View) {
             finish()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@BreedMultiplicationRGMActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 33)
+            startActivity(intent)
+        }
     }
 
 

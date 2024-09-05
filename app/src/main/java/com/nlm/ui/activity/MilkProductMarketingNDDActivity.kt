@@ -23,6 +23,13 @@ class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketin
         fun backPress(view: View) {
             finish()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@MilkProductMarketingNDDActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 30)
+            startActivity(intent)
+        }
     }
 
 

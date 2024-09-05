@@ -29,6 +29,13 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
         fun backPress(view: View) {
             finish()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@MilkProcessingNDDActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 29)
+            startActivity(intent)
+        }
     }
 
 

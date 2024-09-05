@@ -26,6 +26,13 @@ class ProductivityEnhancementServicesNDDActivity : BaseActivity<ActivityProducti
         fun backPress(view: View) {
             finish()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@ProductivityEnhancementServicesNDDActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 31)
+            startActivity(intent)
+        }
     }
 
 

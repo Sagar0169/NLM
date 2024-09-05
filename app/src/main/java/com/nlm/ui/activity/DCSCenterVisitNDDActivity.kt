@@ -30,6 +30,13 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
         fun backPress(view: View) {
             finish()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@DCSCenterVisitNDDActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 27)
+            startActivity(intent)
+        }
     }
 
 

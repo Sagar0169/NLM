@@ -26,6 +26,13 @@ class MilkUnionVisitNDDActivity : BaseActivity<ActivityMilkUnionVisitNddBinding>
         fun backPress(view: View) {
             finish()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@MilkUnionVisitNDDActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 25)
+            startActivity(intent)
+        }
     }
 
 

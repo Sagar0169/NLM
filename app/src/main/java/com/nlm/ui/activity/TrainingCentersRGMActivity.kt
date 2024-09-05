@@ -31,6 +31,13 @@ class TrainingCentersRGMActivity : BaseActivity<ActivityTrainingCentersRgmBindin
         fun backPress(view: View) {
             finish()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@TrainingCentersRGMActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 32)
+            startActivity(intent)
+        }
     }
 
 

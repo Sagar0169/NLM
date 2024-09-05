@@ -29,6 +29,13 @@ class StateCenterLabVisitNDDActivity : BaseActivity<ActivityStateCenterLabVisitN
         fun backPress(view: View) {
             finish()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@StateCenterLabVisitNDDActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 28)
+            startActivity(intent)
+        }
     }
 
 
