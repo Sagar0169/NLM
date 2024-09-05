@@ -108,6 +108,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, Artificial_Insemination_List::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvImportExoticGoat?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, Import_Of_ExoticGoat_List::class.java)
+            startActivity(intent)
+        }
  mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, DCSCenterVisitNDDActivity::class.java)
             startActivity(intent)
@@ -134,6 +138,26 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
         mBinding?.leftDrawerMenu?.tvTrainingCenters?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, TrainingCentersRGMActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvBullMotherFarms?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, Bull_Of_Mothers_List::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvSemenStation?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, Semen_Station_List::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, List_of_RGM_IA::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, List_of_RGM_IA::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, UserActivity::class.java)
             startActivity(intent)
         }
 
