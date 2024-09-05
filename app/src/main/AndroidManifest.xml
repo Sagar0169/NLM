@@ -51,9 +51,7 @@
         <activity
             android:name=".ui.activity.List_of_RGM_IA"
             android:exported="false" />
-        <activity
-            android:name=".ui.activity.RGM_Composition_Of_Governing_Body"
-            android:exported="false" />
+
         <activity
             android:name=".ui.activity.RGM_State_Implementing_Agency"
             android:exported="false" />
