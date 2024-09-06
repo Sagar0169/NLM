@@ -264,5 +264,12 @@ data class FacultyMembersTrainingCenter(
     var postFilledOnContractual: String?,
     var vacantPosts: String?
 )
+data class MaitrisTrainingCenter(
+    var name: String?,
+    var duration: String?,
+    var _2022: String?,
+    var _2023: String?,
+    var _2024: String?,
+)
 
 

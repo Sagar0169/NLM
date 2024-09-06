@@ -16,10 +16,13 @@ import com.nlm.databinding.ActivityAddImplementingAgencyBinding
 import com.nlm.databinding.ActivityAddMilkUnionVisitBinding
 import com.nlm.databinding.ActivityAddTrainingCentersBinding
 import com.nlm.model.FacultyMembersTrainingCenter
+import com.nlm.model.MaitrisTrainingCenter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.ui.adapter.rgm.AddMoreFacultyMembersTrainingAdapter
+import com.nlm.ui.adapter.rgm.AddMoreMaitrisTrainingAdapter
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 import com.nlm.utilities.toast
 
 class AddTrainingCenters : BaseActivity<ActivityAddTrainingCentersBinding>() {
@@ -27,7 +30,9 @@ class AddTrainingCenters : BaseActivity<ActivityAddTrainingCentersBinding>() {
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
     private lateinit var addMoreAdapterFaculty: AddMoreFacultyMembersTrainingAdapter
+    private lateinit var addMoreMaitrisAdapterFaculty: AddMoreMaitrisTrainingAdapter
     private val facultyMembersList = mutableListOf<FacultyMembersTrainingCenter>()
+    private val MaitrisList = mutableListOf<MaitrisTrainingCenter>()
     private val stateList = listOf(
         "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
         "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
@@ -46,8 +51,10 @@ class AddTrainingCenters : BaseActivity<ActivityAddTrainingCentersBinding>() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         facultyMembersList.add(FacultyMembersTrainingCenter("", "", "", ""))
+        MaitrisList.add(MaitrisTrainingCenter("", "", "", "",""))
 
         addMoreFacultyAdapter()
+        addMoreMaitrisAdapter()
         mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State")
             mBinding!!.ivArrowUpDState.hideView()
         }
@@ -62,7 +69,24 @@ class AddTrainingCenters : BaseActivity<ActivityAddTrainingCentersBinding>() {
 
         // Add More button
         mBinding!!.tvAddMoreFaculty.setOnClickListener {
-            addMoreAdapterFaculty.addItem()
+
+//            addMoreAdapterFaculty.addItem()
+            facultyMembersList.add(FacultyMembersTrainingCenter("","","",""))
+            addMoreAdapterFaculty.notifyItemInserted(facultyMembersList.size - 1)
+
+
+            checkRemoveButtonVisibility()
+
+        }
+        mBinding!!.tvAddMoreMaitris.setOnClickListener {
+
+//            addMoreAdapterFaculty.addItem()
+            MaitrisList.add(MaitrisTrainingCenter("","","","",""))
+            addMoreMaitrisAdapterFaculty.notifyItemInserted(MaitrisList.size - 1)
+
+
+            checkRemoveButtonMaitrisVisibility()
+
         }
 
         // Remove button
@@ -70,8 +94,30 @@ class AddTrainingCenters : BaseActivity<ActivityAddTrainingCentersBinding>() {
             addMoreAdapterFaculty.removeItem()
             checkRemoveButtonVisibility()
         }
+        mBinding!!.tvRemoveMaitris.setOnClickListener {
+            addMoreMaitrisAdapterFaculty.removeItem()
+            checkRemoveButtonMaitrisVisibility()
+        }
+
+        mBinding!!.rbReadingMaterailYes.setOnClickListener {
+           rbReadingMaterial()
+
+        }
+        mBinding!!.rbReadingMaterailNo.setOnClickListener {
+           rbReadingMaterial()
+
+        }
 
 
+
+    }
+    fun rbReadingMaterial(){
+        if (mBinding!!.rbReadingMaterailYes.isChecked){
+            mBinding!!.llMaitris.showView()
+        }else{
+            mBinding!!.llMaitris.hideView()
+
+        }
     }
 fun addMoreFacultyAdapter(){
     addMoreAdapterFaculty = AddMoreFacultyMembersTrainingAdapter(this, facultyMembersList)
@@ -85,6 +131,21 @@ fun addMoreFacultyAdapter(){
             mBinding!!.tvRemoveFaculty.visibility = View.VISIBLE
         } else {
             mBinding!!.tvRemoveFaculty.visibility = View.GONE
+        }
+        }
+
+    fun addMoreMaitrisAdapter(){
+    addMoreMaitrisAdapterFaculty = AddMoreMaitrisTrainingAdapter(this, MaitrisList)
+    mBinding?.rvMaitris?.layoutManager = LinearLayoutManager(this)
+    mBinding?.rvMaitris?.adapter = addMoreMaitrisAdapterFaculty
+}
+
+    // Function to show or hide the Remove button based on the list size
+    private fun checkRemoveButtonMaitrisVisibility() {
+        if (MaitrisList.size > 1) {
+            mBinding!!.tvRemoveMaitris.visibility = View.VISIBLE
+        } else {
+            mBinding!!.tvRemoveMaitris.visibility = View.GONE
         }
         }
     private fun showBottomSheetDialog(type: String) {
