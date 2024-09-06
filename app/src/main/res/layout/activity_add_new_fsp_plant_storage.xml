@@ -91,6 +91,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_10"
@@ -117,6 +118,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_10"
@@ -341,6 +343,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tvClass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_10"
@@ -357,6 +360,7 @@
                     android:textColor="@color/grey" />
 
                 <TextView
+                    android:id="@+id/tvVariety"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_10"

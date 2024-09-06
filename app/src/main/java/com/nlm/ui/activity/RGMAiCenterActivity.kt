@@ -61,8 +61,9 @@ class RGMAiCenterActivity : BaseActivity<ActivityRgmaiCenterAcitivityBinding>() 
                 "02-09-2024",
                 "Submitted",
                 "02-09-2024",
+                "Super Admin"
 
-                ),
+            ),
             RgmAi(
                 "ass",
                 "UTTAR PRADESH",
@@ -71,8 +72,10 @@ class RGMAiCenterActivity : BaseActivity<ActivityRgmaiCenterAcitivityBinding>() 
                 "14-08-2024",
                 "Submitted",
                 "16-08-2024",
+                "Super Admin"
 
-                ),
+
+            ),
         )
 
 

@@ -5,10 +5,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
 import com.nlm.utilities.BaseActivity
@@ -30,7 +32,31 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         setDefaultDrawables()
+        mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                // Do something when the drawer is sliding (optional)
+                Log.d("Drawer", "Slide")
+            }
 
+            override fun onDrawerOpened(drawerView: View) {
+                // Lock the drawer to prevent interaction with the content behind
+                mBinding!!.contentNav.ivDrawer.hideView()
+
+                Log.d("Drawer", "Open")
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                // Unlock the drawer to allow interaction with the content
+                mBinding!!.contentNav.ivDrawer.showView()
+                Log.d("Drawer", "Close")
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+                // Handle drawer state changes (optional)
+                Log.d("Drawer", "Change")
+
+            }
+        })
         // Set click listeners for menu items
         mBinding?.leftDrawerMenu?.tvUsers?.setOnClickListener {
             toggleMenuItem(
@@ -187,10 +213,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
 
-        mBinding?.leftDrawerMenu?.ivEdit?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, EditProfile::class.java)
-            startActivity(intent)
-        }
         mBinding?.leftDrawerMenu?.tvPrivacyPolicy?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, AboutUsActivity::class.java)
             startActivity(intent)
@@ -227,7 +249,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, Import_Of_ExoticGoat_List::class.java)
             startActivity(intent)
         }
- mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.setOnClickListener {
+        mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, DCSCenterVisitNDDActivity::class.java)
             startActivity(intent)
         }
@@ -352,8 +374,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     private fun toggleLeftDrawer() {
         if (mBinding?.drawerLayout?.isDrawerOpen(GravityCompat.START) == true) {
             mBinding?.drawerLayout?.closeDrawer(GravityCompat.END)
+            Log.d("DrawerOpen", "Open")
         } else {
             mBinding?.drawerLayout?.openDrawer(GravityCompat.START)
+            Log.d("DrawerOpen", "Close")
+
         }
     }
 

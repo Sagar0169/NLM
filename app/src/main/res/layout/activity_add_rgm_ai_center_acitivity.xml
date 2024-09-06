@@ -156,11 +156,11 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <TextView
+                                android:id="@+id/tvState"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:clickable="false"
                                 android:drawableEnd="@drawable/ic_arrow_down"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -180,11 +180,11 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <TextView
+                                android:id="@+id/tvDistrict"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:clickable="false"
                                 android:drawableEnd="@drawable/ic_arrow_down"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -228,11 +228,11 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <TextView
+                                android:id="@+id/tvCentre"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:clickable="false"
                                 android:drawableEnd="@drawable/ic_arrow_down"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -252,11 +252,11 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <TextView
+                                android:id="@+id/tvAgency"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:clickable="false"
                                 android:drawableEnd="@drawable/ic_arrow_down"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -456,6 +456,7 @@
                         </LinearLayout>
 
                         <TextView
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -467,11 +468,11 @@
 
 
                         <TextView
+                            android:id="@+id/tvCategoryWorker"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
-                            android:clickable="false"
                             android:drawableEnd="@drawable/ic_arrow_down"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
@@ -503,11 +504,11 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <TextView
+                                android:id="@+id/tvQualificationWorker"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:clickable="false"
                                 android:drawableEnd="@drawable/ic_arrow_down"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.model.NodalOfficer
 import com.nlm.ui.activity.NodalOfficerDetailActivity
-import com.nlm.ui.activity.RegistrationActivity
 
 class ImplementingAgencyAdapter(private val implementingAgencyList: List<NodalOfficer>) :
     RecyclerView.Adapter<ImplementingAgencyAdapter.ImplementingAgencyViewholder>() {

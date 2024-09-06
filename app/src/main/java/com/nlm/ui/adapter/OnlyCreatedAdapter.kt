@@ -20,7 +20,8 @@ class OnlyCreatedAdapter(private val onlyCreated: List<OnlyCreated>, private val
     // ViewHolder class to hold the view elements
     class OnlyCreatedAdapterViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvStateName: TextView = itemView.findViewById(R.id.tvState)
-        val tvCreated: TextView = itemView.findViewById(R.id.tvCreated)
+        val tvCreated: TextView = itemView.findViewById(R.id.tvDate)
+        val tvCreatedBy: TextView = itemView.findViewById(R.id.tvCreatedBy)
         val tvDistrict: TextView = itemView.findViewById(R.id.district_name)
         val tvBlock: TextView = itemView.findViewById(R.id.block_name)
         val tvFarmer: TextView = itemView.findViewById(R.id.farmer_name)
@@ -46,6 +47,7 @@ class OnlyCreatedAdapter(private val onlyCreated: List<OnlyCreated>, private val
     override fun onBindViewHolder(holder: OnlyCreatedAdapterViewholder, position: Int) {
         val item = onlyCreated[position]
         holder.tvStateName.text = item.state
+        holder.tvCreatedBy.text = item.createdBy
         holder.tvCreated.text = item.created
 
         when (isFrom) {

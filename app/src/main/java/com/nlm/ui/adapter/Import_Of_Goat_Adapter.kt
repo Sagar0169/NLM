@@ -23,7 +23,6 @@ import com.nlm.ui.activity.NLSIAForm
 import com.nlm.ui.activity.NodalOfficerDetailActivity
 import com.nlm.ui.activity.RspLabSemen
 import com.nlm.ui.activity.StateSemenBank
-import com.nlm.ui.adapter.AddDocumentAdapter.MyViewHolder
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
