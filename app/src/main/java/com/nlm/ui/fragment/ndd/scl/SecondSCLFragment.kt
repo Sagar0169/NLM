@@ -9,23 +9,20 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.nlm.ui.adapter.RelationshipAdapter
+import com.nlm.R
+import com.nlm.databinding.FragmentSecondSclBinding
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import com.nlm.R
-import com.nlm.databinding.FragmentSecondDcsBinding
-import com.nlm.databinding.FragmentSecondDpvBinding
-import com.nlm.databinding.FragmentSecondSclBinding
 import java.util.Calendar
 
-class SecondSCLFragment : BaseFragment<FragmentSecondSclBinding>(){
-    private var mBinding: FragmentSecondSclBinding?=null
+class SecondSCLFragment : BaseFragment<FragmentSecondSclBinding>() {
+    private var mBinding: FragmentSecondSclBinding? = null
     private var isSelected: Boolean? = false
-    private lateinit var relationAdapter: RelationshipAdapter
     private var layoutManager: LinearLayoutManager? = null
     private var listener: OnNextButtonClickListener? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
+
     interface OnNextButtonClickListener {
         fun onNextButtonClick()
     }
@@ -66,7 +63,6 @@ class SecondSCLFragment : BaseFragment<FragmentSecondSclBinding>(){
     }
 
 
-
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
         drawable?.mutate() // Mutate the drawable to avoid affecting other instances
 
@@ -100,6 +96,7 @@ class SecondSCLFragment : BaseFragment<FragmentSecondSclBinding>(){
         fun backPress(view: View) {
 
         }
+
         fun showDatePicker(view: View) {
 
         }
@@ -114,6 +111,7 @@ class SecondSCLFragment : BaseFragment<FragmentSecondSclBinding>(){
         super.onDetach()
         listener = null
     }
+
     private fun showDatePicker(textView: TextView) {
         // Get current date
         val calendar = Calendar.getInstance()

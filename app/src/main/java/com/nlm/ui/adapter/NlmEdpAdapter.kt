@@ -25,6 +25,7 @@ class NlmEdpAdapter(private val onlyCreated: List<NlmEdp>, private val isFrom: I
     class NlmEdpAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvStateName: TextView = itemView.findViewById(R.id.tvCommentChange)
         val tvComment: TextView = itemView.findViewById(R.id.tvComment)
+        val tvCreatedBy: TextView = itemView.findViewById(R.id.tvCreatedBy)
         val tvCreated: TextView = itemView.findViewById(R.id.tvDate)
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
         val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
@@ -46,6 +47,7 @@ class NlmEdpAdapter(private val onlyCreated: List<NlmEdp>, private val isFrom: I
         val item = onlyCreated[position]
         holder.tvStateName.text = item.comment
         holder.tvCreated.text = item.created
+        holder.tvCreatedBy.text = item.createdBy
 
         when(isFrom){
             0->{

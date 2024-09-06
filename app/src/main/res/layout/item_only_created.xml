@@ -132,10 +132,37 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llCreated"
+                android:id="@+id/llCreatedBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llFarmer"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCreatedByTitle"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Created By :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvCreatedBy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Super Admin"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llCreated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llCreatedBy"
                 android:orientation="horizontal">
 
                 <TextView

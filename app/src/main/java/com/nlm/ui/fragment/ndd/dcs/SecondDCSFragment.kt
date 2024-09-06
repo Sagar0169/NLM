@@ -5,25 +5,19 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.nlm.ui.adapter.RelationshipAdapter
+import com.nlm.R
+import com.nlm.databinding.FragmentSecondDcsBinding
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import com.nlm.R
-import com.nlm.databinding.FragmentFirDetailsBinding
-import com.nlm.databinding.FragmentFirstDcsBinding
-import com.nlm.databinding.FragmentSecondDcsBinding
 import java.util.Calendar
 
 class SecondDCSFragment : BaseFragment<FragmentSecondDcsBinding>(){
     private var mBinding: FragmentSecondDcsBinding?=null
     private var isSelected: Boolean? = false
-    private lateinit var relationAdapter: RelationshipAdapter
     private var layoutManager: LinearLayoutManager? = null
     private var listener: OnNextButtonClickListener? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog

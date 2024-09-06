@@ -51,288 +51,6 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:orientation="vertical"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Component  wise financial achievements"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Fund released (Rs. in lakhs)"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Fund utilized  (Rs. in lakhs)"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Unspent balance (Rs. in lakhs)"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                        </LinearLayout>
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Comments"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Quality of construction"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Quality of equipment’s"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="State contribution"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -372,7 +90,7 @@
                                     android:paddingVertical="@dimen/dp_5">
 
                                     <TextView
-                                        android:layout_width="250dp"
+                                        android:layout_width="300dp"
                                         android:layout_height="match_parent"
                                         android:layout_marginTop="@dimen/dp_7"
                                         android:layout_weight="1"
@@ -400,11 +118,12 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="250dp"
+                                        android:layout_width="300dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
+                                        android:layout_marginEnd="@dimen/dp_5"
                                         android:fontFamily="@font/opensans_semibold"
-                                        android:text="In charge"
+                                        android:text="Sanctioned Posts"
 
                                         android:textAlignment="center"
                                         android:textColor="@color/black"
@@ -435,11 +154,12 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="250dp"
+                                        android:layout_width="300dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/opensans_semibold"
-                                        android:text="Veterinarians"
+                                        android:text="Number of Filled Posts"
+                                        android:layout_marginEnd="@dimen/dp_5"
                                         android:textAlignment="center"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/sp_16" />
@@ -469,12 +189,13 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="250dp"
+                                        android:layout_width="300dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/opensans_semibold"
-                                        android:text="Embryologists"
+                                        android:text="Posts Filled on Contractual Basis"
                                         android:textAlignment="center"
+                                        android:layout_marginEnd="@dimen/dp_5"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/sp_16" />
 
@@ -503,12 +224,13 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="250dp"
+                                        android:layout_width="300dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
                                         android:fontFamily="@font/opensans_semibold"
-                                        android:text="Research Assistants"
+                                        android:text="Vacant Posts"
                                         android:textAlignment="center"
+                                        android:layout_marginEnd="@dimen/dp_5"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/sp_16" />
 
@@ -529,823 +251,18 @@
                                         android:textColorHint="@color/grey"
                                         android:textSize="@dimen/sp_16" />
                                 </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginVertical="@dimen/dp_7"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="250dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:fontFamily="@font/opensans_semibold"
-                                        android:text="Laboratory Attendants"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/sp_16" />
-
-                                    <EditText
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginVertical="@dimen/dp_7"
-                                        android:layout_weight="1"
-                                        android:background="@drawable/curve_all_corner_grey"
-                                        android:fontFamily="@font/opensans_regular"
-                                        android:hint=""
-
-                                        android:maxLength="50"
-                                        android:paddingHorizontal="@dimen/dp_10"
-                                        android:paddingVertical="@dimen/dp_5"
-                                        android:singleLine="true"
-                                        android:textColor="@color/black"
-                                        android:textColorHint="@color/grey"
-                                        android:textSize="@dimen/sp_16" />
-                                </LinearLayout>
-
 
                             </LinearLayout>
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:orientation="vertical"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="List of equipment"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_20"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Name of Equipment"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <RadioGroup
-                                android:id="@+id/rbMentally"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <androidx.appcompat.widget.AppCompatRadioButton
-                                    android:id="@+id/rbMentallyYes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:checked="true"
-                                    android:paddingEnd="@dimen/dp_5"
-                                    android:text="Yes"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/sp_14"
-                                    app:buttonTint="@color/black" />
-
-                                <RadioButton
-                                    android:id="@+id/rbMentallyNo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/dp_15"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:paddingEnd="@dimen/dp_5"
-                                    android:text="No"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/sp_14"
-                                    app:buttonTint="@color/black" />
-                            </RadioGroup>
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Ultrasound Machine with Monitor , Probe, Pick up Assembly for Bovine "
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Embryo Freezer"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="CO2 Incubator (140-160 lts)"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Biosafety cabinet Class 2 Type II"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Denudation Pippete for Bovine Oocytes"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Bench Top Centrifuge"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Bench Top Trigas Incubator"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Water Purification System"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Double Distillation Assembly (Quartz)"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Vertical Autoclave"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Hot Air Oven"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Vortex"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Garment Storage Cabinet"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Embryo Cup Filter Warmer"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Slide Warmer"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Oocyte Embryo Shipping Incubator"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Embryo 0.25 ml Straw Shipping Incubator"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Accurate Temperature Measurement Probe"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Volatile Organic Compounds Level Monitor"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Phase Contrast Microscope (Stage Warmer)"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Refrigerator"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="-20 degree Refrigerator"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Cattle Chute"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Stereo Zoom Microscope (trinocular with camera - 1 and 1 without camera)"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Inverted Microscope (trinocular with camera)"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Thawing Unit"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Dry Bath"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Gas Analyser (with probe for CO2, O2, temperature and RH)"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Pocket tube heater"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Budgetary provision for salary made available by S/G; Quantum of funds made available annually (if not source of funding)"
+                            android:text="Donors (nos)"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -1357,7 +274,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:hint=""
                             android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_15"
+                            android:paddingVertical="@dimen/dp_5"
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
@@ -1367,7 +284,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Sourcing of donor animals (breeding tract/ PT registered/ PS registered/CHRS registered/livestock market/ middlemen)"
+                            android:text="Sourcing of recipient animals"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -1379,156 +296,10 @@
                             android:fontFamily="@font/opensans_regular"
                             android:hint=""
                             android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_15"
+                            android:paddingVertical="@dimen/dp_5"
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Sourcing of recipient animals (breeding tract/registered/PS registered/CHRS registered/livestock market/ middlemen)"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_15"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Stage of donor animals (Heifers/in which lactation)"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_15"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:orientation="vertical"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Infrastructure facilities for donor and recipient animals"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="No. of cow sheds"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Quality of cowsheds"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:hint=""
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1546,10 +317,30 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:hint=""
-                            android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Whether data on IVF uploaded on Bharat Pashudhan database"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint=""
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
@@ -1560,7 +351,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Whether data on IVF uploaded on Bharat Pashudhan data base (check from Portal) if not reasons there for"
+                            android:text="No of calves produced by lab"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -1578,33 +369,6 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Constraints faced by IVF lab"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-
 
                     </LinearLayout>
                 </LinearLayout>

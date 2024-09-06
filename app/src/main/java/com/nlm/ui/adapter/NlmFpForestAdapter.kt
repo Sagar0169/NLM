@@ -27,6 +27,7 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
         val tvDistricts: TextView = itemView.findViewById(R.id.tvDistricts)
         val tvLocation: TextView = itemView.findViewById(R.id.tvLocation)
         val tvArea: TextView = itemView.findViewById(R.id.tvAreaCovered)
+        val tvCreatedBy: TextView = itemView.findViewById(R.id.tvCreatedBy)
         val tvCapacityPlant: TextView = itemView.findViewById(R.id.tvArea)
         val tvNameOfOrganisation: TextView = itemView.findViewById(R.id.tvAgencyTitle)
         val tvOrganogam: TextView = itemView.findViewById(R.id.tvOrganogam)
@@ -50,6 +51,8 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
     // Bind the data to the views in each item
     override fun onBindViewHolder(holder: NlmFpForestViewHolder, position: Int) {
         val item = onlyCreated[position]
+        holder.tvCreatedBy.text = item.createdBy
+
 
         when (isFrom) {
             1 -> {
@@ -96,6 +99,7 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
 
                 }
             }
+
             4 -> {
                 holder.tvCapacityPlant.text = "Technical Competance"
                 holder.tvOrganogam.text = "Organogram"
@@ -124,7 +128,7 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
             }
 
             else -> {
-                holder.tvCapacityPlant.text = "Capacity Of Plant"
+                holder.tvCapacityPlant.text = "Area Covered"
                 holder.tvNameOfOrganisation.text = "Name Implementing Agency"
                 holder.tvStateName.text = item.state
                 holder.tvLocation.text = item.location
@@ -149,7 +153,6 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
                 }
             }
         }
-
 
 
 //        holder.itemView.setOnClickListener {

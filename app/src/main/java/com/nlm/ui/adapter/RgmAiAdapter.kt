@@ -26,6 +26,7 @@ class RgmAiAdapter(private val onlyCreated: List<RgmAi>, private val isFrom: Int
         val tvLocAiCenter: TextView = itemView.findViewById(R.id.tvLocAiCenter)
         val tvNameAiCenter: TextView = itemView.findViewById(R.id.tvNameAiCenter)
         val tvDateOfVisit: TextView = itemView.findViewById(R.id.tvDateOfVisit)
+        val tvCreatedBy: TextView = itemView.findViewById(R.id.tvCreatedBy)
         val tvDistrict: TextView = itemView.findViewById(R.id.tvDistrict)
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
         val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
@@ -52,6 +53,7 @@ class RgmAiAdapter(private val onlyCreated: List<RgmAi>, private val isFrom: Int
         holder.tvNameAiCenter.text = item.name
         holder.tvLocAiCenter.text = item.location
         holder.tvDateOfVisit.text = item.dateOfVisit
+        holder.tvCreatedBy.text = item.createdBy
 
 
         holder.ivView.setOnClickListener {

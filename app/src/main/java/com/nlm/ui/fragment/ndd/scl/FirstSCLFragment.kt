@@ -11,24 +11,21 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.nlm.ui.adapter.RelationshipAdapter
+import com.nlm.R
+import com.nlm.databinding.FragmentFirstSclBinding
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import com.nlm.R
-import com.nlm.databinding.FragmentFirstDcsBinding
-import com.nlm.databinding.FragmentFirstDpvBinding
-import com.nlm.databinding.FragmentFirstSclBinding
 import com.nlm.utilities.hideView
 import java.util.Calendar
 
-class FirstSCLFragment : BaseFragment<FragmentFirstSclBinding>(){
-    private var mBinding: FragmentFirstSclBinding?=null
+class FirstSCLFragment : BaseFragment<FragmentFirstSclBinding>() {
+    private var mBinding: FragmentFirstSclBinding? = null
     private var isSelected: Boolean? = false
-    private lateinit var relationAdapter: RelationshipAdapter
     private var layoutManager: LinearLayoutManager? = null
     private var listener: OnNextButtonClickListener? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
+
     interface OnNextButtonClickListener {
         fun onNextButtonClick()
     }
@@ -65,10 +62,12 @@ class FirstSCLFragment : BaseFragment<FragmentFirstSclBinding>(){
 //        mBinding!!.etDate.setOnClickListener {
 //            showDatePicker(mBinding!!.tvDate)
 //        }
-        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State")
+        mBinding!!.etState.setOnClickListener {
+            showBottomSheetDialog("State")
             mBinding!!.ivArrowUpDState.hideView()
         }
-        mBinding!!.etDistrict.setOnClickListener { showBottomSheetDialog("District")
+        mBinding!!.etDistrict.setOnClickListener {
+            showBottomSheetDialog("District")
             mBinding!!.ivArrowUpDIstrict.hideView()
 
         }
@@ -176,6 +175,7 @@ class FirstSCLFragment : BaseFragment<FragmentFirstSclBinding>(){
         fun backPress(view: View) {
 
         }
+
         fun showDatePicker(view: View) {
 
         }
@@ -190,6 +190,7 @@ class FirstSCLFragment : BaseFragment<FragmentFirstSclBinding>(){
         super.onDetach()
         listener = null
     }
+
     private fun showDatePicker(textView: TextView) {
         // Get current date
         val calendar = Calendar.getInstance()

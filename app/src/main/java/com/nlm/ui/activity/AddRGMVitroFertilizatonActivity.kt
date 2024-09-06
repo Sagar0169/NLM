@@ -25,6 +25,7 @@ class AddRGMVitroFertilizatonActivity : BaseActivity<ActivityAddRgmvitroFertiliz
     private var layoutManager: LinearLayoutManager? = null
     private var isFrom: Int = 0
 
+
     override val layoutId: Int
         get() = R.layout.activity_add_rgmvitro_fertilizaton
 
@@ -47,8 +48,8 @@ class AddRGMVitroFertilizatonActivity : BaseActivity<ActivityAddRgmvitroFertiliz
 
     private fun setupTabLayout() {
         mBinding?.tabLayout?.apply {
-            addTab(newTab().setText("Part 1"))
-            addTab(newTab().setText("Part 2"))
+            addTab(newTab().setText("To be filled by IA"))
+            addTab(newTab().setText("To be filled by NLM"))
 
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {

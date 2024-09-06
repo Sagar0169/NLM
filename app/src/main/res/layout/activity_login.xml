@@ -169,93 +169,14 @@
 <!--                    android:textStyle="bold"-->
 <!--                    app:fontFamily="@fonts/opensans_regular" />-->
 
-                <LinearLayout
-                    android:id="@+id/llCaptcha"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_15"
-                    android:layout_marginVertical="@dimen/dp_5"
-                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:id="@+id/llCaptchaa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvEnterCaptcha"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="7dp"
-                            android:text="Enter Captcha :"
-                            android:textColor="#2C2C2C"
-                            android:textSize="@dimen/sp_14"
-                            app:fontFamily="@font/poppins_medium"  />
-
-                        <EditText
-                            android:id="@+id/etCaptcha"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:paddingVertical="@dimen/dp_10"
-                            android:singleLine="true"
-                            android:paddingHorizontal="@dimen/dp_5"
-                            android:hint="Enter Captch code"
-                            android:textColorHint="@color/grey"
-                            android:inputType="textEmailAddress"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvCaptchaText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:padding="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_10"
-                        android:singleLine="true"
-                        android:text="3B89WS"
-                        android:layout_marginStart="@dimen/dp_10"
-                        android:layout_gravity="bottom"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_22" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_5"
-                        android:padding="@dimen/dp_5"
-                        android:layout_gravity="bottom"
-                        android:src="@drawable/ic_recaptcha" />
-
-                </LinearLayout>
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvRegister"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_15"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:layout_marginBottom="@dimen/dp_15"
-                    android:gravity="end"
-                    android:onClick="@{ClickAction::register}"
-                    android:text="@string/forget_password"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_15"
-                    app:fontFamily="@fonts/poppins_regular" />
 
                 <TextView
                     android:id="@+id/tvSendBtnLogin"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_marginHorizontal="@dimen/dp_30"
                     android:layout_marginTop="@dimen/dp_15"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:background="@drawable/curve_fill_blue"
@@ -264,7 +185,6 @@
                     android:onClick="@{ClickAction::login}"
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
-
                     android:text="Login"
                     android:textAlignment="center"
                     android:textColor="@color/white" />

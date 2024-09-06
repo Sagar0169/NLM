@@ -3,6 +3,7 @@ package com.nlm.ui.activity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityAddNewFspPlantStorageBinding
 import com.nlm.databinding.ActivityAddNlmFpForestLandBinding
@@ -10,14 +11,27 @@ import com.nlm.databinding.ActivityAddRgmAiCenterAcitivityBinding
 import com.nlm.model.NlmEdp
 import com.nlm.ui.adapter.NlmEdpAdapter
 import com.nlm.ui.adapter.ProgrammeAdapter
+import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseActivity
 
 class AddRgmAiCenterAcitivity : BaseActivity<ActivityAddRgmAiCenterAcitivityBinding>() {
     private var mBinding: ActivityAddRgmAiCenterAcitivityBinding? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProgrammeAdapter
-    private lateinit var programmeList: MutableList<Array<String>>
+    private lateinit var stateAdapter: StateAdapter
 
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var programmeList: MutableList<Array<String>>
+    private val stateList = listOf(
+        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+        "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+        "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
+        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep",
+        "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
+    )
     override val layoutId: Int
         get() = R.layout.activity_add_rgm_ai_center_acitivity
 
