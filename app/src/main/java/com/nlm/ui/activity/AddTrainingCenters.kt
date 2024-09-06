@@ -15,7 +15,9 @@ import com.nlm.databinding.ActivityAddBreedMultiplicationBinding
 import com.nlm.databinding.ActivityAddImplementingAgencyBinding
 import com.nlm.databinding.ActivityAddMilkUnionVisitBinding
 import com.nlm.databinding.ActivityAddTrainingCentersBinding
+import com.nlm.model.FacultyMembersTrainingCenter
 import com.nlm.ui.adapter.StateAdapter
+import com.nlm.ui.adapter.rgm.AddMoreFacultyMembersTrainingAdapter
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.hideView
 import com.nlm.utilities.toast
@@ -24,6 +26,8 @@ class AddTrainingCenters : BaseActivity<ActivityAddTrainingCentersBinding>() {
     private var mBinding: ActivityAddTrainingCentersBinding? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
+    private lateinit var addMoreAdapterFaculty: AddMoreFacultyMembersTrainingAdapter
+    private val facultyMembersList = mutableListOf<FacultyMembersTrainingCenter>()
     private val stateList = listOf(
         "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
         "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
@@ -41,6 +45,9 @@ class AddTrainingCenters : BaseActivity<ActivityAddTrainingCentersBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+        facultyMembersList.add(FacultyMembersTrainingCenter("", "", "", ""))
+
+        addMoreFacultyAdapter()
         mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State")
             mBinding!!.ivArrowUpDState.hideView()
         }
@@ -53,8 +60,33 @@ class AddTrainingCenters : BaseActivity<ActivityAddTrainingCentersBinding>() {
 
         }
 
-    }
+        // Add More button
+        mBinding!!.tvAddMoreFaculty.setOnClickListener {
+            addMoreAdapterFaculty.addItem()
+        }
 
+        // Remove button
+        mBinding!!.tvRemoveFaculty.setOnClickListener {
+            addMoreAdapterFaculty.removeItem()
+            checkRemoveButtonVisibility()
+        }
+
+
+    }
+fun addMoreFacultyAdapter(){
+    addMoreAdapterFaculty = AddMoreFacultyMembersTrainingAdapter(this, facultyMembersList)
+    mBinding?.rvFacultyMembers?.layoutManager = LinearLayoutManager(this)
+    mBinding?.rvFacultyMembers?.adapter = addMoreAdapterFaculty
+}
+
+    // Function to show or hide the Remove button based on the list size
+    private fun checkRemoveButtonVisibility() {
+        if (facultyMembersList.size > 1) {
+            mBinding!!.tvRemoveFaculty.visibility = View.VISIBLE
+        } else {
+            mBinding!!.tvRemoveFaculty.visibility = View.GONE
+        }
+        }
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)

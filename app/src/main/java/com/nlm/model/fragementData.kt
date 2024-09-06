@@ -248,5 +248,11 @@ data class UploadDocumentsData(
 
 
 data class FileItem(val fileName: String, val fileUri: Uri?)
+data class FacultyMembersTrainingCenter(
+    var sanctionedPost: String?,
+    var noOfFilledPosts: String?,
+    var postFilledOnContractual: String?,
+    var vacantPosts: String?
+)
 
 
