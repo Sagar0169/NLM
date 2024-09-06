@@ -20,7 +20,7 @@ class StateMobileVeterinaryActivity : BaseActivity<ActivityStateMobileVeterinary
     private lateinit var onlyCreatedAdapter: OnlyCreatedAdapter
     private lateinit var onlyCreated: List<OnlyCreated>
     private var layoutManager: LinearLayoutManager? = null
-    private var isFrom : Int = 0
+    private var isFrom: Int = 0
 
     override val layoutId: Int
         get() = R.layout.activity_state_mobile_veterinary
@@ -29,6 +29,15 @@ class StateMobileVeterinaryActivity : BaseActivity<ActivityStateMobileVeterinary
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        fun filter(view: View) {
+            val intent =
+                Intent(
+                    this@StateMobileVeterinaryActivity,
+                    FilterStateActivity::class.java
+                ).putExtra("isFrom", isFrom)
+            startActivity(intent)
         }
 
     }
@@ -128,6 +137,7 @@ class StateMobileVeterinaryActivity : BaseActivity<ActivityStateMobileVeterinary
                     ),
                 )
             }
+
             5 -> {
                 mBinding!!.tvHeading.text = "List of State Vaccination Programme"
                 onlyCreated = listOf(
@@ -149,6 +159,7 @@ class StateMobileVeterinaryActivity : BaseActivity<ActivityStateMobileVeterinary
                     ),
                 )
             }
+
             6 -> {
                 mBinding!!.tvHeading.text = "List of District Vaccination Programme"
                 onlyCreated = listOf(
@@ -242,7 +253,8 @@ class StateMobileVeterinaryActivity : BaseActivity<ActivityStateMobileVeterinary
 
 
         mBinding!!.fabAddAgency.setOnClickListener {
-            val intent = Intent(this, AddNewMobileVeterinaryUnit::class.java).putExtra("isFrom",isFrom)
+            val intent =
+                Intent(this, AddNewMobileVeterinaryUnit::class.java).putExtra("isFrom", isFrom)
             startActivity(intent)
         }
 

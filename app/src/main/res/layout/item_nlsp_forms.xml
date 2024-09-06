@@ -137,7 +137,7 @@
                     android:id="@+id/tvYear"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Year of Establishment :"
+                    android:text="Year of Establishment:"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />

@@ -11,7 +11,15 @@ import com.google.android.material.tabs.TabLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityRgmStateImplementingAgencyBinding
 import com.nlm.databinding.ActivitySemenStationBinding
+import com.nlm.databinding.FragmentImplementationOfNAIPRGMBinding
+import com.nlm.model.RGM_IA
 import com.nlm.ui.fragment.Details_of_Semen_Station
+import com.nlm.ui.fragment.Fragment_Assets_not_being_used
+import com.nlm.ui.fragment.Funds_Received_RGM
+import com.nlm.ui.fragment.Implementation_of_NAIP_RGM
+import com.nlm.ui.fragment.RGM_Composition_Of_governing
+import com.nlm.ui.fragment.RGM_Details_of_committee_meetings
+import com.nlm.ui.fragment.RGM_IA_Other_Staff
 import com.nlm.ui.fragment.SemenStaion_Manpower
 import com.nlm.ui.fragment.Semen_production_and_semen_doses_distributed
 import com.nlm.ui.fragment.Sex_Sorted_Semen
@@ -26,7 +34,7 @@ class RGM_State_Implementing_Agency : BaseActivity<ActivityRgmStateImplementingA
         mBinding=viewDataBinding
         mBinding?.clickAction=ClickActions()
         setupTabLayout()
-        loadFragment(Details_of_Semen_Station())
+        loadFragment(RGM_IA_Other_Staff())
     }
 
     override fun setVariables() {
@@ -73,18 +81,18 @@ class RGM_State_Implementing_Agency : BaseActivity<ActivityRgmStateImplementingA
                     when (tab?.position) {
                         0 -> {
                             onTabClicks()
-                            loadFragment(Details_of_Semen_Station())
+                            loadFragment(RGM_IA_Other_Staff())
                         }
 
                         1 -> {
                             onTabClicks()
-                            loadFragment(SemenStaion_Manpower())
+                            loadFragment(RGM_Composition_Of_governing())
 
                         }
 
                         2 -> {
                             onTabClicks()
-                            loadFragment(Semen_production_and_semen_doses_distributed())
+                            loadFragment(RGM_Details_of_committee_meetings())
                         }
 
 //                        3 -> {
@@ -99,7 +107,15 @@ class RGM_State_Implementing_Agency : BaseActivity<ActivityRgmStateImplementingA
 
                         3 -> {
                             onTabClicks()
-                            loadFragment(Sex_Sorted_Semen())
+                            loadFragment(Funds_Received_RGM())
+                        }
+                        4 -> {
+                            onTabClicks()
+                            loadFragment(Implementation_of_NAIP_RGM())
+                        }
+                        5 -> {
+                            onTabClicks()
+                            loadFragment(Fragment_Assets_not_being_used())
                         }
 
                     }

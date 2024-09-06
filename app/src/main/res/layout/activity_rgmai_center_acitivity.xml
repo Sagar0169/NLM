@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.NlmAssistanceForEa.ClickActions" />
+            type="com.nlm.ui.activity.RGMAiCenterActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="List of Assistance for Extension Activities"
+                android:text="List of AI Center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textAlignment="center"
@@ -65,7 +65,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNlmEdp"
+            android:id="@+id/rvMobileVeterinaryUnit"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dp_10"

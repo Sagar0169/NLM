@@ -34,7 +34,7 @@ class National_Live_Stock_IA : BaseActivity<ActivityNationalLiveStockIaBinding>(
             "2024-08-12",
             "",
             "",
-            "","","Zenaida Dominguez"
+            "","Super Admin","Zenaida Dominguez"
 
         ),
         OnlyCreatedNlm(
@@ -42,7 +42,7 @@ class National_Live_Stock_IA : BaseActivity<ActivityNationalLiveStockIaBinding>(
             "2024-08-12",
             "",
             "",
-            "","","Name and Location of IA"
+            "","Super Admin","Name and Location of IA"
 
         ),
         OnlyCreatedNlm(
@@ -50,7 +50,7 @@ class National_Live_Stock_IA : BaseActivity<ActivityNationalLiveStockIaBinding>(
             "2024-08-12",
             "",
             "",
-            "","","Chester Parsons"
+            "","Super Admin","Chester Parsons"
 
         ),
         OnlyCreatedNlm(
@@ -58,7 +58,7 @@ class National_Live_Stock_IA : BaseActivity<ActivityNationalLiveStockIaBinding>(
             "2024-08-16",
             "",
             "",
-            "","","Ocean Gould"
+            "","Super Admin","Ocean Gould"
 
         ),
         OnlyCreatedNlm(
@@ -66,7 +66,7 @@ class National_Live_Stock_IA : BaseActivity<ActivityNationalLiveStockIaBinding>(
             "2024-08-16",
             "",
             "",
-            "","","Orson Erickson"
+            "","Super Admin","Orson Erickson"
 
         ),
         OnlyCreatedNlm(
@@ -74,7 +74,7 @@ class National_Live_Stock_IA : BaseActivity<ActivityNationalLiveStockIaBinding>(
             "2024-08-16",
             "",
             "",
-            "","","Name and Locat"
+            "","Super Admin","Name and Locat"
 
         ),
         OnlyCreatedNlm(
@@ -82,7 +82,7 @@ class National_Live_Stock_IA : BaseActivity<ActivityNationalLiveStockIaBinding>(
             "2024-08-21",
             "",
             "",
-            "","","nodal nlm update"
+            "","Nodal NLM","nodal nlm update"
 
         ),
         OnlyCreatedNlm(
@@ -98,7 +98,7 @@ class National_Live_Stock_IA : BaseActivity<ActivityNationalLiveStockIaBinding>(
             "2024-08-21",
             "",
             "",
-            "","","Name and Locat"
+            "","Angan Lal Nirala","j"
 
         ))
         implementingAgency()
