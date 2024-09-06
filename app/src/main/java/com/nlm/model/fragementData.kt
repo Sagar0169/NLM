@@ -198,6 +198,21 @@ data class SightedChildData(
     var differentlyAbled: Boolean? = false,  // Add this
     var mentallyAbled: Boolean? = false  // Add this
 )
+data class details_Semen_Station(
+    var State: String? = "DD/MM/YYYY",
+    var District: String? = null,
+    var Location: String? = null,
+    var Address: String? = null,
+    var Pin_code: String? = null,
+    var  Phone_No: String? = "Please Select",
+    var Grading: String? = null,  // Add this
+    var Area_under: String? = null,  // Add this
+    var Area_fodder: String? = null,  // Add this
+    var ISO_9002: Boolean? = false,  // Add this
+    var Cmugrading: Boolean? = false  // Add this
+
+)
+
 
 data class FacialAttributeData(
     var hariLength: String? = "Please Select",

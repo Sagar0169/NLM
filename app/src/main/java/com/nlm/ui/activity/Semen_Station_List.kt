@@ -63,6 +63,13 @@ class Semen_Station_List : BaseActivity<ActivitySemenStationListBinding>(){
         fun backPress(view: View){
             onBackPressed()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@Semen_Station_List,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 34)
+            startActivity(intent)
+        }
     }
     private fun implementingAgency() {
         implementingAdapter = Bull_Of_Mothers_Adapter(nodalOfficerList,0)

@@ -60,113 +60,53 @@
         android:text="Year wise and Breed wise No.of Insemination using Sex sorted semen"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
-    <TableLayout
-        android:layout_marginVertical="10dp"
-        android:id="@+id/tableLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="0,1, 2"
-
-        android:background="@color/white"
-
-        android:shrinkColumns="0, 2">
-
-        <TableRow
-
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/curve_all_corner_grey"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:background="@color/darkBlue"
-                android:text="Year"
-                android:textColor="@android:color/white"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/white"
+                android:text="Name of the programme"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Place"
+                android:textAlignment="center"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:background="@color/darkBlue"
-                android:text="Breed"
-                android:textColor="@android:color/white"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Duration year"
+                android:textAlignment="center"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:background="@color/darkBlue"
-                android:text="No.of Insemination using Sex sorted semen"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-        </TableRow>
+        </LinearLayout>
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </TableRow>
-
-
-    </TableLayout>
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp" />
         <TextView
 
         android:id="@+id/tvState2"
