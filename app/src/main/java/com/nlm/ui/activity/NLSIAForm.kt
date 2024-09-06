@@ -14,31 +14,15 @@ import com.nlm.model.SightedChildData
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.fragment.NLSIAFormIA
 import com.nlm.ui.fragment.NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep
-import com.nlm.ui.fragment.NLSIA_Composition_of_Advisory_committee
 import com.nlm.ui.fragment.NLSIA_Constraints_faced_by_IA
 import com.nlm.ui.fragment.NLSIA_Feed_fodder
 import com.nlm.ui.fragment.NLSIA_Fodder_Seed
 import com.nlm.ui.fragment.NLSIA_GoverningBody_Board_Of_Directors
 import com.nlm.ui.fragment.NLSIA_Infrastructure_Sheep_goat
-import com.nlm.ui.fragment.NLSIA_PMC
 import com.nlm.ui.fragment.NLSIA_Reporting_System
-import com.nlm.ui.fragment.SightedBackgroundFragment
-import com.nlm.ui.fragment.SightedBasicDetailsFragment
-import com.nlm.ui.fragment.SightedConfirmationFragment
-import com.nlm.ui.fragment.SightedFacialAttributesFragment
-import com.nlm.ui.fragment.SightedLocationDetailsFragment
-import com.nlm.ui.fragment.SightedPhysicalAttributeFragment
-import com.nlm.ui.fragment.SightedUploadFragment
 import com.nlm.utilities.BaseActivity
 
-class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
-    SightedBasicDetailsFragment.OnNextButtonClickListener,
-    SightedFacialAttributesFragment.OnNextButtonClickListener,
-    SightedPhysicalAttributeFragment.OnNextButtonClickListener,
-    SightedBackgroundFragment.OnNextButtonClickListener,
-    SightedLocationDetailsFragment.OnNextButtonClickListener,
-    SightedUploadFragment.OnNextButtonClickListener,
-    SightedConfirmationFragment.OnNextButtonClickListener{
+class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_nlsia_form
     private lateinit var bottomSheetAdapter: BottomSheetAdapter
@@ -51,8 +35,8 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
     var locationData = LocationData()
 
     override fun initView() {
-       mBinding=viewDataBinding
-        mBinding?.clickAction=ClickActions()
+        mBinding = viewDataBinding
+        mBinding?.clickAction = ClickActions()
         setupTabLayout()
         loadFragment(NLSIAFormIA())
 
@@ -66,13 +50,14 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
     override fun setObservers() {
 
     }
+
     inner class ClickActions {
-        fun backPress(view: View){
-           onBackPressedDispatcher.onBackPressed()
+        fun backPress(view: View) {
+            onBackPressedDispatcher.onBackPressed()
         }
 
 
-        fun group(view: View){
+        fun group(view: View) {
 
         }
 
@@ -86,22 +71,22 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
         }
     }
 
-    override fun onNextButtonClick() {
-        // Collect data from current fragment
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
-//        if (currentFragment is SightedBasicDetailsFragment) {
-//            sightedChildData = currentFragment.getData()
-//        } else if (currentFragment is SightedFacialAttributesFragment) {
-//            facialAttributeData = currentFragment.getData()
-//        } else if (currentFragment is SightedPhysicalAttributeFragment) {
-//            physicalAttributesData = currentFragment.getData()
-//        } else if (currentFragment is SightedBackgroundFragment) {
-//            backgroundData = currentFragment.getData()
-//        }else if (currentFragment is SightedLocationDetailsFragment) {
-//            locationData = currentFragment.getData()
-//        }
-        moveToNextTab()
-    }
+//    override fun onNextButtonClick() {
+//        // Collect data from current fragment
+//        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
+////        if (currentFragment is SightedBasicDetailsFragment) {
+////            sightedChildData = currentFragment.getData()
+////        } else if (currentFragment is SightedFacialAttributesFragment) {
+////            facialAttributeData = currentFragment.getData()
+////        } else if (currentFragment is SightedPhysicalAttributeFragment) {
+////            physicalAttributesData = currentFragment.getData()
+////        } else if (currentFragment is SightedBackgroundFragment) {
+////            backgroundData = currentFragment.getData()
+////        }else if (currentFragment is SightedLocationDetailsFragment) {
+////            locationData = currentFragment.getData()
+////        }
+//        moveToNextTab()
+//    }
 
     fun onTabClicks() {
         // Collect data from current fragment
@@ -184,15 +169,18 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),
                             onTabClicks()
                             loadFragment(NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep())
                         }
+
                         5 -> {
                             onTabClicks()
                             loadFragment(NLSIA_Constraints_faced_by_IA())
                         }
-                        6-> {
+
+                        6 -> {
                             onTabClicks()
                             loadFragment(NLSIA_Feed_fodder())
                         }
-                        7-> {
+
+                        7 -> {
                             onTabClicks()
                             loadFragment(NLSIA_Fodder_Seed())
                         }

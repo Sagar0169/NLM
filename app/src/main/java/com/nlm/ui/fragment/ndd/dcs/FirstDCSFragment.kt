@@ -11,23 +11,21 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.nlm.ui.adapter.RelationshipAdapter
+import com.nlm.R
+import com.nlm.databinding.FragmentFirstDcsBinding
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
-import com.nlm.R
-import com.nlm.databinding.FragmentFirDetailsBinding
-import com.nlm.databinding.FragmentFirstDcsBinding
 import com.nlm.utilities.hideView
 import java.util.Calendar
 
-class FirstDCSFragment : BaseFragment<FragmentFirstDcsBinding>(){
-    private var mBinding: FragmentFirstDcsBinding?=null
+class FirstDCSFragment : BaseFragment<FragmentFirstDcsBinding>() {
+    private var mBinding: FragmentFirstDcsBinding? = null
     private var isSelected: Boolean? = false
-    private lateinit var relationAdapter: RelationshipAdapter
     private var layoutManager: LinearLayoutManager? = null
     private var listener: OnNextButtonClickListener? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
+
     interface OnNextButtonClickListener {
         fun onNextButtonClick()
     }
@@ -64,10 +62,12 @@ class FirstDCSFragment : BaseFragment<FragmentFirstDcsBinding>(){
 //        mBinding!!.tvDate.setOnClickListener {
 //            showDatePicker(mBinding!!.tvDate)
 //        }
-        mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State")
+        mBinding!!.etState.setOnClickListener {
+            showBottomSheetDialog("State")
             mBinding!!.ivArrowUpDState.hideView()
         }
-        mBinding!!.etDistrict.setOnClickListener { showBottomSheetDialog("District")
+        mBinding!!.etDistrict.setOnClickListener {
+            showBottomSheetDialog("District")
             mBinding!!.ivArrowUpDIstrict.hideView()
 
         }
@@ -175,6 +175,7 @@ class FirstDCSFragment : BaseFragment<FragmentFirstDcsBinding>(){
         fun backPress(view: View) {
 
         }
+
         fun showDatePicker(view: View) {
 
         }
@@ -189,6 +190,7 @@ class FirstDCSFragment : BaseFragment<FragmentFirstDcsBinding>(){
         super.onDetach()
         listener = null
     }
+
     private fun showDatePicker(textView: TextView) {
         // Get current date
         val calendar = Calendar.getInstance()

@@ -120,7 +120,8 @@
                         android:layout_marginEnd="@dimen/dp_3"
                         android:drawablePadding="@dimen/dp_5"
                         android:fontFamily="@font/poppins_regular"
-                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxLines="2"
                         android:text="@string/na"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -160,7 +161,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_marginHorizontal="@dimen/dp_10"
+
                 android:layout_weight="0.3"
                 android:orientation="vertical">
 
@@ -209,6 +211,34 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvCreated"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_3"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:fontFamily="@font/poppins_regular"
+                        android:singleLine="true"
+                        android:text="@string/na"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvcreadtedByTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Created By"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCreatedBy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"

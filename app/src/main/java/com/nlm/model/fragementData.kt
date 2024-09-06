@@ -33,8 +33,10 @@ data class RgmAi(
     val dateOfVisit: String,
     val submit: String? = null,
     val created: String,
+    val createdBy: String? = null,
 
-) : Serializable
+
+    ) : Serializable
 
 
 data class OnlyCreated(
@@ -43,6 +45,7 @@ data class OnlyCreated(
     val district: String? = null,
     val block: String? = null,
     val village: String? = null,
+    val createdBy: String? = "Super Admin",
     ) : Serializable
 
 data class OnlyCreatedNlm(
@@ -108,6 +111,7 @@ data class All_Users(
 data class NlmEdp(
     val comment: String,
     val created: String,
+    val createdBy: String? = "Super Admin",
 
     ) : Serializable
 
@@ -120,6 +124,7 @@ data class NlmFpForest(
     val created: String,
     val organogram: String = "O",
     val technicalCompetence: String = "O",
+    val createdBy: String? = "Super Admin",
     ) : Serializable
 
 

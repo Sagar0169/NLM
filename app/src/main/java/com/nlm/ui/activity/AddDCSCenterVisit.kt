@@ -1,24 +1,14 @@
 package com.nlm.ui.activity
 
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityAddDcsCenterVisitBinding
-import com.nlm.databinding.ActivityAddImplementingAgencyBinding
-import com.nlm.databinding.ActivityAddMilkUnionVisitBinding
 import com.nlm.ui.adapter.StateAdapter
-import com.nlm.ui.fragment.QuickSearchFragment
-import com.nlm.ui.fragment.TextSeachFragment
 import com.nlm.ui.fragment.ndd.dcs.FirstDCSFragment
 import com.nlm.ui.fragment.ndd.dcs.SecondDCSFragment
 import com.nlm.utilities.BaseActivity
