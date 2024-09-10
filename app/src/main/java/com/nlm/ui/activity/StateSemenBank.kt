@@ -1,25 +1,14 @@
 package com.nlm.ui.activity
 
-import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
-import com.nlm.databinding.ActivityRsplabBinding
 import com.nlm.databinding.ActivityStateSemenBankBinding
-import com.nlm.ui.fragment.RSPManpower
-import com.nlm.ui.fragment.RSP_Availability_of_equipment
-import com.nlm.ui.fragment.RSP_Average_Semen_Dose
-import com.nlm.ui.fragment.RSP_BasicInformation
-import com.nlm.ui.fragment.RSP_Suggestions_for_improvement
-import com.nlm.ui.fragment.StateSemenManpower
-import com.nlm.ui.fragment.StateSemen_BasicInformation
-import com.nlm.ui.fragment.State_Semen_Infrastructure
-import com.nlm.ui.fragment.State_Semen_Major_Clients
+import com.nlm.ui.fragment.StateSemenManpowerFragment
+import com.nlm.ui.fragment.StateSemenBasicInformationFragment
+import com.nlm.ui.fragment.StateSemenInfrastructureFragment
+import com.nlm.ui.fragment.StateSemenMajorClientsFragment
 import com.nlm.utilities.BaseActivity
 
 class StateSemenBank : BaseActivity<ActivityStateSemenBankBinding>() {
@@ -31,7 +20,7 @@ class StateSemenBank : BaseActivity<ActivityStateSemenBankBinding>() {
         mBinding=viewDataBinding
         mBinding?.clickAction=ClickActions()
         setupTabLayout()
-        loadFragment(StateSemen_BasicInformation())
+        loadFragment(StateSemenBasicInformationFragment())
     }
 
     override fun setVariables() {
@@ -78,18 +67,18 @@ class StateSemenBank : BaseActivity<ActivityStateSemenBankBinding>() {
                     when (tab?.position) {
                         0 -> {
                             onTabClicks()
-                            loadFragment(StateSemen_BasicInformation())
+                            loadFragment(StateSemenBasicInformationFragment())
                         }
 
                         1 -> {
                             onTabClicks()
-                            loadFragment(StateSemenManpower())
+                            loadFragment(StateSemenManpowerFragment())
 
                         }
 
                         2 -> {
                             onTabClicks()
-                            loadFragment(State_Semen_Infrastructure())
+                            loadFragment(StateSemenInfrastructureFragment())
                         }
 
 //                        3 -> {
@@ -104,7 +93,7 @@ class StateSemenBank : BaseActivity<ActivityStateSemenBankBinding>() {
 
                         3 -> {
                             onTabClicks()
-                            loadFragment(State_Semen_Major_Clients())
+                            loadFragment(StateSemenMajorClientsFragment())
                         }
 
                     }

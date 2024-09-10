@@ -44,10 +44,11 @@
                 android:layout_marginTop="20dp"
                 android:text="Bull Mother Farms"
                 android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/appCompatImageView"
+                app:layout_constraintStart_toEndOf="@id/ivBackPress"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+
                 app:layout_constraintTop_toTopOf="parent" />
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/appCompatImageView"
@@ -56,6 +57,7 @@
                 android:onClick="@{ClickAction::filter}"
                 android:src="@drawable/ic_filter"
                 android:layout_marginEnd="@dimen/dp_5"
+
                 app:layout_constraintBottom_toBottomOf="@+id/tvHeading"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvHeading" />

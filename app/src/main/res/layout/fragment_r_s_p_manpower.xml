@@ -5,13 +5,13 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.RSPManpower.ClickActions" />
+            type="com.nlm.ui.fragment.RSPManpowerFragment.ClickActions" />
     </data>
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.RSPManpower">
+        tools:context=".ui.fragment.RSPManpowerFragment">
 
         <ScrollView
             android:id="@+id/scrollView"

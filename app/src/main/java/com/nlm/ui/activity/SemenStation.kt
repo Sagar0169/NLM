@@ -1,34 +1,24 @@
 package com.nlm.ui.activity
 
-import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
 import com.nlm.databinding.ActivitySemenStationBinding
-import com.nlm.databinding.ActivityStateSemenBankBinding
 import com.nlm.model.BackgroundData
 import com.nlm.model.FacialAttributeData
 import com.nlm.model.LocationData
 import com.nlm.model.PhysicalAttributesData
-import com.nlm.model.SightedChildData
+
 import com.nlm.model.details_Semen_Station
-import com.nlm.ui.fragment.Details_of_Semen_Station
-import com.nlm.ui.fragment.SemenStaion_Manpower
-import com.nlm.ui.fragment.Semen_production_and_semen_doses_distributed
-import com.nlm.ui.fragment.Sex_Sorted_Semen
-import com.nlm.ui.fragment.SightedBasicDetailsFragment
-import com.nlm.ui.fragment.StateSemenManpower
-import com.nlm.ui.fragment.StateSemen_BasicInformation
-import com.nlm.ui.fragment.State_Semen_Infrastructure
-import com.nlm.ui.fragment.State_Semen_Major_Clients
+import com.nlm.ui.fragment.DetailsOfSemenStationFragment
+import com.nlm.ui.fragment.SemenStationManpowerFragment
+import com.nlm.ui.fragment.SemenProductionAndSemenDosesDistributedFragment
+import com.nlm.ui.fragment.SexSortedSemenFragment
+
 import com.nlm.utilities.BaseActivity
 
-class SemenStation : BaseActivity<ActivitySemenStationBinding>(),Details_of_Semen_Station.OnNextButtonClickListener {
+class SemenStation : BaseActivity<ActivitySemenStationBinding>(),DetailsOfSemenStationFragment.OnNextButtonClickListener {
     private var mBinding: ActivitySemenStationBinding? = null
     override val layoutId: Int
         get() = R.layout.activity_semen_station
@@ -41,7 +31,7 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>(),Details_of_Seme
         mBinding=viewDataBinding
         mBinding?.clickAction=ClickActions()
         setupTabLayout()
-        loadFragment(Details_of_Semen_Station())
+        loadFragment(DetailsOfSemenStationFragment())
     }
 
     override fun setVariables() {
@@ -53,7 +43,7 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>(),Details_of_Seme
     }
 
     private fun loadFragment(fragment: Fragment) {
-        if (fragment is Details_of_Semen_Station) {
+        if (fragment is DetailsOfSemenStationFragment) {
             fragment.setData(details_Semen_Station)
         }
 
@@ -82,18 +72,18 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>(),Details_of_Seme
                     when (tab?.position) {
                         0 -> {
                             onTabClicks()
-                            loadFragment(Details_of_Semen_Station())
+                            loadFragment(DetailsOfSemenStationFragment())
                         }
 
                         1 -> {
                             onTabClicks()
-                            loadFragment(SemenStaion_Manpower())
+                            loadFragment(SemenStationManpowerFragment())
 
                         }
 
                         2 -> {
                             onTabClicks()
-                            loadFragment(Semen_production_and_semen_doses_distributed())
+                            loadFragment(SemenProductionAndSemenDosesDistributedFragment())
                         }
 
 //                        3 -> {
@@ -108,7 +98,7 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>(),Details_of_Seme
 
                         3 -> {
                             onTabClicks()
-                            loadFragment(Sex_Sorted_Semen())
+                            loadFragment(SexSortedSemenFragment())
                         }
 
                     }
@@ -126,13 +116,13 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>(),Details_of_Seme
     }
     fun onTabClicks() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
-        if (currentFragment is Details_of_Semen_Station) {
+        if (currentFragment is DetailsOfSemenStationFragment) {
             details_Semen_Station = currentFragment.getData()}
     }
 
     override fun onNextButtonClick() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
-        if (currentFragment is Details_of_Semen_Station) {
+        if (currentFragment is DetailsOfSemenStationFragment) {
             details_Semen_Station = currentFragment.getData()}
         moveToNextTab()
     }

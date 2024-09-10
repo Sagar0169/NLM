@@ -9,7 +9,7 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.RGM_Details_of_committee_meetings">
+        tools:context=".ui.fragment.RGMDetailsOfCommitteeMeetings">
 
     <ScrollView
         android:id="@+id/scrollView"

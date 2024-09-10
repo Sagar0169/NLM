@@ -1,9 +1,5 @@
 package com.nlm.ui.fragment
 
-import android.content.Context
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -11,40 +7,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
-import com.nlm.databinding.FragmentDetailsOfSemenStationBinding
-import com.nlm.databinding.FragmentRSPBasicInformationBinding
-import com.nlm.model.SightedChildData
-import com.nlm.model.details_Semen_Station
+import com.nlm.databinding.FragmentStateSemenBasicInformationBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
-import com.nlm.ui.fragment.SightedBasicDetailsFragment.OnNextButtonClickListener
 import com.nlm.utilities.BaseFragment
 
 
-class Details_of_Semen_Station : BaseFragment<FragmentDetailsOfSemenStationBinding>() {
-    private var details_Semen_Station: details_Semen_Station? = null
-    private var listener: OnNextButtonClickListener? = null
-    // Call this method before displaying the fragment
-    fun setData(data: details_Semen_Station) {
-        details_Semen_Station = data
-    }
-    fun getData(): details_Semen_Station {
-        return details_Semen_Station?.apply {
-            State = mBinding!!.etState.text.toString()
-            District = mBinding!!.etState.text.toString()
-            Location = mBinding!!.etUsername.text.toString()
-            Address = mBinding!!.etDescription.text.toString()
-            Pin_code = mBinding!!.etPassword.text.toString()
-            Phone_No = mBinding!!.etPhone.text.toString()
-            Grading = mBinding!!.etyear.text.toString()
-            Area_under = mBinding!!.etAreaUnder.text.toString()
-            Area_fodder = mBinding!!.etAreaFodder.text.toString()
-            ISO_9002 = mBinding!!.rbMentally.checkedRadioButtonId == R.id.rbMentallyYes
-            Cmugrading = mBinding!!.rbCmugrading.checkedRadioButtonId == R.id.rbA
-        } ?: details_Semen_Station()
-    }
+class StateSemenBasicInformationFragment : BaseFragment<FragmentStateSemenBasicInformationBinding>() {
     override val layoutId: Int
-        get() = R.layout.fragment_details_of__semen__station
-    private var mBinding: FragmentDetailsOfSemenStationBinding?=null
+        get() = R.layout.fragment_state_semen__basic_information
+    private var mBinding: FragmentStateSemenBasicInformationBinding?=null
     private lateinit var bottomSheetAdapter: BottomSheetAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
@@ -70,10 +41,6 @@ class Details_of_Semen_Station : BaseFragment<FragmentDetailsOfSemenStationBindi
     inner class ClickActions {
         fun state(view: View){showBottomSheetDialog("state")}
         fun district(view: View){showBottomSheetDialog("district")}
-        fun next(view: View) {
-            listener?.onNextButtonClick()
-
-        }
     }
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(requireContext())
@@ -123,17 +90,5 @@ class Details_of_Semen_Station : BaseFragment<FragmentDetailsOfSemenStationBindi
         bottomSheetDialog.setContentView(view)
 
         bottomSheetDialog.show()
-    }
-    interface OnNextButtonClickListener {
-        fun onNextButtonClick()
-    }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        listener = context as? Details_of_Semen_Station.OnNextButtonClickListener
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
     }
 }

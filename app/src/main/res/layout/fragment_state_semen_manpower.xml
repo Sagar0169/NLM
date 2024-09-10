@@ -5,13 +5,13 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.StateSemenManpower.ClickActions" />
+            type="com.nlm.ui.fragment.StateSemenManpowerFragment.ClickActions" />
     </data>
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.StateSemenManpower">
+        tools:context=".ui.fragment.StateSemenManpowerFragment">
 
         <ScrollView
             android:id="@+id/scrollView"

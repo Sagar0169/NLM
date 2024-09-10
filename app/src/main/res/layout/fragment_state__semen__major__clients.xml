@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.State_Semen_Major_Clients">
+    tools:context=".ui.fragment.StateSemenMajorClientsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

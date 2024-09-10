@@ -5,55 +5,117 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
-import com.nlm.R
+import com.nlm.databinding.ItemAgencyWiseBinding
+import com.nlm.databinding.ItemAnyOfAssetsRgmBinding
 
 class AgencyWiseAdapter(
-    private val programmeList: MutableList<Array<String>>
-) : RecyclerView.Adapter<AgencyWiseAdapter.ProgrammeViewHolder>() {
+    private val programmeList: MutableList<Array<String>>,
+    private val isFrom: Int,
+    private val isNOOfCamps: Boolean
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgrammeViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_agency_wise, parent, false)
-        return ProgrammeViewHolder(view)
+    // View type constants
+    private val TYPE_AGENCY_WISE = 0
+    private val TYPE_ASSETS_RGM = 1
+
+    // Get the view type based on the value of isFrom
+    override fun getItemViewType(position: Int): Int {
+        return if (isFrom == 1) TYPE_ASSETS_RGM else TYPE_AGENCY_WISE
     }
 
-    override fun onBindViewHolder(holder: ProgrammeViewHolder, position: Int) {
-
-
-        // Manage visibility of buttons based on position
-        if (position == programmeList.size - 1) {
-            // If this is the last item, hide the add button (since it can only be removed)
-            holder.btnAdd.visibility = View.VISIBLE
-            holder.btnDelete.visibility = View.GONE
-        } else {
-            // For newly added items or existing ones, hide Add button and show Delete button
-            holder.btnAdd.visibility = View.GONE
-            holder.btnDelete.visibility = View.VISIBLE
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            TYPE_ASSETS_RGM -> {
+                val binding = ItemAnyOfAssetsRgmBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                )
+                AssetsRGMViewHolder(binding)
+            }
+            else -> {
+                val binding = ItemAgencyWiseBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                )
+                AgencyWiseViewHolder(binding)
+            }
         }
+    }
 
-        // Add button click listener
-        holder.btnAdd.setOnClickListener {
-            // Add a new row (array with default empty values)
-            programmeList.add(arrayOf("", "", "", "", ""))
-            notifyItemInserted(programmeList.size - 1)
-            notifyItemChanged(position)
-        }
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is AssetsRGMViewHolder -> {
+                // Bind data for the AssetsRGMViewHolder
+                if (isNOOfCamps) {
+                    holder.binding.tv11.text = "No. of Fertility camps"
+                    holder.binding.tv12.text = "No. of Animals Treated"
+                } else {
+                    holder.binding.tv11.text = "Assets /Components"
+                    holder.binding.tv12.text = "Reasons"
+                }
 
-        // Delete button click listener
-        holder.btnDelete.setOnClickListener {
-            // Remove the row from the list
-            if (programmeList.size > 1) {  // Ensure there's at least one row remaining
-                programmeList.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, programmeList.size)  // Update other items
+                // Handle visibility of add/delete buttons
+                handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
+
+                // Add new row for this layout
+                holder.binding.btnAdd.setOnClickListener {
+                    programmeList.add(arrayOf("", ""))
+                    notifyItemInserted(programmeList.size - 1)
+                    notifyItemChanged(position)
+                }
+
+                // Delete row for this layout
+                holder.binding.btnDelete.setOnClickListener {
+                    if (programmeList.size > 1) {
+                        programmeList.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, programmeList.size)
+                    }
+                }
+            }
+
+            is AgencyWiseViewHolder -> {
+
+                // Handle visibility of add/delete buttons
+                handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
+
+                // Add new row for this layout
+                holder.binding.btnAdd.setOnClickListener {
+                    programmeList.add(arrayOf("", "", "", "", ""))
+                    notifyItemInserted(programmeList.size - 1)
+                    notifyItemChanged(position)
+                }
+
+                // Delete row for this layout
+                holder.binding.btnDelete.setOnClickListener {
+                    if (programmeList.size > 1) {
+                        programmeList.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, programmeList.size)
+                    }
+                }
             }
         }
     }
 
     override fun getItemCount(): Int = programmeList.size
 
-    inner class ProgrammeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val btnDelete: ImageButton = itemView.findViewById(R.id.btnDelete)
-        val btnAdd: ImageButton = itemView.findViewById(R.id.btnAdd)
+    // Helper method to manage button visibility
+    private fun handleButtonVisibility(btnAdd: ImageButton, btnDelete: ImageButton, position: Int) {
+        if (position == programmeList.size - 1) {
+            // Last item, show Add button, hide Delete button
+            btnAdd.visibility = View.VISIBLE
+            btnDelete.visibility = View.GONE
+        } else {
+            // Hide Add button, show Delete button for other items
+            btnAdd.visibility = View.GONE
+            btnDelete.visibility = View.VISIBLE
+        }
     }
+
+    // ViewHolder for the AgencyWise layout using View Binding
+    inner class AgencyWiseViewHolder(val binding: ItemAgencyWiseBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    // ViewHolder for the AssetsRGM layout using View Binding
+    inner class AssetsRGMViewHolder(val binding: ItemAnyOfAssetsRgmBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

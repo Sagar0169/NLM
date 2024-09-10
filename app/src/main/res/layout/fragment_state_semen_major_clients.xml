@@ -5,7 +5,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.State_Semen_Major_Clients.ClickActions" />
+            type="com.nlm.ui.fragment.StateSemenMajorClientsFragment.ClickActions" />
 
     </data>
 
@@ -13,7 +13,7 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.State_Semen_Major_Clients">
+        tools:context=".ui.fragment.StateSemenMajorClientsFragment">
 
     <ScrollView
         android:id="@+id/scrollView"

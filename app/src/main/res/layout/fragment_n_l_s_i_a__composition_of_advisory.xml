@@ -5,14 +5,14 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.NLSIA_Composition_of_Advisory_committee.ClickActions" />
+            type="com.nlm.ui.fragment.NLSIACompositionOfAdvisoryCommittee.ClickActions" />
     </data>
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.NLSIA_Composition_of_Advisory_committee">
+        tools:context=".ui.fragment.NLSIACompositionOfAdvisoryCommittee">
 
     <ScrollView
         android:id="@+id/scrollView"

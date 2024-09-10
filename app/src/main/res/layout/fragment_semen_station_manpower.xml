@@ -5,14 +5,14 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.SemenStaion_Manpower.ClickActions" />
+            type="com.nlm.ui.fragment.SemenStationManpowerFragment.ClickActions" />
     </data>
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.SemenStaion_Manpower">
+        tools:context=".ui.fragment.SemenStationManpowerFragment">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -84,7 +84,7 @@
                     android:backgroundTint="@color/darkBlue"
 
                     android:orientation="horizontal"
-                    android:padding="8dp">
+                    >
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                     android:backgroundTint="@color/darkBlue"
 
                     android:orientation="horizontal"
-                    android:padding="8dp">
+                    >
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                     android:backgroundTint="@color/darkBlue"
 
                     android:orientation="horizontal"
-                    android:padding="8dp">
+                   >
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
