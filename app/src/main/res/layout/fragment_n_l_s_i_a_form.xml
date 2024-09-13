@@ -6,14 +6,14 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.NLSIAFormIA.ClickActions" />
+            type="com.nlm.ui.fragment.NLSIAFormIAFragment.ClickActions" />
     </data>
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.NLSIAFormIA">
+        tools:context=".ui.fragment.NLSIAFormIAFragment">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -110,145 +110,152 @@
                     android:text="@string/other_staff"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
-
-                <TableLayout
-                    android:layout_marginVertical="10dp"
-                    android:id="@+id/tableLayout"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="1, 2"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
-                    android:background="@color/white"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:text="Details"
+                        android:textStyle="bold" />
 
-                    android:shrinkColumns="1, 2">
 
-                    <TableRow
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No.Regular employee/deputation"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No manpower Deputed"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="Details"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="No. Regular employee/deputation"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:text="Technical Staff"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="No manpower Deputed"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
-                    </TableRow>
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="Technical Staff"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:inputType="number"
-                            android:maxLength="5"
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Admn. Staff"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="Admn. Staff"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Other Staff"
+                        android:background="@color/white"
+                        android:textColor="@android:color/black" />
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="Other Staff"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                </TableLayout>
 
 
                 <TextView

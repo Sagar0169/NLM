@@ -5,15 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
-import com.nlm.databinding.ActivityAddNewAssistanceForEaBinding
 import com.nlm.databinding.ActivityAddRgmvitroFertilizatonBinding
 import com.nlm.model.NlmEdp
 import com.nlm.ui.adapter.NlmEdpAdapter
-import com.nlm.ui.fragment.RSPManpower
-import com.nlm.ui.fragment.RSP_Availability_of_equipment
-import com.nlm.ui.fragment.RSP_Average_Semen_Dose
-import com.nlm.ui.fragment.RSP_BasicInformation
-import com.nlm.ui.fragment.RSP_Suggestions_for_improvement
 import com.nlm.ui.fragment.VitroPartOneFragment
 import com.nlm.ui.fragment.VitroPartTwoFragment
 import com.nlm.utilities.BaseActivity

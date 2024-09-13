@@ -1,29 +1,15 @@
 package com.nlm.ui.activity
 
-import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
-import com.nlm.databinding.ActivityNlsiaFormBinding
 import com.nlm.databinding.ActivityRspLabSemenBinding
-import com.nlm.ui.fragment.NLSIAFormIA
-import com.nlm.ui.fragment.NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep
-import com.nlm.ui.fragment.NLSIA_Constraints_faced_by_IA
-import com.nlm.ui.fragment.NLSIA_Feed_fodder
-import com.nlm.ui.fragment.NLSIA_Fodder_Seed
-import com.nlm.ui.fragment.NLSIA_GoverningBody_Board_Of_Directors
-import com.nlm.ui.fragment.NLSIA_Infrastructure_Sheep_goat
-import com.nlm.ui.fragment.NLSIA_Reporting_System
-import com.nlm.ui.fragment.RSPManpower
-import com.nlm.ui.fragment.RSP_Availability_of_equipment
-import com.nlm.ui.fragment.RSP_Average_Semen_Dose
-import com.nlm.ui.fragment.RSP_BasicInformation
-import com.nlm.ui.fragment.RSP_Suggestions_for_improvement
+import com.nlm.ui.fragment.RSPManpowerFragment
+import com.nlm.ui.fragment.RSPAvailabilityOfEquipmentFragment
+import com.nlm.ui.fragment.RSPAverageSemenDoseFragment
+import com.nlm.ui.fragment.RSPBasicInformationFragment
+import com.nlm.ui.fragment.RSPSuggestionsForImprovement
 import com.nlm.utilities.BaseActivity
 
 class RspLabSemen() : BaseActivity<ActivityRspLabSemenBinding>() {
@@ -34,7 +20,7 @@ class RspLabSemen() : BaseActivity<ActivityRspLabSemenBinding>() {
         mBinding=viewDataBinding
         mBinding?.clickAction=ClickActions()
         setupTabLayout()
-        loadFragment(RSP_BasicInformation())
+        loadFragment(RSPBasicInformationFragment())
     }
 
     inner class ClickActions {
@@ -95,18 +81,18 @@ class RspLabSemen() : BaseActivity<ActivityRspLabSemenBinding>() {
                     when (tab?.position) {
                         0 -> {
                             onTabClicks()
-                            loadFragment(RSP_BasicInformation())
+                            loadFragment(RSPBasicInformationFragment())
                         }
 
                         1 -> {
                             onTabClicks()
-                            loadFragment(RSPManpower())
+                            loadFragment(RSPManpowerFragment())
 
                         }
 
                         2 -> {
                             onTabClicks()
-                            loadFragment(RSP_Availability_of_equipment())
+                            loadFragment(RSPAvailabilityOfEquipmentFragment())
                         }
 
 //                        3 -> {
@@ -121,12 +107,12 @@ class RspLabSemen() : BaseActivity<ActivityRspLabSemenBinding>() {
 
                         3 -> {
                             onTabClicks()
-                            loadFragment(RSP_Average_Semen_Dose())
+                            loadFragment(RSPAverageSemenDoseFragment())
                         }
 
                         4 -> {
                             onTabClicks()
-                            loadFragment(RSP_Suggestions_for_improvement())
+                            loadFragment(RSPSuggestionsForImprovement())
                         }
 
                     }

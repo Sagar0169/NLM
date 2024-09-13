@@ -1,36 +1,37 @@
 package com.nlm.ui.activity
 
-import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
 import com.nlm.databinding.ActivitySemenStationBinding
-import com.nlm.databinding.ActivityStateSemenBankBinding
-import com.nlm.ui.fragment.Details_of_Semen_Station
-import com.nlm.ui.fragment.SemenStaion_Manpower
-import com.nlm.ui.fragment.Semen_production_and_semen_doses_distributed
-import com.nlm.ui.fragment.Sex_Sorted_Semen
-import com.nlm.ui.fragment.StateSemenManpower
-import com.nlm.ui.fragment.StateSemen_BasicInformation
-import com.nlm.ui.fragment.State_Semen_Infrastructure
-import com.nlm.ui.fragment.State_Semen_Major_Clients
+import com.nlm.model.BackgroundData
+import com.nlm.model.FacialAttributeData
+import com.nlm.model.LocationData
+import com.nlm.model.PhysicalAttributesData
+
+import com.nlm.model.details_Semen_Station
+import com.nlm.ui.fragment.DetailsOfSemenStationFragment
+import com.nlm.ui.fragment.SemenStationManpowerFragment
+import com.nlm.ui.fragment.SemenProductionAndSemenDosesDistributedFragment
+import com.nlm.ui.fragment.SexSortedSemenFragment
+
 import com.nlm.utilities.BaseActivity
 
-class SemenStation : BaseActivity<ActivitySemenStationBinding>() {
+class SemenStation : BaseActivity<ActivitySemenStationBinding>(),DetailsOfSemenStationFragment.OnNextButtonClickListener {
     private var mBinding: ActivitySemenStationBinding? = null
     override val layoutId: Int
         get() = R.layout.activity_semen_station
-
+    var details_Semen_Station = details_Semen_Station()
+    var facialAttributeData = FacialAttributeData()
+    var physicalAttributesData = PhysicalAttributesData()
+    var backgroundData = BackgroundData()
+    var locationData = LocationData()
     override fun initView() {
         mBinding=viewDataBinding
         mBinding?.clickAction=ClickActions()
         setupTabLayout()
-        loadFragment(Details_of_Semen_Station())
+        loadFragment(DetailsOfSemenStationFragment())
     }
 
     override fun setVariables() {
@@ -42,17 +43,10 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-//        if (fragment is SightedBasicDetailsFragment) {
-//            fragment.setData(sightedChildData)
-//        } else if (fragment is SightedFacialAttributesFragment) {
-//            fragment.setData(facialAttributeData)
-//        } else if (fragment is SightedPhysicalAttributeFragment) {
-//            fragment.setData(physicalAttributesData)
-//        } else if (fragment is SightedBackgroundFragment) {
-//            fragment.setData(backgroundData)
-//        }else if (fragment is SightedLocationDetailsFragment) {
-//            fragment.setData(locationData)
-//        }
+        if (fragment is DetailsOfSemenStationFragment) {
+            fragment.setData(details_Semen_Station)
+        }
+
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout, fragment)
         transaction.commit()
@@ -60,7 +54,9 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>() {
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
-        }}
+        }
+
+    }
     private fun setupTabLayout() {
         mBinding?.tabLayout?.apply {
             addTab(newTab().setText("Details of Semen Station"))
@@ -76,18 +72,18 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>() {
                     when (tab?.position) {
                         0 -> {
                             onTabClicks()
-                            loadFragment(Details_of_Semen_Station())
+                            loadFragment(DetailsOfSemenStationFragment())
                         }
 
                         1 -> {
                             onTabClicks()
-                            loadFragment(SemenStaion_Manpower())
+                            loadFragment(SemenStationManpowerFragment())
 
                         }
 
                         2 -> {
                             onTabClicks()
-                            loadFragment(Semen_production_and_semen_doses_distributed())
+                            loadFragment(SemenProductionAndSemenDosesDistributedFragment())
                         }
 
 //                        3 -> {
@@ -102,7 +98,7 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>() {
 
                         3 -> {
                             onTabClicks()
-                            loadFragment(Sex_Sorted_Semen())
+                            loadFragment(SexSortedSemenFragment())
                         }
 
                     }
@@ -119,18 +115,23 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>() {
         }
     }
     fun onTabClicks() {
-        // Collect data from current fragment
-//        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
-//        if (currentFragment is SightedBasicDetailsFragment) {
-//            sightedChildData = currentFragment.getData()
-//        } else if (currentFragment is SightedFacialAttributesFragment) {
-//            facialAttributeData = currentFragment.getData()
-//        } else if (currentFragment is SightedPhysicalAttributeFragment) {
-//            physicalAttributesData = currentFragment.getData()
-//        } else if (currentFragment is SightedBackgroundFragment) {
-//            backgroundData = currentFragment.getData()
-//        }else if (currentFragment is SightedLocationDetailsFragment) {
-//            locationData = currentFragment.getData()
-//        }
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
+        if (currentFragment is DetailsOfSemenStationFragment) {
+            details_Semen_Station = currentFragment.getData()}
     }
+
+    override fun onNextButtonClick() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
+        if (currentFragment is DetailsOfSemenStationFragment) {
+            details_Semen_Station = currentFragment.getData()}
+        moveToNextTab()
+    }
+    private fun moveToNextTab() {
+        val currentTab = mBinding?.tabLayout?.selectedTabPosition ?: 0
+        val nextTab = currentTab + 1
+        if (nextTab < (mBinding?.tabLayout?.tabCount ?: 0)) {
+            mBinding?.tabLayout?.getTabAt(nextTab)?.select()
+        }
+    }
+
 }

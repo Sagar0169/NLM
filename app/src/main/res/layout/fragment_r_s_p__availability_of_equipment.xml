@@ -5,13 +5,13 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.RSP_Availability_of_equipment.ClickActions" />
+            type="com.nlm.ui.fragment.RSPAvailabilityOfEquipmentFragment.ClickActions" />
     </data>
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.RSP_Availability_of_equipment">
+        tools:context=".ui.fragment.RSPAvailabilityOfEquipmentFragment">
 
     <ScrollView
         android:id="@+id/scrollView"

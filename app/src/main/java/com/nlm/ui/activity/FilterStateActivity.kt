@@ -262,6 +262,19 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etNameOfBeneficiary.showView()
 
             }
+            34->{
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvTitleLoc.showView()
+                binding!!.etLoc.showView()
+
+            }
+            35->{
+                binding!!.tvTitleVillageName.showView()
+                binding!!.etVillageName.showView()
+
+            }
+
 
 
 

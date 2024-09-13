@@ -54,6 +54,13 @@ class List_of_RGM_IA : BaseActivity<ActivityListOfRgmIaBinding>() {
         fun backPress(view: View){
             onBackPressed()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@List_of_RGM_IA,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 35)
+            startActivity(intent)
+        }
     }
     private fun implementingAgency() {
         implementingAdapter = RGM_IA_Adapter(nodalOfficerList,1)

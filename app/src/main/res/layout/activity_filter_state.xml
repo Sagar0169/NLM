@@ -618,6 +618,34 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
+            <TextView
+                android:id="@+id/tvTitleLoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Location "
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etLoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvTitleNoa"
