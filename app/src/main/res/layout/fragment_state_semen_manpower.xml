@@ -5,13 +5,13 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.StateSemenManpower.ClickActions" />
+            type="com.nlm.ui.fragment.StateSemenManpowerFragment.ClickActions" />
     </data>
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.StateSemenManpower">
+        tools:context=".ui.fragment.StateSemenManpowerFragment">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -36,141 +36,152 @@
                     android:text="Officer in Charge"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
-                <TableLayout
-                    android:layout_marginVertical="10dp"
-                    android:id="@+id/tableLayout1"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="1, 2"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
-                    android:background="@color/white"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:text="Name of the officer"
+                        android:textStyle="bold" />
 
-                    android:shrinkColumns="1, 2">
 
-                    <TableRow
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/designation_nlsia"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Qualification"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="Name of the officer"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="@string/designation_nlsia"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="Qualification"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
-                    </TableRow>
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                </TableLayout>
                 <TextView
                     android:id="@+id/tvState2"
                     android:layout_width="wrap_content"
@@ -180,171 +191,186 @@
                     android:text="Other Manpower Position"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
-                <TableLayout
-                    android:layout_marginVertical="10dp"
-                    android:id="@+id/tableLayout2"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="1, 2"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
-                    android:background="@color/white"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:text="@string/designation_nlsia"
+                        android:textStyle="bold" />
 
-                    android:shrinkColumns="1, 2">
 
-                    <TableRow
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Qualification"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Experience"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Training Status"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="@string/designation_nlsia"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="Qualification"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="Experience"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="Training Status"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
-                    </TableRow>
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-
-                </TableLayout>
 
                 <TextView
                     android:id="@+id/tvSendOtp"

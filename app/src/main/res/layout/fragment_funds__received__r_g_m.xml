@@ -9,10 +9,11 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.Funds_Received_RGM">
+    tools:context=".ui.fragment.FundsReceivedRGMFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
+        android:overScrollMode="never"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -53,6 +54,7 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5">
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -467,118 +469,14 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-
-
-
-                <LinearLayout
+                <com.nlm.utilities.NonScrollableRecyclerView
+                    android:id="@+id/recyclerView1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5">
+                    android:paddingTop="8dp" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Agency "
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="2022-23"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="2023-24"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="2024-25"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -602,115 +500,11 @@
 
 
 
-                <LinearLayout
+                <com.nlm.utilities.NonScrollableRecyclerView
+                    android:id="@+id/recyclerView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Agency "
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="2022-23"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="2023-24"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="2024-25"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                </LinearLayout>
+                    android:paddingTop="8dp" />
             </LinearLayout>
 
 
@@ -734,7 +528,7 @@
             android:textAlignment="center"
             android:textColor="@color/white" />
     </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 
 

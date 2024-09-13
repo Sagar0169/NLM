@@ -5,14 +5,14 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.SemenStaion_Manpower.ClickActions" />
+            type="com.nlm.ui.fragment.SemenStationManpowerFragment.ClickActions" />
     </data>
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.SemenStaion_Manpower">
+        tools:context=".ui.fragment.SemenStationManpowerFragment">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -37,199 +37,152 @@
                     android:text="Officer in Charge"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
-                <TableLayout
-                    android:layout_marginVertical="10dp"
-                    android:id="@+id/tableLayout1"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="0,1,2"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
-                    android:background="@color/white"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:text="Designation"
+                        android:textStyle="bold" />
 
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No.of Sanctioned Posts"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No.of Filled Posts"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
+
+                    android:orientation="horizontal"
                     >
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                    <TableRow
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="Designation"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="No. of Sanctioned Posts"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                    android:orientation="horizontal"
+                    >
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="No. of Filled Posts"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
-                    </TableRow>
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:backgroundTint="@color/darkBlue"
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                    android:orientation="horizontal"
+                   >
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text"
+                        />
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:background="@android:drawable/edit_text" />
+                </LinearLayout>
 
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                </TableLayout>
                 <TextView
                     android:id="@+id/tvState2"
                     android:layout_width="wrap_content"

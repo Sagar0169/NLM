@@ -69,6 +69,13 @@ class Bull_Of_Mothers_List : BaseActivity<ActivityBullOfMothersListBinding>() {
         fun backPress(view: View){
             onBackPressed()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@Bull_Of_Mothers_List,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 34)
+            startActivity(intent)
+        }
     }
     private fun implementingAgency() {
         implementingAdapter = Bull_Of_Mothers_Adapter(nodalOfficerList,1)

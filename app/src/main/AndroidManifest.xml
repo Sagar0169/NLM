@@ -49,6 +49,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.ReportsOfNlmComponentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.FilterStateActivity"
             android:exported="false" />
         <activity
@@ -60,7 +63,6 @@
         <activity
             android:name=".ui.activity.List_of_RGM_IA"
             android:exported="false" />
-
         <activity
             android:name=".ui.activity.RGM_State_Implementing_Agency"
             android:exported="false" />
@@ -94,7 +96,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.RGMVitroFertilizationActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.activity.Artificial_Insemination_List"
             android:exported="false" />
@@ -240,12 +243,6 @@
             android:name=".ui.activity.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SearchingForAChildActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.EditProfile"
-            android:exported="false" />
-        <activity
             android:name=".ui.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -264,16 +261,7 @@
         </receiver>
 
         <activity
-            android:name=".ui.activity.SplashActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.activity.DashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.RegistrationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.OtpActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"

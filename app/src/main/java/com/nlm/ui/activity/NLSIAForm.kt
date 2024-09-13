@@ -12,14 +12,14 @@ import com.nlm.model.LocationData
 import com.nlm.model.PhysicalAttributesData
 import com.nlm.model.SightedChildData
 import com.nlm.ui.adapter.BottomSheetAdapter
-import com.nlm.ui.fragment.NLSIAFormIA
-import com.nlm.ui.fragment.NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep
-import com.nlm.ui.fragment.NLSIA_Constraints_faced_by_IA
-import com.nlm.ui.fragment.NLSIA_Feed_fodder
-import com.nlm.ui.fragment.NLSIA_Fodder_Seed
-import com.nlm.ui.fragment.NLSIA_GoverningBody_Board_Of_Directors
-import com.nlm.ui.fragment.NLSIA_Infrastructure_Sheep_goat
-import com.nlm.ui.fragment.NLSIA_Reporting_System
+import com.nlm.ui.fragment.NLSIAFormIAFragment
+import com.nlm.ui.fragment.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep
+import com.nlm.ui.fragment.NLSIAConstraintsFacedByIAFragment
+import com.nlm.ui.fragment.NLSIAFeedFodderFragment
+import com.nlm.ui.fragment.NLSIAFodderSeedFragment
+import com.nlm.ui.fragment.NLSIAGoverningBodyBoardOfDirectorsFragment
+import com.nlm.ui.fragment.NLSIAInfrastructureSheepGoat
+import com.nlm.ui.fragment.NLSIAReportingSystem
 import com.nlm.utilities.BaseActivity
 
 class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
@@ -38,7 +38,7 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         setupTabLayout()
-        loadFragment(NLSIAFormIA())
+        loadFragment(NLSIAFormIAFragment())
 
 
     }
@@ -136,18 +136,18 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
                     when (tab?.position) {
                         0 -> {
                             onTabClicks()
-                            loadFragment(NLSIAFormIA())
+                            loadFragment(NLSIAFormIAFragment())
                         }
 
                         1 -> {
                             onTabClicks()
-                            loadFragment(NLSIA_Infrastructure_Sheep_goat())
+                            loadFragment(NLSIAInfrastructureSheepGoat())
 
                         }
 
                         2 -> {
                             onTabClicks()
-                            loadFragment(NLSIA_GoverningBody_Board_Of_Directors())
+                            loadFragment(NLSIAGoverningBodyBoardOfDirectorsFragment())
                         }
 
 //                        3 -> {
@@ -162,27 +162,27 @@ class NLSIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
 
                         3 -> {
                             onTabClicks()
-                            loadFragment(NLSIA_Reporting_System())
+                            loadFragment(NLSIAReportingSystem())
                         }
 
                         4 -> {
                             onTabClicks()
-                            loadFragment(NLSIA_Agencies_involved_in_genetic_improvement_goat_sheep())
+                            loadFragment(NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep())
                         }
 
                         5 -> {
                             onTabClicks()
-                            loadFragment(NLSIA_Constraints_faced_by_IA())
+                            loadFragment(NLSIAConstraintsFacedByIAFragment())
                         }
 
                         6 -> {
                             onTabClicks()
-                            loadFragment(NLSIA_Feed_fodder())
+                            loadFragment(NLSIAFeedFodderFragment())
                         }
 
                         7 -> {
                             onTabClicks()
-                            loadFragment(NLSIA_Fodder_Seed())
+                            loadFragment(NLSIAFodderSeedFragment())
                         }
                     }
                 }

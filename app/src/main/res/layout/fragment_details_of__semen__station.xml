@@ -6,14 +6,14 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.Details_of_Semen_Station.ClickActions" />
+            type="com.nlm.ui.fragment.DetailsOfSemenStationFragment.ClickActions" />
     </data>
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.Details_of_Semen_Station">
+        tools:context=".ui.fragment.DetailsOfSemenStationFragment">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -387,6 +387,7 @@
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>
         <TextView
+            android:onClick="@{ClickAction::next}"
             android:id="@+id/tvSendOtp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

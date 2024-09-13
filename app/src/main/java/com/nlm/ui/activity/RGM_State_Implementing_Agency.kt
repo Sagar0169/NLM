@@ -1,28 +1,16 @@
 package com.nlm.ui.activity
 
-import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityRgmStateImplementingAgencyBinding
-import com.nlm.databinding.ActivitySemenStationBinding
-import com.nlm.databinding.FragmentImplementationOfNAIPRGMBinding
-import com.nlm.model.RGM_IA
-import com.nlm.ui.fragment.Details_of_Semen_Station
-import com.nlm.ui.fragment.Fragment_Assets_not_being_used
-import com.nlm.ui.fragment.Funds_Received_RGM
-import com.nlm.ui.fragment.Implementation_of_NAIP_RGM
-import com.nlm.ui.fragment.RGM_Composition_Of_governing
-import com.nlm.ui.fragment.RGM_Details_of_committee_meetings
-import com.nlm.ui.fragment.RGM_IA_Other_Staff
-import com.nlm.ui.fragment.SemenStaion_Manpower
-import com.nlm.ui.fragment.Semen_production_and_semen_doses_distributed
-import com.nlm.ui.fragment.Sex_Sorted_Semen
+import com.nlm.ui.fragment.FragmentAssetsNotBeingUsed
+import com.nlm.ui.fragment.FundsReceivedRGMFragment
+import com.nlm.ui.fragment.ImplementationOfNAIPRGMFragment
+import com.nlm.ui.fragment.RGMCompositionOfGoverningFragment
+import com.nlm.ui.fragment.RGMDetailsOfCommitteeMeetings
+import com.nlm.ui.fragment.RGMIAOtherStaffFragment
 import com.nlm.utilities.BaseActivity
 
 class RGM_State_Implementing_Agency : BaseActivity<ActivityRgmStateImplementingAgencyBinding>() {
@@ -34,7 +22,7 @@ class RGM_State_Implementing_Agency : BaseActivity<ActivityRgmStateImplementingA
         mBinding=viewDataBinding
         mBinding?.clickAction=ClickActions()
         setupTabLayout()
-        loadFragment(RGM_IA_Other_Staff())
+        loadFragment(RGMIAOtherStaffFragment())
     }
 
     override fun setVariables() {
@@ -45,17 +33,7 @@ class RGM_State_Implementing_Agency : BaseActivity<ActivityRgmStateImplementingA
 
     }
     private fun loadFragment(fragment: Fragment) {
-//        if (fragment is SightedBasicDetailsFragment) {
-//            fragment.setData(sightedChildData)
-//        } else if (fragment is SightedFacialAttributesFragment) {
-//            fragment.setData(facialAttributeData)
-//        } else if (fragment is SightedPhysicalAttributeFragment) {
-//            fragment.setData(physicalAttributesData)
-//        } else if (fragment is SightedBackgroundFragment) {
-//            fragment.setData(backgroundData)
-//        }else if (fragment is SightedLocationDetailsFragment) {
-//            fragment.setData(locationData)
-//        }
+
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout, fragment)
         transaction.commit()
@@ -81,18 +59,18 @@ class RGM_State_Implementing_Agency : BaseActivity<ActivityRgmStateImplementingA
                     when (tab?.position) {
                         0 -> {
                             onTabClicks()
-                            loadFragment(RGM_IA_Other_Staff())
+                            loadFragment(RGMIAOtherStaffFragment())
                         }
 
                         1 -> {
                             onTabClicks()
-                            loadFragment(RGM_Composition_Of_governing())
+                            loadFragment(RGMCompositionOfGoverningFragment())
 
                         }
 
                         2 -> {
                             onTabClicks()
-                            loadFragment(RGM_Details_of_committee_meetings())
+                            loadFragment(RGMDetailsOfCommitteeMeetings())
                         }
 
 //                        3 -> {
@@ -107,15 +85,15 @@ class RGM_State_Implementing_Agency : BaseActivity<ActivityRgmStateImplementingA
 
                         3 -> {
                             onTabClicks()
-                            loadFragment(Funds_Received_RGM())
+                            loadFragment(FundsReceivedRGMFragment())
                         }
                         4 -> {
                             onTabClicks()
-                            loadFragment(Implementation_of_NAIP_RGM())
+                            loadFragment(ImplementationOfNAIPRGMFragment())
                         }
                         5 -> {
                             onTabClicks()
-                            loadFragment(Fragment_Assets_not_being_used())
+                            loadFragment(FragmentAssetsNotBeingUsed())
                         }
 
                     }

@@ -90,6 +90,13 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
         fun backPress(view: View){
             onBackPressed()
         }
+        fun filter(view: View) {
+            val intent = Intent(
+                this@StateSemenBankList,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 34)
+            startActivity(intent)
+        }
 
 
 

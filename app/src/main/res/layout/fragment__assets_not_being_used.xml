@@ -9,9 +9,9 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.Fragment_Assets_not_being_used">
+        tools:context=".ui.fragment.FragmentAssetsNotBeingUsed">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,88 +45,11 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <LinearLayout
+            <com.nlm.utilities.NonScrollableRecyclerView
+                android:id="@+id/recyclerView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_dark_grey"
-                android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_5">
-
-
-
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5">
-
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Assets /Components"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Reasons"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-
-                </LinearLayout>
-
-
-
-
-            </LinearLayout>
+                android:paddingTop="8dp" />
 
 
 
@@ -149,165 +72,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_7"
                 android:fontFamily="@font/opensans_semibold"
-                android:text="District wise and year wise(till date) number of fertility camps organized"
+                android:text="Number of fertility camps organized"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <LinearLayout
+            <com.nlm.utilities.NonScrollableRecyclerView
+                android:id="@+id/recyclerView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_dark_grey"
-                android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_5">
-
-
-
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5">
-
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="District"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="No. of Fertility camps"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="No. of Animals Treated"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="No. of AI done in Cattle Camp"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="No. of Castrations carried out in Cattle Camps"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint=""
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                </LinearLayout>
-
-
-
-
-            </LinearLayout>
+                android:paddingTop="8dp" />
 
 
 
@@ -361,6 +135,6 @@
             android:textAlignment="center"
             android:textColor="@color/white" />
     </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </layout>

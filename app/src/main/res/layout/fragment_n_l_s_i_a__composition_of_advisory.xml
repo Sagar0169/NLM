@@ -5,14 +5,14 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.NLSIA_Composition_of_Advisory_committee.ClickActions" />
+            type="com.nlm.ui.fragment.NLSIACompositionOfAdvisoryCommittee.ClickActions" />
     </data>
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.NLSIA_Composition_of_Advisory_committee">
+        tools:context=".ui.fragment.NLSIACompositionOfAdvisoryCommittee">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -28,142 +28,152 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/dp_10">
-        <TableLayout
-            android:layout_marginVertical="10dp"
-            android:id="@+id/tableLayout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="1, 2"
+            android:layout_marginTop="@dimen/dp_5"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/curve_all_corner_grey"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-            android:background="@color/white"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/white"
+                android:text="Name of the officer"
+                android:textStyle="bold" />
 
-            android:shrinkColumns="1, 2">
 
-            <TableRow
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Designation"
+                android:textAlignment="center"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Organization"
+                android:textAlignment="center"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="@string/name_of_the_official"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:backgroundTint="@color/darkBlue"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="@string/designation_nlsia"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:background="@android:drawable/edit_text"
+                />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="Organization"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-            </TableRow>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:background="@android:drawable/edit_text"
+                />
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
+                android:textColor="@color/black"
+                android:background="@android:drawable/edit_text" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:backgroundTint="@color/darkBlue"
 
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:background="@android:drawable/edit_text"
+                />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:background="@android:drawable/edit_text"
+                />
 
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
+                android:textColor="@color/black"
+                android:background="@android:drawable/edit_text" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:backgroundTint="@color/darkBlue"
 
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-            </TableRow>
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:background="@android:drawable/edit_text"
+                />
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:background="@android:drawable/edit_text"
+                />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
 
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
+                android:textColor="@color/black"
+                android:background="@android:drawable/edit_text" />
+        </LinearLayout>
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:maxLength="5"
-                    android:inputType="number"
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-            </TableRow>
-        </TableLayout>
         <TextView
             android:id="@+id/tvSendOtp"
             android:layout_width="match_parent"
