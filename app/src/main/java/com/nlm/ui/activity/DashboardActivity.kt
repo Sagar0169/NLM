@@ -265,6 +265,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, MilkProductMarketingNDDActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, NLMComponentANDDActivity::class.java)
+            startActivity(intent)
+        }
+
         mBinding?.leftDrawerMenu?.tvProductivityEnhancementServices?.setOnClickListener {
             val intent = Intent(
                 this@DashboardActivity,

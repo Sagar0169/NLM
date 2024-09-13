@@ -410,6 +410,14 @@
                     android:layout_marginHorizontal="@dimen/dp_20"
                     android:orientation="vertical"
                     android:visibility="gone">
+                    <TextView
+                        android:id="@+id/tvNationalLevelComponentA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="@string/national_level_monitors_component_a"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvMilkUnionVisitReport"

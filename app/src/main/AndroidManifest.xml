@@ -68,6 +68,13 @@
             android:name=".ui.activity.Semen_Station_List"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.NLMComponentANDDActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddNLMComponentA"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.activity.SemenStation"
             android:exported="false" />
         <activity
