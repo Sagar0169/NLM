@@ -411,14 +411,6 @@
                     android:visibility="gone"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvReportsOfNlm"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
-                        android:text="Reports of National Level Monitors (Component A)"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvNationalLevelComponentA"
@@ -426,6 +418,14 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_5"
                         android:text="@string/national_level_monitors_component_a"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tvReportsOfNlm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="Reports of National Level Monitors (Component A)"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
