@@ -195,6 +195,13 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             ).putExtra("isFrom", 1)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvReportsOfNlm?.setOnClickListener {
+            val intent = Intent(
+                this@DashboardActivity,
+                ReportsOfNlmComponentActivity::class.java
+            ).putExtra("isFrom", 1)
+            startActivity(intent)
+        }
         mBinding?.leftDrawerMenu?.tvAssistanceQfps?.setOnClickListener {
             val intent = Intent(
                 this@DashboardActivity,
