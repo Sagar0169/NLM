@@ -428,6 +428,14 @@
                         android:text="Reports of National Level Monitors (Component A)"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tvNationalLevelComponentB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_5"
+                        android:text="National Level Monitors(Component A)"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvMilkUnionVisitReport"

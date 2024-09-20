@@ -177,6 +177,12 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                 Intent(this@DashboardActivity, NlmAssistanceForEa::class.java).putExtra("isFrom", 1)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvNationalLevelComponentB?.setOnClickListener {
+            val intent =
+                Intent(this@DashboardActivity, NlmComponentBList::class.java).putExtra("isFrom", 1)
+            startActivity(intent)
+        }
+
         mBinding?.leftDrawerMenu?.tvFpsFromForest?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, NlmFpForestLandActivity::class.java)
             startActivity(intent)

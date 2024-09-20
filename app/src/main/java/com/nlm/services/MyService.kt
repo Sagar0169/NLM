@@ -12,7 +12,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-const val LOGIN = "applogin"
+const val LOGIN = "login"
 const val OTP_LOGIN = "otplogin"
 const val MY_ACCOUNT = "myaccount"
 const val APP_STATUS = "getAppapplicationstatus "
