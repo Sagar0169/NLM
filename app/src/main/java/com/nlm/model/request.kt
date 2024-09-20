@@ -24,8 +24,8 @@ data class OtpRequest(
 )
 
 data class LoginRequest(
-    val application_number: String,
-    val dob: String?
+    var email: String,
+    var password: String,
 )
 data class MyAccountRequest(
     val application_number: String

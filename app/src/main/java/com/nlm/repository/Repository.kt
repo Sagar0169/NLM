@@ -14,33 +14,22 @@ import com.nlm.model.OtpRequest
 import com.nlm.services.MyService
 import javax.inject.Inject
 
-class Repository @Inject constructor(api: MyService,
-                                     apiLogin: MyService): BaseRepository(),RepositoryInt{
+object Repository {
+    private var repository: Repository? = null
+    private lateinit var api: MyService
+    private lateinit var apiLogin: MyService
 
+    val instance: Repository
+        get() {
+            repository = Repository
+            api = ServiceGenerator.createService(MyService::class.java)
 
-    init {
-        mApi=api
-        mApiLogin=apiLogin
-    }
+            apiLogin = ServiceGeneratorLogin.createServiceLogin(MyService::class.java)
+            return repository!!
+        }
 
-    override suspend fun getLogin(request: LoginRequest): Response<AppLoginResponse> {
-        mApiLogin = ServiceGeneratorLogin.createServiceLogin(MyService::class.java)
-        return mApiLogin.getLogin(request)
-    }
-
-    override suspend fun getMyAccount(request: MyAccountRequest): Response<MyAccountResponse> {
-        mApi = ServiceGenerator.createService(MyService::class.java)
-        return mApi.getMyAccount(request)
-    }
-
-    override suspend fun getOtpLogin(request: OtpRequest): Response<LoginResponse> {
-        mApiLogin = ServiceGeneratorLogin.createServiceLogin(MyService::class.java)
-        return mApiLogin.getOtpLogin(request)
-    }
-
-    override suspend fun getAppStatus(request: ApplicationStatusRequest): Response<ApplicationStatusResponse> {
-        mApi = ServiceGenerator.createService(MyService::class.java)
-        return mApi.getAppStatus(request)
+    suspend fun getLogin(request: LoginRequest): Response<LoginResponse> {
+        return apiLogin.getLogin(request)
     }
 }
 

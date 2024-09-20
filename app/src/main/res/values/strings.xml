@@ -281,6 +281,11 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="basic_information">Basic Information</string>
     <string name="major_clients_of_semen_quantity_supplied"><![CDATA[Major clients of semen& Quantity supplied:]]></string>
     <string name="national_programme_for_dairy_development_format_for_national_level_monitors_pre_filled_by_dairy_division_component_a">National Programme for Dairy Development\nFormat for National Level Monitors\n(Pre-filled by Dairy Division)\n(Component A)</string>
-
+    <string name="mandatory_fields">Please Fill Details.</string>
+    <string name="mandatory_field">Mandatory fields required</string>
+    <string name="invalid_password">Password must be at least:\n8 character, 1 upper case,1 lower case,\n1 number.</string>
+    <string name="please_enter_email_id">Please Enter Email</string>
+    <string name="Please_enter_password">Please enter password</string>
+    <string name="enter_valid_id">Enter Valid Email ID</string>
 </resources>
 
