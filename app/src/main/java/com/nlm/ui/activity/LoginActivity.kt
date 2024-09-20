@@ -1,21 +1,18 @@
 package com.nlm.ui.activity
 
-import android.content.Intent
 import android.util.Log
 import android.view.View
-import com.nlm.utilities.BaseActivity
 import com.nlm.R
 import com.nlm.databinding.ActivityLoginBinding
 import com.nlm.model.LoginRequest
-import com.nlm.utilities.AppConstants
+import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
-    var viewModel = ViewModel()
     private var mBinding: ActivityLoginBinding? = null
-
+    var viewModel = ViewModel()
 
     override val layoutId: Int
         get() = R.layout.activity_login
@@ -24,8 +21,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
-
-
     }
 
 
@@ -35,7 +30,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             if (valid())
                 viewModel.getLoginApi(
                     this@LoginActivity, LoginRequest(
-                        mBinding!!.etEmail.text.toString().trim(),
+                        mBinding!!.etUsername.text.toString().trim(),
                         mBinding!!.etPassword.text.toString().trim()
                     )
                 )
@@ -53,16 +48,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     private fun valid(): Boolean {
-        if (mBinding!!.etEmail.text.toString().trim()
+        if (mBinding!!.etUsername.text.toString().trim()
                 .isEmpty() && mBinding!!.etPassword.text.toString().trim().isEmpty()
         ) {
             showSnackbar(mBinding!!.clParent, getString(R.string.mandatory_fields))
             return false
         }
-        return if (mBinding!!.etEmail.text.toString().trim().isEmpty()) {
+        return if (mBinding!!.etUsername.text.toString().trim().isEmpty()) {
             showSnackbar(mBinding!!.clParent, getString(R.string.please_enter_email_id))
             false
-        } else if (!(Utility.isValidEmail(mBinding!!.etEmail.text.toString().trim()))) {
+        } else if (!(Utility.isValidEmail(mBinding!!.etUsername.text.toString().trim()))) {
             showSnackbar(mBinding!!.clParent, getString(R.string.enter_valid_id))
             return false
         } else if (mBinding!!.etPassword.text.toString().trim().isEmpty()) {

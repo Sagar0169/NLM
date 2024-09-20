@@ -106,14 +106,13 @@
 
                     <!-- EditText for Mobile Number -->
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/etEmail"
+                        android:id="@+id/etUsername"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:hint="Enter Username"
                         android:inputType="textEmailAddress"
-                        android:maxLength="10"
                         android:padding="8dp"
                         android:textColor="#555555"
                         android:textColorHint="@color/grey"

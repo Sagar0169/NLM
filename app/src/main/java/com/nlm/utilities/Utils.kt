@@ -777,7 +777,7 @@ fun getUniqueIDWhitRandomString(): String {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             @SuppressLint("HardwareIds") val ANDROID_ID = Settings.Secure.getString(
-                Nlm.instance.getContentResolver(), Settings.Secure.ANDROID_ID
+                Nlm.mContext?.getContentResolver(), Settings.Secure.ANDROID_ID
             )
             if (ANDROID_ID != null && ANDROID_ID.length > 0) {
                 DEVICE_ID =

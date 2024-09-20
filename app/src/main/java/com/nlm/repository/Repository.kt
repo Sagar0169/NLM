@@ -15,6 +15,7 @@ import com.nlm.services.MyService
 import javax.inject.Inject
 
 object Repository {
+
     private var repository: Repository? = null
     private lateinit var api: MyService
     private lateinit var apiLogin: MyService
