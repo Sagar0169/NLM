@@ -18,53 +18,11 @@ class Nlm : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance=this
         mContext = this
         printHashKey(this)
-
-//        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
-//            override fun onActivityPaused(activity: Activity) {
-//            }
-//
-//            override fun onActivityStarted(activity: Activity) {
-//                if (++activityReferences == 1 && !isActivityChangingConfigurations) {
-//                    Log.e("Activity State: ","In Foreground now")
-////                    mSocket?.connect()
-//                }
-//            }
-//
-//            override fun onActivityDestroyed(activity: Activity) {
-//            }
-//
-//            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-//            }
-//
-//            override fun onActivityStopped(activity: Activity) {
-//                isActivityChangingConfigurations = activity.isChangingConfigurations
-//                if (--activityReferences == 0 && !isActivityChangingConfigurations) {
-//                    Log.e("Activity State: ","In Background now")
-////                    mSocket?.disconnect()
-//                }
-//            }
-//
-//            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-//                mActivity = WeakReference(activity)
-//            }
-//
-//            override fun onActivityResumed(activity: Activity) {
-//                mActivity = WeakReference(activity)
-//            }
-//        })
     }
 
-    fun  isInternetConnected(): Boolean {
-        val connectivityManager = this.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetworkInfo
-        return activeNetwork != null && activeNetwork.isConnected
-    }//checks if the internet is connected
     companion object{
-
-        lateinit var instance: Nlm
 
         @JvmField
         var mContext: Context? = null
@@ -74,12 +32,6 @@ class Nlm : Application() {
             return "Bearer ".plus(Utility.getPreferenceString(mContext!!, PrefEntities.TOKEN))
         }
 
-        private var mSocket: Socket?=null
-
-        @JvmField
-        var mActivity: WeakReference<Activity>? = null
-        private var activityReferences = 0
-        private var isActivityChangingConfigurations = false
 
         private fun getContext(): Context {
             return mContext!!

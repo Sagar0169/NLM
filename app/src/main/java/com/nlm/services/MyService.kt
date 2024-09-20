@@ -19,16 +19,11 @@ const val APP_STATUS = "getAppapplicationstatus "
 
 
 
+
 interface MyService {
 
     @POST(LOGIN)
-    suspend fun getLogin(@Body request: LoginRequest): Response<AppLoginResponse>
-    @POST(OTP_LOGIN)
-    suspend fun getOtpLogin(@Body request: OtpRequest): Response<LoginResponse>
-    @POST(MY_ACCOUNT)
-    suspend fun getMyAccount(@Body request: MyAccountRequest): Response<MyAccountResponse>
-    @POST(APP_STATUS)
-    suspend fun getAppStatus(@Body request: ApplicationStatusRequest): Response<ApplicationStatusResponse>
+    suspend fun getLogin(@Body request: LoginRequest): Response<LoginResponse>
 
 }
 

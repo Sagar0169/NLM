@@ -1,7 +1,7 @@
 package com.nlm.services
 
 import android.util.Log
-import com.nlm.utilities.AppConstants.BASE_URL
+import com.nlm.utilities.CONSTANTS.BASE_URL
 import com.nlm.utilities.Nlm
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

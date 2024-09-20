@@ -35,6 +35,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.nlm.R
+import com.nlm.ui.activity.LoginActivity
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.*
@@ -71,14 +72,14 @@ object Utility {
         }
     }
 
-//    fun logout(context : Context){
-//        savePreferencesBoolean(context,AppConstants.ACCEPT_REQ,false)
-//        Preferences.removeAllPreference(context)
-//        clearAllPreferencesExceptDeviceToken(context)
-//        val intent = Intent(context, LoginActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//        context.startActivity(intent)
-//    }
+    fun logout(context : Context){
+        savePreferencesBoolean(context,AppConstants.ACCEPT_REQ,false)
+        Preferences.removeAllPreference(context)
+        clearAllPreferencesExceptDeviceToken(context)
+        val intent = Intent(context, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        context.startActivity(intent)
+    }
 
     fun distance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
         val theta = lon1 - lon2
@@ -776,7 +777,7 @@ fun getUniqueIDWhitRandomString(): String {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             @SuppressLint("HardwareIds") val ANDROID_ID = Settings.Secure.getString(
-                Nlm.instance.getContentResolver(), Settings.Secure.ANDROID_ID
+                Nlm.mContext?.getContentResolver(), Settings.Secure.ANDROID_ID
             )
             if (ANDROID_ID != null && ANDROID_ID.length > 0) {
                 DEVICE_ID =

@@ -15,10 +15,13 @@ data class OTPResponse(
     val otp: Int
 )
 data class LoginResponse(
-    val _result: Result,
+    val _result: ResultData,
     val _resultflag: Int,
     val message: String
 )
+
+
+
 
 data class Result(
     val data: Data,
@@ -31,6 +34,10 @@ data class MyAccountResponse(
 )
 
 data class ResultData(
+    val userId: Int,
+    val usertype: String,
+    val name: String,
+    val token: String,
     val aadhaar_no: String,
     val application_number: String,
     val certificate_generate_date: String,
