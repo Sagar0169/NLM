@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.Artificial_Insemination.ClickActions" />
+            type="com.nlm.ui.activity.national_livestock_mission.ArtificialInseminationForms.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.activity.Artificial_Insemination">
+        tools:context=".ui.activity.national_livestock_mission.ArtificialInseminationForms">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -115,183 +115,32 @@
                 android:text="@string/select"
                 android:textColor="@color/grey"
                 app:drawableEndCompat="@drawable/ic_arrow_down" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Total no in Sheep and Goat Through existing cattle and buffalo labs:"
+                android:layout_marginTop="@dimen/dp_7"
 
-            <LinearLayout
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+
+                android:maxLength="50"
                 android:paddingHorizontal="@dimen/dp_10"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/curve_all_corner_black"
-                android:paddingVertical="@dimen/dp_10">
-                <TextView
-                    android:layout_weight="0.5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Information on the AI Centres"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:background="@drawable/curve_all_corner_dark_grey"
-                    android:orientation="vertical"
-                    >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="State"
-                        android:layout_marginTop="@dimen/dp_7"
-
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="District"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="No. of AI Centre for cattle and buffalo"
-                        android:layout_marginTop="@dimen/dp_7"
-
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="No. AI Centers strengthened for Goat Frozen Semen"
-                        android:layout_marginTop="@dimen/dp_7"
-
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="No. of AI performed (Average by the Centre)"
-                        android:layout_marginTop="@dimen/dp_7"
-
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Equipments in the AI centers provided"
-                        android:layout_marginTop="@dimen/dp_7"
-
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-
-                </LinearLayout>
-
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -405,6 +254,54 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/curve_all_corner_black"
+                android:paddingVertical="@dimen/dp_10">
+                <TextView
+                    android:layout_weight="0.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Observation by the NLM Team: (To be filled by the NLM Team):"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <com.nlm.utilities.NonScrollableRecyclerView
+                    android:id="@+id/recyclerView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:paddingTop="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Import of exotic sheep and goat gernplasm"
+                android:layout_marginTop="@dimen/dp_7"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
             <TextView
                 android:id="@+id/tvSendOtp"
                 android:layout_width="match_parent"
@@ -423,6 +320,6 @@
                 android:textColor="@color/white" />
         </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

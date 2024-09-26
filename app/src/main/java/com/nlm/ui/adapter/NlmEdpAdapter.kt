@@ -6,19 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.model.NlmEdp
-import com.nlm.model.OnlyCreated
-import com.nlm.ui.activity.AddNewAssistanceForEaActivity
-import com.nlm.ui.activity.AddNewMobileVeterinaryUnit
+import com.nlm.ui.activity.national_livestock_mission.AddNewAssistanceForEaActivity
 import com.nlm.ui.activity.AddNlmEdpActivity
-import com.nlm.utilities.showView
+import com.nlm.utilities.hideView
 
 
-class NlmEdpAdapter(private val onlyCreated: List<NlmEdp>, private val isFrom: Int) :
+class NlmEdpAdapter(private val onlyCreated: List<NlmEdp>, private val isFrom: Int,val Role_name:String ) :
     RecyclerView.Adapter<NlmEdpAdapter.NlmEdpAdapterViewHolder>() {
 
     // ViewHolder class to hold the view elements
@@ -29,6 +26,7 @@ class NlmEdpAdapter(private val onlyCreated: List<NlmEdp>, private val isFrom: I
         val tvCreated: TextView = itemView.findViewById(R.id.tvDate)
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
         val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
+        val ivDelete: ImageView = itemView.findViewById(R.id.ivDelete)
     }
 
 
@@ -48,7 +46,12 @@ class NlmEdpAdapter(private val onlyCreated: List<NlmEdp>, private val isFrom: I
         holder.tvStateName.text = item.comment
         holder.tvCreated.text = item.created
         holder.tvCreatedBy.text = item.createdBy
-
+        if (Role_name=="Super Admin")
+        {
+            holder.ivView.hideView()
+            holder.ivEdit.hideView()
+            holder.ivDelete.hideView()
+        }
         when(isFrom){
             0->{
                 holder.ivView.setOnClickListener {

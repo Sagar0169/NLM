@@ -5,13 +5,13 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.RSPSuggestionsForImprovement.ClickActions" />
+            type="com.nlm.ui.fragment.national_livestock_mission_fragments.RSPSuggestionsForImprovement.ClickActions" />
     </data>
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.RSPSuggestionsForImprovement">
+        tools:context=".ui.fragment.national_livestock_mission_fragments.RSPSuggestionsForImprovement">
 
         <ScrollView
             android:id="@+id/scrollView"

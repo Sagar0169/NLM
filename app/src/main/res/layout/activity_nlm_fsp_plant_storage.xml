@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.NlmFspPlantStorageActivity.ClickActions" />
+            type="com.nlm.ui.activity.national_livestock_mission.NlmFspPlantStorageActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

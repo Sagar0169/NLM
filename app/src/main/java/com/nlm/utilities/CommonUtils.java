@@ -117,12 +117,12 @@ public class CommonUtils {
      */
 
 
-    public static void log(String tag, String msg) {
-
-        if (CONSTANTS.isDebug) {
-            Log.d(tag, msg);
-        }
-    }
+//    public static void log(String tag, String msg) {
+//
+//        if (CONSTANTS.isDebug) {
+//            Log.d(tag, msg);
+//        }
+//    }
 
 
     public static String getParamsToUrl(String Url,
@@ -769,7 +769,7 @@ public class CommonUtils {
     }
 
     public static void copyDatabaseToSdCard(Context mContext) {
-        if (CONSTANTS.isDebug) {
+        if (PrefEntities.isDebug) {
             try {
 
                 String DB_PATH = "";

@@ -2,38 +2,18 @@ package com.nlm.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.AddDocsItemBinding
-import com.nlm.databinding.ItemArtificialInsemenationFormsBinding
-import com.nlm.databinding.ItemBullOfMothersBinding
-import com.nlm.databinding.ItemImportOfExoticGoatBinding
-import com.nlm.databinding.ItemNlspFormsBinding
 import com.nlm.databinding.ItemRgmImplementingAgencyBinding
-import com.nlm.model.ArtificialInsemenation
-import com.nlm.model.Bull_Mothers
-import com.nlm.model.ImportOfGoat
-import com.nlm.model.OnlyCreated
-import com.nlm.model.OnlyCreatedNlm
 import com.nlm.model.RGM_IA
-import com.nlm.ui.activity.Artificial_Insemination
-import com.nlm.ui.activity.Bull_Mother_Farms
-import com.nlm.ui.activity.ImportOfExoticGoat
-import com.nlm.ui.activity.NLSIAForm
-import com.nlm.ui.activity.NodalOfficerDetailActivity
-import com.nlm.ui.activity.RGM_State_Implementing_Agency
-import com.nlm.ui.activity.RspLabSemen
-import com.nlm.ui.activity.SemenStation
-import com.nlm.ui.activity.StateSemenBank
+import com.nlm.ui.activity.rashtriya_gokul_mission.RGMStateImplementingAgency
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
-import com.nlm.utilities.showView
 
-class RGM_IA_Adapter(private val implementingAgencyList: List<RGM_IA>, private val isFrom:Int) :
+class RGM_IA_Adapter(private val implementingAgencyList: List<RGM_IA>, private val isFrom:Int,val Role_name:String) :
     RecyclerView.Adapter<RGM_IA_Adapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -61,6 +41,12 @@ class RGM_IA_Adapter(private val implementingAgencyList: List<RGM_IA>, private v
     override fun onBindViewHolder(holder: ImplementingAgencyViewholder, position: Int) {
 
         val item = implementingAgencyList[position]
+        if (Role_name==AppConstants.SUPER_ADMIN||Role_name==AppConstants.Nodal_Officer||Role_name==AppConstants.ADMIN||Role_name==AppConstants.NLM)
+        {
+
+            holder.ivEdit.hideView()
+            holder.mBinding.ivDelete.hideView()
+        }
 
 
     holder.mBinding.tvId.text = item.Id
@@ -74,13 +60,13 @@ class RGM_IA_Adapter(private val implementingAgencyList: List<RGM_IA>, private v
 
 
     holder.mBinding.ivView.setOnClickListener {
-        val intent = Intent(holder.itemView.context, RGM_State_Implementing_Agency::class.java)
+        val intent = Intent(holder.itemView.context, RGMStateImplementingAgency::class.java)
         intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 2)
         holder.itemView.context.startActivity(intent)
     }
     holder.mBinding.ivEdit.setOnClickListener {
-        val intent = Intent(holder.itemView.context, RGM_State_Implementing_Agency::class.java)
+        val intent = Intent(holder.itemView.context, RGMStateImplementingAgency::class.java)
         intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 3)
         holder.itemView.context.startActivity(intent)

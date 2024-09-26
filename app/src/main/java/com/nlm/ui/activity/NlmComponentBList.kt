@@ -1,20 +1,12 @@
 package com.nlm.ui.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityNlmComponentBlistBinding
-import com.nlm.databinding.ActivitySemenStationListBinding
-import com.nlm.model.Bull_Mothers
 import com.nlm.model.NLM_CompB
-import com.nlm.ui.adapter.Bull_Of_Mothers_Adapter
 import com.nlm.ui.adapter.NlmComponentBadapter
 import com.nlm.utilities.BaseActivity
 

@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="ClickAction"
+            type="com.nlm.ui.fragment.RGMIAOtherStaffFragment.ClickActions" />
     </data>
     <RelativeLayout
         android:background="@color/white"
@@ -31,12 +33,58 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
             android:fontFamily="@font/opensans_semibold"
-            android:text="Name and Location of IA"
+            android:text="Name"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
 
         <EditText
             android:id="@+id/etyear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey"
+            android:maxLength="50"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_5"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+        <TextView
+            android:id="@+id/tvState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="States"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/etState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey"
+            android:fontFamily="@font/opensans_regular"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_5"
+            android:onClick="@{ClickAction::state}"
+            android:singleLine="true"
+            android:text="@string/select"
+            android:textColor="@color/black"
+            android:drawableEnd="@drawable/ic_arrow_down" />
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="Location of IA"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <EditText
+            android:id="@+id/etLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_7"
@@ -69,147 +117,170 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
-        <TextView
 
-            android:id="@+id/tvState1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="Other Staff"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_16" />
-
-        <TableLayout
-            android:layout_marginVertical="10dp"
-            android:id="@+id/tableLayout3"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="0,1,2,3"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/curve_all_corner_black"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_10">
 
-            android:background="@color/white"
-
-            android:shrinkColumns="1, 2">
-
-            <TableRow
-
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Other Staff"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_dark_grey"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="No. of Sanctioned Posts"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="No of Post filled Regular"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="No of post filled Deputation/contract basis"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="No of Post vacant"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Particulars"
                     android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
+                    android:textSize="@dimen/sp_16" />
 
-                <EditText
-                    android:layout_width="wrap_content"
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5">
 
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="No. of Sanctioned Posts"
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text"
-                    />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-
-                    android:textColor="@color/black"
-                    android:background="@android:drawable/edit_text" />
-            </TableRow>
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
 
 
 
-        </TableLayout>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:hint=""
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="No of Post filled Regular"
+
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:hint=""
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="No of post filled Deputation/contract basis"
+
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:hint=""
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="No of Post vacant"
+
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:hint=""
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

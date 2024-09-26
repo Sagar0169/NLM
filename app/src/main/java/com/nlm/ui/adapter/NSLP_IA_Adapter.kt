@@ -2,25 +2,19 @@ package com.nlm.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.AddDocsItemBinding
 import com.nlm.databinding.ItemNlspFormsBinding
-import com.nlm.model.OnlyCreated
 import com.nlm.model.OnlyCreatedNlm
-import com.nlm.ui.activity.NLSIAForm
-import com.nlm.ui.activity.NodalOfficerDetailActivity
-import com.nlm.ui.activity.RspLabSemen
-import com.nlm.ui.activity.StateSemenBank
+import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
+import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
-class NSLP_IA_Adapter(private val implementingAgencyList: List<OnlyCreatedNlm>,val isFrom:Int) :
+class NSLP_IA_Adapter(private val implementingAgencyList: List<OnlyCreatedNlm>,val isFrom:Int,val Role_name:String) :
     RecyclerView.Adapter<NSLP_IA_Adapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -50,6 +44,12 @@ class NSLP_IA_Adapter(private val implementingAgencyList: List<OnlyCreatedNlm>,v
     override fun onBindViewHolder(holder: ImplementingAgencyViewholder, position: Int) {
 
         val item = implementingAgencyList[position]
+        if (Role_name=="Super Admin")
+        {
+            holder.mBinding.ivView.hideView()
+            holder.mBinding.ivEdit.hideView()
+            holder.mBinding.ivDelete.hideView()
+        }
 
 if (isFrom==1)
 {
@@ -69,14 +69,15 @@ if (isFrom==1)
 
 
 
+
     holder.mBinding.ivView.setOnClickListener {
-        val intent = Intent(holder.itemView.context, RspLabSemen::class.java)
+        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
         intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 2)
         holder.itemView.context.startActivity(intent)
     }
     holder.mBinding.ivEdit.setOnClickListener {
-        val intent = Intent(holder.itemView.context, RspLabSemen::class.java)
+        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
         intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 3)
         holder.itemView.context.startActivity(intent)
@@ -98,13 +99,13 @@ if (isFrom==1)
         holder.mBinding.llYear.showView()
         holder.mBinding.tvYearofe.text=item.year_of_est
         holder.mBinding.ivView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, RspLabSemen::class.java)
+            val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
             intent.putExtra("nodalOfficer", item)
             intent.putExtra("isFrom", 2)
             holder.itemView.context.startActivity(intent)
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            val intent = Intent(holder.itemView.context, RspLabSemen::class.java)
+            val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
             intent.putExtra("nodalOfficer", item)
             intent.putExtra("isFrom", 3)
             holder.itemView.context.startActivity(intent)
@@ -124,13 +125,13 @@ if (isFrom==1)
             holder.mBinding.llYear.showView()
             holder.mBinding.tvYearofe.text=item.year_of_est
             holder.mBinding.ivView.setOnClickListener {
-                val intent = Intent(holder.itemView.context, StateSemenBank::class.java)
+                val intent = Intent(holder.itemView.context, StateSemenBankForms::class.java)
                 intent.putExtra("nodalOfficer", item)
                 intent.putExtra("isFrom", 2)
                 holder.itemView.context.startActivity(intent)
             }
             holder.mBinding.ivEdit.setOnClickListener {
-                val intent = Intent(holder.itemView.context, StateSemenBank::class.java)
+                val intent = Intent(holder.itemView.context, StateSemenBankForms::class.java)
                 intent.putExtra("nodalOfficer", item)
                 intent.putExtra("isFrom", 3)
                 holder.itemView.context.startActivity(intent)

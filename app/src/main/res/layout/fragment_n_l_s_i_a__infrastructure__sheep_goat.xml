@@ -5,7 +5,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.NLSIAInfrastructureSheepGoat.ClickActions" />
+            type="com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAInfrastructureSheepGoat.ClickActions" />
     </data>
 
 
@@ -13,7 +13,7 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.NLSIAInfrastructureSheepGoat">
+        tools:context=".ui.fragment.national_livestock_mission_fragments.NLSIAInfrastructureSheepGoat">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -29,413 +29,845 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_10">
-
-
-                <TableLayout
-                    android:layout_marginVertical="10dp"
-                    android:id="@+id/tableLayout"
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Particulars"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="1, 2"
-
-                    android:background="@color/white"
-
-                    android:shrinkColumns="1, 2">
-
-                    <TableRow
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:paddingVertical="@dimen/dp_10">
+                    <TextView
 
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/frozen_semen_production_laboratory_for_goat"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
-                            android:text="Particulars"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
+                            android:layout_marginTop="@dimen/dp_7"
 
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@color/darkBlue"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold" />
-                    </TableRow>
+                            android:layout_marginTop="@dimen/dp_7"
 
-                    <TableRow
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/liquid_semen_production_laboratory_for_sheep"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="@string/frozen_semen_production_laboratory_for_goat"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:inputType="number"
-                            android:maxLength="5"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text"
-                            />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
 
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
 
-                    <TableRow
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Production Capacity"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="@string/liquid_semen_production_laboratory_for_sheep"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:text="Production Capacity"
-                            android:layout_marginTop="5dp"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-
-                            android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="@string/actual_production_since_inception"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
 
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/actual_production_since_inception"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="@string/no_doses_of_semen_distributed_within_states"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
 
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/no_doses_of_semen_distributed_within_states"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="@string/no_doses_of_semen_distributed_in_neighboring_states"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
 
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/no_doses_of_semen_distributed_in_neighboring_states"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="@string/availability_of_liquid_nitrogen"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
 
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/availability_of_liquid_nitrogen"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_gravity="center_vertical"
-                            android:text="@string/breeding_farms"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
 
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/breeding_farms"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_gravity="center_vertical"
-                            android:text="@string/goat_breeding_farm"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
 
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/goat_breeding_farm"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_gravity="center_vertical"
-                            android:text="@string/training_centers"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
 
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/training_centers"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="@dimen/dp_8"
-                            android:text="@string/number_of_cattle_ai_centres_equipped_with_goat_frozen_semen"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
 
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                    <TableRow
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/number_of_cattle_ai_centres_equipped_with_goat_frozen_semen"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
 
-                            android:layout_gravity="center_vertical"
-                            android:text="@string/total_ai_performed_by_the_states"
-                            android:background="@color/white"
-                            android:textColor="@android:color/black" />
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:maxLength="5"
-                            android:inputType="number"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/total_ai_performed_by_the_states"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Number"
+                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
-                            android:background="@android:drawable/edit_text" />
-                    </TableRow>
-                </TableLayout>
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
                 <TextView
                     android:id="@+id/tvSendOtp"
                     android:layout_width="match_parent"

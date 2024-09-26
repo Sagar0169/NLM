@@ -160,6 +160,7 @@
                     android:paddingEnd="10dp"
                     app:drawableEndCompat="@drawable/ic_arrow_down"
                     app:drawableStartCompat="@drawable/img_4"
+                    android:visibility="gone"
                     tools:ignore="RtlSymmetry" />
 
                 <LinearLayout
@@ -194,7 +195,8 @@
                     android:layout_height="1dp"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="@dimen/dp_2"
-                    android:background="@color/black" />
+                    android:background="@color/black"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tvLivestockHealthDisease"
@@ -210,7 +212,8 @@
                     android:textSize="16sp"
                     android:paddingEnd="10dp"
                     app:drawableEndCompat="@drawable/ic_arrow_down"
-                    app:drawableStartCompat="@drawable/ic_sightedchild" />
+                    app:drawableStartCompat="@drawable/ic_sightedchild"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:id="@+id/llLivestockHealthDisease"
@@ -253,7 +256,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
+                    android:background="@color/black"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tvNationalLiveStockMission"
@@ -269,7 +273,7 @@
                     android:textSize="16sp"
                     android:paddingEnd="10dp"
                     app:drawableEndCompat="@drawable/ic_arrow_down"
-
+                    android:visibility="gone"
                     app:drawableStartCompat="@drawable/img_3" />
 
                 <LinearLayout
@@ -385,7 +389,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
+                    android:background="@color/black"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tvNationalDairyDevelopment"
@@ -396,6 +401,7 @@
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
                     android:paddingVertical="10dp"
+                    android:visibility="gone"
                     android:text="@string/national_dairy_development"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -506,7 +512,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
+                    android:background="@color/black"
+                    android:visibility="gone"
+                    />
 
                 <TextView
                     android:id="@+id/tvRashtriyaGokulMission"
@@ -522,6 +530,7 @@
                     android:textSize="16sp"
                     android:paddingEnd="10dp"
                     app:drawableEndCompat="@drawable/ic_arrow_down"
+                    android:visibility="gone"
                     app:drawableStartCompat="@drawable/lock" />
 
                 <LinearLayout
@@ -601,7 +610,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
+                    android:background="@color/black"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tvTermsAndConditions"
@@ -611,6 +621,7 @@
                     android:layout_marginTop="10dp"
                     android:drawableStart="@drawable/about_nav"
                     android:drawablePadding="10dp"
+
                     android:fontFamily="@font/roboto_regular"
                     android:paddingVertical="10dp"
                     android:text="Terms and condition"
@@ -622,7 +633,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
+                    android:background="@color/black"
+                    />
 
                 <TextView
                     android:id="@+id/tvPrivacyPolicy"
@@ -643,7 +655,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
+                    android:background="@color/black"
+                    android:visibility="gone"/>
 
             </LinearLayout>
         </ScrollView>

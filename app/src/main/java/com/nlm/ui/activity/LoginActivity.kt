@@ -1,11 +1,14 @@
 package com.nlm.ui.activity
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import com.nlm.R
 import com.nlm.databinding.ActivityLoginBinding
 import com.nlm.model.LoginRequest
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
@@ -27,6 +30,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     inner class ClickActions {
 
         fun login(view: View) {
+//            startActivity(
+//                Intent(
+//                    this@LoginActivity,
+//                    DashboardActivity::class.java
+//                ).putExtra(AppConstants.INFO, 3)
+//            )
             if (valid())
                 viewModel.getLoginApi(
                     this@LoginActivity, LoginRequest(
@@ -34,12 +43,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         mBinding!!.etPassword.text.toString().trim()
                     )
                 )
-        }
-
-        fun register(view: View) {
-//            val intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
-//            startActivity(intent)
-
         }
 
         fun backPress(view: View) {
@@ -57,10 +60,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         return if (mBinding!!.etUsername.text.toString().trim().isEmpty()) {
             showSnackbar(mBinding!!.clParent, getString(R.string.please_enter_email_id))
             false
-        } else if (!(Utility.isValidEmail(mBinding!!.etUsername.text.toString().trim()))) {
-            showSnackbar(mBinding!!.clParent, getString(R.string.enter_valid_id))
-            return false
-        } else if (mBinding!!.etPassword.text.toString().trim().isEmpty()) {
+        }
+        else if (mBinding!!.etPassword.text.toString().trim().isEmpty()) {
             showSnackbar(mBinding!!.clParent, getString(R.string.Please_enter_password))
             false
         } else true
@@ -81,41 +82,41 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
                     Log.d("Login Data", userResponseModel._resultflag.toString())
 
-//                    userResponseModel._result.userId.let { it1 ->
-//                        Utility.savePreferencesInt(
-//                            this, AppConstants.USER_ID,
-//                            it1
-//                        )
-//                    }
-//                    userResponseModel._result.usertype.let { it1 ->
-//                        Utility.savePreferencesString(
-//                            this, AppConstants.USER_TYPE,
-//                            it1
-//                        )
-//                    }
-//                    userResponseModel._result.token.let { it1 ->
-//                        Utility.savePreferencesString(
-//                            this, com.nlm.utilities.PrefEntities.TOKEN,
-//                            it1
-//                        )
-//                    }
-//                    if (userResponseModel._result.usertype == "Admin") {
-//                        startActivity(
-//                            Intent(
-//                                this@LoginActivity,
-//                                DashboardActivity::class.java
-//                            ).putExtra(AppConstants.INFO, 3)
-//                        )
-//                        finishAffinity()
-//                    } else {
-//                        startActivity(
-//                            Intent(
-//                                this@LoginActivity,
-//                                DashboardActivity::class.java
-//                            ).putExtra(AppConstants.INFO, 3)
-//                        )
-//                        finishAffinity()
-//                    }
+
+                    userResponseModel._result.user_id?.let { it1 ->
+                        Utility.savePreferencesInt(
+                            this, AppConstants.USER_ID,
+                            it1
+                        )
+                    }
+
+                    userResponseModel._result.role_id?.let { it1 ->
+                        Utility.savePreferencesString(
+                            this, AppConstants.ROLE_ID,
+                            it1
+                        )
+                    }
+                    userResponseModel._result.token?.let { it1 ->
+                        Utility.savePreferencesString(
+                            this, PrefEntities.TOKEN,
+                            it1
+                        )
+
+                    }
+
+                    userResponseModel._result.role_name?.let { it1 ->
+                        Utility.savePreferencesString(this,AppConstants.ROLE_NAME,
+                            it1
+                        )
+                    }
+                        startActivity(
+                            Intent(
+                                this@LoginActivity,
+                                DashboardActivity::class.java
+                            )
+                        )
+                        finishAffinity()
+
                 }
             }
         }

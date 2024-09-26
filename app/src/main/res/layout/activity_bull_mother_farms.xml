@@ -6,14 +6,14 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.Bull_Mother_Farms.ClickActions" />
+            type="com.nlm.ui.activity.rashtriya_gokul_mission.BullMotherFarms.ClickActions" />
     </data>
 
     <RelativeLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activity.Bull_Mother_Farms">
+        tools:context=".ui.activity.rashtriya_gokul_mission.BullMotherFarms">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"

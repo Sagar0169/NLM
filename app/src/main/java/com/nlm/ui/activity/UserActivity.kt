@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityUserBinding
 import com.nlm.model.All_Users
-import com.nlm.model.Bull_Mothers
 import com.nlm.ui.adapter.ALL_Users_Adapter
-import com.nlm.ui.adapter.Bull_Of_Mothers_Adapter
 import com.nlm.utilities.BaseActivity
 
 class UserActivity : BaseActivity<ActivityUserBinding>() {

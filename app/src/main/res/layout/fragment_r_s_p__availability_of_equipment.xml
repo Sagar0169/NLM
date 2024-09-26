@@ -5,13 +5,13 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.RSPAvailabilityOfEquipmentFragment.ClickActions" />
+            type="com.nlm.ui.fragment.national_livestock_mission_fragments.RSPAvailabilityOfEquipmentFragment.ClickActions" />
     </data>
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.RSPAvailabilityOfEquipmentFragment">
+        tools:context=".ui.fragment.national_livestock_mission_fragments.RSPAvailabilityOfEquipmentFragment">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -36,101 +36,20 @@
             android:text="Availability of equipment:"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1, 2, 3"
+            android:layout_height="match_parent"
 
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/white">
-
-            <!-- Header Row -->
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:background="@color/darkBlue"
-                    android:text="Availability of Equipments"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:layout_span="3"
-                    android:gravity="center" />
-            </TableRow>
-
-            <!-- Subheader Row -->
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:background="@color/light_gray"
-                    android:text="List of equipment"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    android:gravity="center" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:background="@color/light_gray"
-                    android:text="Make"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    android:gravity="center" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:background="@color/light_gray"
-                    android:text="Year of procurement"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    android:gravity="center" />
-            </TableRow>
-
-            <!-- Input Row -->
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:background="@android:drawable/edit_text"
-
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:background="@android:drawable/edit_text"
-
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:background="@android:drawable/edit_text"
-
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:inputType="number" />
-            </TableRow>
-        </TableLayout>
+            android:background="@drawable/curve_all_corner_black"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dp_5"
+            android:paddingVertical="@dimen/dp_10">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp" /></LinearLayout>
         <TextView
             android:id="@+id/tvState2"
             android:layout_width="wrap_content"

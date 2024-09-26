@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.BreedMultiplicationRGMActivity.ClickActions" />
+            type="com.nlm.ui.activity.rashtriya_gokul_mission.BreedMultiplicationRGMActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

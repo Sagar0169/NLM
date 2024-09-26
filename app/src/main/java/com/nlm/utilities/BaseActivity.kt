@@ -59,10 +59,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         setObservers()
     }
 
-    fun isArabicLang(): Boolean {
-        return Preferences.getPreference(context, PrefEntities.selected_language).equals("ar")
-    }
-
     private fun performDataBinding() {
         viewDataBinding = DataBindingUtil.setContentView(this, layoutId)
         viewDataBinding.executePendingBindings()
@@ -81,10 +77,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     private fun showToast(message: String?) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    open fun isUserLogin(): Boolean {
-        return Preferences.getPreference(this, PrefEntities.USER_DETAILS).isNotEmpty()
     }
 
     fun View.showStringSnackbar(message: String) {
@@ -142,24 +134,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         val alert = builder.create()
         alert.show()
     }
-
-
-    @TargetApi(Build.VERSION_CODES.M)
-    fun requestPermissionsSafely(permissions: Array<String?>?, requestCode: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(permissions!!, requestCode)
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.M)
-    fun hasPermission(permission: String?): Boolean {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
-                checkSelfPermission(permission!!) == PackageManager.PERMISSION_GRANTED
-    }
-
-//    override fun attachBaseContext(newBase: Context?) {
-//        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase!!))
-//    }
 
     fun shareOptions() {
         try {

@@ -2,31 +2,17 @@ package com.nlm.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.AddDocsItemBinding
-import com.nlm.databinding.ItemArtificialInsemenationFormsBinding
 import com.nlm.databinding.ItemImportOfExoticGoatBinding
-import com.nlm.databinding.ItemNlspFormsBinding
-import com.nlm.model.ArtificialInsemenation
 import com.nlm.model.ImportOfGoat
-import com.nlm.model.OnlyCreated
-import com.nlm.model.OnlyCreatedNlm
-import com.nlm.ui.activity.Artificial_Insemination
-import com.nlm.ui.activity.ImportOfExoticGoat
-import com.nlm.ui.activity.NLSIAForm
-import com.nlm.ui.activity.NodalOfficerDetailActivity
-import com.nlm.ui.activity.RspLabSemen
-import com.nlm.ui.activity.StateSemenBank
+import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatForms
 import com.nlm.utilities.hideView
-import com.nlm.utilities.showView
 
-class Import_Of_Goat_Adapter(private val implementingAgencyList: List<ImportOfGoat>,) :
+class Import_Of_Goat_Adapter(private val implementingAgencyList: List<ImportOfGoat>,val Role_name:String) :
     RecyclerView.Adapter<Import_Of_Goat_Adapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -57,7 +43,12 @@ class Import_Of_Goat_Adapter(private val implementingAgencyList: List<ImportOfGo
 
         val item = implementingAgencyList[position]
 
-
+        if (Role_name=="Super Admin")
+        {
+            holder.mBinding.ivView.hideView()
+            holder.mBinding.ivEdit.hideView()
+            holder.mBinding.ivDelete.hideView()
+        }
 
     holder.mBinding.tvNoofFramer.text = item.Number_Of_Farmers
     holder.mBinding.tvDate.text = item.created
@@ -68,13 +59,13 @@ class Import_Of_Goat_Adapter(private val implementingAgencyList: List<ImportOfGo
 
 
     holder.mBinding.ivView.setOnClickListener {
-        val intent = Intent(holder.itemView.context, ImportOfExoticGoat::class.java)
+        val intent = Intent(holder.itemView.context, ImportOfExoticGoatForms::class.java)
         intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 2)
         holder.itemView.context.startActivity(intent)
     }
     holder.mBinding.ivEdit.setOnClickListener {
-        val intent = Intent(holder.itemView.context, ImportOfExoticGoat::class.java)
+        val intent = Intent(holder.itemView.context, ImportOfExoticGoatForms::class.java)
         intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 3)
         holder.itemView.context.startActivity(intent)

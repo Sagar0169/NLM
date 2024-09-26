@@ -6,14 +6,14 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.NLSIAConstraintsFacedByIAFragment.ClickActions" />
+            type="com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAConstraintsFacedByIAFragment.ClickActions" />
     </data>
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep">
+        tools:context=".ui.fragment.national_livestock_mission_fragments.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep">
 
     <ScrollView
         android:id="@+id/scrollView"

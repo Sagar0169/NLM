@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.Artificial_Insemination_List.ClickActions" />
+            type="com.nlm.ui.activity.national_livestock_mission.ArtificialInseminationList.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.activity.Artificial_Insemination_List">
+        tools:context=".ui.activity.national_livestock_mission.ArtificialInseminationList">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
