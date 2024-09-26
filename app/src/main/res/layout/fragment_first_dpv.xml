@@ -41,40 +41,20 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <RelativeLayout
-                    android:id="@+id/rlDateOfSighting"
+                <TextView
+                    android:id="@+id/etState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:elevation="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRegisterCategory">
-
-
-                    <TextView
-                        android:id="@+id/etState"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:text="Select"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp" />
-
-
-                    <ImageView
-                        android:id="@+id/ivArrowUpDState"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="20dp"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_arrow_down"
-                        android:visibility="visible" />
-                </RelativeLayout>
-
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:text="Please Select"
+                    android:textColor="@color/grey" />
 
                 <TextView
 
@@ -86,52 +66,20 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <RelativeLayout
-                    android:id="@+id/rlRelationship"
+                <TextView
+                    android:id="@+id/etDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:elevation="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRegisterCategory">
-
-
-                    <TextView
-                        android:id="@+id/etDistrict"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:text="Please Select"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:id="@+id/ivArrowDown"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="20dp"
-                        android:elevation="2sp"
-                        android:padding="5dp"
-                        android:rotation="180"
-                        android:src="@drawable/ic_arrow_down"
-                        android:visibility="gone" />
-
-                    <ImageView
-                        android:id="@+id/ivArrowUpDIstrict"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="20dp"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_arrow_down"
-                        android:visibility="visible" />
-                </RelativeLayout>
-
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:text="Please Select"
+                    android:textColor="@color/grey" />
                 <LinearLayout
                     android:id="@+id/llRelation"
                     android:layout_width="match_parent"
@@ -434,7 +382,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Liquid Milk"
+                        android:text="Liquid Milk (in TLPD)"
                         android:layout_marginTop="@dimen/dp_7"
 
                         android:textColor="@color/black"
@@ -459,7 +407,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_15"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Value Added Products"
+                        android:text="Value added products (in TKgPD)"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
                     <LinearLayout
@@ -697,41 +645,6 @@
 
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Draft Guidelines for preparation of Visit Report by NLMs"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_18" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1.2dp"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:background="@color/black"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="@string/field_visit_report_should_be_clear_and_"
-                        android:textColor="@color/black"
-
-                        android:textSize="@dimen/sp_16" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1.2dp"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:background="@color/black"/>
-
-                </LinearLayout>
 
 
 
@@ -752,7 +665,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="Submit"
+                    android:text="Next"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </LinearLayout>

@@ -1,5 +1,6 @@
 package com.nlm.ui.activity
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import com.nlm.R
@@ -27,13 +28,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     inner class ClickActions {
 
         fun login(view: View) {
-            if (valid())
-                viewModel.getLoginApi(
-                    this@LoginActivity, LoginRequest(
-                        mBinding!!.etUsername.text.toString().trim(),
-                        mBinding!!.etPassword.text.toString().trim()
-                    )
-                )
+//            if (valid())
+//                viewModel.getLoginApi(
+//                    this@LoginActivity, LoginRequest(
+//                        mBinding!!.etUsername.text.toString().trim(),
+//                        mBinding!!.etPassword.text.toString().trim()
+//                    )
+//                )
+
+        val intent=Intent(this@LoginActivity,DashboardActivity::class.java)
+            startActivity(intent)
+
         }
 
         fun register(view: View) {

@@ -46,7 +46,7 @@ class NLMComponentANDDActivity : BaseActivity<ActivityNlmComponentANddBinding>()
 
             NLMComponentA(
                 "TAMIL NADU",
-                "Sheila Benjamin",
+                "Sheila BenjaminBenjaminBenjamin",
                 "NPDD_MP_01C",
                 "2024",
                 "submitted",

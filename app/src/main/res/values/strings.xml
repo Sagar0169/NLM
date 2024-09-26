@@ -288,5 +288,29 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="please_enter_email_id">Please Enter Email</string>
     <string name="Please_enter_password">Please enter password</string>
     <string name="enter_valid_id">Enter Valid Email ID</string>
+    <string name="name_of_milk_union">Name Of Milk Union<font color='red'>*</font></string>
+    <string name="stateMU">State<font color='red'>*</font></string>
+    <string name="name_of_districts_covered">Name of Districts Covered<font color='red'>*</font></string>
+    <string name="photographs_of_site_asset"><![CDATA[Photographs of site & asset]]></string>
+    <string name="name_of_dcs">Name of DCS<font color='red'>*</font></string>
+    <string name="stateDcs">State<font color='red'>*</font></string>
+    <string name="districtDCS">District<font color='red'>*</font></string>
+    <string name="village">Village<font color='red'>*</font></string>
+    <string name="location_of_state_central_lab">Location of State Central Lab<font color='red'>*</font></string>
+    <string name="month_year_of_installation"><![CDATA[Month & Year of installation]]></string>
+    <string name="civil_work_including_electrical_interiorsscl"><![CDATA[Civil Work (including electrical & Interiors)]]></string>
+    <string name="name_of_stateMP">Name of State<font color='red'>*</font></string>
+    <string name="name_of_the_districtMP">Name of the District<font color='red'>*</font></string>
+    <string name="name_of_the_retail_shop_milk_parlour_visitedMPM">Name of the Retail Shop/Milk Parlour Visited<font color='red'>*</font></string>
+    <string name="name_of_the_milk_union_mpc_federationMPM">Name of the Milk Union/MPC/Federation<font color='red'>*</font></string>
+    <string name="name_of_stateMPM">Name of State<font color='red'>*</font></string>
+    <string name="name_of_the_districtMPM">Name of the District<font color='red'>*</font></string>
+    <string name="name_of_the_tehsil">Name of the Tehsil<font color='red'>*</font></string>
+    <string name="date_of_inspection">Date of Inspection<font color='red'>*</font></string>
+    <string name="name_of_statePES">Name of State<font color='red'>*</font></string>
+    <string name="name_of_the_districtPES">Name of the District<font color='red'>*</font></string>
+    <string name="msp"><![CDATA[< MSP]]></string>
+    <string name="aboveMsp"><![CDATA[> MSP]]></string>
+    <string name="productivity_enhancement_servicesPES">Productivity Enhancement Services</string>
 </resources>
 

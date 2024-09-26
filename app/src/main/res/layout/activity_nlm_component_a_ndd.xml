@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
-            android:paddingBottom="10dp"
+            android:paddingVertical="12dp"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -39,10 +40,11 @@
                 android:id="@+id/tvHeading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="20sp"
                 android:text="National Level Monitors(Component A)"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:fontFamily="@font/lexend_semibold"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"

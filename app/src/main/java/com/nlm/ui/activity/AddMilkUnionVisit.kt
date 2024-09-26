@@ -40,10 +40,8 @@ class AddMilkUnionVisit : BaseActivity<ActivityAddMilkUnionVisitBinding>() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         mBinding!!.etState.setOnClickListener { showBottomSheetDialog("State")
-        mBinding!!.ivArrowUpDState.hideView()
         }
         mBinding!!.etDistrict.setOnClickListener { showBottomSheetDialog("District")
-            mBinding!!.ivArrowUpDIstrict.hideView()
 
         }
 

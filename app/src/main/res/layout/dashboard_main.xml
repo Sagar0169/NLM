@@ -16,6 +16,8 @@
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+
             android:background="@drawable/headear_back_small">
 
             <LinearLayout
