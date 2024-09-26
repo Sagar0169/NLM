@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.NlmAssistanceForEa.ClickActions" />
+            type="com.nlm.ui.activity.national_livestock_mission.NlmAssistanceForEa.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
-            android:paddingBottom="10dp"
+            android:paddingVertical="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/lexend_semibold"
                 android:text="List of Assistance for Extension Activities"
                 android:textColor="@color/white"
                 android:textSize="20sp"

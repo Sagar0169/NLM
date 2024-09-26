@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/llone"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:paddingVertical="@dimen/dp_5"
+        android:background="@drawable/curve_all_corner_dark_grey"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="Name of the centre"
+            android:layout_marginTop="@dimen/dp_7"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey"
+            android:fontFamily="@font/opensans_regular"
+
+            android:maxLength="50"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_5"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="@dimen/sp_16" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="Number of Ai performed"
+            android:layout_marginTop="@dimen/dp_7"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey"
+            android:fontFamily="@font/opensans_regular"
+
+            android:maxLength="50"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_5"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="@dimen/sp_16" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="Whether man power trained for Goat AI"
+            android:layout_marginTop="@dimen/dp_7"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey"
+            android:fontFamily="@font/opensans_regular"
+
+            android:maxLength="50"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_5"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="@dimen/sp_16" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="Equipment available"
+            android:layout_marginTop="@dimen/dp_7"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey"
+            android:fontFamily="@font/opensans_regular"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:maxLength="50"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_5"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="@dimen/sp_16" />
+    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Delete row"
+        android:src="@android:drawable/ic_delete"
+        android:layout_below="@+id/llone"
+        android:layout_toStartOf="@+id/btnAdd"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintTop_toBottomOf="@+id/llone"
+        android:layout_alignParentEnd="true"
+        app:tint="@android:color/holo_red_dark" />
+    <ImageButton
+        android:layout_below="@+id/llone"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Add row"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llone"
+        app:tint="@android:color/holo_green_dark" />
+</RelativeLayout>

@@ -5,16 +5,16 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.NLSIAGoverningBodyBoardOfDirectorsFragment.ClickActions" />
+            type="com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAGoverningBodyBoardOfDirectorsFragment.ClickActions" />
     </data>
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.NLSIAGoverningBodyBoardOfDirectorsFragment">
+        tools:context=".ui.fragment.national_livestock_mission_fragments.NLSIAGoverningBodyBoardOfDirectorsFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,469 +28,60 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/dp_10">
-        <TextView
-            android:id="@+id/tvState1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/curve_all_corner_black"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_10">
+            <TextView
+
+                android:id="@+id/tvState1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Composition of Advisory committee (if any)"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+            <com.nlm.utilities.NonScrollableRecyclerView
+                android:id="@+id/recyclerView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="@string/composition_of_governing_body_board_of_directors_of_regional_semen_bank"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_16" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-            android:background="@drawable/curve_all_corner_grey"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
+            android:background="@drawable/curve_all_corner_black"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_10">
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/tvState2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:text="Name of the officer"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Project Monitoring Committee (TMC)"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+            <com.nlm.utilities.NonScrollableRecyclerView
+                android:id="@+id/recyclerView2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Designation"
-                android:textAlignment="center"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Organization"
-                android:textAlignment="center"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:paddingTop="8dp" />
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvState2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="Project Monitoring Committee (PMC)"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_16" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-            android:background="@drawable/curve_all_corner_grey"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:text="Name of the officer"
-                android:textStyle="bold" />
 
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Designation"
-                android:textAlignment="center"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Organization"
-                android:textAlignment="center"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </LinearLayout>
-        <TextView
-            android:id="@+id/tvState3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="Composition of Advisory committee (if any)"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_16" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-            android:background="@drawable/curve_all_corner_grey"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:text="Name of the officer"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Designation"
-                android:textAlignment="center"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Organization"
-                android:textAlignment="center"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:backgroundTint="@color/darkBlue"
-
-            android:orientation="horizontal"
-            android:padding="8dp">
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:layout_weight="1"
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text"
-                />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-
-                android:textColor="@color/black"
-                android:background="@android:drawable/edit_text" />
-        </LinearLayout>
         <TextView
             android:id="@+id/tvSendOtp"
             android:layout_width="match_parent"
@@ -509,6 +100,6 @@
             android:textAlignment="center"
             android:textColor="@color/white" />
     </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </layout>

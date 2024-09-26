@@ -43,9 +43,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-/**
- * Created by Prashant Rajput on April, 07 2021.
- */
 object FileUtils {
     // get path of File for grter than kitkat
     fun getPath(context: Context, uri: Uri): String? {

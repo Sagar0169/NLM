@@ -80,56 +80,46 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Date of last test"
+                                android:text="Whether tests performed (Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
-                                android:id="@+id/etDateOfPesticide"
+                            <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Frequency"
-                                android:layout_marginTop="@dimen/dp_7"
+                                android:orientation="horizontal">
 
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="Yes"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="No"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
+
+                            </RadioGroup>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Result"
+                                android:text="Frequency of tests performed"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
@@ -148,6 +138,10 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+
+
+
+
                         </LinearLayout>
 
 
@@ -185,57 +179,46 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Date of last test"
+                                android:text="Whether tests performed (Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
-                                android:id="@+id/etDateOfAntibiotic"
-
+                            <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Frequency"
-                                android:layout_marginTop="@dimen/dp_7"
+                                android:orientation="horizontal">
 
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="Yes"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="No"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
+
+                            </RadioGroup>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Result"
+                                android:text="Frequency of tests performed"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
@@ -254,6 +237,10 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+
+
+
+
                         </LinearLayout>
 
 
@@ -292,57 +279,46 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Date of last test"
+                                android:text="Whether tests performed (Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
-                                android:id="@+id/etDateOfHeavyMetal"
-
+                            <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Frequency"
-                                android:layout_marginTop="@dimen/dp_7"
+                                android:orientation="horizontal">
 
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="Yes"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="No"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
+
+                            </RadioGroup>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Result"
+                                android:text="Frequency of tests performed"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
@@ -361,6 +337,10 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+
+
+
+
                         </LinearLayout>
 
 
@@ -399,57 +379,46 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Date of last test"
+                                android:text="Whether tests performed (Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
-                                android:id="@+id/etDateOfMicrobiological"
-
+                            <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Frequency"
-                                android:layout_marginTop="@dimen/dp_7"
+                                android:orientation="horizontal">
 
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="Yes"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="No"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
+
+                            </RadioGroup>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Result"
+                                android:text="Frequency of tests performed"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
@@ -468,6 +437,10 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+
+
+
+
                         </LinearLayout>
 
 
@@ -506,57 +479,46 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Date of last test"
+                                android:text="Whether tests performed (Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
-                                android:id="@+id/etDateOfFattyAcidProfile"
-
+                            <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Frequency"
-                                android:layout_marginTop="@dimen/dp_7"
+                                android:orientation="horizontal">
 
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="Yes"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="No"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
+
+                            </RadioGroup>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Result"
+                                android:text="Frequency of tests performed"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
@@ -575,6 +537,10 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+
+
+
+
                         </LinearLayout>
 
 
@@ -613,57 +579,46 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Date of last test"
+                                android:text="Whether tests performed (Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
-                                android:id="@+id/etDateOfProteinEstimation"
-
+                            <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Frequency"
-                                android:layout_marginTop="@dimen/dp_7"
+                                android:orientation="horizontal">
 
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="Yes"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="No"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
+
+                            </RadioGroup>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Result"
+                                android:text="Frequency of tests performed"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
@@ -682,6 +637,10 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+
+
+
+
                         </LinearLayout>
 
 
@@ -720,57 +679,46 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Date of last test"
+                                android:text="Whether tests performed (Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
-                                android:id="@+id/etDateOfAflatoxins"
-
+                            <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Frequency"
-                                android:layout_marginTop="@dimen/dp_7"
+                                android:orientation="horizontal">
 
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="Yes"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="No"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
+
+                            </RadioGroup>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Result"
+                                android:text="Frequency of tests performed"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
@@ -789,6 +737,10 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+
+
+
+
                         </LinearLayout>
 
 
@@ -827,57 +779,46 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Date of last test"
+                                android:text="Whether tests performed (Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
-                                android:id="@+id/etDateOfOthers"
-
+                            <RadioGroup
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Frequency"
-                                android:layout_marginTop="@dimen/dp_7"
+                                android:orientation="horizontal">
 
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="Yes"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
+                                <androidx.appcompat.widget.AppCompatRadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:paddingEnd="@dimen/dp_5"
+                                    android:text="No"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_14"
+                                    app:buttonTint="@color/darkBlue" />
 
+
+                            </RadioGroup>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Result"
+                                android:text="Frequency of tests performed"
                                 android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
@@ -896,6 +837,10 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+
+
+
+
                         </LinearLayout>
 
 
@@ -933,52 +878,8 @@
                         android:orientation="vertical"
                         >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Name"
-                            android:layout_marginTop="@dimen/dp_7"
 
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
 
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Designation"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1002,25 +903,30 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
-                    </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="No. of employee"
+                            android:layout_marginTop="@dimen/dp_7"
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Financial Viability"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1032,77 +938,56 @@
                         android:orientation="vertical"
                         >
 
+
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Revenue generated (Last FY)"
+                            android:text="Degree/Qualification"
                             android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
-                        <LinearLayout
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="No. of employee"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
-                            android:background="@drawable/curve_all_corner_black"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Designation"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Degree/Qualification"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1113,81 +998,115 @@
                         android:orientation="vertical"
                         >
 
+
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Cost incurred (Last FY)"
+                            android:text="Degree/Qualification"
                             android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
-                        <LinearLayout
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="No. of employee"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
-                            android:background="@drawable/curve_all_corner_black"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Designation"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Degree/Qualification"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
 
 
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Degree/Qualification"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="No. of employee"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -1296,41 +1215,6 @@
 
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Draft Guidelines for preparation of Visit Report by NLMs"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_18" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1.2dp"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:background="@color/black"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="@string/field_visit_report_should_be_clear_and_"
-                        android:textColor="@color/black"
-
-                        android:textSize="@dimen/sp_16" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1.2dp"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:background="@color/black"/>
-
-                </LinearLayout>
 
 
 

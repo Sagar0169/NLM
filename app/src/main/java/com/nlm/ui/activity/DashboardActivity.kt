@@ -1,12 +1,6 @@
 package com.nlm.ui.activity
 
-import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.RotateDrawable
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -18,7 +12,28 @@ import androidx.core.view.ViewCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
+import com.nlm.ui.activity.national_livestock_mission.ArtificialInseminationList
+import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatList
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockIAList
+import com.nlm.ui.activity.national_livestock_mission.NlmAssistanceForEa
+import com.nlm.ui.activity.national_livestock_mission.NlmAssistanceForQFSPActivity
+import com.nlm.ui.activity.national_livestock_mission.NlmEdpActivity
+import com.nlm.ui.activity.national_livestock_mission.NlmFpForestLandActivity
+import com.nlm.ui.activity.national_livestock_mission.NlmFspPlantStorageActivity
+import com.nlm.ui.activity.national_livestock_mission.RSPLabList
+import com.nlm.ui.activity.national_livestock_mission.StateSemenBankList
+import com.nlm.ui.activity.rashtriya_gokul_mission.BreedMultiplicationRGMActivity
+import com.nlm.ui.activity.rashtriya_gokul_mission.BullOfMothersList
+import com.nlm.ui.activity.rashtriya_gokul_mission.RGMAiCenterActivity
+import com.nlm.ui.activity.rashtriya_gokul_mission.RGMIAList
+import com.nlm.ui.activity.rashtriya_gokul_mission.RGMVitroFertilizationActivity
+import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStationList
+import com.nlm.ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.setDrawableWithArrow
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
@@ -42,6 +57,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         )
 
         setDefaultDrawables()
+        RoleBased()
         mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 // Do something when the drawer is sliding (optional)
@@ -157,7 +173,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
 
         mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, LoginActivity::class.java)
+            Utility.clearAllPreferencesExceptDeviceToken(this)
+            intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             finish()
         }
@@ -187,6 +205,12 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                 Intent(this@DashboardActivity, NlmAssistanceForEa::class.java).putExtra("isFrom", 1)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvNationalLevelComponentB?.setOnClickListener {
+            val intent =
+                Intent(this@DashboardActivity, NlmComponentBList::class.java).putExtra("isFrom", 1)
+            startActivity(intent)
+        }
+
         mBinding?.leftDrawerMenu?.tvFpsFromForest?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, NlmFpForestLandActivity::class.java)
             startActivity(intent)
@@ -239,7 +263,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvImplementingAgency?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, National_Live_Stock_IA::class.java)
+            val intent = Intent(this@DashboardActivity, NationalLiveStockIAList::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvMilkUnionVisitReport?.setOnClickListener {
@@ -251,7 +275,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvRspLaboratorySemen?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, RSPLab::class.java)
+            val intent = Intent(this@DashboardActivity, RSPLabList::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvStateSemenBank?.setOnClickListener {
@@ -259,11 +283,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvArtificialInsemination?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, Artificial_Insemination_List::class.java)
+            val intent = Intent(this@DashboardActivity, ArtificialInseminationList::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvImportExoticGoat?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, Import_Of_ExoticGoat_List::class.java)
+            val intent = Intent(this@DashboardActivity, ImportOfExoticGoatList::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.setOnClickListener {
@@ -314,15 +338,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, List_of_RGM_IA::class.java)
             startActivity(intent)
         }
-        mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, List_of_RGM_IA::class.java)
-            startActivity(intent)
-        }
+
 //        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
 //            val intent = Intent(this@DashboardActivity, UserActivity::class.java)
 //            startActivity(intent)
 //        }
-
     }
 
 
@@ -343,6 +363,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         if (isOpen) {
             layoutToShow.hideView()
             setDrawableWithArrow(
+                this,
                 textViewToUpdate,
                 ContextCompat.getDrawable(this, drawableStartId),
                 false
@@ -350,6 +371,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         } else {
             layoutToShow.showView()
             setDrawableWithArrow(
+                this,
                 textViewToUpdate,
                 ContextCompat.getDrawable(this, drawableStartId),
                 true
@@ -412,9 +434,48 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
     }
 
-    @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         finishAffinity()
         // This will close the app and all the activities in the task.
     }
-}
+
+ private fun RoleBased(){
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.Nodal_Officer||
+         Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.RGM_State_Level_Monitor
+     ){
+         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+         mBinding?.leftDrawerMenu?.view4?.showView()
+     }
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NPDD_State_Level_Monitor) {
+         mBinding?.leftDrawerMenu?.view6?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+     }
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.LHDCP_and_NLM_State_Level_Monitor) {
+         mBinding?.leftDrawerMenu?.view3?.showView()
+         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+         mBinding?.leftDrawerMenu?.view5?.showView()
+     }
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)=="Super Admin") {
+         mBinding?.leftDrawerMenu?.tvUsers?.showView()
+         mBinding?.leftDrawerMenu?.view2?.showView()
+         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
+         mBinding?.leftDrawerMenu?.view3?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+         mBinding?.leftDrawerMenu?.view4?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+         mBinding?.leftDrawerMenu?.view5?.showView()
+         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+         mBinding?.leftDrawerMenu?.view6?.showView()
+     }
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM||Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
+         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
+         mBinding?.leftDrawerMenu?.view3?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+         mBinding?.leftDrawerMenu?.view4?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+         mBinding?.leftDrawerMenu?.view5?.showView()
+         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+         mBinding?.leftDrawerMenu?.view6?.showView()
+     }
+ }}

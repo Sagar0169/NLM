@@ -1016,7 +1016,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans_semibold"
-                android:text="Photographs of the site and assets (with date, time preferably with geo-location)"
+                android:text="Asset with Date, time preferably with geo-location"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
@@ -1129,41 +1129,56 @@
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dp_10"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/dp_5"
-            android:paddingVertical="@dimen/dp_10">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Draft Guidelines for preparation of Visit Report by NLMs"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_18" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1.2dp"
                 android:layout_marginTop="@dimen/dp_20"
-                android:background="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:fontFamily="@font/poppins_regular"
-                android:text="@string/field_visit_report_should_be_clear_and_"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="@string/photographs_of_site_asset"
                 android:textColor="@color/black"
-
                 android:textSize="@dimen/sp_16" />
-            <View
+
+
+            <LinearLayout
+                android:id="@+id/llApplicantPhoto"
                 android:layout_width="match_parent"
-                android:layout_height="1.2dp"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/black"/>
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvChooseFile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:background="@drawable/back_number_gray"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="Choose File"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14" />
+
+                <View
+                    android:layout_width="@dimen/dp_1"
+                    android:layout_height="match_parent"
+                    android:background="#909090" />
+
+                <TextView
+                    android:id="@+id/tvDoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="No File Chosen"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/sp_14" />
+
+            </LinearLayout>
 
 
 
@@ -1171,7 +1186,10 @@
 
 
 
-        <TextView
+
+
+
+            <TextView
             android:id="@+id/tvSendOtp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

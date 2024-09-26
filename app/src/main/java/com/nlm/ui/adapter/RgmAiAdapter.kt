@@ -9,13 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.model.RGMVitro
 import com.nlm.model.RgmAi
-import com.nlm.ui.activity.AddRGMVitroFertilizatonActivity
-import com.nlm.ui.activity.AddRgmAiCenterAcitivity
+import com.nlm.ui.activity.rashtriya_gokul_mission.AddRgmAiCenterAcitivity
+import com.nlm.utilities.hideView
 
 
-class RgmAiAdapter(private val onlyCreated: List<RgmAi>, private val isFrom: Int) :
+class RgmAiAdapter(private val onlyCreated: List<RgmAi>, private val isFrom: Int, val Role_name:String) :
     RecyclerView.Adapter<RgmAiAdapter.RgmAiAdapterViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -30,6 +29,7 @@ class RgmAiAdapter(private val onlyCreated: List<RgmAi>, private val isFrom: Int
         val tvDistrict: TextView = itemView.findViewById(R.id.tvDistrict)
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
         val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
+        val ivDelete: ImageView = itemView.findViewById(R.id.ivDelete)
     }
 
 
@@ -46,6 +46,23 @@ class RgmAiAdapter(private val onlyCreated: List<RgmAi>, private val isFrom: Int
     // Bind the data to the views in each item
     override fun onBindViewHolder(holder: RgmAiAdapterViewholder, position: Int) {
         val item = onlyCreated[position]
+        if (Role_name=="Super Admin")
+        {
+            holder.ivView.hideView()
+            holder.ivEdit.hideView()
+            holder.ivDelete.hideView()
+        }
+        
+        if (Role_name=="RGM State Level Monitor")
+        {
+            holder.ivEdit.hideView()
+            holder.ivDelete.hideView()
+        }
+        if (Role_name=="Rashtriya Gokul Mission (Nodal Officer)")
+        {
+            holder.ivEdit.hideView()
+            holder.ivDelete.hideView()
+        }
         holder.tvStateName.text = item.state
         holder.tvCreated.text = item.created
         holder.tvSubmit.text = item.submit

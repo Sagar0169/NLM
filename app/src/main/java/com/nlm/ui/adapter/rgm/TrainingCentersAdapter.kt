@@ -6,18 +6,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.ItemBreedMultiplicationBinding
-import com.nlm.databinding.ItemMilkUnionVisitBinding
 import com.nlm.databinding.ItemTrainingCentersBinding
-import com.nlm.model.MilkUnionVisit
 import com.nlm.model.TrainingCenters
-import com.nlm.ui.activity.AddBreedMultiplication
-import com.nlm.ui.activity.AddMilkUnionVisit
 import com.nlm.ui.activity.AddTrainingCenters
-import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.utilities.hideView
 
 class TrainingCentersAdapter(
-    private val implementingAgencyList: List<TrainingCenters>) :
+    private val implementingAgencyList: List<TrainingCenters>,val Role_name:String) :
 
     RecyclerView.Adapter<TrainingCentersAdapter.Viewholder>() {
 
@@ -48,7 +43,11 @@ class TrainingCentersAdapter(
         holder.mBinding.tvDistrict.text = item.district
 
 
-
+        if (Role_name=="Rashtriya Gokul Mission (Nodal Officer)")
+        {
+            holder.mBinding.ivEdit.hideView()
+            holder.mBinding.ivDelete.hideView()
+        }
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddTrainingCenters::class.java)

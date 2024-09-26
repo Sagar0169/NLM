@@ -6,20 +6,20 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.Bull_Mother_Farms.ClickActions" />
+            type="com.nlm.ui.activity.rashtriya_gokul_mission.BullMotherFarms.ClickActions" />
     </data>
 
     <RelativeLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activity.Bull_Mother_Farms">
+        tools:context=".ui.activity.rashtriya_gokul_mission.BullMotherFarms">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
-            android:paddingBottom="10dp"
+            android:paddingVertical="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -29,11 +29,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:onClick="@{ClickAction::backPress}"
                 android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHeading"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/tvHeading" />
 
             <TextView
                 android:id="@+id/tvHeading"
@@ -43,6 +43,7 @@
                 android:text=" Bull mother farms"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:fontFamily="@font/lexend_semibold"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"

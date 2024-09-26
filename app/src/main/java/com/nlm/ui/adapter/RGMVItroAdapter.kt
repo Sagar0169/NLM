@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.model.RGMVitro
-import com.nlm.ui.activity.AddRGMVitroFertilizatonActivity
+import com.nlm.ui.activity.rashtriya_gokul_mission.AddRGMVitroFertilizatonActivity
 
 
 class RGMVItroAdapter(private val onlyCreated: List<RGMVitro>, private val isFrom: Int) :

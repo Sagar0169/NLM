@@ -112,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_10"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Location Of Dairy Plant"
+                        android:text="Created By"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 

@@ -24,7 +24,7 @@ data class OtpRequest(
 )
 
 data class LoginRequest(
-    var email: String,
+    var username: String,
     var password: String,
 )
 data class MyAccountRequest(
