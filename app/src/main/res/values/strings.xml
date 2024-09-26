@@ -180,11 +180,11 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="users">Users</string>
     <string name="all_users">All users</string>
     <string name="livestock_health_disease">Livestock Health Disease</string>
-    <string name="vaccination_programme">Vaccination Programme</string>
+    <string name="vaccination_programme"><ul><li>Vaccination Programme</li></ul></string>
     <string name="implementing_agency">Implementing Agency</string>
     <string name="locations">Locations</string>
-    <string name="ascad">ASCAD</string>
-    <string name="mobile_veterinary_units">Mobile veterinary Units</string>
+    <string name="ascad"><ul><li>ASCAD</li></ul></string>
+    <string name="mobile_veterinary_units"><ul><li>Mobile veterinary Units</li></ul></string>
     <string name="national_livestock_mission">National Livestock Mission</string>
     <string name="implementing_agency_format1">Implementing Agency (Format1)</string>
     <string name="rsplaboratory_semen_format2">RspLaboratory Semen (Format2)</string>

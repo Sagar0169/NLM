@@ -3,13 +3,18 @@ package com.nlm.ui.activity
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
+import androidx.core.view.ViewCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
@@ -31,6 +36,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     override fun initView() {
         mBinding = viewDataBinding
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+
         setDefaultDrawables()
         mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -58,20 +68,20 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             }
         })
         // Set click listeners for menu items
-        mBinding?.leftDrawerMenu?.tvUsers?.setOnClickListener {
-            toggleMenuItem(
-                isUserOpen,
-                R.drawable.img_4,
-                mBinding!!.leftDrawerMenu.llUsers,
-                mBinding!!.leftDrawerMenu.tvUsers
-            )
-            isUserOpen = !isUserOpen
-        }
+//        mBinding?.leftDrawerMenu?.tvUsers?.setOnClickListener {
+//            toggleMenuItem(
+//                isUserOpen,
+//                R.drawable.ic_user,
+//                mBinding!!.leftDrawerMenu.llUsers,
+//                mBinding!!.leftDrawerMenu.tvUsers
+//            )
+//            isUserOpen = !isUserOpen
+//        }
 
         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.setOnClickListener {
             toggleMenuItem(
                 isLiveStockOpen,
-                R.drawable.ic_sightedchild,
+                R.drawable.ic_lhd,
                 mBinding!!.leftDrawerMenu.llLivestockHealthDisease,
                 mBinding!!.leftDrawerMenu.tvLivestockHealthDisease
             )
@@ -81,7 +91,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.setOnClickListener {
             toggleMenuItem(
                 isNationLiveStockOpen,
-                R.drawable.img_3,
+                R.drawable.ic_nlm,
                 mBinding!!.leftDrawerMenu.llNationalLivestockMission,
                 mBinding!!.leftDrawerMenu.tvNationalLiveStockMission
             )
@@ -91,7 +101,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.setOnClickListener {
             toggleMenuItem(
                 isNationDairyOpen,
-                R.drawable.baseline_person_24,
+                R.drawable.ic_ndd,
                 mBinding!!.leftDrawerMenu.llNationalDairyDevelopment,
                 mBinding!!.leftDrawerMenu.tvNationalDairyDevelopment
             )
@@ -101,7 +111,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.setOnClickListener {
             toggleMenuItem(
                 isGokulOpen,
-                R.drawable.lock,
+                R.drawable.ic_rgm,
                 mBinding!!.leftDrawerMenu.llRashtriyaGokulMission,
                 mBinding!!.leftDrawerMenu.tvRashtriyaGokulMission
             )
@@ -116,29 +126,29 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     // Method to set default arrow drawables
     private fun setDefaultDrawables() {
-        setDrawableWithArrow(
-            mBinding?.leftDrawerMenu?.tvUsers,
-            ContextCompat.getDrawable(this, R.drawable.img_4),
-            false
-        )
+//        setDrawableWithArrow(
+//            mBinding?.leftDrawerMenu?.tvUsers,
+//            ContextCompat.getDrawable(this, R.drawable.ic_user),
+//            false
+//        )
         setDrawableWithArrow(
             mBinding?.leftDrawerMenu?.tvLivestockHealthDisease,
-            ContextCompat.getDrawable(this, R.drawable.ic_sightedchild),
+            ContextCompat.getDrawable(this, R.drawable.ic_lhd),
             false
         )
         setDrawableWithArrow(
             mBinding?.leftDrawerMenu?.tvNationalLiveStockMission,
-            ContextCompat.getDrawable(this, R.drawable.img_3),
+            ContextCompat.getDrawable(this, R.drawable.ic_nlm),
             false
         )
         setDrawableWithArrow(
             mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment,
-            ContextCompat.getDrawable(this, R.drawable.baseline_person_24),
+            ContextCompat.getDrawable(this, R.drawable.ic_ndd),
             false
         )
         setDrawableWithArrow(
             mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission,
-            ContextCompat.getDrawable(this, R.drawable.lock),
+            ContextCompat.getDrawable(this, R.drawable.ic_rgm),
             false
         )
 
@@ -151,11 +161,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
             finish()
         }
-        mBinding?.leftDrawerMenu?.tvMasterImplementingAgency?.setOnClickListener {
-            val intent =
-                Intent(this@DashboardActivity, ImplementingAgencyMasterActivity::class.java)
-            startActivity(intent)
-        }
+//        mBinding?.leftDrawerMenu?.tvMasterImplementingAgency?.setOnClickListener {
+//            val intent =
+//                Intent(this@DashboardActivity, ImplementingAgencyMasterActivity::class.java)
+//            startActivity(intent)
+//        }
         mBinding?.leftDrawerMenu?.tvMobileVeterinaryUnits?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, MobileVeterinaryActivity::class.java)
             startActivity(intent)
@@ -308,10 +318,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, List_of_RGM_IA::class.java)
             startActivity(intent)
         }
-        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, UserActivity::class.java)
-            startActivity(intent)
-        }
+//        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
+//            val intent = Intent(this@DashboardActivity, UserActivity::class.java)
+//            startActivity(intent)
+//        }
 
     }
 
@@ -349,7 +359,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     // Close all other menu items and reset arrows
     private fun closeAllMenus() {
-        mBinding!!.leftDrawerMenu.llUsers.hideView()
+//        mBinding!!.leftDrawerMenu.llUsers.hideView()
         mBinding!!.leftDrawerMenu.llLivestockHealthDisease.hideView()
         mBinding!!.leftDrawerMenu.llNationalLivestockMission.hideView()
         mBinding!!.leftDrawerMenu.llNationalDairyDevelopment.hideView()
@@ -364,11 +374,19 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         drawableStart: Drawable?,
         isOpen: Boolean
     ) {
-        val arrowDrawable = if (isOpen) {
-            ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
-        } else {
-            rotateDrawable(ContextCompat.getDrawable(this, R.drawable.ic_arrow_down), 90f)
+        var arrowDrawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)?.let {
+            // Apply the initial color (black when arrow is down)
+            DrawableCompat.wrap(it).also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.white))
+            }
         }
+        if (!isOpen) {
+            // Rotate and change the color to white when rotated
+            arrowDrawable = rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.black))
+            }
+        }
+
         textView?.setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, arrowDrawable, null)
     }
 

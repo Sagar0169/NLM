@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="25dp"
+                android:layout_marginTop="60dp"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -82,148 +83,138 @@
                     android:id="@+id/tvDashboard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
+                    android:paddingHorizontal="@dimen/dp_5"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_vertical"
                     android:paddingVertical="10dp"
                     android:text="@string/home"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_home" />
-
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
-
-<!--                <RelativeLayout-->
-<!--                    android:id="@+id/rlRelationship"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="10dp"-->
-<!--                    android:elevation="5dp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/tvRegisterCategory">-->
+                    app:drawableStartCompat="@drawable/ic_dashboard" />
 
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tvSelect"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@drawable/curve_all_corner_grey"-->
-<!--                        android:paddingHorizontal="10dp"-->
-<!--                        android:paddingVertical="10dp"-->
-<!--                        android:text="Please Select"-->
-<!--                        android:textColor="@color/grey"-->
-<!--                        android:textSize="14sp" />-->
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/rlRelationship"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:elevation="5dp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/tvRegisterCategory">-->
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/ivArrowDown"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_centerVertical="true"-->
-<!--                        android:layout_marginHorizontal="20dp"-->
-<!--                        android:elevation="2sp"-->
-<!--                        android:padding="5dp"-->
-<!--                        android:rotation="180"-->
-<!--                        android:src="@drawable/ic_arrow_down"-->
-<!--                        android:visibility="gone" />-->
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/ivArrowUp"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_centerVertical="true"-->
-<!--                        android:layout_marginHorizontal="20dp"-->
-<!--                        android:padding="5dp"-->
-<!--                        android:src="@drawable/ic_arrow_down"-->
-<!--                        android:visibility="visible" />-->
-<!--                </RelativeLayout>-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tvSelect"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:background="@drawable/curve_all_corner_grey"-->
+                <!--                        android:paddingHorizontal="10dp"-->
+                <!--                        android:paddingVertical="10dp"-->
+                <!--                        android:text="Please Select"-->
+                <!--                        android:textColor="@color/grey"-->
+                <!--                        android:textSize="14sp" />-->
+
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/ivArrowDown"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_alignParentEnd="true"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginHorizontal="20dp"-->
+                <!--                        android:elevation="2sp"-->
+                <!--                        android:padding="5dp"-->
+                <!--                        android:rotation="180"-->
+                <!--                        android:src="@drawable/ic_arrow_down"-->
+                <!--                        android:visibility="gone" />-->
+
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/ivArrowUp"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_alignParentEnd="true"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginHorizontal="20dp"-->
+                <!--                        android:padding="5dp"-->
+                <!--                        android:src="@drawable/ic_arrow_down"-->
+                <!--                        android:visibility="visible" />-->
+                <!--                </RelativeLayout>-->
 
                 <TextView
                     android:id="@+id/tvUsers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="10dp"
                     android:drawablePadding="10dp"
+                    android:paddingHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_vertical"
                     android:paddingVertical="10dp"
+                    android:paddingEnd="10dp"
                     android:text="@string/users"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:paddingEnd="10dp"
-                    app:drawableEndCompat="@drawable/ic_arrow_down"
-                    app:drawableStartCompat="@drawable/img_4"
+                    app:drawableStartCompat="@drawable/ic_user"
                     tools:ignore="RtlSymmetry" />
 
-                <LinearLayout
-                    android:id="@+id/llUsers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_20"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/llUsers"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="@dimen/dp_20"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:visibility="gone">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
-                        android:text="@string/all_users"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="@dimen/dp_5"-->
+<!--                        android:text="@string/all_users"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="16sp" />-->
 
-                    <TextView
-                        android:id="@+id/tvMasterImplementingAgency"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
-                        android:text="Implementing Agency"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:background="@color/black" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvMasterImplementingAgency"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="@dimen/dp_5"-->
+<!--                        android:text="Implementing Agency"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="16sp" />-->
+<!--                </LinearLayout>-->
 
                 <TextView
                     android:id="@+id/tvLivestockHealthDisease"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="10dp"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:backgroundTint="#1964A2"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/dp_5"
                     android:paddingVertical="10dp"
+                    android:paddingEnd="10dp"
                     android:text="@string/livestock_health_disease"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:paddingEnd="10dp"
                     app:drawableEndCompat="@drawable/ic_arrow_down"
-                    app:drawableStartCompat="@drawable/ic_sightedchild" />
+                    app:drawableStartCompat="@drawable/ic_lhd" />
 
                 <LinearLayout
                     android:id="@+id/llLivestockHealthDisease"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_20"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    android:background="@drawable/curve_back_grey"
+                    android:backgroundTint="#F1F9FF"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvVaccinationProgramme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_40"
                         android:padding="@dimen/dp_5"
                         android:text="@string/vaccination_programme"
                         android:textColor="@color/black"
@@ -233,7 +224,9 @@
                         android:id="@+id/tvMobileVeterinaryUnits"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_40"
                         android:padding="@dimen/dp_5"
+
                         android:text="@string/mobile_veterinary_units"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -242,35 +235,33 @@
                         android:id="@+id/tvAscad"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_40"
                         android:padding="@dimen/dp_5"
                         android:text="@string/ascad"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/view3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
 
                 <TextView
                     android:id="@+id/tvNationalLiveStockMission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:backgroundTint="#1964A2"
                     android:layout_marginTop="10dp"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_vertical"
                     android:paddingVertical="10dp"
+                    android:paddingHorizontal="@dimen/dp_5"
+                    android:paddingEnd="10dp"
                     android:text="@string/national_livestock_mission"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:paddingEnd="10dp"
                     app:drawableEndCompat="@drawable/ic_arrow_down"
 
-                    app:drawableStartCompat="@drawable/img_3" />
+                    app:drawableStartCompat="@drawable/ic_nlm" />
 
                 <LinearLayout
                     android:id="@+id/llNationalLivestockMission"
@@ -380,36 +371,33 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/view5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
 
                 <TextView
                     android:id="@+id/tvNationalDairyDevelopment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:backgroundTint="#1964A2"
                     android:layout_marginTop="10dp"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:paddingVertical="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="10dp"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="@dimen/dp_5"
                     android:text="@string/national_dairy_development"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:paddingEnd="10dp"
                     app:drawableEndCompat="@drawable/ic_arrow_down"
-                    app:drawableStartCompat="@drawable/baseline_person_24" />
+                    app:drawableStartCompat="@drawable/ic_ndd" />
 
                 <LinearLayout
                     android:id="@+id/llNationalDairyDevelopment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_20"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
 
                     <TextView
@@ -420,6 +408,7 @@
                         android:text="@string/national_level_monitors_component_a"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
+
                     <TextView
                         android:id="@+id/tvReportsOfNlm"
                         android:layout_width="match_parent"
@@ -493,28 +482,26 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/view6"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
 
                 <TextView
                     android:id="@+id/tvRashtriyaGokulMission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:backgroundTint="#1964A2"
+                    android:paddingHorizontal="@dimen/dp_5"
                     android:layout_marginTop="10dp"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_vertical"
                     android:paddingVertical="10dp"
+                    android:paddingEnd="10dp"
+
                     android:text="@string/rashtriya_gokul_mission"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:paddingEnd="10dp"
                     app:drawableEndCompat="@drawable/ic_arrow_down"
-                    app:drawableStartCompat="@drawable/lock" />
+                    app:drawableStartCompat="@drawable/ic_rgm" />
 
                 <LinearLayout
                     android:id="@+id/llRashtriyaGokulMission"
@@ -588,54 +575,39 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/view4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
 
                 <TextView
                     android:id="@+id/tvTermsAndConditions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
-                    android:drawableStart="@drawable/about_nav"
+                    android:drawableStart="@drawable/ic_terms"
                     android:drawablePadding="10dp"
+                    android:paddingHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_vertical"
                     android:paddingVertical="10dp"
                     android:text="Terms and condition"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <View
-                    android:id="@+id/view7"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
+
 
                 <TextView
                     android:id="@+id/tvPrivacyPolicy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
-                    android:drawableStart="@drawable/privacy_nav"
+                    android:drawableStart="@drawable/ic_privacy"
                     android:drawablePadding="10dp"
+                    android:paddingHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_vertical"
                     android:paddingVertical="5dp"
                     android:text="Privacy Policy"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <View
-                    android:id="@+id/view8"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/black" />
 
             </LinearLayout>
         </ScrollView>
@@ -647,11 +619,12 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="10dp"
+            android:drawableStart="@drawable/ic_logout"
             android:drawablePadding="10dp"
             android:fontFamily="@font/roboto_regular"
+            android:gravity="center_vertical"
             android:paddingVertical="10dp"
             android:text="@string/logout"
-            android:textAlignment="viewEnd"
             android:textColor="@color/grey"
             android:textSize="18sp" />
     </RelativeLayout>

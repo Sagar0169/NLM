@@ -1,116 +1,317 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-    </data>
+    <data></data>
 
-    <RelativeLayout
-        android:id="@+id/rlParent"
+    <ScrollView
+        android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:fillViewport="true">
 
         <RelativeLayout
-            android:id="@+id/rlToolbar"
+            android:id="@+id/rlParent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/headear_back_small">
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_main_back">
+
 
             <LinearLayout
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
                 android:id="@+id/ll1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="80dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivDrawer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="15dp"
                     android:src="@drawable/ic_drawer" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivPerson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_person" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llParent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/ll1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/employee_home_bg"
+                android:backgroundTint="@color/white"
+                android:elevation="@dimen/dp_5"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/curve_back_grey"
+                    android:backgroundTint="#E2F4FF"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/left_half_circle"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_40">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_nos" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="@dimen/dp_10"
+                        android:gravity="start"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvLogin"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:text="Number of Scheme Covered"
+                            android:textColor="#2C2C2C"
+                            android:textSize="@dimen/sp_20"
+                            app:fontFamily="@font/opensans_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:text="04"
+                            android:textColor="#23ACFF"
+                            android:textSize="@dimen/sp_30"
+                            app:fontFamily="@font/opensans_bold" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/curve_back_grey"
+                    android:backgroundTint="#FFEAD7"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/left_half_circle"
+                        android:backgroundTint="#FF8D23"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_40">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_tv" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="@dimen/dp_10"
+                        android:gravity="start"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:text="Total Visits"
+                            android:textColor="#2C2C2C"
+                            android:textSize="@dimen/sp_20"
+                            app:fontFamily="@font/opensans_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:text="04"
+                            android:textColor="#FF8D23"
+                            android:textSize="@dimen/sp_30"
+                            app:fontFamily="@font/opensans_bold" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/curve_back_grey"
+                    android:backgroundTint="#F1E0FF"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/left_half_circle"
+                        android:backgroundTint="#9E23FF"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_40">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_nofc" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="@dimen/dp_10"
+                        android:gravity="start"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:text="Number of State Covered"
+                            android:textColor="#2C2C2C"
+                            android:textSize="@dimen/sp_20"
+                            app:fontFamily="@font/opensans_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:text="04"
+                            android:textColor="#9E23FF"
+                            android:textSize="@dimen/sp_30"
+                            app:fontFamily="@font/opensans_bold" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/curve_back_grey"
+                    android:backgroundTint="#DEFFD3"
+                    android:gravity="center_vertical"
+
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/left_half_circle"
+                        android:backgroundTint="#33C400"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_40">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_rsbn" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="@dimen/dp_10"
+                        android:gravity="start"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:text="Report submitted by NLM"
+                            android:textColor="#2C2C2C"
+                            android:textSize="@dimen/sp_20"
+                            app:fontFamily="@font/opensans_bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:text="04"
+                            android:textColor="#33C400"
+                            android:textSize="@dimen/sp_30"
+                            app:fontFamily="@font/opensans_bold" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
 
         </RelativeLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/rlToolbar"
-            android:fillViewport="true">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tvNoOfSchemeCovered"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_15"
-                    android:layout_marginVertical="@dimen/dp_10"
-                    android:background="@drawable/curve_all_corner_yellow"
-                    android:fontFamily="@font/poppins_bold"
-                    android:paddingVertical="@dimen/dp_40"
-                    android:text="@string/no_of_scheme_covered_4"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_20" />
-
-                <TextView
-                    android:id="@+id/tvTotalVisit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_15"
-                    android:layout_marginVertical="@dimen/dp_10"
-                    android:background="@drawable/curve_all_corner_yellow"
-                    android:fontFamily="@font/poppins_bold"
-                    android:paddingVertical="@dimen/dp_40"
-                    android:layout_below="@id/tvNoOfSchemeCovered"
-                    android:text="@string/total_visit"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_20" />
-
-                <TextView
-                    android:id="@+id/tvNoOfStatesCovered"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_15"
-                    android:layout_marginVertical="@dimen/dp_10"
-                    android:background="@drawable/curve_all_corner_yellow"
-                    android:fontFamily="@font/poppins_bold"
-                    android:paddingVertical="@dimen/dp_40"
-                    android:layout_below="@id/tvTotalVisit"
-                    android:text="@string/no_of_states_covered"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_20" />
-
-                <TextView
-                    android:id="@+id/tvTotalNoOfReportsSubmittedByNlm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_15"
-                    android:layout_marginVertical="@dimen/dp_10"
-                    android:layout_below="@id/tvNoOfStatesCovered"
-                    android:background="@drawable/curve_all_corner_yellow"
-                    android:fontFamily="@font/poppins_bold"
-                    android:paddingVertical="@dimen/dp_40"
-                    android:text="@string/total_no_of_reports_submitted_by_nlm"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_20" />
-
-            </RelativeLayout>
-        </ScrollView>
-
-    </RelativeLayout>
+    </ScrollView>
 
 </layout>

@@ -86,9 +86,9 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         context = this
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        window.statusBarColor = ContextCompat.getColor(this, R.color.darkBlue)
-//        window.decorView.systemUiVisibility =
-//            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//        window.statusBarColor = ContextCompat.getColor(this, R.color.darkBlue)
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         performDataBinding()
         initView()
         setVariables()

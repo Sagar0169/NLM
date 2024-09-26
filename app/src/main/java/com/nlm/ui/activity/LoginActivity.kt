@@ -3,6 +3,7 @@ package com.nlm.ui.activity
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import com.nlm.utilities.BaseActivity
 import com.nlm.R
 import com.nlm.databinding.ActivityLoginBinding
@@ -23,7 +24,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        viewModel.init()
+//        viewModel.init()
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
 
 
     }
@@ -32,13 +37,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     inner class ClickActions {
 
         fun login(view: View) {
-            if (valid())
-                viewModel.getLoginApi(
-                    this@LoginActivity, LoginRequest(
-                        mBinding!!.etEmail.text.toString().trim(),
-                        mBinding!!.etPassword.text.toString().trim()
-                    )
-                )
+            val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+            startActivity(intent)
+//            if (valid())
+//                viewModel.getLoginApi(
+//                    this@LoginActivity, LoginRequest(
+//                        mBinding!!.etEmail.text.toString().trim(),
+//                        mBinding!!.etPassword.text.toString().trim()
+//                    )
+//                )
         }
 
         fun register(view: View) {
