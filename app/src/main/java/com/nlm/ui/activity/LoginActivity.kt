@@ -36,19 +36,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     inner class ClickActions {
 
         fun login(view: View) {
-//            startActivity(
-//                Intent(
-//                    this@LoginActivity,
-//                    DashboardActivity::class.java
-//                ).putExtra(AppConstants.INFO, 3)
-//            )
-            if (valid())
-                viewModel.getLoginApi(
-                    this@LoginActivity, LoginRequest(
-                        mBinding!!.etUsername.text.toString().trim(),
-                        mBinding!!.etPassword.text.toString().trim()
-                    )
+            startActivity(
+                Intent(
+                    this@LoginActivity,
+                    DashboardActivity::class.java
                 )
+            )
+//            if (valid())
+//                viewModel.getLoginApi(
+//                    this@LoginActivity, LoginRequest(
+//                        mBinding!!.etUsername.text.toString().trim(),
+//                        mBinding!!.etPassword.text.toString().trim()
+//                    )
+//                )
         }
 
         fun backPress(view: View) {

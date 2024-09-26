@@ -1,6 +1,8 @@
 package com.nlm.ui.activity
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.RotateDrawable
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -8,7 +10,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
@@ -31,7 +32,6 @@ import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStationList
 import com.nlm.ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.setDrawableWithArrow
 import com.nlm.utilities.hideView
@@ -327,15 +327,15 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvBullMotherFarms?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, Bull_Of_Mothers_List::class.java)
+            val intent = Intent(this@DashboardActivity, BullOfMothersList::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvSemenStation?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, Semen_Station_List::class.java)
+            val intent = Intent(this@DashboardActivity, SemenStationList::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, List_of_RGM_IA::class.java)
+            val intent = Intent(this@DashboardActivity, RGMIAList::class.java)
             startActivity(intent)
         }
 
@@ -386,7 +386,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding!!.leftDrawerMenu.llNationalLivestockMission.hideView()
         mBinding!!.leftDrawerMenu.llNationalDairyDevelopment.hideView()
         mBinding!!.leftDrawerMenu.llRashtriyaGokulMission.hideView()
-
         setDefaultDrawables() // Reset arrows to default position
     }
 
@@ -402,12 +401,15 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                 DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.white))
             }
         }
+
         if (!isOpen) {
             // Rotate and change the color to white when rotated
             arrowDrawable = rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
                 DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.black))
             }
         }
+
+
 
         textView?.setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, arrowDrawable, null)
     }
@@ -444,38 +446,25 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
          Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.RGM_State_Level_Monitor
      ){
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-         mBinding?.leftDrawerMenu?.view4?.showView()
      }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NPDD_State_Level_Monitor) {
-         mBinding?.leftDrawerMenu?.view6?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
      }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.LHDCP_and_NLM_State_Level_Monitor) {
-         mBinding?.leftDrawerMenu?.view3?.showView()
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.view5?.showView()
      }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)=="Super Admin") {
          mBinding?.leftDrawerMenu?.tvUsers?.showView()
-         mBinding?.leftDrawerMenu?.view2?.showView()
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-         mBinding?.leftDrawerMenu?.view3?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-         mBinding?.leftDrawerMenu?.view4?.showView()
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.view5?.showView()
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-         mBinding?.leftDrawerMenu?.view6?.showView()
      }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM||Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-         mBinding?.leftDrawerMenu?.view3?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-         mBinding?.leftDrawerMenu?.view4?.showView()
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.view5?.showView()
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-         mBinding?.leftDrawerMenu?.view6?.showView()
      }
  }}

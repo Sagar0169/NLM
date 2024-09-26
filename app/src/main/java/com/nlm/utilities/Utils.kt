@@ -32,6 +32,8 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.ViewCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
@@ -75,18 +77,36 @@ object Utility {
     }
 
     // Method to handle arrow rotation and setting drawable
-    fun setDrawableWithArrow(
+     fun setDrawableWithArrow(
         context: Context,
         textView: TextView?,
         drawableStart: Drawable?,
         isOpen: Boolean
     ) {
-        val arrowDrawable = if (isOpen) {
-            ContextCompat.getDrawable(context, R.drawable.ic_arrow_down)
-        } else {
-            rotateDrawable(ContextCompat.getDrawable(context, R.drawable.ic_arrow_down), 90f)
+        var arrowDrawable = ContextCompat.getDrawable(context, R.drawable.ic_arrow_down)?.let {
+            // Apply the initial color (black when arrow is down)
+            DrawableCompat.wrap(it).also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(context, R.color.white))
+            }
         }
+
+        var ll = ContextCompat.getDrawable(context, R.drawable.curve_back_grey)?.let {
+            // Apply the initial color (black when arrow is down)
+            DrawableCompat.wrap(it).also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(context, R.color.black))
+            }
+        }
+
+        if (!isOpen) {
+            // Rotate and change the color to white when rotated
+            arrowDrawable = rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(context, R.color.black))
+            }
+        }
+
+
         textView?.setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, arrowDrawable, null)
+
     }
 
     // Rotate the drawable for the arrow direction
