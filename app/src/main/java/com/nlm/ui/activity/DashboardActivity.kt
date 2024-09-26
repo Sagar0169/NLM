@@ -28,7 +28,6 @@ import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStationList
 import com.nlm.ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.Preferences
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.setDrawableWithArrow
 import com.nlm.utilities.hideView
@@ -169,7 +168,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
 
         mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
-            Preferences.removeAllPreference(this)
             Utility.clearAllPreferencesExceptDeviceToken(this)
             intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

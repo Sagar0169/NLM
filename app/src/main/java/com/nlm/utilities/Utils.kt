@@ -101,8 +101,6 @@ object Utility {
     }
 
     fun logout(context : Context){
-
-        Preferences.removeAllPreference(context)
         clearAllPreferencesExceptDeviceToken(context)
         val intent = Intent(context, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
