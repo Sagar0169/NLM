@@ -7,14 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemBreedMultiplicationBinding
-import com.nlm.databinding.ItemMilkUnionVisitBinding
 import com.nlm.model.MilkUnionVisit
-import com.nlm.ui.activity.AddBreedMultiplication
-import com.nlm.ui.activity.AddMilkUnionVisit
-import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.ui.activity.rashtriya_gokul_mission.AddBreedMultiplication
+import com.nlm.utilities.hideView
 
 class BreedMultiplicationAdapter(
-    private val implementingAgencyList: List<MilkUnionVisit>) :
+    private val implementingAgencyList: List<MilkUnionVisit>, val Role_name:String) :
 
     RecyclerView.Adapter<BreedMultiplicationAdapter.Viewholder>() {
 
@@ -38,6 +36,12 @@ class BreedMultiplicationAdapter(
     // Bind the data to the views in each item
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
         val item = implementingAgencyList[position]
+        if (Role_name=="Super Admin")
+        {
+            holder.mBinding.ivView.hideView()
+            holder.mBinding.ivEdit.hideView()
+            holder.mBinding.ivDelete.hideView()
+        }
         holder.mBinding.tvCreated.text = item.createdBy
         holder.mBinding.tvName.text = item.nameOfMilkUnion
 

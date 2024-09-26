@@ -7,7 +7,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -95,6 +95,8 @@
         </LinearLayout>
 
         <ImageButton
+            android:layout_below="@+id/llone"
+            android:layout_alignParentEnd="true"
             android:id="@+id/btnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,6 +108,8 @@
             app:tint="@android:color/holo_red_dark" />
 
         <ImageButton
+            android:layout_below="@+id/llone"
+            android:layout_alignParentEnd="true"
             android:id="@+id/btnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,5 +120,5 @@
             app:layout_constraintTop_toBottomOf="@+id/llone"
             app:tint="@android:color/holo_green_dark" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

@@ -1,7 +1,7 @@
 package com.nlm.services
 
 import android.util.Log
-import com.nlm.utilities.CONSTANTS.BASE_URL
+import com.nlm.utilities.AppConstants.BASE_URL
 import com.nlm.utilities.Nlm
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -27,14 +27,27 @@ object ServiceGenerator {
         Log.e("token", "c $authToken")
 
         if (!checkEmptyString(authToken)) {
-            val interceptor = AuthenticationInterceptor(authToken)
+            val interceptor =MyOkHttpInterceptor(authToken)
             val logInterceptor = HttpLoggingInterceptor()
             logInterceptor.level = HttpLoggingInterceptor.Level.BODY
             if (!httpClient.interceptors().contains(interceptor)) {
-                httpClient.addInterceptor(MyOkHttpInterceptor(authToken))
+                httpClient.addInterceptor(interceptor)
                 httpClient.addInterceptor(logInterceptor)
                 builder.client(httpClient.build())
-                retrofit = builder.build() } }
+                retrofit = builder.build() }
+        }
+        else{
+            val interceptor = MyOkHttpInterceptorLogin()
+            val logInterceptor = HttpLoggingInterceptor()
+            logInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            if (!httpClient.interceptors().contains(interceptor)) {
+                httpClient.addInterceptor(interceptor)
+                httpClient.addInterceptor(logInterceptor)
+                builder.client(httpClient.build())
+                retrofit = builder.build()
+            }
+        }
+
         return retrofit!!.create(serviceClass) }
 
     private fun buildClient(): OkHttpClient {
@@ -53,11 +66,20 @@ object ServiceGenerator {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             val originalRequest = chain.request()
-            Log.e("tokenServer" , "aaa $tokenServer")
             val token = tokenServer// get token logic
             val newRequest = originalRequest.newBuilder()
                 .header("Authorization", token)
                 .header("Accept", "application/json")
+                .build()
+            return chain.proceed(newRequest)
+        }
+    }
+
+    class MyOkHttpInterceptorLogin internal constructor() : Interceptor {
+        @Throws(IOException::class)
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val originalRequest = chain.request()
+            val newRequest = originalRequest.newBuilder()
                 .build()
             return chain.proceed(newRequest)
         }

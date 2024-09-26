@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.FragmentFundsReceivedRGMBinding
-import com.nlm.ui.adapter.AgencyWiseAdapter
+import com.nlm.ui.adapter.rgm.AgencyWiseAdapter
 import com.nlm.utilities.BaseFragment
 
 class FundsReceivedRGMFragment : BaseFragment<FragmentFundsReceivedRGMBinding>() {
@@ -24,6 +24,9 @@ class FundsReceivedRGMFragment : BaseFragment<FragmentFundsReceivedRGMBinding>()
 
         adapter = AgencyWiseAdapter(programmeList,0,false)
         recyclerView.adapter = adapter
+
+
+
         recyclerView = mBinding?.recyclerView2!!
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 

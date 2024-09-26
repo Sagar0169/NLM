@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.AddRgmAiCenterAcitivity.ClickActions" />
+            type="com.nlm.ui.activity.rashtriya_gokul_mission.AddRgmAiCenterAcitivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

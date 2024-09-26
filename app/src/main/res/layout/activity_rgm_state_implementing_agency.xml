@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.RGM_State_Implementing_Agency.ClickActions" />
+            type="com.nlm.ui.activity.rashtriya_gokul_mission.RGMStateImplementingAgency.ClickActions" />
     </data>
 
     <RelativeLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.activity.RspLabSemen">
+        tools:context=".ui.activity.national_livestock_mission.RspLabSemenForms">
 
         <RelativeLayout
             android:id="@+id/rlToolbar"

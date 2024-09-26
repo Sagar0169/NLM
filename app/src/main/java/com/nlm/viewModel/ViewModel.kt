@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.net.SocketTimeoutException
 
-
 class ViewModel : ViewModel() {
 
     private lateinit var repository: Repository

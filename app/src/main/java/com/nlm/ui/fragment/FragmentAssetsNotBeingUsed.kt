@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.FragmentAssetsNotBeingUsedBinding
-import com.nlm.ui.adapter.AgencyWiseAdapter
+import com.nlm.ui.adapter.rgm.AgencyWiseAdapter
 import com.nlm.utilities.BaseFragment
 
 

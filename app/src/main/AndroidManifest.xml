@@ -49,25 +49,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.NlmCompnentBDairyDevelopment"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.NlmComponentBList"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ReportsOfNlmComponentActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.FilterStateActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddRgmAiCenterAcitivity"
+            android:name=".ui.activity.rashtriya_gokul_mission.AddRgmAiCenterAcitivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.RGMAiCenterActivity"
+            android:name=".ui.activity.rashtriya_gokul_mission.RGMAiCenterActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.List_of_RGM_IA"
+            android:name=".ui.activity.rashtriya_gokul_mission.RGMIAList"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.RGM_State_Implementing_Agency"
+            android:name=".ui.activity.rashtriya_gokul_mission.RGMStateImplementingAgency"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.Semen_Station_List"
+            android:name=".ui.activity.rashtriya_gokul_mission.SemenStationList"
             android:exported="false" />
         <activity
             android:name=".ui.activity.NLMComponentANDDActivity"
@@ -75,76 +81,75 @@
         <activity
             android:name=".ui.activity.AddNLMComponentA"
             android:exported="false" />
-
         <activity
-            android:name=".ui.activity.SemenStation"
+            android:name=".ui.activity.rashtriya_gokul_mission.SemenStation"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.Bull_Of_Mothers_List"
+            android:name=".ui.activity.rashtriya_gokul_mission.BullOfMothersList"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.Bull_Mother_Farms"
+            android:name=".ui.activity.rashtriya_gokul_mission.BullMotherFarms"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.Import_Of_ExoticGoat_List"
+            android:name=".ui.activity.national_livestock_mission.ImportOfExoticGoatList"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ImportOfExoticGoat"
+            android:name=".ui.activity.national_livestock_mission.ImportOfExoticGoatForms"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddRGMVitroFertilizatonActivity"
+            android:name=".ui.activity.rashtriya_gokul_mission.AddRGMVitroFertilizatonActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.RGMVitroFertilizationActivity"
+            android:name=".ui.activity.rashtriya_gokul_mission.RGMVitroFertilizationActivity"
             android:exported="false"
             android:launchMode="singleTop" />
         <activity
-            android:name=".ui.activity.Artificial_Insemination_List"
+            android:name=".ui.activity.national_livestock_mission.ArtificialInseminationList"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.Artificial_Insemination"
+            android:name=".ui.activity.national_livestock_mission.ArtificialInseminationForms"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.StateSemenBank"
+            android:name=".ui.activity.national_livestock_mission.StateSemenBankForms"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.StateSemenBankList"
+            android:name=".ui.activity.national_livestock_mission.StateSemenBankList"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.RSPLab"
+            android:name=".ui.activity.national_livestock_mission.RSPLabList"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.RspLabSemen"
+            android:name=".ui.activity.national_livestock_mission.RspLabSemenForms"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddNlmAssistanceForQFSPActivity"
+            android:name=".ui.activity.national_livestock_mission.AddNlmAssistanceForQFSPActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.NlmAssistanceForQFSPActivity"
+            android:name=".ui.activity.national_livestock_mission.NlmAssistanceForQFSPActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddNewFspPlantStorageActivity"
+            android:name=".ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.NlmFspPlantStorageActivity"
+            android:name=".ui.activity.national_livestock_mission.NlmFspPlantStorageActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.AddNlmFpForestLandActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.NlmFpForestLandActivity"
+            android:name=".ui.activity.national_livestock_mission.NlmFpForestLandActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddNewAssistanceForEaActivity"
+            android:name=".ui.activity.national_livestock_mission.AddNewAssistanceForEaActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.NlmAssistanceForEa"
+            android:name=".ui.activity.national_livestock_mission.NlmAssistanceForEa"
             android:exported="false" />
         <activity
             android:name=".ui.activity.AddNlmEdpActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.NlmEdpActivity"
+            android:name=".ui.activity.national_livestock_mission.NlmEdpActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.AscadActivity"
@@ -174,10 +179,10 @@
             android:name=".ui.activity.ImplementingAgencyMasterActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.NLSIAForm"
+            android:name=".ui.activity.national_livestock_mission.NLMIAForm"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.National_Live_Stock_IA"
+            android:name=".ui.activity.national_livestock_mission.NationalLiveStockIAList"
             android:exported="false" />
         <activity
             android:name=".ui.activity.UserActivity"
@@ -204,13 +209,13 @@
             android:name=".ui.activity.StateCenterLabVisitNDDActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.BreedMultiplicationRGMActivity"
+            android:name=".ui.activity.rashtriya_gokul_mission.BreedMultiplicationRGMActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddBreedMultiplication"
+            android:name=".ui.activity.rashtriya_gokul_mission.AddBreedMultiplication"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.TrainingCentersRGMActivity"
+            android:name=".ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.AddTrainingCenters"

@@ -2,39 +2,15 @@ package com.nlm.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.AddDocsItemBinding
 import com.nlm.databinding.ItemAllUsersBinding
-import com.nlm.databinding.ItemArtificialInsemenationFormsBinding
-import com.nlm.databinding.ItemBullOfMothersBinding
-import com.nlm.databinding.ItemImportOfExoticGoatBinding
-import com.nlm.databinding.ItemNlspFormsBinding
-import com.nlm.databinding.ItemRgmImplementingAgencyBinding
 import com.nlm.model.All_Users
-import com.nlm.model.ArtificialInsemenation
-import com.nlm.model.Bull_Mothers
-import com.nlm.model.ImportOfGoat
-import com.nlm.model.OnlyCreated
-import com.nlm.model.OnlyCreatedNlm
-import com.nlm.model.RGM_IA
-import com.nlm.ui.activity.Artificial_Insemination
-import com.nlm.ui.activity.Bull_Mother_Farms
-import com.nlm.ui.activity.ImportOfExoticGoat
-import com.nlm.ui.activity.NLSIAForm
-import com.nlm.ui.activity.NodalOfficerDetailActivity
-import com.nlm.ui.activity.RGM_State_Implementing_Agency
-import com.nlm.ui.activity.RspLabSemen
-import com.nlm.ui.activity.SemenStation
-import com.nlm.ui.activity.StateSemenBank
 import com.nlm.ui.activity.UserFormActivity
 import com.nlm.utilities.hideView
-import com.nlm.utilities.showView
 
 class ALL_Users_Adapter(private val implementingAgencyList: List<All_Users>, private val isFrom:Int) :
     RecyclerView.Adapter<ALL_Users_Adapter.ImplementingAgencyViewholder>() {

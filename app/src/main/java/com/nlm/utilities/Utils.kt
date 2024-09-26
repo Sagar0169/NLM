@@ -9,6 +9,8 @@ import android.content.pm.PackageManager
 import android.graphics.*
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.RotateDrawable
 import android.media.ExifInterface
 import android.net.ConnectivityManager
 import android.net.Uri
@@ -72,9 +74,33 @@ object Utility {
         }
     }
 
+    // Method to handle arrow rotation and setting drawable
+    fun setDrawableWithArrow(
+        context: Context,
+        textView: TextView?,
+        drawableStart: Drawable?,
+        isOpen: Boolean
+    ) {
+        val arrowDrawable = if (isOpen) {
+            ContextCompat.getDrawable(context, R.drawable.ic_arrow_down)
+        } else {
+            rotateDrawable(ContextCompat.getDrawable(context, R.drawable.ic_arrow_down), 90f)
+        }
+        textView?.setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, arrowDrawable, null)
+    }
+
+    // Rotate the drawable for the arrow direction
+    fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
+        drawable?.mutate() // Mutate the drawable to avoid affecting other instances
+        val rotateDrawable = RotateDrawable()
+        rotateDrawable.drawable = drawable
+        rotateDrawable.fromDegrees = 0f
+        rotateDrawable.toDegrees = angle
+        rotateDrawable.level = 10000 // Needed to apply the rotation
+        return rotateDrawable
+    }
+
     fun logout(context : Context){
-        savePreferencesBoolean(context,AppConstants.ACCEPT_REQ,false)
-        Preferences.removeAllPreference(context)
         clearAllPreferencesExceptDeviceToken(context)
         val intent = Intent(context, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -740,21 +766,8 @@ object Utility {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = sharedPreferences.edit()
         editor.remove(PrefEntities.TOKEN)
-        editor.remove(AppConstants.APPLICATION_NUMBER)
-        editor.remove(AppConstants.STATUS_NAME)
-        editor.remove(AppConstants.PROFILE_COMPLETED)
-        editor.remove(AppConstants.USER_ID)
-        editor.remove(AppConstants.FULL_NAME)
-        editor.remove(AppConstants.USER_TYPE)
-        editor.remove(AppConstants.fullName)
-        editor.remove(AppConstants.USERID)
-        editor.remove(AppConstants.ADDRESS)
-        editor.remove(AppConstants.PHONE_NUMBER)
-        editor.remove(AppConstants.COUNTRY_CODE)
-        editor.remove(AppConstants.EMAIL)
-        editor.remove(AppConstants.PROFILE_IMAGE)
-        editor.remove(AppConstants.CATEGORY_ID)
-        //editor.clear()
+
+        editor.clear()
         editor.apply()
     }
 //    fun showSnackBar(viewLayout: View?, toastMessage: String?) {

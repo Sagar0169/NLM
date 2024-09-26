@@ -83,6 +83,15 @@ data class Bull_Mothers(
     val Submit_As: String,
     val Created_On: String,
     val Form_status: String,
+    ) : Serializable
+
+data class NLM_CompB(
+    val Name_Of_The_DCS: String,
+    val State_Name: String,
+    val District: String,
+    val Tehsil: String,
+    val Village: String,
+    val Created_At: String,
 
 
     ) : Serializable

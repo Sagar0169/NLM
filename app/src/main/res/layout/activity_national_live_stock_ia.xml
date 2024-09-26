@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.National_Live_Stock_IA.ClickActions" />
+            type="com.nlm.ui.activity.national_livestock_mission.NationalLiveStockIAList.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

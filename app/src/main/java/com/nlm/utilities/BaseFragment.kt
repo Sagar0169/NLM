@@ -36,17 +36,10 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         init()
         setObservers()
         return viewDataBinding.root
-       /* setObservers()
-        return init(inflater, container, savedInstanceState)*/
     }
 
     abstract fun init()
 
- /*   abstract fun init(
-        inflater: LayoutInflater?,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View?*/
     abstract fun setVariables()
 
     abstract fun setObservers()
@@ -99,14 +92,6 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
             context.resources
                 .updateConfiguration(config, context.resources.displayMetrics)
         }
-    }
-
-    fun isArabicLang():Boolean{
-        return  Preferences.getPreference(requireContext(), PrefEntities.selected_language).equals("ar")
-    }
-
-    open fun isUserLogin(): Boolean {
-        return Preferences.getPreference(requireContext(), PrefEntities.USER_DETAILS).isNotEmpty()
     }
 
     open fun isValidPassword(password: String?): Boolean {
