@@ -11,13 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="4dp"
-        android:background="@android:color/white"
+        android:background="@drawable/curve_back_blue"
+        android:backgroundTint="#1C6AAA"
+        app:cardCornerRadius="@dimen/dp_10"
         android:radius="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FAE2BC"
+            android:background="#FFFFFF"
+            android:layout_marginEnd="@dimen/dp_50"
             android:padding="16dp">
 
             <!-- Permit Number and State Name -->

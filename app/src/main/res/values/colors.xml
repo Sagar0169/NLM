@@ -18,5 +18,6 @@
     <color name="gray_300">#dbdbdb</color>
     <color name="your_checked_color">#141B5D</color>
     <color name="your_unchecked_color">#dbdbdb</color>
+    <color name="drawerOn">#1964A2</color>
 
 </resources>

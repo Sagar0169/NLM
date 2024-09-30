@@ -396,23 +396,33 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         isOpen: Boolean
     ) {
         var arrowDrawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)?.let {
-            // Apply the initial color (black when arrow is down)
+            // Apply the initial color (white when arrow is down)
             DrawableCompat.wrap(it).also { drawable ->
                 DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.white))
+                textView?.setTextColor(ContextCompat.getColor(this, R.color.white))
+
             }
         }
 
+        // Create background drawable
+        var ll = R.color.drawerOn
+
+        // Rotate arrow if not open
         if (!isOpen) {
-            // Rotate and change the color to white when rotated
-            arrowDrawable = rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
+            arrowDrawable = Utility.rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
                 DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.black))
+                textView?.setTextColor(ContextCompat.getColor(this, R.color.black))
+
             }
+            ll = R.color.white
         }
 
-
-
+        // Set drawables to TextView
         textView?.setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, arrowDrawable, null)
+        textView?.setBackgroundColor(ContextCompat.getColor(this, ll)) // Change background to black when closed
+
     }
+
 
     // Rotate the drawable for the arrow direction
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {

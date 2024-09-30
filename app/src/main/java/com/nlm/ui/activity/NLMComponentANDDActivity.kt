@@ -2,6 +2,7 @@ package com.nlm.ui.activity
 
 import android.content.Intent
 import android.view.View
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityImplementingAgencyMasterBinding
@@ -42,6 +43,10 @@ class NLMComponentANDDActivity : BaseActivity<ActivityNlmComponentANddBinding>()
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
         list = listOf(
 
             NLMComponentA(

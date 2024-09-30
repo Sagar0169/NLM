@@ -193,8 +193,7 @@
                     android:id="@+id/tvLivestockHealthDisease"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:backgroundTint="#FFFFFF"
+                    android:background="@color/white"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center_vertical"
@@ -253,8 +252,7 @@
                     android:id="@+id/tvNationalLiveStockMission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:backgroundTint="#FFFFFF"
+                    android:background="@color/white"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center_vertical"
@@ -274,8 +272,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/curve_back_grey"
                     android:backgroundTint="#F1F9FF"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvImplementingAgency"
@@ -381,8 +379,8 @@
                         android:id="@+id/tvNlmEdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/nlm_edp_format11"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -393,8 +391,7 @@
                     android:id="@+id/tvNationalDairyDevelopment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:backgroundTint="#FFFFFF"
+                    android:background="@color/white"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center_vertical"
@@ -413,46 +410,46 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/curve_back_grey"
                     android:backgroundTint="#F1F9FF"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
 
                     <TextView
                         android:id="@+id/tvNationalLevelComponentA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_40"
                         android:padding="@dimen/dp_5"
                         android:text="@string/national_level_monitors_component_a"
                         android:textColor="@color/black"
-                        android:layout_marginHorizontal="@dimen/dp_40"
                         android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvReportsOfNlm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_40"
                         android:padding="@dimen/dp_5"
                         android:text="@string/reports_of_national_level_monitors_component_a"
                         android:textColor="@color/black"
-                        android:layout_marginHorizontal="@dimen/dp_40"
                         android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvNationalLevelComponentB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_40"
                         android:padding="@dimen/dp_5"
                         android:text="@string/national_level_monitors_component_b"
                         android:textColor="@color/black"
-                        android:layout_marginHorizontal="@dimen/dp_40"
                         android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvMilkUnionVisitReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/milk_union_visit_report"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -461,8 +458,8 @@
                         android:id="@+id/tvDairyPlantVisitReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/dairy_plant_visit_report"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -471,8 +468,8 @@
                         android:id="@+id/tvDcsBmsCenterVisitReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/dcs_bms_center_visit_report"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -481,8 +478,8 @@
                         android:id="@+id/tvStateCenterLabVisitReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/state_center_lab_visit_report"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -491,8 +488,8 @@
                         android:id="@+id/tvMilkProcessing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/milk_processing"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -501,8 +498,8 @@
                         android:id="@+id/tvMilkProductMarketing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/milk_product_marketing"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -511,8 +508,8 @@
                         android:id="@+id/tvProductivityEnhancementServices"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/productivity_enhancement_services"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -523,8 +520,7 @@
                     android:id="@+id/tvRashtriyaGokulMission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:backgroundTint="#FFFFFF"
+                    android:background="@color/white"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center_vertical"
@@ -542,17 +538,17 @@
                     android:id="@+id/llRashtriyaGokulMission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:background="@drawable/curve_back_grey"
                     android:backgroundTint="#F1F9FF"
+                    android:orientation="vertical"
                     android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvStateImplementingAgency"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/state_implementing_agency"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -561,8 +557,8 @@
                         android:id="@+id/tvAiCenter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/ai_center"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -571,8 +567,8 @@
                         android:id="@+id/tvSemenStation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/semen_station"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -581,8 +577,8 @@
                         android:id="@+id/tvTrainingCenters"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/training_centers"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -601,8 +597,8 @@
                         android:id="@+id/tvBreedMultiplication"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/breed_multiplication"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -611,8 +607,8 @@
                         android:id="@+id/tvVitroFertilization"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_5"
                         android:layout_marginHorizontal="@dimen/dp_40"
+                        android:padding="@dimen/dp_5"
                         android:text="@string/vitro_fertilization"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
