@@ -806,8 +806,11 @@ object Utility {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = sharedPreferences.edit()
         editor.remove(PrefEntities.TOKEN)
+        editor.remove(AppConstants.ROLE_NAME)
+        editor.remove(AppConstants.ROLE_ID)
+        editor.remove(AppConstants.USER_ID)
 
-        editor.clear()
+//        editor.clear()
         editor.apply()
     }
 

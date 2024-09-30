@@ -8,7 +8,10 @@ import com.nlm.R
 import com.nlm.databinding.ActivityNlmComponentBlistBinding
 import com.nlm.model.NLM_CompB
 import com.nlm.ui.adapter.NlmComponentBadapter
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Utility
+import com.nlm.utilities.hideView
 
 class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>() {
     private var mBinding: ActivityNlmComponentBlistBinding? = null
@@ -21,6 +24,11 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction=ClickActions()
+        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.SUPER_ADMIN ||
+            Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.NPDD_State_Level_Monitor|| Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.ADMIN )
+        {
+            mBinding!!.fabAddAgency.hideView()
+        }
         nodalOfficerList = listOf(
             NLM_CompB(
                 "mzfmd",
@@ -69,7 +77,7 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>() {
         }
     }
     private fun implementingAgency() {
-        implementingAdapter = NlmComponentBadapter(this,nodalOfficerList)
+        implementingAdapter = NlmComponentBadapter(this,nodalOfficerList,Utility.getPreferenceString(this,AppConstants.ROLE_NAME))
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvArtificialInsemination.layoutManager = layoutManager
         mBinding!!.rvArtificialInsemination.adapter = implementingAdapter

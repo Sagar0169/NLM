@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemNlmComponentBBinding
 import com.nlm.model.NLM_CompB
+import com.nlm.utilities.AppConstants
+import com.nlm.utilities.hideView
 
-class NlmComponentBadapter(private val Context: Context, private val implementingAgencyList: List<NLM_CompB>) :
+class NlmComponentBadapter(private val Context: Context, private val implementingAgencyList: List<NLM_CompB>,val Role_name:String) :
     RecyclerView.Adapter<NlmComponentBadapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -41,7 +43,12 @@ class NlmComponentBadapter(private val Context: Context, private val implementin
     override fun onBindViewHolder(holder: ImplementingAgencyViewholder, position: Int) {
 
         val item = implementingAgencyList[position]
+        if (Role_name== AppConstants.SUPER_ADMIN||Role_name== AppConstants.NDDB||Role_name== AppConstants.ADMIN)
+        {
 
+            holder.ivEdit.hideView()
+            holder.mBinding.ivDelete.hideView()
+        }
 
     holder.mBinding.tvName.text = item.Name_Of_The_DCS
     holder.mBinding.tvStateName.text = item.State_Name

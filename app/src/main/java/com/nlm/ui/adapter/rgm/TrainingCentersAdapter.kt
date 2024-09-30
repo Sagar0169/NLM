@@ -9,6 +9,7 @@ import com.nlm.R
 import com.nlm.databinding.ItemTrainingCentersBinding
 import com.nlm.model.TrainingCenters
 import com.nlm.ui.activity.AddTrainingCenters
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
 
 class TrainingCentersAdapter(
@@ -43,8 +44,9 @@ class TrainingCentersAdapter(
         holder.mBinding.tvDistrict.text = item.district
 
 
-        if (Role_name=="Rashtriya Gokul Mission (Nodal Officer)")
+        if (Role_name== AppConstants.SUPER_ADMIN||Role_name== AppConstants.Nodal_Officer||Role_name== AppConstants.NLM||Role_name== AppConstants.ADMIN)
         {
+
             holder.mBinding.ivEdit.hideView()
             holder.mBinding.ivDelete.hideView()
         }

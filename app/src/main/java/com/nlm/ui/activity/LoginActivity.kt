@@ -15,7 +15,9 @@ import com.nlm.model.LoginRequest
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.getPreferenceString
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
@@ -31,6 +33,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        toast(getPreferenceString(this,PrefEntities.TOKEN ))
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
@@ -146,7 +149,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                                 DashboardActivity::class.java
                             )
                         )
-                        finishAffinity()
+                        finish()
 
                 }
             }

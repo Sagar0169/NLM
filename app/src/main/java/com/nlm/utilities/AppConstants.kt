@@ -27,6 +27,7 @@ object AppConstants {
     const val LHDCP_and_NLM_State_Level_Monitor = "LHDCP and NLM State Level Monitor"
     const val RGM_State_Level_Monitor= "RGM State Level Monitor"
     const val NPDD_State_Level_Monitor= "NPDD State Level Monitor"
+    const val NDDB= "National Dairy Development Board (NDDB)"
 
 }
 object cryptConstantCodes{

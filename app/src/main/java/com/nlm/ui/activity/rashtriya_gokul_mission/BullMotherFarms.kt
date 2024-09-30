@@ -30,6 +30,7 @@ class BullMotherFarms :BaseActivity<ActivityBullMotherFarmsBinding>() {
     override fun initView() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
+
     }
 
     override fun setVariables() {

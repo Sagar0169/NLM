@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.model.RGMVitro
 import com.nlm.ui.activity.rashtriya_gokul_mission.AddRGMVitroFertilizatonActivity
+import com.nlm.utilities.AppConstants
+import com.nlm.utilities.hideView
 
 
-class RGMVItroAdapter(private val onlyCreated: List<RGMVitro>, private val isFrom: Int) :
+class RGMVItroAdapter(private val onlyCreated: List<RGMVitro>, private val isFrom: Int,val Role_name:String) :
     RecyclerView.Adapter<RGMVItroAdapter.RGMVItroAdapterViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -23,6 +25,7 @@ class RGMVItroAdapter(private val onlyCreated: List<RGMVitro>, private val isFro
         val tvStatus: TextView = itemView.findViewById(R.id.tvStatusData)
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
         val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
+        val ivDelete: ImageView = itemView.findViewById(R.id.ivDelete)
     }
 
 
@@ -43,7 +46,12 @@ class RGMVItroAdapter(private val onlyCreated: List<RGMVitro>, private val isFro
         holder.tvCreated.text = item.created
         holder.tvStatus.text = item.status
 
+        if (Role_name== AppConstants.SUPER_ADMIN||Role_name== AppConstants.Nodal_Officer||Role_name== AppConstants.ADMIN)
+        {
 
+            holder.ivEdit.hideView()
+            holder.ivDelete.hideView()
+        }
         holder.ivView.setOnClickListener {
             val intent = Intent(
                 holder.itemView.context,

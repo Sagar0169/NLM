@@ -460,6 +460,17 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NPDD_State_Level_Monitor) {
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
      }
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NDDB) {
+         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+         mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.hideView()
+         mBinding?.leftDrawerMenu?.tvAiCenter?.hideView()
+         mBinding?.leftDrawerMenu?.tvTrainingCenters?.hideView()
+         mBinding?.leftDrawerMenu?.tvSemenStation?.hideView()
+         mBinding?.leftDrawerMenu?.tvBullMotherFarms?.hideView()
+         mBinding?.leftDrawerMenu?.tvVitroFertilization?.hideView()
+
+     }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.LHDCP_and_NLM_State_Level_Monitor) {
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
@@ -471,10 +482,19 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
      }
-     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM||Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM) {
+         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.hideView()
+         mBinding?.leftDrawerMenu?.tvReportsOfNlm?.hideView()
+         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+     }
+     if (    Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
      }
+
  }}

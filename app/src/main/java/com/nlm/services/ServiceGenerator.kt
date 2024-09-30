@@ -85,7 +85,7 @@ object ServiceGenerator {
         }
     }
 
-    private fun checkEmptyString(string: String?): Boolean {
-        return string == null || string.trim { it <= ' ' }.isEmpty()
+    private fun checkEmptyString(string: String): Boolean {
+        return  string.isEmpty()
     }
 }
