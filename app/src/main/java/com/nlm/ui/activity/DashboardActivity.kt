@@ -451,7 +451,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
      }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NDDB) {
-         mBinding?.leftDrawerMenu?.view6?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
          mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.hideView()
@@ -461,7 +460,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
          mBinding?.leftDrawerMenu?.tvBullMotherFarms?.hideView()
          mBinding?.leftDrawerMenu?.tvVitroFertilization?.hideView()
 
-         mBinding?.leftDrawerMenu?.view4?.showView()
      }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.LHDCP_and_NLM_State_Level_Monitor) {
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
@@ -476,15 +474,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
      }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM) {
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-         mBinding?.leftDrawerMenu?.view3?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-         mBinding?.leftDrawerMenu?.view4?.showView()
          mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.hideView()
          mBinding?.leftDrawerMenu?.tvReportsOfNlm?.hideView()
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.view5?.showView()
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-         mBinding?.leftDrawerMenu?.view6?.showView()
      }
      if (    Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
