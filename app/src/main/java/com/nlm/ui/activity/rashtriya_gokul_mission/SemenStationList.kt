@@ -27,8 +27,8 @@ class SemenStationList : BaseActivity<ActivitySemenStationListBinding>(){
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction=ClickActions()
-        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin"|| Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Rashtriya Gokul Mission (Nodal Officer)"
-            || Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="National Level Monitor"    )
+        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)==AppConstants.SUPER_ADMIN|| Utility.getPreferenceString(this, AppConstants.ROLE_NAME)==AppConstants.Nodal_Officer
+            || Utility.getPreferenceString(this, AppConstants.ROLE_NAME)==AppConstants.NLM|| Utility.getPreferenceString(this, AppConstants.ROLE_NAME)==AppConstants.ADMIN)
         {
             mBinding!!.fabAddAgency.hideView()
         }

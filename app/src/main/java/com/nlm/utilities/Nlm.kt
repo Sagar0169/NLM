@@ -29,8 +29,9 @@ class Nlm : Application() {
 
         @JvmStatic
         fun getToken(): String {
+            Log.e("TOOKEN",Utility.getPreferenceString(mContext!!, PrefEntities.TOKEN))
             return if(Utility.getPreferenceString(mContext!!, PrefEntities.TOKEN).isEmpty())
-                " "
+                ""
             else
                 "Bearer ".plus(Utility.getPreferenceString(mContext!!, PrefEntities.TOKEN))
         }

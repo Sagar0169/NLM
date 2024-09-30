@@ -174,6 +174,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
+            finish()
         }
         mBinding?.leftDrawerMenu?.tvMasterImplementingAgency?.setOnClickListener {
             val intent =
@@ -334,7 +335,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, RGMIAList::class.java)
             startActivity(intent)
         }
-
         mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, UserActivity::class.java)
             startActivity(intent)
@@ -413,6 +413,19 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
          mBinding?.leftDrawerMenu?.view6?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
      }
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NDDB) {
+         mBinding?.leftDrawerMenu?.view6?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+         mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.hideView()
+         mBinding?.leftDrawerMenu?.tvAiCenter?.hideView()
+         mBinding?.leftDrawerMenu?.tvTrainingCenters?.hideView()
+         mBinding?.leftDrawerMenu?.tvSemenStation?.hideView()
+         mBinding?.leftDrawerMenu?.tvBullMotherFarms?.hideView()
+         mBinding?.leftDrawerMenu?.tvVitroFertilization?.hideView()
+
+         mBinding?.leftDrawerMenu?.view4?.showView()
+     }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.LHDCP_and_NLM_State_Level_Monitor) {
          mBinding?.leftDrawerMenu?.view3?.showView()
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
@@ -431,7 +444,19 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
          mBinding?.leftDrawerMenu?.view6?.showView()
      }
-     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM||Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM) {
+         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
+         mBinding?.leftDrawerMenu?.view3?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+         mBinding?.leftDrawerMenu?.view4?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.hideView()
+         mBinding?.leftDrawerMenu?.tvReportsOfNlm?.hideView()
+         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+         mBinding?.leftDrawerMenu?.view5?.showView()
+         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+         mBinding?.leftDrawerMenu?.view6?.showView()
+     }
+     if (    Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
          mBinding?.leftDrawerMenu?.view3?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
@@ -441,4 +466,5 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
          mBinding?.leftDrawerMenu?.view6?.showView()
      }
+
  }}

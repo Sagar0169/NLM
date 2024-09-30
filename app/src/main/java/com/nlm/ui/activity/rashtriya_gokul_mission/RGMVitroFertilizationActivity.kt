@@ -8,7 +8,10 @@ import com.nlm.databinding.ActivityRgmvitroFertilizationBinding
 import com.nlm.model.RGMVitro
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.RGMVItroAdapter
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Utility
+import com.nlm.utilities.hideView
 
 class RGMVitroFertilizationActivity : BaseActivity<ActivityRgmvitroFertilizationBinding>() {
     private var mBinding: ActivityRgmvitroFertilizationBinding? = null
@@ -40,7 +43,10 @@ class RGMVitroFertilizationActivity : BaseActivity<ActivityRgmvitroFertilization
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-
+        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.SUPER_ADMIN || Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.Nodal_Officer|| Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.ADMIN )
+        {
+            mBinding!!.fabAddAgency.hideView()
+        }
         onlyCreated = listOf(
             RGMVitro(
                 "Bihar",
@@ -94,7 +100,7 @@ class RGMVitroFertilizationActivity : BaseActivity<ActivityRgmvitroFertilization
     }
 
     private fun onlyCreatedAdapter() {
-        onlyCreatedAdapter = RGMVItroAdapter(onlyCreated, isFrom)
+        onlyCreatedAdapter = RGMVItroAdapter(onlyCreated, isFrom,Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvMobileVeterinaryUnit.layoutManager = layoutManager
         mBinding!!.rvMobileVeterinaryUnit.adapter = onlyCreatedAdapter

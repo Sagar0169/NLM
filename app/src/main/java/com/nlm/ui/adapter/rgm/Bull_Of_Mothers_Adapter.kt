@@ -11,6 +11,7 @@ import com.nlm.databinding.ItemBullOfMothersBinding
 import com.nlm.model.Bull_Mothers
 import com.nlm.ui.activity.rashtriya_gokul_mission.BullMotherFarms
 import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStation
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
 
 class Bull_Of_Mothers_Adapter(private val implementingAgencyList: List<Bull_Mothers>, private val isFrom:Int,val Role_name:String) :
@@ -43,17 +44,13 @@ class Bull_Of_Mothers_Adapter(private val implementingAgencyList: List<Bull_Moth
     override fun onBindViewHolder(holder: ImplementingAgencyViewholder, position: Int) {
 
         val item = implementingAgencyList[position]
-        if (Role_name=="Super Admin")
+        if (Role_name==AppConstants.SUPER_ADMIN||Role_name==AppConstants.Nodal_Officer||Role_name==AppConstants.NLM||Role_name==AppConstants.ADMIN)
         {
-            holder.ivView.hideView()
+
             holder.ivEdit.hideView()
             holder.mBinding.ivDelete.hideView()
         }
-        if (Role_name=="Rashtriya Gokul Mission (Nodal Officer)")
-        {
-            holder.ivEdit.hideView()
-            holder.mBinding.ivDelete.hideView()
-        }
+
 if (isFrom==1)
 {
     holder.mBinding.tvStateName.text = item.Name_of_State
@@ -80,7 +77,12 @@ if (isFrom==1)
     }
 }
         else{
+    if (Role_name== AppConstants.SUPER_ADMIN||Role_name== AppConstants.Nodal_Officer||Role_name== AppConstants.ADMIN||Role_name== AppConstants.NLM)
+    {
 
+        holder.ivEdit.hideView()
+        holder.mBinding.ivDelete.hideView()
+    }
     holder.mBinding.tvStateName.text = item.Name_of_State
     holder.mBinding.tvLocation.text = item.Location
     holder.mBinding.tvSubmitAs.text = item.Submit_As

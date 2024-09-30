@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.model.RgmAi
 import com.nlm.ui.activity.rashtriya_gokul_mission.AddRgmAiCenterAcitivity
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
 
 
@@ -46,23 +47,13 @@ class RgmAiAdapter(private val onlyCreated: List<RgmAi>, private val isFrom: Int
     // Bind the data to the views in each item
     override fun onBindViewHolder(holder: RgmAiAdapterViewholder, position: Int) {
         val item = onlyCreated[position]
-        if (Role_name=="Super Admin")
+        if (Role_name==AppConstants.SUPER_ADMIN||Role_name==AppConstants.Nodal_Officer||Role_name==AppConstants.RGM_State_Level_Monitor||Role_name==AppConstants.ADMIN)
         {
-            holder.ivView.hideView()
+
             holder.ivEdit.hideView()
             holder.ivDelete.hideView()
         }
-        
-        if (Role_name=="RGM State Level Monitor")
-        {
-            holder.ivEdit.hideView()
-            holder.ivDelete.hideView()
-        }
-        if (Role_name=="Rashtriya Gokul Mission (Nodal Officer)")
-        {
-            holder.ivEdit.hideView()
-            holder.ivDelete.hideView()
-        }
+
         holder.tvStateName.text = item.state
         holder.tvCreated.text = item.created
         holder.tvSubmit.text = item.submit
