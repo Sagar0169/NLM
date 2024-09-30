@@ -2,6 +2,7 @@ package com.nlm.ui.activity
 
 import android.content.Intent
 import android.view.View
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityImplementingAgencyMasterBinding
@@ -13,7 +14,10 @@ import com.nlm.model.NodalOfficer
 import com.nlm.ui.adapter.ImplementingAgencyAdapter
 import com.nlm.ui.adapter.ndd.MilkUnionVisitAdapter
 import com.nlm.ui.adapter.ndd.NLMComponentAAdapter
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Utility
+import com.nlm.utilities.hideView
 
 class NLMComponentANDDActivity : BaseActivity<ActivityNlmComponentANddBinding>() {
     private var mBinding: ActivityNlmComponentANddBinding? = null
@@ -42,6 +46,10 @@ class NLMComponentANDDActivity : BaseActivity<ActivityNlmComponentANddBinding>()
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.SUPER_ADMIN||Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.ADMIN )
+        {
+            mBinding!!.fabAdd.hideView()
+        }
         list = listOf(
 
             NLMComponentA(
@@ -92,7 +100,7 @@ class NLMComponentANDDActivity : BaseActivity<ActivityNlmComponentANddBinding>()
     }
 
     private fun implementingAgency() {
-        adapter = NLMComponentAAdapter(list)
+        adapter = NLMComponentAAdapter(list,Utility.getPreferenceString(this,AppConstants.ROLE_NAME))
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.recyclerView.layoutManager = layoutManager
         mBinding!!.recyclerView.adapter = adapter

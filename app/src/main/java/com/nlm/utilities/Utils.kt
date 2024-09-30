@@ -32,6 +32,8 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.ViewCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
@@ -59,15 +61,19 @@ object Utility {
             AppConstants.TEXT -> {
                 messageType
             }
+
             AppConstants.IMAGE -> {
                 "\uD83D\uDCF7 $messageType"
             }
+
             AppConstants.VIDEO -> {
                 "\uD83C\uDFA5 $messageType"
             }
+
             AppConstants.AUDIO -> {
                 messageType
             }
+
             else -> {
                 messageType
             }
@@ -81,13 +87,42 @@ object Utility {
         drawableStart: Drawable?,
         isOpen: Boolean
     ) {
-        val arrowDrawable = if (isOpen) {
-            ContextCompat.getDrawable(context, R.drawable.ic_arrow_down)
-        } else {
-            rotateDrawable(ContextCompat.getDrawable(context, R.drawable.ic_arrow_down), 90f)
+        // Create arrow drawable
+        var arrowDrawable = ContextCompat.getDrawable(context, R.drawable.ic_arrow_down)?.let {
+            // Apply the initial color (white when arrow is down)
+            DrawableCompat.wrap(it).also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(context, R.color.white))
+                textView?.setTextColor(ContextCompat.getColor(context, R.color.white))
+
+            }
+
         }
+
+        // Create background drawable
+        var ll = R.color.drawerOn
+
+        // Rotate arrow if not open
+        if (!isOpen) {
+            arrowDrawable = Utility.rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(context, R.color.black))
+            }
+            textView?.setTextColor(ContextCompat.getColor(context, R.color.black))
+
+            ll = R.color.white
+        }
+
+        // Set drawables to TextView
         textView?.setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, arrowDrawable, null)
+
+        textView?.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                ll
+            )
+        ) // Change background to black when closed
+
     }
+
 
     // Rotate the drawable for the arrow direction
     fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
@@ -100,7 +135,7 @@ object Utility {
         return rotateDrawable
     }
 
-    fun logout(context : Context){
+    fun logout(context: Context) {
         clearAllPreferencesExceptDeviceToken(context)
         val intent = Intent(context, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -178,6 +213,7 @@ object Utility {
             ""
         }
     }
+
     fun dateConvertToFormat(dateString: String): String {
         return try {
             val originalFormat: DateFormat =
@@ -190,6 +226,7 @@ object Utility {
             ""
         }
     }
+
     fun dateConvertToString(dateString: String): String {
         return try {
             val originalFormat: DateFormat =
@@ -358,6 +395,7 @@ object Utility {
         }
         return ""
     }
+
     private const val SECOND_MILLIS = 1000
     private const val MINUTE_MILLIS = 60 * SECOND_MILLIS
     private const val HOUR_MILLIS = 60 * MINUTE_MILLIS
@@ -405,7 +443,8 @@ object Utility {
         val calendar = Calendar.getInstance()
         return calendar.time
     }
-        fun isValidEmail(target: CharSequence): Boolean {
+
+    fun isValidEmail(target: CharSequence): Boolean {
         return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
@@ -500,6 +539,7 @@ object Utility {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreferences.getBoolean(key, false)
     }
+
     fun getPreferencesInt(context: Context, key: String): Int {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreferences.getInt(key, 0)
@@ -766,21 +806,25 @@ object Utility {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = sharedPreferences.edit()
         editor.remove(PrefEntities.TOKEN)
+        editor.remove(AppConstants.ROLE_NAME)
+        editor.remove(AppConstants.ROLE_ID)
+        editor.remove(AppConstants.USER_ID)
 
-        editor.clear()
+//        editor.clear()
         editor.apply()
     }
-//    fun showSnackBar(viewLayout: View?, toastMessage: String?) {
+
+    //    fun showSnackBar(viewLayout: View?, toastMessage: String?) {
 //        try {
 //            Snackbar.make(viewLayout!!, toastMessage!!, Snackbar.LENGTH_LONG).show()
 //        } catch (exception: Exception) {
 //            Logger.e("log:", exception.toString())
 //        }
 //    }
-fun getUniqueIDWhitRandomString(): String {
-    return getCryptUniqueId() + "-" + randomString()
-    //return getCryptUniqueId();
-}
+    fun getUniqueIDWhitRandomString(): String {
+        return getCryptUniqueId() + "-" + randomString()
+        //return getCryptUniqueId();
+    }
 
     var DEVICE_ID = ""
 
@@ -825,6 +869,7 @@ fun getUniqueIDWhitRandomString(): String {
         view.setBackgroundColor(Color.parseColor("#AC0000"))
         snackbar.show()
     }
+
     fun showSnackbarSuccess(view: View, message: String) {
         var view = view
         val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
@@ -1333,6 +1378,7 @@ fun getUniqueIDWhitRandomString(): String {
             ""
         }
     }
+
     fun dateConvert1(dateString: String): String {
         return try {
             val originalFormat: DateFormat =
@@ -1345,6 +1391,7 @@ fun getUniqueIDWhitRandomString(): String {
             ""
         }
     }
+
     fun dateConvert2(dateString: String): String {
         return try {
             val originalFormat: DateFormat =
@@ -1810,9 +1857,10 @@ fun getUniqueIDWhitRandomString(): String {
             context.startActivity(i)
         }
     }
-    fun getFormattedDate(dateStr: String):String{
+
+    fun getFormattedDate(dateStr: String): String {
         try {
-            var format:SimpleDateFormat?=null
+            var format: SimpleDateFormat? = null
 
             if (dateStr.startsWith("1") && !dateStr.startsWith("11"))
                 format = SimpleDateFormat("dd'st' MMMM yyyy")
@@ -1823,20 +1871,19 @@ fun getUniqueIDWhitRandomString(): String {
             else
                 format = SimpleDateFormat("dd'th' MMMM yyyy")
 
-           var format1 = SimpleDateFormat("dd MMM yyyy")
+            var format1 = SimpleDateFormat("dd MMM yyyy")
             val date: Date = format.parse(dateStr)
             val formattedDate: String = format1.format(date).toString().toUpperCase()
 
             return formattedDate
-        }
-        catch (ex: Exception){
+        } catch (ex: Exception) {
             return dateStr
         }
     }
 
-     fun getFormatedAmount(amount: Double): String? {
-         val formatter = DecimalFormat("#,###.00")
-        return  formatter.format(amount)
+    fun getFormatedAmount(amount: Double): String? {
+        val formatter = DecimalFormat("#,###.00")
+        return formatter.format(amount)
     }
 
 //    fun getDecryptedString(value: String?, cryptKey: String?): String? {
@@ -1908,7 +1955,7 @@ fun getUniqueIDWhitRandomString(): String {
         return randomStringBuilder.toString()
     }
 
-    fun versionName(context: Context):String{
+    fun versionName(context: Context): String {
         try {
             val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
             return pInfo.versionName
@@ -1918,6 +1965,7 @@ fun getUniqueIDWhitRandomString(): String {
         }
         return ""
     }
+
     fun getFileType(filePath: String): Pair<Boolean, String?> {
         val supportedExtensions = listOf("pdf", "png", "jpg")
 
@@ -1930,6 +1978,7 @@ fun getUniqueIDWhitRandomString(): String {
         // Return the result and the file extension
         return Pair(isSupported, if (isSupported) fileExtension else null)
     }
+
     suspend fun getFileSizeFromUrl(url: String): Long? {
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
@@ -1952,6 +2001,7 @@ fun getUniqueIDWhitRandomString(): String {
             return@withContext null
         }
     }
+
     fun formatFileSize(bytes: Long): String {
         val kilobytes = bytes / 1024.0
         val megabytes = kilobytes / 1024.0

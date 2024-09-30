@@ -13,9 +13,11 @@ import com.nlm.model.NLMComponentA
 import com.nlm.ui.activity.AddMilkUnionVisit
 import com.nlm.ui.activity.AddNLMComponentA
 import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.utilities.AppConstants
+import com.nlm.utilities.hideView
 
 class NLMComponentAAdapter(
-    private val implementingAgencyList: List<NLMComponentA>) :
+    private val implementingAgencyList: List<NLMComponentA>,val Role_name:String) :
 
     RecyclerView.Adapter<NLMComponentAAdapter.Viewholder>() {
 
@@ -46,7 +48,12 @@ class NLMComponentAAdapter(
         holder.mBinding.tvSubmit.text = item.submit
         holder.mBinding.tvYear.text = item.year
 
+        if (Role_name== AppConstants.SUPER_ADMIN||Role_name== AppConstants.ADMIN)
+        {
 
+            holder.mBinding.ivEdit.hideView()
+            holder.mBinding.ivDelete.hideView()
+        }
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddNLMComponentA::class.java)

@@ -1,10 +1,14 @@
 package com.nlm.ui.activity
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.RotateDrawable
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
@@ -41,11 +45,17 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     var isNationDairyOpen = false
     var isGokulOpen = false
 
+
     override val layoutId: Int
         get() = R.layout.activity_dashboard
 
     override fun initView() {
         mBinding = viewDataBinding
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+
         setDefaultDrawables()
         RoleBased()
         mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
@@ -74,20 +84,20 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             }
         })
         // Set click listeners for menu items
-        mBinding?.leftDrawerMenu?.tvUsers?.setOnClickListener {
-            toggleMenuItem(
-                isUserOpen,
-                R.drawable.img_4,
-                mBinding!!.leftDrawerMenu.llUsers,
-                mBinding!!.leftDrawerMenu.tvUsers
-            )
-            isUserOpen = !isUserOpen
-        }
+//        mBinding?.leftDrawerMenu?.tvUsers?.setOnClickListener {
+//            toggleMenuItem(
+//                isUserOpen,
+//                R.drawable.ic_user,
+//                mBinding!!.leftDrawerMenu.llUsers,
+//                mBinding!!.leftDrawerMenu.tvUsers
+//            )
+//            isUserOpen = !isUserOpen
+//        }
 
         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.setOnClickListener {
             toggleMenuItem(
                 isLiveStockOpen,
-                R.drawable.ic_sightedchild,
+                R.drawable.ic_lhd,
                 mBinding!!.leftDrawerMenu.llLivestockHealthDisease,
                 mBinding!!.leftDrawerMenu.tvLivestockHealthDisease
             )
@@ -97,7 +107,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.setOnClickListener {
             toggleMenuItem(
                 isNationLiveStockOpen,
-                R.drawable.img_3,
+                R.drawable.ic_nlm,
                 mBinding!!.leftDrawerMenu.llNationalLivestockMission,
                 mBinding!!.leftDrawerMenu.tvNationalLiveStockMission
             )
@@ -107,7 +117,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.setOnClickListener {
             toggleMenuItem(
                 isNationDairyOpen,
-                R.drawable.baseline_person_24,
+                R.drawable.ic_ndd,
                 mBinding!!.leftDrawerMenu.llNationalDairyDevelopment,
                 mBinding!!.leftDrawerMenu.tvNationalDairyDevelopment
             )
@@ -117,7 +127,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.setOnClickListener {
             toggleMenuItem(
                 isGokulOpen,
-                R.drawable.lock,
+                R.drawable.ic_rgm,
                 mBinding!!.leftDrawerMenu.llRashtriyaGokulMission,
                 mBinding!!.leftDrawerMenu.tvRashtriyaGokulMission
             )
@@ -132,34 +142,29 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     // Method to set default arrow drawables
     private fun setDefaultDrawables() {
+//        setDrawableWithArrow(
+//            mBinding?.leftDrawerMenu?.tvUsers,
+//            ContextCompat.getDrawable(this, R.drawable.ic_user),
+//            false
+//        )
         setDrawableWithArrow(
-            this,
-            mBinding?.leftDrawerMenu?.tvUsers,
-            ContextCompat.getDrawable(this, R.drawable.img_4),
-            false
-        )
-        setDrawableWithArrow(
-            this,
             mBinding?.leftDrawerMenu?.tvLivestockHealthDisease,
-            ContextCompat.getDrawable(this, R.drawable.ic_sightedchild),
+            ContextCompat.getDrawable(this, R.drawable.ic_lhd),
             false
         )
         setDrawableWithArrow(
-            this,
             mBinding?.leftDrawerMenu?.tvNationalLiveStockMission,
-            ContextCompat.getDrawable(this, R.drawable.img_3),
+            ContextCompat.getDrawable(this, R.drawable.ic_nlm),
             false
         )
         setDrawableWithArrow(
-            this,
             mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment,
-            ContextCompat.getDrawable(this, R.drawable.baseline_person_24),
+            ContextCompat.getDrawable(this, R.drawable.ic_ndd),
             false
         )
         setDrawableWithArrow(
-            this,
             mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission,
-            ContextCompat.getDrawable(this, R.drawable.lock),
+            ContextCompat.getDrawable(this, R.drawable.ic_rgm),
             false
         )
 
@@ -172,12 +177,13 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
+            finish()
         }
-        mBinding?.leftDrawerMenu?.tvMasterImplementingAgency?.setOnClickListener {
-            val intent =
-                Intent(this@DashboardActivity, ImplementingAgencyMasterActivity::class.java)
-            startActivity(intent)
-        }
+//        mBinding?.leftDrawerMenu?.tvMasterImplementingAgency?.setOnClickListener {
+//            val intent =
+//                Intent(this@DashboardActivity, ImplementingAgencyMasterActivity::class.java)
+//            startActivity(intent)
+//        }
         mBinding?.leftDrawerMenu?.tvMobileVeterinaryUnits?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, MobileVeterinaryActivity::class.java)
             startActivity(intent)
@@ -333,10 +339,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
 
-        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, UserActivity::class.java)
-            startActivity(intent)
-        }
+//        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
+//            val intent = Intent(this@DashboardActivity, UserActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
 
@@ -375,13 +381,58 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     // Close all other menu items and reset arrows
     private fun closeAllMenus() {
-        mBinding!!.leftDrawerMenu.llUsers.hideView()
+//        mBinding!!.leftDrawerMenu.llUsers.hideView()
         mBinding!!.leftDrawerMenu.llLivestockHealthDisease.hideView()
         mBinding!!.leftDrawerMenu.llNationalLivestockMission.hideView()
         mBinding!!.leftDrawerMenu.llNationalDairyDevelopment.hideView()
         mBinding!!.leftDrawerMenu.llRashtriyaGokulMission.hideView()
-
         setDefaultDrawables() // Reset arrows to default position
+    }
+
+    // Method to handle arrow rotation and setting drawable
+    private fun setDrawableWithArrow(
+        textView: TextView?,
+        drawableStart: Drawable?,
+        isOpen: Boolean
+    ) {
+        var arrowDrawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)?.let {
+            // Apply the initial color (white when arrow is down)
+            DrawableCompat.wrap(it).also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.white))
+                textView?.setTextColor(ContextCompat.getColor(this, R.color.white))
+
+            }
+        }
+
+        // Create background drawable
+        var ll = R.color.drawerOn
+
+        // Rotate arrow if not open
+        if (!isOpen) {
+            arrowDrawable = Utility.rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.black))
+                textView?.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+            }
+            ll = R.color.white
+        }
+
+        // Set drawables to TextView
+        textView?.setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, arrowDrawable, null)
+        textView?.setBackgroundColor(ContextCompat.getColor(this, ll)) // Change background to black when closed
+
+    }
+
+
+    // Rotate the drawable for the arrow direction
+    private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
+        drawable?.mutate() // Mutate the drawable to avoid affecting other instances
+        val rotateDrawable = RotateDrawable()
+        rotateDrawable.drawable = drawable
+        rotateDrawable.fromDegrees = 0f
+        rotateDrawable.toDegrees = angle
+        rotateDrawable.level = 10000 // Needed to apply the rotation
+        return rotateDrawable
     }
 
     private fun toggleLeftDrawer() {
@@ -405,38 +456,45 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
          Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.RGM_State_Level_Monitor
      ){
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-         mBinding?.leftDrawerMenu?.view4?.showView()
      }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NPDD_State_Level_Monitor) {
-         mBinding?.leftDrawerMenu?.view6?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
      }
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NDDB) {
+         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+         mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.hideView()
+         mBinding?.leftDrawerMenu?.tvAiCenter?.hideView()
+         mBinding?.leftDrawerMenu?.tvTrainingCenters?.hideView()
+         mBinding?.leftDrawerMenu?.tvSemenStation?.hideView()
+         mBinding?.leftDrawerMenu?.tvBullMotherFarms?.hideView()
+         mBinding?.leftDrawerMenu?.tvVitroFertilization?.hideView()
+
+     }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.LHDCP_and_NLM_State_Level_Monitor) {
-         mBinding?.leftDrawerMenu?.view3?.showView()
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.view5?.showView()
      }
      if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)=="Super Admin") {
          mBinding?.leftDrawerMenu?.tvUsers?.showView()
-         mBinding?.leftDrawerMenu?.view2?.showView()
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-         mBinding?.leftDrawerMenu?.view3?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-         mBinding?.leftDrawerMenu?.view4?.showView()
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.view5?.showView()
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-         mBinding?.leftDrawerMenu?.view6?.showView()
      }
-     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM||Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
+     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM) {
          mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-         mBinding?.leftDrawerMenu?.view3?.showView()
          mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-         mBinding?.leftDrawerMenu?.view4?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.hideView()
+         mBinding?.leftDrawerMenu?.tvReportsOfNlm?.hideView()
          mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.view5?.showView()
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-         mBinding?.leftDrawerMenu?.view6?.showView()
      }
+     if (    Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
+         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+     }
+
  }}

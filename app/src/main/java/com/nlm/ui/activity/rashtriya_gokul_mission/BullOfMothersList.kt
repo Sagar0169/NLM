@@ -25,7 +25,9 @@ class BullOfMothersList : BaseActivity<ActivityBullOfMothersListBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction=ClickActions()
-        if (Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin") {
+        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)==AppConstants.SUPER_ADMIN || Utility.getPreferenceString(this, AppConstants.ROLE_NAME)==AppConstants.Nodal_Officer||
+            Utility.getPreferenceString(this, AppConstants.ROLE_NAME)==AppConstants.NLM|| Utility.getPreferenceString(this, AppConstants.ROLE_NAME)==AppConstants.ADMIN )
+        {
             mBinding!!.fabAddAgency.hideView()
         }
         nodalOfficerList = listOf(

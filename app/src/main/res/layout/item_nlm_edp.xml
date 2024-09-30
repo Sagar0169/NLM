@@ -10,14 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:background="@drawable/curve_back_blue"
+        android:backgroundTint="#1C6AAA"
         android:elevation="4dp"
-        android:background="@android:color/white"
-        android:radius="8dp">
+        android:radius="8dp"
+        app:cardCornerRadius="@dimen/dp_10">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FAE2BC"
+            android:layout_marginEnd="@dimen/dp_50"
+            android:background="#FFFFFF"
             android:padding="16dp">
 
             <!-- Permit Number and State Name -->
@@ -31,8 +34,8 @@
                     android:id="@+id/tvComment"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Comment Progress :"
                     android:fontFamily="@font/poppins_bold"
+                    android:text="Comment Progress :"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -58,8 +61,8 @@
                     android:id="@+id/tvCreatedTitle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Created :"
                     android:fontFamily="@font/poppins_bold"
+                    android:text="Created :"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -67,9 +70,9 @@
                     android:id="@+id/tvCreatedBy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2024-08-28"
-                    android:fontFamily="@font/poppins_regular"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="2024-08-28"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -86,8 +89,8 @@
                     android:id="@+id/tvCreated"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Created :"
                     android:fontFamily="@font/poppins_bold"
+                    android:text="Created :"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -95,9 +98,9 @@
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2024-08-28"
-                    android:fontFamily="@font/poppins_regular"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="2024-08-28"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -107,11 +110,11 @@
                 android:id="@+id/llActions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp_5"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-5dp"
                 android:layout_below="@id/llCreated"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="-5dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <!-- View Icon -->
@@ -121,9 +124,9 @@
                     android:id="@+id/ivView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_5"
                     android:contentDescription="View"
                     android:padding="@dimen/dp_5"
-                    android:layout_marginHorizontal="@dimen/dp_5"
                     android:src="@drawable/ic_view"
                     app:tint="@color/black" />
 
@@ -132,10 +135,10 @@
                     android:id="@+id/ivEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="Edit"
-                    android:padding="@dimen/dp_5"
-
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:contentDescription="Edit"
+
+                    android:padding="@dimen/dp_5"
                     android:src="@drawable/edit_icon"
                     app:tint="@color/black" />
 
@@ -144,10 +147,10 @@
                     android:id="@+id/ivDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="Delete"
-                    android:padding="@dimen/dp_5"
-
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:contentDescription="Delete"
+
+                    android:padding="@dimen/dp_5"
                     android:src="@drawable/ic_deleted"
                     app:tint="@color/black" />
             </LinearLayout>

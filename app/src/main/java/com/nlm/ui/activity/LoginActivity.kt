@@ -1,21 +1,30 @@
 package com.nlm.ui.activity
 
 import android.content.Intent
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
+import android.widget.EditText
+import android.widget.ImageView
+import com.nlm.utilities.BaseActivity
 import com.nlm.R
 import com.nlm.databinding.ActivityLoginBinding
 import com.nlm.model.LoginRequest
 import com.nlm.utilities.AppConstants
-import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.getPreferenceString
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private var mBinding: ActivityLoginBinding? = null
-    var viewModel = ViewModel()
+    private var viewModel = ViewModel()
+    private var isPasswordVisible = false
+
 
     override val layoutId: Int
         get() = R.layout.activity_login
@@ -24,6 +33,31 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        toast(getPreferenceString(this,PrefEntities.TOKEN ))
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+
+        val passwordEditText = findViewById<EditText>(R.id.etPassword)
+        val toggleImageView = findViewById<ImageView>(R.id.ivPassEye)
+
+        toggleImageView.setOnClickListener {
+            if (isPasswordVisible) {
+                // Hide password
+                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                toggleImageView.setImageResource(R.drawable.ic_login_hide_eye) // Change to eye-off icon
+                isPasswordVisible = false
+            } else {
+                // Show password
+                passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                toggleImageView.setImageResource(R.drawable.ic_eye_open) // Change to eye-on icon
+                isPasswordVisible = true
+            }
+
+            // Move cursor to the end of the text after toggling
+            passwordEditText.setSelection(passwordEditText.text.length)
+        }
     }
 
 
@@ -35,7 +69,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     this@LoginActivity,
                     DashboardActivity::class.java
                 )
-//                ).putExtra(AppConstants.INFO, 3)
             )
 //            if (valid())
 //                viewModel.getLoginApi(
@@ -116,7 +149,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                                 DashboardActivity::class.java
                             )
                         )
-                        finishAffinity()
+                        finish()
 
                 }
             }

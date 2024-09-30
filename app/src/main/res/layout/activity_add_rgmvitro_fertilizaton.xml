@@ -27,6 +27,7 @@
                 android:id="@+id/ivBackPress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="30dp"
                 android:onClick="@{ClickAction::backPress}"
                 android:src="@drawable/ic_back" />
 
@@ -37,6 +38,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
+                android:paddingTop="30dp"
                 android:text="Add New Vitro Fertilization"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_20"
@@ -56,6 +58,7 @@
             app:tabIndicatorColor="@color/orange"
             app:tabSelectedTextColor="@color/orange"
             app:tabMode="scrollable"
+            app:tabGravity="center"
             app:tabTextColor="@color/white" />
 
 

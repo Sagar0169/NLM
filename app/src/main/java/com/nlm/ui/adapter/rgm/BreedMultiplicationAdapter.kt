@@ -10,6 +10,7 @@ import com.nlm.databinding.ItemBreedMultiplicationBinding
 import com.nlm.model.BreedMultiplication
 import com.nlm.model.MilkUnionVisit
 import com.nlm.ui.activity.rashtriya_gokul_mission.AddBreedMultiplication
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
 
 class BreedMultiplicationAdapter(
@@ -37,9 +38,9 @@ class BreedMultiplicationAdapter(
     // Bind the data to the views in each item
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
         val item = implementingAgencyList[position]
-        if (Role_name=="Super Admin")
+        if (Role_name== AppConstants.SUPER_ADMIN||Role_name== AppConstants.Nodal_Officer||Role_name== AppConstants.ADMIN)
         {
-            holder.mBinding.ivView.hideView()
+
             holder.mBinding.ivEdit.hideView()
             holder.mBinding.ivDelete.hideView()
         }
