@@ -42,8 +42,8 @@ class DairyPlantVisitAdapter(
         holder.mBinding.tvFssai.text = item.fssaiLicenseNo
         holder.mBinding.tvState.text = item.state
         holder.mBinding.tvDistrict.text = item.district
-        holder.mBinding.tvCreatedBy.text = item.created
-        holder.mBinding.tvlocation.text = item.location
+        holder.mBinding.tvCreatedBy.text = item.location
+        holder.mBinding.tvCreated.text = item.created
 
 
 

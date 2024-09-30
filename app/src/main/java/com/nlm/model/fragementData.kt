@@ -144,6 +144,15 @@ data class MilkUnionVisit(
     val createdBy: String,
     val createdDate: String,
 ) : Serializable
+data class BreedMultiplication(
+    val nameOfBeneficiary: String,
+
+    val state: String,
+    val district: String,
+    val nlmStatus: String,
+
+    val created: String,
+) : Serializable
 data class NLMComponentA(
     val state: String,
     val district: String,

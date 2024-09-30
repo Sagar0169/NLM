@@ -43,6 +43,7 @@ class StateCenterLabVisitAdapter(
         holder.mBinding.tvDistrict.text = item.district
         holder.mBinding.tvCreated.text = item.created
         holder.mBinding.tvLocation.text = item.location
+        holder.mBinding.tvCreatedBy.text = item.created
 
 
 

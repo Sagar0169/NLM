@@ -39,7 +39,7 @@ class TrainingCentersAdapter(
         holder.mBinding.tvCreated.text = item.created
         holder.mBinding.tvVillage.text = item.village
         holder.mBinding.tvState.text = item.state
-        holder.mBinding.tvSubmit.text = item.submit
+        holder.mBinding.tvSettingYear.text = item.submit
         holder.mBinding.tvDistrict.text = item.district
 
 

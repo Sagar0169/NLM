@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityBreedMultiplicationRgmBinding
+import com.nlm.model.BreedMultiplication
 import com.nlm.model.MilkUnionVisit
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.rgm.BreedMultiplicationAdapter
@@ -17,7 +18,7 @@ import com.nlm.utilities.hideView
 class BreedMultiplicationRGMActivity : BaseActivity<ActivityBreedMultiplicationRgmBinding>() {
     private var mBinding: ActivityBreedMultiplicationRgmBinding? = null
     private lateinit var adapter: BreedMultiplicationAdapter
-    private lateinit var list: List<MilkUnionVisit>
+    private lateinit var list: List<BreedMultiplication>
     private var layoutManager: LinearLayoutManager? = null
 
     override val layoutId: Int
@@ -46,51 +47,22 @@ class BreedMultiplicationRGMActivity : BaseActivity<ActivityBreedMultiplicationR
         }
         list = listOf(
 
-            MilkUnionVisit(
-                "TAMIL NADU",
-                "Sheila Benjamin",
-                "CHENGALPATTU,CHENNAI",
-                "Shri Sudhanshu Shekhar",
-                "2024-08-20"
 
-                ),
-            MilkUnionVisit(
+            BreedMultiplication(
+                "Shri Sudhanshu Shekhar",
                 "TAMIL NADU",
                 "Sheila Benjamin",
-                "CHENGALPATTU,CHENNAI",
-                "Shri Sudhanshu Shekhar",
+                "Not filled",
+
                 "2024-08-20"
 
             ),
-            MilkUnionVisit(
+ BreedMultiplication(
+                "Shri Sudhanshu Shekhar",
                 "TAMIL NADU",
                 "Sheila Benjamin",
-                "CHENGALPATTU,CHENNAI",
-                "Shri Sudhanshu Shekhar",
-                "2024-08-20"
+                "Not filled",
 
-            ),
-            MilkUnionVisit(
-                "TAMIL NADU",
-                "Sheila Benjamin",
-                "CHENGALPATTU,CHENNAI",
-                "Shri Sudhanshu Shekhar",
-                "2024-08-20"
-
-            ),
-            MilkUnionVisit(
-                "TAMIL NADU",
-                "Sheila Benjamin",
-                "CHENGALPATTU,CHENNAI",
-                "Shri Sudhanshu Shekhar",
-                "2024-08-20"
-
-            ),
-            MilkUnionVisit(
-                "TAMIL NADU",
-                "Sheila Benjamin",
-                "CHENGALPATTU,CHENNAI",
-                "Shri Sudhanshu Shekhar",
                 "2024-08-20"
 
             ),
