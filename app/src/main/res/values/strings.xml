@@ -315,5 +315,8 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="productivity_enhancement_servicesPES">Productivity Enhancement Services</string>
     <string name="reports_of_national_level_monitors_component_a"><ul><li>Reports of National Level Monitors (Component A)</li></ul></string>
     <string name="national_level_monitors_component_b"><ul><li>National Level Monitors(Component B)</li></ul></string>
+    <string name="add_dcs_center_visit_report">Add DCS Center Visit Report</string>
+    <string name="add_state_center_lab_visit">Add State Center Lab Visit</string>
+    <string name="add_national_level_monitors_component_a">Add National Level Monitors(Component A)</string>
 </resources>
 

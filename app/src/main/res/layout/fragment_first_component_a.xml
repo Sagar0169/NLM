@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Name of State"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -59,6 +59,8 @@
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="@dimen/dp_5"
                         android:text="Select"
+                        android:fontFamily="@font/inter_regular"
+
                         android:textColor="@color/grey"
                         android:textSize="14sp" />
 
@@ -78,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="NPDD Project No"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -88,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -102,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Districts Covered"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -125,6 +127,8 @@
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="@dimen/dp_5"
                         android:text="Please Select"
+                        android:fontFamily="@font/inter_regular"
+
                         android:textColor="@color/grey"
                         android:textSize="14sp" />
 
@@ -173,7 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Year of Approval"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -183,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -196,7 +200,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Approved Outlay"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -206,7 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -218,7 +222,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Central Share"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -229,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -242,7 +246,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Total Central Share Released"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -252,7 +256,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -265,7 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="FUC submitted"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -275,7 +279,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -289,7 +293,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Unspent Balance"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -299,7 +303,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:hint=""
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
@@ -313,7 +317,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Year of Unspent"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -323,7 +327,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -335,7 +339,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Status of Project (Completed/Ongoing)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -345,7 +349,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -371,12 +375,13 @@
                     android:layout_marginHorizontal="@dimen/dp_50"
                     android:layout_marginTop="@dimen/dp_15"
                     android:layout_marginBottom="@dimen/dp_10"
-                    android:background="@drawable/curve_fill_blue"
+                    android:background="@drawable/button_bg"
                     android:clickable="true"
-                    android:fontFamily="@font/poppins_medium"
+                    android:fontFamily="@font/khula_semibold"
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
                     android:text="Next"
+                    android:textSize="@dimen/dp_20"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </LinearLayout>
