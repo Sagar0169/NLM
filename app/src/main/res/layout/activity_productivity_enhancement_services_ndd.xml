@@ -19,34 +19,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
-            android:paddingBottom="10dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:paddingVertical="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivBackPress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:onClick="@{ClickAction::backPress}"
                 android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHeading"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/tvHeading" />
 
             <TextView
                 android:id="@+id/tvHeading"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="Productivity Enhancement Services"
+                android:text="@string/productivity_enhancement_services"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_19"
+                android:fontFamily="@font/lexend_semibold"
+                android:textSize="20sp"
+                android:textAlignment="center"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                app:layout_constraintStart_toEndOf="@+id/ivBackPress"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/appCompatImageView"
                 android:layout_width="wrap_content"

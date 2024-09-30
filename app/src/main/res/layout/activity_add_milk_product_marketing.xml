@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of the Retail Shop/Milk Parlour Visited*"
+                    android:text="@string/name_of_the_retail_shop_milk_parlour_visitedMPM"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of the Milk Union/MPC/Federation"
+                    android:text="@string/name_of_the_milk_union_mpc_federationMPM"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -126,44 +126,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of State*"
+                    android:text="@string/name_of_stateMPM"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <RelativeLayout
-                    android:id="@+id/rlDateOfSighting"
+                <TextView
+                    android:id="@+id/etState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:elevation="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRegisterCategory">
-
-
-                    <TextView
-                        android:id="@+id/etState"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:text="Please Select"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp" />
-
-
-                    <ImageView
-                        android:id="@+id/ivArrowUpDState"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="20dp"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_arrow_down"
-                        android:visibility="visible" />
-                </RelativeLayout>
-
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:text="Please Select"
+                    android:textColor="@color/grey" />
 
                 <TextView
 
@@ -171,56 +151,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of the District*"
+                    android:text="@string/name_of_the_districtMPM"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <RelativeLayout
-                    android:id="@+id/rlRelationship"
+                <TextView
+                    android:id="@+id/etDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:elevation="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRegisterCategory">
-
-
-                    <TextView
-                        android:id="@+id/etDistrict"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:text="Please Select"
-                        android:textColor="@color/grey"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:id="@+id/ivArrowDown"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="20dp"
-                        android:elevation="2sp"
-                        android:padding="5dp"
-                        android:rotation="180"
-                        android:src="@drawable/ic_arrow_down"
-                        android:visibility="gone" />
-
-                    <ImageView
-                        android:id="@+id/ivArrowUpDIstrict"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="20dp"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_arrow_down"
-                        android:visibility="visible" />
-                </RelativeLayout>
-
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:text="Please Select"
+                    android:textColor="@color/grey" />
                 <LinearLayout
                     android:id="@+id/llRelation"
                     android:layout_width="match_parent"
@@ -242,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of the Tehsil"
+                    android:text="@string/name_of_the_tehsil"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -265,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Lat of the Retail Shop/Milk Parlour||Find lat/long"
+                    android:text="Lat of the Retail Shop/Milk Parlour"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -309,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Date of Inspection*"
+                    android:text="@string/date_of_inspection"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 

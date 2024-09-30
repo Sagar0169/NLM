@@ -180,39 +180,39 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="users">Users</string>
     <string name="all_users">All users</string>
     <string name="livestock_health_disease">Livestock Health Disease</string>
-    <string name="vaccination_programme">Vaccination Programme</string>
+    <string name="vaccination_programme"><ul><li>Vaccination Programme</li></ul></string>
     <string name="implementing_agency">Implementing Agency</string>
     <string name="locations">Locations</string>
-    <string name="ascad">ASCAD</string>
-    <string name="mobile_veterinary_units">Mobile veterinary Units</string>
+    <string name="ascad"><ul><li>ASCAD</li></ul></string>
+    <string name="mobile_veterinary_units"><ul><li>Mobile veterinary Units</li></ul></string>
     <string name="national_livestock_mission">National Livestock Mission</string>
-    <string name="implementing_agency_format1">Implementing Agency (Format1)</string>
-    <string name="rsplaboratory_semen_format2">RspLaboratory Semen (Format2)</string>
-    <string name="state_semen_bank_format3">State Semen Bank (Format3)</string>
-    <string name="artificial_insemination_format4">Artificial Insemination (Format4)</string>
-    <string name="import_of_exotic_goat_format5">Import of Exotic Goat (Format5)</string>
-    <string name="assistance_for_qfps_format6">Assistance For Qfps (Format6)</string>
-    <string name="fps_plan_storage_format7">Fps plan Storage (Format7)</string>
-    <string name="fps_from_non_forest_format8">Fps From Non Forest (Format8)</string>
-    <string name="fps_from_forest_land_format9">Fps From Forest Land (Format9)</string>
-    <string name="assistance_for_ea_format10">Assistance For EA (Format10)</string>
-    <string name="nlm_edp_format11">NLM EDP (Format11)</string>
+    <string name="implementing_agency_format1"><ul><li>Implementing Agency (Format1)</li></ul></string>
+    <string name="rsplaboratory_semen_format2"><ul><li>RspLaboratory Semen (Format2)</li></ul></string>
+    <string name="state_semen_bank_format3"><ul><li>State Semen Bank (Format3)</li></ul></string>
+    <string name="artificial_insemination_format4"><ul><li>Artificial Insemination (Format4)</li></ul></string>
+    <string name="import_of_exotic_goat_format5"><ul><li>Import of Exotic Goat (Format5)</li></ul></string>
+    <string name="assistance_for_qfps_format6"><ul><li>Assistance For Qfps (Format6)</li></ul></string>
+    <string name="fps_plan_storage_format7"><ul><li>Fps plan Storage (Format7)</li></ul></string>
+    <string name="fps_from_non_forest_format8"><ul><li>Fps From Non Forest (Format8)</li></ul></string>
+    <string name="fps_from_forest_land_format9"><ul><li>Fps From Forest Land (Format9)</li></ul></string>
+    <string name="assistance_for_ea_format10"><ul><li>Assistance For EA (Format10)</li></ul></string>
+    <string name="nlm_edp_format11"><ul><li>NLM EDP (Format11)</li></ul></string>
     <string name="national_dairy_development">National Dairy Development</string>
-    <string name="milk_union_visit_report">Milk Union Visit Report</string>
-    <string name="dairy_plant_visit_report">Dairy Plant Visit Report</string>
-    <string name="dcs_bms_center_visit_report">DCS/BMS Center Visit report</string>
-    <string name="state_center_lab_visit_report">State Center Lab Visit Report</string>
-    <string name="milk_processing">Milk Processing</string>
-    <string name="milk_product_marketing">Milk Product Marketing</string>
-    <string name="productivity_enhancement_services">Productivity Enhancement Services</string>
-    <string name="state_implementing_agency">State Implementing Agency</string>
-    <string name="ai_center">Artificial Insemination Center</string>
-    <string name="semen_station">Semen Station</string>
+    <string name="milk_union_visit_report"><ul><li>Milk Union Visit Report</li></ul></string>
+    <string name="dairy_plant_visit_report"><ul><li>Dairy Plant Visit Report</li></ul></string>
+    <string name="dcs_bms_center_visit_report"><ul><li>DCS/BMS Center Visit report</li></ul></string>
+    <string name="state_center_lab_visit_report"><ul><li>State Center Lab Visit Report</li></ul></string>
+    <string name="milk_processing"><ul><li>Milk Processing</li></ul></string>
+    <string name="milk_product_marketing"><ul><li>Milk Product Marketing</li></ul></string>
+    <string name="productivity_enhancement_services"><ul><li>Productivity Enhancement Services</li></ul></string>
+    <string name="state_implementing_agency"><ul><li>State Implementing Agency</li></ul></string>
+    <string name="ai_center"><ul><li>Artificial Insemination Center</li></ul></string>
+    <string name="semen_station"><ul><li>Semen Station</li></ul></string>
     <string name="rashtriya_gokul_mission">Rashtriya Gokul Mission</string>
-    <string name="training_centers">Training Centers</string>
-    <string name="bull_mother_farms">Bull Mother Farms</string>
-    <string name="breed_multiplication">Breed Multiplication</string>
-    <string name="vitro_fertilization">Vitro Fertilization</string>
+    <string name="training_centers"><ul><li>Training Centers</li></ul></string>
+    <string name="bull_mother_farms"><ul><li>Bull Mother Farms</li></ul></string>
+    <string name="breed_multiplication"><ul><li>Breed Multiplication</li></ul></string>
+    <string name="vitro_fertilization"><ul><li>Vitro Fertilization</li></ul></string>
     <string name="no_of_scheme_covered_4">No. of scheme Covered 4</string>
     <string name="total_visit">Total Visit</string>
     <string name="no_of_states_covered">No. of states Covered</string>
@@ -280,7 +280,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="area_of_goat_sheep_station_acres">Area of Goat/Sheep Station (Acres)</string>
     <string name="basic_information">Basic Information</string>
     <string name="major_clients_of_semen_quantity_supplied"><![CDATA[Major clients of semen& Quantity supplied:]]></string>
-    <string name="national_level_monitors_component_a">National Level Monitors(Component A)</string>
+    <string name="national_level_monitors_component_a"><ul><li>National Level Monitors(Component A)</li></ul></string>
     <string name="national_programme_for_dairy_development_format_for_national_level_monitors_pre_filled_by_dairy_division_component_a">National Programme for Dairy Development\nFormat for National Level Monitors\n(Pre-filled by Dairy Division)\n(Component A)</string>
     <string name="mandatory_fields">Please Fill Details.</string>
     <string name="mandatory_field">Mandatory fields required</string>
@@ -288,5 +288,31 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="please_enter_email_id">Please Enter Email</string>
     <string name="Please_enter_password">Please enter password</string>
     <string name="enter_valid_id">Enter Valid Email ID</string>
+    <string name="name_of_milk_union">Name Of Milk Union<font color='red'>*</font></string>
+    <string name="stateMU">State<font color='red'>*</font></string>
+    <string name="name_of_districts_covered">Name of Districts Covered<font color='red'>*</font></string>
+    <string name="photographs_of_site_asset"><![CDATA[Photographs of site & asset]]></string>
+    <string name="name_of_dcs">Name of DCS<font color='red'>*</font></string>
+    <string name="stateDcs">State<font color='red'>*</font></string>
+    <string name="districtDCS">District<font color='red'>*</font></string>
+    <string name="village">Village<font color='red'>*</font></string>
+    <string name="location_of_state_central_lab">Location of State Central Lab<font color='red'>*</font></string>
+    <string name="month_year_of_installation"><![CDATA[Month & Year of installation]]></string>
+    <string name="civil_work_including_electrical_interiorsscl"><![CDATA[Civil Work (including electrical & Interiors)]]></string>
+    <string name="name_of_stateMP">Name of State<font color='red'>*</font></string>
+    <string name="name_of_the_districtMP">Name of the District<font color='red'>*</font></string>
+    <string name="name_of_the_retail_shop_milk_parlour_visitedMPM">Name of the Retail Shop/Milk Parlour Visited<font color='red'>*</font></string>
+    <string name="name_of_the_milk_union_mpc_federationMPM">Name of the Milk Union/MPC/Federation<font color='red'>*</font></string>
+    <string name="name_of_stateMPM">Name of State<font color='red'>*</font></string>
+    <string name="name_of_the_districtMPM">Name of the District<font color='red'>*</font></string>
+    <string name="name_of_the_tehsil">Name of the Tehsil<font color='red'>*</font></string>
+    <string name="date_of_inspection">Date of Inspection<font color='red'>*</font></string>
+    <string name="name_of_statePES">Name of State<font color='red'>*</font></string>
+    <string name="name_of_the_districtPES">Name of the District<font color='red'>*</font></string>
+    <string name="msp"><![CDATA[< MSP]]></string>
+    <string name="aboveMsp"><![CDATA[> MSP]]></string>
+    <string name="productivity_enhancement_servicesPES">Productivity Enhancement Services</string>
+    <string name="reports_of_national_level_monitors_component_a"><ul><li>Reports of National Level Monitors (Component A)</li></ul></string>
+    <string name="national_level_monitors_component_b"><ul><li>National Level Monitors(Component B)</li></ul></string>
 </resources>
 

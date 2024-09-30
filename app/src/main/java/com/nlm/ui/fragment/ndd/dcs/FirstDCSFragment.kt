@@ -64,11 +64,9 @@ class FirstDCSFragment : BaseFragment<FragmentFirstDcsBinding>() {
 //        }
         mBinding!!.etState.setOnClickListener {
             showBottomSheetDialog("State")
-            mBinding!!.ivArrowUpDState.hideView()
         }
         mBinding!!.etDistrict.setOnClickListener {
             showBottomSheetDialog("District")
-            mBinding!!.ivArrowUpDIstrict.hideView()
 
         }
 

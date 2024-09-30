@@ -3,11 +3,12 @@ package com.nlm.ui.activity
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
+import com.nlm.utilities.BaseActivity
 import com.nlm.R
 import com.nlm.databinding.ActivityLoginBinding
 import com.nlm.model.LoginRequest
 import com.nlm.utilities.AppConstants
-import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.getPreferenceString
@@ -27,25 +28,30 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         toast(getPreferenceString(this,PrefEntities.TOKEN ))
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+
     }
 
 
     inner class ClickActions {
 
         fun login(view: View) {
-//            startActivity(
-//                Intent(
-//                    this@LoginActivity,
-//                    DashboardActivity::class.java
-//                ).putExtra(AppConstants.INFO, 3)
-//            )
-            if (valid())
-                viewModel.getLoginApi(
-                    this@LoginActivity, LoginRequest(
-                        mBinding!!.etUsername.text.toString().trim(),
-                        mBinding!!.etPassword.text.toString().trim()
-                    )
+            startActivity(
+                Intent(
+                    this@LoginActivity,
+                    DashboardActivity::class.java
                 )
+            )
+//            if (valid())
+//                viewModel.getLoginApi(
+//                    this@LoginActivity, LoginRequest(
+//                        mBinding!!.etUsername.text.toString().trim(),
+//                        mBinding!!.etPassword.text.toString().trim()
+//                    )
+//                )
         }
 
         fun backPress(view: View) {
