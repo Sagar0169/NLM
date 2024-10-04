@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.model.OnlyCreated
-import com.nlm.ui.activity.AddNewMobileVeterinaryUnit
+import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnit
 import com.nlm.utilities.showView
 
 

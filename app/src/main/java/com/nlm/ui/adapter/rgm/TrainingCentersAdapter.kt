@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemTrainingCentersBinding
 import com.nlm.model.TrainingCenters
-import com.nlm.ui.activity.AddTrainingCenters
+import com.nlm.ui.activity.rashtriya_gokul_mission.AddTrainingCenters
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
 

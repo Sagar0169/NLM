@@ -13,6 +13,16 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
+import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryActivity
+import com.nlm.ui.activity.national_dairy_development.DCSCenterVisitNDDActivity
+import com.nlm.ui.activity.national_dairy_development.DairyPlantVisitNDDActivity
+import com.nlm.ui.activity.national_dairy_development.MilkProcessingNDDActivity
+import com.nlm.ui.activity.national_dairy_development.MilkProductMarketingNDDActivity
+import com.nlm.ui.activity.national_dairy_development.MilkUnionVisitNDDActivity
+import com.nlm.ui.activity.national_dairy_development.NLMComponentANDDActivity
+import com.nlm.ui.activity.national_dairy_development.NlmComponentBList
+import com.nlm.ui.activity.national_dairy_development.ProductivityEnhancementServicesNDDActivity
+import com.nlm.ui.activity.national_dairy_development.StateCenterLabVisitNDDActivity
 import com.nlm.ui.activity.national_livestock_mission.ArtificialInseminationList
 import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatList
 import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockIAList
@@ -22,6 +32,7 @@ import com.nlm.ui.activity.national_livestock_mission.NlmEdpActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmFpForestLandActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmFspPlantStorageActivity
 import com.nlm.ui.activity.national_livestock_mission.RSPLabList
+import com.nlm.ui.activity.national_livestock_mission.ReportsOfNlmComponentActivity
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankList
 import com.nlm.ui.activity.rashtriya_gokul_mission.BreedMultiplicationRGMActivity
 import com.nlm.ui.activity.rashtriya_gokul_mission.BullOfMothersList
@@ -396,33 +407,23 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         isOpen: Boolean
     ) {
         var arrowDrawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)?.let {
-            // Apply the initial color (white when arrow is down)
+            // Apply the initial color (black when arrow is down)
             DrawableCompat.wrap(it).also { drawable ->
                 DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.white))
-                textView?.setTextColor(ContextCompat.getColor(this, R.color.white))
-
             }
         }
 
-        // Create background drawable
-        var ll = R.color.drawerOn
-
-        // Rotate arrow if not open
         if (!isOpen) {
-            arrowDrawable = Utility.rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
+            // Rotate and change the color to white when rotated
+            arrowDrawable = rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
                 DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.black))
-                textView?.setTextColor(ContextCompat.getColor(this, R.color.black))
-
             }
-            ll = R.color.white
         }
 
-        // Set drawables to TextView
+
+
         textView?.setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, arrowDrawable, null)
-        textView?.setBackgroundColor(ContextCompat.getColor(this, ll)) // Change background to black when closed
-
     }
-
 
     // Rotate the drawable for the arrow direction
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {

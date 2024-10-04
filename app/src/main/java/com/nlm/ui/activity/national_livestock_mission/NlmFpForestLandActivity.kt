@@ -6,12 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityNlmFpForestLandBinding
 import com.nlm.model.NlmFpForest
-import com.nlm.ui.activity.AddNlmFpForestLandActivity
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.NlmFpForestAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 

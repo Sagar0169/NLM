@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.model.NlmEdp
 import com.nlm.ui.activity.national_livestock_mission.AddNewAssistanceForEaActivity
-import com.nlm.ui.activity.AddNlmEdpActivity
+import com.nlm.ui.activity.national_livestock_mission.AddNlmEdpActivity
 import com.nlm.utilities.hideView
 
 

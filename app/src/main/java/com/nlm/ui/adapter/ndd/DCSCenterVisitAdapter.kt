@@ -7,12 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemDcsCenterVisitBinding
-import com.nlm.databinding.ItemMilkUnionVisitBinding
 import com.nlm.model.DcsCenterVisit
-import com.nlm.model.MilkUnionVisit
-import com.nlm.ui.activity.AddDCSCenterVisit
-import com.nlm.ui.activity.AddMilkUnionVisit
-import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.ui.activity.national_dairy_development.AddDCSCenterVisit
 
 class DCSCenterVisitAdapter(
     private val implementingAgencyList: List<DcsCenterVisit>) :

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.AddMilkUnionVisit.ClickActions" />
+            type="com.nlm.ui.activity.national_dairy_development.AddMilkUnionVisit.ClickActions" />
     </data>
 
     <RelativeLayout

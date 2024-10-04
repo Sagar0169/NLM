@@ -6,13 +6,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.ItemMilkUnionVisitBinding
 import com.nlm.databinding.ItemNlmComponentABinding
-import com.nlm.model.MilkUnionVisit
 import com.nlm.model.NLMComponentA
-import com.nlm.ui.activity.AddMilkUnionVisit
-import com.nlm.ui.activity.AddNLMComponentA
-import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.ui.activity.national_dairy_development.AddNLMComponentA
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
 
