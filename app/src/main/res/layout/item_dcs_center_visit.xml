@@ -9,21 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_8"
+        android:layout_margin="@dimen/dp_8">
 
-
-        >
-
-        <!--        <View-->
-        <!--            android:id="@+id/viw"-->
-        <!--            android:layout_width="5dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_marginVertical="10dp"-->
-        <!--            android:layout_marginEnd="@dimen/dp_5"-->
-        <!--            android:background="@color/black"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@+id/tvSendMail"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -288,7 +275,6 @@
                             android:textSize="14sp" />
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -328,13 +314,6 @@
                             android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
-
-
-
-
-
-
-
 
                     <LinearLayout
                         android:id="@+id/llActions"
@@ -386,7 +365,6 @@
                             android:src="@drawable/ic_deleted"
                             app:tint="@color/black" />
                     </LinearLayout>
-
 
                 </LinearLayout>
                 <LinearLayout

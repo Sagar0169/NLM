@@ -211,6 +211,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="semen_station"><ul><li>Semen Station</li></ul></string>
     <string name="rashtriya_gokul_mission">Rashtriya Gokul Mission</string>
     <string name="training_centers"><ul><li>Training Centers</li></ul></string>
+    <string name="training_centers_">Training Centers</string>
     <string name="bull_mother_farms"><ul><li>Bull Mother Farms</li></ul></string>
     <string name="breed_multiplication"><ul><li>Breed Multiplication</li></ul></string>
     <string name="vitro_fertilization"><ul><li>Vitro Fertilization</li></ul></string>
@@ -324,5 +325,11 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="monitoring_of_nlm_by_national_level_monitors_format_for_fodder_seed_processing_plant_storage">MONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for fodder seed processing plant/ storage</string>
     <string name="monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_quality_fodder_seed_production">MONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for Assistance for quality Fodder seed production</string>
     <string name="format_for_artifical_insemination_center_to_be_provided_for_govt_inst_dairy_co_operatives_others_separately">FORMAT FOR ARTIFICIAL INSEMINATION CENTER\n(To be provided for Govt. Inst / Dairy Co-operatives / Others separately)</string>
+    <string name="save_next"><![CDATA[Save & Next]]></string>
+    <string name="staff_details">Staff Details:</string>
+    <string name="available_infrastructure_for_sheep_goat_genetic_improvement">Available infrastructure for Sheep / Goat Genetic Improvement:</string>
+    <string name="view">View</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>
 

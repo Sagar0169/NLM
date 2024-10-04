@@ -43,10 +43,7 @@ class DCSCenterVisitAdapter(
         holder.mBinding.tvfssai.text = item.fssai
         holder.mBinding.tvDOV.text = item.dateOfValidity
 
-
-
-
-        holder.mBinding.ivView.setOnClickListener {
+holder.mBinding.ivView.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddDCSCenterVisit::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

@@ -66,12 +66,11 @@ class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>() {
     private fun setupTabLayout() {
         mBinding?.tabLayout?.apply {
             addTab(newTab().setText("Basic Information"))
-
-            addTab(newTab().setText("Availability of equipment"))
+//            addTab(newTab().setText("Availability of equipment"))
 //            addTab(newTab().setText("Composition of Advisory committee (if any)"))
 //            addTab(newTab().setText("Project Monitoring Committee (PMC)"))
             addTab(newTab().setText("Average semen dose production of goat/sheep during last four years (breed wise)"))
-            addTab(newTab().setText("Suggestions for improvement if any elaborate"))
+            addTab(newTab().setText("To be filled by the NLM Team"))
 
 
 
@@ -83,16 +82,16 @@ class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>() {
                             loadFragment(RSPBasicInformationFragment())
                         }
 
+//                        2 -> {
+//                            onTabClicks()
+//                            loadFragment(RSPAvailabilityOfEquipmentFragment())
+//                        }
                         1 -> {
-                            onTabClicks()
-                            loadFragment(RSPAvailabilityOfEquipmentFragment())
-                        }
-                        2 -> {
                             onTabClicks()
                             loadFragment(RSPAverageSemenDoseFragment())
                         }
 
-                        3 -> {
+                        2 -> {
                             onTabClicks()
                             loadFragment(RSPSuggestionsForImprovement())
                         }

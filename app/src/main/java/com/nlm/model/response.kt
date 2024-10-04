@@ -20,9 +20,6 @@ data class LoginResponse(
     val message: String
 )
 
-
-
-
 data class Result(
     val data: Data,
     val token: String
