@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemStateCenterVisitBinding
 import com.nlm.model.StateCenterVisit
+import com.nlm.ui.activity.national_dairy_development.AddProductivityEnhancementServices
 import com.nlm.ui.activity.national_dairy_development.AddStateCenterLabtVisit
 
 class StateCenterLabVisitAdapter(
@@ -43,7 +44,13 @@ class StateCenterLabVisitAdapter(
 
 
 
-        holder.itemView.setOnClickListener {
+
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddStateCenterLabtVisit::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddStateCenterLabtVisit::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

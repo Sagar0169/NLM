@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemNlmComponentABinding
 import com.nlm.model.NLMComponentA
+import com.nlm.ui.activity.national_dairy_development.AddMilkUnionVisit
 import com.nlm.ui.activity.national_dairy_development.AddNLMComponentA
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
@@ -51,7 +52,13 @@ class NLMComponentAAdapter(
             holder.mBinding.ivDelete.hideView()
         }
 
-        holder.itemView.setOnClickListener {
+
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddNLMComponentA::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddNLMComponentA::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)
