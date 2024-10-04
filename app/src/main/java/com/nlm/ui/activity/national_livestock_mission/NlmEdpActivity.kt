@@ -43,10 +43,10 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
-        {
-            mBinding!!.fabAddAgency.hideView()
-        }
+//        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
+//        {
+//            mBinding!!.fabAddAgency.hideView()
+//        }
         onlyCreated = listOf(
             NlmEdp(
                 "Omnis in ipsam sunt",

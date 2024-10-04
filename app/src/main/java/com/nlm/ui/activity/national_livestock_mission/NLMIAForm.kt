@@ -128,7 +128,6 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
             addTab(newTab().setText("Funds Received"))
             addTab(newTab().setText("Constraints faced by IA in implementation of the project (elaborate)"))
             addTab(newTab().setText("Feed Fodder Situation in the State"))
-            addTab(newTab().setText("Fodder Seed procurement and Distribution"))
 
 
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -180,10 +179,6 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
                             loadFragment(NLSIAFeedFodderFragment())
                         }
 
-                        7 -> {
-                            onTabClicks()
-                            loadFragment(NLSIAFodderSeedFragment())
-                        }
                     }
                 }
 

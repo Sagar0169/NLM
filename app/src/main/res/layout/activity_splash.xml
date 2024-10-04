@@ -37,7 +37,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="-100dp"
                 android:layout_below="@+id/ivEmblem"
-                android:src="@drawable/nlm_title"
+                android:src="@drawable/nlm_title_text"
                 android:elevation="6dp"
                 android:contentDescription="@null" /></RelativeLayout>
     </RelativeLayout>
