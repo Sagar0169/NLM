@@ -188,6 +188,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, MobileVeterinaryActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvEdit?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         mBinding?.leftDrawerMenu?.tvVaccinationProgramme?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, VaccinationProgrammerActivity::class.java)
             startActivity(intent)

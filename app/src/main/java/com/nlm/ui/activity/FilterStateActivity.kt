@@ -120,8 +120,11 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             11 -> {
                 binding!!.tvTitleState.showView()
                 binding!!.tvState.showView()
-                binding!!.tvTitleStatus.showView()
-                binding!!.tvStatus.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvTitleLocAi.text = "Location"
+                binding!!.tvTitleLocAi.showView()
+                binding!!.etLocAi.showView()
 
             }
 

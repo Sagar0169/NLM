@@ -6,292 +6,279 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_8"
-        android:background="@drawable/curve_all_corner_white"
-        android:elevation="@dimen/dp_3"
-        android:paddingTop="@dimen/dp_5"
-        android:paddingBottom="@dimen/dp_5">
+        android:layout_margin="8dp"
+        android:elevation="4dp"
+        android:background="@drawable/curve_back_blue"
+        android:backgroundTint="#1C6AAA"
+        app:cardCornerRadius="@dimen/dp_10"
+        android:radius="8dp">
 
-
-        <LinearLayout
-            android:id="@+id/llParent"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="#FFFFFF"
+            android:layout_marginEnd="@dimen/dp_50"
+            android:padding="16dp">
+
+            <!-- Permit Number and State Name -->
+            <LinearLayout
+                android:id="@+id/llState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/state_name"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="States :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Delhi"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/llDistrict"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:orientation="vertical">
+                android:layout_below="@id/llState"
+                android:layout_marginTop="@dimen/dp_5"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="District :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvDistricts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Delhi"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llBlock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llDistrict"
+                android:layout_marginTop="@dimen/dp_5"
+
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAgencyTitle"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Name Implementing Agency"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAgencyName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="States"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvState"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dp_3"
-                        android:drawablePadding="@dimen/dp_5"
-                        android:fontFamily="@font/poppins_regular"
-                        android:singleLine="true"
-                        android:text="@string/na"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Districts"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDistricts"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dp_3"
-                        android:drawablePadding="@dimen/dp_5"
-                        android:fontFamily="@font/poppins_regular"
-                        android:singleLine="true"
-                        android:text="@string/na"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvOrganogam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Location/Address"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvLocation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
-                        android:layout_marginEnd="@dimen/dp_3"
-                        android:drawablePadding="@dimen/dp_5"
-                        android:fontFamily="@font/poppins_regular"
-                        android:singleLine="true"
-                        android:text="@string/na"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/llTotalExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvArea"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Area Covered"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvAreaCovered"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
-                        android:layout_marginEnd="@dimen/dp_3"
-                        android:drawablePadding="@dimen/dp_5"
-                        android:fontFamily="@font/poppins_regular"
-                        android:singleLine="true"
-                        android:text="@string/na"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="West Bengal Cooperative Milk Producers Federation Ltd."
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
             </LinearLayout>
 
 
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/llFarmer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_10"
-                android:layout_weight="0.3"
-                android:orientation="vertical">
+                android:layout_below="@id/llBlock"
+                android:layout_marginTop="@dimen/dp_5"
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvOrganogam"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:text="Location/Address :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvAgencyTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Name Implementing Agency"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvAgencyName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dp_3"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_regular"
-                        android:lines="2"
-                        android:maxLines="2"
-                        android:text="West Bengal Cooperative Milk Producers Federation Ltd."
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCreatedByTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Created By"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCreatedBy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dp_3"
-                        android:drawablePadding="@dimen/dp_5"
-                        android:fontFamily="@font/poppins_regular"
-                        android:singleLine="true"
-                        android:text="@string/na"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvJoiningDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="Created"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvCreated"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dp_3"
-                        android:drawablePadding="@dimen/dp_5"
-                        android:fontFamily="@font/poppins_regular"
-                        android:singleLine="true"
-                        android:text="@string/na"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/na"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/llActions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llParent">
-
-            <!-- View Icon -->
-
-
-            <ImageView
-                android:id="@+id/ivView"
+            <LinearLayout
+                android:id="@+id/llNlmStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="View"
-                android:layout_marginHorizontal="@dimen/dp_5"
-                android:src="@drawable/ic_view"
-                android:padding="@dimen/dp_4"
-                app:tint="@color/black" />
+                android:layout_below="@id/llFarmer"
+                android:layout_marginTop="@dimen/dp_5"
 
-            <!-- Edit Icon -->
-            <ImageView
-                android:id="@+id/ivEdit"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvArea"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Area Covered :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvAreaCovered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/na"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llCreatedBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="Edit"
-                android:layout_marginHorizontal="@dimen/dp_5"
-                android:src="@drawable/edit_icon"
-                android:padding="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_5"
 
-                app:tint="@color/black" />
+                android:layout_below="@id/llNlmStatus"
+                android:orientation="horizontal">
 
-            <!-- Delete Icon -->
-            <ImageView
-                android:id="@+id/ivDelete"
+                <TextView
+                    android:id="@+id/tvCreatedByTitle"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Created By :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvCreatedBy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Super Admin"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/llCreated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="Delete"
-                android:layout_marginHorizontal="@dimen/dp_5"
-                android:padding="@dimen/dp_4"
-                android:src="@drawable/ic_deleted"
-                app:tint="@color/black" />
-        </LinearLayout>
+                android:layout_below="@id/llCreatedBy"
+                android:layout_marginTop="@dimen/dp_5"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvJoiningDate"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Created :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvCreated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2024-08-28"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Icons for View, Edit, Delete -->
+            <LinearLayout
+                android:id="@+id/llActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-5dp"
+                android:layout_below="@id/llCreated"
+                android:orientation="horizontal">
+
+                <!-- View Icon -->
+
+
+                <ImageView
+                    android:id="@+id/ivView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="View"
+                    android:padding="@dimen/dp_5"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/ic_view"
+                    app:tint="@color/black" />
+
+                <!-- Edit Icon -->
+                <ImageView
+                    android:id="@+id/ivEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Edit"
+                    android:padding="@dimen/dp_5"
+
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/edit_icon"
+                    app:tint="@color/black" />
+
+                <!-- Delete Icon -->
+                <ImageView
+                    android:id="@+id/ivDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Delete"
+                    android:padding="@dimen/dp_5"
+
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/ic_deleted"
+                    app:tint="@color/black" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

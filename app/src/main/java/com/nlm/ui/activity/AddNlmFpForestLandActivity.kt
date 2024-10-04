@@ -59,12 +59,15 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         isFrom = intent?.getIntExtra("isFrom", 0)!!
         mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
         mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
+        mBinding!!.tvDistrictNlm.setOnClickListener { showBottomSheetDialog("DistrictNlm") }
         mBinding!!.tvLand.setOnClickListener { showBottomSheetDialog("Land") }
         mBinding!!.tvAgency.setOnClickListener { showBottomSheetDialog("Agency") }
 
         when (isFrom) {
             1 -> {
                 mBinding!!.tvHeading.text = "Add New Fpfrom Non Forest"
+                mBinding!!.tvMainHeading.text = "MONITORING OF NLM BY NATIONAL LEVEL MONITORS\n" +
+                        "Format for Fodder production from Non. forest/rangeland/non. arableland"
             }
         }
 
@@ -100,6 +103,10 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             "District" -> {
                 selectedList = stateList
                 selectedTextView = mBinding!!.tvDistrict
+            }
+            "DistrictNlm" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.tvDistrictNlm
             }
             "Land" -> {
                 selectedList = land

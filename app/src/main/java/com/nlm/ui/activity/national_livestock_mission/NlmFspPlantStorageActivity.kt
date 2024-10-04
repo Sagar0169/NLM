@@ -43,10 +43,10 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
-        {
-            mBinding!!.fabAddAgency.hideView()
-        }
+//        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
+//        {
+//            mBinding!!.fabAddAgency.hideView()
+//        }
         onlyCreated = listOf(
                 NlmFpForest(
                     state = "GUJARAT",

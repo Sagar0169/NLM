@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
+            android:paddingTop="@dimen/dp_40"
             android:paddingBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,15 +72,14 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:layout_height="0dp"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_weight="0.5"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="National Level Monitors MONITORING OF RASHTRIYA GOKUL MISSION BY NLMS"
+                    android:text="@string/format_for_artifical_insemination_center_to_be_provided_for_govt_inst_dairy_co_operatives_others_separately"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/sp_14" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -90,6 +90,15 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend_bold"
+                        android:text="To be filled by NLM during visit"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -542,9 +551,9 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:textSize="@dimen/sp_16"
-                                    android:textColor="@color/black"
                                     android:text="Name of the programme"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -553,8 +562,8 @@
                                     android:layout_weight="1"
                                     android:text="Place"
                                     android:textAlignment="center"
-                                    android:textSize="@dimen/sp_16"
                                     android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -563,8 +572,8 @@
                                     android:layout_weight="1"
                                     android:text="Duration year"
                                     android:textAlignment="center"
-                                    android:textSize="@dimen/sp_16"
                                     android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16"
                                     android:textStyle="bold" />
 
                             </LinearLayout>
@@ -584,8 +593,8 @@
                             android:layout_marginTop="@dimen/dp_20"
                             android:fontFamily="@font/opensans_semibold"
                             android:text="IV) Equipments / Infrastructure available at AI Centre (Yes/ No) (To be filled by NLM)"
-                            android:textColor="@color/black"
                             android:textAlignment="center"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <RadioGroup
@@ -801,9 +810,7 @@
                                 android:textSize="@dimen/sp_16" />
 
 
-
                         </LinearLayout>
-
 
 
                         <TextView
@@ -812,8 +819,8 @@
                             android:layout_marginTop="@dimen/dp_20"
                             android:fontFamily="@font/opensans_semibold"
                             android:text="V) Supply of Inputs (Yes/No)"
-                            android:textColor="@color/black"
                             android:textAlignment="center"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <RadioGroup
@@ -907,6 +914,16 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1077,7 +1094,6 @@
                                 android:textSize="@dimen/sp_16" />
 
 
-
                         </LinearLayout>
 
                         <TextView
@@ -1212,10 +1228,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Comments of NLMs"
                     android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Comments of NLMs"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 

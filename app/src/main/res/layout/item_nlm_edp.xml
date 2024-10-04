@@ -62,7 +62,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Created :"
+                    android:text="Created By :"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="2024-08-28"
+                    android:text="Super Admin"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
             </LinearLayout>

@@ -187,16 +187,16 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="mobile_veterinary_units"><ul><li>Mobile veterinary Units</li></ul></string>
     <string name="national_livestock_mission">National Livestock Mission</string>
     <string name="implementing_agency_format1"><ul><li>Implementing Agency (Format1)</li></ul></string>
-    <string name="rsplaboratory_semen_format2"><ul><li>RspLaboratory Semen (Format2)</li></ul></string>
+    <string name="rsplaboratory_semen_format2"><ul><li>Regional Semen Production Laboratory(Format2)</li></ul></string>
     <string name="state_semen_bank_format3"><ul><li>State Semen Bank (Format3)</li></ul></string>
     <string name="artificial_insemination_format4"><ul><li>Artificial Insemination (Format4)</li></ul></string>
     <string name="import_of_exotic_goat_format5"><ul><li>Import of Exotic Goat (Format5)</li></ul></string>
-    <string name="assistance_for_qfps_format6"><ul><li>Assistance For Qfps (Format6)</li></ul></string>
-    <string name="fps_plan_storage_format7"><ul><li>Fps plan Storage (Format7)</li></ul></string>
-    <string name="fps_from_non_forest_format8"><ul><li>Fps From Non Forest (Format8)</li></ul></string>
-    <string name="fps_from_forest_land_format9"><ul><li>Fps From Forest Land (Format9)</li></ul></string>
-    <string name="assistance_for_ea_format10"><ul><li>Assistance For EA (Format10)</li></ul></string>
-    <string name="nlm_edp_format11"><ul><li>NLM EDP (Format11)</li></ul></string>
+    <string name="assistance_for_qfps_format6"><ul><li>Assistance For Quality Fodder Seed Production (Format6)</li></ul></string>
+    <string name="fps_plan_storage_format7"><ul><li>Fodder Seed Processing Plant Storage (Format7)</li></ul></string>
+    <string name="fps_from_non_forest_format8"><ul><li>Fodder Production From Non Forest (Format8)</li></ul></string>
+    <string name="fps_from_forest_land_format9"><ul><li>Fodder Production From Forest Land (Format9)</li></ul></string>
+    <string name="assistance_for_ea_format10"><ul><li>Assistance For Extension Activities (Format10)</li></ul></string>
+    <string name="nlm_edp_format11"><ul><li>NLM Entrepreneur Development Programme (Format11)</li></ul></string>
     <string name="national_dairy_development">National Dairy Development</string>
     <string name="milk_union_visit_report"><ul><li>Milk Union Visit Report</li></ul></string>
     <string name="dairy_plant_visit_report"><ul><li>Dairy Plant Visit Report</li></ul></string>
@@ -314,5 +314,11 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="productivity_enhancement_servicesPES">Productivity Enhancement Services</string>
     <string name="reports_of_national_level_monitors_component_a"><ul><li>Reports of National Level Monitors (Component A)</li></ul></string>
     <string name="national_level_monitors_component_b"><ul><li>National Level Monitors(Component B)</li></ul></string>
+    <string name="brorahul_1171">@brorahul@1171</string>
+    <string name="national_livestock_mission_entrepreneur_development_programme_edp_monitoring_of_nlm_by_national_level_monitors_format_for_nlm_edp">National Livestock Mission Entrepreneur Development Programme (EDP)\nMonitoring of NLM by National Level Monitors\nFormat for NLM-EDP</string>
+    <string name="feed_and_fodder_development_monitoring_of_nlm_by_national_level_monitors_format_for_fodder_production_from_forest_land">Feed and fodder development\nMONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for Fodder production from forest land</string>
+    <string name="monitoring_of_nlm_by_national_level_monitors_format_for_fodder_seed_processing_plant_storage">MONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for fodder seed processing plant/ storage</string>
+    <string name="monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_quality_fodder_seed_production">MONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for Assistance for quality Fodder seed production</string>
+    <string name="format_for_artifical_insemination_center_to_be_provided_for_govt_inst_dairy_co_operatives_others_separately">FORMAT FOR ARTIFICIAL INSEMINATION CENTER\n(To be provided for Govt. Inst / Dairy Co-operatives / Others separately)</string>
 </resources>
 

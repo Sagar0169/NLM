@@ -22,7 +22,7 @@ class RGMVItroAdapter(private val onlyCreated: List<RGMVitro>, private val isFro
     class RGMVItroAdapterViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvStateName: TextView = itemView.findViewById(R.id.tvState)
         val tvCreated: TextView = itemView.findViewById(R.id.tvCreated)
-        val tvStatus: TextView = itemView.findViewById(R.id.tvStatusData)
+        val tvNlmStatus: TextView = itemView.findViewById(R.id.tvNlmStatus)
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
         val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
         val ivDelete: ImageView = itemView.findViewById(R.id.ivDelete)
@@ -44,7 +44,7 @@ class RGMVItroAdapter(private val onlyCreated: List<RGMVitro>, private val isFro
         val item = onlyCreated[position]
         holder.tvStateName.text = item.state
         holder.tvCreated.text = item.created
-        holder.tvStatus.text = item.status
+        holder.tvNlmStatus.text = item.status
 
         if (Role_name== AppConstants.SUPER_ADMIN||Role_name== AppConstants.Nodal_Officer||Role_name== AppConstants.ADMIN)
         {
