@@ -25,10 +25,10 @@ class NationalLiveStockIAList : BaseActivity<ActivityNationalLiveStockIaBinding>
     override fun initView() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
-        if(Utility.getPreferenceString(this,AppConstants.ROLE_NAME)=="Super Admin")
-        {
-            mBinding!!.fabAddAgency.hideView()
-        }
+//        if(Utility.getPreferenceString(this,AppConstants.ROLE_NAME)=="Super Admin")
+//        {
+//            mBinding!!.fabAddAgency.hideView()
+//        }
         nodalOfficerList = listOf(
         OnlyCreatedNlm(
             "ANDAMAN AND NICOBAR ISLANDS",
