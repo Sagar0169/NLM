@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.AddProductivityEnhancementServices.ClickActions" />
+            type="com.nlm.ui.activity.national_dairy_development.AddProductivityEnhancementServices.ClickActions" />
     </data>
 
     <RelativeLayout
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
-            android:paddingBottom="10dp"
+            android:paddingVertical="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -32,25 +32,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:onClick="@{ClickAction::backPress}"
                 android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHeading"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/tvHeading" />
 
             <TextView
                 android:id="@+id/tvHeading"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+android:fontFamily="@font/lexend_semibold"
                 android:layout_marginTop="20dp"
                 android:text="Add Productivity Enhancement Services"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivBackPress"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

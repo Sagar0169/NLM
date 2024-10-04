@@ -205,6 +205,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="milk_processing"><ul><li>Milk Processing</li></ul></string>
     <string name="milk_product_marketing"><ul><li>Milk Product Marketing</li></ul></string>
     <string name="productivity_enhancement_services"><ul><li>Productivity Enhancement Services</li></ul></string>
+    <string name="productivity_enhancement_servicesPE"><ul><li>Productivity Enhancement Services</li></ul></string>
     <string name="state_implementing_agency"><ul><li>State Implementing Agency</li></ul></string>
     <string name="ai_center"><ul><li>Artificial Insemination Center</li></ul></string>
     <string name="semen_station"><ul><li>Semen Station</li></ul></string>
@@ -314,6 +315,9 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="productivity_enhancement_servicesPES">Productivity Enhancement Services</string>
     <string name="reports_of_national_level_monitors_component_a"><ul><li>Reports of National Level Monitors (Component A)</li></ul></string>
     <string name="national_level_monitors_component_b"><ul><li>National Level Monitors(Component B)</li></ul></string>
+    <string name="add_dcs_center_visit_report">Add DCS Center Visit Report</string>
+    <string name="add_state_center_lab_visit">Add State Center Lab Visit</string>
+    <string name="add_national_level_monitors_component_a">Add National Level Monitors(Component A)</string>
     <string name="brorahul_1171">@brorahul@1171</string>
     <string name="national_livestock_mission_entrepreneur_development_programme_edp_monitoring_of_nlm_by_national_level_monitors_format_for_nlm_edp">National Livestock Mission Entrepreneur Development Programme (EDP)\nMonitoring of NLM by National Level Monitors\nFormat for NLM-EDP</string>
     <string name="feed_and_fodder_development_monitoring_of_nlm_by_national_level_monitors_format_for_fodder_production_from_forest_land">Feed and fodder development\nMONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for Fodder production from forest land</string>

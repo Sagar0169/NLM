@@ -6,12 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityTrainingCentersRgmBinding
 import com.nlm.model.TrainingCenters
-import com.nlm.ui.activity.AddTrainingCenters
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.rgm.TrainingCentersAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 

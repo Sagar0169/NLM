@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_8"
-        android:background="@color/white"
 
 
         >
@@ -32,16 +31,22 @@
             app:cardElevation="5dp"
             app:cardCornerRadius="@dimen/dp_20"
             android:layout_margin="@dimen/dp_10"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="2">
 
             <LinearLayout
                 android:id="@+id/llParent"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.7"
                 android:layout_height="wrap_content"
-                android:background="@drawable/va_bg_items"
+                android:background="@drawable/curve_all_corner_bg_item_white"
                 android:orientation="vertical"
                 android:padding="@dimen/dp_10"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +56,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -92,7 +96,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -133,7 +136,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -173,7 +175,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -215,7 +216,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -259,7 +259,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -350,6 +349,15 @@
 
 
             </LinearLayout>
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="0.3"
+    android:background="@drawable/curve_all_corner_bg_item"
+    android:orientation="horizontal"
+    />
+</LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

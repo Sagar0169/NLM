@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemTrainingCentersBinding
 import com.nlm.model.TrainingCenters
-import com.nlm.ui.activity.AddTrainingCenters
+import com.nlm.ui.activity.rashtriya_gokul_mission.AddTrainingCenters
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
 
@@ -40,7 +40,7 @@ class TrainingCentersAdapter(
         holder.mBinding.tvCreated.text = item.created
         holder.mBinding.tvVillage.text = item.village
         holder.mBinding.tvState.text = item.state
-        holder.mBinding.tvSubmit.text = item.submit
+        holder.mBinding.tvSettingYear.text = item.submit
         holder.mBinding.tvDistrict.text = item.district
 
 

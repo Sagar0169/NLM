@@ -6,15 +6,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.ItemMilkProcessingBinding
-import com.nlm.databinding.ItemMilkProductMarketingBinding
 import com.nlm.databinding.ItemProductivityEnhancementServicesBinding
-import com.nlm.model.MilkProcessing
-import com.nlm.model.MilkProductMarketing
 import com.nlm.model.ProductivityEnhancementServices
-import com.nlm.ui.activity.AddMilkProductMarketing
-import com.nlm.ui.activity.AddMilkUnionVisit
-import com.nlm.ui.activity.AddProductivityEnhancementServices
+import com.nlm.ui.activity.national_dairy_development.AddProductivityEnhancementServices
 
 class ProductivityEnhancementServicesAdapter(
     private val implementingAgencyList: List<ProductivityEnhancementServices>) :

@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemMilkUnionVisitBinding
 import com.nlm.model.MilkUnionVisit
-import com.nlm.ui.activity.AddMilkUnionVisit
-import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.ui.activity.national_dairy_development.AddMilkUnionVisit
 
 class MilkUnionVisitAdapter(
     private val implementingAgencyList: List<MilkUnionVisit>) :
