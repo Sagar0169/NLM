@@ -62,7 +62,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Name of The DCS/MPP"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -89,7 +89,7 @@
                             android:maxLines="2"
                             android:singleLine="false"
                             android:text="NA"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
                     <LinearLayout
@@ -102,7 +102,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="District"
 
                             android:textColor="@color/black"
@@ -128,7 +128,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -142,7 +142,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="State Name"
 
                             android:textColor="@color/black"
@@ -168,7 +168,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
                     <LinearLayout
@@ -181,7 +181,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Tehsil"
 
                             android:textColor="@color/black"
@@ -207,7 +207,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -222,7 +222,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Village"
 
                             android:textColor="@color/black"
@@ -248,7 +248,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -265,7 +265,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Created At"
 
                             android:textColor="@color/black"
@@ -291,7 +291,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 

@@ -64,7 +64,7 @@
                             android:layout_weight="1"
                             android:textColor="@color/black"
 
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="@string/name_of_the_retail_shop_milk_parlour_visited"
                             android:textSize="14sp" />
 
@@ -90,7 +90,7 @@
                             android:maxLines="2"
                             android:singleLine="false"
                             android:text="NA"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
                     <LinearLayout
@@ -103,7 +103,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Name of the Milk Union/MPC/Federation"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -128,7 +128,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -142,7 +142,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="State"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -167,7 +167,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -181,7 +181,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="District"
 
                             android:textColor="@color/black"
@@ -206,7 +206,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
                     <LinearLayout
@@ -219,7 +219,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Date of Inspection"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -244,7 +244,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -258,7 +258,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Created By"
 
                             android:textColor="@color/black"
@@ -284,7 +284,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -299,7 +299,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Created"
 
                             android:textColor="@color/black"
@@ -325,7 +325,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
