@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/name_of_the_retail_shop_milk_parlour_visitedMPM"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -86,8 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
+                    android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -98,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/name_of_the_milk_union_mpc_federationMPM"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -109,8 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
+                    android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -126,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/name_of_stateMPM"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -138,8 +136,7 @@
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:drawableEnd="@drawable/ic_arrow_down"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
+                    android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -151,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/name_of_the_districtMPM"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -163,8 +160,7 @@
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:drawableEnd="@drawable/ic_arrow_down"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
+                    android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -190,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/name_of_the_tehsil"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -200,8 +196,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
+                    android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -213,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Lat of the Retail Shop/Milk Parlour"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -223,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular" android:maxLength="50"
+                    android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -235,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Long of the Retail Shop/Milk Parlour"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -245,7 +240,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular" android:maxLength="50"
+                    android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -257,7 +252,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/date_of_inspection"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -268,7 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular" android:maxLength="50"
+                    android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -312,7 +307,7 @@
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
+                        android:fontFamily="@font/inter_semi_bold"
                         android:text="General Observations"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
@@ -330,7 +325,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_semi_bold"
                             android:text="Is the Asset earmarked under the Project available (Yes/No)"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -349,7 +344,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Provide Answer"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -367,6 +362,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="Yes"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -378,6 +375,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="No"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -390,7 +389,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Remarks"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -402,8 +401,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
+                                android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="false"
@@ -435,7 +433,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Provide Answer"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -453,6 +451,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="Good"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -464,6 +464,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="Bad"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -476,7 +478,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Remarks"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -488,8 +490,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
+                                android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="false"
@@ -521,7 +522,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Provide Answer"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -539,6 +540,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="Good"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -550,6 +553,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="Bad"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -562,7 +567,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Remarks"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -574,8 +579,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
+                                android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="false"
@@ -607,7 +611,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Provide Answer"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -625,6 +629,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="Yes"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -636,6 +642,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="No"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -648,7 +656,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Remarks"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -660,8 +668,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
+                                android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="false"
@@ -693,7 +700,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Provide Answer"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -711,6 +718,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="Yes"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -722,6 +731,8 @@
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:paddingEnd="@dimen/dp_5"
                                     android:text="No"
+                                    android:fontFamily="@font/inter_medium"
+
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_14"
                                     app:buttonTint="@color/darkBlue" />
@@ -734,7 +745,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Remarks"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -746,8 +757,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
+                                android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="false"
@@ -795,7 +805,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Improvement in the visibility of Milk and Milk Products"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -812,6 +822,8 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:paddingEnd="@dimen/dp_5"
                                 android:text="Yes"
+                                android:fontFamily="@font/inter_medium"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14"
                                 app:buttonTint="@color/darkBlue" />
@@ -823,6 +835,8 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:paddingEnd="@dimen/dp_5"
                                 android:text="No"
+                                android:fontFamily="@font/inter_medium"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14"
                                 app:buttonTint="@color/darkBlue" />
@@ -832,7 +846,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Increase in Milk and Milk Product Sales"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -849,6 +863,8 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:paddingEnd="@dimen/dp_5"
                                 android:text="Yes"
+                                android:fontFamily="@font/inter_medium"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14"
                                 app:buttonTint="@color/darkBlue" />
@@ -860,6 +876,8 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:paddingEnd="@dimen/dp_5"
                                 android:text="No"
+                                android:fontFamily="@font/inter_medium"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14"
                                 app:buttonTint="@color/darkBlue" />
@@ -869,7 +887,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Better availability of Milk and Milk Products"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -886,6 +904,8 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:paddingEnd="@dimen/dp_5"
                                 android:text="Yes"
+                                android:fontFamily="@font/inter_medium"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14"
                                 app:buttonTint="@color/darkBlue" />
@@ -897,6 +917,8 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:paddingEnd="@dimen/dp_5"
                                 android:text="No"
+                                android:fontFamily="@font/inter_medium"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14"
                                 app:buttonTint="@color/darkBlue" />
@@ -906,7 +928,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Improvement in shelf life of milk and milk products due to improved cold chain facility"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -923,6 +945,8 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:paddingEnd="@dimen/dp_5"
                                 android:text="Yes"
+                                android:fontFamily="@font/inter_medium"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14"
                                 app:buttonTint="@color/darkBlue" />
@@ -934,6 +958,7 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:paddingEnd="@dimen/dp_5"
                                 android:text="No"
+                                android:fontFamily="@font/inter_medium"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14"
                                 app:buttonTint="@color/darkBlue" />
@@ -943,7 +968,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Any Other (Please specify)"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -954,8 +979,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
+                            android:fontFamily="@font/inter_regular"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="false"
