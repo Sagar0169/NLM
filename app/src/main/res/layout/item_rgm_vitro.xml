@@ -36,7 +36,7 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="Laboratory Name :"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/inter_regular"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -45,10 +45,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:text="N/A"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llState"
@@ -63,7 +63,7 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="State Name :"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/inter_regular"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -72,10 +72,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:text="Delhi"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -91,7 +91,7 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="District Name :"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/inter_regular"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -100,10 +100,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:text="Delhi"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -119,7 +119,7 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="Location :"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/inter_regular"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -128,10 +128,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:text="Delhi"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
 
@@ -149,7 +149,7 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="IA Status :"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/inter_regular"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -158,10 +158,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:text="N/A"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
 
@@ -179,7 +179,7 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="NLM Status :"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/inter_regular"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -188,10 +188,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:text="N/A"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -207,7 +207,7 @@
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="Created :"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/inter_regular"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -216,10 +216,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2024-08-28"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- Icons for View, Edit, Delete -->

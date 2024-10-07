@@ -13,23 +13,41 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityAddNlmEdpBinding
 import com.nlm.model.NlmEdp
+import com.nlm.ui.adapter.EdpIAAdapter
+import com.nlm.ui.adapter.EdpNlmAdapter
 import com.nlm.ui.adapter.NlmEdpAdapter
 import com.nlm.ui.adapter.OnlyCreatedAdapter
 import com.nlm.ui.adapter.StateAdapter
+import com.nlm.ui.adapter.rgm.CompositionOFGoverningAdapter
 import com.nlm.utilities.BaseActivity
 
 class AddNlmEdpActivity : BaseActivity<ActivityAddNlmEdpBinding>() {
     private var mBinding: ActivityAddNlmEdpBinding? = null
-    private lateinit var onlyCreatedAdapter: NlmEdpAdapter
-    private lateinit var onlyCreated: List<NlmEdp>
-    private var layoutManager: LinearLayoutManager? = null
-    private var isFrom: Int = 0
     private lateinit var stateAdapter: StateAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView2: RecyclerView
+    private lateinit var adapter: EdpIAAdapter
+    private lateinit var adapter2: EdpNlmAdapter
 
+    private lateinit var programmeList: MutableList<Array<String>>
+    private lateinit var programmeList2: MutableList<Array<String>>
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
     private val projectFinancing = listOf(
         "Subsidy Loan", "Self Finance"
+    )
+    private val tvAnimals = listOf(
+        "Yes", "No"
+    )
+    private val stateList = listOf(
+        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+        "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+        "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
+        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep",
+        "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
     )
 
     override val layoutId: Int
@@ -47,7 +65,26 @@ class AddNlmEdpActivity : BaseActivity<ActivityAddNlmEdpBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        mBinding!!.tvProjectFinancing.setOnClickListener { showBottomSheetDialog("State") }
+        recyclerView = mBinding?.recyclerView1!!
+        recyclerView2 = mBinding?.recyclerView2!!
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView2.layoutManager = LinearLayoutManager(this)
+
+        programmeList = mutableListOf()
+        programmeList2 = mutableListOf()
+        programmeList.add(arrayOf("", ""))
+        programmeList2.add(arrayOf("", ""))
+
+        adapter = EdpIAAdapter(programmeList)
+        recyclerView.adapter = adapter
+        mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(this)
+
+        adapter2 = EdpNlmAdapter(programmeList2,this)
+        recyclerView2.adapter = adapter2
+        mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(this)
+//        mBinding!!.tvProjectFinancing.setOnClickListener { showBottomSheetDialog("projectFinancing") }
+        mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
+//        mBinding!!.tvAnimals.setOnClickListener { showBottomSheetDialog("Animals") }
 
 
     }
@@ -74,9 +111,17 @@ class AddNlmEdpActivity : BaseActivity<ActivityAddNlmEdpBinding>() {
         // Initialize based on type
         when (type) {
             "State" -> {
-                selectedList = projectFinancing
-                selectedTextView = mBinding!!.tvProjectFinancing
+                selectedList = stateList
+                selectedTextView = mBinding!!.tvState
             }
+//            "projectFinancing" -> {
+//                selectedList = projectFinancing
+//                selectedTextView = mBinding!!.tvProjectFinancing
+//            }
+//            "Animals" -> {
+//                selectedList = tvAnimals
+//                selectedTextView = mBinding!!.tvAnimals
+//            }
             else -> return
         }
 
