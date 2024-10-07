@@ -48,7 +48,7 @@ class ReportsOfNlmComponentActivity : BaseActivity<ActivityReportsOfNlmComponent
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        mBinding!!.tvState.setOnClickListener{
+        mBinding!!.tvState.setOnClickListener {
             showBottomSheetDialog("State")
         }
     }
@@ -78,7 +78,6 @@ class ReportsOfNlmComponentActivity : BaseActivity<ActivityReportsOfNlmComponent
                 selectedList = stateList
                 selectedTextView = mBinding!!.tvState
             }
-
 
 
             else -> return

@@ -12,7 +12,6 @@ import com.nlm.model.LocationData
 import com.nlm.model.PhysicalAttributesData
 import com.nlm.model.SightedChildData
 import com.nlm.ui.adapter.BottomSheetAdapter
-import com.nlm.ui.fragment.FundsReceivedRGMFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFormIAFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAConstraintsFacedByIAFragment
@@ -166,16 +165,17 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
                             onTabClicks()
                             loadFragment(NLSIAReportingSystem())
                         }
+
                         4 -> {
                             onTabClicks()
                             loadFragment(NLSIAFundsReceivedFragment())
                         }
 
-
                         5 -> {
                             onTabClicks()
                             loadFragment(NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep())
                         }
+
                         6 -> {
                             onTabClicks()
                             loadFragment(NlmManpowerAndCapacityFragment())
