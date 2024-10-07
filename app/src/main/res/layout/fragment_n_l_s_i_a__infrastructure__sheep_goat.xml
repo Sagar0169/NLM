@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Particulars"
+                    android:text="@string/available_infrastructure_for_sheep_goat_genetic_improvement"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
                 <LinearLayout
@@ -62,8 +62,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -71,7 +70,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -95,17 +93,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -116,7 +112,6 @@
 
                     </LinearLayout>
                     <TextView
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
@@ -131,8 +126,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -140,7 +134,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -150,7 +143,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -164,17 +156,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -200,8 +190,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -209,7 +198,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -219,7 +207,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -233,17 +220,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -268,8 +253,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -277,7 +261,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -287,7 +270,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -301,17 +283,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -336,8 +316,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -345,7 +324,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -355,7 +333,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -369,17 +346,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -404,8 +379,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -413,7 +387,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -423,7 +396,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -437,17 +409,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -472,8 +442,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -481,7 +450,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -491,7 +459,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -505,17 +472,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -540,8 +505,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -549,7 +513,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -559,7 +522,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -573,17 +535,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -608,8 +568,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -617,7 +576,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -627,7 +585,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -641,17 +598,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -666,7 +621,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="@string/training_centers"
+                        android:text="@string/training_centers_"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
                     <LinearLayout
@@ -676,8 +631,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -685,7 +639,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -695,7 +648,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -709,17 +661,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -744,8 +694,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -753,7 +702,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -763,7 +711,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -777,17 +724,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -812,8 +757,7 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -821,7 +765,6 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Number"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -831,7 +774,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -845,17 +787,15 @@
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Location"
                             android:layout_marginTop="@dimen/dp_7"
-
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -879,7 +819,6 @@
                     android:background="@drawable/curve_fill_blue"
                     android:clickable="true"
                     android:fontFamily="@font/poppins_medium"
-
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
                     android:text="Next"

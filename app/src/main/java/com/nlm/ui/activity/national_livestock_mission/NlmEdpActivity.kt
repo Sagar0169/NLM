@@ -6,12 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityNlmEdpBinding
 import com.nlm.model.NlmEdp
-import com.nlm.ui.activity.AddNlmEdpActivity
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.NlmEdpAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 
@@ -45,10 +43,10 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
-        {
-            mBinding!!.fabAddAgency.hideView()
-        }
+//        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
+//        {
+//            mBinding!!.fabAddAgency.hideView()
+//        }
         onlyCreated = listOf(
             NlmEdp(
                 "Omnis in ipsam sunt",

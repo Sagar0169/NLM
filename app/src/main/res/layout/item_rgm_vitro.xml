@@ -11,27 +11,58 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="4dp"
-        android:background="@android:color/white"
+        android:background="@drawable/curve_back_blue"
+        android:backgroundTint="#1C6AAA"
+        app:cardCornerRadius="@dimen/dp_10"
         android:radius="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FAE2BC"
+            android:background="#FFFFFF"
+            android:layout_marginEnd="@dimen/dp_50"
             android:padding="16dp">
 
             <!-- Permit Number and State Name -->
+
             <LinearLayout
-                android:id="@+id/llState"
+                android:id="@+id/llLabName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/state_name"
-                    android:layout_width="100dp"
+                    android:id="@+id/tvLabNameTitle"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:text="State :"
+                    android:text="Laboratory Name :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvLabName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="N/A"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llLabName"
+                android:layout_marginTop="@dimen/dp_5"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/state_name"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="State Name :"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -48,23 +79,24 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llStatus"
+                android:id="@+id/llDistrict"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/llCreated"
+                android:layout_below="@+id/llState"
+                android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="100dp"
+                    android:id="@+id/district_name"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:text="Status:"
+                    android:text="District Name :"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvStatusData"
+                    android:id="@+id/tvDistrict"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
@@ -75,15 +107,104 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_below="@+id/llDistrict"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvLocationTitle"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Location :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Delhi"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/llIA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_below="@+id/llLocation"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvIATitle"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="IA Status :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvIAStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="N/A"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/llNLMStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_below="@id/llIA"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNLMTitle"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="NLM Status :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvNlmStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="N/A"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/llCreated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/llState"
+                android:layout_below="@id/llNLMStatus"
+                android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvCreated"
-                    android:layout_width="100dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="Created :"
                     android:fontFamily="@font/poppins_bold"
@@ -110,7 +231,7 @@
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="-5dp"
-                android:layout_below="@id/llStatus"
+                android:layout_below="@id/llCreated"
                 android:orientation="horizontal">
 
                 <!-- View Icon -->

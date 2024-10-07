@@ -22,7 +22,7 @@ class RgmAiAdapter(private val onlyCreated: List<RgmAi>, private val isFrom: Int
     class RgmAiAdapterViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvStateName: TextView = itemView.findViewById(R.id.tvState)
         val tvCreated: TextView = itemView.findViewById(R.id.tvCreated)
-        val tvSubmit: TextView = itemView.findViewById(R.id.tvSubmitAs)
+        val tvNlmStatus: TextView = itemView.findViewById(R.id.tvNlmStatus)
         val tvLocAiCenter: TextView = itemView.findViewById(R.id.tvLocAiCenter)
         val tvNameAiCenter: TextView = itemView.findViewById(R.id.tvNameAiCenter)
         val tvDateOfVisit: TextView = itemView.findViewById(R.id.tvDateOfVisit)
@@ -56,7 +56,7 @@ class RgmAiAdapter(private val onlyCreated: List<RgmAi>, private val isFrom: Int
 
         holder.tvStateName.text = item.state
         holder.tvCreated.text = item.created
-        holder.tvSubmit.text = item.submit
+        holder.tvNlmStatus.text = item.submit
         holder.tvDistrict.text = item.district
         holder.tvNameAiCenter.text = item.name
         holder.tvLocAiCenter.text = item.location

@@ -37,7 +37,7 @@ class AddNewFspPlantStorageActivity : BaseActivity<ActivityAddNewFspPlantStorage
         "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
     )
     private val variety = listOf(
-        "Please Select"
+        "Class Wise","Variety Wise"
     )
 
 
@@ -60,7 +60,6 @@ class AddNewFspPlantStorageActivity : BaseActivity<ActivityAddNewFspPlantStorage
         isFrom = intent?.getIntExtra("isFrom", 0)!!
         mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
         mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
-        mBinding!!.tvVariety.setOnClickListener { showBottomSheetDialog("Variety") }
         mBinding!!.tvClass.setOnClickListener { showBottomSheetDialog("Class") }
 
         when (isFrom) {
@@ -102,15 +101,10 @@ class AddNewFspPlantStorageActivity : BaseActivity<ActivityAddNewFspPlantStorage
                 selectedList = stateList
                 selectedTextView = mBinding!!.tvDistrict
             }
-            "Variety" -> {
-                selectedList = variety
-                selectedTextView = mBinding!!.tvVariety
-            }
             "Class" -> {
                 selectedList = variety
                 selectedTextView = mBinding!!.tvClass
             }
-
             else -> return
         }
 

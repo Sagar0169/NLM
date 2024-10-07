@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@color/darkBlue"
             android:paddingHorizontal="@dimen/dp_10"
-            android:paddingVertical="@dimen/dp_15">
+            android:paddingVertical="@dimen/dp_25">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivBackPress"

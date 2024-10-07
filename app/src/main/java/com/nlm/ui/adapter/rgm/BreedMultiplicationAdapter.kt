@@ -7,13 +7,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemBreedMultiplicationBinding
+import com.nlm.model.BreedMultiplication
 import com.nlm.model.MilkUnionVisit
+import com.nlm.ui.activity.national_dairy_development.AddStateCenterLabtVisit
 import com.nlm.ui.activity.rashtriya_gokul_mission.AddBreedMultiplication
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
 
 class BreedMultiplicationAdapter(
-    private val implementingAgencyList: List<MilkUnionVisit>, val Role_name:String) :
+    private val implementingAgencyList: List<BreedMultiplication>, val Role_name:String) :
 
     RecyclerView.Adapter<BreedMultiplicationAdapter.Viewholder>() {
 
@@ -43,14 +45,22 @@ class BreedMultiplicationAdapter(
             holder.mBinding.ivEdit.hideView()
             holder.mBinding.ivDelete.hideView()
         }
+        holder.mBinding.tvCreated.text = item.created
+        holder.mBinding.tvName.text = item.nameOfBeneficiary
+        holder.mBinding.tvState.text = item.state
+        holder.mBinding.tvDistrict.text = item.district
+        holder.mBinding.tvStatus.text = item.nlmStatus
 
-        holder.mBinding.tvCreated.text = item.createdBy
-        holder.mBinding.tvName.text = item.nameOfMilkUnion
 
 
 
 
-        holder.itemView.setOnClickListener {
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddBreedMultiplication::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddBreedMultiplication::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

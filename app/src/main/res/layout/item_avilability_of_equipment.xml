@@ -78,10 +78,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_7"
+            android:layout_marginVertical="@dimen/dp_7"
             android:background="@drawable/curve_all_corner_grey"
             android:fontFamily="@font/opensans_regular"
-
             android:maxLength="50"
             android:paddingHorizontal="@dimen/dp_10"
             android:paddingVertical="@dimen/dp_5"

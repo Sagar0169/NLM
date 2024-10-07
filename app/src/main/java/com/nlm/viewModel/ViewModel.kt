@@ -2,6 +2,7 @@ package com.nlm.viewModel
 
 import android.content.Context
 import android.util.Log
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nlm.model.LoginRequest

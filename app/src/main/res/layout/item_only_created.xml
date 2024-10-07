@@ -11,13 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="4dp"
-        android:background="@android:color/white"
+        android:background="@drawable/curve_back_blue"
+        android:backgroundTint="#1C6AAA"
+        app:cardCornerRadius="@dimen/dp_10"
         android:radius="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FAE2BC"
+            android:background="#FFFFFF"
+            android:layout_marginEnd="@dimen/dp_50"
             android:padding="16dp">
 
             <!-- Permit Number and State Name -->
@@ -159,10 +162,37 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llCreated"
+                android:id="@+id/llNlmStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llCreatedBy"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNlm"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="NLM Status :"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvNlmStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Submitted"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llCreated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llNlmStatus"
                 android:orientation="horizontal">
 
                 <TextView

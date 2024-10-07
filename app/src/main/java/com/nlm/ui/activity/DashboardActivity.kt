@@ -13,6 +13,16 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
+import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryActivity
+import com.nlm.ui.activity.national_dairy_development.DCSCenterVisitNDDActivity
+import com.nlm.ui.activity.national_dairy_development.DairyPlantVisitNDDActivity
+import com.nlm.ui.activity.national_dairy_development.MilkProcessingNDDActivity
+import com.nlm.ui.activity.national_dairy_development.MilkProductMarketingNDDActivity
+import com.nlm.ui.activity.national_dairy_development.MilkUnionVisitNDDActivity
+import com.nlm.ui.activity.national_dairy_development.NLMComponentANDDActivity
+import com.nlm.ui.activity.national_dairy_development.NlmComponentBList
+import com.nlm.ui.activity.national_dairy_development.ProductivityEnhancementServicesNDDActivity
+import com.nlm.ui.activity.national_dairy_development.StateCenterLabVisitNDDActivity
 import com.nlm.ui.activity.national_livestock_mission.ArtificialInseminationList
 import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatList
 import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockIAList
@@ -22,6 +32,7 @@ import com.nlm.ui.activity.national_livestock_mission.NlmEdpActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmFpForestLandActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmFspPlantStorageActivity
 import com.nlm.ui.activity.national_livestock_mission.RSPLabList
+import com.nlm.ui.activity.national_livestock_mission.ReportsOfNlmComponentActivity
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankList
 import com.nlm.ui.activity.rashtriya_gokul_mission.BreedMultiplicationRGMActivity
 import com.nlm.ui.activity.rashtriya_gokul_mission.BullOfMothersList
@@ -188,6 +199,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, MobileVeterinaryActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvEdit?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         mBinding?.leftDrawerMenu?.tvVaccinationProgramme?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, VaccinationProgrammerActivity::class.java)
             startActivity(intent)

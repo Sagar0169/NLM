@@ -12,7 +12,7 @@ import com.nlm.R
 import com.nlm.model.NlmFpForest
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
 import com.nlm.ui.activity.national_livestock_mission.AddNlmAssistanceForQFSPActivity
-import com.nlm.ui.activity.AddNlmFpForestLandActivity
+import com.nlm.ui.activity.national_livestock_mission.AddNlmFpForestLandActivity
 import com.nlm.utilities.hideView
 
 
@@ -60,7 +60,7 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
         }
         when (isFrom) {
             1 -> {
-                holder.tvNameOfOrganisation.text = "Name of Agency"
+                holder.tvNameOfOrganisation.text = "Name of Agency :"
                 holder.ivView.setOnClickListener {
                     val intent = Intent(
                         holder.itemView.context,
@@ -79,8 +79,9 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
             }
 
             3 -> {
-                holder.tvCapacityPlant.text = "Capacity Of Plant"
-                holder.tvNameOfOrganisation.text = "Name Of Organization"
+                holder.tvCapacityPlant.text = "NlM Status :"
+                holder.tvOrganogam.text = "AI Status :"
+                holder.tvNameOfOrganisation.text = "Name Of Organization :"
                 holder.tvStateName.text = item.state
                 holder.tvLocation.text = item.location
                 holder.tvArea.text = item.areaCovered
@@ -105,9 +106,9 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
             }
 
             4 -> {
-                holder.tvCapacityPlant.text = "Technical Competance"
-                holder.tvOrganogam.text = "Organogram"
-                holder.tvNameOfOrganisation.text = "Name of Organization"
+                holder.tvCapacityPlant.text = "NlM Status :"
+                holder.tvOrganogam.text = "Organogram :"
+                holder.tvNameOfOrganisation.text = "Organization Name :"
                 holder.tvStateName.text = item.state
                 holder.tvAgencyName.text = item.agencyName
                 holder.tvDistricts.text = item.district
@@ -132,8 +133,8 @@ class NlmFpForestAdapter(private val onlyCreated: List<NlmFpForest>, private val
             }
 
             else -> {
-                holder.tvCapacityPlant.text = "Area Covered"
-                holder.tvNameOfOrganisation.text = "Name Implementing Agency"
+                holder.tvCapacityPlant.text = "Area Covered :"
+                holder.tvNameOfOrganisation.text = "Name Implementing Agency :"
                 holder.tvStateName.text = item.state
                 holder.tvLocation.text = item.location
                 holder.tvArea.text = item.areaCovered

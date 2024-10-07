@@ -51,10 +51,11 @@ class NlmComponentBadapter(private val Context: Context, private val implementin
         }
 
     holder.mBinding.tvName.text = item.Name_Of_The_DCS
-    holder.mBinding.tvStateName.text = item.State_Name
+    holder.mBinding.tvState.text = item.State_Name
     holder.mBinding.tvDistrict.text = item.District
-    holder.mBinding.tvTehsil2.text = item.Tehsil
+    holder.mBinding.tvTehsil.text = item.Tehsil
     holder.mBinding.tvCreated.text=item.Created_At
+//    holder.mBinding.tvVillage.text=item.village
 
 
 

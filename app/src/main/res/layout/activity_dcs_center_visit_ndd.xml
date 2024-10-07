@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.DCSCenterVisitNDDActivity.ClickActions" />
+            type="com.nlm.ui.activity.national_dairy_development.DCSCenterVisitNDDActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

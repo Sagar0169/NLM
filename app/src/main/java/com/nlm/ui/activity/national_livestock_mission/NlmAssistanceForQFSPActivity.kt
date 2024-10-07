@@ -44,11 +44,11 @@ class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspac
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         isFrom = 4
-
-        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
-        {
-            mBinding!!.fabAddAgency.hideView()
-        }
+//
+//        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
+//        {
+//            mBinding!!.fabAddAgency.hideView()
+//        }
         onlyCreated = listOf(
             NlmFpForest(
                 "GUJARAT",

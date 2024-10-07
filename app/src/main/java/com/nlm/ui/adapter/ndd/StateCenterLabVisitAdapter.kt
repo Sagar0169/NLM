@@ -6,13 +6,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.ItemMilkUnionVisitBinding
 import com.nlm.databinding.ItemStateCenterVisitBinding
-import com.nlm.model.MilkUnionVisit
 import com.nlm.model.StateCenterVisit
-import com.nlm.ui.activity.AddMilkUnionVisit
-import com.nlm.ui.activity.AddStateCenterLabtVisit
-import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.ui.activity.national_dairy_development.AddProductivityEnhancementServices
+import com.nlm.ui.activity.national_dairy_development.AddStateCenterLabtVisit
 
 class StateCenterLabVisitAdapter(
     private val implementingAgencyList: List<StateCenterVisit>) :
@@ -43,10 +40,17 @@ class StateCenterLabVisitAdapter(
         holder.mBinding.tvDistrict.text = item.district
         holder.mBinding.tvCreated.text = item.created
         holder.mBinding.tvLocation.text = item.location
+        holder.mBinding.tvCreatedBy.text = item.created
 
 
 
-        holder.itemView.setOnClickListener {
+
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddStateCenterLabtVisit::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddStateCenterLabtVisit::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

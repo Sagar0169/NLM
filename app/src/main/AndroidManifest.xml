@@ -49,13 +49,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.NlmCompnentBDairyDevelopment"
+            android:name=".ui.activity.national_dairy_development.NlmComponentBDairyDevelopment"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.NlmComponentBList"
+            android:name=".ui.activity.national_dairy_development.NlmComponentBList"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ReportsOfNlmComponentActivity"
+            android:name=".ui.activity.national_livestock_mission.ReportsOfNlmComponentActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.FilterStateActivity"
@@ -76,10 +76,10 @@
             android:name=".ui.activity.rashtriya_gokul_mission.SemenStationList"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.NLMComponentANDDActivity"
+            android:name=".ui.activity.national_dairy_development.NLMComponentANDDActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddNLMComponentA"
+            android:name=".ui.activity.national_dairy_development.AddNLMComponentA"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.SemenStation"
@@ -134,7 +134,7 @@
             android:name=".ui.activity.national_livestock_mission.NlmFspPlantStorageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddNlmFpForestLandActivity"
+            android:name=".ui.activity.national_livestock_mission.AddNlmFpForestLandActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmFpForestLandActivity"
@@ -146,7 +146,7 @@
             android:name=".ui.activity.national_livestock_mission.NlmAssistanceForEa"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddNlmEdpActivity"
+            android:name=".ui.activity.national_livestock_mission.AddNlmEdpActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmEdpActivity"
@@ -158,16 +158,16 @@
             android:name=".ui.activity.VaccinationProgrammerActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ViewStateMobileVeterinaryUnit"
+            android:name=".ui.activity.livestock_health_disease.ViewStateMobileVeterinaryUnit"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddNewMobileVeterinaryUnit"
+            android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnit"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.StateMobileVeterinaryActivity"
+            android:name=".ui.activity.livestock_health_disease.StateMobileVeterinaryActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MobileVeterinaryActivity"
+            android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.AddImplementingAgency"
@@ -194,19 +194,19 @@
             android:name=".ui.activity.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddMilkUnionVisit"
+            android:name=".ui.activity.national_dairy_development.AddMilkUnionVisit"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.DairyPlantVisitNDDActivity"
+            android:name=".ui.activity.national_dairy_development.DairyPlantVisitNDDActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddDairyPlantVisit"
+            android:name=".ui.activity.national_dairy_development.AddDairyPlantVisit"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddDCSCenterVisit"
+            android:name=".ui.activity.national_dairy_development.AddDCSCenterVisit"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.StateCenterLabVisitNDDActivity"
+            android:name=".ui.activity.national_dairy_development.StateCenterLabVisitNDDActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.BreedMultiplicationRGMActivity"
@@ -218,37 +218,40 @@
             android:name=".ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddTrainingCenters"
+            android:name=".ui.activity.rashtriya_gokul_mission.AddTrainingCenters"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MilkProcessingNDDActivity"
+            android:name=".ui.activity.national_dairy_development.MilkProcessingNDDActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MilkProductMarketingNDDActivity"
+            android:name=".ui.activity.national_dairy_development.MilkProductMarketingNDDActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ProductivityEnhancementServicesNDDActivity"
+            android:name=".ui.activity.national_dairy_development.ProductivityEnhancementServicesNDDActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddProductivityEnhancementServices"
+            android:name=".ui.activity.national_dairy_development.AddProductivityEnhancementServices"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddStateCenterLabtVisit"
+            android:name=".ui.activity.national_dairy_development.AddStateCenterLabtVisit"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddMilkProcessing"
+            android:name=".ui.activity.national_dairy_development.AddMilkProcessing"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.AddMilkProductMarketing"
+            android:name=".ui.activity.national_dairy_development.AddMilkProductMarketing"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.DCSCenterVisitNDDActivity"
+            android:name=".ui.activity.national_dairy_development.DCSCenterVisitNDDActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ChangePasswordActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -272,7 +275,7 @@
             android:name=".ui.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MilkUnionVisitNDDActivity"
+            android:name=".ui.activity.national_dairy_development.MilkUnionVisitNDDActivity"
             android:exported="false" />
 
         <provider

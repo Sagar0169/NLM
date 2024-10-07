@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_8"
-        android:background="@color/white"
 
 
         >
@@ -32,16 +31,22 @@
             app:cardElevation="5dp"
             app:cardCornerRadius="@dimen/dp_20"
             android:layout_margin="@dimen/dp_10"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="2">
 
             <LinearLayout
                 android:id="@+id/llParent"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.7"
                 android:layout_height="wrap_content"
-                android:background="@drawable/va_bg_items"
+                android:background="@drawable/curve_all_corner_bg_item_white"
                 android:orientation="vertical"
                 android:padding="@dimen/dp_10"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,14 +56,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/inter_regular"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Name of State"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -85,21 +89,20 @@
                         android:maxLines="2"
                         android:singleLine="false"
                         android:text="NA"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textGrey"
                         android:textSize="14sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/inter_regular"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Name of District"
 
                         android:textColor="@color/black"
@@ -125,7 +128,7 @@
                         android:fontFamily="@font/inter_light"
 
                         android:text="@string/na"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textGrey"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -133,14 +136,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/inter_regular"
+                        android:fontFamily="@font/inter_medium"
                         android:text="NPDD Project No"
 
                         android:textColor="@color/black"
@@ -166,21 +168,20 @@
                         android:fontFamily="@font/inter_light"
 
                         android:text="@string/na"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textGrey"
                         android:textSize="14sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/inter_regular"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Year of Approval"
 
                         android:textColor="@color/black"
@@ -206,7 +207,7 @@
                         android:fontFamily="@font/inter_light"
 
                         android:text="@string/na"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textGrey"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -215,14 +216,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/inter_regular"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Submit As"
 
                         android:textColor="@color/black"
@@ -248,7 +248,7 @@
                         android:fontFamily="@font/inter_light"
 
                         android:text="@string/na"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textGrey"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -259,14 +259,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:layout_marginEnd="48dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/inter_regular"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Created On"
 
                         android:textColor="@color/black"
@@ -292,7 +291,7 @@
                         android:fontFamily="@font/inter_light"
 
                         android:text="@string/na"
-                        android:textColor="@color/black"
+                        android:textColor="@color/textGrey"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -350,6 +349,15 @@
 
 
             </LinearLayout>
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="0.3"
+    android:background="@drawable/curve_all_corner_bg_item"
+    android:orientation="horizontal"
+    />
+</LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

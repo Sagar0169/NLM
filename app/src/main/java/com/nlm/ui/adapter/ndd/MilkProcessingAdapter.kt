@@ -7,12 +7,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemMilkProcessingBinding
-import com.nlm.databinding.ItemMilkUnionVisitBinding
 import com.nlm.model.MilkProcessing
-import com.nlm.model.MilkUnionVisit
-import com.nlm.ui.activity.AddMilkProcessing
-import com.nlm.ui.activity.AddMilkUnionVisit
-import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.ui.activity.national_dairy_development.AddDCSCenterVisit
+import com.nlm.ui.activity.national_dairy_development.AddMilkProcessing
 
 class MilkProcessingAdapter(
     private val implementingAgencyList: List<MilkProcessing>) :
@@ -47,7 +44,13 @@ class MilkProcessingAdapter(
 
 
 
-        holder.itemView.setOnClickListener {
+
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddMilkProcessing::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddMilkProcessing::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

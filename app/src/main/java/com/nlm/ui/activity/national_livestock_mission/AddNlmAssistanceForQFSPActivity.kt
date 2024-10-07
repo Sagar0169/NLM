@@ -30,6 +30,9 @@ class AddNlmAssistanceForQFSPActivity :
         "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep",
         "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
     )
+    private val variety = listOf(
+        "Class Wise", "Variety Wise"
+    )
     override val layoutId: Int
         get() = R.layout.activity_add_nlm_assistance_for_qfspactivity
 
@@ -48,6 +51,10 @@ class AddNlmAssistanceForQFSPActivity :
         isFrom = intent?.getIntExtra("isFrom", 0)!!
         mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
         mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
+        mBinding!!.tvDistrictName.setOnClickListener { showBottomSheetDialog("DistrictName") }
+        mBinding!!.tvFooderClass.setOnClickListener { showBottomSheetDialog("Variety") }
+        mBinding!!.tvTargetClass.setOnClickListener { showBottomSheetDialog("VarietyTarget") }
+        mBinding!!.tvQuantityClass.setOnClickListener { showBottomSheetDialog("VarietyQuantity") }
 
         when (isFrom) {
             1 -> {
@@ -57,6 +64,7 @@ class AddNlmAssistanceForQFSPActivity :
 
 
     }
+
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
@@ -86,6 +94,26 @@ class AddNlmAssistanceForQFSPActivity :
             "District" -> {
                 selectedList = stateList
                 selectedTextView = mBinding!!.tvDistrict
+            }
+
+            "DistrictName" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.tvDistrictName
+            }
+
+            "Variety" -> {
+                selectedList = variety
+                selectedTextView = mBinding!!.tvFooderClass
+            }
+
+            "VarietyTarget" -> {
+                selectedList = variety
+                selectedTextView = mBinding!!.tvTargetClass
+            }
+
+            "VarietyQuantity" -> {
+                selectedList = variety
+                selectedTextView = mBinding!!.tvQuantityClass
             }
 
             else -> return

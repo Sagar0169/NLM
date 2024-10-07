@@ -23,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
-            android:paddingVertical="12dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="@dimen/dp_10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -44,8 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Apply Filter"
                 android:fontFamily="@font/lexend_semibold"
+                android:text="Apply Filter"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -93,7 +94,7 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
-<!--            name of milk union-->
+            <!--            name of milk union-->
             <TextView
                 android:id="@+id/tvNameofMilkUnion"
                 android:layout_width="wrap_content"
@@ -123,6 +124,7 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
+
             <TextView
                 android:id="@+id/tvfssaiLicNo"
                 android:layout_width="wrap_content"
@@ -152,6 +154,7 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
+
             <TextView
                 android:id="@+id/tvNameOfBeneficiaery"
                 android:layout_width="wrap_content"
@@ -182,7 +185,7 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
- <TextView
+            <TextView
                 android:id="@+id/tvnameOfDcs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -211,7 +214,8 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
-<TextView
+
+            <TextView
                 android:id="@+id/tvLocationNDD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -240,7 +244,8 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
-<TextView
+
+            <TextView
                 android:id="@+id/tvTitleNDD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -270,7 +275,7 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
-<TextView
+            <TextView
                 android:id="@+id/tvNameofRetailShop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -300,7 +305,7 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
-<TextView
+            <TextView
                 android:id="@+id/tvNameOfMPCFederation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -330,7 +335,7 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
-<TextView
+            <TextView
                 android:id="@+id/tvDateOfInspection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -388,6 +393,7 @@
                 android:text="Please Select"
                 android:textColor="@color/black"
                 android:visibility="gone" />
+
             <TextView
                 android:id="@+id/tvTitleState"
                 android:layout_width="wrap_content"
@@ -619,6 +625,7 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
+
             <TextView
                 android:id="@+id/tvTitleLoc"
                 android:layout_width="wrap_content"

@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemMilkUnionVisitBinding
 import com.nlm.model.MilkUnionVisit
-import com.nlm.ui.activity.AddMilkUnionVisit
-import com.nlm.ui.activity.NodalOfficerDetailActivity
+import com.nlm.ui.activity.national_dairy_development.AddMilkProductMarketing
+import com.nlm.ui.activity.national_dairy_development.AddMilkUnionVisit
 
 class MilkUnionVisitAdapter(
     private val implementingAgencyList: List<MilkUnionVisit>) :
@@ -44,7 +44,14 @@ class MilkUnionVisitAdapter(
 
 
 
-        holder.itemView.setOnClickListener {
+
+
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddMilkUnionVisit::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddMilkUnionVisit::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

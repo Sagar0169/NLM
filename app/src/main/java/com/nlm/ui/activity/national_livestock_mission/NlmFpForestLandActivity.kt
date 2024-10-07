@@ -6,12 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityNlmFpForestLandBinding
 import com.nlm.model.NlmFpForest
-import com.nlm.ui.activity.AddNlmFpForestLandActivity
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.NlmFpForestAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 
@@ -51,15 +49,15 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>() {
                 mBinding!!.tvHeading.text="List of Fpfrom Non Forest"
             }
         }
-        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
-        {
-            mBinding!!.fabAddAgency.hideView()
-        }
+//        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
+//        {
+//            mBinding!!.fabAddAgency.hideView()
+//        }
         onlyCreated = listOf(
             NlmFpForest(
                 "GUJARAT",
                 "DAHOD",
-                "test",
+                "n/A",
                 "test",
                 "N/A",
                 "2024-08-21"
@@ -75,7 +73,7 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>() {
             NlmFpForest(
                 "GUJARAT",
                 "DAHOD",
-                "test",
+                "N/a",
                 "test",
                 "N/A",
                 "2024-08-21"
