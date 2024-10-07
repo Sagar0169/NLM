@@ -20,5 +20,7 @@
     <color name="your_unchecked_color">#dbdbdb</color>
     <color name="drawerOn">#1964A2</color>
     <color name="blue">#1A5E98</color>
+    <color name="textGrey">#666666</color>
+    <color name="textBlue">#1A5E98</color>
 
 </resources>

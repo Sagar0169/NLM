@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.FragmentRSPBasicInformationBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.rgm.AvailabilityOfEquipmentAdapter
 import com.nlm.utilities.BaseFragment
 
 
@@ -18,6 +19,8 @@ class RSPBasicInformationFragment : BaseFragment<FragmentRSPBasicInformationBind
     private var mBinding: FragmentRSPBasicInformationBinding?=null
     private lateinit var bottomSheetAdapter: BottomSheetAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var adapter: AvailabilityOfEquipmentAdapter
+    private lateinit var programmeList: MutableList<Array<String>>
 
     private val state = listOf(
         "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
@@ -29,6 +32,13 @@ class RSPBasicInformationFragment : BaseFragment<FragmentRSPBasicInformationBind
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
+        mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
+
+        programmeList = mutableListOf()
+        programmeList.add(arrayOf("", "", ""))
+
+        adapter = AvailabilityOfEquipmentAdapter(programmeList)
+        mBinding?.recyclerView2?.adapter = adapter
     }
 
     override fun setVariables() {

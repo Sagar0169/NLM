@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemTrainingCentersBinding
 import com.nlm.model.TrainingCenters
+import com.nlm.ui.activity.rashtriya_gokul_mission.AddBreedMultiplication
 import com.nlm.ui.activity.rashtriya_gokul_mission.AddTrainingCenters
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
@@ -51,7 +52,13 @@ class TrainingCentersAdapter(
             holder.mBinding.ivDelete.hideView()
         }
 
-        holder.itemView.setOnClickListener {
+       
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddTrainingCenters::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddTrainingCenters::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

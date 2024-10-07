@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemMilkProcessingBinding
 import com.nlm.model.MilkProcessing
+import com.nlm.ui.activity.national_dairy_development.AddDCSCenterVisit
 import com.nlm.ui.activity.national_dairy_development.AddMilkProcessing
 
 class MilkProcessingAdapter(
@@ -43,7 +44,13 @@ class MilkProcessingAdapter(
 
 
 
-        holder.itemView.setOnClickListener {
+
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddMilkProcessing::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddMilkProcessing::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

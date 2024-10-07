@@ -43,7 +43,12 @@ class DairyPlantVisitAdapter(
 
 
 
-        holder.itemView.setOnClickListener {
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddDairyPlantVisit::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddDairyPlantVisit::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

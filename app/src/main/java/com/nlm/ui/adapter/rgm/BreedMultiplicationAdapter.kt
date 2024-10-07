@@ -9,6 +9,7 @@ import com.nlm.R
 import com.nlm.databinding.ItemBreedMultiplicationBinding
 import com.nlm.model.BreedMultiplication
 import com.nlm.model.MilkUnionVisit
+import com.nlm.ui.activity.national_dairy_development.AddStateCenterLabtVisit
 import com.nlm.ui.activity.rashtriya_gokul_mission.AddBreedMultiplication
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
@@ -53,7 +54,13 @@ class BreedMultiplicationAdapter(
 
 
 
-        holder.itemView.setOnClickListener {
+
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, AddBreedMultiplication::class.java)
+            intent.putExtra("milkUnion", item)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, AddBreedMultiplication::class.java)
             intent.putExtra("milkUnion", item)
             holder.itemView.context.startActivity(intent)

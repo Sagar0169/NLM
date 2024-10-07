@@ -62,7 +62,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Name Processing Plant"                            android:textColor="@color/black"
 
                             android:textSize="14sp" />
@@ -89,7 +89,7 @@
                             android:maxLines="2"
                             android:singleLine="false"
                             android:text="NA"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
                     <LinearLayout
@@ -102,7 +102,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Name Milk Union"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -126,7 +126,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -140,7 +140,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="State"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -165,7 +165,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -179,7 +179,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="District"
 
                             android:textColor="@color/black"
@@ -204,7 +204,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -218,7 +218,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Created By"
 
                             android:textColor="@color/black"
@@ -244,7 +244,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -259,7 +259,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Created"
 
                             android:textColor="@color/black"
@@ -285,7 +285,7 @@
                             android:fontFamily="@font/inter_light"
 
                             android:text="@string/na"
-                            android:textColor="@color/black"
+                            android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
 

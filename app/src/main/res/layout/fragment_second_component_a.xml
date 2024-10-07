@@ -35,8 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Physical Progress:(Pre filled by Dairy Division)"
+                    android:fontFamily="@font/inter_medium"                    android:text="Physical Progress:(Pre filled by Dairy Division)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_18" />
 
@@ -52,15 +51,13 @@
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Component"
+                        android:fontFamily="@font/inter_medium"                        android:text="Component"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Milk Processing Capacity (TLPD)"
+                        android:fontFamily="@font/inter_medium"                        android:text="Milk Processing Capacity (TLPD)"
                         android:layout_marginTop="@dimen/dp_10"
 
                         android:textColor="@color/black"
@@ -153,8 +150,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Dairy Cooperative Society (nos.)"
+                        android:fontFamily="@font/inter_medium"                        android:text="Dairy Cooperative Society (nos.)"
                         android:layout_marginTop="@dimen/dp_10"
 
                         android:textColor="@color/black"
@@ -246,8 +242,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Milk Producer members (‘000)"
+                        android:fontFamily="@font/inter_medium"                        android:text="Milk Producer members (‘000)"
                         android:layout_marginTop="@dimen/dp_10"
 
                         android:textColor="@color/black"
@@ -339,8 +334,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Average Daily Milk Procurement (TLPD)"
+                        android:fontFamily="@font/inter_medium"                        android:text="Average Daily Milk Procurement (TLPD)"
                         android:layout_marginTop="@dimen/dp_10"
 
                         android:textColor="@color/black"
@@ -432,8 +426,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Average Daily Milk Marketing (TLPD)"
+                        android:fontFamily="@font/inter_medium"                        android:text="Average Daily Milk Marketing (TLPD)"
                         android:layout_marginTop="@dimen/dp_10"
 
                         android:textColor="@color/black"
@@ -528,8 +521,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Milk Chilling facilities (at village/block/district level)"
+                        android:fontFamily="@font/inter_medium"                        android:text="Milk Chilling facilities (at village/block/district level)"
                         android:layout_marginTop="@dimen/dp_10"
 
                         android:textColor="@color/black"
@@ -638,8 +630,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Bulk Milk Cooler with accessories Capacity (TLPD)"
+                            android:fontFamily="@font/inter_medium"                            android:text="Bulk Milk Cooler with accessories Capacity (TLPD)"
                             android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
@@ -721,8 +712,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Lab Strengthening"
+                        android:fontFamily="@font/inter_medium"                        android:text="Lab Strengthening"
                         android:layout_marginTop="@dimen/dp_10"
 
                         android:textColor="@color/black"
@@ -832,8 +822,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="FTIR Technology Based Milk Analyser (Nos.)"
+                            android:fontFamily="@font/inter_medium"                            android:text="FTIR Technology Based Milk Analyser (Nos.)"
                             android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
@@ -924,8 +913,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Automatic Milk Collection Unit (Nos.)"
+                            android:fontFamily="@font/inter_medium"                            android:text="Automatic Milk Collection Unit (Nos.)"
                             android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
@@ -1016,8 +1004,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Electronic Milk Adulteration Testing Machine (Nos.)"
+                            android:fontFamily="@font/inter_medium"                            android:text="Electronic Milk Adulteration Testing Machine (Nos.)"
                             android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
@@ -1111,7 +1098,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Administrative Approval of the project providing physical and financial targets is attached."
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
