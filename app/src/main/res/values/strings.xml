@@ -331,5 +331,8 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="view">View</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="to_be_filled_by_the_state_ah_department_or_implementing_agency">To be filled by the State AH Department or Implementing Agency</string>
+    <string name="save_and_next">Save and Next</string>
+    <string name="to_be_filled_by_the_ah_department_or_implementing_authority">To be filled by the AH Department or Implementing Authority</string>
 </resources>
 

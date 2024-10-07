@@ -10,17 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:elevation="4dp"
         android:background="@drawable/curve_back_blue"
         android:backgroundTint="#1C6AAA"
-        app:cardCornerRadius="@dimen/dp_10"
-        android:radius="8dp">
+        android:elevation="4dp"
+        android:radius="8dp"
+        app:cardCornerRadius="@dimen/dp_10">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
             android:layout_marginEnd="@dimen/dp_50"
+            android:background="#FFFFFF"
             android:padding="16dp">
 
             <!-- Permit Number and State Name -->
@@ -34,8 +34,8 @@
                     android:id="@+id/state_name"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
                     android:text="States :"
-                    android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -44,10 +44,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:text="Delhi"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -61,8 +61,8 @@
                 <TextView
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
                     android:text="District :"
-                    android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -71,10 +71,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:text="Delhi"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -90,7 +90,7 @@
                     android:id="@+id/tvAgencyTitle"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/inter_regular"
                     android:text="Name Implementing Agency"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -101,14 +101,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:ellipsize="end"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:lines="2"
                     android:maxLines="2"
                     android:text="West Bengal Cooperative Milk Producers Federation Ltd."
-                    android:textColor="@color/black"
+                    android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -124,8 +123,8 @@
                     android:id="@+id/tvOrganogam"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
                     android:text="Location/Address :"
-                    android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -134,10 +133,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/inter_light"
                     android:text="@string/na"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -153,8 +152,8 @@
                     android:id="@+id/tvArea"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
                     android:text="Area Covered :"
-                    android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -162,28 +161,28 @@
                     android:id="@+id/tvAreaCovered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/na"
-                    android:fontFamily="@font/poppins_regular"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/inter_light"
+                    android:text="@string/na"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llCreatedBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
-
                 android:layout_below="@id/llNlmStatus"
+
+                android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvCreatedByTitle"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
                     android:text="Created By :"
-                    android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -191,13 +190,12 @@
                     android:id="@+id/tvCreatedBy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Super Admin"
-                    android:fontFamily="@font/poppins_regular"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/inter_light"
+                    android:text="Super Admin"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -213,8 +211,8 @@
                     android:id="@+id/tvJoiningDate"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
                     android:text="Created :"
-                    android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -222,11 +220,11 @@
                     android:id="@+id/tvCreated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2024-08-28"
-                    android:fontFamily="@font/poppins_regular"
                     android:layout_marginHorizontal="@dimen/dp_5"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/inter_light"
+                    android:text="2024-08-28"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- Icons for View, Edit, Delete -->
@@ -234,11 +232,11 @@
                 android:id="@+id/llActions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp_5"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-5dp"
                 android:layout_below="@id/llCreated"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="-5dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <!-- View Icon -->
@@ -248,9 +246,9 @@
                     android:id="@+id/ivView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_5"
                     android:contentDescription="View"
                     android:padding="@dimen/dp_5"
-                    android:layout_marginHorizontal="@dimen/dp_5"
                     android:src="@drawable/ic_view"
                     app:tint="@color/black" />
 
@@ -259,10 +257,10 @@
                     android:id="@+id/ivEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="Edit"
-                    android:padding="@dimen/dp_5"
-
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:contentDescription="Edit"
+
+                    android:padding="@dimen/dp_5"
                     android:src="@drawable/edit_icon"
                     app:tint="@color/black" />
 
@@ -271,10 +269,10 @@
                     android:id="@+id/ivDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="Delete"
-                    android:padding="@dimen/dp_5"
-
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:contentDescription="Delete"
+
+                    android:padding="@dimen/dp_5"
                     android:src="@drawable/ic_deleted"
                     app:tint="@color/black" />
             </LinearLayout>
