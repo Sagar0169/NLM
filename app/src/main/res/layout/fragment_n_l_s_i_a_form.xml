@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/other_staff"
+                    android:text="Staff Detail:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
                 <LinearLayout
