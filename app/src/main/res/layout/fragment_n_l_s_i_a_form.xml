@@ -23,13 +23,35 @@
             android:layout_alignParentBottom="true"
             android:scrollbars="none">
 
+
             <LinearLayout
-                android:id="@+id/llParent"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_10">
-
+               >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/orange"
+                    android:padding="@dimen/dp_10"
+                    >
+                    <TextView
+                        android:id="@+id/tvWelcome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/to_be_filled_by_the_state_ah_department_or_implementing_agency"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_20"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/llParent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/dp_10">
                 <TextView
                     android:id="@+id/tvState"
                     android:layout_width="wrap_content"
@@ -124,6 +146,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="Technical Staff:"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -193,6 +217,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="Admn. Staff:"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -262,6 +288,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="Other Staff:"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -366,8 +394,10 @@
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
                     android:text="Next"
+                    android:textSize="20sp"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
+                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>

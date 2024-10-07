@@ -393,6 +393,7 @@
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
                     android:text="Submit"
+                    android:textSize="20sp"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </LinearLayout>
