@@ -45,7 +45,8 @@ class EdpNlmAdapter(
 
         // Handle visibility of add/delete buttons
         handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
-        holder.binding.tvProjectFinancing.setOnClickListener { showBottomSheetDialog("projectFinancing",holder.binding.tvProjectFinancing) }
+
+
         holder.binding.tvAnimals.setOnClickListener { showBottomSheetDialog("Animals",holder.binding.tvAnimals) }
         // Add new row
         holder.binding.btnAdd.setOnClickListener {

@@ -16,7 +16,6 @@ import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFormIAFragm
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAConstraintsFacedByIAFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFeedFodderFragment
-import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFodderSeedFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFundsReceivedFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAGoverningBodyBoardOfDirectorsFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAInfrastructureSheepGoat
@@ -150,16 +149,6 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
                             onTabClicks()
                             loadFragment(NLSIAGoverningBodyBoardOfDirectorsFragment())
                         }
-
-//                        3 -> {
-//                            onTabClicks()
-//                            loadFragment(NLSIA_Composition_of_Advisory_committee())
-//                        }
-//
-//                        4 -> {
-//                            onTabClicks()
-//                            loadFragment(NLSIA_PMC())
-//                        }
 
                         3 -> {
                             onTabClicks()

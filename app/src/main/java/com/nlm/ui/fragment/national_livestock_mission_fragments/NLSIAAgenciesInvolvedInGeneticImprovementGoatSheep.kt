@@ -26,7 +26,7 @@ class NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep:
 
         programmeList = mutableListOf()
         programmeList.add(arrayOf("", "",""))
-        adapter = NlmIADistrictWiseNoAdapter  (programmeList)
+        adapter = NlmIADistrictWiseNoAdapter  (programmeList,requireActivity())
         recyclerView.adapter = adapter
     }
 
