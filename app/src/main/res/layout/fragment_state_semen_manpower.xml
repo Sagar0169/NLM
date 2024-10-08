@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.national_livestock_mission_fragments.StateSemenManpowerFragment">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -165,7 +165,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 
 </layout>

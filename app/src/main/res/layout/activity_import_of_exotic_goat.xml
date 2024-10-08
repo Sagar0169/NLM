@@ -61,7 +61,28 @@
             android:layout_below="@id/rlToolbar"
             android:background="@color/white"
             android:fillViewport="true">
+            <LinearLayout
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/orange"
+                android:padding="@dimen/dp_10"
+                >
+                <TextView
+                    android:id="@+id/tvWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/to_be_filled_by_the_state_implementing_agency"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         <LinearLayout
             android:id="@+id/llParent"
             android:layout_width="match_parent"
@@ -1222,8 +1243,9 @@
                 android:paddingHorizontal="@dimen/dp_20"
                 android:paddingVertical="@dimen/dp_10"
                 android:text="Submit"
+                android:textSize="20sp"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
-        </LinearLayout></ScrollView></RelativeLayout>
+        </LinearLayout></LinearLayout></ScrollView></RelativeLayout>
 
 </layout>

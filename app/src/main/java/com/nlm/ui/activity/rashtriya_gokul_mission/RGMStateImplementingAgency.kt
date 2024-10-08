@@ -49,7 +49,7 @@ class RGMStateImplementingAgency : BaseActivity<ActivityRgmStateImplementingAgen
             addTab(newTab().setText("Details of committee meetings"))
             addTab(newTab().setText("Funds Received:- (In Lakhs)"))
             addTab(newTab().setText("Implementation of NAIP"))
-            addTab(newTab().setText("Any of the assets created under RGM and not being used. Specify the reasons"))
+//            addTab(newTab().setText("Any of the assets created under RGM and not being used. Specify the reasons"))
 
 
 

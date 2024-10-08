@@ -60,6 +60,12 @@
             app:layout_constraintTop_toBottomOf="@+id/rlToolbar"
             app:layout_constraintBottom_toBottomOf="parent"
             android:scrollbars="none">
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
 
         <LinearLayout
             android:id="@+id/llParent"
@@ -67,6 +73,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/dp_10">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/orange"
+                android:padding="@dimen/dp_10"
+                >
+                <TextView
+                    android:id="@+id/tvWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/to_be_filled_by_ah_department_or_implementing_agency"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+            </RelativeLayout>
             <TextView
                 android:id="@+id/tvState"
                 android:layout_width="wrap_content"
@@ -141,7 +163,22 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/sp_16" />
 
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/orange"
+                android:padding="@dimen/dp_10"
+                >
+                <TextView
+                    android:id="@+id/tvWelcome2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/observation_by_the_nlm_team_to_be_filled_by_the_nlm_team"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -320,7 +357,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/white" />
         </LinearLayout>
-
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
