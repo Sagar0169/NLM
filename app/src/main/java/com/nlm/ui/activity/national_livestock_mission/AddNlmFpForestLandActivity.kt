@@ -12,6 +12,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityAddNlmFpForestLandBinding
 import com.nlm.model.NlmEdp
+import com.nlm.ui.adapter.EdpIAAdapter
+import com.nlm.ui.adapter.EdpNlmAdapter
+import com.nlm.ui.adapter.ForestLandNLMAdapter
 import com.nlm.ui.adapter.NlmEdpAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseActivity
@@ -23,6 +26,10 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
     private var layoutManager: LinearLayoutManager? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ForestLandNLMAdapter
+
+    private lateinit var programmeList: MutableList<Array<String>>
     private var isFrom: Int = 0
     private val stateList = listOf(
         "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
@@ -59,9 +66,17 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         isFrom = intent?.getIntExtra("isFrom", 0)!!
         mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
         mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
-        mBinding!!.tvDistrictNlm.setOnClickListener { showBottomSheetDialog("DistrictNlm") }
+//        mBinding!!.tvDistrictNlm.setOnClickListener { showBottomSheetDialog("DistrictNlm") }
         mBinding!!.tvLand.setOnClickListener { showBottomSheetDialog("Land") }
         mBinding!!.tvAgency.setOnClickListener { showBottomSheetDialog("Agency") }
+        recyclerView = mBinding?.recyclerView1!!
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        programmeList = mutableListOf()
+        programmeList.add(arrayOf("", ""))
+
+        adapter = ForestLandNLMAdapter(programmeList,this)
+        recyclerView.adapter = adapter
+        mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(this)
 
         when (isFrom) {
             1 -> {
@@ -104,14 +119,15 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                 selectedList = stateList
                 selectedTextView = mBinding!!.tvDistrict
             }
-            "DistrictNlm" -> {
-                selectedList = stateList
-                selectedTextView = mBinding!!.tvDistrictNlm
-            }
+//            "DistrictNlm" -> {
+//                selectedList = stateList
+//                selectedTextView = mBinding!!.tvDistrictNlm
+//            }
             "Land" -> {
                 selectedList = land
                 selectedTextView = mBinding!!.tvLand
             }
+
             "Agency" -> {
                 selectedList = agency
                 selectedTextView = mBinding!!.tvAgency

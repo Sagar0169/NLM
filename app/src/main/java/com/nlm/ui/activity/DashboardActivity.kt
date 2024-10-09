@@ -1,5 +1,6 @@
 package com.nlm.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
@@ -159,21 +160,25 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 //            false
 //        )
         setDrawableWithArrow(
+            this,
             mBinding?.leftDrawerMenu?.tvLivestockHealthDisease,
             ContextCompat.getDrawable(this, R.drawable.ic_lhd),
             false
         )
         setDrawableWithArrow(
+            this,
             mBinding?.leftDrawerMenu?.tvNationalLiveStockMission,
             ContextCompat.getDrawable(this, R.drawable.ic_nlm),
             false
         )
         setDrawableWithArrow(
+            this,
             mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment,
             ContextCompat.getDrawable(this, R.drawable.ic_ndd),
             false
         )
         setDrawableWithArrow(
+            this,
             mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission,
             ContextCompat.getDrawable(this, R.drawable.ic_rgm),
             false
@@ -407,28 +412,47 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     // Method to handle arrow rotation and setting drawable
     private fun setDrawableWithArrow(
+        context: Context,
         textView: TextView?,
         drawableStart: Drawable?,
         isOpen: Boolean
     ) {
-        var arrowDrawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)?.let {
-            // Apply the initial color (black when arrow is down)
+        // Create arrow drawable
+        var arrowDrawable = ContextCompat.getDrawable(context, R.drawable.ic_arrow_down)?.let {
+            // Apply the initial color (white when arrow is down)
             DrawableCompat.wrap(it).also { drawable ->
-                DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.white))
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(context, R.color.white))
+                textView?.setTextColor(ContextCompat.getColor(context, R.color.white))
+
             }
+
         }
 
+        // Create background drawable
+        var ll = R.color.drawerOn
+
+        // Rotate arrow if not open
         if (!isOpen) {
-            // Rotate and change the color to white when rotated
-            arrowDrawable = rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
-                DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.black))
+            arrowDrawable = Utility.rotateDrawable(arrowDrawable, 90f)?.also { drawable ->
+                DrawableCompat.setTint(drawable, ContextCompat.getColor(context, R.color.black))
             }
+            textView?.setTextColor(ContextCompat.getColor(context, R.color.black))
+
+            ll = R.color.white
         }
 
-
-
+        // Set drawables to TextView
         textView?.setCompoundDrawablesWithIntrinsicBounds(drawableStart, null, arrowDrawable, null)
+
+        textView?.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                ll
+            )
+        ) // Change background to black when closed
+
     }
+
 
     // Rotate the drawable for the arrow direction
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {

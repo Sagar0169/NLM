@@ -78,7 +78,9 @@
                     android:fontFamily="@font/opensans_semibold"
                     android:text="@string/monitoring_of_nlm_by_national_level_monitors_format_for_fodder_seed_processing_plant_storage"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:background="@color/orange"
+                    android:padding="@dimen/dp_5"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_15" />
 
 
