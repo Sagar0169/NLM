@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivitySemenStationListBinding
 import com.nlm.model.Bull_Mothers
+import com.nlm.model.Semen_Station
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.rgm.Bull_Of_Mothers_Adapter
+import com.nlm.ui.adapter.rgm.SemenStatioinListAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.PrefEntities
@@ -20,9 +22,9 @@ class SemenStationList : BaseActivity<ActivitySemenStationListBinding>(){
     override val layoutId: Int
         get() = R.layout.activity_semen_station_list
 
-    private lateinit var implementingAdapter: Bull_Of_Mothers_Adapter
+    private lateinit var implementingAdapter: SemenStatioinListAdapter
     private var layoutManager: LinearLayoutManager? = null
-    private lateinit var nodalOfficerList: List<Bull_Mothers>
+    private lateinit var nodalOfficerList: List<Semen_Station>
 
     override fun initView() {
         mBinding = viewDataBinding
@@ -33,19 +35,14 @@ class SemenStationList : BaseActivity<ActivitySemenStationListBinding>(){
             mBinding!!.fabAddAgency.hideView()
         }
         nodalOfficerList = listOf(
-            Bull_Mothers(
-                "LADAKH",
-                "Perspiciatis esse nihil ullam dolor sit duis velit tempora occaecat cupiditate deserunt dolorem est a esse",
-                "Submitted",
-                "04-09-2024",
-                "Done"
-            ),
-            Bull_Mothers(
-                "UTTAR PRADESH",
-                "Eiusmod aut ea soluta iusto quidem",
-                "Submitted",
-                "03-09-2024",
-                "Done"),
+            Semen_Station(
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA"
+            )
 
         )
         implementingAgency()
@@ -75,7 +72,7 @@ class SemenStationList : BaseActivity<ActivitySemenStationListBinding>(){
         }
     }
     private fun implementingAgency() {
-        implementingAdapter = Bull_Of_Mothers_Adapter(nodalOfficerList,0,Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
+        implementingAdapter = SemenStatioinListAdapter(nodalOfficerList,0,Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvArtificialInsemination.layoutManager = layoutManager
         mBinding!!.rvArtificialInsemination.adapter = implementingAdapter

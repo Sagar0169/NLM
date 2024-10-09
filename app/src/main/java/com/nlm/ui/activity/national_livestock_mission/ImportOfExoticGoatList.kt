@@ -29,17 +29,12 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
         }
         nodalOfficerList = listOf(
             ImportOfGoat(
-                "805",
-                "2024-08-21",
-            ),
-            ImportOfGoat(
-                "154",
-                "1970-01-01",
-            ),
-            ImportOfGoat(
-                "643",
-                "2024-08-13",
-            ),
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+            )
             )
         implementingAgency()
 

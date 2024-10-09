@@ -14,6 +14,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
+import com.nlm.model.Result
+import com.nlm.model.Scheme
 import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryActivity
 import com.nlm.ui.activity.national_dairy_development.DCSCenterVisitNDDActivity
 import com.nlm.ui.activity.national_dairy_development.DairyPlantVisitNDDActivity
@@ -44,6 +46,7 @@ import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStationList
 import com.nlm.ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Preferences
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.setDrawableWithArrow
 import com.nlm.utilities.hideView
@@ -67,6 +70,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
+        Preferences.getPreferenceOfScheme(this,AppConstants.SCHEME,Result::class.java).let {
+            Log.d("Scheme",it.schemes.toString())
+        }
 
         setDefaultDrawables()
         RoleBased()
@@ -217,6 +223,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, AscadActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvDashboard?.setOnClickListener {
+            mBinding?.drawerLayout?.closeDrawer(GravityCompat.END)
+        }
+
         mBinding?.leftDrawerMenu?.tvNlmEdp?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, NlmEdpActivity::class.java)
             startActivity(intent)

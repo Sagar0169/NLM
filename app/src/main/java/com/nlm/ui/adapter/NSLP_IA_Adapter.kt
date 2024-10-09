@@ -8,13 +8,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemNlspFormsBinding
-import com.nlm.model.OnlyCreatedNlm
-import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
-import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
-import com.nlm.utilities.hideView
-import com.nlm.utilities.showView
+import com.nlm.model.NLMIA_data
 
-class NSLP_IA_Adapter(private val implementingAgencyList: List<OnlyCreatedNlm>,val isFrom:Int,val Role_name:String) :
+import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
+
+import com.nlm.utilities.hideView
+
+
+class NSLP_IA_Adapter(private val implementingAgencyList: List<NLMIA_data>,val isFrom:Int,val Role_name:String) :
     RecyclerView.Adapter<NSLP_IA_Adapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -51,19 +52,14 @@ class NSLP_IA_Adapter(private val implementingAgencyList: List<OnlyCreatedNlm>,v
             holder.mBinding.ivDelete.hideView()
         }
 
-if (isFrom==1)
-{
 
-    holder.mBinding.tvState.text = item.state
-//        holder.mBinding.districtName.text = item.district
-    holder.mBinding.name.text = item.name
-    holder.mBinding.tvBlock.text = "Name/Location"
-    holder.mBinding.tvYear.text = "Created By"
-    holder.mBinding.tvYearofe.text = item.created_by
-//        holder.mBinding.phoneNumber.text = item.phone
-    holder.mBinding.tvDate.text = item.created
-    holder.mBinding.llDistrict.hideView()
-    holder.mBinding.llFarmer.hideView()
+
+    holder.mBinding.etState.text = item.state
+    holder.mBinding.etCreatedBy.text = item.Name_Location
+    holder.mBinding.etCreated.text = item.created
+    holder.mBinding.etStatus.text = item.IA_Status
+
+
 
 
 
@@ -82,63 +78,10 @@ if (isFrom==1)
         intent.putExtra("isFrom", 3)
         holder.itemView.context.startActivity(intent)
     }
-}
-        else
-{
-    if (isFrom==0)
-    {
-        holder.mBinding.tvState.text = item.state
-        holder.mBinding.districtName.text = item.district
-        holder.mBinding.tvBlock.text = "Location"
-        holder.mBinding.name.text = item.name
-        holder.mBinding.phoneNumber.text = item.phone
-        holder.mBinding.tvDate.text = item.created
-        holder.mBinding.llDistrict.showView()
-        holder.mBinding.llFarmer.showView()
 
-        holder.mBinding.llYear.showView()
-        holder.mBinding.tvYearofe.text=item.year_of_est
-        holder.mBinding.ivView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-            intent.putExtra("nodalOfficer", item)
-            intent.putExtra("isFrom", 2)
-            holder.itemView.context.startActivity(intent)
-        }
-        holder.mBinding.ivEdit.setOnClickListener {
-            val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-            intent.putExtra("nodalOfficer", item)
-            intent.putExtra("isFrom", 3)
-            holder.itemView.context.startActivity(intent)
-        }
-    }
-    else if (isFrom==2){
 
-            holder.mBinding.tvState.text = item.state
-            holder.mBinding.districtName.text = item.district
-            holder.mBinding.tvBlock.text = "Location"
-            holder.mBinding.name.text = item.name
-            holder.mBinding.phoneNumber.text = item.phone
-            holder.mBinding.tvDate.text = item.created
-            holder.mBinding.llDistrict.showView()
-            holder.mBinding.llFarmer.showView()
 
-            holder.mBinding.llYear.showView()
-            holder.mBinding.tvYearofe.text=item.year_of_est
-            holder.mBinding.ivView.setOnClickListener {
-                val intent = Intent(holder.itemView.context, StateSemenBankForms::class.java)
-                intent.putExtra("nodalOfficer", item)
-                intent.putExtra("isFrom", 2)
-                holder.itemView.context.startActivity(intent)
-            }
-            holder.mBinding.ivEdit.setOnClickListener {
-                val intent = Intent(holder.itemView.context, StateSemenBankForms::class.java)
-                intent.putExtra("nodalOfficer", item)
-                intent.putExtra("isFrom", 3)
-                holder.itemView.context.startActivity(intent)
 
-        }
-    }
-}
 
 //
 //        holder.tvStateName.setOnClickListener {

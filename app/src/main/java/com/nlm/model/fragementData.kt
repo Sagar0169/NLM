@@ -48,17 +48,30 @@ data class OnlyCreated(
     val createdBy: String? = "Super Admin",
     ) : Serializable
 
-data class OnlyCreatedNlm(
+data class NLMIA_data(
     val state: String,
     val created: String,
-    val district: String? = null,
-    val block: String? = null,
-    val phone: String? = null,
-    val created_by: String? = null,
-    val year_of_est: String? = null,
-    val name: String? = null,
+    val Name_Location: String? = null,
+    val IA_Status: String? = null,
+
 
     ) : Serializable
+data class State_Semen_Bank(
+    val state: String,
+    val District: String,
+    val created: String,
+    val Establishment_Year: String? = null,
+    val NLM_Status: String? = null,
+    ) : Serializable
+data class Rsp_lab_data(
+    val state: String,
+    val District: String,
+    val Phone: String,
+    val created: String,
+    val Establishment_Year: String? = null,
+    val NLM_Status: String? = null,
+    val IA_Status: String? = null,
+) : Serializable
 
 data class ArtificialInsemenation(
     val state: String,
@@ -72,18 +85,29 @@ data class ArtificialInsemenation(
 
 
 data class ImportOfGoat(
-    val Number_Of_Farmers: String,
-    val created: String,
-
-
+    val State: String,
+    val Created_By: String,
+    val Created: String,
+    val Status_IA: String,
+    val Status_NLM: String,
     ) : Serializable
 data class Bull_Mothers(
-    val Name_of_State: String,
-    val Location: String,
-    val Submit_As: String,
+    val Name_of_The_Farm: String,
+    val State_Name: String,
+    val District_Name: String,
+    val Locatiob: String,
+    val IA_Status: String,
+    val NLM_Status: String,
     val Created_On: String,
-    val Form_status: String,
     ) : Serializable
+data class Semen_Station(
+    val State_Name: String,
+    val District_Name: String,
+    val NLM_visit_date: String,
+    val IA_Status: String,
+    val NLM_Status: String,
+    val Created_On: String,
+) : Serializable
 
 data class NLM_CompB(
     val Name_Of_The_DCS: String,
@@ -96,25 +120,26 @@ data class NLM_CompB(
 
     ) : Serializable
 data class RGM_IA(
-    val Id: String,
-    val Name: String,
+    val Agency_Name: String,
+    val State: String,
+    val District: String,
+    val Status_IA: String,
+    val Status_NLM: String,
     val Created: String,
-    val Status: String,
 
 
 
     ) : Serializable
 data class All_Users(
 
+    val State: String,
     val Name: String,
-    val UserName: String,
+    val Username: String,
     val Email: String,
-    val Type: String,
+    val Groups: String,
     val Role: String,
-    val Created: String,
     val Status: String,
-
-
+    val Created: String,
 
     ) : Serializable
 data class NlmEdp(
@@ -150,7 +175,7 @@ data class BreedMultiplication(
     val state: String,
     val district: String,
     val nlmStatus: String,
-
+    val iaStatus: String,
     val created: String,
 ) : Serializable
 data class NLMComponentA(

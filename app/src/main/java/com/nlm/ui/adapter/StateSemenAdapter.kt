@@ -7,16 +7,23 @@ import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.databinding.ItemAllUsersBinding
-import com.nlm.model.All_Users
-import com.nlm.ui.activity.UserFormActivity
+import com.nlm.databinding.ItemNlspFormsBinding
+import com.nlm.databinding.ItemStateSemenBinding
+import com.nlm.model.NLMIA_data
+import com.nlm.model.State_Semen_Bank
+
+import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
+
 import com.nlm.utilities.hideView
 
-class ALL_Users_Adapter(private val implementingAgencyList: List<All_Users>, private val isFrom:Int) :
-    RecyclerView.Adapter<ALL_Users_Adapter.ImplementingAgencyViewholder>() {
+
+class StateSemenAdapter(private val implementingAgencyList: List<State_Semen_Bank>, val isFrom:Int, val Role_name:String) :
+    RecyclerView.Adapter<StateSemenAdapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
-    class ImplementingAgencyViewholder(val mBinding:ItemAllUsersBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    class ImplementingAgencyViewholder(val mBinding:ItemStateSemenBinding) : RecyclerView.ViewHolder(mBinding.root) {
+
+
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
         val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
     }
@@ -27,9 +34,9 @@ class ALL_Users_Adapter(private val implementingAgencyList: List<All_Users>, pri
         parent: ViewGroup,
         viewType: Int
     ): ImplementingAgencyViewholder {
-        val mBinding: ItemAllUsersBinding = DataBindingUtil.inflate(
+        val mBinding: ItemStateSemenBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_all_users,
+            R.layout.item_state_semen,
             parent,
             false
         )
@@ -38,33 +45,52 @@ class ALL_Users_Adapter(private val implementingAgencyList: List<All_Users>, pri
 
     // Bind the data to the views in each item
     override fun onBindViewHolder(holder: ImplementingAgencyViewholder, position: Int) {
+
         val item = implementingAgencyList[position]
-    holder.mBinding.etState.text = item.State
-    holder.mBinding.etName.text = item.Name
-    holder.mBinding.etUserName.text = item.Username
-    holder.mBinding.etEmail.text = item.Email
-    holder.mBinding.etGroup.text = item.Groups
-    holder.mBinding.etRole.text = item.Role
-    holder.mBinding.etStatus.text = item.Status
-    holder.mBinding.etCreated.text=item.Created
+        if (Role_name=="Super Admin")
+        {
+            holder.mBinding.ivView.hideView()
+            holder.mBinding.ivEdit.hideView()
+            holder.mBinding.ivDelete.hideView()
+        }
+
+
+
+    holder.mBinding.etState.text = item.state
+    holder.mBinding.etDistricts.text = item.District
+    holder.mBinding.etEstablishment.text = item.Establishment_Year
+    holder.mBinding.etCreated.text = item.created
+    holder.mBinding.etStatus.text = item.NLM_Status
+
+
+
+
+
+
+
+
     holder.mBinding.ivView.setOnClickListener {
-        val intent = Intent(holder.itemView.context, UserFormActivity::class.java)
+        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
         intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 2)
         holder.itemView.context.startActivity(intent)
     }
     holder.mBinding.ivEdit.setOnClickListener {
-        val intent = Intent(holder.itemView.context, UserFormActivity::class.java)
+        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
         intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 3)
         holder.itemView.context.startActivity(intent)
     }
-}
+
+
+
+
+
 //
 //        holder.tvStateName.setOnClickListener {
 //            callBackItemDistrict.onClickItemDistrict(stateName)
 //        }
-
+    }
 
     // Return the total number of items
     override fun getItemCount(): Int {

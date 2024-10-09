@@ -9,11 +9,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityBullMotherFarmsBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.SupportingDocumentAdapter
 import com.nlm.utilities.BaseActivity
 
 class BullMotherFarms :BaseActivity<ActivityBullMotherFarmsBinding>() {
     private var mBinding: ActivityBullMotherFarmsBinding? = null
-
+    private lateinit var adapter: SupportingDocumentAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var programmeList: MutableList<Array<String>>
     override val layoutId: Int
         get() = R.layout.activity_bull_mother_farms
     private lateinit var bottomSheetAdapter: BottomSheetAdapter
@@ -30,6 +33,13 @@ class BullMotherFarms :BaseActivity<ActivityBullMotherFarmsBinding>() {
     override fun initView() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
+        recyclerView = mBinding?.recyclerView1!!
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        programmeList = mutableListOf()
+        programmeList.add(arrayOf(""))
+        adapter = SupportingDocumentAdapter(programmeList)
+        recyclerView.adapter = adapter
 
     }
 

@@ -21,8 +21,6 @@ class RGM_IA_Adapter(private val implementingAgencyList: List<RGM_IA>, private v
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
         val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
     }
-
-
     // Inflate the item layout and create the holder
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -47,18 +45,12 @@ class RGM_IA_Adapter(private val implementingAgencyList: List<RGM_IA>, private v
             holder.ivEdit.hideView()
             holder.mBinding.ivDelete.hideView()
         }
-
-
-    holder.mBinding.tvId.text = item.Id
-    holder.mBinding.tvName.text = item.Name
-    holder.mBinding.tvDate.text = item.Created
-    holder.mBinding.tvStatusData.text = item.Status
-    holder.mBinding.tvStatusData.hideView()
-
-
-
-
-
+    holder.mBinding.etAgencyName.text = item.Agency_Name
+    holder.mBinding.etState.text = item.State
+    holder.mBinding.etDistrict.text = item.District
+    holder.mBinding.etStatus.text=item.Status_IA
+    holder.mBinding.etStatusNlm.text=item.Status_NLM
+    holder.mBinding.etCreated.text=item.Created
     holder.mBinding.ivView.setOnClickListener {
         val intent = Intent(holder.itemView.context, RGMStateImplementingAgency::class.java)
         intent.putExtra("nodalOfficer", item)

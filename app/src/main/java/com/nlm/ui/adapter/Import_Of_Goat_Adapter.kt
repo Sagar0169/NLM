@@ -50,8 +50,11 @@ class Import_Of_Goat_Adapter(private val implementingAgencyList: List<ImportOfGo
             holder.mBinding.ivDelete.hideView()
         }
 
-    holder.mBinding.tvNoofFramer.text = item.Number_Of_Farmers
-    holder.mBinding.tvDate.text = item.created
+    holder.mBinding.etState.text = item.State
+    holder.mBinding.etCreatedBy.text = item.Created_By
+    holder.mBinding.etCreated.text = item.Created
+    holder.mBinding.etStatus.text = item.Status_IA
+    holder.mBinding.etStatusNlm.text = item.Status_NLM
 
 
 

@@ -24,35 +24,16 @@ class UserActivity : BaseActivity<ActivityUserBinding>() {
         mBinding?.clickAction=ClickActions()
         nodalOfficerList = listOf(
             All_Users(
-                "Super Admin",
-                "superadmin",
-                "superadmin@silvertouch.com",
-                "Admin",
-                "superadmin","2023-12-27","Active"
-            ),
-            All_Users(
-                "Dairy Division MP",
-                "dairy.division.mp",
-                "dairy.division.mp@gmail.com",
                 "NA",
-                "Dairy Division","2024-08-09","Active"),
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+            ),)
 
-
-        All_Users(
-        "Angan Lal Nirala",
-        "anganlalnirala",
-        "anganlalnirala@hotmail.com",
-        "NA",
-        "National Level Monitor","2024-08-12","Active"),
-
-
-        All_Users(
-        "Col Param Vir Singh Sidhu",
-        "pvsid09",
-        "pvsid09@gmail.com",
-        "NA",
-        "National Level Monitor","2024-08-12","Active"),
-        )
 
         implementingAgency()
 
