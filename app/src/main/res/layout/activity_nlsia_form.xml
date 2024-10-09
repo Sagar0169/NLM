@@ -25,17 +25,19 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivBackPress"
                 android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
                 android:layout_height="wrap_content"
                 android:onClick="@{ClickAction::backPress}"
                 android:src="@drawable/ic_back" />
 
             <TextView
+
                 android:id="@+id/tvWelcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_15"
+
                 android:text="@string/implementing_agency"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_20"

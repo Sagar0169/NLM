@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.national_livestock_mission_fragments.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,10 +24,46 @@
     <LinearLayout
         android:id="@+id/llParent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/dp_10">
+        <TextView
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:id="@+id/tvDistrict"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:fontFamily="@font/opensans_semibold"
+            android:text="Funds Received (in Rs. Lakh)"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18" />
+        <com.nlm.utilities.NonScrollableRecyclerView
+            android:id="@+id/recyclerView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_funds_received_nlsia"
+            android:paddingTop="8dp" />
 
-    </LinearLayout></ScrollView></RelativeLayout>
+        <TextView
+            android:id="@+id/tvSendOtp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/curve_fill_blue"
+            android:clickable="true"
+            android:fontFamily="@font/poppins_medium"
+
+            android:paddingHorizontal="@dimen/dp_20"
+            android:paddingVertical="@dimen/dp_10"
+            android:text="Next"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
 
 </layout>

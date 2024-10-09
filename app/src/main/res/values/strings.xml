@@ -319,7 +319,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="add_dcs_center_visit_report">Add DCS Center Visit Report</string>
     <string name="add_state_center_lab_visit">Add State Center Lab Visit</string>
     <string name="add_national_level_monitors_component_a">Add National Level Monitors(Component A)</string>
-    <string name="brorahul_1171">@brorahul@1171</string>
+    <string name="brorahul_1171">brorahul</string>
     <string name="national_livestock_mission_entrepreneur_development_programme_edp_monitoring_of_nlm_by_national_level_monitors_format_for_nlm_edp">National Livestock Mission Entrepreneur Development Programme (EDP)\nMonitoring of NLM by National Level Monitors\nFormat for NLM-EDP</string>
     <string name="feed_and_fodder_development_monitoring_of_nlm_by_national_level_monitors_format_for_fodder_production_from_forest_land">Feed and fodder development\nMONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for Fodder production from forest land</string>
     <string name="monitoring_of_nlm_by_national_level_monitors_format_for_fodder_seed_processing_plant_storage">MONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for fodder seed processing plant/ storage</string>
@@ -331,5 +331,12 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="view">View</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="to_be_filled_by_the_state_ah_department_or_implementing_agency">To be filled by the State AH Department or Implementing Agency</string>
+    <string name="save_and_next">Save and Next</string>
+    <string name="to_be_filled_by_the_ah_department_or_implementing_authority">To be filled by the AH Department or Implementing Authority</string>
+    <string name="to_be_filled_by_the_nlm_team">To be filled by the NLM Team</string>
+    <string name="to_be_filled_by_ah_department_or_implementing_agency">To be filled by AH Department or Implementing Agency</string>
+    <string name="observation_by_the_nlm_team_to_be_filled_by_the_nlm_team">Observation by the NLM Team: (To be filled by the NLM Team)</string>
+    <string name="to_be_filled_by_the_state_implementing_agency">To be filled by the state/ implementing Agency</string>
 </resources>
 

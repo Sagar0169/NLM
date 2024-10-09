@@ -24,6 +24,28 @@
             android:scrollbars="none">
 
             <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/orange"
+                android:padding="@dimen/dp_10"
+                >
+                <TextView
+                    android:id="@+id/tvWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/to_be_filled_by_the_ah_department_or_implementing_authority"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+            <LinearLayout
                 android:id="@+id/llParent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,6 +63,7 @@
                     android:layout_weight="0.5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="@string/basic_information"
                     android:textColor="@color/black"
@@ -239,6 +262,7 @@
                     <TextView
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="@string/area_of_goat_sheep_station_acres"
@@ -321,6 +345,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Manpower"
+                    android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
                 <EditText
@@ -354,6 +379,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:fontFamily="@font/opensans_semibold"
+                        android:layout_gravity="center"
                         android:text="Availability of equipment:"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
@@ -389,6 +415,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:fontFamily="@font/opensans_semibold"
+                        android:layout_gravity="center"
                         android:text="Availability of computer and data processing:"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
@@ -458,7 +485,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </LinearLayout>
-
+            </LinearLayout>
         </ScrollView>
     </RelativeLayout>
 </layout>

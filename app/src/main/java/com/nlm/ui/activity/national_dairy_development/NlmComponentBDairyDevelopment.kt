@@ -9,6 +9,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityNlmCompnentBdairyDevelopmentBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.NlmIAFundsRecievedAdapter
+import com.nlm.ui.adapter.SupportingDocumentAdapter
 import com.nlm.utilities.BaseActivity
 
 class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDevelopmentBinding>() {
@@ -17,6 +19,9 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
         get() = R.layout.activity_nlm_compnent_bdairy_development
     private lateinit var bottomSheetAdapter: BottomSheetAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var adapter: SupportingDocumentAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var programmeList: MutableList<Array<String>>
     private val state = listOf(
         "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
     )
@@ -27,6 +32,13 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
     override fun initView() {
     mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
+        recyclerView = mBinding?.recyclerView1!!
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        programmeList = mutableListOf()
+        programmeList.add(arrayOf(""))
+        adapter = SupportingDocumentAdapter(programmeList)
+        recyclerView.adapter = adapter
     }
 
     override fun setVariables() {

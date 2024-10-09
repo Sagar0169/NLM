@@ -13,41 +13,40 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
-import com.nlm.databinding.ItemNlmedpIaBinding
-import com.nlm.databinding.ItemNlmedpNlmBinding
-import kotlin.coroutines.coroutineContext
+import com.nlm.databinding.ItemAvilabilityOfEquipmentBinding
+import com.nlm.databinding.ItemCompositionOfGoverningBinding
+import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
+import com.nlm.databinding.ItemDistrictWiseNoNlsiaBinding
 
-class EdpNlmAdapter(
+import com.nlm.databinding.ItemQualityBuckBinding
+import com.nlm.model.District
+
+class NlmIADistrictWiseNoAdapter(
     private val programmeList: MutableList<Array<String>>,
     private val context: Context,
-
-) : RecyclerView.Adapter<EdpNlmAdapter.AvailabilityOfEquipmentViewHolder>() {
+) : RecyclerView.Adapter<NlmIADistrictWiseNoAdapter.NlmIADistrictWiseNo>() {
     private lateinit var stateAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
-    private val projectFinancing = listOf(
-        "Subsidy Loan", "Self Finance"
-    )
-    private val tvAnimals = listOf(
-        "Yes", "No"
+    private val District = listOf(
+        "Begalkote", "Bellari","Belagavi","Bidar"
     )
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AvailabilityOfEquipmentViewHolder {
 
-        val binding = ItemNlmedpNlmBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
-        )
-        return   AvailabilityOfEquipmentViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NlmIADistrictWiseNo {
 
-    }
+                val binding = ItemDistrictWiseNoNlsiaBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                )
+        return    NlmIADistrictWiseNo(binding)
 
-    override fun onBindViewHolder(holder: AvailabilityOfEquipmentViewHolder, position: Int) {
+        }
+
+    override fun onBindViewHolder(holder: NlmIADistrictWiseNo, position: Int) {
 
 
         // Handle visibility of add/delete buttons
         handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
-
-
-        holder.binding.tvAnimals.setOnClickListener { showBottomSheetDialog("Animals",holder.binding.tvAnimals) }
+        holder.binding.etState.setOnClickListener { showBottomSheetDialog("district",holder.binding.etState) }
         // Add new row
         holder.binding.btnAdd.setOnClickListener {
             programmeList.add(arrayOf("", "",""))
@@ -77,7 +76,6 @@ class EdpNlmAdapter(
             btnDelete.visibility = View.VISIBLE
         }
     }
-
     private fun showBottomSheetDialog(type: String,textView: TextView) {
         // Initialize the BottomSheetDialog
         bottomSheetDialog = BottomSheetDialog(context)
@@ -103,14 +101,11 @@ class EdpNlmAdapter(
 
         // Initialize based on type
         when (type) {
-            "projectFinancing" -> {
-                selectedList = projectFinancing
+            "district" -> {
+                selectedList = District
                 selectedTextView = textView
             }
-            "Animals" -> {
-                selectedList = tvAnimals
-                selectedTextView = textView
-            }
+
             else -> return
         }
 
@@ -154,6 +149,6 @@ class EdpNlmAdapter(
 
         return rotateDrawable
     }
-    inner class AvailabilityOfEquipmentViewHolder(val binding: ItemNlmedpNlmBinding) :
+    inner class NlmIADistrictWiseNo(val binding: ItemDistrictWiseNoNlsiaBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

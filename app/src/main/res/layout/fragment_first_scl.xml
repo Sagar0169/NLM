@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/stateMU"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -48,7 +48,7 @@
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:drawableEnd="@drawable/ic_arrow_down"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/districtDCS"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -72,7 +72,7 @@
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:drawableEnd="@drawable/ic_arrow_down"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -100,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/location_of_state_central_lab"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="Year of Establishment/Operationalisation"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
+                    android:fontFamily="@font/inter_regular"
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -144,7 +144,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="NABL Certified"
                     android:layout_marginTop="@dimen/dp_20"
 
@@ -193,7 +193,7 @@
                     android:layout_weight="0.5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/opensans_semibold"
+                    android:fontFamily="@font/inter_medium"
                     android:text="NABL Certified"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
@@ -230,8 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
+                    android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -255,7 +254,7 @@
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
+                        android:fontFamily="@font/inter_semi_bold"
                         android:text="Equipments Provided under NPDD"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
@@ -273,7 +272,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="@string/civil_work_including_electrical_interiorsscl"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -292,7 +291,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Available at the Site(Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -331,7 +330,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="@string/month_year_of_installation"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -343,7 +342,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -356,7 +355,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Status (Operatioal /Non- operational )"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -396,7 +395,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="LCMS/MS-Triple Cord Liquid Chromatography/Mass Spectrometer with accessories"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -415,7 +414,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Available at the Site(Yes/No)"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -454,7 +453,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="@string/month_year_of_installation"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -466,7 +465,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -479,7 +478,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Status (Operatioal /Non- operational )"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -519,7 +518,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="GCMS/MS-Triple Cord Gas Chromatography/Mass Spectrometer with accessories"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -538,7 +537,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Available at the Site"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -550,7 +549,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -561,7 +560,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="@string/month_of_installati_on_make"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -573,7 +572,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -586,7 +585,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Status (Operatioal /Non- operational )"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -598,8 +597,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
+                                android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"
@@ -610,7 +608,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Induced Couple Plasma Mass Spectrometer (ICP-MS) with accessories"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -629,7 +627,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Available at the Site"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -641,7 +639,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -652,7 +650,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="@string/month_of_installati_on_make"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -664,7 +662,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -677,7 +675,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Status (Operatioal /Non- operational )"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -689,7 +687,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -701,7 +699,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="FTIR Technology based Milk Analyser"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -720,7 +718,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Available at the Site"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -732,7 +730,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -743,7 +741,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="@string/month_of_installati_on_make"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -755,7 +753,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -768,7 +766,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Status (Operatioal /Non- operational )"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -780,7 +778,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -792,7 +790,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Bacterial and Somatic Cell Analyser"
                             android:layout_marginTop="@dimen/dp_7"
 
@@ -811,7 +809,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Available at the Site"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -823,7 +821,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -834,7 +832,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="@string/month_of_installati_on_make"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -846,7 +844,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -859,7 +857,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
+                                android:fontFamily="@font/inter_medium"
                                 android:text="Status (Operatioal /Non- operational )"
                                 android:layout_marginTop="@dimen/dp_7"
 
@@ -871,7 +869,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
+                                android:fontFamily="@font/inter_regular"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"

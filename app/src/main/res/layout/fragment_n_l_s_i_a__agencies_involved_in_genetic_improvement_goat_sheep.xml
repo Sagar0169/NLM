@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.national_livestock_mission_fragments.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,353 +30,29 @@
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/dp_10">
         <TextView
-            android:id="@+id/tv1"
+            android:id="@+id/tvEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_7"
             android:fontFamily="@font/opensans_semibold"
-            android:text="2021-22"
+            android:text="Agencies involved in genetic improvement of goat and sheep activities in the State and the existing infrastructure of these agencies i.e. Dept. of Animal Husbandry Department or State Livestock Board/ Agencies"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
-        <LinearLayout
-            android:id="@+id/llone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dp_7"
-            android:background="@drawable/curve_all_corner_dark_grey"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/dp_10"
-            android:paddingVertical="@dimen/dp_5"
-            tools:ignore="MissingConstraints">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_grey"
-                android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/tvname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of District"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint=""
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/tv11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Location of AI Centre"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint=""
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/tv12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/ai_performed_since_converted"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint=""
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
         <TextView
-            android:id="@+id/tv2"
+            android:id="@+id/tvDistrict"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_7"
             android:fontFamily="@font/opensans_semibold"
-            android:text="2022-23"
+            android:text="District wise no. of AI centres for Goat and Sheep in the State - ……."
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
-        <LinearLayout
-            android:id="@+id/lltwo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <com.nlm.utilities.NonScrollableRecyclerView
+            android:id="@+id/recyclerView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dp_7"
-            android:background="@drawable/curve_all_corner_dark_grey"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/dp_10"
-            android:paddingVertical="@dimen/dp_5"
-            tools:ignore="MissingConstraints">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_grey"
-                android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/tvname2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of District"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint=""
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/tv111"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Location of AI Centre"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint=""
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/tv122"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/ai_performed_since_converted"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint=""
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_7"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="2023-24"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_16" />
-        <LinearLayout
-            android:id="@+id/llthree"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/dp_7"
-            android:background="@drawable/curve_all_corner_dark_grey"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/dp_10"
-            android:paddingVertical="@dimen/dp_5"
-            tools:ignore="MissingConstraints">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_grey"
-                android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/tvname3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of District"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint=""
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/tv1111"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Location of AI Centre"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint=""
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/tv1222"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/ai_performed_since_converted"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:hint=""
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
+            tools:listitem="@layout/item_district_wise_no_nlsia"
+            android:paddingTop="8dp" />
 
         <TextView
             android:id="@+id/tvSendOtp"
@@ -396,6 +72,6 @@
             android:textAlignment="center"
             android:textColor="@color/white" />
     </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </layout>

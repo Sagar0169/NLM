@@ -47,7 +47,8 @@
                     android:background="@drawable/curve_all_corner_black"
                     android:paddingVertical="@dimen/dp_10">
                     <TextView
-
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
@@ -112,6 +113,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
@@ -175,6 +178,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -239,6 +244,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -302,6 +309,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -365,6 +374,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -428,6 +439,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -491,6 +504,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -554,6 +569,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -617,6 +634,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -680,6 +699,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -743,6 +764,8 @@
 
                     </LinearLayout>
                     <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -805,6 +828,29 @@
                             android:textSize="@dimen/sp_16" />
 
                     </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Total No of Regional semen bank :"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLength="50"
+                        android:inputType="number"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 
 
@@ -821,7 +867,8 @@
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="Next"
+                    android:text="@string/save_and_next"
+                    android:textSize="20sp"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </LinearLayout>
