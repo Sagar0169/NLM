@@ -81,8 +81,8 @@ class AddNLMComponentA : BaseActivity<ActivityAddNlmComponentABinding>() {
     }
     private fun setupTabLayout() {
         mBinding?.tabLayout?.apply {
-            addTab(newTab().setText("Part 1"))
-            addTab(newTab().setText("Part 2"))
+            addTab(newTab().setText("Project details"))
+            addTab(newTab().setText("Physical Progress"))
 
             // If you have only two tabs and want to ensure they occupy the entire width:
             tabMode = TabLayout.MODE_FIXED
