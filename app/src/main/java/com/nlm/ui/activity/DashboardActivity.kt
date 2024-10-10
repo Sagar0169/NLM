@@ -79,7 +79,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 //        }
 
         setDefaultDrawables()
-        RoleBased()
+//        RoleBased()
         mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 // Do something when the drawer is sliding (optional)
@@ -228,7 +228,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvDashboard?.setOnClickListener {
-            mBinding?.drawerLayout?.closeDrawer(GravityCompat.END)
+            mBinding?.drawerLayout?.closeDrawers()
         }
 
         mBinding?.leftDrawerMenu?.tvNlmEdp?.setOnClickListener {
@@ -588,11 +588,29 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                             mBinding?.leftDrawerMenu?.tvImplementingAgency?.showView()
                         } else if (matchingFormId == 221){
                             mBinding?.leftDrawerMenu?.tvRspLaboratorySemen?.showView()
+                        }else if (matchingFormId == 222){
+                            mBinding?.leftDrawerMenu?.tvStateSemenBank?.showView()
+                        }else if (matchingFormId == 223){
+                            mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
+                        }else if (matchingFormId == 224){
+                            mBinding?.leftDrawerMenu?.tvImportExoticGoat?.showView()
+                        }else if (matchingFormId == 225){
+                            mBinding?.leftDrawerMenu?.tvAssistanceQfps?.showView()
+                        }else if (matchingFormId == 226){
+                            mBinding?.leftDrawerMenu?.tvFpsPlanStorage?.showView()
+                        }else if (matchingFormId == 227){
+                            mBinding?.leftDrawerMenu?.tvFpsFromNonForest?.showView()
+                        }else if (matchingFormId == 228){
+                            mBinding?.leftDrawerMenu?.tvFpsFromForest?.showView()
+                        }else if (matchingFormId == 229){
+                            mBinding?.leftDrawerMenu?.tvAssistanceForEa?.showView()
+                        }else if (matchingFormId == 230){
+                            mBinding?.leftDrawerMenu?.tvNlmEdp?.showView()
                         }
                     }
                 }
                 else if (matchingSchemeId == 201){
-                    mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+                    mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
                     for (matchingFormId in matchingFormIds) {
                         if (matchingFormId == 219) {
                             mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.showView()

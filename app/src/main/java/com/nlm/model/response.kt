@@ -14,6 +14,7 @@ data class OTPResponse(
     val message: String,
     val otp: Int
 )
+
 data class LoginResponse(
     val _result: Result,
     val _resultflag: Int,

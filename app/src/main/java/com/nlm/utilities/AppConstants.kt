@@ -1,6 +1,5 @@
 package com.nlm.utilities
 
-import com.nlm.model.Scheme
 
 object AppConstants {
 
