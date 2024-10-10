@@ -10,102 +10,139 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:elevation="4dp"
         android:background="@drawable/curve_back_blue"
         android:backgroundTint="#1C6AAA"
-        app:cardCornerRadius="@dimen/dp_10"
-        android:radius="8dp">
+        android:elevation="4dp"
+        android:radius="8dp"
+        app:cardCornerRadius="@dimen/dp_10">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
             android:layout_marginEnd="@dimen/dp_50"
+            android:background="#FFFFFF"
             android:padding="16dp">
 
             <!-- Permit Number and State Name -->
             <LinearLayout
                 android:id="@+id/llNameOfAiCenter"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Name of AI Center :"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Name of AI Center"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvNameAiCenter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/llState"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llNameOfAiCenter"
+                android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Name of State :"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Name of State"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvState"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llDistrict"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llState"
                 android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Name of District :"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Name of District"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvDistrict"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llBlock"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llDistrict"
                 android:layout_marginTop="@dimen/dp_5"
@@ -113,27 +150,39 @@
 
                 <TextView
                     android:id="@+id/tvBlock"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Location of AI Center :"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Location of AI Center"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvLocAiCenter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
                     android:textColor="@color/grey"
+                    android:layout_weight="1"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llFarmer"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llBlock"
                 android:layout_marginTop="@dimen/dp_5"
@@ -141,55 +190,79 @@
 
                 <TextView
                     android:id="@+id/tvFarmer"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Date of Visit :"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Date of Visit"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvDateOfVisit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llCreatedBy"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
                 android:layout_below="@id/llNlmStatus"
+                android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvCreatedByTitle"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Created By :"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Created By"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvCreatedBy"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Super Admin"
-                    android:fontFamily="@font/inter_light"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/inter_light"
+                    android:text="Super Admin"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llNlmStatus"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llFarmer"
                 android:layout_marginTop="@dimen/dp_5"
@@ -197,47 +270,71 @@
 
                 <TextView
                     android:id="@+id/tvNlm"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="NLM Status :"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="NLM Status"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvNlmStatus"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Submitted"
-                    android:fontFamily="@font/inter_light"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/inter_light"
+                    android:text="Submitted"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llCreated"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llCreatedBy"
                 android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Created On :"
-                    android:fontFamily="@font/inter_regular"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Created On"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvCreated"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="2024-08-28"
-                    android:fontFamily="@font/inter_light"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/inter_light"
+                    android:text="2024-08-28"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -247,11 +344,11 @@
                 android:id="@+id/llActions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp_5"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-5dp"
                 android:layout_below="@id/llCreated"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="-5dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <!-- View Icon -->
@@ -261,9 +358,9 @@
                     android:id="@+id/ivView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_5"
                     android:contentDescription="View"
                     android:padding="@dimen/dp_5"
-                    android:layout_marginHorizontal="@dimen/dp_5"
                     android:src="@drawable/ic_view"
                     app:tint="@color/black" />
 
@@ -272,10 +369,10 @@
                     android:id="@+id/ivEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="Edit"
-                    android:padding="@dimen/dp_5"
-
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:contentDescription="Edit"
+
+                    android:padding="@dimen/dp_5"
                     android:src="@drawable/edit_icon"
                     app:tint="@color/black" />
 
@@ -284,10 +381,10 @@
                     android:id="@+id/ivDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="Delete"
-                    android:padding="@dimen/dp_5"
-
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:contentDescription="Delete"
+
+                    android:padding="@dimen/dp_5"
                     android:src="@drawable/ic_deleted"
                     app:tint="@color/black" />
             </LinearLayout>

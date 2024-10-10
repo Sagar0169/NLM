@@ -338,5 +338,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="to_be_filled_by_ah_department_or_implementing_agency">To be filled by AH Department or Implementing Agency</string>
     <string name="observation_by_the_nlm_team_to_be_filled_by_the_nlm_team">Observation by the NLM Team: (To be filled by the NLM Team)</string>
     <string name="to_be_filled_by_the_state_implementing_agency">To be filled by the state/ implementing Agency</string>
+    <string name="donors_nos_msp"><![CDATA[Donors (nos) < MSP]]></string>
+    <string name="donors_nos_msp1"><![CDATA[Donors (nos) > MSP]]></string>
 </resources>
 

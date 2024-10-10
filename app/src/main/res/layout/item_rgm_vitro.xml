@@ -27,32 +27,43 @@
 
             <LinearLayout
                 android:id="@+id/llLabName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvLabNameTitle"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Laboratory Name :"
-                    android:fontFamily="@font/inter_regular"
+                    android:text="Laboratory Name"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvLabName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
+                    android:layout_weight="1"
                     android:text="N/A"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llState"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llLabName"
                 android:layout_marginTop="@dimen/dp_5"
@@ -60,27 +71,38 @@
 
                 <TextView
                     android:id="@+id/state_name"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="State Name :"
-                    android:fontFamily="@font/inter_regular"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvState"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llDistrict"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llState"
                 android:layout_marginTop="@dimen/dp_5"
@@ -88,27 +110,38 @@
 
                 <TextView
                     android:id="@+id/district_name"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="District Name :"
-                    android:fontFamily="@font/inter_regular"
+                    android:text="District Name"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvDistrict"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llLocation"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_below="@+id/llDistrict"
@@ -116,20 +149,31 @@
 
                 <TextView
                     android:id="@+id/tvLocationTitle"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Location :"
-                    android:fontFamily="@font/inter_regular"
+                    android:text="Location"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvLocation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -138,7 +182,7 @@
 
             <LinearLayout
                 android:id="@+id/llIA"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_below="@+id/llLocation"
@@ -146,20 +190,31 @@
 
                 <TextView
                     android:id="@+id/tvIATitle"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="IA Status :"
-                    android:fontFamily="@font/inter_regular"
+                    android:text="IA Status"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvIAStatus"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="N/A"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -168,7 +223,7 @@
 
             <LinearLayout
                 android:id="@+id/llNLMStatus"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_below="@id/llIA"
@@ -176,46 +231,67 @@
 
                 <TextView
                     android:id="@+id/tvNLMTitle"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="NLM Status :"
-                    android:fontFamily="@font/inter_regular"
+                    android:text="NLM Status"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvNlmStatus"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:fontFamily="@font/inter_light"
                     android:text="N/A"
+                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llCreated"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llNLMStatus"
                 android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tvCreated"
-                    android:layout_width="140dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Created :"
-                    android:fontFamily="@font/inter_regular"
+                    android:text="Created"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvDate"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvCreated"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="2024-08-28"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_light"
                     android:layout_marginHorizontal="@dimen/dp_5"
                     android:textColor="@color/grey"

@@ -64,7 +64,7 @@ class NlmEdpAdapter(private val onlyCreated: List<NlmEdp>, private val isFrom: I
                 }
             }
             1->{
-                holder.tvComment.text = "Development Of Reading Material :"
+                holder.tvComment.text = "Development Of Reading Material"
                 holder.ivView.setOnClickListener {
                     val intent = Intent(holder.itemView.context, AddNewAssistanceForEaActivity::class.java)
                     holder.ivView.context.startActivity(intent)
