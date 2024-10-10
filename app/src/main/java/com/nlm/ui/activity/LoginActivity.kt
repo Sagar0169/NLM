@@ -8,13 +8,12 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
-import com.nlm.utilities.BaseActivity
 import com.nlm.R
 import com.nlm.databinding.ActivityLoginBinding
 import com.nlm.model.LoginRequest
 import com.nlm.model.Result
-import com.nlm.model.Scheme
 import com.nlm.utilities.AppConstants
+import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Utility
@@ -149,7 +148,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
                     }
 
-                    userResponseModel._result.role_name?.let { it1 ->
+                    userResponseModel._result.role_name.let { it1 ->
                         Utility.savePreferencesString(this,AppConstants.ROLE_NAME,
                             it1
                         )
@@ -158,10 +157,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             Intent(
                                 this@LoginActivity,
                                 DashboardActivity::class.java
-                            )
+                            ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                         )
-                        finish()
-
+//                        finish()
                 }
             }
         }
