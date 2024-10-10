@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
-            android:paddingVertical="12dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="@dimen/dp_10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

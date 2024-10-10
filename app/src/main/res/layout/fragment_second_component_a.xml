@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.BasicDetailsFragment">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
@@ -31,13 +31,13 @@
                 android:paddingHorizontal="@dimen/dp_15">
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"                    android:text="Physical Progress:(Pre filled by Dairy Division)"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_18" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/dp_20"-->
+<!--                    android:fontFamily="@font/inter_medium"                    android:text="Physical Progress:(Pre filled by Dairy Division)"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="@dimen/sp_18" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,6 +85,8 @@
 
 
                         <EditText
+                            android:id="@+id/etMilkProcessingCapacityProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -108,6 +110,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProcessingCapacityAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -131,6 +135,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProcessingCapacityAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -178,6 +184,8 @@
 
 
                         <EditText
+                            android:id="@+id/etDairyCooperativeProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -201,6 +209,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etDairyCooperativeAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -224,6 +234,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etDairyCooperativeAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -270,6 +282,8 @@
 
 
                         <EditText
+                            android:id="@+id/etMilkProducerProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -293,6 +307,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProducerAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -316,6 +332,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProducerAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -334,7 +352,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"                        android:text="Average Daily Milk Procurement (TLPD)"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Average Daily Milk Procurement (TLPD)"
                         android:layout_marginTop="@dimen/dp_10"
 
                         android:textColor="@color/black"
@@ -362,6 +381,8 @@
 
 
                         <EditText
+                            android:id="@+id/etAverageDailyMilkProcurementProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -385,6 +406,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAverageDailyMilkProcurementAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -408,6 +431,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAverageDailyMilkProcurementAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -426,7 +451,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"                        android:text="Average Daily Milk Marketing (TLPD)"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Average Daily Milk Marketing (TLPD)"
                         android:layout_marginTop="@dimen/dp_10"
 
                         android:textColor="@color/black"
@@ -454,6 +480,8 @@
 
 
                         <EditText
+                            android:id="@+id/etAverageDailyMilkMarketingProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -477,6 +505,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAverageDailyMilkMarketingAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -500,6 +530,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAverageDailyMilkMarketingAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -557,6 +589,8 @@
 
 
                         <EditText
+                            android:id="@+id/etBulkMilkCoolerNumberProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -580,6 +614,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etBulkMilkCoolerNumberAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -603,6 +639,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etBulkMilkCoolerNumberAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -648,6 +686,8 @@
 
 
                         <EditText
+                            android:id="@+id/etBulkMilkCoolerCapacityProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -671,6 +711,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etBulkMilkCoolerCapacityAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -694,6 +736,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etBulkMilkCoolerCapacityAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -748,6 +792,8 @@
 
 
                         <EditText
+                            android:id="@+id/etStateCenterLaboratoryProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -771,6 +817,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etStateCenterLaboratoryAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -794,6 +842,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etStateCenterLaboratoryAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -840,6 +890,8 @@
 
 
                         <EditText
+                            android:id="@+id/etFTIRProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -863,6 +915,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etFTIRAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -886,6 +940,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etFTIRAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -931,6 +987,8 @@
 
 
                         <EditText
+                            android:id="@+id/etAutomaticMilkCollectionProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -954,6 +1012,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAutomaticMilkCollectionAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -977,6 +1037,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAutomaticMilkCollectionAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -1022,6 +1084,8 @@
 
 
                         <EditText
+                            android:id="@+id/etElectronicMilkProjectTargets"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1045,6 +1109,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etElectronicMilkAchievement"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -1068,6 +1134,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etElectronicMilkAch"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -1083,6 +1151,16 @@
 
 
                     </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="*Incremental target = EOP target-Base year status"
+                        android:layout_marginTop="@dimen/dp_7"
+
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
 
                 </LinearLayout>
 
@@ -1143,6 +1221,34 @@
 
                 </LinearLayout>
 
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:text="Supporting Documents"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <LinearLayout
+                    android:id="@+id/llRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.nlm.utilities.NonScrollableRecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+
 <!--                <TextView-->
 <!--                    android:id="@+id/tvMaxSize"-->
 <!--                    android:layout_width="wrap_content"-->
@@ -1186,27 +1292,54 @@
 
 
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_15"
+    android:layout_marginBottom="@dimen/dp_10"
+
+    >
+    <TextView
+        android:id="@+id/tvSave"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="@dimen/dp_9"
+
+        android:background="@drawable/button_bg"
+        android:clickable="true"
+        android:fontFamily="@font/khula_semibold"
+        android:paddingHorizontal="@dimen/dp_20"
+        android:paddingVertical="@dimen/dp_10"
+        android:text="Save As Draft"
+        android:textSize="@dimen/sp_20"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+    <TextView
+        android:id="@+id/tvSendOtp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_9"
+
+        android:background="@drawable/button_bg"
+        android:clickable="true"
+        android:fontFamily="@font/khula_semibold"
+        android:paddingHorizontal="@dimen/dp_20"
+        android:paddingVertical="@dimen/dp_10"
+        android:text="Submit"
+        android:textSize="@dimen/sp_20"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
 
 
-                <TextView
-                    android:id="@+id/tvSendOtp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_50"
-                    android:layout_marginTop="@dimen/dp_15"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    android:background="@drawable/button_bg"
-                    android:clickable="true"
-                    android:fontFamily="@font/khula_semibold"
-                    android:paddingHorizontal="@dimen/dp_20"
-                    android:paddingVertical="@dimen/dp_10"
-                    android:text="Submit"
-                    android:textSize="@dimen/sp_20"
-                    android:textAlignment="center"
-                    android:textColor="@color/white" />
+</LinearLayout>
+
+
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
     </FrameLayout>

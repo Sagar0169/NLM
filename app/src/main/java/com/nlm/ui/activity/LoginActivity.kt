@@ -12,8 +12,11 @@ import com.nlm.utilities.BaseActivity
 import com.nlm.R
 import com.nlm.databinding.ActivityLoginBinding
 import com.nlm.model.LoginRequest
+import com.nlm.model.Result
+import com.nlm.model.Scheme
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.PrefEntities
+import com.nlm.utilities.Preferences
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.getPreferenceString
 import com.nlm.utilities.Utility.showSnackbar
@@ -64,19 +67,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     inner class ClickActions {
 
         fun login(view: View) {
-            startActivity(
-                Intent(
-                    this@LoginActivity,
-                    DashboardActivity::class.java
+//            startActivity(
+//                Intent(this@LoginActivity,
+//                    DashboardActivity::class.java)
+//            )
+            if (valid())
+                viewModel.getLoginApi(
+                    this@LoginActivity, LoginRequest(
+                        mBinding!!.etUsername.text.toString().trim(),
+                        mBinding!!.etPassword.text.toString().trim()
+                    )
                 )
-            )
-//            if (valid())
-//                viewModel.getLoginApi(
-//                    this@LoginActivity, LoginRequest(
-//                        mBinding!!.etUsername.text.toString().trim(),
-//                        mBinding!!.etPassword.text.toString().trim()
-//                    )
-//                )
         }
 
         fun backPress(view: View) {
@@ -116,6 +117,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
                     Log.d("Login Data", userResponseModel._resultflag.toString())
 
+                    Preferences.setPreference(
+                        this,AppConstants.SCHEME,Result(
+                            userResponseModel._result.name,
+                            userResponseModel._result.role_id,
+                            userResponseModel._result.role_name,
+                            userResponseModel._result.schemes,
+                           null,
+                            userResponseModel._result.user_id,
+                        )
+                    )
 
                     userResponseModel._result.user_id?.let { it1 ->
                         Utility.savePreferencesInt(
@@ -127,7 +138,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     userResponseModel._result.role_id?.let { it1 ->
                         Utility.savePreferencesString(
                             this, AppConstants.ROLE_ID,
-                            it1
+                            it1.toString()
                         )
                     }
                     userResponseModel._result.token?.let { it1 ->

@@ -5,9 +5,11 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityStateSemenBankListBinding
-import com.nlm.model.OnlyCreatedNlm
+import com.nlm.model.State_Semen_Bank
+
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.NSLP_IA_Adapter
+import com.nlm.ui.adapter.StateSemenAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.PrefEntities
@@ -19,9 +21,9 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
 
     override val layoutId: Int
         get() = R.layout.activity_state_semen_bank_list
-    private lateinit var implementingAdapter: NSLP_IA_Adapter
+    private lateinit var implementingAdapter: StateSemenAdapter
 
-    private lateinit var nodalOfficerList: List<OnlyCreatedNlm>
+    private lateinit var nodalOfficerList: List<State_Semen_Bank>
     private var layoutManager: LinearLayoutManager? = null
     override fun initView() {
         mBinding = viewDataBinding
@@ -31,47 +33,13 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
             mBinding!!.fabAddAgency.hideView()
         }
         nodalOfficerList = listOf(
-            OnlyCreatedNlm(
-                "DELHI",
-                "2024-08-27",
-                "NORTH",
-                "",
-                "234242342432","1977","Voluptas inventore n"
-
+            State_Semen_Bank(
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
             ),
-            OnlyCreatedNlm(
-                "N/A",
-                "2024-08-23",
-                "N/A",
-                "",
-                "895353543535453","2000","Ab voluptatem cum deserunt fugiat cupiditate omnis quis magni"
-
-            ),
-            OnlyCreatedNlm(
-                "HARYANA",
-                "2024-08-12",
-                "KARNAL",
-                "",
-                "9996543218","2017","test"
-
-            ),
-            OnlyCreatedNlm(
-                "N/A",
-                "2024-08-21",
-                "N/A",
-                "",
-                "9990157283","1947","T-29 Okhla New Delhi"
-
-            ),
-            OnlyCreatedNlm(
-                "N/A",
-                "2024-08-16",
-                "N/A",
-                "",
-                "9990157283","2001","Facilis perspiciatis cillum commodo atque nulla culpa"
-
-            ),
-
             )
         implementingAgency()
 
@@ -105,8 +73,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
 
     }
     private fun implementingAgency() {
-        implementingAdapter = NSLP_IA_Adapter(nodalOfficerList,2,
-            Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
+        implementingAdapter = StateSemenAdapter(nodalOfficerList,2,Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvStateSemenLabView.layoutManager = layoutManager
         mBinding!!.rvStateSemenLabView.adapter = implementingAdapter

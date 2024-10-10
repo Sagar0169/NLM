@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/job_details_bg1"
-            android:paddingVertical="12dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="@dimen/dp_10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -43,20 +44,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Add Milk Union Report"
                 android:fontFamily="@font/lexend_semibold"
+                android:text="Add Milk Union Report"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivBackPress"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -174,6 +175,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
+                    android:id="@+id/etTotalNoOfVillages"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -197,6 +199,8 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
+                    android:id="@+id/etNoOfVillagesCovered"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -219,6 +223,8 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
+                    android:id="@+id/etNoOfMilkProducers"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -270,6 +276,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etOrganised"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -293,6 +301,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etFunctional"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -367,12 +377,15 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+
                             >
                             <EditText
+                                android:id="@+id/location1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/dp_5"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -383,10 +396,14 @@
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
                             <EditText
+                                android:id="@+id/capacity1"
+
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
+                                android:layout_marginStart="@dimen/dp_5"
+
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -405,10 +422,14 @@
                             android:layout_height="wrap_content"
                             >
                             <EditText
+                                android:id="@+id/location2"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/dp_5"
+
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -419,10 +440,14 @@
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
                             <EditText
+                                android:id="@+id/capacity2"
+
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
+                                android:layout_marginStart="@dimen/dp_5"
+
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -438,10 +463,14 @@
                             android:layout_height="wrap_content"
                             >
                             <EditText
+                                android:id="@+id/location3"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/dp_5"
+
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -452,10 +481,14 @@
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
                             <EditText
+                                android:id="@+id/capacity3"
+
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
+                                android:layout_marginStart="@dimen/dp_5"
+
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -479,6 +512,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/TotalLocationCapacity"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -534,6 +569,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etBulkMilkChillersNumber"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -557,6 +594,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etBulkMilkChillersTotalCapacity"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -612,6 +651,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProcurementAverageLastYear"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -635,6 +676,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProcurementAverageCurrentYear"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -658,6 +701,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProcurementAverageCurrentMonth"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -712,6 +757,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProductSaleLiquidMilk"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -735,6 +782,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProductSaleBulkSale"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -758,6 +807,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMilkProductSaleValueAdded"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -844,6 +895,8 @@
                             android:layout_height="wrap_content"
                             >
                             <EditText
+                                android:id="@+id/etAPPCowLastYear"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -928,6 +981,8 @@
                             android:layout_height="wrap_content"
                             >
                             <EditText
+                                android:id="@+id/etAPPBuffaloLastYear"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -1034,6 +1089,8 @@
                             android:layout_height="wrap_content"
                             >
                             <EditText
+                                android:id="@+id/etIPCowLastYear"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -1118,6 +1175,8 @@
                             android:layout_height="wrap_content"
                             >
                             <EditText
+                                android:id="@+id/etIPBuffaloLastYear"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -1192,6 +1251,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etFPTurnOver"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1215,6 +1276,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etFPCumulativeProfit"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1238,6 +1301,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etFPNetProfit"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -1292,6 +1357,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etStaffPositionSanctioned"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1317,6 +1384,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etStaffPositionAvailable"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -1346,6 +1415,8 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
+                    android:id="@+id/etFuturePlans"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -1369,6 +1440,8 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
+                    android:id="@+id/etRemarks"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -1436,54 +1509,107 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <TextView
-                    android:id="@+id/tvSendOtp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:text="Supporting Documents"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <LinearLayout
+                    android:id="@+id/llRv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_50"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.nlm.utilities.NonScrollableRecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_15"
                     android:layout_marginBottom="@dimen/dp_10"
-                    android:background="@drawable/button_bg"
-                    android:clickable="true"
-                    android:fontFamily="@font/khula_semibold"
-                    android:paddingHorizontal="@dimen/dp_20"
-                    android:paddingVertical="@dimen/dp_10"
-                    android:text="Submit"
-                    android:textSize="@dimen/sp_20"
-                    android:textAlignment="center"
-                    android:textColor="@color/white" />
+
+                    >
+                    <TextView
+                        android:id="@+id/tvSave"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/dp_9"
+
+                        android:background="@drawable/button_bg"
+                        android:clickable="true"
+                        android:fontFamily="@font/khula_semibold"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Save As Draft"
+                        android:textSize="@dimen/sp_20"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                    <TextView
+                        android:id="@+id/tvSendOtp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_9"
+
+                        android:background="@drawable/button_bg"
+                        android:clickable="true"
+                        android:fontFamily="@font/khula_semibold"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Submit"
+                        android:textSize="@dimen/sp_20"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
+
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </layout>

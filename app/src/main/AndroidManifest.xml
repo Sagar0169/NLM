@@ -74,6 +74,9 @@
             android:name=".ui.activity.rashtriya_gokul_mission.RGMIAList"
             android:exported="false" />
         <activity
+            android:name=".ui.activity.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.rashtriya_gokul_mission.RGMStateImplementingAgency"
             android:exported="false" />
         <activity

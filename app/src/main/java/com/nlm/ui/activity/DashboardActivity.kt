@@ -14,6 +14,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
+import com.nlm.model.Result
+import com.nlm.model.Scheme
 import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryActivity
 import com.nlm.ui.activity.national_dairy_development.DCSCenterVisitNDDActivity
 import com.nlm.ui.activity.national_dairy_development.DairyPlantVisitNDDActivity
@@ -44,6 +46,8 @@ import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStationList
 import com.nlm.ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+
+import com.nlm.utilities.Preferences
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.setDrawableWithArrow
 import com.nlm.utilities.hideView
@@ -56,6 +60,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     var isNationLiveStockOpen = false
     var isNationDairyOpen = false
     var isGokulOpen = false
+    val matchingSchemeIds = mutableListOf<Int>()
+    val matchingFormIds = mutableListOf<Int>()
 
 
     override val layoutId: Int
@@ -67,6 +73,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
+        compareSchemeIds()
+//        Preferences.getPreferenceOfScheme(this,AppConstants.SCHEME,Result::class.java).let {
+//            Log.d("Scheme",it.schemes.toString())
+//        }
 
         setDefaultDrawables()
         RoleBased()
@@ -217,6 +227,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, AscadActivity::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvDashboard?.setOnClickListener {
+            mBinding?.drawerLayout?.closeDrawer(GravityCompat.END)
+        }
+
         mBinding?.leftDrawerMenu?.tvNlmEdp?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, NlmEdpActivity::class.java)
             startActivity(intent)
@@ -527,4 +541,118 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
          mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
      }
 
- }}
+ }
+    fun compareSchemeIds() {
+        // Retrieve the schemes from preferences
+        val storedSchemes = Preferences.getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.schemes
+         Log.d("Scheme from response",storedSchemes.toString())
+        if (storedSchemes != null) {
+            for (scheme in storedSchemes) {
+                val matchingLocalScheme = LocalSchemeData.localSchemes.find { it.id == scheme.id }
+
+                if (matchingLocalScheme != null) {
+                    // Add the matching scheme ID to the list
+                    matchingSchemeIds.add(scheme.id)
+
+                    // Now check for matching form IDs within the matched scheme
+                    for (form in scheme.forms) {
+                        val matchingLocalForm = matchingLocalScheme.forms.find { it.id == form.id }
+
+                        if (matchingLocalForm != null) {
+                            // Add the matching form ID to the list
+                            matchingFormIds.add(form.id)
+                        }
+                    }
+                }
+            }
+
+            // Log or use the matching IDs as needed
+            Log.d("Matching Scheme IDs", matchingSchemeIds.toString())
+            Log.d("Matching Form IDs", matchingFormIds.toString())
+            for (matchingSchemeId in matchingSchemeIds) {
+                if (matchingSchemeId == 198) {
+                    mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
+                    for (matchingFormId in matchingFormIds) {
+                        if (matchingFormId == 206) {
+                            mBinding?.leftDrawerMenu?.tvVaccinationProgramme?.showView()
+                        } else if (matchingFormId == 207){
+                            mBinding?.leftDrawerMenu?.tvMobileVeterinaryUnits?.showView()
+                        }else if (matchingFormId == 208){
+                            mBinding?.leftDrawerMenu?.tvAscad?.showView()
+                        }
+                    }
+                } else if (matchingSchemeId == 199){
+                    mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+                    for (matchingFormId in matchingFormIds) {
+                        if (matchingFormId == 203) {
+                            mBinding?.leftDrawerMenu?.tvImplementingAgency?.showView()
+                        } else if (matchingFormId == 221){
+                            mBinding?.leftDrawerMenu?.tvRspLaboratorySemen?.showView()
+                        }
+                    }
+                }
+                else if (matchingSchemeId == 201){
+                    mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+                    for (matchingFormId in matchingFormIds) {
+                        if (matchingFormId == 219) {
+                            mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.showView()
+                        } else if (matchingFormId == 234){
+                            mBinding?.leftDrawerMenu?.tvReportsOfNlm?.showView()
+                        }
+                        else if (matchingFormId == 220){
+                            mBinding?.leftDrawerMenu?.tvNationalLevelComponentB?.showView()
+                        }
+                        else if (matchingFormId == 209){
+                            mBinding?.leftDrawerMenu?.tvMilkUnionVisitReport?.showView()
+                        }
+                        else if (matchingFormId == 205){
+                            mBinding?.leftDrawerMenu?.tvDairyPlantVisitReport?.showView()
+                        }
+                        else if (matchingFormId == 210){
+                            mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.showView()
+                        }
+                        else if (matchingFormId == 211){
+                            mBinding?.leftDrawerMenu?.tvStateCenterLabVisitReport?.showView()
+                        }
+                        else if (matchingFormId == 212){
+                            mBinding?.leftDrawerMenu?.tvMilkProcessing?.showView()
+                        }
+                        else if (matchingFormId == 213){
+                            mBinding?.leftDrawerMenu?.tvMilkProductMarketing?.showView()
+                        }
+                        else if (matchingFormId == 214){
+                            mBinding?.leftDrawerMenu?.tvProductivityEnhancementServices?.showView()
+                        }
+                    }
+                }
+                else if (matchingSchemeId == 204){
+                    mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+                    for (matchingFormId in matchingFormIds) {
+                        if (matchingFormId == 202) {
+                            mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.showView()
+                        } else if (matchingFormId == 236){
+                            mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
+                        }
+                        else if (matchingFormId == 237){
+                            mBinding?.leftDrawerMenu?.tvSemenStation?.showView()
+                        }
+                        else if (matchingFormId == 238){
+                            mBinding?.leftDrawerMenu?.tvTrainingCenters?.showView()
+                        }
+                        else if (matchingFormId == 239){
+                            mBinding?.leftDrawerMenu?.tvBullMotherFarms?.showView()
+                        }
+                        else if (matchingFormId == 240){
+                            mBinding?.leftDrawerMenu?.tvBreedMultiplication?.showView()
+                        }
+                    }
+                }
+                else if (matchingSchemeId == 1){
+                    mBinding?.leftDrawerMenu?.tvUsers?.showView()
+                }
+            }
+        } else {
+            Log.d("Scheme", "Nothing found")
+        }
+    }
+}
