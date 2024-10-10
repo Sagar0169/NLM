@@ -809,6 +809,7 @@ object Utility {
         editor.remove(AppConstants.ROLE_NAME)
         editor.remove(AppConstants.ROLE_ID)
         editor.remove(AppConstants.USER_ID)
+        editor.remove(AppConstants.SCHEME)
 
 //        editor.clear()
         editor.apply()

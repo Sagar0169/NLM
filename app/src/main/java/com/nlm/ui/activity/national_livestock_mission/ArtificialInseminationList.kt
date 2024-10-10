@@ -31,45 +31,16 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
         }
         nodalOfficerList = listOf(
             ArtificialInsemenation(
-                "BIHAR",
-                "2024-08-23",
-                "BHAGALPUR",
-                "test",
-                "234242342432","1977"
-
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
             ),
-            ArtificialInsemenation(
-                "HARYANA",
-                "2024-08-23",
-                "GURUGRAM",
-                "test",
-                "895353543535453","2000"
 
-            ),
-            ArtificialInsemenation(
-                "N/A",
-                "2024-08-21",
-                "N/A",
-                "test",
-                "9996543218","2017"
 
-            ),
-            ArtificialInsemenation(
-                "N/A",
-                "2024-08-20",
-                "N/A",
-                "",
-                "9990157283","1947"
 
-            ),
-            ArtificialInsemenation(
-                "N/A",
-                "1970-01-01",
-                "N/A",
-                "",
-                "9990157283","2001"
-
-            ),
 
             )
         implementingAgency()

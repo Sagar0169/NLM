@@ -50,7 +50,7 @@
                         android:fontFamily="@font/inter_medium"
                         android:textColor="@color/black"
                         android:id="@+id/state_name"
-                        android:text="State"
+                        android:text="States"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/inter_medium"
-                        android:text="Name/Location"
+                        android:text="Districts"
 
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -105,7 +105,7 @@
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/etCreatedBy"
+                        android:id="@+id/etDistricts"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_3"
@@ -128,7 +128,46 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/inter_medium"
-                        android:text="Created"
+                        android:text="Establishment Year"
+
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:text=":"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/etEstablishment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_3"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:fontFamily="@font/inter_light"
+
+                        android:text="@string/na"
+                        android:textColor="@color/textGrey"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Created At"
 
                         android:textColor="@color/black"
                         android:textSize="14sp" />
@@ -168,7 +207,7 @@
                         android:fontFamily="@font/inter_medium"
                         android:textColor="@color/black"
                         android:id="@+id/status_IA"
-                        android:text="IA Status"
+                        android:text="NLM Status"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView

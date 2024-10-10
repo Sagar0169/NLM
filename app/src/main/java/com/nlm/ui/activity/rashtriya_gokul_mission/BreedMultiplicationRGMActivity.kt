@@ -50,23 +50,15 @@ class BreedMultiplicationRGMActivity : BaseActivity<ActivityBreedMultiplicationR
 
 
             BreedMultiplication(
-                "Shri Sudhanshu Shekhar",
-                "TAMIL NADU",
-                "Sheila Benjamin",
-                "Not filled",
-
-                "2024-08-20"
-
-            ),
- BreedMultiplication(
-                "Shri Sudhanshu Shekhar",
-                "TAMIL NADU",
-                "Sheila Benjamin",
-                "Not filled",
-
-                "2024-08-20"
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
 
             ),
+
 
 
         )

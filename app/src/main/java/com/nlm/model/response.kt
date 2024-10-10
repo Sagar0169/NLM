@@ -14,16 +14,14 @@ data class OTPResponse(
     val message: String,
     val otp: Int
 )
+
 data class LoginResponse(
-    val _result: ResultData,
+    val _result: Result,
     val _resultflag: Int,
     val message: String
 )
 
-data class Result(
-    val data: Data,
-    val token: String
-)
+
 data class MyAccountResponse(
     val _result: ResultData,
     val _resultflag: Int,
@@ -47,7 +45,50 @@ data class ResultData(
     val mobile1: String?,
     val photo_url: String?,
 
+
 )
+data class LoginRes(
+    val _result: Result,
+    val _resultflag: Int,
+    val message: String
+)
+
+data class Result(
+//    val address: Any,
+//    val designation_id: Int,
+//    val district_code: Any,
+//    val email: String,
+//    val first_login: Int,
+//    val implementing_agency_id: Any,
+//    val mobile: String,
+//    val mobile1: String,
+    val name: String,
+//    val organisation_id: Any,
+    val role_id: Int,
+    val role_name: String,
+    val schemes: List<Scheme>,
+//    val state_code: Int,
+//    val status: Boolean,
+    val token: String?,
+    val user_id: Int,
+//    val username: String
+)
+
+data class Scheme(
+    val forms: List<Form>,
+    val id: Int,
+    val name: String
+)
+
+data class Form(
+    val action: String,
+    val controller: String,
+    val id: Int,
+    val name: String,
+    val pid: Int
+)
+
+
 
 data class District(
     val district_name: String

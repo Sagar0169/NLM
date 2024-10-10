@@ -44,46 +44,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/inter_medium"
-                                android:textColor="@color/black"
-                                android:id="@+id/farmstate_name"
-                                android:text="Name of The Farm"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.1"
-                                android:fontFamily="@font/poppins_bold"
-                                android:gravity="center"
-                                android:text=":"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etFarmName"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginEnd="@dimen/dp_3"
-                                android:layout_weight="1"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/inter_light"
-                                android:maxLines="2"
-                                android:singleLine="false"
-                                android:text="NA"
-                                android:textColor="@color/textGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -176,7 +137,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/inter_medium"
                                 android:id="@+id/Submit_as"
-                                android:text="Location"
+                                android:text="NLM visit date"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
@@ -191,7 +152,7 @@
                                 android:textSize="14sp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvNameOfDCS"
+                                android:id="@+id/etNlmVistDate"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/dp_3"
@@ -300,7 +261,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/inter_medium"
-                                android:text="Created"
+                                android:text="Created On"
 
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />

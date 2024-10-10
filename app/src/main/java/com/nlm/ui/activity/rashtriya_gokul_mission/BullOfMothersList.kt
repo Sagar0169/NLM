@@ -32,24 +32,14 @@ class BullOfMothersList : BaseActivity<ActivityBullOfMothersListBinding>() {
         }
         nodalOfficerList = listOf(
             Bull_Mothers(
-                "GOA",
-                "Ut incididunt corporis et dolore",
-                "Submitted",
-                "04-09-2024",
-                ""
-            ),
-            Bull_Mothers(
-                "MEGHALAYA",
-                "Et cupidatat eiusmod magna quaerat quia cumque tempora veniam reprehenderit distinctio Enim quis fugiat est est soluta nihil fugit qui",
-                "Submitted",
-                "03-09-2024",
-                ""),
-            Bull_Mothers(
-                "PUNJAB",
-                "Voluptatum culpa laboriosam magnam nobis non quasi amet voluptate in nisi quisquam rem ut ab",
-                "Submitted",
-                "03-09-2024",
-                ""
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+                "NA",
+
             ),
         )
         implementingAgency()

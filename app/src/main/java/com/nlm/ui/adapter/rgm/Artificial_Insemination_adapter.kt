@@ -50,15 +50,15 @@ class Artificial_Insemination_adapter(private val implementingAgencyList: List<A
         }
 
 
-    holder.mBinding.tvState.text = item.state
-//        holder.mBinding.districtName.text = item.district
-    holder.mBinding.name.text = item.liquid_nitrogen
+    holder.mBinding.etState.text = item.state
+        holder.mBinding.etDistrict.text = item.district
+    holder.mBinding.etLiquidNitrogen.text = item.liquid_nitrogen
 //        holder.mBinding.phoneNumber.text = item.phone
-    holder.mBinding.tvDate.text = item.created
-    holder.mBinding.districtName.text=item.district
-    holder.mBinding.phoneNumber.text=item.frozen_semen_straws
+    holder.mBinding.etFrozenSemen.text = item.frozen_semen_straws
+    holder.mBinding.etCryocans.text=item.cryocans
+    holder.mBinding.etCreated.text=item.created
 
-    holder.mBinding.tvYearofe.text=item.cryocans
+
 
 
 

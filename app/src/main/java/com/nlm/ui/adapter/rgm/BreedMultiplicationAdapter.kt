@@ -45,11 +45,13 @@ class BreedMultiplicationAdapter(
             holder.mBinding.ivEdit.hideView()
             holder.mBinding.ivDelete.hideView()
         }
-        holder.mBinding.tvCreated.text = item.created
+        holder.mBinding.etCreated.text = item.created
         holder.mBinding.tvName.text = item.nameOfBeneficiary
         holder.mBinding.tvState.text = item.state
         holder.mBinding.tvDistrict.text = item.district
-        holder.mBinding.tvStatus.text = item.nlmStatus
+        holder.mBinding.etStatus.text = item.iaStatus
+        holder.mBinding.etStatusNlm.text = item.nlmStatus
+
 
 
 

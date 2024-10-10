@@ -21,7 +21,9 @@
             android:layout_height="wrap_content"
             android:background="@color/darkBlue"
             android:paddingHorizontal="@dimen/dp_10"
-            android:paddingVertical="@dimen/dp_15">
+            android:paddingTop="40dp"
+            android:paddingBottom="@dimen/dp_10"
+          >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivBackPress"
@@ -56,7 +58,8 @@
             android:layout_alignParentEnd="true"
             app:tabIndicatorColor="@color/orange"
             app:tabSelectedTextColor="@color/orange"
-            app:tabMode="scrollable"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
             app:tabTextColor="@color/white" />
 
 

@@ -8,17 +8,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemBullOfMothersBinding
+import com.nlm.databinding.ItemSemenStationBinding
 import com.nlm.model.Bull_Mothers
+import com.nlm.model.Semen_Station
 import com.nlm.ui.activity.rashtriya_gokul_mission.BullMotherFarms
 import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStation
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.hideView
 
-class Bull_Of_Mothers_Adapter(private val implementingAgencyList: List<Bull_Mothers>, private val isFrom:Int,val Role_name:String) :
-    RecyclerView.Adapter<Bull_Of_Mothers_Adapter.ImplementingAgencyViewholder>() {
+class SemenStatioinListAdapter(private val implementingAgencyList: List<Semen_Station>, private val isFrom:Int, val Role_name:String) :
+    RecyclerView.Adapter<SemenStatioinListAdapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
-    class ImplementingAgencyViewholder(val mBinding:ItemBullOfMothersBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    class ImplementingAgencyViewholder(val mBinding:ItemSemenStationBinding) : RecyclerView.ViewHolder(mBinding.root) {
 
 
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
@@ -31,9 +33,9 @@ class Bull_Of_Mothers_Adapter(private val implementingAgencyList: List<Bull_Moth
         parent: ViewGroup,
         viewType: Int
     ): ImplementingAgencyViewholder {
-        val mBinding: ItemBullOfMothersBinding = DataBindingUtil.inflate(
+        val mBinding: ItemSemenStationBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_bull_of_mothers,
+            R.layout.item_semen_station,
             parent,
             false
         )
@@ -51,14 +53,12 @@ class Bull_Of_Mothers_Adapter(private val implementingAgencyList: List<Bull_Moth
             holder.mBinding.ivDelete.hideView()
         }
 
-
-    holder.mBinding.etFarmName.text = item.Name_of_The_Farm
     holder.mBinding.etStateName.text = item.State_Name
     holder.mBinding.etDistrictName.text = item.District_Name
-    holder.mBinding.etStatus.text = item.IA_Status
-    holder.mBinding.etStatusNlm.text = item.NLM_Status
-    holder.mBinding.tvCreated.text = item.Created_On
-
+    holder.mBinding.etNlmVistDate.text = item.NLM_visit_date
+    holder.mBinding.etStatus.text=item.IA_Status
+    holder.mBinding.etStatusNlm.text=item.NLM_Status
+    holder.mBinding.tvCreated.text=item.Created_On
 
 
 

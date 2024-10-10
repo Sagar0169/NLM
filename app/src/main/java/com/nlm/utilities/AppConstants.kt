@@ -1,11 +1,13 @@
 package com.nlm.utilities
 
+
 object AppConstants {
 
     const val ROLE_NAME = "role_name"
     const val USER_ID = "USER_ID"
     const val ROLE_ID = "USER_TYPE"
     const val LOCALE = "LOCALE"
+
 
 
     const val BASE_URL = "http://134.209.222.136/nlm/api/rest/"
@@ -28,6 +30,7 @@ object AppConstants {
     const val RGM_State_Level_Monitor= "RGM State Level Monitor"
     const val NPDD_State_Level_Monitor= "NPDD State Level Monitor"
     const val NDDB= "National Dairy Development Board (NDDB)"
+    const val SCHEME="SCHEME"
 
 }
 object cryptConstantCodes{

@@ -48,6 +48,7 @@ class EdpNlmAdapter(
 
 
         holder.binding.tvAnimals.setOnClickListener { showBottomSheetDialog("Animals",holder.binding.tvAnimals) }
+        holder.binding.tvProjectFinancing.setOnClickListener { showBottomSheetDialog("projectFinancing",holder.binding.tvProjectFinancing) }
         // Add new row
         holder.binding.btnAdd.setOnClickListener {
             programmeList.add(arrayOf("", "",""))
