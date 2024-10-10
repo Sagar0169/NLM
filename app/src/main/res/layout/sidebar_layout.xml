@@ -151,6 +151,7 @@
                 <!--                </RelativeLayout>-->
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tvUsers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -206,6 +207,7 @@
                     android:text="@string/livestock_health_disease"
                     android:textColor="@color/black"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:drawableEndCompat="@drawable/ic_arrow_down"
                     app:drawableStartCompat="@drawable/ic_lhd" />
 
@@ -219,6 +221,7 @@
                     android:visibility="gone">
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvVaccinationProgramme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -230,6 +233,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvMobileVeterinaryUnits"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -241,6 +245,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvAscad"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -254,6 +259,7 @@
 
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tvNationalLiveStockMission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -289,9 +295,11 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="@string/implementing_agency_format1"
                         android:textColor="@color/black"
+                        android:visibility="gone"
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvRspLaboratorySemen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -303,6 +311,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvStateSemenBank"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -314,6 +323,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvArtificialInsemination"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -325,6 +335,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvImportExoticGoat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -336,6 +347,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvAssistanceQfps"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -347,6 +359,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvFpsPlanStorage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -358,6 +371,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvFpsFromNonForest"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -369,6 +383,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvFpsFromForest"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -380,6 +395,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvAssistanceForEa"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -391,6 +407,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvNlmEdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -404,6 +421,7 @@
 
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tvNationalDairyDevelopment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -431,6 +449,7 @@
 
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvNationalLevelComponentA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -442,6 +461,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvReportsOfNlm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -453,6 +473,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvNationalLevelComponentB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -464,6 +485,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvMilkUnionVisitReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -475,6 +497,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvDairyPlantVisitReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -486,6 +509,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvDcsBmsCenterVisitReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -497,6 +521,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvStateCenterLabVisitReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -508,6 +533,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvMilkProcessing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -519,6 +545,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvMilkProductMarketing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -530,6 +557,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvProductivityEnhancementServices"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -543,6 +571,7 @@
 
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tvRashtriyaGokulMission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -569,6 +598,7 @@
                     android:visibility="gone">
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvStateImplementingAgency"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -580,6 +610,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvAiCenter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -591,6 +622,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvSemenStation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -602,6 +634,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvTrainingCenters"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -613,6 +646,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvBullMotherFarms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -624,6 +658,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvBreedMultiplication"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -635,6 +670,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvVitroFertilization"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
