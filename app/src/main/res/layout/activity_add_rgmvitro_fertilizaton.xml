@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="ClickAction"
             type="com.nlm.ui.activity.rashtriya_gokul_mission.AddRGMVitroFertilizatonActivity.ClickActions" />
     </data>
+
     <RelativeLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -27,8 +29,8 @@
                 android:id="@+id/ivBackPress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="30dp"
                 android:onClick="@{ClickAction::backPress}"
+                android:paddingTop="30dp"
                 android:src="@drawable/ic_back" />
 
             <TextView
@@ -42,32 +44,30 @@
                 android:text="Add New Vitro Fertilization"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_20"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
-            app:tabIndicatorFullWidth="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/darkBlue"
             android:layout_below="@+id/rlToolbar"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
+            android:background="@color/darkBlue"
+            app:tabGravity="fill"
             app:tabIndicatorColor="@color/orange"
+            app:tabIndicatorFullWidth="true"
+            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/orange"
-            app:tabMode="scrollable"
-            app:tabGravity="center"
             app:tabTextColor="@color/white" />
 
 
         <FrameLayout
             android:id="@+id/frameLayout"
-            android:layout_below="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tabLayout"
             android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
