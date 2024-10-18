@@ -136,6 +136,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_login_hide_eye"
                         android:padding="@dimen/dp_8"
+                        android:onClick="@{ClickAction::visiblePassword}"
                         android:layout_gravity="center"/>
 
                 </LinearLayout>

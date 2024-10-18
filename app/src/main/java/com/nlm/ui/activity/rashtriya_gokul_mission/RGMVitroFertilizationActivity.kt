@@ -43,10 +43,10 @@ class RGMVitroFertilizationActivity : BaseActivity<ActivityRgmvitroFertilization
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.SUPER_ADMIN || Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.Nodal_Officer|| Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.ADMIN )
-        {
-            mBinding!!.fabAddAgency.hideView()
-        }
+//        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.SUPER_ADMIN || Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.Nodal_Officer|| Utility.getPreferenceString(this, AppConstants.ROLE_NAME)== AppConstants.ADMIN )
+//        {
+//            mBinding!!.fabAddAgency.hideView()
+//        }
         onlyCreated = listOf(
             RGMVitro(
                 "Bihar",
@@ -54,12 +54,12 @@ class RGMVitroFertilizationActivity : BaseActivity<ActivityRgmvitroFertilization
             ),
             RGMVitro(
                 "LADAKH",
-                "2024-08-28", "Active"
+                "2024-08-20", "Active"
             ),
 
             RGMVitro(
                 "DELHI",
-                "2024-08-28", "Active"
+                "2024-08-11", "Active"
             ),
 
             RGMVitro(

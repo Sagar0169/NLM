@@ -8,13 +8,12 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
-import com.nlm.utilities.BaseActivity
 import com.nlm.R
 import com.nlm.databinding.ActivityLoginBinding
 import com.nlm.model.LoginRequest
 import com.nlm.model.Result
-import com.nlm.model.Scheme
 import com.nlm.utilities.AppConstants
+import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Utility
@@ -41,26 +40,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
-
-        val passwordEditText = findViewById<EditText>(R.id.etPassword)
-        val toggleImageView = findViewById<ImageView>(R.id.ivPassEye)
-
-        toggleImageView.setOnClickListener {
-            if (isPasswordVisible) {
-                // Hide password
-                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
-                toggleImageView.setImageResource(R.drawable.ic_login_hide_eye) // Change to eye-off icon
-                isPasswordVisible = false
-            } else {
-                // Show password
-                passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                toggleImageView.setImageResource(R.drawable.ic_eye_open) // Change to eye-on icon
-                isPasswordVisible = true
-            }
-
-            // Move cursor to the end of the text after toggling
-            passwordEditText.setSelection(passwordEditText.text.length)
-        }
     }
 
 
@@ -82,6 +61,23 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        fun visiblePassword(view: View) {
+            if (isPasswordVisible) {
+                // Hide password
+                mBinding?.etPassword?.transformationMethod = PasswordTransformationMethod.getInstance()
+                mBinding?.ivPassEye?.setImageResource(R.drawable.ic_login_hide_eye) // Change to eye-off icon
+                isPasswordVisible = false
+            } else {
+                // Show password
+                mBinding?.etPassword?.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                mBinding?.ivPassEye?.setImageResource(R.drawable.ic_eye_open) // Change to eye-on icon
+                isPasswordVisible = true
+            }
+
+            // Move cursor to the end of the text after toggling
+            mBinding?.etPassword?.text?.length?.let { it1 -> mBinding?.etPassword?.setSelection(it1) }
         }
     }
 
@@ -114,15 +110,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 if (userResponseModel._resultflag == 0) {
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 } else {
-
-                    Log.d("Login Data", userResponseModel._resultflag.toString())
-
                     Preferences.setPreference(
                         this,AppConstants.SCHEME,Result(
                             userResponseModel._result.name,
                             userResponseModel._result.role_id,
                             userResponseModel._result.role_name,
                             userResponseModel._result.schemes,
+                            userResponseModel._result.state_code,
                            null,
                             userResponseModel._result.user_id,
                         )
@@ -149,7 +143,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
                     }
 
-                    userResponseModel._result.role_name?.let { it1 ->
+                    userResponseModel._result.role_name.let { it1 ->
                         Utility.savePreferencesString(this,AppConstants.ROLE_NAME,
                             it1
                         )
@@ -158,10 +152,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             Intent(
                                 this@LoginActivity,
                                 DashboardActivity::class.java
-                            )
+                            ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                         )
-                        finish()
-
                 }
             }
         }
@@ -170,5 +162,4 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             showSnackbar(mBinding!!.clParent, it)
         }
     }
-
 }

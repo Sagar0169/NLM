@@ -46,12 +46,12 @@ class RGMVItroAdapter(private val onlyCreated: List<RGMVitro>, private val isFro
         holder.tvCreated.text = item.created
         holder.tvNlmStatus.text = item.status
 
-        if (Role_name== AppConstants.SUPER_ADMIN||Role_name== AppConstants.Nodal_Officer||Role_name== AppConstants.ADMIN)
-        {
-
-            holder.ivEdit.hideView()
-            holder.ivDelete.hideView()
-        }
+//        if (Role_name== AppConstants.SUPER_ADMIN||Role_name== AppConstants.Nodal_Officer||Role_name== AppConstants.ADMIN)
+//        {
+//
+//            holder.ivEdit.hideView()
+//            holder.ivDelete.hideView()
+//        }
         holder.ivView.setOnClickListener {
             val intent = Intent(
                 holder.itemView.context,

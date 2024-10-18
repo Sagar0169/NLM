@@ -47,12 +47,16 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.Nlm"
         android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="adjustPan|adjustResize"
         tools:targetApi="31">
         <activity
             android:name=".ui.activity.national_dairy_development.NlmComponentBDairyDevelopment"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.NlmComponentBList"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.ReportsOfNlmComponentActivity"
@@ -185,7 +189,7 @@
             android:name=".ui.activity.national_livestock_mission.NLMIAForm"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.national_livestock_mission.NationalLiveStockIAList"
+            android:name=".ui.activity.national_livestock_mission.NationalLiveStockMissionIAList"
             android:exported="false" />
         <activity
             android:name=".ui.activity.UserActivity"

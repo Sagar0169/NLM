@@ -18,6 +18,7 @@ import com.nlm.databinding.FragmentRSPBasicInformationBinding
 import com.nlm.databinding.FragmentVitroPartOneBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.StateAdapter
+import com.nlm.ui.adapter.SupportingDocumentAdapter
 import com.nlm.utilities.BaseFragment
 
 
@@ -27,7 +28,9 @@ class VitroPartOneFragment : BaseFragment<FragmentVitroPartOneBinding>() {
     private var mBinding: FragmentVitroPartOneBinding?=null
     private lateinit var bottomSheetAdapter: BottomSheetAdapter
     private lateinit var stateAdapter: StateAdapter
-
+    private lateinit var adapter: SupportingDocumentAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var programmeList: MutableList<Array<String>>
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
     private val stateList = listOf(
@@ -44,6 +47,13 @@ class VitroPartOneFragment : BaseFragment<FragmentVitroPartOneBinding>() {
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
+        recyclerView = mBinding?.recyclerView1!!
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        programmeList = mutableListOf()
+        programmeList.add(arrayOf(""))
+        adapter = SupportingDocumentAdapter(programmeList)
+        recyclerView.adapter = adapter
         mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
 
     }

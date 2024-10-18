@@ -15,7 +15,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
 import com.nlm.model.Result
-import com.nlm.model.Scheme
 import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryActivity
 import com.nlm.ui.activity.national_dairy_development.DCSCenterVisitNDDActivity
 import com.nlm.ui.activity.national_dairy_development.DairyPlantVisitNDDActivity
@@ -28,7 +27,7 @@ import com.nlm.ui.activity.national_dairy_development.ProductivityEnhancementSer
 import com.nlm.ui.activity.national_dairy_development.StateCenterLabVisitNDDActivity
 import com.nlm.ui.activity.national_livestock_mission.ArtificialInseminationList
 import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatList
-import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockIAList
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList
 import com.nlm.ui.activity.national_livestock_mission.NlmAssistanceForEa
 import com.nlm.ui.activity.national_livestock_mission.NlmAssistanceForQFSPActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmEdpActivity
@@ -49,7 +48,6 @@ import com.nlm.utilities.BaseActivity
 
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Utility
-import com.nlm.utilities.Utility.setDrawableWithArrow
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
@@ -73,13 +71,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
-        compareSchemeIds()
-//        Preferences.getPreferenceOfScheme(this,AppConstants.SCHEME,Result::class.java).let {
-//            Log.d("Scheme",it.schemes.toString())
-//        }
 
+        compareSchemeIds()
         setDefaultDrawables()
-        RoleBased()
+
         mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 // Do something when the drawer is sliding (optional)
@@ -105,7 +100,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
             }
         })
-        // Set click listeners for menu items
+//        Set click listeners for menu items
 //        mBinding?.leftDrawerMenu?.tvUsers?.setOnClickListener {
 //            toggleMenuItem(
 //                isUserOpen,
@@ -228,7 +223,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvDashboard?.setOnClickListener {
-            mBinding?.drawerLayout?.closeDrawer(GravityCompat.END)
+            mBinding?.drawerLayout?.closeDrawers()
         }
 
         mBinding?.leftDrawerMenu?.tvNlmEdp?.setOnClickListener {
@@ -298,7 +293,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvImplementingAgency?.setOnClickListener {
-            val intent = Intent(this@DashboardActivity, NationalLiveStockIAList::class.java)
+            val intent = Intent(this@DashboardActivity, NationalLiveStockMissionIAList::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvMilkUnionVisitReport?.setOnClickListener {
@@ -495,54 +490,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         // This will close the app and all the activities in the task.
     }
 
- private fun RoleBased(){
-     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.Nodal_Officer||
-         Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.RGM_State_Level_Monitor
-     ){
-         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-     }
-     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NPDD_State_Level_Monitor) {
-         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-     }
-     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NDDB) {
-         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-         mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.hideView()
-         mBinding?.leftDrawerMenu?.tvAiCenter?.hideView()
-         mBinding?.leftDrawerMenu?.tvTrainingCenters?.hideView()
-         mBinding?.leftDrawerMenu?.tvSemenStation?.hideView()
-         mBinding?.leftDrawerMenu?.tvBullMotherFarms?.hideView()
-         mBinding?.leftDrawerMenu?.tvVitroFertilization?.hideView()
-
-     }
-     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.LHDCP_and_NLM_State_Level_Monitor) {
-         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-     }
-     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)=="Super Admin") {
-         mBinding?.leftDrawerMenu?.tvUsers?.showView()
-         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-     }
-     if (Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.NLM) {
-         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-         mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.hideView()
-         mBinding?.leftDrawerMenu?.tvReportsOfNlm?.hideView()
-         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-     }
-     if (    Utility.getPreferenceString(this,AppConstants.ROLE_NAME)==AppConstants.ADMIN) {
-         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-         mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-         mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-         mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-     }
-
- }
-    fun compareSchemeIds() {
+    private fun compareSchemeIds() {
         // Retrieve the schemes from preferences
         val storedSchemes = Preferences.getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.schemes
          Log.d("Scheme from response",storedSchemes.toString())
@@ -588,11 +536,29 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                             mBinding?.leftDrawerMenu?.tvImplementingAgency?.showView()
                         } else if (matchingFormId == 221){
                             mBinding?.leftDrawerMenu?.tvRspLaboratorySemen?.showView()
+                        }else if (matchingFormId == 222){
+                            mBinding?.leftDrawerMenu?.tvStateSemenBank?.showView()
+                        }else if (matchingFormId == 223){
+                            mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
+                        }else if (matchingFormId == 224){
+                            mBinding?.leftDrawerMenu?.tvImportExoticGoat?.showView()
+                        }else if (matchingFormId == 225){
+                            mBinding?.leftDrawerMenu?.tvAssistanceQfps?.showView()
+                        }else if (matchingFormId == 226){
+                            mBinding?.leftDrawerMenu?.tvFpsPlanStorage?.showView()
+                        }else if (matchingFormId == 227){
+                            mBinding?.leftDrawerMenu?.tvFpsFromNonForest?.showView()
+                        }else if (matchingFormId == 228){
+                            mBinding?.leftDrawerMenu?.tvFpsFromForest?.showView()
+                        }else if (matchingFormId == 229){
+                            mBinding?.leftDrawerMenu?.tvAssistanceForEa?.showView()
+                        }else if (matchingFormId == 230){
+                            mBinding?.leftDrawerMenu?.tvNlmEdp?.showView()
                         }
                     }
                 }
                 else if (matchingSchemeId == 201){
-                    mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+                    mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
                     for (matchingFormId in matchingFormIds) {
                         if (matchingFormId == 219) {
                             mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.showView()
