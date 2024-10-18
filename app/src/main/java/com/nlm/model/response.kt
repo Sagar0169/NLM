@@ -67,7 +67,7 @@ data class Result(
     val role_id: Int,
     val role_name: String,
     val schemes: List<Scheme>,
-//    val state_code: Int,
+    val state_code: Int,
 //    val status: Boolean,
     val token: String?,
     val user_id: Int,
@@ -171,3 +171,40 @@ data class StatusArray(
     val id: Int,
     val status_name: String
 ): Serializable
+
+data class ImplementingAgencyResponse(
+    val _result: ResultImplementingAgency,
+    val _resultflag: Int,
+    val fileurl: Any,
+    val message: String,
+    val statuscode: Int,
+    val total_count: Int
+)
+
+data class ResultImplementingAgency(
+    val data: List<DataImplementingAgency>,
+    val is_add: Boolean
+)
+
+data class DataImplementingAgency(
+    val is_delete: Boolean,
+    val is_draft: String,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val name_location_of_ai: String,
+    val state_name: String
+)
+
+data class GetDropDownResponse(
+    val _result: List<ResultGetDropDown>,
+    val _resultflag: Int,
+    val message: String,
+    val model: String,
+    val statuscode: Int,
+    val total_count: Int
+)
+
+data class ResultGetDropDown(
+    val id: Int,
+    val name: String
+)

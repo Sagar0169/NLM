@@ -189,7 +189,7 @@
             android:name=".ui.activity.national_livestock_mission.NLMIAForm"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.national_livestock_mission.NationalLiveStockIAList"
+            android:name=".ui.activity.national_livestock_mission.NationalLiveStockMissionIAList"
             android:exported="false" />
         <activity
             android:name=".ui.activity.UserActivity"

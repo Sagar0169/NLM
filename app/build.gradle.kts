@@ -103,4 +103,7 @@ dependencies {
 
     implementation(libs.androidx.viewpager2)
 
+    //swipe for refresh
+    implementation(libs.androidx.swiperefreshlayout)
+
 }

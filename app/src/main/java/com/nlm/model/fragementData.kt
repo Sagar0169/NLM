@@ -79,9 +79,8 @@ data class ArtificialInsemenation(
     val district: String? = null,
     val liquid_nitrogen: String? = null,
     val frozen_semen_straws: String? = null,
-    val cryocans: String? = null,
-
-    ) : Serializable
+    val cryocans: String? = null
+) : Serializable
 
 
 data class ImportOfGoat(

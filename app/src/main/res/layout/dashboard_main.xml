@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/ic_main_back">
-
 
             <LinearLayout
                 android:id="@+id/ll1"
@@ -117,7 +115,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tvLogin"
-                            android:layout_width="250dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Number of Scheme Covered"
                             android:textColor="#000000"
@@ -177,7 +175,7 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="250dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Total Visits"
                             android:textColor="#000000"
@@ -237,7 +235,7 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="250dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Number of State Covered"
                             android:textColor="#000000"
@@ -266,7 +264,6 @@
                     android:background="@drawable/curve_back_grey"
                     android:backgroundTint="#DEFFD3"
                     android:gravity="center_vertical"
-
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -298,7 +295,7 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="250dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Report submitted by NLM"
                             android:textColor="#000000"
@@ -316,12 +313,9 @@
 
                     </LinearLayout>
 
-
                 </LinearLayout>
 
-
             </LinearLayout>
-
 
         </RelativeLayout>
 

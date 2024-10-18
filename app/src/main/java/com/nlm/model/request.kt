@@ -33,3 +33,19 @@ data class MyAccountRequest(
 data class ApplicationStatusRequest(
     val application_number: String
 )
+
+data class ImplementingAgencyRequest(
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+    val limit: Int,
+    val page: Int
+)
+
+data class GetDropDownRequest(
+    val limit: Int?,
+    val model: String?,
+    val page: Int?,
+    val state_code: Int?,
+    val user_id: Int?
+)

@@ -8,11 +8,9 @@ import com.nlm.databinding.ActivityStateSemenBankListBinding
 import com.nlm.model.State_Semen_Bank
 
 import com.nlm.ui.activity.FilterStateActivity
-import com.nlm.ui.adapter.NSLP_IA_Adapter
 import com.nlm.ui.adapter.StateSemenAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 

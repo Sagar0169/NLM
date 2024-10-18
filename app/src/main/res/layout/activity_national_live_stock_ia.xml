@@ -7,24 +7,21 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.national_livestock_mission.NationalLiveStockIAList.ClickActions" />
+            type="com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.ClickActions" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/job_details_bg1">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:paddingTop="40dp"
-            android:paddingBottom="@dimen/dp_10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:paddingBottom="@dimen/dp_10">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivBackPress"
@@ -33,9 +30,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:onClick="@{ClickAction::backPress}"
-                android:src="@drawable/ic_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:src="@drawable/ic_back" />
 
             <TextView
                 android:id="@+id/tvHeading"
@@ -47,32 +42,56 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_centerHorizontal="true"/>
 
-        <LinearLayout
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="15dp"
+                android:padding="@dimen/dp_10"
+                android:layout_alignParentEnd="true"
+                android:onClick="@{ClickAction::filter}"
+                android:src="@drawable/ic_filter" />
+        </RelativeLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srlImplementingAgency"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rlToolbar">
+
+        <RelativeLayout
             android:id="@+id/llParent"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:background="@drawable/employee_home_bg"
             android:backgroundTint="@color/white"
             android:elevation="@dimen/dp_5"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rlToolbar">
+            android:padding="@dimen/dp_10">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvImplementingaegency"
+                android:id="@+id/rvImplementingAgency"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-        </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNoDataFound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/lexend_bold"
+                android:text="@string/no_data_found"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                android:visibility="gone" />
+        </RelativeLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <!-- Floating Action Button -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddAgency"
@@ -81,11 +100,12 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/black"
-            android:contentDescription="Add New Agency"
+            android:contentDescription="@string/add_new_implementing_agency"
             android:src="@drawable/ic_add"
             app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{ClickAction::addImplementingAgency}"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             app:tint="@android:color/white" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

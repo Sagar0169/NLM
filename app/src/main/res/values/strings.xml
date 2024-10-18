@@ -342,5 +342,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="donors_nos_msp1"><![CDATA[Donors (nos) > MSP]]></string>
     <string name="format_for_national_level_monitors_to_be_filled_by_ia_component_a">Format for National Level Monitors\n(To be filled by IA) (Component A)</string>
     <string name="to_be_filled_by_ia">To be filled by IA</string>
+    <string name="no_data_found">No data found</string>
+    <string name="add_new_implementing_agency">Add New Implementing Agency</string>
 </resources>
 

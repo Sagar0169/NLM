@@ -6,11 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityRsplabBinding
 import com.nlm.model.Rsp_lab_data
-import com.nlm.ui.adapter.NSLP_IA_Adapter
 import com.nlm.ui.adapter.RSPLABListAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 
