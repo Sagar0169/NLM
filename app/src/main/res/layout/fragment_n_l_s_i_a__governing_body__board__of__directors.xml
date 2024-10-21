@@ -50,7 +50,8 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
             <TextView
-android:onClick="@{ClickAction::openDialog}"
+
+                android:onClick="@{ClickAction::compositionOfGoverningNlmIaDialog}"
                 android:id="@+id/tvAddMore1"
                 android:layout_marginVertical="@dimen/dp_7"
                 android:layout_width="wrap_content"
@@ -64,7 +65,7 @@ android:onClick="@{ClickAction::openDialog}"
                 android:text="Add More"
                 android:textColor="@color/white" />
             <com.nlm.utilities.NonScrollableRecyclerView
-                android:id="@+id/recyclerView1"
+                android:id="@+id/rvNlmIACompositionOFGoverning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -124,10 +125,10 @@ android:onClick="@{ClickAction::openDialog}"
             android:background="@drawable/curve_fill_blue"
             android:clickable="true"
             android:fontFamily="@font/poppins_medium"
-             android:onClick="@{ClickAction::save2}"
+             android:onClick="@{ClickAction::saveAndNext}"
             android:paddingHorizontal="@dimen/dp_20"
             android:paddingVertical="@dimen/dp_10"
-            android:text="Next"
+            android:text="@string/save_next"
             android:textAlignment="center"
             android:textColor="@color/white" />
     </LinearLayout>

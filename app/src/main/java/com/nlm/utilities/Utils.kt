@@ -867,7 +867,7 @@ object Utility {
         val params = view.layoutParams as FrameLayout.LayoutParams
         params.gravity = Gravity.BOTTOM
         view.layoutParams = params
-        view.setBackgroundColor(Color.parseColor("#AC0000"))
+        view.setBackgroundColor(Color.parseColor("#DD4552"))
         snackbar.show()
     }
 

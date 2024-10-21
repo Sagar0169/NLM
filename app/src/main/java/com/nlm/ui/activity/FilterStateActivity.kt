@@ -18,7 +18,6 @@ import com.nlm.utilities.toast
 
 class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
     private var binding: ActivityFilterStateBinding? = null
-    private var isEditMode = false
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
     private val stateList = listOf(
@@ -46,6 +45,11 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         val isFrom = intent?.getIntExtra("isFrom", 0)
 
         when (isFrom) {
+
+            0 -> {
+                binding!!.tvTitleState.showView()
+                binding!!.tvState.showView()
+            }
             1 -> {
                 binding!!.tvTitleState.showView()
                 binding!!.tvState.showView()
@@ -79,11 +83,9 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etVillageName.showView()
 
             }
-
             5 -> {
                 binding!!.tvTitleState.showView()
                 binding!!.tvState.showView()
-
             }
 
             6 -> {

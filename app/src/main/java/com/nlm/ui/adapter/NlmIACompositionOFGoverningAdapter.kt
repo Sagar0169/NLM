@@ -17,9 +17,8 @@ import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 class NlmIACompositionOFGoverningAdapter(
     private val programmeList: MutableList<ImplementingAgencyAdvisoryCommittee>,
 //    private val callBackItem: AddItemCallBack,
-) : RecyclerView.Adapter<NlmIACompositionOFGoverningAdapter.NlmIACompositionOFGoverning>() {
-
-
+) : RecyclerView.Adapter<NlmIACompositionOFGoverningAdapter.NlmIACompositionOFGoverning>()
+{
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NlmIACompositionOFGoverning {
 
@@ -43,18 +42,8 @@ class NlmIACompositionOFGoverningAdapter(
     }
 
     override fun getItemCount(): Int = programmeList.size
-    // Helper method to manage button visibility
-    private fun handleButtonVisibility(btnAdd: ImageButton, btnDelete: ImageButton, position: Int) {
-        if (position == programmeList.size - 1) {
-            // Last item, show Add button, hide Delete button
-            btnAdd.visibility = View.VISIBLE
-            btnDelete.visibility = View.GONE
-        } else {
-            // Hide Add button, show Delete button for other items
-            btnAdd.visibility = View.GONE
-            btnDelete.visibility = View.VISIBLE
-        }
-    }
+
+
     inner class NlmIACompositionOFGoverning(val binding: ItemCompositionOfGoverningNlmIaBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

@@ -1,20 +1,15 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.callBack.AddItemCallBack
-import com.nlm.callBack.AddItemCallBackProjectMonitoring
 import com.nlm.databinding.FragmentNLSIAGoverningBodyBoardOfDirectorsBinding
 import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
 import com.nlm.model.ImplementingAgencyAddRequest
@@ -34,41 +29,24 @@ import com.nlm.viewModel.ViewModel
 
 
 class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGoverningBodyBoardOfDirectorsBinding>(){
-    override val layoutId: Int
-        get() = R.layout.fragment_n_l_s_i_a__governing_body__board__of__directors
     val viewModel = ViewModel()
     private var mBinding: FragmentNLSIAGoverningBodyBoardOfDirectorsBinding?=null
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: NlmIACompositionOFGoverningAdapter
-    private var AdvisoryCommitteeList: MutableList<ImplementingAgencyAdvisoryCommittee> = mutableListOf()
-    private var ProjectMonitoringCommitteeList: MutableList<ImplementingAgencyProjectMonitoring> = mutableListOf()
-    private lateinit var programmeList: MutableList<ImplementingAgencyAdvisoryCommittee>
-    private lateinit var adapter2: NlmIAProjectMonitoringCommitteeAdapter
-    private lateinit var programmeList2: MutableList<ImplementingAgencyProjectMonitoring>
+    private lateinit var nlmIACompositionOFGoverningAdapter: NlmIACompositionOFGoverningAdapter
+    private lateinit var nlmIACompositionOFGoverningList: MutableList<ImplementingAgencyAdvisoryCommittee>
+    private lateinit var nlmIAProjectMonitoringCommitteeAdapter: NlmIAProjectMonitoringCommitteeAdapter
+    private lateinit var nlmIAProjectMonitoringCommitteeList: MutableList<ImplementingAgencyProjectMonitoring>
     private var dialog: Dialog? = null
+
+    override val layoutId: Int
+        get() = R.layout.fragment_n_l_s_i_a__governing_body__board__of__directors
 
 
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
-        recyclerView = mBinding?.recyclerView2!!
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.init()
-        mBinding?.tvAddMore1?.setOnClickListener {
-      openCamera()
-        }
-        programmeList = mutableListOf()
-        adapter = NlmIACompositionOFGoverningAdapter(programmeList)
-        recyclerView.adapter = adapter
-
-        mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(requireContext())
-
-        programmeList2 = mutableListOf()
-        programmeList2.add(ImplementingAgencyProjectMonitoring(null,null,null,null))
-
-        adapter2 = NlmIAProjectMonitoringCommitteeAdapter(programmeList2)
-        mBinding?.recyclerView1?.adapter = adapter2
-
+        nlmIACompositionOFGoverningAdapter()
+        nlmIAProjectMonitoringCommitteeAdapter()
     }
 
     override fun setVariables() {
@@ -89,8 +67,27 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
             }
         }
     }
+
+    private fun nlmIACompositionOFGoverningAdapter() {
+        nlmIACompositionOFGoverningList = mutableListOf()
+        nlmIACompositionOFGoverningAdapter =
+            NlmIACompositionOFGoverningAdapter(nlmIACompositionOFGoverningList)
+        mBinding?.rvNlmIACompositionOFGoverning?.adapter = nlmIACompositionOFGoverningAdapter
+        mBinding?.rvNlmIACompositionOFGoverning?.layoutManager =
+            LinearLayoutManager(requireContext())
+    }
+
+    private fun nlmIAProjectMonitoringCommitteeAdapter() {
+        nlmIAProjectMonitoringCommitteeList = mutableListOf()
+        nlmIAProjectMonitoringCommitteeAdapter =
+            NlmIAProjectMonitoringCommitteeAdapter(nlmIAProjectMonitoringCommitteeList)
+        mBinding?.recyclerView2?.adapter = nlmIAProjectMonitoringCommitteeAdapter
+        mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+
     inner class ClickActions {
-   fun save2(view: View){
+        fun saveAndNext(view: View) {
        viewModel.getImplementingAgencyAddApi(requireContext(),true,
            ImplementingAgencyAddRequest(
                getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
@@ -128,8 +125,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
                null,
                null,
                null,
-               AdvisoryCommitteeList,
-               ProjectMonitoringCommitteeList,
+               null,
+               null,
                null,
                null,
                null,
@@ -172,43 +169,52 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
        )
    }
 
-
-
+        fun compositionOfGoverningNlmIaDialog(view: View) {
+            compositionOfGoverningNlmIaDialog(requireContext())
+        }
     }
 
-//    override fun onClickItem(list: MutableList<ImplementingAgencyAdvisoryCommittee>) {
-//       AdvisoryCommitteeList.clear() // Clear previous data if needed
-//        AdvisoryCommitteeList.addAll(list) // Copy new items
-//        Log.d("ListData", "onClickItem: $list")
-//    }
-
-
-    private fun openCamera() {
-        val binding: ItemCompositionOfGoverningNlmIaBinding = DataBindingUtil.inflate(
+    private fun compositionOfGoverningNlmIaDialog(context: Context) {
+        val bindingDialog: ItemCompositionOfGoverningNlmIaBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_composition_of_governing_nlm_ia,
             null,
             false
         )
-        dialog = Dialog(requireContext())
-        dialog!!.setCancelable(false)
-        dialog!!.setContentView(binding.root)
-        dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog!!.window!!.setLayout(
+        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setContentView(bindingDialog.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setLayout(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-        dialog!!.window!!.setGravity(Gravity.CENTER)
-       binding.btnDelete.hideView()
-        binding.tvSubmit.setOnClickListener {
-            if (binding.nameOfOfficial.toString().isNotEmpty()||binding.nameOfDesignation.toString().isNotEmpty()||binding.nameOfOrganization.toString().isNotEmpty())
+        dialog.window!!.setGravity(Gravity.CENTER)
+        bindingDialog.btnDelete.hideView()
+        bindingDialog.tvSubmit.showView()
+
+        bindingDialog.tvSubmit.setOnClickListener {
+            if (bindingDialog.nameOfOfficial.text.toString().isNotEmpty()||bindingDialog.nameOfDesignation.text.toString().isNotEmpty()||bindingDialog.nameOfOrganization.text.toString().isNotEmpty())
             {
-            programmeList.add(ImplementingAgencyAdvisoryCommittee(binding.nameOfOfficial.toString(),binding.nameOfDesignation.toString(),binding.nameOfOrganization.toString(),null,null))
-            programmeList.size.minus(1).let {
-                adapter.notifyItemInserted(it)}
+                nlmIACompositionOFGoverningList.add(
+                    ImplementingAgencyAdvisoryCommittee(
+                        bindingDialog.nameOfOfficial.text.toString(),
+                        bindingDialog.nameOfDesignation.text.toString(),
+                        bindingDialog.nameOfOrganization.text.toString(),
+                        null,
+                        null
+                    )
+                )
+                nlmIACompositionOFGoverningList.size.minus(1).let {
+                    nlmIACompositionOFGoverningAdapter.notifyItemInserted(it)
+                }
+                dialog.dismiss()
             }
-           dialog!!.dismiss()
+            else {
+                showSnackbar(mBinding!!.clParent, getString(R.string.please_enter_atleast_one_field))
+            }
         }
-        dialog!!.show()
+        dialog.show()
     }
 }

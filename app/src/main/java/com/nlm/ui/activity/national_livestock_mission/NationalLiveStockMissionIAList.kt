@@ -22,7 +22,6 @@ import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
-
 class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaBinding>() {
 
     private var viewModel = ViewModel()
@@ -103,7 +102,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
             startActivity(Intent(this@NationalLiveStockMissionIAList, NLMIAForm::class.java).putExtra("isFrom",1))
         }
         fun filter(view: View) {
-            startActivity(Intent(this@NationalLiveStockMissionIAList, FilterStateActivity::class.java))
+            startActivity(Intent(this@NationalLiveStockMissionIAList, FilterStateActivity::class.java).putExtra("isFrom",0))
         }
     }
 
