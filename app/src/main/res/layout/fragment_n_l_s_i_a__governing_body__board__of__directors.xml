@@ -100,14 +100,15 @@
                 android:clickable="true"
                 android:fontFamily="@font/poppins_medium"
                 android:paddingHorizontal="@dimen/dp_20"
+                android:onClick="@{ClickAction::nlmIAProjectMonitoringCommitteeDialog}"
                 android:paddingVertical="@dimen/dp_10"
                 android:text="Add More"
                 android:textColor="@color/white" />
             <com.nlm.utilities.NonScrollableRecyclerView
-                android:id="@+id/recyclerView2"
+                android:id="@+id/rvNlmIAProjectMonitoringCommittee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:paddingTop="8dp" />
 
         </LinearLayout>
