@@ -38,6 +38,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/dp_10"
             android:paddingVertical="@dimen/dp_10">
+
             <TextView
 
                 android:id="@+id/tvState1"
@@ -48,10 +49,26 @@
                 android:text="Composition of Advisory committee (if any)"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
+            <TextView
+
+                android:onClick="@{ClickAction::compositionOfGoverningNlmIaDialog}"
+                android:id="@+id/tvAddMore1"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:layout_width="wrap_content"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"
+                android:background="@drawable/curve_fill_blue"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingVertical="@dimen/dp_10"
+                android:text="Add More"
+                android:textColor="@color/white" />
             <com.nlm.utilities.NonScrollableRecyclerView
-                android:id="@+id/recyclerView1"
+                android:id="@+id/rvNlmIACompositionOFGoverning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:paddingTop="8dp" />
 
         </LinearLayout>
@@ -73,10 +90,24 @@
                 android:text="Project Monitoring Committee (TMC)"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
+            <TextView
+                android:id="@+id/tvAddMore2"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:layout_width="wrap_content"
+                android:layout_gravity="end"
+                android:layout_height="wrap_content"
+                android:background="@drawable/curve_fill_blue"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingVertical="@dimen/dp_10"
+                android:text="Add More"
+                android:textColor="@color/white" />
             <com.nlm.utilities.NonScrollableRecyclerView
                 android:id="@+id/recyclerView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:paddingTop="8dp" />
 
         </LinearLayout>
@@ -94,10 +125,10 @@
             android:background="@drawable/curve_fill_blue"
             android:clickable="true"
             android:fontFamily="@font/poppins_medium"
-             android:onClick="@{ClickAction::save2}"
+             android:onClick="@{ClickAction::saveAndNext}"
             android:paddingHorizontal="@dimen/dp_20"
             android:paddingVertical="@dimen/dp_10"
-            android:text="Next"
+            android:text="@string/save_next"
             android:textAlignment="center"
             android:textColor="@color/white" />
     </LinearLayout>

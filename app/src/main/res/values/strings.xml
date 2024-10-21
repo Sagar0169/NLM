@@ -346,5 +346,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="add_new_implementing_agency">Add New Implementing Agency</string>
     <string name="you_are_not_authorized_to_access_that_location">You are not authorized to access that location</string>
 
+    <string name="please_enter_atleast_one_field">Please Enter atleast One Field</string>
+    <string name="organization">Organization</string>
 </resources>
 

@@ -89,7 +89,6 @@ class NlmIAFundsRecievedAdapter(
             if (programmeList.size > 1) {
                 // Remove the item at the current position
                 programmeList.removeAt(position)
-
                 // Notify that an item has been removed and update the RecyclerView
                 notifyItemRemoved(position)
                 notifyItemRangeChanged(position, programmeList.size)
