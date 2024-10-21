@@ -142,8 +142,8 @@ class ImplementingAgencyMasterActivity : BaseActivity<ActivityImplementingAgency
     private fun implementingAgency() {
         implementingAdapter = ImplementingAgencyAdapter(nodalOfficerList)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding!!.rvImplementingaegency.layoutManager = layoutManager
-        mBinding!!.rvImplementingaegency.adapter = implementingAdapter
+        mBinding!!.rvImplementingAgency.layoutManager = layoutManager
+        mBinding!!.rvImplementingAgency.adapter = implementingAdapter
     }
 
     override fun setVariables() {

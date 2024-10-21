@@ -37,12 +37,8 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
                 "NA",
                 "NA",
                 "NA",
-            ),
-
-
-
-
             )
+        )
         implementingAgency()
 
         mBinding!!.fabAddAgency.setOnClickListener{

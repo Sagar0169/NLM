@@ -63,6 +63,7 @@
 
 
                         <EditText
+                            android:id="@+id/etNpddScheme1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -86,6 +87,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMajorLab1"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -114,6 +117,8 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbAvailable1"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -124,6 +129,8 @@
                                 app:buttonTint="@color/darkBlue" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotAvailable1"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
@@ -222,6 +229,8 @@
 
 
                         <EditText
+                            android:id="@+id/etNpddScheme2"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -245,6 +254,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMajorLab2"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -273,6 +284,8 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbAvailable2"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -283,6 +296,8 @@
                                 app:buttonTint="@color/darkBlue" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotAvailable2"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
@@ -381,6 +396,8 @@
 
 
                         <EditText
+                            android:id="@+id/etNpddScheme3"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -404,6 +421,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMajorLab3"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -432,6 +451,8 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbAvailable3"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -442,6 +463,8 @@
                                 app:buttonTint="@color/darkBlue" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotAvailable3"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
@@ -540,6 +563,8 @@
 
 
                         <EditText
+                            android:id="@+id/etNpddScheme4"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -563,6 +588,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMajorLab4"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -591,6 +618,8 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbAvailable4"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -601,6 +630,8 @@
                                 app:buttonTint="@color/darkBlue" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotAvailable4"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
@@ -699,6 +730,8 @@
 
 
                         <EditText
+                            android:id="@+id/etNpddScheme5"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -722,6 +755,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMajorLab5"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -750,6 +785,8 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbAvailable5"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -760,6 +797,8 @@
                                 app:buttonTint="@color/darkBlue" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotAvailable5"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
@@ -858,6 +897,8 @@
 
 
                         <EditText
+                            android:id="@+id/etNpddScheme6"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -881,6 +922,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMajorLab6"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -909,6 +952,8 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbAvailable6"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -919,6 +964,8 @@
                                 app:buttonTint="@color/darkBlue" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotAvailable6"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
@@ -1016,6 +1063,8 @@
 
 
                         <EditText
+                            android:id="@+id/etNpddScheme7"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1039,6 +1088,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMajorLab7"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -1067,6 +1118,8 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbAvailable7"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -1077,165 +1130,8 @@
                                 app:buttonTint="@color/darkBlue" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dp_15"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:paddingEnd="@dimen/dp_5"
-                                android:text="Not Available"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14"
-                                app:buttonTint="@color/darkBlue" />
+                                android:id="@+id/rbNotAvailable7"
 
-
-                        </RadioGroup>                        <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Present status (Operational/ Non Operational)"
-                        android:layout_marginTop="@dimen/dp_7"
-
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                        <RadioGroup
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatRadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:paddingEnd="@dimen/dp_5"
-                                android:text="Operational"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14"
-                                app:buttonTint="@color/darkBlue" />
-
-                            <androidx.appcompat.widget.AppCompatRadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dp_15"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:paddingEnd="@dimen/dp_5"
-                                android:text="Non Operational"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14"
-                                app:buttonTint="@color/darkBlue" />
-
-
-                        </RadioGroup>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Remark"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="NPDD Scheme/ Project No."
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Major Lab Strengthening Equipments-Dairy Plant Labs"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Available/ Not Available"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <RadioGroup
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatRadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:paddingEnd="@dimen/dp_5"
-                                android:text="Available"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14"
-                                app:buttonTint="@color/darkBlue" />
-
-                            <androidx.appcompat.widget.AppCompatRadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
@@ -1334,6 +1230,8 @@
 
 
                         <EditText
+                            android:id="@+id/etNpddScheme8"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1357,6 +1255,8 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etMajorLab8"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -1385,6 +1285,8 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbAvailable8"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -1395,6 +1297,175 @@
                                 app:buttonTint="@color/darkBlue" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotAvailable8"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:paddingEnd="@dimen/dp_5"
+                                android:text="Not Available"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14"
+                                app:buttonTint="@color/darkBlue" />
+
+
+                        </RadioGroup>                        <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Present status (Operational/ Non Operational)"
+                        android:layout_marginTop="@dimen/dp_7"
+
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:paddingEnd="@dimen/dp_5"
+                                android:text="Operational"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14"
+                                app:buttonTint="@color/darkBlue" />
+
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:paddingEnd="@dimen/dp_5"
+                                android:text="Non Operational"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14"
+                                app:buttonTint="@color/darkBlue" />
+
+
+                        </RadioGroup>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Remark"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="NPDD Scheme/ Project No."
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+
+
+                        <EditText
+                            android:id="@+id/etNpddScheme9"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Major Lab Strengthening Equipments-Dairy Plant Labs"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:id="@+id/etMajorLab9"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Available/ Not Available"
+                            android:layout_marginTop="@dimen/dp_7"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbAvailable9"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:paddingEnd="@dimen/dp_5"
+                                android:text="Available"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14"
+                                app:buttonTint="@color/darkBlue" />
+
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotAvailable9"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
@@ -1765,36 +1836,87 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <TextView
-                    android:id="@+id/tvSendOtp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:text="Supporting Documents"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <LinearLayout
+                    android:id="@+id/llRv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_50"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.nlm.utilities.NonScrollableRecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_15"
                     android:layout_marginBottom="@dimen/dp_10"
-                    android:background="@drawable/button_bg"
-                    android:clickable="true"
-                    android:fontFamily="@font/khula_semibold"
-                    android:paddingHorizontal="@dimen/dp_20"
-                    android:paddingVertical="@dimen/dp_10"
-                    android:text="Submit"
-                    android:textSize="@dimen/sp_20"
-                    android:textAlignment="center"
-                    android:textColor="@color/white" />
+
+                    >
+                    <TextView
+                        android:id="@+id/tvSave"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/dp_9"
+
+                        android:background="@drawable/button_bg"
+                        android:clickable="true"
+                        android:fontFamily="@font/khula_semibold"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Save As Draft"
+                        android:textSize="@dimen/sp_20"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                    <TextView
+                        android:id="@+id/tvSendOtp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_9"
+
+                        android:background="@drawable/button_bg"
+                        android:clickable="true"
+                        android:fontFamily="@font/khula_semibold"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Submit"
+                        android:textSize="@dimen/sp_20"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
 

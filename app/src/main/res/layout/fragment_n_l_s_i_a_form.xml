@@ -10,6 +10,7 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/clParent"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -88,7 +89,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
-                    android:id="@+id/etName"
+                    android:id="@+id/etNameAndLocationOfIa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -111,7 +112,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
-                    android:id="@+id/etUsername"
+                    android:id="@+id/etDirectorDGCeoName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -172,12 +173,13 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etTechnicalStaffRegularDepute"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -186,6 +188,7 @@
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
                         <TextView
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/opensans_semibold"
@@ -196,12 +199,13 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etTechnicalStaffManpowerDepute"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -243,6 +247,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAdminStaffEmployeeDepute"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -267,6 +272,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAdminStaffManpowerDepute"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -314,6 +320,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etOtherStaffEmployeeDepute"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -338,6 +345,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etOtherStaffManpowerDepute"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -368,7 +376,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
-                    android:id="@+id/etPassword"
+                    android:id="@+id/etOrganisationalChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -393,8 +401,9 @@
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="Next"
+                    android:text="@string/save_next"
                     android:textSize="20sp"
+                    android:onClick="@{ClickAction::save}"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
                 </LinearLayout>

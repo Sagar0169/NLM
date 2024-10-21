@@ -1,5 +1,11 @@
 package com.nlm.repository
 
+import com.nlm.model.GetDropDownRequest
+import com.nlm.model.GetDropDownResponse
+import com.nlm.model.ImplementingAgencyAddRequest
+import com.nlm.model.ImplementingAgencyRequest
+import com.nlm.model.ImplementingAgencyResponse
+import com.nlm.model.ImplementingAgencyResponseNlm
 import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.services.MyService
@@ -21,6 +27,16 @@ object Repository {
 
     suspend fun getLogin(request: LoginRequest): Response<LoginResponse> {
         return api.getLogin(request)
+    }
+    suspend fun getDropDown(request: GetDropDownRequest): Response<GetDropDownResponse> {
+        return api.getDropDown(request)
+    }
+
+    suspend fun getImplementingAgency(request: ImplementingAgencyRequest): Response<ImplementingAgencyResponse> {
+        return api.getImplementingAgency(request)
+    }
+    suspend fun getImplementingAgencyAdd(request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm> {
+        return api.getImplementingAgencyAdd(request)
     }
 }
 

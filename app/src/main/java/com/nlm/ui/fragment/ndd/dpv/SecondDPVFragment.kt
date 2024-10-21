@@ -8,10 +8,12 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.FragmentSecondDpvBinding
 import com.nlm.ui.adapter.StateAdapter
+import com.nlm.ui.adapter.SupportingDocumentAdapterNDD
 import com.nlm.utilities.BaseFragment
 import java.util.Calendar
 
@@ -22,6 +24,9 @@ class SecondDPVFragment : BaseFragment<FragmentSecondDpvBinding>() {
     private var listener: OnNextButtonClickListener? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var stateAdapter: StateAdapter
+    private lateinit var adapter: SupportingDocumentAdapterNDD
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var programmeList: MutableList<Array<String>>
 
     interface OnNextButtonClickListener {
         fun onNextButtonClick()
@@ -59,6 +64,13 @@ class SecondDPVFragment : BaseFragment<FragmentSecondDpvBinding>() {
 //        mBinding!!.tvDate.setOnClickListener {
 //            showDatePicker(mBinding!!.tvDate)
 //        }
+        recyclerView = mBinding?.recyclerView!!
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        programmeList = mutableListOf()
+        programmeList.add(arrayOf(""))
+        adapter = SupportingDocumentAdapterNDD(programmeList)
+        recyclerView.adapter = adapter
 
     }
 
