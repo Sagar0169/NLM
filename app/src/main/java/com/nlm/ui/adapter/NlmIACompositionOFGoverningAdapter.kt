@@ -16,7 +16,6 @@ import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 
 class NlmIACompositionOFGoverningAdapter(
     private val programmeList: MutableList<ImplementingAgencyAdvisoryCommittee>,
-//    private val callBackItem: AddItemCallBack,
 ) : RecyclerView.Adapter<NlmIACompositionOFGoverningAdapter.NlmIACompositionOFGoverning>()
 {
 
@@ -42,6 +41,14 @@ class NlmIACompositionOFGoverningAdapter(
     }
 
     override fun getItemCount(): Int = programmeList.size
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
 
     inner class NlmIACompositionOFGoverning(val binding: ItemCompositionOfGoverningNlmIaBinding) :

@@ -45,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Frequency of Monitoring "
+                        android:text="@string/frequency_of_monitoring"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -57,9 +57,6 @@
                         android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical">
-
-
-
                         <EditText
                             android:id="@+id/etFrequencyOfMonitoring1"
                             android:layout_width="match_parent"
@@ -67,8 +64,8 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:maxLength="50"
+                            android:inputType="text"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -85,6 +82,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:inputType="text"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -99,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Reporting Mechanism to State Govt."
+                        android:text="@string/reporting_mechanism_to_state_govt_"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -112,8 +110,6 @@
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical">
 
-
-
                         <EditText
                             android:id="@+id/etReportingMechanismToStateGovt1"
                             android:layout_width="match_parent"
@@ -122,6 +118,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:inputType="text"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -138,6 +135,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:inputType="text"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -153,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Regularity"
+                        android:text="@string/regularity"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -177,6 +175,7 @@
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
+                            android:inputType="text"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
@@ -191,6 +190,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:inputType="text"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -206,7 +206,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Submission of quarterly progress report and annual progress report in the prescribed time frame"
+                        android:text="submission_of_quarterly_progress_report_and_annual_progress_report_in_the_prescribed_time_frame"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
                     <LinearLayout
@@ -227,6 +227,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:inputType="text"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -243,6 +244,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:inputType="text"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -256,24 +258,23 @@
 
 
                 <TextView
-                    android:id="@+id/tvPassword"
+                    android:id="@+id/tvStudiesConducted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Studies / Surveys conducted:"
+                    android:text="@string/studies_surveys_conducted"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
-                    android:id="@+id/etStudiesConducted1"
-
+                    android:id="@+id/etStudiesConducted"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:hint="Enter Remarks"
-                    android:inputType="textPassword"
+                    android:hint="@string/enter_remarks"
+                    android:inputType="text"
                     android:maxLength="80"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -281,8 +282,51 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
+                <LinearLayout
+                    android:id="@+id/llFundRecieved"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginVertical="@dimen/dp_10"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:paddingHorizontal="@dimen/dp_10">
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:id="@+id/tvDistrict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/funds_received_in_rs_lakh"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_18" />
+
+                    <TextView
+                        android:id="@+id/tvAddMore"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:onClick="@{ClickAction::nlmIAFundsRecievedDialog}"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="@string/add_more"
+                        android:textColor="@color/white" />
+
+                    <com.nlm.utilities.NonScrollableRecyclerView
+                        android:id="@+id/rvFundRecieved"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp" />
+
+                </LinearLayout>
+
                 <TextView
-                    android:id="@+id/tvSendOtp"
+                    android:id="@+id/tvSaveAndNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -294,8 +338,8 @@
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="Next"
-                    android:onClick="@{ClickAction::save2}"
+                    android:text="@string/save_next"
+                    android:onClick="@{ClickAction::saveAndNext}"
                     android:textAlignment="center"
                     android:textColor="@color/white" />
             </LinearLayout>

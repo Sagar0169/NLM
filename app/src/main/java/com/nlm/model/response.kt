@@ -2,7 +2,7 @@ package com.nlm.model
 
 import java.io.Serializable
 
-data class  CommonResponse(
+data class CommonResponse(
     val statuscode: Int,
     val _result: Any,
     val _resultflag: Int,
@@ -21,7 +21,30 @@ data class LoginResponse(
     val message: String,
 
 
+    )
+
+
+data class LogoutResponse(
+    val _result: String,
+    val _resultflag: Int,
+    val message: String,
 )
+
+data class DashboardResponse(
+    val _result: DashData,
+    val _resultflag: Int,
+    val statuscode: Int,
+    val message: String,
+)
+
+data class DashData(
+    val no_of_covered_scheme: Int,
+    val total_visit: Int,
+    val no_of_state_covered: Int,
+    val report_submitted_by_nlm: Int,
+)
+
+
 
 
 data class MyAccountResponse(
@@ -48,7 +71,8 @@ data class ResultData(
     val photo_url: String?,
 
 
-)
+    )
+
 data class LoginRes(
     val _result: Result,
     val _resultflag: Int,
@@ -93,7 +117,6 @@ data class Form(
 )
 
 
-
 data class District(
     val district_name: String
 )
@@ -128,6 +151,7 @@ data class State(
 data class Subdistrict(
     val subdistrict_name: String
 )
+
 data class Data(
     val application_number: String,
     val current_address: String,
@@ -155,7 +179,7 @@ data class Data(
 
 data class PwdApplicationStatus(
     val status_name: String
-):Serializable
+) : Serializable
 
 data class ApplicationStatusResponse(
     val _resultflag: Int,
@@ -174,7 +198,7 @@ data class ApplicationStatus(
 data class StatusArray(
     val id: Int,
     val status_name: String
-): Serializable
+) : Serializable
 
 data class ImplementingAgencyResponse(
     val _result: ResultImplementingAgency,
@@ -212,6 +236,7 @@ data class ResultGetDropDown(
     val id: Int,
     val name: String
 )
+
 data class ImplementingAgencyResponseNlm(
     val _result: ResultNLMIA,
     val _resultflag: Int,

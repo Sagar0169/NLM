@@ -31,11 +31,10 @@ import com.nlm.viewModel.ViewModel
 class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGoverningBodyBoardOfDirectorsBinding>(){
     val viewModel = ViewModel()
     private var mBinding: FragmentNLSIAGoverningBodyBoardOfDirectorsBinding?=null
-    private lateinit var nlmIACompositionOFGoverningAdapter: NlmIACompositionOFGoverningAdapter
+    private var nlmIACompositionOFGoverningAdapter: NlmIACompositionOFGoverningAdapter ?= null
     private lateinit var nlmIACompositionOFGoverningList: MutableList<ImplementingAgencyAdvisoryCommittee>
-    private lateinit var nlmIAProjectMonitoringCommitteeAdapter: NlmIAProjectMonitoringCommitteeAdapter
+    private var nlmIAProjectMonitoringCommitteeAdapter: NlmIAProjectMonitoringCommitteeAdapter ?= null
     private lateinit var nlmIAProjectMonitoringCommitteeList: MutableList<ImplementingAgencyProjectMonitoring>
-    private var dialog: Dialog? = null
 
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__governing_body__board__of__directors
@@ -81,8 +80,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
         nlmIAProjectMonitoringCommitteeList = mutableListOf()
         nlmIAProjectMonitoringCommitteeAdapter =
             NlmIAProjectMonitoringCommitteeAdapter(nlmIAProjectMonitoringCommitteeList)
-        mBinding?.recyclerView2?.adapter = nlmIAProjectMonitoringCommitteeAdapter
-        mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
+        mBinding?.rvNlmIAProjectMonitoringCommittee?.adapter = nlmIAProjectMonitoringCommitteeAdapter
+        mBinding?.rvNlmIAProjectMonitoringCommittee?.layoutManager = LinearLayoutManager(requireContext())
     }
 
 
@@ -170,11 +169,14 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
    }
 
         fun compositionOfGoverningNlmIaDialog(view: View) {
-            compositionOfGoverningNlmIaDialog(requireContext())
+            compositionOfGoverningNlmIaDialog(requireContext(),1)
+        }
+        fun nlmIAProjectMonitoringCommitteeDialog(view: View) {
+            compositionOfGoverningNlmIaDialog(requireContext(),2)
         }
     }
 
-    private fun compositionOfGoverningNlmIaDialog(context: Context) {
+    private fun compositionOfGoverningNlmIaDialog(context: Context,isFrom:Int) {
         val bindingDialog: ItemCompositionOfGoverningNlmIaBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_composition_of_governing_nlm_ia,
@@ -197,19 +199,35 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.nameOfOfficial.text.toString().isNotEmpty()||bindingDialog.nameOfDesignation.text.toString().isNotEmpty()||bindingDialog.nameOfOrganization.text.toString().isNotEmpty())
             {
-                nlmIACompositionOFGoverningList.add(
-                    ImplementingAgencyAdvisoryCommittee(
-                        bindingDialog.nameOfOfficial.text.toString(),
-                        bindingDialog.nameOfDesignation.text.toString(),
-                        bindingDialog.nameOfOrganization.text.toString(),
-                        null,
-                        null
+                if(isFrom == 2) {
+                    nlmIAProjectMonitoringCommitteeList.add(
+                        ImplementingAgencyProjectMonitoring(
+                            bindingDialog.nameOfOfficial.text.toString(),
+                            bindingDialog.nameOfDesignation.text.toString(),
+                            bindingDialog.nameOfOrganization.text.toString(),
+                            null
+                        )
                     )
-                )
-                nlmIACompositionOFGoverningList.size.minus(1).let {
-                    nlmIACompositionOFGoverningAdapter.notifyItemInserted(it)
+                    nlmIAProjectMonitoringCommitteeList.size.minus(1).let {
+                        nlmIAProjectMonitoringCommitteeAdapter?.notifyItemInserted(it)
+                    }
+                    dialog.dismiss()
                 }
-                dialog.dismiss()
+                else if(isFrom == 1){
+                    nlmIACompositionOFGoverningList.add(
+                        ImplementingAgencyAdvisoryCommittee(
+                            bindingDialog.nameOfOfficial.text.toString(),
+                            bindingDialog.nameOfDesignation.text.toString(),
+                            bindingDialog.nameOfOrganization.text.toString(),
+                            null,
+                            null
+                        )
+                    )
+                    nlmIACompositionOFGoverningList.size.minus(1).let {
+                        nlmIACompositionOFGoverningAdapter?.notifyItemInserted(it)
+                    }
+                    dialog.dismiss()
+                }
             }
             else {
                 showSnackbar(mBinding!!.clParent, getString(R.string.please_enter_atleast_one_field))
