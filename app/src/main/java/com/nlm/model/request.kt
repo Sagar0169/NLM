@@ -27,6 +27,9 @@ data class LoginRequest(
     var username: String,
     var password: String,
 )
+data class LogoutRequest(
+    var user_id: Int,
+)
 data class MyAccountRequest(
     val application_number: String
 )

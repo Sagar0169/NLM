@@ -123,6 +123,7 @@
                             app:fontFamily="@font/lexend_regular" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvNoOfSchemeCovered"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_5"
@@ -183,6 +184,7 @@
                             app:fontFamily="@font/lexend_regular" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTotalVisits"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_5"
@@ -243,6 +245,7 @@
                             app:fontFamily="@font/lexend_regular" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvNoOfStateCovered"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_5"
@@ -303,6 +306,7 @@
                             app:fontFamily="@font/lexend_regular" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvReportSubmittedNLM"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_5"
