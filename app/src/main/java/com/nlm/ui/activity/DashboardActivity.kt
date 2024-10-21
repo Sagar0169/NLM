@@ -12,8 +12,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.bumptech.glide.Glide
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
+import com.nlm.model.LogoutRequest
 import com.nlm.model.Result
 import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryActivity
 import com.nlm.ui.activity.national_dairy_development.DCSCenterVisitNDDActivity
@@ -45,11 +47,15 @@ import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStationList
 import com.nlm.ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.PrefEntities
 
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
+import com.nlm.utilities.toast
+import com.nlm.viewModel.ViewModel
 
 class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     private var mBinding: ActivityDashboardBinding? = null
@@ -58,6 +64,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     var isNationLiveStockOpen = false
     var isNationDairyOpen = false
     var isGokulOpen = false
+    private var viewModel = ViewModel()
     val matchingSchemeIds = mutableListOf<Int>()
     val matchingFormIds = mutableListOf<Int>()
 
@@ -67,10 +74,25 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     override fun initView() {
         mBinding = viewDataBinding
+        viewModel.init()
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
+
+        viewModel.getDashboardApi(
+            this@DashboardActivity,
+            LogoutRequest(
+                Preferences.getPreferenceOfScheme(
+                    this@DashboardActivity,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                ).user_id
+            )
+        )
+
+
+
 
         compareSchemeIds()
         setDefaultDrawables()
@@ -368,6 +390,18 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this@DashboardActivity, RGMIAList::class.java)
             startActivity(intent)
         }
+        mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
+            viewModel.getLogoutApi(
+                this@DashboardActivity,
+                LogoutRequest(
+                    Preferences.getPreferenceOfScheme(
+                        this@DashboardActivity,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    ).user_id
+                )
+            )
+        }
 
 //        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
 //            val intent = Intent(this@DashboardActivity, UserActivity::class.java)
@@ -380,6 +414,46 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     }
 
     override fun setObservers() {
+
+        viewModel.dashboardResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+                    mBinding!!.contentNav.tvNoOfSchemeCovered.text =
+                        userResponseModel._result.no_of_covered_scheme.toString()
+                    mBinding!!.contentNav.tvTotalVisits.text =
+                        userResponseModel._result.total_visit.toString()
+                    mBinding!!.contentNav.tvNoOfStateCovered.text =
+                        userResponseModel._result.no_of_state_covered.toString()
+                    mBinding!!.contentNav.tvReportSubmittedNLM.text =
+                        userResponseModel._result.report_submitted_by_nlm.toString()
+                }
+            }
+            viewModel.errors.observe(this) {
+                mBinding?.contentNav?.rlParent?.let { it1 -> Utility.showSnackbar(it1, it) }
+            }
+
+        }
+
+
+
+
+        viewModel.logoutResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel._resultflag == 1) {
+                Preferences.removeAllPreference(this)
+                Utility.clearAllPreferencesExceptDeviceToken(this)
+                intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                toast(userResponseModel.message)
+            } else {
+                if (userResponseModel._resultflag == 0 && userResponseModel.message == getString(R.string.you_are_not_authorized_to_access_that_location)) {
+                    Utility.logout(this)
+                }
+                toast(userResponseModel.message)
+            }
+        }
     }
 
     private fun toggleMenuItem(
@@ -492,8 +566,12 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     private fun compareSchemeIds() {
         // Retrieve the schemes from preferences
-        val storedSchemes = Preferences.getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.schemes
-         Log.d("Scheme from response",storedSchemes.toString())
+        val storedSchemes = Preferences.getPreferenceOfScheme(
+            this,
+            AppConstants.SCHEME,
+            Result::class.java
+        )?.schemes
+        Log.d("Scheme from response", storedSchemes.toString())
         if (storedSchemes != null) {
             for (scheme in storedSchemes) {
                 val matchingLocalScheme = LocalSchemeData.localSchemes.find { it.id == scheme.id }
@@ -523,97 +601,82 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                     for (matchingFormId in matchingFormIds) {
                         if (matchingFormId == 206) {
                             mBinding?.leftDrawerMenu?.tvVaccinationProgramme?.showView()
-                        } else if (matchingFormId == 207){
+                        } else if (matchingFormId == 207) {
                             mBinding?.leftDrawerMenu?.tvMobileVeterinaryUnits?.showView()
-                        }else if (matchingFormId == 208){
+                        } else if (matchingFormId == 208) {
                             mBinding?.leftDrawerMenu?.tvAscad?.showView()
                         }
                     }
-                } else if (matchingSchemeId == 199){
+                } else if (matchingSchemeId == 199) {
                     mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
                     for (matchingFormId in matchingFormIds) {
                         if (matchingFormId == 203) {
                             mBinding?.leftDrawerMenu?.tvImplementingAgency?.showView()
-                        } else if (matchingFormId == 221){
+                        } else if (matchingFormId == 221) {
                             mBinding?.leftDrawerMenu?.tvRspLaboratorySemen?.showView()
-                        }else if (matchingFormId == 222){
+                        } else if (matchingFormId == 222) {
                             mBinding?.leftDrawerMenu?.tvStateSemenBank?.showView()
-                        }else if (matchingFormId == 223){
+                        } else if (matchingFormId == 223) {
                             mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
-                        }else if (matchingFormId == 224){
+                        } else if (matchingFormId == 224) {
                             mBinding?.leftDrawerMenu?.tvImportExoticGoat?.showView()
-                        }else if (matchingFormId == 225){
+                        } else if (matchingFormId == 225) {
                             mBinding?.leftDrawerMenu?.tvAssistanceQfps?.showView()
-                        }else if (matchingFormId == 226){
+                        } else if (matchingFormId == 226) {
                             mBinding?.leftDrawerMenu?.tvFpsPlanStorage?.showView()
-                        }else if (matchingFormId == 227){
+                        } else if (matchingFormId == 227) {
                             mBinding?.leftDrawerMenu?.tvFpsFromNonForest?.showView()
-                        }else if (matchingFormId == 228){
+                        } else if (matchingFormId == 228) {
                             mBinding?.leftDrawerMenu?.tvFpsFromForest?.showView()
-                        }else if (matchingFormId == 229){
+                        } else if (matchingFormId == 229) {
                             mBinding?.leftDrawerMenu?.tvAssistanceForEa?.showView()
-                        }else if (matchingFormId == 230){
+                        } else if (matchingFormId == 230) {
                             mBinding?.leftDrawerMenu?.tvNlmEdp?.showView()
                         }
                     }
-                }
-                else if (matchingSchemeId == 201){
+                } else if (matchingSchemeId == 201) {
                     mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
                     for (matchingFormId in matchingFormIds) {
                         if (matchingFormId == 219) {
                             mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.showView()
-                        } else if (matchingFormId == 234){
+                        } else if (matchingFormId == 234) {
                             mBinding?.leftDrawerMenu?.tvReportsOfNlm?.showView()
-                        }
-                        else if (matchingFormId == 220){
+                        } else if (matchingFormId == 220) {
                             mBinding?.leftDrawerMenu?.tvNationalLevelComponentB?.showView()
-                        }
-                        else if (matchingFormId == 209){
+                        } else if (matchingFormId == 209) {
                             mBinding?.leftDrawerMenu?.tvMilkUnionVisitReport?.showView()
-                        }
-                        else if (matchingFormId == 205){
+                        } else if (matchingFormId == 205) {
                             mBinding?.leftDrawerMenu?.tvDairyPlantVisitReport?.showView()
-                        }
-                        else if (matchingFormId == 210){
+                        } else if (matchingFormId == 210) {
                             mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.showView()
-                        }
-                        else if (matchingFormId == 211){
+                        } else if (matchingFormId == 211) {
                             mBinding?.leftDrawerMenu?.tvStateCenterLabVisitReport?.showView()
-                        }
-                        else if (matchingFormId == 212){
+                        } else if (matchingFormId == 212) {
                             mBinding?.leftDrawerMenu?.tvMilkProcessing?.showView()
-                        }
-                        else if (matchingFormId == 213){
+                        } else if (matchingFormId == 213) {
                             mBinding?.leftDrawerMenu?.tvMilkProductMarketing?.showView()
-                        }
-                        else if (matchingFormId == 214){
+                        } else if (matchingFormId == 214) {
                             mBinding?.leftDrawerMenu?.tvProductivityEnhancementServices?.showView()
                         }
                     }
-                }
-                else if (matchingSchemeId == 204){
+                } else if (matchingSchemeId == 204) {
                     mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
                     for (matchingFormId in matchingFormIds) {
                         if (matchingFormId == 202) {
                             mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.showView()
-                        } else if (matchingFormId == 236){
+                        } else if (matchingFormId == 236) {
                             mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
-                        }
-                        else if (matchingFormId == 237){
+                        } else if (matchingFormId == 237) {
                             mBinding?.leftDrawerMenu?.tvSemenStation?.showView()
-                        }
-                        else if (matchingFormId == 238){
+                        } else if (matchingFormId == 238) {
                             mBinding?.leftDrawerMenu?.tvTrainingCenters?.showView()
-                        }
-                        else if (matchingFormId == 239){
+                        } else if (matchingFormId == 239) {
                             mBinding?.leftDrawerMenu?.tvBullMotherFarms?.showView()
-                        }
-                        else if (matchingFormId == 240){
+                        } else if (matchingFormId == 240) {
                             mBinding?.leftDrawerMenu?.tvBreedMultiplication?.showView()
                         }
                     }
-                }
-                else if (matchingSchemeId == 1){
+                } else if (matchingSchemeId == 1) {
                     mBinding?.leftDrawerMenu?.tvUsers?.showView()
                 }
             }
