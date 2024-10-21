@@ -54,6 +54,9 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
         recyclerView = mBinding?.recyclerView2!!
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.init()
+        mBinding?.tvAddMore1?.setOnClickListener {
+      openCamera()
+        }
         programmeList = mutableListOf()
         adapter = NlmIACompositionOFGoverningAdapter(programmeList)
         recyclerView.adapter = adapter
@@ -168,9 +171,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
                )
        )
    }
-   fun openDialog(view: View){
-       openCamera()
-   }
+
 
 
     }
@@ -180,6 +181,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
 //        AdvisoryCommitteeList.addAll(list) // Copy new items
 //        Log.d("ListData", "onClickItem: $list")
 //    }
+
 
     private fun openCamera() {
         val binding: ItemCompositionOfGoverningNlmIaBinding = DataBindingUtil.inflate(
