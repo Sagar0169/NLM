@@ -1,5 +1,6 @@
 package com.nlm.services
 
+import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.DashboardResponse
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
@@ -21,6 +22,7 @@ const val DASHBOARD = "rest/dashboard"
 const val GET_DROP_DOWN = "rest/getDropdown"
 const val IMPLEMENTING_AGENCY_LIST = "nationalLivestockMission/implimentingAgencyList"
 const val IMPLEMENTING_AGENCY_ADD = "nationalLivestockMission/implimentingAgencyAddEdit"
+const val ARTIFICIAL_INSEMINATION_LIST = "nationalLivestockMission/artificialInseminationList"
 
 interface MyService {
 
@@ -38,6 +40,11 @@ interface MyService {
 
     @POST(IMPLEMENTING_AGENCY_LIST)
     suspend fun getImplementingAgency(@Body request: ImplementingAgencyRequest): Response<ImplementingAgencyResponse>
+
+    @POST(ARTIFICIAL_INSEMINATION_LIST)
+    suspend fun getArtificialInsemination(@Body request: ArtificialInseminationRequest): Response<ImplementingAgencyResponse>
+
+
     @POST(IMPLEMENTING_AGENCY_ADD)
     suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm>
 

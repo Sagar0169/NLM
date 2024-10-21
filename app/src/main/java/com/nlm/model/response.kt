@@ -209,6 +209,15 @@ data class ImplementingAgencyResponse(
     val total_count: Int
 )
 
+data class ArtificialInseminationResponse(
+    val _result: ResultImplementingAgency,
+    val _resultflag: Int,
+    val fileurl: Any,
+    val message: String,
+    val statuscode: Int,
+    val total_count: Int
+)
+
 data class ResultImplementingAgency(
     val data: List<DataImplementingAgency>,
     val is_add: Boolean
