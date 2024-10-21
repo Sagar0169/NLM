@@ -346,5 +346,17 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="add_new_implementing_agency">Add New Implementing Agency</string>
     <string name="please_enter_atleast_one_field">Please Enter atleast One Field</string>
     <string name="organization">Organization</string>
+    <string name="studies_surveys_conducted">Studies / Surveys conducted:</string>
+    <string name="enter_remarks">Enter Remarks</string>
+    <string name="funds_received_in_rs_lakh">Funds Received (in Rs. Lakh)</string>
+    <string name="frequency_of_monitoring">Frequency of Monitoring</string>
+    <string name="reporting_mechanism_to_state_govt_">Reporting Mechanism to State Govt.</string>
+    <string name="regularity">Regularity</string>
+    <string name="add_more">Add More</string>
+    <string name="year">Year</string>
+    <string name="from_dahd">From DAHD</string>
+    <string name="state_govt">State Govt.</string>
+    <string name="any_other">Any Other.</string>
+    <string name="physical_progress">Physical Progress.</string>
 </resources>
 

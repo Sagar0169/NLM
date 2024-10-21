@@ -16,7 +16,6 @@ import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFormIAFragm
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAConstraintsFacedByIAFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFeedFodderFragment
-import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFundsReceivedFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAGoverningBodyBoardOfDirectorsFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAInfrastructureSheepGoat
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAReportingSystem
@@ -26,22 +25,13 @@ import com.nlm.utilities.BaseActivity
 class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_nlsia_form
-    private lateinit var bottomSheetAdapter: BottomSheetAdapter
-    private lateinit var bottomSheetDialog: BottomSheetDialog
     private var mBinding: ActivityNlsiaFormBinding? = null
-    var sightedChildData = SightedChildData()
-    var facialAttributeData = FacialAttributeData()
-    var physicalAttributesData = PhysicalAttributesData()
-    var backgroundData = BackgroundData()
-    var locationData = LocationData()
 
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         setupTabLayout()
         loadFragment(NLSIAFormIAFragment())
-
-
     }
 
     override fun setVariables() {
@@ -124,7 +114,6 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
             addTab(newTab().setText("Available infrastructure for Sheep / Goat Genetic Improvement"))
             addTab(newTab().setText("Composition of Advisory committee (if any)/Project Monitoring Committee (PMC)"))
             addTab(newTab().setText("Reporting System"))
-            addTab(newTab().setText("Funds Received"))
             addTab(newTab().setText("District wise no. of AI centres for Goat and Sheep in the State "))
             addTab(newTab().setText("Manpower and Capacity Building"))
             addTab(newTab().setText("Constraints faced by IA in implementation of the project (elaborate)"))
@@ -157,25 +146,20 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
 
                         4 -> {
                             onTabClicks()
-                            loadFragment(NLSIAFundsReceivedFragment())
+                            loadFragment(NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep())
                         }
 
                         5 -> {
                             onTabClicks()
-                            loadFragment(NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep())
+                            loadFragment(NlmManpowerAndCapacityFragment())
                         }
 
                         6 -> {
                             onTabClicks()
-                            loadFragment(NlmManpowerAndCapacityFragment())
-                        }
-
-                        7 -> {
-                            onTabClicks()
                             loadFragment(NLSIAConstraintsFacedByIAFragment())
                         }
 
-                        8 -> {
+                        7 -> {
                             onTabClicks()
                             loadFragment(NLSIAFeedFodderFragment())
                         }
