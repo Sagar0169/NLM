@@ -34,16 +34,34 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/tv1"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Name of the Official"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="8"
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Name of the Official"
+
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <ImageButton
+                        android:padding="@dimen/dp_5"
+                        android:id="@+id/btnDelete"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/baseline_delete_24"
+                        app:layout_constraintTop_toBottomOf="@+id/llone"
+                        />
+                </LinearLayout>
+
 
                 <EditText
                     android:id="@+id/nameOfOfficial"
@@ -117,35 +135,29 @@
 
 
             </LinearLayout>
-
+            <TextView
+                android:layout_below="@+id/llone"
+                android:id="@+id/tvSubmit"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="@dimen/dp_50"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:background="@drawable/curve_fill_blue"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingVertical="@dimen/dp_10"
+                android:text="Submit"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btnDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/llone"
-            android:layout_alignParentEnd="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Delete row"
-            android:src="@android:drawable/ic_delete"
-            app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-            app:layout_constraintTop_toBottomOf="@+id/llone"
-            app:tint="@android:color/holo_red_dark" />
 
-        <ImageButton
-            android:layout_below="@+id/llone"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Add row"
-            android:src="@android:drawable/ic_input_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llone"
-            app:tint="@android:color/holo_green_dark" />
+
+
 
     </RelativeLayout>
 </layout>

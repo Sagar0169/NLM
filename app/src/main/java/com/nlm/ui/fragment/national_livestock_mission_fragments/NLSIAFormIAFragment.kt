@@ -55,8 +55,8 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
-        mBinding?.tvState?.text= getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_name
-        mBinding?.tvState?.isEnabled=false
+        mBinding?.etState?.text= getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_name
+        mBinding?.etState?.isEnabled=false
 
     }
 

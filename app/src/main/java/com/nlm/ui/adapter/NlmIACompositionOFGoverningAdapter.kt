@@ -16,7 +16,7 @@ import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 
 class NlmIACompositionOFGoverningAdapter(
     private val programmeList: MutableList<ImplementingAgencyAdvisoryCommittee>,
-    private val callBackItem: AddItemCallBack,
+//    private val callBackItem: AddItemCallBack,
 ) : RecyclerView.Adapter<NlmIACompositionOFGoverningAdapter.NlmIACompositionOFGoverning>() {
 
 
@@ -31,50 +31,14 @@ class NlmIACompositionOFGoverningAdapter(
         }
 
     override fun onBindViewHolder(holder: NlmIACompositionOFGoverning, position: Int) {
-
         val currentItem = programmeList[position]
-
-        // Set the existing data (if any) in the fields to prevent them from being cleared
-        holder.binding.nameOfOfficial.setText(currentItem.name_of_the_official ?: "")
-        holder.binding.nameOfDesignation.setText(currentItem.designation ?: "")
-        holder.binding.nameOfOrganization.setText(currentItem.organization ?: "")
-
-        // Handle visibility of add/delete buttons
-        handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
-
-        // Add button logic
-        holder.binding.btnAdd.setOnClickListener {
-            val currentText = holder.binding.nameOfOfficial.text.toString().trim()
-            val currentText2 = holder.binding.nameOfDesignation.text.toString().trim()
-            val currentText3 = holder.binding.nameOfOrganization.text.toString().trim()
-
-            // Ensure that the current field is not empty
-            if (currentText.isNotEmpty() && currentText2.isNotEmpty() && currentText3.isNotEmpty()) {
-                // Update the current item with the new data
-                programmeList[position] = ImplementingAgencyAdvisoryCommittee(currentText, currentText2, currentText3, null, null)
-                // Add a new empty item at the end of the list
-                callBackItem.onClickItem(programmeList)
-                programmeList.add(ImplementingAgencyAdvisoryCommittee("", "", "", null, null))
-
-                // Notify that a new item has been inserted
-                notifyItemInserted(programmeList.size - 1)
-                notifyItemChanged(position)  // Update the current row
-            } else {
-                // Show a message to the user to fill in all fields before adding a new one
-                Toast.makeText(holder.itemView.context, "Please fill in all fields before adding a new one.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
+        holder.binding.nameOfOfficial.setText(currentItem.name_of_the_official)
+        holder.binding.nameOfDesignation.setText(currentItem.designation)
+        holder.binding.nameOfOrganization.setText(currentItem.organization)
         // Delete button logic
         holder.binding.btnDelete.setOnClickListener {
-            if (programmeList.size > 1) {
-                // Remove the item at the current position
-                programmeList.removeAt(position)
-
-                // Notify that an item has been removed and update the RecyclerView
+                  programmeList.removeAt(position)
                 notifyItemRemoved(position)
-                notifyItemRangeChanged(position, programmeList.size)
-            }
         }
     }
 

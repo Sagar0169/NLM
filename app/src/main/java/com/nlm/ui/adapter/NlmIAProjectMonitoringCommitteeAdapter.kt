@@ -19,7 +19,7 @@ import com.nlm.model.ImplementingAgencyProjectMonitoring
 
 class NlmIAProjectMonitoringCommitteeAdapter(
     private val programmeList: MutableList<ImplementingAgencyProjectMonitoring>,
-    private val callBackItem: AddItemCallBackProjectMonitoring,
+//    private val callBackItem: AddItemCallBackProjectMonitoring,
 ) : RecyclerView.Adapter<NlmIAProjectMonitoringCommitteeAdapter.NlmIACompositionOFGoverning>() {
 
 
@@ -43,30 +43,30 @@ class NlmIAProjectMonitoringCommitteeAdapter(
         holder.binding.nameOfOrganization.setText(currentItem.organization ?: "")
 
         // Handle visibility of add/delete buttons
-        handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
-
-        // Add button logic
-        holder.binding.btnAdd.setOnClickListener {
-            val currentText = holder.binding.nameOfOfficial.text.toString().trim()
-            val currentText2 = holder.binding.nameOfDesignation.text.toString().trim()
-            val currentText3 = holder.binding.nameOfOrganization.text.toString().trim()
-
-            // Ensure that the current field is not empty
-            if (currentText.isNotEmpty() && currentText2.isNotEmpty() && currentText3.isNotEmpty()) {
-                // Update the current item with the new data
-                programmeList[position] = ImplementingAgencyProjectMonitoring(currentText, currentText2, currentText3, currentItem.id)
-                // Add a new empty item at the end of the list
-                callBackItem.onClickItem2(programmeList)
-                programmeList.add(ImplementingAgencyProjectMonitoring("", "", "", null))
-
-                // Notify that a new item has been inserted
-                notifyItemInserted(programmeList.size - 1)
-                notifyItemChanged(position)  // Update the current row
-            } else {
-                // Show a message to the user to fill in all fields before adding a new one
-                Toast.makeText(holder.itemView.context, "Please fill in all fields before adding a new one.", Toast.LENGTH_SHORT).show()
-            }
-        }
+//        handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
+//
+//        // Add button logic
+//        holder.binding.btnAdd.setOnClickListener {
+//            val currentText = holder.binding.nameOfOfficial.text.toString().trim()
+//            val currentText2 = holder.binding.nameOfDesignation.text.toString().trim()
+//            val currentText3 = holder.binding.nameOfOrganization.text.toString().trim()
+//
+//            // Ensure that the current field is not empty
+//            if (currentText.isNotEmpty() && currentText2.isNotEmpty() && currentText3.isNotEmpty()) {
+//                // Update the current item with the new data
+//                programmeList[position] = ImplementingAgencyProjectMonitoring(currentText, currentText2, currentText3, currentItem.id)
+//                // Add a new empty item at the end of the list
+//                callBackItem.onClickItem2(programmeList)
+//                programmeList.add(ImplementingAgencyProjectMonitoring("", "", "", null))
+//
+//                // Notify that a new item has been inserted
+//                notifyItemInserted(programmeList.size - 1)
+//                notifyItemChanged(position)  // Update the current row
+//            } else {
+//                // Show a message to the user to fill in all fields before adding a new one
+//                Toast.makeText(holder.itemView.context, "Please fill in all fields before adding a new one.", Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
         // Delete button logic
         holder.binding.btnDelete.setOnClickListener {
