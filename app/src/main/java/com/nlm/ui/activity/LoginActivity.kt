@@ -117,36 +117,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             userResponseModel._result.role_name,
                             userResponseModel._result.schemes,
                             userResponseModel._result.state_code,
+                            userResponseModel._result.state_name,
                            null,
                             userResponseModel._result.user_id,
                         )
                     )
 
-                    userResponseModel._result.user_id?.let { it1 ->
-                        Utility.savePreferencesInt(
-                            this, AppConstants.USER_ID,
-                            it1
-                        )
-                    }
-
-                    userResponseModel._result.role_id?.let { it1 ->
-                        Utility.savePreferencesString(
-                            this, AppConstants.ROLE_ID,
-                            it1.toString()
-                        )
-                    }
                     userResponseModel._result.token?.let { it1 ->
                         Utility.savePreferencesString(
                             this, PrefEntities.TOKEN,
                             it1
                         )
 
-                    }
-
-                    userResponseModel._result.role_name.let { it1 ->
-                        Utility.savePreferencesString(this,AppConstants.ROLE_NAME,
-                            it1
-                        )
                     }
                         startActivity(
                             Intent(

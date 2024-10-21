@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
+import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
+import com.nlm.model.ImplementingAgencyResponseNlm
 import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.repository.Repository
@@ -28,6 +30,7 @@ class ViewModel : ViewModel() {
     var loginResult = MutableLiveData<LoginResponse>()
     var getDropDownResult = MutableLiveData<GetDropDownResponse>()
     var implementingAgencyResult = MutableLiveData<ImplementingAgencyResponse>()
+    var implementingAgencyAddResult = MutableLiveData<ImplementingAgencyResponseNlm>()
 
     val errors = MutableLiveData<String>()
 
@@ -174,6 +177,58 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 implementingAgencyResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
+    fun getImplementingAgencyAddApi(context: Context, loader: Boolean, request: ImplementingAgencyAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getImplementingAgencyAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                implementingAgencyAddResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

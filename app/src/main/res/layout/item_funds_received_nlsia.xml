@@ -38,12 +38,14 @@
                 android:textSize="@dimen/sp_16" />
 
             <EditText
+                android:id="@+id/etYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_7"
                 android:background="@drawable/curve_all_corner_grey"
                 android:fontFamily="@font/opensans_regular"
                 android:hint=""
+                android:inputType="number"
                 android:maxLength="50"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5"
@@ -64,12 +66,14 @@
                 android:textSize="@dimen/sp_16" />
 
             <EditText
+                android:id="@+id/etFormDahd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_7"
                 android:background="@drawable/curve_all_corner_grey"
                 android:fontFamily="@font/opensans_regular"
                 android:hint=""
+                android:inputType="numberDecimal"
                 android:maxLength="50"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5"
@@ -90,12 +94,14 @@
                 android:textSize="@dimen/sp_16" />
 
             <EditText
+                android:id="@+id/etStateGovt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_7"
                 android:background="@drawable/curve_all_corner_grey"
                 android:fontFamily="@font/opensans_regular"
                 android:hint=""
+                android:inputType="numberDecimal"
                 android:maxLength="50"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5"
@@ -115,12 +121,14 @@
                 android:textSize="@dimen/sp_16" />
 
             <EditText
+                android:id="@+id/etAnyOther"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_7"
                 android:background="@drawable/curve_all_corner_grey"
                 android:fontFamily="@font/opensans_regular"
                 android:hint=""
+                android:inputType="numberDecimal"
                 android:maxLength="50"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5"
@@ -140,12 +148,14 @@
                 android:textSize="@dimen/sp_16" />
 
             <EditText
+                android:id="@+id/etPhysicalProgress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_7"
                 android:background="@drawable/curve_all_corner_grey"
                 android:fontFamily="@font/opensans_regular"
                 android:hint=""
+                android:inputType="numberDecimal"
                 android:maxLength="50"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5"

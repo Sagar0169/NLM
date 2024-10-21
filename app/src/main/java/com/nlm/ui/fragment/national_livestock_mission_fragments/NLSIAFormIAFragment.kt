@@ -8,14 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.FragmentNLSIAFormBinding
+import com.nlm.model.ImplementingAgencyAddRequest
+import com.nlm.model.Result
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
+import com.nlm.utilities.Preferences
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.viewModel.ViewModel
 
 
 class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a_form
-
+    private var viewModel = ViewModel()
     private lateinit var bottomSheetAdapter: BottomSheetAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
@@ -47,6 +54,10 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
+        viewModel.init()
+        mBinding?.tvState?.text= getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_name
+        mBinding?.tvState?.isEnabled=false
+
     }
 
     override fun setVariables() {
@@ -54,7 +65,18 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
     }
 
     override fun setObservers() {
-
+      viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
+          val userResponseModel = it
+          if (userResponseModel!=null)
+          {
+              if(userResponseModel._resultflag==0){
+                  showSnackbar(mBinding!!.clParent, userResponseModel.message)
+              }
+              else{
+                  showSnackbar(mBinding!!.clParent, userResponseModel.message)
+              }
+          }
+      }
     }
     inner class ClickActions {
 
@@ -67,7 +89,88 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
         fun state(view: View){showBottomSheetDialog("state")}
         fun district(view: View){showBottomSheetDialog("district")}
         fun designation(view: View){showBottomSheetDialog("designation")}
-        fun organisation(view: View){showBottomSheetDialog("organisation")}
+        fun save(view: View){
+            viewModel.getImplementingAgencyAddApi(requireContext(),true,
+                ImplementingAgencyAddRequest(
+                    getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                    mBinding?.etNameAndLocationOfIa?.text.toString(),
+                    mBinding?.etDirectorDGCeoName?.text.toString(),
+                    mBinding?.etTechnicalStaffRegularDepute?.text.toString().toInt(),
+                    mBinding?.etTechnicalStaffManpowerDepute?.text.toString().toInt(),
+                    mBinding?.etAdminStaffEmployeeDepute?.text.toString().toInt(),
+                    mBinding?.etAdminStaffManpowerDepute?.text.toString().toInt(),
+                    mBinding?.etOtherStaffEmployeeDepute?.text.toString().toInt(),
+                    mBinding?.etOtherStaffManpowerDepute?.text.toString().toInt(),
+                    mBinding?.etOrganisationalChart?.text.toString(),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+
+                )
+            )
+        }
+
     }
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(requireContext())
@@ -90,35 +193,11 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
 
         // Initialize based on type
         when (type) {
-//            "hairLength" -> {
-//                selectedList = group
-//                selectedTextView = mBinding!!.etGroup
-//            }
-//
-//            "hairColor" -> {
-//                selectedList = role
-//                selectedTextView = mBinding!!.etRole
-//            }
-//
             "state" -> {
                 selectedList = state
                 selectedTextView = mBinding!!.etState
             }
-//
-//            "eyeColor" -> {
-//                selectedList = district
-//                selectedTextView = mBinding!!.etDistrict
-//            }
-//
-//            "earsType" -> {
-//                selectedList = designation
-//                selectedTextView = mBinding!!.etDesignation
-//            }
-//
-//            "earsSize" -> {
-//                selectedList = organisation
-//                selectedTextView = mBinding!!.etOrganisation
-//            }
+
 
             else -> return
         }

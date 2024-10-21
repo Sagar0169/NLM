@@ -11,6 +11,7 @@
 
     <RelativeLayout
         android:background="@color/white"
+        android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragment.national_livestock_mission_fragments.NLSIAInfrastructureSheepGoat">
@@ -75,6 +76,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etFrozenSemenNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -98,6 +100,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etFrozenSemenLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -141,6 +144,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etLiquidSemenNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -163,6 +167,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etLiquidSemenLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -207,6 +212,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etProductionCapacityNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -229,6 +235,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etProductionCapacityLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -272,6 +279,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etActualProductionNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -294,6 +302,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etActualProductionLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -337,6 +346,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etNoOfDosesOfSemenNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -359,6 +369,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etNoOfDosesOfSemenLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -402,6 +413,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etNoOfDosesOfSemenNeighbouringNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -424,6 +436,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etNoOfDosesOfSemenNeighbouringnLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -467,6 +480,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAvailabilityOfLiquidNitrogenNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -489,6 +503,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etAvailabilityOfLiquidNitrogenLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -532,6 +547,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etBreedingFramsNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -554,6 +570,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etBreedingFramsLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -597,6 +614,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etGoatBreedingFramsNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -619,6 +637,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etGoatBreedingFramsLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -662,6 +681,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etTrainingCentersNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -684,6 +704,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etTrainingCentersLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -727,6 +748,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etCatelAiNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -749,6 +771,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etCatelAiLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -792,6 +815,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etTotalAiNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -814,6 +838,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etTotalAiLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
@@ -838,6 +863,7 @@
                         android:textSize="@dimen/sp_16" />
 
                     <EditText
+                        android:id="@+id/etTotalNoOfReginalSemenBank"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
@@ -868,6 +894,7 @@
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
                     android:text="@string/save_and_next"
+                    android:onClick="@{ClickAction::save}"
                     android:textSize="20sp"
                     android:textAlignment="center"
                     android:textColor="@color/white" />

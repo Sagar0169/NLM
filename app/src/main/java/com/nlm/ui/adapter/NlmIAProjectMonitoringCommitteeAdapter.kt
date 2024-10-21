@@ -5,19 +5,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.compose.runtime.currentRecomposeScope
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.callBack.AddItemCallBack
+import com.nlm.callBack.AddItemCallBackProjectMonitoring
 import com.nlm.databinding.ItemAvilabilityOfEquipmentBinding
 import com.nlm.databinding.ItemCompositionOfGoverningBinding
 import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
 
 import com.nlm.databinding.ItemQualityBuckBinding
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
+import com.nlm.model.ImplementingAgencyProjectMonitoring
 
-class NlmIACompositionOFGoverningAdapter(
-    private val programmeList: MutableList<ImplementingAgencyAdvisoryCommittee>,
-    private val callBackItem: AddItemCallBack,
-) : RecyclerView.Adapter<NlmIACompositionOFGoverningAdapter.NlmIACompositionOFGoverning>() {
+class NlmIAProjectMonitoringCommitteeAdapter(
+    private val programmeList: MutableList<ImplementingAgencyProjectMonitoring>,
+    private val callBackItem: AddItemCallBackProjectMonitoring,
+) : RecyclerView.Adapter<NlmIAProjectMonitoringCommitteeAdapter.NlmIACompositionOFGoverning>() {
 
 
 
@@ -35,7 +38,7 @@ class NlmIACompositionOFGoverningAdapter(
         val currentItem = programmeList[position]
 
         // Set the existing data (if any) in the fields to prevent them from being cleared
-        holder.binding.nameOfOfficial.setText(currentItem.name_of_the_official ?: "")
+        holder.binding.nameOfOfficial.setText(currentItem.name_of_official ?: "")
         holder.binding.nameOfDesignation.setText(currentItem.designation ?: "")
         holder.binding.nameOfOrganization.setText(currentItem.organization ?: "")
 
@@ -51,10 +54,10 @@ class NlmIACompositionOFGoverningAdapter(
             // Ensure that the current field is not empty
             if (currentText.isNotEmpty() && currentText2.isNotEmpty() && currentText3.isNotEmpty()) {
                 // Update the current item with the new data
-                programmeList[position] = ImplementingAgencyAdvisoryCommittee(currentText, currentText2, currentText3, null, null)
+                programmeList[position] = ImplementingAgencyProjectMonitoring(currentText, currentText2, currentText3, currentItem.id)
                 // Add a new empty item at the end of the list
-                callBackItem.onClickItem(programmeList)
-                programmeList.add(ImplementingAgencyAdvisoryCommittee("", "", "", null, null))
+                callBackItem.onClickItem2(programmeList)
+                programmeList.add(ImplementingAgencyProjectMonitoring("", "", "", null))
 
                 // Notify that a new item has been inserted
                 notifyItemInserted(programmeList.size - 1)

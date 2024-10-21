@@ -9,6 +9,7 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/clParent"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -93,7 +94,7 @@
             android:background="@drawable/curve_fill_blue"
             android:clickable="true"
             android:fontFamily="@font/poppins_medium"
-
+             android:onClick="@{ClickAction::save2}"
             android:paddingHorizontal="@dimen/dp_20"
             android:paddingVertical="@dimen/dp_10"
             android:text="Next"
