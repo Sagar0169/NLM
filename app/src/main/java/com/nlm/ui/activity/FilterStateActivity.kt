@@ -1,7 +1,9 @@
 package com.nlm.ui.activity
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -11,45 +13,98 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityFilterStateBinding
+import com.nlm.model.ArtificialInseminationRequest
+import com.nlm.model.DataArtificialInsemination
+import com.nlm.model.GetDropDownRequest
+import com.nlm.model.Result
+import com.nlm.model.ResultGetDropDown
+import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.StateAdapter
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.Utility
+import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.utilities.toast
+import com.nlm.viewModel.ViewModel
 
 class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
     private var binding: ActivityFilterStateBinding? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
-    private lateinit var stateAdapter: StateAdapter
-    private val stateList = listOf(
-        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
-        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
-        "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
-        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
-        "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
-        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep",
-        "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
-    )
-    private val status = listOf(
-        "Active", "In Active"
-    )
-    private val reading = listOf(
-        "Yes", "No"
-    )
+    private lateinit var stateAdapter: BottomSheetAdapter
+    private var viewModel = ViewModel()
+    private var currentPage = 1
+    private var totalPage = 1
+    private var loading = true
+    private var stateList = ArrayList<ResultGetDropDown>()
+    private var layoutManager: LinearLayoutManager? = null
+    private var stateId: Int? = null // Store selected state
+
+
+    //    private val stateList = listOf(
+//        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+//        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+//        "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+//        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+//        "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+//        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
+//        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep",
+//        "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
+//    )
+//    private val status = listOf(
+//        "Active", "In Active"
+//    )
+//    private val reading = listOf(
+//        "Yes", "No"
+//    )
     override val layoutId: Int
         get() = R.layout.activity_filter_state
 
     override fun initView() {
         binding = viewDataBinding
         binding?.clickAction = ClickActions()
+        viewModel.init()
         val isFrom = intent?.getIntExtra("isFrom", 0)
+        val selectedStateId = intent.getIntExtra("selectedStateId", 0)
+        val selectedLocation = intent.getStringExtra("selectedLocation")
 
         when (isFrom) {
 
             0 -> {
                 binding!!.tvTitleState.showView()
                 binding!!.tvState.showView()
+
+                binding!!.tvLocationNDD.text = "Name/Location"
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+
+                }
+                binding!!.tvLocationNDD.showView()
+                if (selectedLocation != null) {
+                    binding?.etLocationNDD?.setText(selectedLocation)
+                }
+
+                binding!!.etLocationNDD.showView()
             }
+
             1 -> {
                 binding!!.tvTitleState.showView()
                 binding!!.tvState.showView()
@@ -83,6 +138,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etVillageName.showView()
 
             }
+
             5 -> {
                 binding!!.tvTitleState.showView()
                 binding!!.tvState.showView()
@@ -191,7 +247,8 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etCommentProgress.showView()
 
             }
-            25->{
+
+            25 -> {
 
                 binding!!.tvStateTitleNDD.showView()
                 binding!!.tvStateNDD.showView()
@@ -201,7 +258,8 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etNameofMilkUnion.showView()
 
             }
-            26->{
+
+            26 -> {
                 binding!!.tvStateTitleNDD.showView()
                 binding!!.tvStateNDD.showView()
                 binding!!.tvTitleDistrict.showView()
@@ -211,7 +269,8 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
 
 
             }
-            27->{
+
+            27 -> {
                 binding!!.tvStateTitleNDD.showView()
                 binding!!.tvStateNDD.showView()
                 binding!!.tvTitleDistrict.showView()
@@ -221,7 +280,8 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvnameOfDcs.showView()
                 binding!!.etnameOfDcs.showView()
             }
-            28->{
+
+            28 -> {
                 binding!!.tvStateTitleNDD.showView()
                 binding!!.tvStateNDD.showView()
                 binding!!.tvTitleDistrict.showView()
@@ -229,13 +289,15 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvLocationNDD.showView()
                 binding!!.etLocationNDD.showView()
             }
-            29->{
+
+            29 -> {
                 binding!!.tvTitleNDD.showView()
                 binding!!.etTitleNDD.showView()
                 binding!!.tvStatus.showView()
 
             }
-            30->{
+
+            30 -> {
                 binding!!.tvStateTitleNDD.showView()
                 binding!!.tvStateNDD.showView()
                 binding!!.tvTitleDistrict.showView()
@@ -248,13 +310,15 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etDateOfInspection.showView()
 
             }
-            31->{
+
+            31 -> {
                 binding!!.tvTitleNDD.showView()
                 binding!!.etTitleNDD.showView()
                 binding!!.tvStatus.showView()
 
             }
-            32->{
+
+            32 -> {
                 binding!!.tvStateTitleNDD.showView()
                 binding!!.tvStateNDD.showView()
                 binding!!.tvTitleDistrict.showView()
@@ -262,28 +326,26 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvTitleVillageName.showView()
                 binding!!.etVillageName.showView()
             }
-            33->{
+
+            33 -> {
                 binding!!.tvNameOfBeneficiaery.showView()
                 binding!!.etNameOfBeneficiary.showView()
 
             }
-            34->{
+
+            34 -> {
                 binding!!.tvState.showView()
                 binding!!.tvTitleState.showView()
                 binding!!.tvTitleLoc.showView()
                 binding!!.etLoc.showView()
 
             }
-            35->{
+
+            35 -> {
                 binding!!.tvTitleVillageName.showView()
                 binding!!.etVillageName.showView()
 
             }
-
-
-
-
-
 
 
             else -> {
@@ -297,12 +359,30 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         }
         binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.grey))
         binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.grey))
-        binding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
+        binding!!.tvState.setOnClickListener {
+            showBottomSheetDialog("State")
+
+        }
         binding!!.tvStateNDD.setOnClickListener { showBottomSheetDialog("StateNDD") }
         binding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
         binding!!.tvStatus.setOnClickListener { showBottomSheetDialog("Status") }
         binding!!.tvReadingMaterial.setOnClickListener { showBottomSheetDialog("Reading") }
 
+    }
+
+    private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
+        if (paginate) {
+            currentPage++
+        }
+        viewModel.getDropDownApi(
+            this, loader, GetDropDownRequest(
+                20,
+                "States",
+                currentPage,
+                null,
+                getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+            )
+        )
     }
 
 
@@ -322,15 +402,17 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         }
 
         // Define a variable for the selected list and TextView
-        val selectedList: List<String>
+        val selectedList: List<ResultGetDropDown>
         val selectedTextView: TextView
 
         // Initialize based on type
         when (type) {
             "State" -> {
+                dropDownApiCall(paginate = false, loader = true)
                 selectedList = stateList
                 selectedTextView = binding!!.tvState
             }
+
             "StateNDD" -> {
                 selectedList = stateList
                 selectedTextView = binding!!.tvStateNDD
@@ -341,31 +423,35 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 selectedTextView = binding!!.tvDistrict
             }
 
-            "Status" -> {
-                selectedList = status
-                selectedTextView = binding!!.tvStatus
-            }
-
-            "Reading" -> {
-                selectedList = reading
-                selectedTextView = binding!!.tvReadingMaterial
-            }
+//            "Status" -> {
+//                selectedList = status
+//                selectedTextView = binding!!.tvStatus
+//            }
+//
+//            "Reading" -> {
+//                selectedList = reading
+//                selectedTextView = binding!!.tvReadingMaterial
+//            }
 
             else -> return
         }
 
         // Set up the adapter
-        stateAdapter = StateAdapter(selectedList, this) { selectedItem ->
+        stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
             // Handle state item click
             selectedTextView.text = selectedItem
+            stateId = id
             selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
             bottomSheetDialog.dismiss()
         }
 
-        rvBottomSheet.layoutManager =
+        layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.layoutManager = layoutManager
         rvBottomSheet.adapter = stateAdapter
+        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
         bottomSheetDialog.setContentView(view)
+
 
         // Rotate drawable
         val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
@@ -399,25 +485,100 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         return rotateDrawable
     }
 
+//    private fun swipeForRefreshImplementingAgency() {
+//        mBinding?.srlImplementingAgency?.setOnRefreshListener {
+//            implementingAgencyAPICall(paginate = false, loader = true)
+//            mBinding?.srlImplementingAgency?.isRefreshing = false
+//        }
+//    }
+
+    private var recyclerScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val visibleItemCount: Int? = layoutManager?.childCount
+                    val totalItemCount: Int? = layoutManager?.itemCount
+                    val pastVisiblesItems: Int? = layoutManager?.findFirstVisibleItemPosition()
+                    if (loading) {
+                        if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
+                            loading = false
+                            if (currentPage < totalPage) {
+                                //Call API here
+                                dropDownApiCall(paginate = true, loader = true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 
     override fun setVariables() {
     }
 
     override fun setObservers() {
+
+        viewModel.getDropDownResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            } else {
+                if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
+                    if (currentPage == 1) {
+                        stateList.clear()
+
+                        val remainingCount = userResponseModel.total_count % 10
+                        totalPage = if (remainingCount == 0) {
+                            val count = userResponseModel.total_count / 10
+                            count
+                        } else {
+                            val count = userResponseModel.total_count / 10
+                            count + 1
+                        }
+                    }
+                    stateList.addAll(userResponseModel._result)
+                    stateAdapter.notifyDataSetChanged()
+
+//                    mBinding?.tvNoDataFound?.hideView()
+//                    mBinding?.rvArtificialInsemination?.showView()
+                } else {
+//                    mBinding?.tvNoDataFound?.showView()
+//                    mBinding?.rvArtificialInsemination?.hideView()
+                }
+            }
+        }
+
     }
 
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+        fun clear(view: View) {
+            val isFrom = intent?.getIntExtra("isFrom", 0)
+
+            if (isFrom == 0 && stateId != null) {
+               binding!!.etLocationNDD.setText("")
+            }
+        }
 
 
         fun submit(view: View) {
-            toast("Filter Applied")
-//            val intent =
-//                Intent(this@AddImplementingAgency, ImplementingAgencyMasterActivity::class.java)
-//            startActivity(intent)
-            finish()
+            val isFrom = intent?.getIntExtra("isFrom", 0)
+
+            if (isFrom == 0 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("nameLocation", binding!!.etLocationNDD.text.toString())
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                toast(stateId.toString())
+                finish()
+            }
+
+            // Close the activity
+
         }
     }
 }

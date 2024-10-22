@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.FragmentStateSemenBasicInformationBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
 
 
@@ -16,7 +17,7 @@ class StateSemenBasicInformationFragment : BaseFragment<FragmentStateSemenBasicI
     override val layoutId: Int
         get() = R.layout.fragment_state_semen__basic_information
     private var mBinding: FragmentStateSemenBasicInformationBinding?=null
-    private lateinit var bottomSheetAdapter: BottomSheetAdapter
+    private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
     private val state = listOf(
@@ -79,7 +80,7 @@ class StateSemenBasicInformationFragment : BaseFragment<FragmentStateSemenBasicI
 
             else -> return
         }
-        bottomSheetAdapter = BottomSheetAdapter(requireContext(),selectedList) { selectedItem ->
+        bottomSheetAdapter = StateAdapter(selectedList,requireContext()) { selectedItem ->
             selectedTextView.text = selectedItem
             bottomSheetDialog.dismiss()
         }

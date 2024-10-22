@@ -1,5 +1,7 @@
 package com.nlm.repository
 
+import com.nlm.model.ArtificialInseminationRequest
+import com.nlm.model.ArtificialInseminationResponse
 import com.nlm.model.DashboardResponse
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
@@ -47,6 +49,11 @@ object Repository {
     suspend fun getImplementingAgency(request: ImplementingAgencyRequest): Response<ImplementingAgencyResponse> {
         return api.getImplementingAgency(request)
     }
+
+    suspend fun getArtificialInsemination(request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse> {
+        return api.getArtificialInsemination(request)
+    }
+
     suspend fun getImplementingAgencyAdd(request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm> {
         return api.getImplementingAgencyAdd(request)
     }

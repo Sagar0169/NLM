@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.FragmentRSPBasicInformationBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.StateAdapter
 import com.nlm.ui.adapter.rgm.AvailabilityOfEquipmentAdapter
 import com.nlm.utilities.BaseFragment
 
@@ -17,7 +18,7 @@ class RSPBasicInformationFragment : BaseFragment<FragmentRSPBasicInformationBind
     override val layoutId: Int
         get() = R.layout.fragment_r_s_p__basic_information
     private var mBinding: FragmentRSPBasicInformationBinding?=null
-    private lateinit var bottomSheetAdapter: BottomSheetAdapter
+    private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var adapter: AvailabilityOfEquipmentAdapter
     private lateinit var programmeList: MutableList<Array<String>>
@@ -89,7 +90,7 @@ class RSPBasicInformationFragment : BaseFragment<FragmentRSPBasicInformationBind
 
             else -> return
         }
-        bottomSheetAdapter = BottomSheetAdapter(requireContext(),selectedList) { selectedItem ->
+        bottomSheetAdapter = StateAdapter(selectedList,requireContext()) { selectedItem ->
             selectedTextView.text = selectedItem
             bottomSheetDialog.dismiss()
         }

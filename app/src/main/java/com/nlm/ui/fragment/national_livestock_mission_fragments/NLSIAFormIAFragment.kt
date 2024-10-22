@@ -11,6 +11,7 @@ import com.nlm.databinding.FragmentNLSIAFormBinding
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
@@ -23,7 +24,7 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a_form
     private var viewModel = ViewModel()
-    private lateinit var bottomSheetAdapter: BottomSheetAdapter
+    private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
     private var mBinding:FragmentNLSIAFormBinding?=null
@@ -201,7 +202,7 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
 
             else -> return
         }
-        bottomSheetAdapter = BottomSheetAdapter(requireContext(),selectedList) { selectedItem ->
+        bottomSheetAdapter = StateAdapter(selectedList,requireContext()) { selectedItem ->
             selectedTextView.text = selectedItem
             bottomSheetDialog.dismiss()
         }

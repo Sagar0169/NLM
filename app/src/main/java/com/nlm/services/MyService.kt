@@ -1,6 +1,7 @@
 package com.nlm.services
 
 import com.nlm.model.ArtificialInseminationRequest
+import com.nlm.model.ArtificialInseminationResponse
 import com.nlm.model.DashboardResponse
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
@@ -42,7 +43,7 @@ interface MyService {
     suspend fun getImplementingAgency(@Body request: ImplementingAgencyRequest): Response<ImplementingAgencyResponse>
 
     @POST(ARTIFICIAL_INSEMINATION_LIST)
-    suspend fun getArtificialInsemination(@Body request: ArtificialInseminationRequest): Response<ImplementingAgencyResponse>
+    suspend fun getArtificialInsemination(@Body request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse>
 
 
     @POST(IMPLEMENTING_AGENCY_ADD)

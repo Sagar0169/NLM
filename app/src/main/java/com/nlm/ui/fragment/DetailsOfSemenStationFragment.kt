@@ -11,6 +11,7 @@ import com.nlm.R
 import com.nlm.databinding.FragmentDetailsOfSemenStationBinding
 import com.nlm.model.details_Semen_Station
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.StateAdapter
 
 import com.nlm.utilities.BaseFragment
 
@@ -40,7 +41,7 @@ class DetailsOfSemenStationFragment : BaseFragment<FragmentDetailsOfSemenStation
     override val layoutId: Int
         get() = R.layout.fragment_details_of__semen__station
     private var mBinding: FragmentDetailsOfSemenStationBinding?=null
-    private lateinit var bottomSheetAdapter: BottomSheetAdapter
+    private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
     private val state = listOf(
@@ -107,7 +108,7 @@ class DetailsOfSemenStationFragment : BaseFragment<FragmentDetailsOfSemenStation
 
             else -> return
         }
-        bottomSheetAdapter = BottomSheetAdapter(requireContext(),selectedList) { selectedItem ->
+        bottomSheetAdapter = StateAdapter(selectedList,requireContext()) { selectedItem ->
             selectedTextView.text = selectedItem
             bottomSheetDialog.dismiss()
         }

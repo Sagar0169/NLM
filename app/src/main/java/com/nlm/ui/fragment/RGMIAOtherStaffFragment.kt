@@ -9,12 +9,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.FragmentRGMIAOtherStaffBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseFragment
 
 
 class RGMIAOtherStaffFragment : BaseFragment<FragmentRGMIAOtherStaffBinding>() {
     private var mBinding: FragmentRGMIAOtherStaffBinding? = null
-    private lateinit var bottomSheetAdapter: BottomSheetAdapter
+    private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
     override val layoutId: Int
         get() = R.layout.fragment_r_g_m__i_a__other__staff
@@ -74,7 +75,7 @@ class RGMIAOtherStaffFragment : BaseFragment<FragmentRGMIAOtherStaffBinding>() {
 
             else -> return
         }
-        bottomSheetAdapter = BottomSheetAdapter(requireContext(),selectedList) { selectedItem ->
+        bottomSheetAdapter = StateAdapter(selectedList,requireContext()) { selectedItem ->
             selectedTextView.text = selectedItem
             bottomSheetDialog.dismiss()
         }

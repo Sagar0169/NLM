@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityBullMotherFarmsBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.StateAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapter
 import com.nlm.utilities.BaseActivity
 
@@ -19,7 +20,7 @@ class BullMotherFarms :BaseActivity<ActivityBullMotherFarmsBinding>() {
     private lateinit var programmeList: MutableList<Array<String>>
     override val layoutId: Int
         get() = R.layout.activity_bull_mother_farms
-    private lateinit var bottomSheetAdapter: BottomSheetAdapter
+    private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
     private val state = listOf(
@@ -96,7 +97,7 @@ class BullMotherFarms :BaseActivity<ActivityBullMotherFarmsBinding>() {
 
             else -> return
         }
-        bottomSheetAdapter = BottomSheetAdapter(this,selectedList) { selectedItem ->
+        bottomSheetAdapter = StateAdapter(selectedList,this) { selectedItem ->
             selectedTextView.text = selectedItem
             bottomSheetDialog.dismiss()
         }

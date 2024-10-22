@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nlm.model.ArtificialInseminationRequest
+import com.nlm.model.ArtificialInseminationResponse
 import com.nlm.model.DashboardResponse
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
@@ -35,6 +37,7 @@ class ViewModel : ViewModel() {
     var dashboardResult = MutableLiveData<DashboardResponse>()
     var getDropDownResult = MutableLiveData<GetDropDownResponse>()
     var implementingAgencyResult = MutableLiveData<ImplementingAgencyResponse>()
+    var artificialInseminationResult = MutableLiveData<ArtificialInseminationResponse>()
     var implementingAgencyAddResult = MutableLiveData<ImplementingAgencyResponseNlm>()
 
     val errors = MutableLiveData<String>()
@@ -221,9 +224,9 @@ class ViewModel : ViewModel() {
         }
     }
 
-    fun getDropDownApi(context: Context, request: GetDropDownRequest) {
+    fun getDropDownApi(context: Context, loader: Boolean, request: GetDropDownRequest) {
         // can be launched in a separate asynchronous job
-        networkCheck(context, true)
+        networkCheck(context, loader)
 
         job = scope.launch {
             try {
@@ -378,4 +381,58 @@ class ViewModel : ViewModel() {
             }
         }
     }
+
+    fun getArtificialInseminationApi(context: Context, loader: Boolean, request: ArtificialInseminationRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getArtificialInsemination(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                artificialInseminationResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
+
 }

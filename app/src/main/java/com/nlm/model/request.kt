@@ -41,6 +41,7 @@ data class ImplementingAgencyRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val name_location_of_ai: String?,
     val limit: Int,
     val page: Int
 )
