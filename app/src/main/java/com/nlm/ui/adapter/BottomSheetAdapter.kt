@@ -7,22 +7,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
+import com.nlm.model.ResultGetDropDown
 
 class BottomSheetAdapter(
     private val context: Context,
-    private val list: List<String>,
-    private val onItemClicked: (String) -> Unit // Lambda for item clicks
+    private val list: List<ResultGetDropDown>,
+    private val onItemClicked: (String,Int) -> Unit // Lambda for item clicks
 ) : RecyclerView.Adapter<BottomSheetAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.tvStateName)
 
-        fun bind(text: String) {
-            textView.text = text
+        fun bind(text: ResultGetDropDown) {
+            textView.text = text.name
 
             // Set click listener for the item
             itemView.setOnClickListener {
-                onItemClicked(text) // Call the lambda function with the selected item
+                onItemClicked(text.name,text.id) // Call the lambda function with the selected item
             }
         }
     }
@@ -40,5 +41,13 @@ class BottomSheetAdapter(
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 }

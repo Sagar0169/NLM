@@ -10,13 +10,14 @@ import com.nlm.R
 import com.nlm.databinding.ActivityArtificialInseminationBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.ObservationAIAdapter
+import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseActivity
 
 class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationBinding>(){
     override val layoutId: Int
         get() = R.layout.activity_artificial_insemination
     private var mBinding: ActivityArtificialInseminationBinding? = null
-    private lateinit var bottomSheetAdapter: BottomSheetAdapter
+    private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ObservationAIAdapter
@@ -93,7 +94,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
 
             else -> return
         }
-        bottomSheetAdapter = BottomSheetAdapter(this,selectedList) { selectedItem ->
+        bottomSheetAdapter = StateAdapter(selectedList,this) { selectedItem ->
             selectedTextView.text = selectedItem
             bottomSheetDialog.dismiss()
         }

@@ -1,6 +1,7 @@
 package com.nlm.ui.activity.national_livestock_mission
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,20 +33,32 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
     private var currentPage = 1
     private var totalPage = 1
     private var loading = true
+    var stateId: Int = 0
+    var nameOfLocation: String = ""
+
+    companion object {
+        const val FILTER_REQUEST_CODE = 1001
+    }
+
 
     override val layoutId: Int
         get() = R.layout.activity_national_live_stock_ia
 
     override fun initView() {
-        mBinding=viewDataBinding
+        mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         implementingAgencyAdapter()
-        implementingAgencyAPICall(paginate = false, loader = true)
+        implementingAgencyAPICall(paginate = false, loader = true, "")
         swipeForRefreshImplementingAgency()
     }
+
     private fun implementingAgencyAdapter() {
-        implementingAdapter = NationalLiveStockMissionIAAdapter(implementingAgencyList,1,Utility.getPreferenceString(this,AppConstants.ROLE_NAME))
+        implementingAdapter = NationalLiveStockMissionIAAdapter(
+            implementingAgencyList,
+            1,
+            Utility.getPreferenceString(this, AppConstants.ROLE_NAME)
+        )
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding?.rvImplementingAgency?.layoutManager = layoutManager
         mBinding?.rvImplementingAgency?.adapter = implementingAdapter
@@ -76,10 +89,9 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                             count + 1
                         }
                     }
-                    if(userResponseModel._result.is_add){
+                    if (userResponseModel._result.is_add) {
                         mBinding?.fabAddAgency?.showView()
-                    }
-                    else{
+                    } else {
                         mBinding?.fabAddAgency?.hideView()
                     }
                     implementingAgencyList.addAll(userResponseModel._result.data)
@@ -94,21 +106,50 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
         }
 
     }
+
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+
         fun addImplementingAgency(view: View) {
-            startActivity(Intent(this@NationalLiveStockMissionIAList, NLMIAForm::class.java).putExtra("isFrom",1))
+            startActivity(
+                Intent(
+                    this@NationalLiveStockMissionIAList,
+                    NLMIAForm::class.java
+                ).putExtra("isFrom", 1)
+            )
         }
+
         fun filter(view: View) {
-            startActivity(Intent(this@NationalLiveStockMissionIAList, FilterStateActivity::class.java).putExtra("isFrom",0))
+            val intent =
+                Intent(this@NationalLiveStockMissionIAList, FilterStateActivity::class.java)
+            intent.putExtra("isFrom", 0)
+            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("selectedLocation", nameOfLocation)
+            startActivityForResult(intent, FILTER_REQUEST_CODE)
         }
     }
 
-    private fun swipeForRefreshImplementingAgency(){
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == FILTER_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Retrieve the data passed from FilterStateActivity
+             stateId = data?.getIntExtra("stateId", 0)!!
+             nameOfLocation = data.getStringExtra("nameLocation").toString()
+            // Log the data
+            implementingAgencyAPICall(paginate = false, loader = true, nameOfLocation)
+            Log.d("FilterResult", "Received data from FilterStateActivity: $nameOfLocation")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $stateId")
+        }
+    }
+
+
+    private fun swipeForRefreshImplementingAgency() {
         mBinding?.srlImplementingAgency?.setOnRefreshListener {
-            implementingAgencyAPICall(paginate = false, loader = true)
+            implementingAgencyAPICall(paginate = false, loader = true, nameOfLocation)
             mBinding?.srlImplementingAgency?.isRefreshing = false
         }
     }
@@ -126,7 +167,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                implementingAgencyAPICall(paginate = true, loader = true)
+                                implementingAgencyAPICall(paginate = true, loader = true, "")
                             }
                         }
                     }
@@ -134,16 +175,31 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
             }
         }
 
-    private fun implementingAgencyAPICall(paginate: Boolean,loader: Boolean) {
+    private fun implementingAgencyAPICall(paginate: Boolean, loader: Boolean, location: String) {
         if (paginate) {
             currentPage++
         }
-        viewModel.getImplementingAgencyApi(this, loader, ImplementingAgencyRequest(
-            getPreferenceOfScheme(this@NationalLiveStockMissionIAList, AppConstants.SCHEME, Result::class.java)?.role_id,
-            getPreferenceOfScheme(this@NationalLiveStockMissionIAList, AppConstants.SCHEME, Result::class.java)?.state_code,
-            getPreferenceOfScheme(this@NationalLiveStockMissionIAList, AppConstants.SCHEME, Result::class.java)?.user_id,
-            10,
-            currentPage
-            ))
+        viewModel.getImplementingAgencyApi(
+            this, loader, ImplementingAgencyRequest(
+                getPreferenceOfScheme(
+                    this@NationalLiveStockMissionIAList,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                getPreferenceOfScheme(
+                    this@NationalLiveStockMissionIAList,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                getPreferenceOfScheme(
+                    this@NationalLiveStockMissionIAList,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                location,
+                10,
+                currentPage
+            )
+        )
     }
 }

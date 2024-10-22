@@ -10,6 +10,7 @@ import com.nlm.R
 import com.nlm.databinding.ActivityNlmCompnentBdairyDevelopmentBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.NlmIAFundsRecievedAdapter
+import com.nlm.ui.adapter.StateAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapter
 import com.nlm.utilities.BaseActivity
 
@@ -17,7 +18,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
     private var mBinding: ActivityNlmCompnentBdairyDevelopmentBinding? = null
     override val layoutId: Int
         get() = R.layout.activity_nlm_compnent_bdairy_development
-    private lateinit var bottomSheetAdapter: BottomSheetAdapter
+    private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var adapter: SupportingDocumentAdapter
     private lateinit var recyclerView: RecyclerView
@@ -96,7 +97,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
 
             else -> return
         }
-        bottomSheetAdapter = BottomSheetAdapter(this,selectedList) { selectedItem ->
+        bottomSheetAdapter = StateAdapter(selectedList,this) { selectedItem ->
             selectedTextView.text = selectedItem
             bottomSheetDialog.dismiss()
         }

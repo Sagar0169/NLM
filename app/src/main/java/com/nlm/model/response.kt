@@ -209,11 +209,42 @@ data class ImplementingAgencyResponse(
     val total_count: Int
 )
 
+
 data class ResultImplementingAgency(
     val data: List<DataImplementingAgency>,
     val is_add: Boolean
 )
 
+data class ArtificialInseminationResponse(
+    val _result: ResultArtificialInsemination,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class ResultArtificialInsemination(
+    val `data`: List<DataArtificialInsemination>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class DataArtificialInsemination(
+    val state_code: Int,
+    val state_name: String,
+    val district_code: Int,
+    val district_name: String,
+    val liquid_nitrogen: String,
+    val frozen_semen_straws: String,
+    val cryocans: String,
+    val created: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: String,
+    val is_draft_ia: Int,
+    val is_draft_nlm: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+)
 data class DataImplementingAgency(
     val is_delete: Boolean,
     val is_draft: String,

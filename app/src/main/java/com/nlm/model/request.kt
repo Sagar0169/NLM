@@ -41,9 +41,21 @@ data class ImplementingAgencyRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val name_location_of_ai: String?,
     val limit: Int,
     val page: Int
 )
+
+
+data class ArtificialInseminationRequest(
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+    val limit: Int,
+    val page: Int
+)
+
+
 
 data class GetDropDownRequest(
     val limit: Int?,

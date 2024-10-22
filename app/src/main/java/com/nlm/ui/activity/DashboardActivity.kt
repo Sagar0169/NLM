@@ -417,6 +417,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
         viewModel.dashboardResult.observe(this) {
             val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                return@observe Utility.logout(this)
+            }
             if (userResponseModel != null) {
                 if (userResponseModel._resultflag == 0) {
                     mBinding!!.contentNav.tvNoOfSchemeCovered.text =
