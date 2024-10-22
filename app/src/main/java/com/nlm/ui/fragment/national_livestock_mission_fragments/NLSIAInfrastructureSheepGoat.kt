@@ -1,5 +1,6 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
+import android.util.Log
 import android.view.View
 import com.nlm.R
 import com.nlm.databinding.FragmentNLSIAInfrastructureSheepGoatBinding
@@ -12,7 +13,7 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
 
 
-class NLSIAInfrastructureSheepGoat : BaseFragment<FragmentNLSIAInfrastructureSheepGoatBinding>() {
+class NLSIAInfrastructureSheepGoat(val fragmentId:Int) : BaseFragment<FragmentNLSIAInfrastructureSheepGoatBinding>() {
 
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__infrastructure__sheep_goat
@@ -22,6 +23,7 @@ class NLSIAInfrastructureSheepGoat : BaseFragment<FragmentNLSIAInfrastructureShe
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+       Log.d("ID", fragmentId.toString())
     }
     override fun setVariables() {
 
@@ -45,7 +47,8 @@ class NLSIAInfrastructureSheepGoat : BaseFragment<FragmentNLSIAInfrastructureShe
         fun save(view: View){
             viewModel.getImplementingAgencyAddApi(requireContext(),true,
                 ImplementingAgencyAddRequest(
-                    getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                    "part2",
+                    null,
                     null,
                     null,
                     null,

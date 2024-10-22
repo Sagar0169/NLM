@@ -36,6 +36,7 @@ class ViewModel : ViewModel() {
     var getDropDownResult = MutableLiveData<GetDropDownResponse>()
     var implementingAgencyResult = MutableLiveData<ImplementingAgencyResponse>()
     var implementingAgencyAddResult = MutableLiveData<ImplementingAgencyResponseNlm>()
+    var id = 0
 
     val errors = MutableLiveData<String>()
 

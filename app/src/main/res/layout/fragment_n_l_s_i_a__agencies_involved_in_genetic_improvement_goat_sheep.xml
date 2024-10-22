@@ -6,14 +6,15 @@
     <data>
         <variable
             name="ClickAction"
-            type="com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep.ClickActions" />
+            type="com.nlm.ui.fragment.national_livestock_mission_fragments.NLMDistrictWiseNoOfAiCenter.ClickActions" />
     </data>
 
     <RelativeLayout
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.national_livestock_mission_fragments.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep">
+        android:id="@+id/clParent"
+        tools:context=".ui.fragment.national_livestock_mission_fragments.NLMDistrictWiseNoOfAiCenter">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
@@ -47,14 +48,143 @@
             android:text="District wise no. of AI centres for Goat and Sheep in the State - ……."
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
+        <TextView
+
+            android:onClick="@{ClickAction::AddDistrictWiseNoAiDialog}"
+            android:id="@+id/tvAddMore1"
+            android:layout_marginVertical="@dimen/dp_7"
+            android:layout_width="wrap_content"
+            android:layout_gravity="end"
+            android:layout_height="wrap_content"
+            android:background="@drawable/curve_fill_blue"
+            android:clickable="true"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingHorizontal="@dimen/dp_20"
+            android:paddingVertical="@dimen/dp_10"
+            android:text="Add More"
+            android:textColor="@color/white" />
         <com.nlm.utilities.NonScrollableRecyclerView
-            android:id="@+id/recyclerView1"
+            android:id="@+id/recyclerViewDistrictWiseOfAi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_district_wise_no_nlsia"
+            android:layout_marginTop="@dimen/dp_7"
             android:paddingTop="8dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/lexend_bold"
+                android:text="Manpower and Capacity Building:"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:background="@drawable/curve_back_grey"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="No of AI technicians involved"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+
+                    android:id="@+id/etNoOfAiTechnician"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:gravity="top"
+                    android:inputType="number"
+                    android:maxLength="50"
+                    android:overScrollMode="always"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Number of AI Technician Trained"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+
+                    android:id="@+id/etNumberOfAiTechnicianTrained"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:gravity="top"
+                    android:inputType="number"
+                    android:maxLength="50"
+                    android:overScrollMode="always"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Total No. of Paravet Trained"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+
+                    android:id="@+id/etTotalNoOfParavetTrained"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:gravity="top"
+                    android:inputType="number"
+                    android:maxLength="50"
+                    android:overScrollMode="always"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:textSize="@dimen/sp_16" />
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
+            android:onClick="@{ClickAction::saveAndNext}"
             android:id="@+id/tvSendOtp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +198,7 @@
 
             android:paddingHorizontal="@dimen/dp_20"
             android:paddingVertical="@dimen/dp_10"
-            android:text="Next"
+            android:text="@string/save_next"
             android:textAlignment="center"
             android:textColor="@color/white" />
     </LinearLayout>

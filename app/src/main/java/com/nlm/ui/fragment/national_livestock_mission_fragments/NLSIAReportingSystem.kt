@@ -63,7 +63,8 @@ class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>()
         fun saveAndNext(view: View) {
             viewModel.getImplementingAgencyAddApi(requireContext(),true,
                 ImplementingAgencyAddRequest(
-                    getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                    "part4",
+                    null,
                     null,
                     null,
                     null,
@@ -109,7 +110,7 @@ class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>()
                     mBinding?.etSubmission1?.text.toString(),
                     mBinding?.etSubmission2?.text.toString(),
                     mBinding?.etStudiesConducted?.text.toString(),
-                    null,
+                    nlmIAFundsRecievedList,
                     null,
                     null,
                     null,

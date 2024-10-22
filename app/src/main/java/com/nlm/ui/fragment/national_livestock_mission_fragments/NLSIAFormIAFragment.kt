@@ -6,7 +6,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.tabs.TabLayout
 import com.nlm.R
+import com.nlm.callBack.SwitchFragmentCallBack
 import com.nlm.databinding.FragmentNLSIAFormBinding
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
@@ -19,44 +21,28 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
 
 
-class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
+class NLSIAFormIAFragment(private val switchFragment:SwitchFragmentCallBack) : BaseFragment<FragmentNLSIAFormBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a_form
     private var viewModel = ViewModel()
+    private lateinit var tabLayout: TabLayout
     private lateinit var bottomSheetAdapter: BottomSheetAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
-
     private var mBinding:FragmentNLSIAFormBinding?=null
 
-    private val group = listOf(
-        "Short", "Medium", "Long", "No Hair"
-    )
-
-    private val role = listOf(
-        "Black", "Brown", "Gray"
-    )
 
     private val state = listOf(
         "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
-    )
-
-    private val district = listOf(
-        "Black", "Brown", "Blue", "Reddish", "Green", "Other"
-    )
-
-    private val designation = listOf(
-        "Folded", "Normal", "Other"
-    )
-
-    private val organisation = listOf(
-        "Large", "Normal", "Small"
     )
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+
+        tabLayout=requireActivity().findViewById(R.id.tabLayout)
         mBinding?.etState?.text= getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_name
         mBinding?.etState?.isEnabled=false
+
 
     }
 
@@ -70,9 +56,13 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
           if (userResponseModel!=null)
           {
               if(userResponseModel._resultflag==0){
+
                   showSnackbar(mBinding!!.clParent, userResponseModel.message)
+
               }
               else{
+
+                  switchFragment.onClickItem(NLSIAInfrastructureSheepGoat(userResponseModel._result.id),1)
                   showSnackbar(mBinding!!.clParent, userResponseModel.message)
               }
           }
@@ -92,15 +82,16 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
         fun save(view: View){
             viewModel.getImplementingAgencyAddApi(requireContext(),true,
                 ImplementingAgencyAddRequest(
+                    "part1",
                     getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
                     mBinding?.etNameAndLocationOfIa?.text.toString(),
                     mBinding?.etDirectorDGCeoName?.text.toString(),
-                    mBinding?.etTechnicalStaffRegularDepute?.text.toString().toInt(),
-                    mBinding?.etTechnicalStaffManpowerDepute?.text.toString().toInt(),
-                    mBinding?.etAdminStaffEmployeeDepute?.text.toString().toInt(),
-                    mBinding?.etAdminStaffManpowerDepute?.text.toString().toInt(),
-                    mBinding?.etOtherStaffEmployeeDepute?.text.toString().toInt(),
-                    mBinding?.etOtherStaffManpowerDepute?.text.toString().toInt(),
+                    mBinding?.etTechnicalStaffRegularDepute?.text.toString().toIntOrNull(),
+                    mBinding?.etTechnicalStaffManpowerDepute?.text.toString().toIntOrNull(),
+                    mBinding?.etAdminStaffEmployeeDepute?.text.toString().toIntOrNull(),
+                    mBinding?.etAdminStaffManpowerDepute?.text.toString().toIntOrNull(),
+                    mBinding?.etOtherStaffEmployeeDepute?.text.toString().toIntOrNull(),
+                    mBinding?.etOtherStaffManpowerDepute?.text.toString().toIntOrNull(),
                     mBinding?.etOrganisationalChart?.text.toString(),
                     null,
                     null,
@@ -158,13 +149,13 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
                     null,
                     null,
                     null,
+                    1,
                     null,
                     null,
                     null,
                     null,
                     null,
-                    null,
-                    null,
+                    getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
                     null,
 
                 )
@@ -213,5 +204,6 @@ class NLSIAFormIAFragment() : BaseFragment<FragmentNLSIAFormBinding>() {
 
         bottomSheetDialog.show()
     }
+
 
 }

@@ -2,36 +2,32 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
+import com.nlm.callBack.SwitchFragmentCallBack
 import com.nlm.databinding.ActivityNlsiaFormBinding
-import com.nlm.model.BackgroundData
-import com.nlm.model.FacialAttributeData
-import com.nlm.model.LocationData
-import com.nlm.model.PhysicalAttributesData
-import com.nlm.model.SightedChildData
-import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFormIAFragment
-import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep
+import com.nlm.ui.fragment.national_livestock_mission_fragments.NLMDistrictWiseNoOfAiCenter
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAConstraintsFacedByIAFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFeedFodderFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAGoverningBodyBoardOfDirectorsFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAInfrastructureSheepGoat
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAReportingSystem
-import com.nlm.ui.fragment.national_livestock_mission_fragments.NlmManpowerAndCapacityFragment
+
 import com.nlm.utilities.BaseActivity
 
-class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
+class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>(),SwitchFragmentCallBack {
     override val layoutId: Int
         get() = R.layout.activity_nlsia_form
     private var mBinding: ActivityNlsiaFormBinding? = null
+    private var IAFragment: NLSIAFormIAFragment? = null
 
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         setupTabLayout()
-        loadFragment(NLSIAFormIAFragment())
+        IAFragment=NLSIAFormIAFragment(this)
+        loadFragment(IAFragment)
     }
 
     override fun setVariables() {
@@ -96,15 +92,9 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
     }
 
 
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     override fun onBackPressed() {
-        val currentTab = mBinding?.tabLayout?.selectedTabPosition ?: 0
-        if (currentTab > 0) {
-            // Move to the previous tab if not on the first tab
-            mBinding?.tabLayout?.getTabAt(currentTab - 1)?.select()
-        } else {
-            // If on the first tab, you can either call super to finish the activity or handle it differently
-            super.onBackPressed()
-        }
+        super.onBackPressed()
     }
 
 
@@ -115,7 +105,6 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
             addTab(newTab().setText("Composition of Advisory committee (if any)/Project Monitoring Committee (PMC)"))
             addTab(newTab().setText("Reporting System"))
             addTab(newTab().setText("District wise no. of AI centres for Goat and Sheep in the State "))
-            addTab(newTab().setText("Manpower and Capacity Building"))
             addTab(newTab().setText("Constraints faced by IA in implementation of the project (elaborate)"))
             addTab(newTab().setText("Feed Fodder Situation in the State"))
 
@@ -125,12 +114,12 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
                     when (tab?.position) {
                         0 -> {
                             onTabClicks()
-                            loadFragment(NLSIAFormIAFragment())
+                            loadFragment(IAFragment)
                         }
 
                         1 -> {
                             onTabClicks()
-                            loadFragment(NLSIAInfrastructureSheepGoat())
+                            loadFragment(NLSIAInfrastructureSheepGoat(0))
 
                         }
 
@@ -146,20 +135,16 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
 
                         4 -> {
                             onTabClicks()
-                            loadFragment(NLSIAAgenciesInvolvedInGeneticImprovementGoatSheep())
+                            loadFragment(NLMDistrictWiseNoOfAiCenter())
                         }
 
-                        5 -> {
-                            onTabClicks()
-                            loadFragment(NlmManpowerAndCapacityFragment())
-                        }
 
-                        6 -> {
+                        5-> {
                             onTabClicks()
                             loadFragment(NLSIAConstraintsFacedByIAFragment())
                         }
 
-                        7 -> {
+                        6 -> {
                             onTabClicks()
                             loadFragment(NLSIAFeedFodderFragment())
                         }
@@ -178,20 +163,16 @@ class NLMIAForm() : BaseActivity<ActivityNlsiaFormBinding>() {
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
-//        if (fragment is SightedBasicDetailsFragment) {
-//            fragment.setData(sightedChildData)
-//        } else if (fragment is SightedFacialAttributesFragment) {
-//            fragment.setData(facialAttributeData)
-//        } else if (fragment is SightedPhysicalAttributeFragment) {
-//            fragment.setData(physicalAttributesData)
-//        } else if (fragment is SightedBackgroundFragment) {
-//            fragment.setData(backgroundData)
-//        }else if (fragment is SightedLocationDetailsFragment) {
-//            fragment.setData(locationData)
-//        }
+    private fun loadFragment(fragment: Fragment?) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frameLayout, fragment)
+        if (fragment != null) {
+            transaction.replace(R.id.frameLayout, fragment)
+        }
         transaction.commit()
+    }
+
+    override fun onClickItem(fragment: Fragment, tabId: Int) {
+        loadFragment(fragment)
+        mBinding?.tabLayout?.getTabAt(tabId)?.select()
     }
 }

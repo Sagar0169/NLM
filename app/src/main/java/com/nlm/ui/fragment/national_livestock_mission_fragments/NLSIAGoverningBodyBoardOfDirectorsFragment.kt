@@ -89,7 +89,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
         fun saveAndNext(view: View) {
        viewModel.getImplementingAgencyAddApi(requireContext(),true,
            ImplementingAgencyAddRequest(
-               getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+               "part3",
                null,
                null,
                null,
@@ -125,7 +125,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
                null,
                null,
                null,
-               null,
+               nlmIACompositionOFGoverningList,
+               nlmIAProjectMonitoringCommitteeList,
                null,
                null,
                null,

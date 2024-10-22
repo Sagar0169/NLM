@@ -53,6 +53,7 @@ data class GetDropDownRequest(
     val user_id: Int?
 )
 data class ImplementingAgencyAddRequest(
+    val part:String?,
     val state_code: Int?,
     val name_location_of_ai: String?,
     val director_dg_ceo_name: String?,
@@ -102,6 +103,7 @@ data class ImplementingAgencyAddRequest(
     val implementing_agency_funds_received: List<ImplementingAgencyFundsReceived>?,
     val no_of_al_technicians: Int?,
     val total_paravet_trained: Int?,
+    val implementing_agency_involved_district_wise: List<ImplementingAgencyInvolvedDistrictWise>?,
     val infrastructural: String?,
     val organizational: String?,
     val funds: String?,
@@ -126,7 +128,7 @@ data class ImplementingAgencyAddRequest(
     val status: Int?,
     val user_id: String?,
     val implementing_agency_document: List<ImplementingAgencyDocument>?,
-    val implementing_agency_involved_district_wise: List<ImplementingAgencyInvolvedDistrictWise>?,
+
 
 )
 
@@ -156,11 +158,11 @@ data class ImplementingAgencyFundsReceived(
 )
 
 data class ImplementingAgencyInvolvedDistrictWise(
-    val ai_performed: String,
-    val id: Int,
-    val location_of_ai_centre: String,
-    val name_of_district: Int,
-    val year: Int
+    val name_of_district: Int?,
+    val location_of_ai_centre: String?,
+    val ai_performed: String?,
+    val id: Int?,
+    val year: Int?
 )
 
 data class ImplementingAgencyProjectMonitoring(

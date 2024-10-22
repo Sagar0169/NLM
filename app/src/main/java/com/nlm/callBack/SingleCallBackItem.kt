@@ -1,5 +1,6 @@
 package com.nlm.callBack
 
+import androidx.fragment.app.Fragment
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyFundsReceived
 import com.nlm.model.ImplementingAgencyProjectMonitoring
@@ -17,8 +18,8 @@ import com.nlm.model.ImplementingAgencyProjectMonitoring
 interface DeleteItemCallBack {
     fun onClickItem(documentId: Int,position:Int)
 }
-interface AddItemCallBack {
-    fun onClickItem(list:MutableList<ImplementingAgencyAdvisoryCommittee>)
+interface SwitchFragmentCallBack {
+    fun onClickItem(fragment:Fragment,Tab_id:Int)
 }
 interface AddItemCallBackProjectMonitoring {
     fun onClickItem2(list:MutableList<ImplementingAgencyProjectMonitoring>)
