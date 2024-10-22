@@ -133,6 +133,7 @@ class NLMDistrictWiseNoOfAiCenter:
                     null,
                     null,
                     mBinding?.etNoOfAiTechnician?.text.toString().toInt(),
+                    mBinding?.etNumberOfAiTechnicianTrained?.text.toString().toInt(),
                     mBinding?.etTotalNoOfParavetTrained?.text.toString().toInt(),
                     mNlmIADistrictWiseNoList,
                     null,
@@ -159,8 +160,6 @@ class NLMDistrictWiseNoOfAiCenter:
                     null,
                     null,
                     null,
-
-
 
                     )
             )

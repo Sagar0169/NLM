@@ -114,6 +114,7 @@ data class ImplementingAgencyAddRequest(
     val studies_surveys_conducted: String?=null,
     val implementing_agency_funds_received: List<ImplementingAgencyFundsReceived>?=null,
     val no_of_al_technicians: Int?=null,
+    val number_of_ai: Int?=null,
     val total_paravet_trained: Int?=null,
     val implementing_agency_involved_district_wise: List<ImplementingAgencyInvolvedDistrictWise>?=null,
     val infrastructural: String?=null,
@@ -133,7 +134,6 @@ data class ImplementingAgencyAddRequest(
     val number_of_fodder: String?=null,
     val id: Int?=null,// it is the id of the element we want to edit
     val is_draft: Int?=null,//always 1 till the user clicks on submit button then it will be 0
-    val number_of_ai: Int?=null,
     val present_system: String?=null,
     val sheep_breeding_farms_location: String?=null,
     val sheep_breeding_farms_number: Int?=null,

@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
+        android:id="@+id/clParent"
         tools:context=".ui.fragment.national_livestock_mission_fragments.NLSIAFeedFodderFragment">
 
         <ScrollView
@@ -69,7 +70,7 @@
 
                         <EditText
 
-                            android:id="@+id/et1"
+                            android:id="@+id/etAssessmentOfGreen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -96,7 +97,7 @@
 
                         <EditText
 
-                            android:id="@+id/et2"
+                            android:id="@+id/etAvailabilityOfGreen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -123,7 +124,7 @@
 
                         <EditText
 
-                            android:id="@+id/et3"
+                            android:id="@+id/etAvailibilityOfDry"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -150,7 +151,7 @@
 
                         <EditText
 
-                            android:id="@+id/et4"
+                            android:id="@+id/etAvailibilityOfConcentrate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -178,7 +179,7 @@
 
                         <EditText
 
-                            android:id="@+id/et5"
+                            android:id="@+id/etAvailabilityCommon"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -205,7 +206,7 @@
 
                         <EditText
 
-                            android:id="@+id/et6"
+                            android:id="@+id/etEffortsOfState"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -260,7 +261,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                             android:id="@+id/etNameOfAgency"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -285,7 +286,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                            android:id="@+id/etQuantityOfFodder"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -310,7 +311,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                            android:id="@+id/etDistributionChannel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -335,7 +336,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                             android:id="@+id/AvailabilityOfConcentrate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -361,7 +362,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                            android:id="@+id/etNumberOfFodder"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
