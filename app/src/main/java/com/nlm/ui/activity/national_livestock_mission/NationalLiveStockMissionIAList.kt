@@ -6,24 +6,28 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityNationalLiveStockIaBinding
 import com.nlm.model.DataImplementingAgency
+import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
 
 import com.nlm.ui.adapter.NationalLiveStockMissionIAAdapter
+import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAInfrastructureSheepGoat
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
-class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaBinding>() {
+class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaBinding>(),CallBackDeleteAtId {
 
     private var viewModel = ViewModel()
     private lateinit var implementingAdapter: NationalLiveStockMissionIAAdapter
@@ -33,6 +37,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
     private var currentPage = 1
     private var totalPage = 1
     private var loading = true
+    private var itemPosition : Int ?= null
     var stateId: Int = 0
     var nameOfLocation: String = ""
 
@@ -54,10 +59,11 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
     }
 
     private fun implementingAgencyAdapter() {
-        implementingAdapter = NationalLiveStockMissionIAAdapter(
+        implementingAdapter = NationalLiveStockMissionIAAdapter(this,
             implementingAgencyList,
             1,
-            Utility.getPreferenceString(this, AppConstants.ROLE_NAME)
+            Utility.getPreferenceString(this, AppConstants.ROLE_NAME),
+            this
         )
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding?.rvImplementingAgency?.layoutManager = layoutManager
@@ -101,6 +107,25 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                 } else {
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvImplementingAgency?.hideView()
+                }
+            }
+        }
+        viewModel.implementingAgencyAddResult.observe(this){
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel!=null)
+            {
+                if(userResponseModel._resultflag==0){
+
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+
+                }
+                else{
+
+                    itemPosition?.let { it1 -> implementingAdapter?.onDeleteButtonClick(it1) }
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
             }
         }
@@ -201,5 +226,16 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                 currentPage
             )
         )
+    }
+
+    override fun onClickItem(ID: Int?, position: Int) {
+        viewModel.getImplementingAgencyAddApi(this,true,
+            ImplementingAgencyAddRequest(
+                user_id = getPreferenceOfScheme(this,AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                part = "part1",
+              id= ID, is_deleted = 1
+                )
+        )
+        itemPosition = position
     }
 }

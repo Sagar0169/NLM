@@ -18,6 +18,13 @@ import com.nlm.model.ImplementingAgencyProjectMonitoring
 interface DeleteItemCallBack {
     fun onClickItem(documentId: Int,position:Int)
 }
+interface DialogCallback {
+    fun onYes()
+
+}
+interface CallBackDeleteAtId {
+    fun onClickItem(ID: Int?,position:Int)
+}
 interface SwitchFragmentCallBack {
     fun onClickItem(fragment:Fragment,Tab_id:Int)
 }

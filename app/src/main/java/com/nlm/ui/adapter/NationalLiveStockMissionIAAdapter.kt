@@ -1,20 +1,27 @@
 package com.nlm.ui.adapter
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemNlspFormsBinding
 import com.nlm.model.DataImplementingAgency
+import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
 
 class NationalLiveStockMissionIAAdapter(
-    private val implementingAgencyList: List<DataImplementingAgency>,
+    val context:Context,
+    private val implementingAgencyList: ArrayList<DataImplementingAgency>,
     val isFrom: Int,
-    val Role_name: String
+    val Role_name: String,
+    private val callBackDeleteAtId: CallBackDeleteAtId
 ) : RecyclerView.Adapter<NationalLiveStockMissionIAAdapter.ImplementingAgencyViewHolder>() {
 
     class ImplementingAgencyViewHolder(val mBinding: ItemNlspFormsBinding) :
@@ -30,7 +37,7 @@ class NationalLiveStockMissionIAAdapter(
         return ImplementingAgencyViewHolder(mBinding)
     }
 
-    override fun onBindViewHolder(holder: ImplementingAgencyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImplementingAgencyViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
         val item = implementingAgencyList?.get(position)
 
@@ -56,6 +63,20 @@ class NationalLiveStockMissionIAAdapter(
         else{
             holder.mBinding.ivEdit.hideView()
         }
+         holder.mBinding.ivDelete.setOnClickListener {
+             Utility.showConfirmationAlertDialog(
+                 context,
+                 object :
+                     DialogCallback {
+                     override fun onYes() {
+                         if (item != null) {
+                             callBackDeleteAtId.onClickItem(item.id,position)
+                         }
+                     }
+                 },
+                 context.getString(R.string.are_you_sure_want_to_delete_your_post)
+             )
+         }
 
 //        holder.mBinding.ivView.setOnClickListener {
 //            val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
@@ -82,5 +103,8 @@ class NationalLiveStockMissionIAAdapter(
     override fun getItemViewType(position: Int): Int {
         return position
     }
-
+    fun onDeleteButtonClick(position: Int) {
+        implementingAgencyList.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }

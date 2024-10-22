@@ -39,6 +39,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.nlm.R
+import com.nlm.callBack.DialogCallback
 import com.nlm.ui.activity.LoginActivity
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -1566,7 +1567,7 @@ object Utility {
 //        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
 //        dialog.window
 //        dialog.window?.attributes = lp
-//        dialog.setContentView(R.layout.item_confirmation_dialog)
+//        dialog.setContentView(R.layout.item_delete_confirmation_dialog)
 //        val tvShowText = dialog.findViewById(R.id.tvShowText) as TextView
 //        val tvCancel = dialog.findViewById(R.id.tvCancel) as TextView
 //
@@ -1656,40 +1657,40 @@ object Utility {
 //        }
 //        dialog.show()
 //    }
-//     fun showConfirmationAlertDialog(
-//        context: Context,
-//        callback: DialogCallback,
-//        heading:String
-//    ) {
-//        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
-//        dialog.setCancelable(true)
-//        dialog.setCanceledOnTouchOutside(true)
-//        dialog.window!!.setLayout(
-//            LinearLayout.LayoutParams.MATCH_PARENT,
-//            LinearLayout.LayoutParams.WRAP_CONTENT
-//        )
-//        dialog.window?.setGravity(Gravity.CENTER)
-//        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
-//        lp.dimAmount = 0.5f
-//        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-//        dialog.window
-//        dialog.window?.attributes = lp
-//        dialog.setContentView(R.layout.item_delete_confirmation_dialog)
-//        val tvCancel = dialog.findViewById(R.id.tvCancel) as TextView
-//        val ivConfirm = dialog.findViewById(R.id.tvConfirm) as TextView
-//        val tvShowText = dialog.findViewById(R.id.tvShowText) as TextView
-//         tvShowText.text=heading
-//
-//        ivConfirm.setOnClickListener {
-//            dialog.dismiss()
-//            callback.onYes()
-//        }
-//        tvCancel.setOnClickListener {
-//            dialog.dismiss()
-//        }
-//        dialog.show()
-//    }
+     fun showConfirmationAlertDialog(
+    context: Context,
+    callback: DialogCallback,
+    heading:String
+    ) {
+        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.window!!.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window
+        dialog.window?.attributes = lp
+        dialog.setContentView(R.layout.item_delete_confirmation_dialog)
+        val tvCancel = dialog.findViewById(R.id.tvCancel) as TextView
+        val ivConfirm = dialog.findViewById(R.id.tvConfirm) as TextView
+        val tvShowText = dialog.findViewById(R.id.tvShowText) as TextView
+         tvShowText.text=heading
+
+        ivConfirm.setOnClickListener {
+            dialog.dismiss()
+            callback.onYes()
+        }
+        tvCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
 //
 //    fun showImageDialog(context: Context,image:String) {
 //        val dialog = Dialog(context,android.R.style.Theme_Translucent_NoTitleBar)

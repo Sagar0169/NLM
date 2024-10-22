@@ -246,6 +246,7 @@ data class DataArtificialInsemination(
     val is_view: Boolean,
 )
 data class DataImplementingAgency(
+    val id: Int,
     val is_delete: Boolean,
     val is_draft: String,
     val is_edit: Boolean,

@@ -18,6 +18,7 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
 
@@ -55,6 +56,9 @@ class NLSIAFormIAFragment(private val switchFragment:SwitchFragmentCallBack) : B
     override fun setObservers() {
       viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
           val userResponseModel = it
+          if (userResponseModel.statuscode == 401) {
+              Utility.logout(requireContext())
+          }
           if (userResponseModel!=null)
           {
               if(userResponseModel._resultflag==0){
@@ -159,6 +163,7 @@ class NLSIAFormIAFragment(private val switchFragment:SwitchFragmentCallBack) : B
                     null,
                     getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
                     null,
+                    0,
 
                 )
             )
