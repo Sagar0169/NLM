@@ -54,7 +54,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         implementingAgencyAdapter()
-        implementingAgencyAPICall(paginate = false, loader = true, "")
+
         swipeForRefreshImplementingAgency()
     }
 
@@ -237,5 +237,9 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                 )
         )
         itemPosition = position
+    }
+    override fun onResume() {
+        super.onResume()
+        implementingAgencyAPICall(paginate = false, loader = true, "")
     }
 }

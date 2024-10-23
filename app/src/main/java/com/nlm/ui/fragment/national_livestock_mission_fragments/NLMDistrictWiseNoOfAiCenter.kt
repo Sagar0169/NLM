@@ -26,6 +26,8 @@ import com.nlm.ui.adapter.NlmIADistrictWiseNoAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
+import com.nlm.utilities.Preferences
+import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility.rotateDrawable
 import com.nlm.utilities.Utility.showSnackbar
@@ -61,10 +63,8 @@ class NLMDistrictWiseNoOfAiCenter:
        mNlmIADistrictWiseNoAdapter = NlmIADistrictWiseNoAdapter  (mNlmIADistrictWiseNoList)
        mBinding?.recyclerViewDistrictWiseOfAi?.adapter = mNlmIADistrictWiseNoAdapter
    }
-
    override fun setVariables() {
    }
-
     override fun setObservers() {
         viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
             val userResponseModel = it
@@ -97,6 +97,7 @@ class NLMDistrictWiseNoOfAiCenter:
                     user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
                     implementing_agency_document = null,
                     is_deleted = 0,
+                    id =Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
                 )
             )
         }

@@ -1,6 +1,8 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -9,14 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
+import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAFormBinding
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
+import com.nlm.services.LOGOUT
 import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
+import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
@@ -27,10 +33,12 @@ class NLSIAFormIAFragment : BaseFragment<FragmentNLSIAFormBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a_form
     private var viewModel = ViewModel()
+    private var savedAsDraft:Boolean=false
     private lateinit var tabLayout: TabLayout
     private lateinit var bottomSheetAdapter: StateAdapter
     protected lateinit var mActivityMain: NLMIAForm
     private var listener: OnNextButtonClickListener? = null
+    private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var mBinding:FragmentNLSIAFormBinding?=null
 
@@ -66,8 +74,16 @@ class NLSIAFormIAFragment : BaseFragment<FragmentNLSIAFormBinding>() {
                   showSnackbar(mBinding!!.clParent, userResponseModel.message)
               }
               else{
-                  listener?.onNextButtonClick()
-                  showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                  if (savedAsDraft)
+                  {
+                      savedAsDraftClick?.onSaveAsDraft()
+                  }
+                  else{
+                      Preferences.setPreference_int(requireContext(),AppConstants.FORM_FILLED_ID,userResponseModel._result.id)
+                      listener?.onNextButtonClick()
+                      showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                  }
+
               }
           }
       }
@@ -76,11 +92,13 @@ class NLSIAFormIAFragment : BaseFragment<FragmentNLSIAFormBinding>() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as OnNextButtonClickListener
+        savedAsDraftClick = context as OnBackSaveAsDraft
     }
 
     override fun onDetach() {
         super.onDetach()
         listener = null
+        savedAsDraftClick = null
     }
     inner class ClickActions {
 
@@ -103,6 +121,27 @@ class NLSIAFormIAFragment : BaseFragment<FragmentNLSIAFormBinding>() {
                     is_deleted = 0,
                 )
             )
+        }
+        fun saveAsDraft(view: View){
+            viewModel.getImplementingAgencyAddApi(requireContext(),true,
+                ImplementingAgencyAddRequest(
+                    part = "part1",
+                    state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                    name_location_of_ai = mBinding?.etNameAndLocationOfIa?.text.toString(),
+                    director_dg_ceo_name = mBinding?.etDirectorDGCeoName?.text.toString(),
+                    technical_staff_regular_employee = mBinding?.etTechnicalStaffRegularDepute?.text.toString().toIntOrNull(),
+                    technical_staff_manpower_deputed = mBinding?.etTechnicalStaffManpowerDepute?.text.toString().toIntOrNull(),
+                    admn_staff_regular_employee = mBinding?.etAdminStaffEmployeeDepute?.text.toString().toIntOrNull(),
+                    admn_staff_manpower_deputed = mBinding?.etAdminStaffManpowerDepute?.text.toString().toIntOrNull(),
+                    other_staff_regular_employee = mBinding?.etOtherStaffEmployeeDepute?.text.toString().toIntOrNull(),
+                    other_staff_manpower_deputed = mBinding?.etOtherStaffManpowerDepute?.text.toString().toIntOrNull(),
+                    organizational_chart = mBinding?.etOrganisationalChart?.text.toString(),
+                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                    is_deleted = 0,
+                    is_draft = 1,
+                )
+            )
+            savedAsDraft=true
         }
     }
     private fun showBottomSheetDialog(type: String) {

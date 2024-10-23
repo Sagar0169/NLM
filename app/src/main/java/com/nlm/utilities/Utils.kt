@@ -815,6 +815,13 @@ object Utility {
 //        editor.clear()
         editor.apply()
     }
+    fun clearAllFormFilledID(context: Context) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = sharedPreferences.edit()
+        editor.remove(AppConstants.FORM_FILLED_ID)
+//        editor.clear()
+        editor.apply()
+    }
 
     //    fun showSnackBar(viewLayout: View?, toastMessage: String?) {
 //        try {

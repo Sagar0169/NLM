@@ -1,12 +1,17 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
+import android.content.Intent
 import android.view.View
 import com.nlm.R
 import com.nlm.databinding.FragmentNLSIAFeedFodderBinding
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
+import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
+import com.nlm.utilities.Preferences
+import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
@@ -67,9 +72,37 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
                     quantity_of_fodder = mBinding?.etQuantityOfFodder?.text.toString(),
                     distribution_channel =mBinding?.etDistributionChannel?.text.toString() ,
                     number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
+                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
 
                 )
             )
+        }
+        fun saveAsDraft(view: View){
+            viewModel.getImplementingAgencyAddApi(requireContext(),true,
+                ImplementingAgencyAddRequest(
+                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                    part = "part7",
+                    assessments_of_green = mBinding?.etAssessmentOfGreen?.text.toString(),
+                    availability_of_green_area = mBinding?.etAvailabilityOfGreen?.text.toString(),
+                    availability_of_dry = mBinding?.etAvailibilityOfDry?.text.toString(),
+                    availability_of_concentrate = mBinding?.AvailabilityOfConcentrate?.text.toString(),
+                    availability_of_common = mBinding?.etAvailabilityCommon?.text.toString(),
+                    efforts_of_state = mBinding?.etEffortsOfState?.text.toString(),
+                    name_of_the_agency = mBinding?.etNameOfAgency?.text.toString(),
+                    quantity_of_fodder = mBinding?.etQuantityOfFodder?.text.toString(),
+                    distribution_channel =mBinding?.etDistributionChannel?.text.toString() ,
+                    number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
+                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+
+                    )
+            )
+            startActivity(
+                Intent(
+                    requireContext(),
+                    NationalLiveStockMissionIAList::class.java
+                )
+            )
+            Utility.clearAllFormFilledID(requireContext())
         }
     }
 }

@@ -2,11 +2,13 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
+import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.callBack.SwitchFragmentCallBack
 import com.nlm.databinding.ActivityNlsiaFormBinding
@@ -19,8 +21,10 @@ import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAInfrastruct
 import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAReportingSystem
 
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Utility
 
-class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickListener {
+class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickListener,
+    OnBackSaveAsDraft {
     override val layoutId: Int
         get() = R.layout.activity_nlsia_form
     private var mBinding: ActivityNlsiaFormBinding? = null
@@ -41,6 +45,7 @@ class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickList
 
     inner class ClickActions {
         fun backPress(view: View) {
+            Utility.clearAllFormFilledID(this@NLMIAForm)
             onBackPressedDispatcher.onBackPressed()
         }
     }
@@ -48,8 +53,10 @@ class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickList
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             super.onBackPressed()
-        }else {
-
+        }
+        else {
+            Utility.clearAllFormFilledID(this@NLMIAForm)
+            onBackPressedDispatcher.onBackPressed()
             if (mDoubleBackToExitPressedOnce) {
                 super.onBackPressed()
                 return
@@ -65,6 +72,7 @@ class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickList
                 { mDoubleBackToExitPressedOnce = false },
                 2000
             )
+
         }
     }
 
@@ -135,4 +143,20 @@ class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickList
     override fun onNextButtonClick() {
         moveToNextTab()
     }
+
+    override fun onNavigateToFirstFragment() {
+        // Load the first fragment (Implementing Agency)
+        loadFragment(NLSIAFormIAFragment())
+
+        // Select the first tab
+        mBinding?.tabLayout?.getTabAt(0)?.select()
+    }
+
+    override fun onSaveAsDraft() {
+
+        Utility.clearAllFormFilledID(this@NLMIAForm)
+        onBackPressedDispatcher.onBackPressed()
+    }
+
+
 }

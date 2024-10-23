@@ -34,9 +34,10 @@ interface AddItemCallBackProjectMonitoring {
 interface AddItemCallBackFundsRecieved {
     fun onClickItem(list:MutableList<ImplementingAgencyFundsReceived>)
 }
-interface SizeItemCallBack {
-    fun onClickItemSize(size: Int)
+interface OnBackSaveAsDraft {
+    fun onSaveAsDraft()
 }
 interface OnNextButtonClickListener {
     fun onNextButtonClick()
+    fun onNavigateToFirstFragment()
 }
