@@ -1,5 +1,6 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -8,28 +9,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
-import com.nlm.callBack.SwitchFragmentCallBack
+import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAFormBinding
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
-import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
-import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
 
 
-class NLSIAFormIAFragment(private val switchFragment:SwitchFragmentCallBack) : BaseFragment<FragmentNLSIAFormBinding>() {
+class NLSIAFormIAFragment : BaseFragment<FragmentNLSIAFormBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a_form
     private var viewModel = ViewModel()
     private lateinit var tabLayout: TabLayout
     private lateinit var bottomSheetAdapter: StateAdapter
-
+    protected lateinit var mActivityMain: NLMIAForm
+    private var listener: OnNextButtonClickListener? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var mBinding:FragmentNLSIAFormBinding?=null
 
@@ -45,7 +46,7 @@ class NLSIAFormIAFragment(private val switchFragment:SwitchFragmentCallBack) : B
         tabLayout=requireActivity().findViewById(R.id.tabLayout)
         mBinding?.etState?.text= getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_name
         mBinding?.etState?.isEnabled=false
-
+        mActivityMain = activity as NLMIAForm
 
     }
 
@@ -62,113 +63,47 @@ class NLSIAFormIAFragment(private val switchFragment:SwitchFragmentCallBack) : B
           if (userResponseModel!=null)
           {
               if(userResponseModel._resultflag==0){
-
                   showSnackbar(mBinding!!.clParent, userResponseModel.message)
-
               }
               else{
-
-                  switchFragment.onClickItem(NLSIAInfrastructureSheepGoat(userResponseModel._result.id),1)
+                  listener?.onNextButtonClick()
                   showSnackbar(mBinding!!.clParent, userResponseModel.message)
               }
           }
       }
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as OnNextButtonClickListener
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
     inner class ClickActions {
 
-
-
-        fun group(view: View){
-            showBottomSheetDialog("group")
-        }
-        fun role(view: View){showBottomSheetDialog("role")}
         fun state(view: View){showBottomSheetDialog("state")}
-        fun district(view: View){showBottomSheetDialog("district")}
-        fun designation(view: View){showBottomSheetDialog("designation")}
         fun save(view: View){
             viewModel.getImplementingAgencyAddApi(requireContext(),true,
                 ImplementingAgencyAddRequest(
-                    "part1",
-                    getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
-                    mBinding?.etNameAndLocationOfIa?.text.toString(),
-                    mBinding?.etDirectorDGCeoName?.text.toString(),
-                    mBinding?.etTechnicalStaffRegularDepute?.text.toString().toIntOrNull(),
-                    mBinding?.etTechnicalStaffManpowerDepute?.text.toString().toIntOrNull(),
-                    mBinding?.etAdminStaffEmployeeDepute?.text.toString().toIntOrNull(),
-                    mBinding?.etAdminStaffManpowerDepute?.text.toString().toIntOrNull(),
-                    mBinding?.etOtherStaffEmployeeDepute?.text.toString().toIntOrNull(),
-                    mBinding?.etOtherStaffManpowerDepute?.text.toString().toIntOrNull(),
-                    mBinding?.etOrganisationalChart?.text.toString(),
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    1,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                    null,
-                    0,
-
+                    part = "part1",
+                    state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                    name_location_of_ai = mBinding?.etNameAndLocationOfIa?.text.toString(),
+                    director_dg_ceo_name = mBinding?.etDirectorDGCeoName?.text.toString(),
+                    technical_staff_regular_employee = mBinding?.etTechnicalStaffRegularDepute?.text.toString().toIntOrNull(),
+                    technical_staff_manpower_deputed = mBinding?.etTechnicalStaffManpowerDepute?.text.toString().toIntOrNull(),
+                    admn_staff_regular_employee = mBinding?.etAdminStaffEmployeeDepute?.text.toString().toIntOrNull(),
+                    admn_staff_manpower_deputed = mBinding?.etAdminStaffManpowerDepute?.text.toString().toIntOrNull(),
+                    other_staff_regular_employee = mBinding?.etOtherStaffEmployeeDepute?.text.toString().toIntOrNull(),
+                    other_staff_manpower_deputed = mBinding?.etOtherStaffManpowerDepute?.text.toString().toIntOrNull(),
+                    organizational_chart = mBinding?.etOrganisationalChart?.text.toString(),
+                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                    is_deleted = 0,
                 )
             )
         }
-
     }
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(requireContext())

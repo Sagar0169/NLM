@@ -37,3 +37,6 @@ interface AddItemCallBackFundsRecieved {
 interface SizeItemCallBack {
     fun onClickItemSize(size: Int)
 }
+interface OnNextButtonClickListener {
+    fun onNextButtonClick()
+}

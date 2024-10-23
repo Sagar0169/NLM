@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAReportingSystemBinding
 import com.nlm.databinding.ItemFundsReceivedNlsiaBinding
 import com.nlm.model.ImplementingAgencyAddRequest
@@ -34,7 +35,7 @@ class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>()
     private var mBinding: FragmentNLSIAReportingSystemBinding?=null
     private var nlmIAFundsRecievedAdapter: NlmIAFundsRecievedAdapter? = null
     private lateinit var nlmIAFundsRecievedList: MutableList<ImplementingAgencyFundsReceived>
-
+    private var listener: OnNextButtonClickListener? = null
 
     override fun init() {
         mBinding=viewDataBinding
@@ -54,6 +55,7 @@ class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
                 else{
+                    listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
             }
@@ -206,5 +208,14 @@ class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>()
             }
         }
         dialog.show()
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as OnNextButtonClickListener
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
     }
 }

@@ -43,7 +43,7 @@ class NationalLiveStockMissionIAAdapter(
 
         holder.mBinding.etState.text = item?.state_name
         holder.mBinding.etCreatedBy.text = item?.name_location_of_ai
-        holder.mBinding.etCreated.text = "item.created_by"
+        holder.mBinding.etCreated.text = item?.created
         holder.mBinding.etStatus.text = item?.is_draft
         if(item?.is_view == true){
            holder.mBinding.ivView.showView()

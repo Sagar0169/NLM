@@ -206,12 +206,12 @@ data class ImplementingAgencyResponse(
     val fileurl: Any,
     val message: String,
     val statuscode: Int,
-    val total_count: Int
 )
 
 
 data class ResultImplementingAgency(
     val data: List<DataImplementingAgency>,
+    val total_count: Int,
     val is_add: Boolean
 )
 
@@ -252,7 +252,8 @@ data class DataImplementingAgency(
     val is_edit: Boolean,
     val is_view: Boolean,
     val name_location_of_ai: String,
-    val state_name: String
+    val state_name: String,
+    val created: String
 )
 
 data class GetDropDownResponse(

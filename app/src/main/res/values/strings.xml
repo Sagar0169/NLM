@@ -1,6 +1,7 @@
 <!DOCTYPE resources [<!ENTITY app_name "NLM">]>
 <resources>
-    <string name="app_name">NLM</string>
+<!--    <string name="app_name">NLM</string>-->
+    <string name="app_name" translatable="false">&app_name;</string>
     <string name="Ok">Ok\n</string>
     <string name="please_enter_correct_otp">Please enter correct otp</string>
     <string name="please_enter_correct_Mobile">Please enter correct Mobile Number</string>
@@ -8,6 +9,7 @@
     <string name="text_select">Select</string>
     <string name="text_cancel">Cancel</string>
     <string name="text_done">Done</string>
+    <string name="press_back_again">Press Back Again</string>
     <string name="text_add_video">Video</string>
     <string name="error_valid_medai_format">Please upload valid Image or Video file format.</string>
     <string name="error_valid_pdf_format">Please upload valid PDF file format.</string>

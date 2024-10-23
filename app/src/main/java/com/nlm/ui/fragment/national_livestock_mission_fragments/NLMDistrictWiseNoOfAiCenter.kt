@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
+import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding
 import com.nlm.databinding.ItemDistrictWiseNoNlsiaBinding
 import com.nlm.model.ImplementingAgencyAddRequest
@@ -43,6 +44,7 @@ class NLMDistrictWiseNoOfAiCenter:
     private val district = listOf(
         "Black", "Brown", "Blue", "Reddish", "Green", "Other"
     )
+    private var listener: OnNextButtonClickListener? = null
     private var mBinding: FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding?=null
 
     private lateinit var mNlmIADistrictWiseNoAdapter: NlmIADistrictWiseNoAdapter
@@ -59,9 +61,9 @@ class NLMDistrictWiseNoOfAiCenter:
        mNlmIADistrictWiseNoAdapter = NlmIADistrictWiseNoAdapter  (mNlmIADistrictWiseNoList)
        mBinding?.recyclerViewDistrictWiseOfAi?.adapter = mNlmIADistrictWiseNoAdapter
    }
-    override fun setVariables() {
 
-    }
+   override fun setVariables() {
+   }
 
     override fun setObservers() {
         viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
@@ -72,96 +74,30 @@ class NLMDistrictWiseNoOfAiCenter:
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
                 else{
+                    listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
             }
         }
     }
+
     inner class ClickActions {
       fun AddDistrictWiseNoAiDialog(view: View){
           compositionOfGoverningNlmIaDialog(requireContext())
       }
         fun saveAndNext(view: View) {
-            viewModel.getImplementingAgencyAddApi(requireContext(),true,
-                ImplementingAgencyAddRequest(
-                    "part5",
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    mBinding?.etNoOfAiTechnician?.text.toString().toInt(),
-                    mBinding?.etNumberOfAiTechnicianTrained?.text.toString().toInt(),
-                    mBinding?.etTotalNoOfParavetTrained?.text.toString().toInt(),
-                    mNlmIADistrictWiseNoList,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-
-                    )
+            viewModel.getImplementingAgencyAddApi(
+                context = requireContext(), loader = true,
+                request = ImplementingAgencyAddRequest(
+                    part = "part5",
+                    no_of_al_technicians = mBinding?.etNoOfAiTechnician?.text.toString().toIntOrNull(),
+                    number_of_ai = mBinding?.etNumberOfAiTechnicianTrained?.text.toString().toIntOrNull(),
+                    total_paravet_trained = mBinding?.etTotalNoOfParavetTrained?.text.toString().toIntOrNull(),
+                    implementing_agency_involved_district_wise = mNlmIADistrictWiseNoList,
+                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                    implementing_agency_document = null,
+                    is_deleted = 0,
+                )
             )
         }
     }
@@ -270,5 +206,15 @@ class NLMDistrictWiseNoOfAiCenter:
             }
         }
         dialog.show()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as OnNextButtonClickListener
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
     }
 }

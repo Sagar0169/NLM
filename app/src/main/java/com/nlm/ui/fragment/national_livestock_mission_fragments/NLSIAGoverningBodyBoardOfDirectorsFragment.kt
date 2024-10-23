@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAGoverningBodyBoardOfDirectorsBinding
 import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
 import com.nlm.model.ImplementingAgencyAddRequest
@@ -35,6 +36,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
     private lateinit var nlmIACompositionOFGoverningList: MutableList<ImplementingAgencyAdvisoryCommittee>
     private var nlmIAProjectMonitoringCommitteeAdapter: NlmIAProjectMonitoringCommitteeAdapter ?= null
     private lateinit var nlmIAProjectMonitoringCommitteeList: MutableList<ImplementingAgencyProjectMonitoring>
+    private var listener: OnNextButtonClickListener? = null
 
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__governing_body__board__of__directors
@@ -61,6 +63,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
                 else{
+                    listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
             }
@@ -235,5 +238,15 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
             }
         }
         dialog.show()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as OnNextButtonClickListener
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
     }
 }

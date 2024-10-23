@@ -86,12 +86,12 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                     if (currentPage == 1) {
                         implementingAgencyList.clear()
 
-                        val remainingCount = userResponseModel.total_count % 10
+                        val remainingCount = userResponseModel._result.total_count % 10
                         totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel._result.total_count / 10
                             count
                         } else {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel._result.total_count / 10
                             count + 1
                         }
                     }

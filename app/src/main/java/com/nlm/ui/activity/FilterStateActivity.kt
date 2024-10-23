@@ -95,13 +95,11 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.state_code
-
                 }
                 binding!!.tvLocationNDD.showView()
                 if (selectedLocation != null) {
                     binding?.etLocationNDD?.setText(selectedLocation)
                 }
-
                 binding!!.etLocationNDD.showView()
             }
 
