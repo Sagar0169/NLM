@@ -55,8 +55,9 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
     private var Discription:String?=null
     var body: MultipartBody.Part? = null
     private var AddDocumentAdapter: SupportingDocumentAdapterWithDialog?=null
-    private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private lateinit var DocumentList: MutableList<DocumentData>
+    private var savedAsDraftClick: OnBackSaveAsDraft? = null
+
     private var listener: OnNextButtonClickListener? = null
     private var DialogDocName:TextView?=null
 
@@ -65,6 +66,7 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         DocumentList = mutableListOf()
+        viewModel.init()
         AddDocumentAdapter=SupportingDocumentAdapterWithDialog(DocumentList)
         mBinding?.recyclerView1?.adapter = AddDocumentAdapter
         mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(requireContext())
@@ -259,10 +261,9 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
                         }
                             viewModel.getProfileUploadFile(
                                 context = requireActivity(),
-                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString().toRequestBody(MultipartBody.FORM),
+                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
                                 table_name = getString(R.string.implementing_agency_document).toRequestBody(MultipartBody.FORM),
-                                id = Preferences.getPreference_int(requireContext(), AppConstants.FORM_FILLED_ID).toString().toRequestBody(MultipartBody.FORM),
-//                                null,
+                                null,
                                 ia_document = body
                             )
                         }

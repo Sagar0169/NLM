@@ -62,9 +62,9 @@ interface MyService {
     @Multipart
     @POST(UPLOAD_DOCUMENT)
     suspend fun getProfileFileUpload(
-        @Part("user_id") user_id: RequestBody?,
+        @Part("user_id") user_id: Int?,
         @Part("table_name") table_name: RequestBody?,
-        @Part("id") id: RequestBody?,
+        @Part("id") id: Int?,
         @Part ia_document: MultipartBody.Part?
     ): Response<UploadDocument_Response>
 

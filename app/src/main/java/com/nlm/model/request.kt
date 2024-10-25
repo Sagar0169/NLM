@@ -164,8 +164,9 @@ data class ImplementingAgencyAdvisoryCommittee(
 )
 
 data class ImplementingAgencyDocument(
-    val description: String,
-    val id: Int
+    val description: String?,
+    val id: Int?,
+    val name_doc: String?
 )
 
 data class ImplementingAgencyFundsReceived(

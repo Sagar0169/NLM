@@ -66,9 +66,9 @@ object Repository {
         return api.getImplementingAgencyAdd(request)
     }
     suspend fun getProfileFileUpload(
-        user_id:  RequestBody?,
+        user_id: Int?,
         table_name: RequestBody?,
-        id:  RequestBody?,
+        id: Int?,
         ia_document:MultipartBody.Part?
     ): Response<UploadDocument_Response> {
         return api.getProfileFileUpload(

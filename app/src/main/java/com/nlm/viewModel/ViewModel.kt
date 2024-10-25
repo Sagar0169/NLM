@@ -497,9 +497,9 @@ class ViewModel : ViewModel() {
     }
     fun getProfileUploadFile(
         context: Context,
-        user_id:  RequestBody?,
+        user_id: Int?,
         table_name: RequestBody?,
-        id:  RequestBody?,
+        id: Int?,
         ia_document:MultipartBody.Part?
     ) {
         networkCheck(context, true)
