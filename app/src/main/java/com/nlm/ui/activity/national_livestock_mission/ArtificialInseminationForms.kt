@@ -178,6 +178,9 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+        fun submit(view: View){
+
+        }
         fun addDocDialog(view: View){
             AddDocumentDialog(this@ArtificialInseminationForms)
         }

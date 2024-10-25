@@ -7,7 +7,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
@@ -19,26 +18,17 @@ import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAFeedFodderBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
-import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
 import com.nlm.model.DocumentData
 import com.nlm.model.ImplementingAgencyAddRequest
-import com.nlm.model.ImplementingAgencyAdvisoryCommittee
-import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.Result
-import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
-import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList
-import com.nlm.ui.adapter.SupportingDocumentAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
-import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
-import com.nlm.utilities.hideView
-import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -70,8 +60,6 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
         AddDocumentAdapter=SupportingDocumentAdapterWithDialog(DocumentList)
         mBinding?.recyclerView1?.adapter = AddDocumentAdapter
         mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(requireContext())
-
-
     }
 
     override fun setVariables() {

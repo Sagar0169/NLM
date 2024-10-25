@@ -364,7 +364,13 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="physical_progress">Physical Progress.</string>
     <string name="are_you_sure_want_to_delete_your_post">Are you sure you want to delete the form</string>
     <string name="confirm">Confirm</string>
-    <string name="save_as_draft">Save As Draft</string>
+    <string name="information_regarding_sources_of_inputs">Information regarding sources of inputs</string>
+    <string name="liquid_nitrogen">Liquid Nitrogen:</string>
+    <string name="frozen_semen_straws">Frozen Semen Straws:</string>
+    <string name="cryocans">Cryocans:</string>
+    <string name="save_as_draft">Save as draft</string>
+    <string name="import_of_exotic_sheep_and_goat_gernplasm">Import of exotic sheep and goat gernplasm</string>
     <string name="implementing_agency_document">implementing_agency_document</string>
+    <string name="rsp_lab">RSP Lab</string>
 </resources>
 

@@ -451,3 +451,33 @@ data class ImplementingAgencyAdvisoryCommitteeAdd(
     val status: Int,
     val updated: Any
 )
+
+data class RSPLabListResponse(
+    val _result: RSPLabListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class RSPLabListResult(
+    val data: List<RSPLabListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class RSPLabListData(
+    val created_at: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val phone_no: Long,
+    val state_code: Int,
+    val state_name: String,
+    val updated_at: String,
+    val year_of_establishment: String
+)

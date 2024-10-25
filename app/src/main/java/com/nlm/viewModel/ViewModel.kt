@@ -19,6 +19,8 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.RSPLabListResponse
+import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.UploadDocument_Response
@@ -44,6 +46,7 @@ class ViewModel : ViewModel() {
     var dashboardResult = MutableLiveData<DashboardResponse>()
     var getDropDownResult = MutableLiveData<GetDropDownResponse>()
     var implementingAgencyResult = MutableLiveData<ImplementingAgencyResponse>()
+    var rspLabListResult = MutableLiveData<RSPLabListResponse>()
     var artificialInseminationResult = MutableLiveData<ArtificialInseminationResponse>()
     var statesemenBankResult = MutableLiveData<StateSemenBankResponse>()
     var implementingAgencyAddResult = MutableLiveData<ImplementingAgencyResponseNlm>()
@@ -460,6 +463,59 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 artificialInseminationResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getRspLabListApi(context: Context, loader: Boolean, request: RspLabListRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getRspLabList(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                rspLabListResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

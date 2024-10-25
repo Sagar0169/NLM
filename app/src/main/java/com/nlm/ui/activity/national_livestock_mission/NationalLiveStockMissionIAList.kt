@@ -46,7 +46,6 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
         const val FILTER_REQUEST_CODE = 1001
     }
 
-
     override val layoutId: Int
         get() = R.layout.activity_national_live_stock_ia
 

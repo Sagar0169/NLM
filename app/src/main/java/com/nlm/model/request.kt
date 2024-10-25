@@ -46,6 +46,14 @@ data class ImplementingAgencyRequest(
     val page: Int
 )
 
+data class RspLabListRequest(
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+    val limit: Int,
+    val page: Int
+)
+
 
 data class ArtificialInseminationRequest(
     val role_id: Int?,
@@ -203,9 +211,6 @@ data class ImplementingAgencyFundsReceived(
     val any_other: Double?,
     val physical_progress: Double?,
     val id: Int?,
-
-
-
 )
 
 data class ImplementingAgencyInvolvedDistrictWise(
@@ -221,6 +226,31 @@ data class ImplementingAgencyProjectMonitoring(
     val designation: String?,
     val organization: String?,
     val id: Int?,
-
-
 )
+
+data class ArtificialInseminationAddEditRequest(
+    val ai_centre_cattle_buffalo: Int,
+    val ai_centre_goat_frozen_semen: Int,
+    val ai_performed_average: Double,
+    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>,
+    val cryocans: String,
+    val district_code: Int,
+    val equipments_centers_provided: Int,
+    val exotic_sheep_goat: String,
+    val frozen_semen_straws: String,
+    val id: Int,
+    val is_deleted: Int,
+    val is_draft_nlm: Int,
+    val liquid_nitrogen: String,
+    val percentage_of_conception_rates: Double,
+    val role_id: Int,
+    val state_code: Int,
+    val status: Int,
+    val total_sheep_goat_labs: Int,
+    val user_id: String
+)
+
+//data class ArtificialInseminationObservationByNlm(
+//    val description: String,
+//    val id: Int
+//)

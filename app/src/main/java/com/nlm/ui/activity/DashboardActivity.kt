@@ -47,6 +47,7 @@ import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStationList
 import com.nlm.ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Nlm
 import com.nlm.utilities.PrefEntities
 
 import com.nlm.utilities.Preferences
@@ -74,27 +75,23 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     override fun initView() {
         mBinding = viewDataBinding
+        compareSchemeIds()
         viewModel.init()
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
 
-        viewModel.getDashboardApi(
-            this@DashboardActivity,
-            LogoutRequest(
-                Preferences.getPreferenceOfScheme(
-                    this@DashboardActivity,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                ).user_id
-            )
-        )
-
-
-
-
-        compareSchemeIds()
+//        viewModel.getDashboardApi(
+//            this@DashboardActivity,
+//            LogoutRequest(
+//                Preferences.getPreferenceOfScheme(
+//                    this@DashboardActivity,
+//                    AppConstants.SCHEME,
+//                    Result::class.java
+//                ).user_id
+//            )
+//        )
         setDefaultDrawables()
 
         mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
@@ -215,13 +212,13 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             toggleLeftDrawer()
         }
 
-        mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
-            Utility.clearAllPreferencesExceptDeviceToken(this)
-            intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
-        }
+//        mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
+//            Utility.clearAllPreferencesExceptDeviceToken(this)
+//            intent = Intent(this, LoginActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//            startActivity(intent)
+//            finish()
+//        }
 //        mBinding?.leftDrawerMenu?.tvMasterImplementingAgency?.setOnClickListener {
 //            val intent =
 //                Intent(this@DashboardActivity, ImplementingAgencyMasterActivity::class.java)
@@ -401,6 +398,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                     ).user_id
                 )
             )
+//            startActivity(Intent(this, LoginActivity::class.java))
         }
 
 //        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
@@ -418,7 +416,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         viewModel.dashboardResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
-                return@observe Utility.logout(this)
+                Utility.logout(this)
             }
             if (userResponseModel != null) {
                 if (userResponseModel._resultflag == 0) {
@@ -438,21 +436,13 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
         }
 
-
-
-
         viewModel.logoutResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel._resultflag == 1) {
-                Preferences.removeAllPreference(this)
-                Utility.clearAllPreferencesExceptDeviceToken(this)
-                intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                toast(userResponseModel.message)
+                Nlm.closeAndRestartApplication()
             } else {
                 if (userResponseModel._resultflag == 0 && userResponseModel.message == getString(R.string.you_are_not_authorized_to_access_that_location)) {
-                    Utility.logout(this)
+                    Nlm.closeAndRestartApplication()
                 }
                 toast(userResponseModel.message)
             }

@@ -63,15 +63,6 @@ data class State_Semen_Bank(
     val Establishment_Year: String? = null,
     val NLM_Status: String? = null,
     ) : Serializable
-data class Rsp_lab_data(
-    val state: String,
-    val District: String,
-    val Phone: String,
-    val created: String,
-    val Establishment_Year: String? = null,
-    val NLM_Status: String? = null,
-    val IA_Status: String? = null,
-) : Serializable
 
 data class ArtificialInsemenation(
     val state: String,
