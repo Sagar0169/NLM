@@ -1,5 +1,7 @@
 package com.nlm.repository
 
+import com.nlm.model.ArtificialInsemenNationAddRequest
+import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
 import com.nlm.model.DashboardResponse
@@ -64,6 +66,9 @@ object Repository {
 
     suspend fun getImplementingAgencyAdd(request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm> {
         return api.getImplementingAgencyAdd(request)
+    }
+    suspend fun getArtificialInseminationAdd(request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse> {
+        return api.getArtificialInseminationAdd(request)
     }
     suspend fun getProfileFileUpload(
         user_id: Int?,

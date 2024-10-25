@@ -309,6 +309,51 @@ data class UploadDocument_Response(
     val message: String,
     val statuscode: Int
 )
+data class ArtificialInsemenationAddResponse(
+    val _result: ResultArtificialInsemenation,
+    val _resultflag: Int,
+    val fileurl: Any,
+    val message: String,
+    val statuscode: Int
+)
+
+data class ResultArtificialInsemenation(
+    val ai_centre_cattle_buffalo: Int,
+    val ai_centre_goat_frozen_semen: Int,
+    val ai_performed_average: Double,
+    val artificial_insemination_document: List<ArtificialInseminationDocumentResponse>,
+    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlmResponse>,
+    val created: String,
+    val created_by: Int,
+    val cryocans: String,
+    val district_code: Int,
+    val equipments_centers_provided: Int,
+    val exotic_sheep_goat: String,
+    val frozen_semen_straws: String,
+    val id: Int,
+    val is_deleted: Int,
+    val is_draft_nlm: Int,
+    val liquid_nitrogen: String,
+    val percentage_of_conception_rates: Double,
+    val role_id: Int,
+    val state_code: Int,
+    val status: Int,
+    val total_sheep_goat_labs: Int,
+    val user_id: String
+)
+
+data class ArtificialInseminationDocumentResponse(
+    val artificial_insemination_id: Int,
+    val description: String,
+    val id: Int
+)
+
+data class ArtificialInseminationObservationByNlmResponse(
+    val name_of_center: String,
+    val number_of_ai_performed: Int,
+    val power_trained_ai: String,
+    val quipment_available: String
+)
 
 data class Result_Doc(
     val created_at: String,

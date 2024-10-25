@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nlm.model.ArtificialInsemenNationAddRequest
+import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
 import com.nlm.model.DashboardResponse
@@ -45,6 +47,7 @@ class ViewModel : ViewModel() {
     var artificialInseminationResult = MutableLiveData<ArtificialInseminationResponse>()
     var statesemenBankResult = MutableLiveData<StateSemenBankResponse>()
     var implementingAgencyAddResult = MutableLiveData<ImplementingAgencyResponseNlm>()
+    var artificialInseminationAddResult = MutableLiveData<ArtificialInsemenationAddResponse>()
     var getProfileUploadFileResult = MutableLiveData<UploadDocument_Response>()
     var id = 0
 
@@ -351,6 +354,59 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 implementingAgencyAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getArtificialInseminationAdd(context: Context, loader: Boolean, request: ArtificialInsemenNationAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getArtificialInseminationAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                artificialInseminationAddResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

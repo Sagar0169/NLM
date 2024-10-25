@@ -1,5 +1,7 @@
 package com.nlm.services
 
+import com.nlm.model.ArtificialInsemenNationAddRequest
+import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
 import com.nlm.model.DashboardResponse
@@ -30,6 +32,7 @@ const val DASHBOARD = "rest/dashboard"
 const val GET_DROP_DOWN = "rest/getDropdown"
 const val IMPLEMENTING_AGENCY_LIST = "nationalLivestockMission/implimentingAgencyList"
 const val IMPLEMENTING_AGENCY_ADD = "nationalLivestockMission/implimentingAgencyAddEdit"
+const val ARTIFICIAL_INSEMINATION_ADD = "nationalLivestockMission/artificialInseminationAddEdit"
 const val ARTIFICIAL_INSEMINATION_LIST = "nationalLivestockMission/artificialInseminationList"
 const val STATE_SEMEN_BANK_LIST = "nationalLivestockMission/stateSemenBankList"
 const val UPLOAD_DOCUMENT = "rest/uploadDocument"
@@ -58,6 +61,8 @@ interface MyService {
 
     @POST(IMPLEMENTING_AGENCY_ADD)
     suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm>
+    @POST(ARTIFICIAL_INSEMINATION_ADD)
+    suspend fun getArtificialInseminationAdd(@Body request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse>
 
     @Multipart
     @POST(UPLOAD_DOCUMENT)

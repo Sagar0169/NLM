@@ -61,7 +61,34 @@ data class StateSemenBankRequest(
     val limit: Int,
     val page: Int
 )
+data class ArtificialInsemenNationAddRequest(
 
+    val artificial_insemination_document: List<ArtificialInseminationDocument>?,
+    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>?,
+    val cryocans: String?,
+    val district_code: Int?,
+    val exotic_sheep_goat: String?,
+    val frozen_semen_straws: String?,
+    val is_deleted: Int?,
+    val is_draft_nlm: Int?,
+    val liquid_nitrogen: String?,
+    val role_id: Int?,
+    val state_code: Int?,
+    val total_sheep_goat_labs: Int?,
+    val user_id: Int?
+)
+
+data class ArtificialInseminationDocument(
+    val description: String,
+    val id: Int
+)
+
+data class ArtificialInseminationObservationByNlm(
+    val name_of_center: String,
+    val number_of_ai_performed: Int,
+    val power_trained_ai: String,
+    val quipment_available: String
+)
 
 
 data class GetDropDownRequest(
