@@ -266,8 +266,8 @@ data class DataArtificialInsemination(
     val id: Int,
     val is_delete: Boolean,
     val is_draft: String,
-    val is_draft_ia: Int,
-    val is_draft_nlm: Int,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
     val is_edit: Boolean,
     val is_view: Boolean,
 )

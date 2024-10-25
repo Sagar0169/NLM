@@ -497,6 +497,9 @@ class ViewModel : ViewModel() {
                 if (e is SocketTimeoutException) {
                     errors.postValue("Time out Please try again")
                 }
+                else{
+                    errors.postValue(e.message.toString())
+                }
                 dismissLoader()
             }
         }

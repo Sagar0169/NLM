@@ -59,6 +59,8 @@ class Artificial_Insemination_adapter(private val implementingAgencyList: List<D
     holder.mBinding.etFrozenSemen.text = item.frozen_semen_straws
     holder.mBinding.etCryocans.text=item.cryocans
     holder.mBinding.etCreated.text=item.created
+    holder.mBinding.etStatus.text=item.is_draft_ia
+    holder.mBinding.etStatusNlm.text=item.is_draft_nlm
 
         if(item.is_view){
             holder.mBinding.ivView.showView()
