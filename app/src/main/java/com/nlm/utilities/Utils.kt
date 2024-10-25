@@ -41,8 +41,11 @@ import kotlinx.coroutines.withContext
 import com.nlm.R
 import com.nlm.callBack.DialogCallback
 import com.nlm.ui.activity.LoginActivity
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.*
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -823,6 +826,7 @@ object Utility {
         editor.apply()
     }
 
+
     //    fun showSnackBar(viewLayout: View?, toastMessage: String?) {
 //        try {
 //            Snackbar.make(viewLayout!!, toastMessage!!, Snackbar.LENGTH_LONG).show()
@@ -1076,6 +1080,24 @@ object Utility {
                     .into(view)
             }
         }
+    }
+     fun convertToRequestBody(context: Context, uri: Uri): RequestBody {
+        val contentResolver: ContentResolver = context.contentResolver
+        val tempFileName = "temp_${System.currentTimeMillis()}.pdf"
+        val file = File(context.cacheDir, tempFileName)
+
+        try {
+            contentResolver.openInputStream(uri)?.use { inputStream ->
+                file.outputStream().use { outputStream ->
+                    inputStream.copyTo(outputStream)
+                }
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            // Handle the error appropriately
+        }
+
+        return file.asRequestBody("application/pdf".toMediaType())
     }
 
 //    fun setHintText(

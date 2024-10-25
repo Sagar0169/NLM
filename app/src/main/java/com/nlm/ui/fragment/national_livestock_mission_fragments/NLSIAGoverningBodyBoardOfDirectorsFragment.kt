@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAGoverningBodyBoardOfDirectorsBinding
 import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
@@ -39,6 +40,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
     private var nlmIAProjectMonitoringCommitteeAdapter: NlmIAProjectMonitoringCommitteeAdapter ?= null
     private lateinit var nlmIAProjectMonitoringCommitteeList: MutableList<ImplementingAgencyProjectMonitoring>
     private var listener: OnNextButtonClickListener? = null
+    private var savedAsDraft:Boolean=false
+    private var savedAsDraftClick: OnBackSaveAsDraft? = null
 
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__governing_body__board__of__directors
@@ -65,9 +68,14 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
                 else{
+                    if (savedAsDraft)
+                    {
+                        savedAsDraftClick?.onSaveAsDraft()
+                    }else
+                    {
                     listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                }
+                }}
             }
         }
     }
@@ -94,85 +102,25 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
         fun saveAndNext(view: View) {
        viewModel.getImplementingAgencyAddApi(requireContext(),true,
            ImplementingAgencyAddRequest(
-               "part3",
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               nlmIACompositionOFGoverningList,
-               nlmIAProjectMonitoringCommitteeList,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-               null,
-
+               part = "part3",
+               implementing_agency_advisory_committee = nlmIACompositionOFGoverningList,
+               implementing_agency_project_monitoring = nlmIAProjectMonitoringCommitteeList,
+               id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
                )
        )
    }
+        fun saveAsDraft(view: View) {
+            viewModel.getImplementingAgencyAddApi(requireContext(),true,
+                ImplementingAgencyAddRequest(
+                    part = "part3",
+                    implementing_agency_advisory_committee = nlmIACompositionOFGoverningList,
+                    implementing_agency_project_monitoring = nlmIAProjectMonitoringCommitteeList,
+                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                )
+            )
+            savedAsDraft=true
+
+        }
 
         fun compositionOfGoverningNlmIaDialog(view: View) {
             compositionOfGoverningNlmIaDialog(requireContext(),1)
@@ -245,10 +193,12 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as OnNextButtonClickListener
+        savedAsDraftClick = context as OnBackSaveAsDraft
     }
 
     override fun onDetach() {
         super.onDetach()
         listener = null
+        savedAsDraftClick = null
     }
 }

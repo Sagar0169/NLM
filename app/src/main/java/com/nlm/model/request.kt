@@ -54,6 +54,13 @@ data class ArtificialInseminationRequest(
     val limit: Int,
     val page: Int
 )
+data class StateSemenBankRequest(
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+    val limit: Int,
+    val page: Int
+)
 
 
 
@@ -63,6 +70,10 @@ data class GetDropDownRequest(
     val page: Int?,
     val state_code: Int?,
     val user_id: Int?
+)
+data class DocumentData(
+    val description: String?,
+    val name_doc: String?,
 )
 data class ImplementingAgencyAddRequest(
     val part:String?=null,

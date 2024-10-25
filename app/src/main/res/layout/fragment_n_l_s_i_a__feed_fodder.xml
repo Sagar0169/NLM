@@ -379,6 +379,27 @@
 
                     </LinearLayout>
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/tvAddMore2"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/curve_fill_blue"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:onClick="@{ClickAction::addDocDialog}"
+                    android:paddingVertical="@dimen/dp_10"
+                    android:text="Add Documents"
+                    android:textColor="@color/white" />
+                <com.nlm.utilities.NonScrollableRecyclerView
+                    android:id="@+id/recyclerView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_7"
+
+                    android:paddingTop="8dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

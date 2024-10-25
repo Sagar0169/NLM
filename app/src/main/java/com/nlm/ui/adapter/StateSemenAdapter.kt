@@ -9,15 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemNlspFormsBinding
 import com.nlm.databinding.ItemStateSemenBinding
+import com.nlm.model.DataSemen
 import com.nlm.model.NLMIA_data
 import com.nlm.model.State_Semen_Bank
 
 import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
 
 import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 
 
-class StateSemenAdapter(private val implementingAgencyList: List<State_Semen_Bank>, val isFrom:Int, val Role_name:String) :
+class StateSemenAdapter(private val implementingAgencyList: ArrayList<DataSemen>, val isFrom:Int, val Role_name:String) :
     RecyclerView.Adapter<StateSemenAdapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -56,31 +58,48 @@ class StateSemenAdapter(private val implementingAgencyList: List<State_Semen_Ban
 
 
 
-    holder.mBinding.etState.text = item.state
-    holder.mBinding.etDistricts.text = item.District
-    holder.mBinding.etEstablishment.text = item.Establishment_Year
+    holder.mBinding.etState.text = item.state_name
+    holder.mBinding.etDistricts.text = item.district_name
+    holder.mBinding.etEstablishment.text = item.year_of_establishment
     holder.mBinding.etCreated.text = item.created
-    holder.mBinding.etStatus.text = item.NLM_Status
+    holder.mBinding.etStatus.text = item.is_draft
+
+        if(item.is_view){
+            holder.mBinding.ivView.showView()
+        }
+        else{
+            holder.mBinding.ivView.hideView()
+        }
+        if(item.is_delete){
+            holder.mBinding.ivDelete.showView()
+        }
+        else{
+            holder.mBinding.ivDelete.hideView()
+        }
+        if(item.is_edit){
+            holder.mBinding.ivEdit.showView()
+        }
+        else{
+            holder.mBinding.ivEdit.hideView()
+        }
 
 
 
 
 
 
-
-
-    holder.mBinding.ivView.setOnClickListener {
-        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-        intent.putExtra("nodalOfficer", item)
-        intent.putExtra("isFrom", 2)
-        holder.itemView.context.startActivity(intent)
-    }
-    holder.mBinding.ivEdit.setOnClickListener {
-        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-        intent.putExtra("nodalOfficer", item)
-        intent.putExtra("isFrom", 3)
-        holder.itemView.context.startActivity(intent)
-    }
+//    holder.mBinding.ivView.setOnClickListener {
+//        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
+////        intent.putExtra("nodalOfficer", item)
+////        intent.putExtra("isFrom", 2)
+//        holder.itemView.context.startActivity(intent)
+//    }
+//    holder.mBinding.ivEdit.setOnClickListener {
+//        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
+////        intent.putExtra("nodalOfficer", item)
+////        intent.putExtra("isFrom", 3)
+//        holder.itemView.context.startActivity(intent)
+//    }
 
 
 

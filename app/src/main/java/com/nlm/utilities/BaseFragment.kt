@@ -26,7 +26,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     @get:LayoutRes
     abstract val layoutId: Int
-
+    val REQUEST_iMAGE_PDF = 20
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

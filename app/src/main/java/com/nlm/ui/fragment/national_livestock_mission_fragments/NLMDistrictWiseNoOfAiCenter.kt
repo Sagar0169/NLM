@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
+import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding
 import com.nlm.databinding.ItemDistrictWiseNoNlsiaBinding
@@ -42,6 +43,8 @@ class NLMDistrictWiseNoOfAiCenter:
         get() = R.layout.fragment_n_l_s_i_a__agencies_involved_in_genetic_improvement_goat_sheep
     private lateinit var stateAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var savedAsDraft:Boolean=false
+    private var savedAsDraftClick: OnBackSaveAsDraft? = null
     val viewModel = ViewModel()
     private val district = listOf(
         "Black", "Brown", "Blue", "Reddish", "Green", "Other"
@@ -74,9 +77,14 @@ class NLMDistrictWiseNoOfAiCenter:
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
                 else{
+                    if (savedAsDraft)
+                    {
+                        savedAsDraftClick?.onSaveAsDraft()
+                    }else
+                    {
                     listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                }
+                }}
             }
         }
     }
@@ -100,6 +108,24 @@ class NLMDistrictWiseNoOfAiCenter:
                     id =Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
                 )
             )
+        }
+        fun saveAsDraft(view: View) {
+            viewModel.getImplementingAgencyAddApi(
+                context = requireContext(), loader = true,
+                request = ImplementingAgencyAddRequest(
+                    part = "part5",
+                    no_of_al_technicians = mBinding?.etNoOfAiTechnician?.text.toString().toIntOrNull(),
+                    number_of_ai = mBinding?.etNumberOfAiTechnicianTrained?.text.toString().toIntOrNull(),
+                    total_paravet_trained = mBinding?.etTotalNoOfParavetTrained?.text.toString().toIntOrNull(),
+                    implementing_agency_involved_district_wise = mNlmIADistrictWiseNoList,
+                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                    implementing_agency_document = null,
+                    is_deleted = 0,
+                    id =Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                    is_draft = 1
+                )
+            )
+            savedAsDraft=true
         }
     }
     private fun showBottomSheetDialog(type: String,textView: TextView) {
@@ -212,10 +238,12 @@ class NLMDistrictWiseNoOfAiCenter:
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as OnNextButtonClickListener
+        savedAsDraftClick = context as OnBackSaveAsDraft
     }
 
     override fun onDetach() {
         super.onDetach()
         listener = null
+        savedAsDraftClick = null
     }
 }

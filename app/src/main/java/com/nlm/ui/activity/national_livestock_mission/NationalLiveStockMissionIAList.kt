@@ -3,6 +3,7 @@ package com.nlm.ui.activity.national_livestock_mission
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
@@ -54,7 +55,8 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         implementingAgencyAdapter()
-
+        Toast.makeText(this,Preferences.getPreference_int(this,AppConstants.FORM_FILLED_ID).toString(),
+            Toast.LENGTH_LONG).show()
         swipeForRefreshImplementingAgency()
     }
 

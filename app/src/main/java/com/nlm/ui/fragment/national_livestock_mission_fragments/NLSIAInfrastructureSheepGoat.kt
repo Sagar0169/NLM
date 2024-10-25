@@ -1,8 +1,10 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.nlm.R
 import com.nlm.callBack.OnBackSaveAsDraft
@@ -11,11 +13,13 @@ import com.nlm.databinding.FragmentNLSIAInfrastructureSheepGoatBinding
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
 import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
 
@@ -25,8 +29,9 @@ class NLSIAInfrastructureSheepGoat() : BaseFragment<FragmentNLSIAInfrastructureS
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__infrastructure__sheep_goat
     val viewModel = ViewModel()
-    private var savedAsDraft:Boolean=false
+
     private var listener: OnNextButtonClickListener? = null
+    private var savedAsDraft:Boolean=false
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private var mBinding: FragmentNLSIAInfrastructureSheepGoatBinding?=null
     override fun init() {
@@ -56,7 +61,11 @@ class NLSIAInfrastructureSheepGoat() : BaseFragment<FragmentNLSIAInfrastructureS
                 else{
                     if (savedAsDraft)
                     {
-                        savedAsDraftClick?.onSaveAsDraft()
+                        Utility.clearAllFormFilledID(requireContext())
+
+//                        savedAsDraftClick?.onSaveAsDraft()
+                        startActivity(Intent(requireContext(),NationalLiveStockMissionIAList::class.java))
+
                     }else
                     {
                     listener?.onNextButtonClick()
@@ -131,7 +140,8 @@ class NLSIAInfrastructureSheepGoat() : BaseFragment<FragmentNLSIAInfrastructureS
                     total_ai_performed_location = mBinding?.etTotalAiLocation?.text.toString(),
                     user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
                     is_deleted = 0,
-                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID)
+                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                    is_draft = 1
 
                 )
 

@@ -17,12 +17,17 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.StateSemenBankRequest
+import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.UploadDocument_Response
 import com.nlm.repository.Repository
 import com.nlm.utilities.Utility
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.json.JSONObject
 import java.net.SocketTimeoutException
 
@@ -38,7 +43,9 @@ class ViewModel : ViewModel() {
     var getDropDownResult = MutableLiveData<GetDropDownResponse>()
     var implementingAgencyResult = MutableLiveData<ImplementingAgencyResponse>()
     var artificialInseminationResult = MutableLiveData<ArtificialInseminationResponse>()
+    var statesemenBankResult = MutableLiveData<StateSemenBankResponse>()
     var implementingAgencyAddResult = MutableLiveData<ImplementingAgencyResponseNlm>()
+    var getProfileUploadFileResult = MutableLiveData<UploadDocument_Response>()
     var id = 0
 
     val errors = MutableLiveData<String>()
@@ -436,4 +443,115 @@ class ViewModel : ViewModel() {
         }
     }
 
+    fun getStateSemenBankApi(context: Context, loader: Boolean, request: StateSemenBankRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getStateSemenBank(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                statesemenBankResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
+    fun getProfileUploadFile(
+        context: Context,
+        user_id:  RequestBody?,
+        table_name: RequestBody?,
+        id:  RequestBody?,
+        ia_document:MultipartBody.Part?
+    ) {
+        networkCheck(context, true)
+
+        job = scope.launch {
+            try {
+                val response = repository.getProfileFileUpload(
+                    user_id,table_name, id, ia_document
+                )
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                getProfileUploadFileResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
 }

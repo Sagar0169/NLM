@@ -186,7 +186,8 @@
                 android:fontFamily="@font/poppins_medium"
                 android:paddingHorizontal="@dimen/dp_20"
                 android:paddingVertical="@dimen/dp_10"
-                android:text="Save As Draft"
+                android:text="@string/save_as_draft"
+                android:onClick="@{ClickAction::saveAsDraft}"
                 android:textSize="20sp"
                 android:textAlignment="center"
                 android:textColor="@color/white" />

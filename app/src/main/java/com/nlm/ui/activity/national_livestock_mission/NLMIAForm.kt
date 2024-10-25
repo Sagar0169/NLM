@@ -154,7 +154,7 @@ class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickList
 
     override fun onSaveAsDraft() {
 
-        Utility.clearAllFormFilledID(this@NLMIAForm)
+
         onBackPressedDispatcher.onBackPressed()
     }
 

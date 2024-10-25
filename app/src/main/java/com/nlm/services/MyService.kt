@@ -13,9 +13,16 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.StateSemenBankRequest
+import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.UploadDocument_Response
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 const val LOGIN = "rest/login"
 const val LOGOUT = "rest/logout"
@@ -24,6 +31,8 @@ const val GET_DROP_DOWN = "rest/getDropdown"
 const val IMPLEMENTING_AGENCY_LIST = "nationalLivestockMission/implimentingAgencyList"
 const val IMPLEMENTING_AGENCY_ADD = "nationalLivestockMission/implimentingAgencyAddEdit"
 const val ARTIFICIAL_INSEMINATION_LIST = "nationalLivestockMission/artificialInseminationList"
+const val STATE_SEMEN_BANK_LIST = "nationalLivestockMission/stateSemenBankList"
+const val UPLOAD_DOCUMENT = "rest/uploadDocument"
 
 interface MyService {
 
@@ -44,11 +53,20 @@ interface MyService {
 
     @POST(ARTIFICIAL_INSEMINATION_LIST)
     suspend fun getArtificialInsemination(@Body request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse>
-
+    @POST(STATE_SEMEN_BANK_LIST)
+    suspend fun getStateSemenBank(@Body request: StateSemenBankRequest): Response<StateSemenBankResponse>
 
     @POST(IMPLEMENTING_AGENCY_ADD)
     suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm>
 
+    @Multipart
+    @POST(UPLOAD_DOCUMENT)
+    suspend fun getProfileFileUpload(
+        @Part("user_id") user_id: RequestBody?,
+        @Part("table_name") table_name: RequestBody?,
+        @Part("id") id: RequestBody?,
+        @Part ia_document: MultipartBody.Part?
+    ): Response<UploadDocument_Response>
 
 }
 

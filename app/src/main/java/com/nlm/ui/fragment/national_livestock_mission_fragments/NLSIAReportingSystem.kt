@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAReportingSystemBinding
 import com.nlm.databinding.ItemFundsReceivedNlsiaBinding
@@ -35,6 +36,8 @@ class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>()
 
     val viewModel = ViewModel()
     private var mBinding: FragmentNLSIAReportingSystemBinding?=null
+    private var savedAsDraft:Boolean=false
+    private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private var nlmIAFundsRecievedAdapter: NlmIAFundsRecievedAdapter? = null
     private lateinit var nlmIAFundsRecievedList: MutableList<ImplementingAgencyFundsReceived>
     private var listener: OnNextButtonClickListener? = null
@@ -57,9 +60,14 @@ class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
                 else{
+                    if (savedAsDraft)
+                    {
+                        savedAsDraftClick?.onSaveAsDraft()
+                    }else
+                    {
                     listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                }
+                }}
             }
         }
     }
@@ -147,6 +155,26 @@ class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>()
             )
         }
 
+        fun saveAsDraft(view: View) {
+            viewModel.getImplementingAgencyAddApi(requireContext(),true,
+                ImplementingAgencyAddRequest(
+                    part = "part4",
+                   frequency_of_monitoring_1 =  mBinding?.etFrequencyOfMonitoring1?.text.toString(),
+                    frequency_of_monitoring_2 = mBinding?.etFrequencyOfMonitoring2?.text.toString(),
+                    reporting_mechanism_1 = mBinding?.etReportingMechanismToStateGovt1?.text.toString(),
+                    reporting_mechanism_2 = mBinding?.etReportingMechanismToStateGovt2?.text.toString(),
+                    regularity_1 = mBinding?.etRegularity1?.text.toString(),
+                    regularity_2 = mBinding?.etRegularity2?.text.toString(),
+                    submission_of_quarterly_1 = mBinding?.etSubmission1?.text.toString(),
+                    submission_of_quarterly_2 = mBinding?.etSubmission2?.text.toString(),
+                    studies_surveys_conducted = mBinding?.etStudiesConducted?.text.toString(),
+                    implementing_agency_funds_received = nlmIAFundsRecievedList,
+                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                    is_draft = 1,
+                    )
+            )
+            savedAsDraft=true
+        }
         fun nlmIAFundsRecievedDialog(view: View) {
             nlmIAFundsRecievedDialog(requireContext())
         }
@@ -214,10 +242,12 @@ class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>()
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as OnNextButtonClickListener
+        savedAsDraftClick = context as OnBackSaveAsDraft
     }
 
     override fun onDetach() {
         super.onDetach()
         listener = null
+        savedAsDraftClick = null
     }
 }

@@ -13,8 +13,13 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.StateSemenBankRequest
+import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.UploadDocument_Response
 import com.nlm.services.MyService
 import com.nlm.services.ServiceGenerator
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 
 object Repository {
@@ -53,9 +58,25 @@ object Repository {
     suspend fun getArtificialInsemination(request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse> {
         return api.getArtificialInsemination(request)
     }
+    suspend fun getStateSemenBank(request: StateSemenBankRequest): Response<StateSemenBankResponse> {
+        return api.getStateSemenBank(request)
+    }
 
     suspend fun getImplementingAgencyAdd(request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm> {
         return api.getImplementingAgencyAdd(request)
+    }
+    suspend fun getProfileFileUpload(
+        user_id:  RequestBody?,
+        table_name: RequestBody?,
+        id:  RequestBody?,
+        ia_document:MultipartBody.Part?
+    ): Response<UploadDocument_Response> {
+        return api.getProfileFileUpload(
+            user_id,
+            table_name,
+            id,
+            ia_document
+        )
     }
 }
 

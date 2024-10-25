@@ -45,7 +45,33 @@ data class DashData(
 )
 
 
+data class StateSemenBankResponse(
+    val _result: ResultStateSemen,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
 
+data class ResultStateSemen(
+    val `data`: List<DataSemen>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class DataSemen(
+    val created: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: String,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val state_code: Int,
+    val state_name: String,
+    val updated: Any,
+    val year_of_establishment: String
+)
 
 data class MyAccountResponse(
     val _result: ResultData,
@@ -277,7 +303,21 @@ data class ImplementingAgencyResponseNlm(
     val message: String,
     val statuscode: Int
 )
+data class UploadDocument_Response(
+    val _result: Result_Doc,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
 
+data class Result_Doc(
+    val created_at: String,
+    val description: String,
+    val ia_document: String,
+    val id: Int,
+    val implementing_agency_id: Int,
+    val nlm_document: Any
+)
 data class ResultNLMIA(
     val actual_production_location: String,
     val actual_production_number: Int,

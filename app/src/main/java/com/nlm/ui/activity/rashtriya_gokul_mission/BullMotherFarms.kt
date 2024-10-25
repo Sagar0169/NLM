@@ -36,7 +36,6 @@ class BullMotherFarms :BaseActivity<ActivityBullMotherFarmsBinding>() {
         mBinding?.clickAction = ClickActions()
         recyclerView = mBinding?.recyclerView1!!
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         programmeList = mutableListOf()
         programmeList.add(arrayOf(""))
         adapter = SupportingDocumentAdapter(programmeList)

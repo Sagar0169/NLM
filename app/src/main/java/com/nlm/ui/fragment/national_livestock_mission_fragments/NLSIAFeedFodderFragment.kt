@@ -1,21 +1,47 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
+import android.app.Activity
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.provider.MediaStore
+import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.OnBackSaveAsDraft
+import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAFeedFodderBinding
+import com.nlm.databinding.ItemAddDocumentDialogBinding
+import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
+import com.nlm.model.DocumentData
 import com.nlm.model.ImplementingAgencyAddRequest
+import com.nlm.model.ImplementingAgencyAdvisoryCommittee
+import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.Result
 import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList
+import com.nlm.ui.adapter.SupportingDocumentAdapter
+import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 
 class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
@@ -24,10 +50,26 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
 
     private var mBinding: FragmentNLSIAFeedFodderBinding?=null
     val viewModel = ViewModel()
+    private var savedAsDraft:Boolean=false
+    private var DocumentName:String?=null
+    private var Discription:String?=null
+    var body: MultipartBody.Part? = null
+    private var AddDocumentAdapter: SupportingDocumentAdapterWithDialog?=null
+    private var savedAsDraftClick: OnBackSaveAsDraft? = null
+    private lateinit var DocumentList: MutableList<DocumentData>
+    private var listener: OnNextButtonClickListener? = null
+    private var DialogDocName:TextView?=null
+
 
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
+        DocumentList = mutableListOf()
+        AddDocumentAdapter=SupportingDocumentAdapterWithDialog(DocumentList)
+        mBinding?.recyclerView1?.adapter = AddDocumentAdapter
+        mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(requireContext())
+
+
     }
 
     override fun setVariables() {
@@ -48,9 +90,35 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
 
                 }
                 else{
-
-
-                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                    if (savedAsDraft)
+                    {
+                        savedAsDraftClick?.onSaveAsDraft()
+                    }else
+                    {
+                        listener?.onNextButtonClick()
+                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                    }}
+            }
+        }
+        viewModel.getProfileUploadFileResult.observe(viewLifecycleOwner) {
+            val userResponseModel = it
+            if (userResponseModel != null) {
+                if (userResponseModel.statuscode == 401) {
+                    Utility.logout(requireContext())
+                } else if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+                } else {
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
                 }
             }
         }
@@ -93,16 +161,113 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
                     distribution_channel =mBinding?.etDistributionChannel?.text.toString() ,
                     number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
                     id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-
+                    is_draft = 1,
                     )
             )
-            startActivity(
-                Intent(
-                    requireContext(),
-                    NationalLiveStockMissionIAList::class.java
-                )
-            )
-            Utility.clearAllFormFilledID(requireContext())
+            savedAsDraft=true
         }
+        fun addDocDialog(view: View){
+            AddDocumentDialog(requireContext())
+        }
+
+    }
+    private fun AddDocumentDialog(context: Context) {
+        val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.item_add_document_dialog,
+            null,
+            false
+        )
+        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setContentView(bindingDialog.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window!!.setGravity(Gravity.CENTER)
+        DialogDocName=bindingDialog.etDoc
+        bindingDialog.tvChooseFile.setOnClickListener {
+            openOnlyPdfAccordingToPosition()
+        }
+
+        bindingDialog.tvSubmit.setOnClickListener {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+            {
+
+                DocumentList.add(DocumentData(bindingDialog.etDescription.text.toString(),DocumentName))
+
+                DocumentList.size.minus(1).let {
+                    AddDocumentAdapter?.notifyItemInserted(it)
+                    dialog.dismiss()
+//
+                }
+            }
+
+
+            else {
+                showSnackbar(mBinding!!.clParent, getString(R.string.please_enter_atleast_one_field))
+            }
+        }
+        dialog.show()
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as OnNextButtonClickListener
+        savedAsDraftClick = context as OnBackSaveAsDraft
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+        savedAsDraftClick = null
+    }
+    private fun openOnlyPdfAccordingToPosition() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/pdf"
+        }
+        startActivityForResult(intent, REQUEST_iMAGE_PDF)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_iMAGE_PDF -> {
+                    data?.data?.let { uri ->
+                        val projection = arrayOf(
+                            MediaStore.MediaColumns.DISPLAY_NAME,
+                            MediaStore.MediaColumns.SIZE
+                        )
+                        val cursor = requireActivity().contentResolver.query(uri, projection, null, null, null)
+                        cursor?.use {
+                            if (it.moveToFirst()) {
+                                DocumentName=
+                                    it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
+                                DialogDocName?.text=DocumentName
+
+                                val requestBody = convertToRequestBody(requireActivity(), uri)
+                                body = MultipartBody.Part.createFormData(
+                                    "document_name",
+                                    DocumentName,
+                                    requestBody
+                                )
+//                                use this code to add new view with image name and uri
+                        }
+                            viewModel.getProfileUploadFile(
+                                context = requireActivity(),
+                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString().toRequestBody(MultipartBody.FORM),
+                                table_name = getString(R.string.implementing_agency_document).toRequestBody(MultipartBody.FORM),
+                                id = Preferences.getPreference_int(requireContext(), AppConstants.FORM_FILLED_ID).toString().toRequestBody(MultipartBody.FORM),
+//                                null,
+                                ia_document = body
+                            )
+                        }
+                    }
+                }
+            }}
     }
 }
