@@ -3,6 +3,7 @@ package com.nlm.ui.activity.national_livestock_mission
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
@@ -45,7 +46,6 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
         const val FILTER_REQUEST_CODE = 1001
     }
 
-
     override val layoutId: Int
         get() = R.layout.activity_national_live_stock_ia
 
@@ -54,7 +54,8 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         implementingAgencyAdapter()
-        implementingAgencyAPICall(paginate = false, loader = true, "")
+        Toast.makeText(this,Preferences.getPreference_int(this,AppConstants.FORM_FILLED_ID).toString(),
+            Toast.LENGTH_LONG).show()
         swipeForRefreshImplementingAgency()
     }
 
@@ -86,12 +87,12 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                     if (currentPage == 1) {
                         implementingAgencyList.clear()
 
-                        val remainingCount = userResponseModel.total_count % 10
+                        val remainingCount = userResponseModel._result.total_count % 10
                         totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel._result.total_count / 10
                             count
                         } else {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel._result.total_count / 10
                             count + 1
                         }
                     }
@@ -237,5 +238,9 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                 )
         )
         itemPosition = position
+    }
+    override fun onResume() {
+        super.onResume()
+        implementingAgencyAPICall(paginate = false, loader = true, "")
     }
 }

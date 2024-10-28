@@ -39,25 +39,25 @@ class NationalLiveStockMissionIAAdapter(
 
     override fun onBindViewHolder(holder: ImplementingAgencyViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
-        val item = implementingAgencyList?.get(position)
+        val item = implementingAgencyList[position]
 
-        holder.mBinding.etState.text = item?.state_name
-        holder.mBinding.etCreatedBy.text = item?.name_location_of_ai
-        holder.mBinding.etCreated.text = "item.created_by"
-        holder.mBinding.etStatus.text = item?.is_draft
-        if(item?.is_view == true){
+        holder.mBinding.etState.text = item.state_name
+        holder.mBinding.etCreatedBy.text = item.name_location_of_ai
+        holder.mBinding.etCreated.text = item.created
+        holder.mBinding.etStatus.text = item.is_draft
+        if(item.is_view){
            holder.mBinding.ivView.showView()
         }
         else{
             holder.mBinding.ivView.hideView()
         }
-        if(item?.is_delete == true){
+        if(item.is_delete){
            holder.mBinding.ivDelete.showView()
         }
         else{
             holder.mBinding.ivDelete.hideView()
         }
-        if(item?.is_edit == true){
+        if(item.is_edit){
            holder.mBinding.ivEdit.showView()
         }
         else{

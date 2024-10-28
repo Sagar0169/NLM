@@ -1,5 +1,7 @@
 package com.nlm.repository
 
+import com.nlm.model.ArtificialInsemenNationAddRequest
+import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
 import com.nlm.model.DashboardResponse
@@ -13,25 +15,36 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.RSPLabListResponse
+import com.nlm.model.RspLabListRequest
+import com.nlm.model.StateSemenBankRequest
+import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.UploadDocument_Response
 import com.nlm.services.MyService
 import com.nlm.services.ServiceGenerator
+import com.nlm.services.ServiceGeneratorLogin
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 
 object Repository {
 
     private var repository: Repository? = null
     private lateinit var api: MyService
+    private lateinit var apiLogin: MyService
 
     val instance: Repository
         get() {
             repository = Repository
+
             api = ServiceGenerator.createService(MyService::class.java)
 
+            apiLogin = ServiceGeneratorLogin.createServiceLogin(MyService::class.java)
             return repository!!
         }
 
     suspend fun getLogin(request: LoginRequest): Response<LoginResponse> {
-        return api.getLogin(request)
+        return apiLogin.getLogin(request)
     }
 
     suspend fun getLogout(request: LogoutRequest): Response<LogoutResponse> {
@@ -50,12 +63,35 @@ object Repository {
         return api.getImplementingAgency(request)
     }
 
+    suspend fun getRspLabList(request: RspLabListRequest): Response<RSPLabListResponse> {
+        return api.getRSPLabList(request)
+    }
+
     suspend fun getArtificialInsemination(request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse> {
         return api.getArtificialInsemination(request)
+    }
+    suspend fun getStateSemenBank(request: StateSemenBankRequest): Response<StateSemenBankResponse> {
+        return api.getStateSemenBank(request)
     }
 
     suspend fun getImplementingAgencyAdd(request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm> {
         return api.getImplementingAgencyAdd(request)
+    }
+    suspend fun getArtificialInseminationAdd(request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse> {
+        return api.getArtificialInseminationAdd(request)
+    }
+    suspend fun getProfileFileUpload(
+        user_id: Int?,
+        table_name: RequestBody?,
+        id: Int?,
+        ia_document:MultipartBody.Part?
+    ): Response<UploadDocument_Response> {
+        return api.getProfileFileUpload(
+            user_id,
+            table_name,
+            id,
+            ia_document
+        )
     }
 }
 

@@ -46,8 +46,7 @@ data class ImplementingAgencyRequest(
     val page: Int
 )
 
-
-data class ArtificialInseminationRequest(
+data class RspLabListRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
@@ -56,6 +55,49 @@ data class ArtificialInseminationRequest(
 )
 
 
+data class ArtificialInseminationRequest(
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+    val limit: Int,
+    val page: Int
+)
+data class StateSemenBankRequest(
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+    val limit: Int,
+    val page: Int
+)
+data class ArtificialInsemenNationAddRequest(
+
+    val artificial_insemination_document: List<ArtificialInseminationDocument>?,
+    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>?,
+    val cryocans: String?,
+    val district_code: Int?,
+    val exotic_sheep_goat: String?,
+    val frozen_semen_straws: String?,
+    val is_deleted: Int?,
+    val is_draft_nlm: Int?,
+    val liquid_nitrogen: String?,
+    val role_id: Int?,
+    val state_code: Int?,
+    val total_sheep_goat_labs: Int?,
+    val user_id: Int?
+)
+
+data class ArtificialInseminationDocument(
+    val description: String,
+    val id: Int
+)
+
+data class ArtificialInseminationObservationByNlm(
+    val name_of_center: String,
+    val number_of_ai_performed: Int,
+    val power_trained_ai: String,
+    val quipment_available: String
+)
+
 
 data class GetDropDownRequest(
     val limit: Int?,
@@ -63,6 +105,10 @@ data class GetDropDownRequest(
     val page: Int?,
     val state_code: Int?,
     val user_id: Int?
+)
+data class DocumentData(
+    val description: String?,
+    val name_doc: String?,
 )
 data class ImplementingAgencyAddRequest(
     val part:String?=null,
@@ -114,6 +160,7 @@ data class ImplementingAgencyAddRequest(
     val studies_surveys_conducted: String?=null,
     val implementing_agency_funds_received: List<ImplementingAgencyFundsReceived>?=null,
     val no_of_al_technicians: Int?=null,
+    val number_of_ai: Int?=null,
     val total_paravet_trained: Int?=null,
     val implementing_agency_involved_district_wise: List<ImplementingAgencyInvolvedDistrictWise>?=null,
     val infrastructural: String?=null,
@@ -133,7 +180,6 @@ data class ImplementingAgencyAddRequest(
     val number_of_fodder: String?=null,
     val id: Int?=null,// it is the id of the element we want to edit
     val is_draft: Int?=null,//always 1 till the user clicks on submit button then it will be 0
-    val number_of_ai: Int?=null,
     val present_system: String?=null,
     val sheep_breeding_farms_location: String?=null,
     val sheep_breeding_farms_number: Int?=null,
@@ -153,8 +199,9 @@ data class ImplementingAgencyAdvisoryCommittee(
 )
 
 data class ImplementingAgencyDocument(
-    val description: String,
-    val id: Int
+    val description: String?,
+    val id: Int?,
+    val name_doc: String?
 )
 
 data class ImplementingAgencyFundsReceived(
@@ -164,9 +211,6 @@ data class ImplementingAgencyFundsReceived(
     val any_other: Double?,
     val physical_progress: Double?,
     val id: Int?,
-
-
-
 )
 
 data class ImplementingAgencyInvolvedDistrictWise(
@@ -182,6 +226,31 @@ data class ImplementingAgencyProjectMonitoring(
     val designation: String?,
     val organization: String?,
     val id: Int?,
-
-
 )
+
+data class ArtificialInseminationAddEditRequest(
+    val ai_centre_cattle_buffalo: Int,
+    val ai_centre_goat_frozen_semen: Int,
+    val ai_performed_average: Double,
+    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>,
+    val cryocans: String,
+    val district_code: Int,
+    val equipments_centers_provided: Int,
+    val exotic_sheep_goat: String,
+    val frozen_semen_straws: String,
+    val id: Int,
+    val is_deleted: Int,
+    val is_draft_nlm: Int,
+    val liquid_nitrogen: String,
+    val percentage_of_conception_rates: Double,
+    val role_id: Int,
+    val state_code: Int,
+    val status: Int,
+    val total_sheep_goat_labs: Int,
+    val user_id: String
+)
+
+//data class ArtificialInseminationObservationByNlm(
+//    val description: String,
+//    val id: Int
+//)

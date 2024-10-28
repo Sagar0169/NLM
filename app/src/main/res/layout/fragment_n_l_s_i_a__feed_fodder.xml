@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
+        android:id="@+id/clParent"
         tools:context=".ui.fragment.national_livestock_mission_fragments.NLSIAFeedFodderFragment">
 
         <ScrollView
@@ -69,7 +70,7 @@
 
                         <EditText
 
-                            android:id="@+id/et1"
+                            android:id="@+id/etAssessmentOfGreen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -96,7 +97,7 @@
 
                         <EditText
 
-                            android:id="@+id/et2"
+                            android:id="@+id/etAvailabilityOfGreen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -123,7 +124,7 @@
 
                         <EditText
 
-                            android:id="@+id/et3"
+                            android:id="@+id/etAvailibilityOfDry"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -150,7 +151,7 @@
 
                         <EditText
 
-                            android:id="@+id/et4"
+                            android:id="@+id/etAvailibilityOfConcentrate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -178,7 +179,7 @@
 
                         <EditText
 
-                            android:id="@+id/et5"
+                            android:id="@+id/etAvailabilityCommon"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -205,7 +206,7 @@
 
                         <EditText
 
-                            android:id="@+id/et6"
+                            android:id="@+id/etEffortsOfState"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -260,7 +261,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                             android:id="@+id/etNameOfAgency"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -285,7 +286,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                            android:id="@+id/etQuantityOfFodder"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -310,7 +311,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                            android:id="@+id/etDistributionChannel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -335,7 +336,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                             android:id="@+id/AvailabilityOfConcentrate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -361,7 +362,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-
+                            android:id="@+id/etNumberOfFodder"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -378,24 +379,72 @@
 
                     </LinearLayout>
                 </LinearLayout>
-
                 <TextView
-                    android:id="@+id/tvSendOtp"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvAddMore2"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_50"
-                    android:layout_marginTop="@dimen/dp_15"
-                    android:layout_marginBottom="@dimen/dp_10"
                     android:background="@drawable/curve_fill_blue"
                     android:clickable="true"
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/dp_20"
+                    android:onClick="@{ClickAction::addDocDialog}"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="Submit"
-                    android:textSize="20sp"
-                    android:textAlignment="center"
+                    android:text="Add Documents"
                     android:textColor="@color/white" />
+                <com.nlm.utilities.NonScrollableRecyclerView
+                    android:id="@+id/recyclerView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_7"
+
+                    android:paddingTop="8dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_weight="0.5"
+                        android:id="@+id/tvSaveDraft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
+                        android:backgroundTint="@color/green"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Save As Draft"
+                        android:onClick="@{ClickAction::saveAsDraft}"
+                        android:textSize="20sp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                    <TextView
+                        android:id="@+id/tvSendOtp"
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="@string/save_next"
+                        android:textSize="20sp"
+                        android:onClick="@{ClickAction::saveAndNext}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-object ServiceGenerator {
+object ServiceGeneratorLogin {
     // This is the base Url of the application.
     private val httpClient = OkHttpClient.Builder()
     private val builder = Retrofit.Builder()
@@ -22,7 +22,7 @@ object ServiceGenerator {
 
     private var retrofit: Retrofit? = null
 
-    fun <S> createService(serviceClass: Class<S>): S {
+    fun <S> createServiceLogin(serviceClass: Class<S>): S {
         val authToken = Nlm.getToken()
         Log.e("token", "c $authToken")
 
@@ -37,15 +37,16 @@ object ServiceGenerator {
                 retrofit = builder.build() } }
         return retrofit!!.create(serviceClass) }
 
+
     private fun buildClient(): OkHttpClient {
         val logInterceptor = HttpLoggingInterceptor()
         logInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         return OkHttpClient.Builder()
             .addInterceptor(logInterceptor)
-            .readTimeout(300, TimeUnit.SECONDS)
-            .connectTimeout(300, TimeUnit.SECONDS)
-            .writeTimeout(300, TimeUnit.SECONDS)
+            .readTimeout(180, TimeUnit.SECONDS)
+            .connectTimeout(180, TimeUnit.SECONDS)
+            .writeTimeout(180, TimeUnit.SECONDS)
             .build()
     }
 
@@ -55,11 +56,11 @@ object ServiceGenerator {
             val originalRequest = chain.request()
             Log.e("tokenServer" , "aaa $tokenServer")
             val token = tokenServer// get token logic
-            val newRequest = originalRequest.newBuilder()
-                .header("Authorization", token)
-                .header("Accept", "application/json")
-                .build()
-            return chain.proceed(newRequest)
+                val newRequest = originalRequest.newBuilder()
+//                    .header("Authorization", token)
+//                    .header("Accept", "application/json")
+                    .build()
+               return chain.proceed(newRequest)
         }
     }
 

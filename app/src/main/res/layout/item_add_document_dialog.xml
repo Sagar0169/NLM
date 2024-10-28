@@ -48,13 +48,12 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
-
+                    android:id="@+id/etDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint=""
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
@@ -91,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".4"
                         android:background="@drawable/back_number_gray"
-                        android:enabled="false"
+
                         android:gravity="center"
                         android:padding="@dimen/dp_10"
                         android:text="Choose File"
@@ -104,49 +103,38 @@
                         android:background="#909090" />
 
                     <TextView
-                        android:id="@+id/tvDoc"
+                        android:id="@+id/etDoc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.6"
                         android:gravity="center"
                         android:padding="@dimen/dp_10"
                         android:text="No File Chosen"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/sp_14" />
 
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/tvSubmit"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_50"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:background="@drawable/curve_fill_blue"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:paddingVertical="@dimen/dp_10"
+                    android:text="Add"
+                    android:textAlignment="center"
+                    android:visibility="visible"
+                    android:textColor="@color/white" />
 
 
             </LinearLayout>
 
 
         </LinearLayout>
-
-        <ImageButton
-            android:layout_below="@+id/llone"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/btnDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Delete row"
-            android:src="@android:drawable/ic_delete"
-            app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-            app:layout_constraintTop_toBottomOf="@+id/llone"
-            app:tint="@android:color/holo_red_dark" />
-
-        <ImageButton
-            android:layout_below="@+id/llone"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Add row"
-            android:src="@android:drawable/ic_input_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llone"
-            app:tint="@android:color/holo_green_dark" />
-
     </RelativeLayout>
 </layout>

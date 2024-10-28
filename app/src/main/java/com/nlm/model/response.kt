@@ -45,7 +45,33 @@ data class DashData(
 )
 
 
+data class StateSemenBankResponse(
+    val _result: ResultStateSemen,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
 
+data class ResultStateSemen(
+    val `data`: List<DataSemen>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class DataSemen(
+    val created: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: String,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val state_code: Int,
+    val state_name: String,
+    val updated: Any,
+    val year_of_establishment: String
+)
 
 data class MyAccountResponse(
     val _result: ResultData,
@@ -206,12 +232,12 @@ data class ImplementingAgencyResponse(
     val fileurl: Any,
     val message: String,
     val statuscode: Int,
-    val total_count: Int
 )
 
 
 data class ResultImplementingAgency(
     val data: List<DataImplementingAgency>,
+    val total_count: Int,
     val is_add: Boolean
 )
 
@@ -240,8 +266,8 @@ data class DataArtificialInsemination(
     val id: Int,
     val is_delete: Boolean,
     val is_draft: String,
-    val is_draft_ia: Int,
-    val is_draft_nlm: Int,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
     val is_edit: Boolean,
     val is_view: Boolean,
 )
@@ -252,7 +278,8 @@ data class DataImplementingAgency(
     val is_edit: Boolean,
     val is_view: Boolean,
     val name_location_of_ai: String,
-    val state_name: String
+    val state_name: String,
+    val created: String
 )
 
 data class GetDropDownResponse(
@@ -276,7 +303,66 @@ data class ImplementingAgencyResponseNlm(
     val message: String,
     val statuscode: Int
 )
+data class UploadDocument_Response(
+    val _result: Result_Doc,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+data class ArtificialInsemenationAddResponse(
+    val _result: ResultArtificialInsemenation,
+    val _resultflag: Int,
+    val fileurl: Any,
+    val message: String,
+    val statuscode: Int
+)
 
+data class ResultArtificialInsemenation(
+    val ai_centre_cattle_buffalo: Int,
+    val ai_centre_goat_frozen_semen: Int,
+    val ai_performed_average: Double,
+    val artificial_insemination_document: List<ArtificialInseminationDocumentResponse>,
+    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlmResponse>,
+    val created: String,
+    val created_by: Int,
+    val cryocans: String,
+    val district_code: Int,
+    val equipments_centers_provided: Int,
+    val exotic_sheep_goat: String,
+    val frozen_semen_straws: String,
+    val id: Int,
+    val is_deleted: Int,
+    val is_draft_nlm: Int,
+    val liquid_nitrogen: String,
+    val percentage_of_conception_rates: Double,
+    val role_id: Int,
+    val state_code: Int,
+    val status: Int,
+    val total_sheep_goat_labs: Int,
+    val user_id: String
+)
+
+data class ArtificialInseminationDocumentResponse(
+    val artificial_insemination_id: Int,
+    val description: String,
+    val id: Int
+)
+
+data class ArtificialInseminationObservationByNlmResponse(
+    val name_of_center: String,
+    val number_of_ai_performed: Int,
+    val power_trained_ai: String,
+    val quipment_available: String
+)
+
+data class Result_Doc(
+    val created_at: String,
+    val description: String,
+    val ia_document: String,
+    val id: Int,
+    val implementing_agency_id: Int,
+    val nlm_document: Any
+)
 data class ResultNLMIA(
     val actual_production_location: String,
     val actual_production_number: Int,
@@ -364,4 +450,34 @@ data class ImplementingAgencyAdvisoryCommitteeAdd(
     val organization: String,
     val status: Int,
     val updated: Any
+)
+
+data class RSPLabListResponse(
+    val _result: RSPLabListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class RSPLabListResult(
+    val data: List<RSPLabListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class RSPLabListData(
+    val created_at: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val phone_no: Long,
+    val state_code: Int,
+    val state_name: String,
+    val updated_at: String,
+    val year_of_establishment: String
 )

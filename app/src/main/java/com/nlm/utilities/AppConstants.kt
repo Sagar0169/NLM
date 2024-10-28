@@ -7,6 +7,7 @@ object AppConstants {
     const val USER_ID = "USER_ID"
     const val ROLE_ID = "USER_TYPE"
     const val LOCALE = "LOCALE"
+    const val FORM_FILLED_ID = "ID"
 
 
 
@@ -30,7 +31,7 @@ object AppConstants {
     const val RGM_State_Level_Monitor= "RGM State Level Monitor"
     const val NPDD_State_Level_Monitor= "NPDD State Level Monitor"
     const val NDDB= "National Dairy Development Board (NDDB)"
-    const val SCHEME="SCHEME"
+    var SCHEME="SCHEME"
 
 }
 object cryptConstantCodes{
