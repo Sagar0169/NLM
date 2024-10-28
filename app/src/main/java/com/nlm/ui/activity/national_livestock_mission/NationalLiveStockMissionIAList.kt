@@ -124,7 +124,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                 }
                 else{
 
-                    itemPosition?.let { it1 -> implementingAdapter?.onDeleteButtonClick(it1) }
+                    itemPosition?.let { it1 -> implementingAdapter.onDeleteButtonClick(it1) }
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
             }
