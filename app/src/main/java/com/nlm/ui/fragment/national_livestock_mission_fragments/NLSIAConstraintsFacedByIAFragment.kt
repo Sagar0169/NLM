@@ -17,7 +17,7 @@ import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
 
-class NLSIAConstraintsFacedByIAFragment : BaseFragment<FragmentNLSIAConstraintsFacedByIABinding>(){
+class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAConstraintsFacedByIABinding>(){
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__constraints_faced_by__i_a
 

@@ -11,6 +11,8 @@ import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
 import com.nlm.model.ImplementingAgencyResponseNlm
+import com.nlm.model.ImportExocticGoatListResponse
+import com.nlm.model.ImportExocticGoatRequest
 import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
@@ -70,6 +72,9 @@ object Repository {
     suspend fun getArtificialInsemination(request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse> {
         return api.getArtificialInsemination(request)
     }
+    suspend fun getImportExocticGoatList(request: ImportExocticGoatRequest): Response<ImportExocticGoatListResponse> {
+        return api.getImportExocticGoatList(request)
+    }
     suspend fun getStateSemenBank(request: StateSemenBankRequest): Response<StateSemenBankResponse> {
         return api.getStateSemenBank(request)
     }
@@ -83,14 +88,16 @@ object Repository {
     suspend fun getProfileFileUpload(
         user_id: Int?,
         table_name: RequestBody?,
-        id: Int?,
-        ia_document:MultipartBody.Part?
+        nlm_document:MultipartBody.Part?,
+        implementing_agency_id: Int?,
+        role_id: Int?,
     ): Response<UploadDocument_Response> {
         return api.getProfileFileUpload(
             user_id,
             table_name,
-            id,
-            ia_document
+            nlm_document,
+            implementing_agency_id,
+            role_id
         )
     }
 }

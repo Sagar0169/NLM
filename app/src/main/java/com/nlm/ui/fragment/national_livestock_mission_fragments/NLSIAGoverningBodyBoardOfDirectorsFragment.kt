@@ -32,7 +32,7 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
 
-class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGoverningBodyBoardOfDirectorsBinding>(){
+class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAGoverningBodyBoardOfDirectorsBinding>(){
     val viewModel = ViewModel()
     private var mBinding: FragmentNLSIAGoverningBodyBoardOfDirectorsBinding?=null
     private var nlmIACompositionOFGoverningAdapter: NlmIACompositionOFGoverningAdapter ?= null
@@ -51,8 +51,11 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        if (viewEdit=="view"||viewEdit=="edit")
+        {ViewEditApi()}
         nlmIACompositionOFGoverningAdapter()
         nlmIAProjectMonitoringCommitteeAdapter()
+
     }
 
     override fun setVariables() {
@@ -73,7 +76,27 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
                         savedAsDraftClick?.onSaveAsDraft()
                     }else
                     {
-                    listener?.onNextButtonClick()
+                        if (viewEdit=="view"||viewEdit=="edit")
+                        {
+                            nlmIACompositionOFGoverningList.clear()
+                            nlmIAProjectMonitoringCommitteeList.clear()
+                            userResponseModel._result.implementing_agency_advisory_committee?.let { it1 ->
+                                nlmIACompositionOFGoverningList.addAll(
+                                    it1
+                                )
+                                userResponseModel._result.implementing_agency_project_monitoring?.let { it2 ->
+                                    nlmIAProjectMonitoringCommitteeList.addAll(
+                                        it2
+                                    )
+                                }
+                                nlmIACompositionOFGoverningAdapter?.notifyDataSetChanged()
+                                nlmIAProjectMonitoringCommitteeAdapter?.notifyDataSetChanged()
+                            }
+                        }
+                        else{
+                            listener?.onNextButtonClick()
+                        }
+
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }}
             }
@@ -83,7 +106,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
     private fun nlmIACompositionOFGoverningAdapter() {
         nlmIACompositionOFGoverningList = mutableListOf()
         nlmIACompositionOFGoverningAdapter =
-            NlmIACompositionOFGoverningAdapter(nlmIACompositionOFGoverningList)
+            NlmIACompositionOFGoverningAdapter(nlmIACompositionOFGoverningList,viewEdit)
         mBinding?.rvNlmIACompositionOFGoverning?.adapter = nlmIACompositionOFGoverningAdapter
         mBinding?.rvNlmIACompositionOFGoverning?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -92,7 +115,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
     private fun nlmIAProjectMonitoringCommitteeAdapter() {
         nlmIAProjectMonitoringCommitteeList = mutableListOf()
         nlmIAProjectMonitoringCommitteeAdapter =
-            NlmIAProjectMonitoringCommitteeAdapter(nlmIAProjectMonitoringCommitteeList)
+            NlmIAProjectMonitoringCommitteeAdapter(nlmIAProjectMonitoringCommitteeList,viewEdit)
         mBinding?.rvNlmIAProjectMonitoringCommittee?.adapter = nlmIAProjectMonitoringCommitteeAdapter
         mBinding?.rvNlmIAProjectMonitoringCommittee?.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -200,5 +223,17 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment : BaseFragment<FragmentNLSIAGov
         super.onDetach()
         listener = null
         savedAsDraftClick = null
+    }
+    private fun ViewEditApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                part = "part3",
+                id = itemId,
+                state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                is_deleted = 0,
+                is_type = viewEdit
+            )
+        )
     }
 }

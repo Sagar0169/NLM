@@ -51,6 +51,7 @@ import com.nlm.utilities.Nlm
 import com.nlm.utilities.PrefEntities
 
 import com.nlm.utilities.Preferences
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
@@ -174,6 +175,21 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.contentNav?.ivDrawer?.setOnClickListener {
             toggleLeftDrawer()
         }
+        mBinding?.leftDrawerMenu?.tvUserName?.text= getPreferenceOfScheme(
+            this@DashboardActivity,
+            AppConstants.SCHEME,
+            Result::class.java
+        )?.name
+        mBinding?.leftDrawerMenu?.tvRoleName?.text= getPreferenceOfScheme(
+            this@DashboardActivity,
+            AppConstants.SCHEME,
+            Result::class.java
+        )?.role_name
+        mBinding?.leftDrawerMenu?.tvStateName?.text= getPreferenceOfScheme(
+            this@DashboardActivity,
+            AppConstants.SCHEME,
+            Result::class.java
+        )?.state_name
     }
 
     // Method to set default arrow drawables
@@ -391,7 +407,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             viewModel.getLogoutApi(
                 this@DashboardActivity,
                 LogoutRequest(
-                    Preferences.getPreferenceOfScheme(
+                    getPreferenceOfScheme(
                         this@DashboardActivity,
                         AppConstants.SCHEME,
                         Result::class.java

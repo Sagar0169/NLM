@@ -29,12 +29,16 @@ class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickList
         get() = R.layout.activity_nlsia_form
     private var mBinding: ActivityNlsiaFormBinding? = null
     private var mDoubleBackToExitPressedOnce = false
+    private var viewEdit: String? = null
+    private var itemId: Int? = null
 
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         setupTabLayout()
-        loadFragment(NLSIAFormIAFragment())
+         viewEdit = intent.getStringExtra("View/Edit")
+        itemId = intent.getIntExtra("itemId",0)
+        loadFragment(NLSIAFormIAFragment(viewEdit,itemId))
     }
 
     override fun setVariables() {
@@ -92,25 +96,25 @@ class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickList
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
                         0 -> {
-                            loadFragment(NLSIAFormIAFragment())
+                            loadFragment(NLSIAFormIAFragment(viewEdit,itemId))
                         }
                         1 -> {
-                            loadFragment(NLSIAInfrastructureSheepGoat())
+                            loadFragment(NLSIAInfrastructureSheepGoat(viewEdit,itemId))
                         }
                         2 -> {
-                            loadFragment(NLSIAGoverningBodyBoardOfDirectorsFragment())
+                            loadFragment(NLSIAGoverningBodyBoardOfDirectorsFragment(viewEdit,itemId))
                         }
                         3 -> {
-                            loadFragment(NLSIAReportingSystem())
+                            loadFragment(NLSIAReportingSystem(viewEdit,itemId))
                         }
                         4 -> {
-                            loadFragment(NLMDistrictWiseNoOfAiCenter())
+                            loadFragment(NLMDistrictWiseNoOfAiCenter(viewEdit,itemId))
                         }
                         5-> {
-                            loadFragment(NLSIAConstraintsFacedByIAFragment())
+                            loadFragment(NLSIAConstraintsFacedByIAFragment(viewEdit,itemId))
                         }
                         6 -> {
-                            loadFragment(NLSIAFeedFodderFragment())
+                            loadFragment(NLSIAFeedFodderFragment(viewEdit,itemId))
                         }
                     }
                 }
@@ -146,7 +150,7 @@ class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickList
 
     override fun onNavigateToFirstFragment() {
         // Load the first fragment (Implementing Agency)
-        loadFragment(NLSIAFormIAFragment())
+        loadFragment(NLSIAFormIAFragment(viewEdit,itemId))
 
         // Select the first tab
         mBinding?.tabLayout?.getTabAt(0)?.select()

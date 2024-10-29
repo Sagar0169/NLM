@@ -37,7 +37,7 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
 
-class NLMDistrictWiseNoOfAiCenter:
+class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val itemId:Int?):
     BaseFragment<FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__agencies_involved_in_genetic_improvement_goat_sheep

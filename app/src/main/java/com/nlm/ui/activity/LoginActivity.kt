@@ -119,6 +119,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             userResponseModel._result.state_name,
                            null,
                             userResponseModel._result.user_id,
+                            userResponseModel._result.username
                         )
                     )
 

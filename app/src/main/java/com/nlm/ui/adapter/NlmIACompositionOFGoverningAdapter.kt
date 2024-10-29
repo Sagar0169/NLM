@@ -16,6 +16,7 @@ import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 
 class NlmIACompositionOFGoverningAdapter(
     private val programmeList: MutableList<ImplementingAgencyAdvisoryCommittee>,
+    private val viewEdit: String?
 ) : RecyclerView.Adapter<NlmIACompositionOFGoverningAdapter.NlmIACompositionOFGoverning>()
 {
 

@@ -15,6 +15,8 @@ import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
 import com.nlm.model.ImplementingAgencyResponseNlm
+import com.nlm.model.ImportExocticGoatListResponse
+import com.nlm.model.ImportExocticGoatRequest
 import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
@@ -48,6 +50,7 @@ class ViewModel : ViewModel() {
     var implementingAgencyResult = MutableLiveData<ImplementingAgencyResponse>()
     var rspLabListResult = MutableLiveData<RSPLabListResponse>()
     var artificialInseminationResult = MutableLiveData<ArtificialInseminationResponse>()
+    var importExocticGoatResult = MutableLiveData<ImportExocticGoatListResponse>()
     var statesemenBankResult = MutableLiveData<StateSemenBankResponse>()
     var implementingAgencyAddResult = MutableLiveData<ImplementingAgencyResponseNlm>()
     var artificialInseminationAddResult = MutableLiveData<ArtificialInsemenationAddResponse>()
@@ -501,6 +504,58 @@ class ViewModel : ViewModel() {
             }
         }
     }
+    fun getImportExocticGoatList(context: Context, loader: Boolean, request: ImportExocticGoatRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getImportExocticGoatList(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                importExocticGoatResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
 
     fun getRspLabListApi(context: Context, loader: Boolean, request: RspLabListRequest) {
         // can be launched in a separate asynchronous job
@@ -611,15 +666,16 @@ class ViewModel : ViewModel() {
         context: Context,
         user_id: Int?,
         table_name: RequestBody?,
-        id: Int?,
-        ia_document:MultipartBody.Part?
+        nlm_document:MultipartBody.Part?,
+        implementing_agency_id: Int?,
+        role_id: Int?,
     ) {
         networkCheck(context, true)
 
         job = scope.launch {
             try {
                 val response = repository.getProfileFileUpload(
-                    user_id,table_name, id, ia_document
+                    user_id,table_name, nlm_document,implementing_agency_id, role_id
                 )
 
                 Log.e("response", response.toString())

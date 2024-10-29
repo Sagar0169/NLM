@@ -8,6 +8,7 @@ import com.nlm.model.ImplementingAgencyProjectMonitoring
 
 class NlmIAProjectMonitoringCommitteeAdapter(
     private val programmeList: MutableList<ImplementingAgencyProjectMonitoring>,
+    private val viewEdit: String?
 ) : RecyclerView.Adapter<NlmIAProjectMonitoringCommitteeAdapter.NlmIACompositionOFGoverning>() {
 
 

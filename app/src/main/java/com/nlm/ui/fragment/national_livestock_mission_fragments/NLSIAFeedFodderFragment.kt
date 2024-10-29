@@ -34,7 +34,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 
-class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
+class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__feed_fodder
 
@@ -133,6 +133,7 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
                     id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
 
                 )
+
             )
         }
         fun saveAsDraft(view: View){
@@ -249,10 +250,11 @@ class NLSIAFeedFodderFragment : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
                         }
                             viewModel.getProfileUploadFile(
                                 context = requireActivity(),
+                                role_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id,
                                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
                                 table_name = getString(R.string.implementing_agency_document).toRequestBody(MultipartBody.FORM),
-                                null,
-                                ia_document = body
+                                implementing_agency_id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                                nlm_document = body
                             )
                         }
                     }

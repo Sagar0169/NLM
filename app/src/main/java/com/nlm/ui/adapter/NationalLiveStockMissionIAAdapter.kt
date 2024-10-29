@@ -2,6 +2,7 @@ package com.nlm.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,6 +12,7 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemNlspFormsBinding
 import com.nlm.model.DataImplementingAgency
+import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -78,18 +80,18 @@ class NationalLiveStockMissionIAAdapter(
              )
          }
 
-//        holder.mBinding.ivView.setOnClickListener {
-//            val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-//            intent.putExtra("nodalOfficer", item)
-//            intent.putExtra("isFrom", 2)
-//            holder.itemView.context.startActivity(intent)
-//        }
-//        holder.mBinding.ivEdit.setOnClickListener {
-//            val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-//            intent.putExtra("nodalOfficer", item)
-//            intent.putExtra("isFrom", 3)
-//            holder.itemView.context.startActivity(intent)
-//        }
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, NLMIAForm::class.java)
+            intent.putExtra("View/Edit", "view")
+            intent.putExtra("itemId", item.id)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
+            val intent = Intent(holder.itemView.context, NLMIAForm::class.java)
+            intent.putExtra("View/Edit", "edit")
+            intent.putExtra("itemId", item.id)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

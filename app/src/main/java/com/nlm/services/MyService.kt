@@ -11,6 +11,8 @@ import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
 import com.nlm.model.ImplementingAgencyResponseNlm
+import com.nlm.model.ImportExocticGoatListResponse
+import com.nlm.model.ImportExocticGoatRequest
 import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
@@ -36,6 +38,7 @@ const val IMPLEMENTING_AGENCY_LIST = "nationalLivestockMission/implimentingAgenc
 const val IMPLEMENTING_AGENCY_ADD = "nationalLivestockMission/implimentingAgencyAddEdit"
 const val ARTIFICIAL_INSEMINATION_ADD = "nationalLivestockMission/artificialInseminationAddEdit"
 const val ARTIFICIAL_INSEMINATION_LIST = "nationalLivestockMission/artificialInseminationList"
+const val IMPORT_EXOTIC_GOAT_LIST = "nationalLivestockMission/importOfExoticGoatList"
 const val STATE_SEMEN_BANK_LIST = "nationalLivestockMission/stateSemenBankList"
 const val UPLOAD_DOCUMENT = "rest/uploadDocument"
 const val RSP_LAP_LIST = "nationalLivestockMission/rspLaboratorySemenList"
@@ -62,6 +65,8 @@ interface MyService {
 
     @POST(ARTIFICIAL_INSEMINATION_LIST)
     suspend fun getArtificialInsemination(@Body request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse>
+    @POST(IMPORT_EXOTIC_GOAT_LIST)
+    suspend fun getImportExocticGoatList(@Body request: ImportExocticGoatRequest): Response<ImportExocticGoatListResponse>
     @POST(STATE_SEMEN_BANK_LIST)
     suspend fun getStateSemenBank(@Body request: StateSemenBankRequest): Response<StateSemenBankResponse>
 
@@ -75,8 +80,10 @@ interface MyService {
     suspend fun getProfileFileUpload(
         @Part("user_id") user_id: Int?,
         @Part("table_name") table_name: RequestBody?,
-        @Part("id") id: Int?,
-        @Part ia_document: MultipartBody.Part?
+        @Part nlm_document: MultipartBody.Part?,
+        @Part("implementing_agency_id") implementing_agency_id: Int?,
+        @Part("role_id") role_id: Int?,
+
     ): Response<UploadDocument_Response>
 
 }

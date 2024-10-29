@@ -53,7 +53,13 @@ data class RspLabListRequest(
     val limit: Int,
     val page: Int
 )
-
+data class ImportExocticGoatRequest(
+    val limit: String?,
+    val page: String?,
+    val role_id: String?,
+    val state_code: String?,
+    val user_id: String?,
+)
 
 data class ArtificialInseminationRequest(
     val role_id: Int?,
@@ -185,6 +191,7 @@ data class ImplementingAgencyAddRequest(
     val sheep_breeding_farms_number: Int?=null,
     val status: Int?=null,
     val user_id: String?=null,
+    val is_type: String?=null,
     val implementing_agency_document: List<ImplementingAgencyDocument>?=null,
     val is_deleted: Int?=null,
 

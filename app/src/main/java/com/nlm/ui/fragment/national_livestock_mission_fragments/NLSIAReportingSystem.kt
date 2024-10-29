@@ -30,7 +30,7 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
 
-class NLSIAReportingSystem : BaseFragment<FragmentNLSIAReportingSystemBinding>() {
+class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int?): BaseFragment<FragmentNLSIAReportingSystemBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__reporting__system
 

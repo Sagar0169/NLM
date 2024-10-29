@@ -8,11 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.databinding.ItemImportOfExoticGoatBinding
+import com.nlm.model.DataIE
 import com.nlm.model.ImportOfGoat
 import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatForms
 import com.nlm.utilities.hideView
 
-class Import_Of_Goat_Adapter(private val implementingAgencyList: List<ImportOfGoat>,val Role_name:String) :
+class Import_Of_Goat_Adapter(private val implementingAgencyList: List<DataIE>,val Role_name:String) :
     RecyclerView.Adapter<Import_Of_Goat_Adapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -50,36 +51,22 @@ class Import_Of_Goat_Adapter(private val implementingAgencyList: List<ImportOfGo
             holder.mBinding.ivDelete.hideView()
         }
 
-    holder.mBinding.etState.text = item.State
-    holder.mBinding.etCreatedBy.text = item.Created_By
-    holder.mBinding.etCreated.text = item.Created
-    holder.mBinding.etStatus.text = item.Status_IA
-    holder.mBinding.etStatusNlm.text = item.Status_NLM
-
-
-
-
-
+    holder.mBinding.etState.text = item.state_name
+    holder.mBinding.etCreatedBy.text = item.created_by
+    holder.mBinding.etCreated.text = item.created_at
+    holder.mBinding.etStatus.text = item.is_draft_ia
+    holder.mBinding.etStatusNlm.text = item.is_draft_nlm
 
     holder.mBinding.ivView.setOnClickListener {
         val intent = Intent(holder.itemView.context, ImportOfExoticGoatForms::class.java)
-        intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 2)
         holder.itemView.context.startActivity(intent)
     }
     holder.mBinding.ivEdit.setOnClickListener {
         val intent = Intent(holder.itemView.context, ImportOfExoticGoatForms::class.java)
-        intent.putExtra("nodalOfficer", item)
         intent.putExtra("isFrom", 3)
         holder.itemView.context.startActivity(intent)
     }
-
-
-
-//
-//        holder.tvStateName.setOnClickListener {
-//            callBackItemDistrict.onClickItemDistrict(stateName)
-//        }
     }
 
     // Return the total number of items

@@ -24,7 +24,7 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
 
 
-class NLSIAInfrastructureSheepGoat() : BaseFragment<FragmentNLSIAInfrastructureSheepGoatBinding>() {
+class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAInfrastructureSheepGoatBinding>() {
 
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__infrastructure__sheep_goat
@@ -38,6 +38,26 @@ class NLSIAInfrastructureSheepGoat() : BaseFragment<FragmentNLSIAInfrastructureS
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        if(viewEdit=="view"){
+            mBinding?.etFrozenSemenNumber?.isEnabled=false
+            mBinding?.etFrozenSemenLocation?.isEnabled=false
+            mBinding?.etLiquidSemenNumber?.isEnabled=false
+            mBinding?.etLiquidSemenLocation?.isEnabled=false
+            mBinding?.etProductionCapacityNumber?.isEnabled=false
+            mBinding?.etProductionCapacityLocation?.isEnabled=false
+            mBinding?.etActualProductionNumber?.isEnabled=false
+            mBinding?.etActualProductionLocation?.isEnabled=false
+            mBinding?.etNoOfDosesOfSemenNumber?.isEnabled=false
+            mBinding?.etNoOfDosesOfSemenLocation?.isEnabled=false
+            mBinding?.etNoOfDosesOfSemenNeighbouringNumber?.isEnabled=false
+            mBinding?.etNoOfDosesOfSemenNeighbouringnLocation?.isEnabled=false
+            mBinding?.etAvailabilityOfLiquidNitrogenNumber?.isEnabled=false
+            mBinding?.etAvailabilityOfLiquidNitrogenLocation?.isEnabled=false
+            ViewEditApi()
+        }
+        if(viewEdit=="edit"){
+            ViewEditApi()
+        }
     }
     override fun setVariables() {
 
@@ -68,7 +88,27 @@ class NLSIAInfrastructureSheepGoat() : BaseFragment<FragmentNLSIAInfrastructureS
 
                     }else
                     {
-                    listener?.onNextButtonClick()
+                        if (viewEdit == "view" || viewEdit == "edit") {
+                            mBinding?.etFrozenSemenNumber?.setText(userResponseModel._result.frozen_semen_goat_number?.toString() ?: "")
+                            mBinding?.etFrozenSemenLocation?.setText(userResponseModel._result.frozen_semen_goat_location ?: "")
+                            mBinding?.etLiquidSemenNumber?.setText(userResponseModel._result.liquid_semen_sheep_number?.toString() ?: "")
+                            mBinding?.etLiquidSemenLocation?.setText(userResponseModel._result.liquid_semen_sheep_location ?: "")
+                            mBinding?.etProductionCapacityNumber?.setText(userResponseModel._result.production_capacity_number?.toString() ?: "")
+                            mBinding?.etProductionCapacityLocation?.setText(userResponseModel._result.production_capacity_location ?: "")
+                            mBinding?.etActualProductionNumber?.setText(userResponseModel._result.actual_production_number?.toString() ?: "")
+                            mBinding?.etActualProductionLocation?.setText(userResponseModel._result.actual_production_location ?: "")
+                            mBinding?.etNoOfDosesOfSemenNumber?.setText(userResponseModel._result.no_semen_distributed_number?.toString() ?: "")
+                            mBinding?.etNoOfDosesOfSemenLocation?.setText(userResponseModel._result.no_semen_distributed_location ?: "")
+                            mBinding?.etNoOfDosesOfSemenNeighbouringNumber?.setText(userResponseModel._result.no_semen_neighboring_number?.toString() ?: "")
+                            mBinding?.etNoOfDosesOfSemenNeighbouringnLocation?.setText(userResponseModel._result.no_semen_neighboring_location ?: "")
+                            mBinding?.etAvailabilityOfLiquidNitrogenNumber?.setText(userResponseModel._result.availability_liquid_nitrogen_number?.toString() ?: "")
+                            mBinding?.etAvailabilityOfLiquidNitrogenLocation?.setText(userResponseModel._result.availability_liquid_nitrogen_location ?: "")
+                        }
+                        else{
+                            Utility.clearAllFormFilledID(requireContext())
+                            listener?.onNextButtonClick()
+                        }
+
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }}
             }
@@ -148,6 +188,18 @@ class NLSIAInfrastructureSheepGoat() : BaseFragment<FragmentNLSIAInfrastructureS
             )
             savedAsDraft=true
         }
+    }
+    private fun ViewEditApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                part = "part2",
+                id = itemId,
+                state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                is_deleted = 0,
+                is_type = viewEdit
+            )
+        )
     }
 
     override fun onAttach(context: Context) {
