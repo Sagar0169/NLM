@@ -291,8 +291,8 @@ data class DataArtificialInsemination(
     val id: Int,
     val is_delete: Boolean,
     val is_draft: String,
-    val is_draft_ia: Int,
-    val is_draft_nlm: Int,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
     val is_edit: Boolean,
     val is_view: Boolean,
 )
@@ -319,6 +319,77 @@ data class GetDropDownResponse(
 data class ResultGetDropDown(
     val id: Int,
     val name: String
+)
+
+data class StateSemenAddResponse(
+    val _result: StateSemenAddResult,
+    val _resultflag: Int,
+    val fileurl: Any,
+    val message: String,
+    val statuscode: Int
+)
+
+data class StateSemenAddResult(
+    val Address: String,
+    val area_fodder_cultivation: String,
+    val area_under_buildings: String,
+    val created: String,
+    val created_by: Int,
+    val district_code: Int,
+    val id: Int,
+    val is_deleted: Int,
+    val is_draft: Int,
+    val location: String,
+    val major_clients_coop_fin_year_one: String,
+    val major_clients_coop_fin_year_three: String,
+    val major_clients_coop_fin_year_two: String,
+    val major_clients_ngo_fin_year_one: String,
+    val major_clients_ngo_fin_year_three: String,
+    val major_clients_ngo_fin_year_two: String,
+    val major_clients_other_states_fin_year_one: String,
+    val major_clients_other_states_fin_year_three: String,
+    val major_clients_other_states_fin_year_two: String,
+    val major_clients_private_fin_year_one: String,
+    val major_clients_private_fin_year_three: String,
+    val major_clients_private_fin_year_two: String,
+    val manpower_no_of_people: Int,
+    val officer_in_charge_name: String,
+    val phone_no: Long,
+    val pin_code: Int,
+    val quality_status: String,
+    val role_id: Int,
+    val state_code: Int,
+    val state_semen_bank_document: List<StateSemenBankAddDocument>,
+    val state_semen_bank_infrastructure: List<StateSemenBankAddInfrastructure>,
+    val state_semen_bank_other_manpower: List<StateSemenBankOtherAddManpower>,
+    val status: Int,
+    val storage_capacity: String,
+    val type_of_semen_station: String,
+    val user_id: String,
+    val year_of_establishment: String
+)
+
+data class StateSemenBankAddDocument(
+    val description: String,
+    val id: Int,
+    val state_semen_bank_id: Int
+)
+
+data class StateSemenBankAddInfrastructure(
+    val id: Int,
+    val infrastructure_list_of_equipment: String,
+    val infrastructure_year_of_procurement: String,
+    val state_semen_bank_id: Int
+)
+
+data class StateSemenBankOtherAddManpower(
+    val created: String,
+    val designation: String,
+    val experience: String,
+    val id: Int,
+    val qualification: String,
+    val state_semen_bank_id: Int,
+    val training_status: String
 )
 
 data class ImplementingAgencyResponseNlm(

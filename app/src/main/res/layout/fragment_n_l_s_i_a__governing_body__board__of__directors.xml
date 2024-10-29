@@ -50,7 +50,6 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
             <TextView
-
                 android:onClick="@{ClickAction::compositionOfGoverningNlmIaDialog}"
                 android:id="@+id/tvAddMore1"
                 android:layout_marginVertical="@dimen/dp_7"
@@ -68,7 +67,6 @@
                 android:id="@+id/rvNlmIACompositionOFGoverning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:paddingTop="8dp" />
 
         </LinearLayout>
