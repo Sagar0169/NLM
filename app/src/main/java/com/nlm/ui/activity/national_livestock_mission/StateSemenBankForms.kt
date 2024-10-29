@@ -51,29 +51,16 @@ class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>(),
     private fun setupTabLayout() {
         mBinding?.tabLayout?.apply {
             addTab(newTab().setText("Basic Information"))
-            addTab(newTab().setText("Manpower"))
             addTab(newTab().setText("Infrastructure for goat semen bank"))
-            addTab(newTab().setText("Major clients of semen& Quantity supplied"))
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
                         0 -> {
                             loadFragment(StateSemenBasicInformationFragment())
                         }
-
                         1 -> {
-                            loadFragment(StateSemenManpowerFragment())
-
-                        }
-
-                        2 -> {
                             loadFragment(StateSemenInfrastructureFragment())
                         }
-
-                        3 -> {
-                            loadFragment(StateSemenMajorClientsFragment())
-                        }
-
                     }
                 }
 

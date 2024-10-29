@@ -78,7 +78,7 @@ object Repository {
     suspend fun getImportExocticGoatList(request: ImportExocticGoatRequest): Response<ImportExocticGoatListResponse> {
         return api.getImportExocticGoatList(request)
     }
-    suspend fun getStateSemenBank(request: StateSemenBankRequest): Response<StateSemenBankResponse> {
+    suspend fun getStateSemenBank(request: StateSemenBankNLMRequest): Response<StateSemenAddResponse> {
         return api.getStateSemenBank(request)
     }
 
@@ -88,7 +88,7 @@ object Repository {
 
 
     suspend fun getStateSemenAdd(request: StateSemenBankRequest): Response<StateSemenBankResponse> {
-        return api.getStateSemenAdd(request)
+        return api.getStateSemenBank(request)
     }
 
     suspend fun getArtificialInseminationAdd(request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse> {

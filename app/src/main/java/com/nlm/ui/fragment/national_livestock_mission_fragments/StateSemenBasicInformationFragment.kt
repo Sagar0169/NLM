@@ -1,13 +1,19 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -17,15 +23,18 @@ import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAFormBinding
 import com.nlm.databinding.FragmentStateSemenBasicInformationBinding
+import com.nlm.databinding.ItemStateSemenManpowerBinding
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.StateSemenBankNLMRequest
+import com.nlm.model.StateSemenBankOtherManpower
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.RspManPowerAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
@@ -33,6 +42,8 @@ import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
 
@@ -56,6 +67,8 @@ class StateSemenBasicInformationFragment :
     private var districtList = ArrayList<ResultGetDropDown>()
     private var loading = true
     private var layoutManager: LinearLayoutManager? = null
+    private lateinit var stateSemenManPowerList: MutableList<StateSemenBankOtherManpower>
+    private var stateSemenManPowerAdapter: RspManPowerAdapter? = null
 
 
     private val state = listOf(
@@ -78,7 +91,17 @@ class StateSemenBasicInformationFragment :
         )?.state_name
         mBinding?.etState?.isEnabled = false
         mActivityMain = activity as StateSemenBankForms
+        stateSemenManPowerAdapter()
 
+    }
+
+    private fun stateSemenManPowerAdapter() {
+        stateSemenManPowerList = mutableListOf()
+        stateSemenManPowerAdapter =
+            RspManPowerAdapter(stateSemenManPowerList)
+        mBinding?.recyclerView1?.adapter = stateSemenManPowerAdapter
+        mBinding?.recyclerView1?.layoutManager =
+            LinearLayoutManager(requireContext())
     }
 
     override fun onAttach(context: Context) {
@@ -156,6 +179,54 @@ class StateSemenBasicInformationFragment :
 
     }
 
+    private fun compositionOfGoverningNlmIaDialog(context: Context, isFrom: Int) {
+        val bindingDialog: ItemStateSemenManpowerBinding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.item_state_semen_manpower,
+            null,
+            false
+        )
+        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setContentView(bindingDialog.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window!!.setGravity(Gravity.CENTER)
+        bindingDialog.btnDelete.hideView()
+        bindingDialog.tvSubmit.showView()
+
+        bindingDialog.tvSubmit.setOnClickListener {
+            if (bindingDialog.etDesignation.text.toString()
+                    .isNotEmpty() || bindingDialog.etQualification.text.toString()
+                    .isNotEmpty() || bindingDialog.etExperience.text.toString()
+                    .isNotEmpty() || bindingDialog.etTrainingStatus.text.toString().isNotEmpty()
+            ) {
+                stateSemenManPowerList.add(
+                    StateSemenBankOtherManpower(
+                        bindingDialog.etDesignation.text.toString(),
+                        bindingDialog.etQualification.text.toString(),
+                        bindingDialog.etExperience.text.toString(),
+                        bindingDialog.etTrainingStatus.text.toString(),
+                    )
+                )
+                stateSemenManPowerList.size.minus(1).let {
+                    stateSemenManPowerAdapter?.notifyItemInserted(it)
+                }
+                dialog.dismiss()
+            } else {
+                showSnackbar(
+                    mBinding!!.clParent,
+                    getString(R.string.please_enter_atleast_one_field)
+                )
+            }
+        }
+        dialog.show()
+    }
+
     inner class ClickActions {
         fun state(view: View) {
             showBottomSheetDialog("state")
@@ -192,6 +263,9 @@ class StateSemenBasicInformationFragment :
                         Result::class.java
                     )?.user_id.toString(),
                     year_of_establishment = mBinding?.etyear?.text.toString(),
+                    manpower_no_of_people = mBinding!!.etManPower.text.toString().toIntOrNull(),
+                    officer_in_charge_name = mBinding!!.etOfficerInCharge.text.toString(),
+                    state_semen_bank_other_manpower = stateSemenManPowerList,
                     is_draft = 1,
                 )
             )
@@ -223,10 +297,17 @@ class StateSemenBasicInformationFragment :
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.user_id.toString(),
-                    year_of_establishment = mBinding?.etyear?.text.toString()
+                    year_of_establishment = mBinding?.etyear?.text.toString(),
+                    manpower_no_of_people = mBinding!!.etManPower.text.toString().toIntOrNull(),
+                    officer_in_charge_name = mBinding!!.etOfficerInCharge.text.toString(),
+                    state_semen_bank_other_manpower = stateSemenManPowerList,
                 )
             )
         }
+        fun otherManpowerPositionDialog(view: View) {
+            compositionOfGoverningNlmIaDialog(requireContext(), 1)
+        }
+
     }
 
     private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
