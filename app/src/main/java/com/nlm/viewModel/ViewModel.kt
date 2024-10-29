@@ -21,6 +21,7 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.NLMIAResponse
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
@@ -54,7 +55,7 @@ class ViewModel : ViewModel() {
     var artificialInseminationResult = MutableLiveData<ArtificialInseminationResponse>()
     var importExocticGoatResult = MutableLiveData<ImportExocticGoatListResponse>()
     var statesemenBankResult = MutableLiveData<StateSemenBankResponse>()
-    var implementingAgencyAddResult = MutableLiveData<ImplementingAgencyResponseNlm>()
+    var implementingAgencyAddResult = MutableLiveData<NLMIAResponse>()
     var stateSemenBankAddResult = MutableLiveData<StateSemenAddResponse>()
     var artificialInseminationAddResult = MutableLiveData<ArtificialInsemenationAddResponse>()
     var getProfileUploadFileResult = MutableLiveData<UploadDocument_Response>()
@@ -364,6 +365,7 @@ class ViewModel : ViewModel() {
                             200, 201 -> {
                                 implementingAgencyAddResult.postValue(response.body())
                                 dismissLoader()
+                                Log.e("responseAdd", implementingAgencyAddResult.toString())
                             }
                         }
                     }
@@ -407,7 +409,7 @@ class ViewModel : ViewModel() {
 
         job = scope.launch {
             try {
-                val response = repository.getStateSemenBank(request)
+                val response = repository.getStateSemenAdd(request)
 
                 Log.e("response", response.toString())
                 when (response.isSuccessful) {
@@ -674,7 +676,7 @@ class ViewModel : ViewModel() {
 
         job = scope.launch {
             try {
-                val response = repository.getStateSemenAdd(request)
+                val response = repository.getStateSemenBank(request)
 
                 Log.e("response", response.toString())
                 when (response.isSuccessful) {

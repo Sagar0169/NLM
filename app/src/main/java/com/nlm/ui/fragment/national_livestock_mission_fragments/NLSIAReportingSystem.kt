@@ -223,7 +223,9 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                         bindingDialog.etStateGovt.text.toString().toDoubleOrNull(),
                         bindingDialog.etAnyOther.text.toString().toDoubleOrNull(),
                         bindingDialog.etPhysicalProgress.text.toString().toDoubleOrNull(),
-                        null
+                        null,
+                        null,
+
                     )
                 )
                 nlmIAFundsRecievedList.size.minus(1).let {

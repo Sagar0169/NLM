@@ -17,6 +17,7 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.NLMIAResponse
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
@@ -82,12 +83,12 @@ object Repository {
         return api.getStateSemenBank(request)
     }
 
-    suspend fun getImplementingAgencyAdd(request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm> {
+    suspend fun getImplementingAgencyAdd(request: ImplementingAgencyAddRequest): Response<NLMIAResponse> {
         return api.getImplementingAgencyAdd(request)
     }
 
 
-    suspend fun getStateSemenAdd(request: StateSemenBankRequest): Response<StateSemenBankResponse> {
+    suspend fun getStateSemenAdd(request: StateSemenBankNLMRequest): Response<StateSemenAddResponse> {
         return api.getStateSemenAdd(request)
     }
 

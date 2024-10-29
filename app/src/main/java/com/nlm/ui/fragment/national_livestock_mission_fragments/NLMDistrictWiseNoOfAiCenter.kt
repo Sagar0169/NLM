@@ -219,6 +219,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                             bindingDialog.etAiPerformed.text.toString(),
                             null,
                             null,
+                            null,
                         )
                     )
                     mNlmIADistrictWiseNoList.size.minus(1).let {

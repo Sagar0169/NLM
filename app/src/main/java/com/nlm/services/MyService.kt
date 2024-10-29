@@ -17,6 +17,7 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.NLMIAResponse
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
@@ -74,10 +75,10 @@ interface MyService {
     @POST(STATE_SEMEN_BANK_LIST)
     suspend fun getStateSemenBank(@Body request: StateSemenBankRequest): Response<StateSemenBankResponse>
     @POST(STATE_SEMEN_ADD)
-    suspend fun getStateSemenBank(@Body request: StateSemenBankNLMRequest): Response<StateSemenAddResponse>
+    suspend fun getStateSemenAdd(@Body request: StateSemenBankNLMRequest): Response<StateSemenAddResponse>
 
     @POST(IMPLEMENTING_AGENCY_ADD)
-    suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm>
+    suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<NLMIAResponse>
     @POST(ARTIFICIAL_INSEMINATION_ADD)
     suspend fun getArtificialInseminationAdd(@Body request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse>
 

@@ -182,7 +182,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                             bindingDialog.nameOfOfficial.text.toString(),
                             bindingDialog.nameOfDesignation.text.toString(),
                             bindingDialog.nameOfOrganization.text.toString(),
-                            null
+                            null,
+                            null,
                         )
                     )
                     nlmIAProjectMonitoringCommitteeList.size.minus(1).let {

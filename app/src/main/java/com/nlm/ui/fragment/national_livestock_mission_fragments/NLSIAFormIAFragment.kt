@@ -80,13 +80,16 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
     }
 
     override fun setObservers() {
+
       viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
           val userResponseModel = it
+          Log.e("responseAdd", it.toString())
           if (userResponseModel.statuscode == 401) {
               Utility.logout(requireContext())
           }
           if (userResponseModel!=null)
           {
+
               if(userResponseModel._resultflag==0){
                   showSnackbar(mBinding!!.clParent, userResponseModel.message)
               }
@@ -96,6 +99,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                       savedAsDraftClick?.onSaveAsDraft()
                   }
                   else{
+
                       if (viewEdit=="view"||viewEdit=="edit")
                       {
                           mBinding?.etNameAndLocationOfIa?.setText(userResponseModel._result.name_location_of_ai)
@@ -186,6 +190,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
         }
     }
     private fun ViewEditApi(){
+
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(
                 part = "part1",

@@ -286,6 +286,7 @@ data class ImplementingAgencyFundsReceived(
     val any_other: Double?,
     val physical_progress: Double?,
     val id: Int?,
+    val implementing_agency_id: Int?,
 )
 
 data class ImplementingAgencyInvolvedDistrictWise(
@@ -293,7 +294,8 @@ data class ImplementingAgencyInvolvedDistrictWise(
     val location_of_ai_centre: String?,
     val ai_performed: String?,
     val id: Int?,
-    val year: Int?
+    val year: Int?,
+    val implementing_agency_id: Int?,
 )
 
 data class ImplementingAgencyProjectMonitoring(
@@ -301,6 +303,7 @@ data class ImplementingAgencyProjectMonitoring(
     val designation: String?,
     val organization: String?,
     val id: Int?,
+    val implementing_agency_id: Int?,
 )
 
 data class ArtificialInseminationAddEditRequest(
