@@ -21,6 +21,8 @@ import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspLabListRequest
+import com.nlm.model.StateSemenAddResponse
+import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.UploadDocument_Response
@@ -50,6 +52,7 @@ class ViewModel : ViewModel() {
     var artificialInseminationResult = MutableLiveData<ArtificialInseminationResponse>()
     var statesemenBankResult = MutableLiveData<StateSemenBankResponse>()
     var implementingAgencyAddResult = MutableLiveData<ImplementingAgencyResponseNlm>()
+    var stateSemenBankAddResult = MutableLiveData<StateSemenAddResponse>()
     var artificialInseminationAddResult = MutableLiveData<ArtificialInsemenationAddResponse>()
     var getProfileUploadFileResult = MutableLiveData<UploadDocument_Response>()
     var id = 0
@@ -395,6 +398,58 @@ class ViewModel : ViewModel() {
             }
         }
     }
+    fun getStateSemenAddBankApi(context: Context, loader: Boolean, request: StateSemenBankNLMRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getStateSemenBank(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                stateSemenBankAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
 
     fun getArtificialInseminationAdd(context: Context, loader: Boolean, request: ArtificialInsemenNationAddRequest) {
         // can be launched in a separate asynchronous job
@@ -564,7 +619,7 @@ class ViewModel : ViewModel() {
 
         job = scope.launch {
             try {
-                val response = repository.getStateSemenBank(request)
+                val response = repository.getStateSemenAdd(request)
 
                 Log.e("response", response.toString())
                 when (response.isSuccessful) {

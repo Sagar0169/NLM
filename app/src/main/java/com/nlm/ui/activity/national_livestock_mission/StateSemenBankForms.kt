@@ -4,21 +4,26 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
+import com.nlm.callBack.OnBackSaveAsDraft
+import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.ActivityStateSemenBankBinding
+import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAFormIAFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenManpowerFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenBasicInformationFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenInfrastructureFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenMajorClientsFragment
 import com.nlm.utilities.BaseActivity
 
-class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>() {
+class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>(),
+    OnNextButtonClickListener, OnBackSaveAsDraft {
     override val layoutId: Int
         get() = R.layout.activity_state_semen_bank
     private var mBinding: ActivityStateSemenBankBinding? = null
+    private var mDoubleBackToExitPressedOnce = false
 
     override fun initView() {
-        mBinding=viewDataBinding
-        mBinding?.clickAction=ClickActions()
+        mBinding = viewDataBinding
+        mBinding?.clickAction = ClickActions()
         setupTabLayout()
         loadFragment(StateSemenBasicInformationFragment())
     }
@@ -30,69 +35,42 @@ class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>() {
     override fun setObservers() {
 
     }
-    private fun loadFragment(fragment: Fragment) {
-//        if (fragment is SightedBasicDetailsFragment) {
-//            fragment.setData(sightedChildData)
-//        } else if (fragment is SightedFacialAttributesFragment) {
-//            fragment.setData(facialAttributeData)
-//        } else if (fragment is SightedPhysicalAttributeFragment) {
-//            fragment.setData(physicalAttributesData)
-//        } else if (fragment is SightedBackgroundFragment) {
-//            fragment.setData(backgroundData)
-//        }else if (fragment is SightedLocationDetailsFragment) {
-//            fragment.setData(locationData)
-//        }
+
+    fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout, fragment)
         transaction.commit()
     }
+
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
-        }}
+        }
+    }
+
     private fun setupTabLayout() {
         mBinding?.tabLayout?.apply {
             addTab(newTab().setText("Basic Information"))
             addTab(newTab().setText("Manpower"))
             addTab(newTab().setText("Infrastructure for goat semen bank"))
-//            addTab(newTab().setText("Composition of Advisory committee (if any)"))
-//            addTab(newTab().setText("Project Monitoring Committee (PMC)"))
             addTab(newTab().setText("Major clients of semen& Quantity supplied"))
-
-
-
-
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
                         0 -> {
-                            onTabClicks()
                             loadFragment(StateSemenBasicInformationFragment())
                         }
 
                         1 -> {
-                            onTabClicks()
                             loadFragment(StateSemenManpowerFragment())
 
                         }
 
                         2 -> {
-                            onTabClicks()
                             loadFragment(StateSemenInfrastructureFragment())
                         }
 
-//                        3 -> {
-//                            onTabClicks()
-//                            loadFragment(NLSIA_Composition_of_Advisory_committee())
-//                        }
-//
-//                        4 -> {
-//                            onTabClicks()
-//                            loadFragment(NLSIA_PMC())
-//                        }
-
                         3 -> {
-                            onTabClicks()
                             loadFragment(StateSemenMajorClientsFragment())
                         }
 
@@ -109,19 +87,29 @@ class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>() {
             })
         }
     }
-    fun onTabClicks() {
-        // Collect data from current fragment
-//        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
-//        if (currentFragment is SightedBasicDetailsFragment) {
-//            sightedChildData = currentFragment.getData()
-//        } else if (currentFragment is SightedFacialAttributesFragment) {
-//            facialAttributeData = currentFragment.getData()
-//        } else if (currentFragment is SightedPhysicalAttributeFragment) {
-//            physicalAttributesData = currentFragment.getData()
-//        } else if (currentFragment is SightedBackgroundFragment) {
-//            backgroundData = currentFragment.getData()
-//        }else if (currentFragment is SightedLocationDetailsFragment) {
-//            locationData = currentFragment.getData()
-//        }
+
+    private fun moveToNextTab() {
+        val currentTab = mBinding?.tabLayout?.selectedTabPosition ?: 0
+        val nextTab = currentTab + 1
+        if (nextTab < (mBinding?.tabLayout?.tabCount ?: 0)) {
+            mBinding?.tabLayout?.getTabAt(nextTab)?.select()
+        }
     }
+
+    override fun onNextButtonClick() {
+        moveToNextTab()
+    }
+
+    override fun onNavigateToFirstFragment() {
+        // Load the first fragment (Implementing Agency)
+        loadFragment(StateSemenBasicInformationFragment())
+
+        // Select the first tab
+        mBinding?.tabLayout?.getTabAt(0)?.select()
+    }
+
+    override fun onSaveAsDraft() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+
 }

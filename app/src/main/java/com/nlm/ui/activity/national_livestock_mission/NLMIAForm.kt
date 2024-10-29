@@ -23,7 +23,7 @@ import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAReportingSy
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Utility
 
-class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickListener,
+    class NLMIAForm : BaseActivity<ActivityNlsiaFormBinding>(),OnNextButtonClickListener,
     OnBackSaveAsDraft {
     override val layoutId: Int
         get() = R.layout.activity_nlsia_form

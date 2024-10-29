@@ -17,6 +17,9 @@ import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspLabListRequest
+import com.nlm.model.StateSemenAddResponse
+import com.nlm.model.StateSemenAddResult
+import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.UploadDocument_Response
@@ -34,6 +37,7 @@ const val DASHBOARD = "rest/dashboard"
 const val GET_DROP_DOWN = "rest/getDropdown"
 const val IMPLEMENTING_AGENCY_LIST = "nationalLivestockMission/implimentingAgencyList"
 const val IMPLEMENTING_AGENCY_ADD = "nationalLivestockMission/implimentingAgencyAddEdit"
+const val STATE_SEMEN_ADD = "nationalLivestockMission/stateSemenBankAddEdit"
 const val ARTIFICIAL_INSEMINATION_ADD = "nationalLivestockMission/artificialInseminationAddEdit"
 const val ARTIFICIAL_INSEMINATION_LIST = "nationalLivestockMission/artificialInseminationList"
 const val STATE_SEMEN_BANK_LIST = "nationalLivestockMission/stateSemenBankList"
@@ -62,11 +66,16 @@ interface MyService {
 
     @POST(ARTIFICIAL_INSEMINATION_LIST)
     suspend fun getArtificialInsemination(@Body request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse>
-    @POST(STATE_SEMEN_BANK_LIST)
-    suspend fun getStateSemenBank(@Body request: StateSemenBankRequest): Response<StateSemenBankResponse>
+    @POST(STATE_SEMEN_ADD)
+    suspend fun getStateSemenBank(@Body request: StateSemenBankNLMRequest): Response<StateSemenAddResponse>
 
     @POST(IMPLEMENTING_AGENCY_ADD)
     suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<ImplementingAgencyResponseNlm>
+
+    @POST(STATE_SEMEN_BANK_LIST)
+    suspend fun getStateSemenAdd(@Body request: StateSemenBankRequest): Response<StateSemenBankResponse>
+
+
     @POST(ARTIFICIAL_INSEMINATION_ADD)
     suspend fun getArtificialInseminationAdd(@Body request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse>
 

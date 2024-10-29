@@ -9,6 +9,7 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/clParent"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,12 +46,25 @@
                         android:text="Infrastructure for goat semen bank"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
+                    <TextView
+                        android:onClick="@{ClickAction::otherManpowerPositionDialog}"
+                        android:id="@+id/tvAddMore1"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Add More"
+                        android:textColor="@color/white" />
 
                     <com.nlm.utilities.NonScrollableRecyclerView
                         android:id="@+id/recyclerView1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:paddingTop="8dp" />
 
                 </LinearLayout>
@@ -78,22 +92,52 @@
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
-                <TextView
-                    android:id="@+id/tvSendOtp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_50"
-                    android:layout_marginTop="@dimen/dp_15"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    android:background="@drawable/curve_fill_blue"
-                    android:clickable="true"
-                    android:fontFamily="@font/poppins_medium"
-                    android:paddingHorizontal="@dimen/dp_20"
-                    android:paddingVertical="@dimen/dp_10"
-                    android:text="Next"
-                    android:textAlignment="center"
-                    android:textColor="@color/white" />
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_weight="0.5"
+                        android:id="@+id/tvSaveDraft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
+                        android:backgroundTint="@color/green"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Save As Draft"
+                        android:textSize="20sp"
+                        android:onClick="@{ClickAction::saveAsDraft}"
+
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                    <TextView
+                        android:id="@+id/tvSendOtp"
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="@string/save_next"
+                        android:onClick="@{ClickAction::save}"
+
+                        android:textSize="20sp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

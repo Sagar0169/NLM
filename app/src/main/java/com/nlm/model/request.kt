@@ -198,10 +198,78 @@ data class ImplementingAgencyAdvisoryCommittee(
     val id: Int?,
 )
 
+data class StateSemenManPower(
+    val designation: String?,
+    val qualification: String?,
+    val experience: String?,
+    val trainingStatus: String?,
+    val id: Int?,
+)
+
+data class StateSemenInfraGoat(
+    val listOfEquipment: String?,
+    val yearOfProcurement: String?,
+    val id: Int?,
+)
+
 data class ImplementingAgencyDocument(
     val description: String?,
     val id: Int?,
     val name_doc: String?
+)
+
+
+data class StateSemenBankNLMRequest(
+    val Address: String?=null,
+    val area_fodder_cultivation: String?=null,
+    val area_under_buildings: String?=null,
+    val district_code: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val location: String?=null,
+    val major_clients_coop_fin_year_one: String?=null,
+    val major_clients_coop_fin_year_three: String?=null,
+    val major_clients_coop_fin_year_two: String?=null,
+    val major_clients_ngo_fin_year_one: String?=null,
+    val major_clients_ngo_fin_year_three: String?=null,
+    val major_clients_ngo_fin_year_two: String?=null,
+    val major_clients_other_states_fin_year_one: String?=null,
+    val major_clients_other_states_fin_year_three: String?=null,
+    val major_clients_other_states_fin_year_two: String?=null,
+    val major_clients_private_fin_year_one: String?=null,
+    val major_clients_private_fin_year_three: String?=null,
+    val major_clients_private_fin_year_two: String?=null,
+    val manpower_no_of_people: Int?=null,
+    val officer_in_charge_name: String?=null,
+    val phone_no: Long?=null,
+    val pin_code: Int?=null,
+    val quality_status: String?=null,
+    val role_id: Int?=null,
+    val state_code: Int?=null,
+    val state_semen_bank_document: List<StateSemenBankDocument>?=null,
+    val state_semen_bank_infrastructure: List<StateSemenBankInfrastructure>?=null,
+    val state_semen_bank_other_manpower: List<StateSemenBankOtherManpower>?=null,
+    val status: Int?=null,
+    val storage_capacity: String?=null,
+    val type_of_semen_station: String?=null,
+    val user_id: String?=null,
+    val year_of_establishment: String?=null
+)
+
+data class StateSemenBankDocument(
+    val description: String?=null
+)
+
+data class StateSemenBankInfrastructure(
+    val infrastructure_list_of_equipment: String?=null,
+    val infrastructure_year_of_procurement: String?=null
+)
+
+data class StateSemenBankOtherManpower(
+    val designation: String?=null,
+    val experience: String?=null,
+    val qualification: String?=null,
+    val training_status: String?=null
 )
 
 data class ImplementingAgencyFundsReceived(
