@@ -64,6 +64,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
 
     override fun setObservers() {
         viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
+
             val userResponseModel = it
             if (userResponseModel!=null)
             {
@@ -71,10 +72,12 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
                 else{
+
                     if (savedAsDraft)
                     {
                         savedAsDraftClick?.onSaveAsDraft()
-                    }else
+                    }
+                    else
                     {
                         if (viewEdit=="view"||viewEdit=="edit")
                         {

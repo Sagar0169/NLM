@@ -20,6 +20,7 @@ import com.nlm.databinding.FragmentNLSIAFeedFodderBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.model.DocumentData
 import com.nlm.model.ImplementingAgencyAddRequest
+import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.Result
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
@@ -45,7 +46,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
     private var Discription:String?=null
     var body: MultipartBody.Part? = null
     private var AddDocumentAdapter: SupportingDocumentAdapterWithDialog?=null
-    private lateinit var DocumentList: MutableList<DocumentData>
+    private lateinit var DocumentList: MutableList<ImplementingAgencyDocument>
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
 
     private var listener: OnNextButtonClickListener? = null
@@ -188,7 +189,13 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
             if (bindingDialog.etDescription.text.toString().isNotEmpty())
             {
 
-                DocumentList.add(DocumentData(bindingDialog.etDescription.text.toString(),DocumentName))
+                DocumentList.add(ImplementingAgencyDocument(
+                    description = bindingDialog.etDescription.text.toString(),
+                    ia_document = DocumentName,
+                    nlm_document = null,
+                    implementing_agency_id = null,
+                    id = null,
+                ))
 
                 DocumentList.size.minus(1).let {
                     AddDocumentAdapter?.notifyItemInserted(it)

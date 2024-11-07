@@ -17,6 +17,8 @@ import com.nlm.model.ImplementingAgencyResponse
 import com.nlm.model.ImplementingAgencyResponseNlm
 import com.nlm.model.ImportExocticGoatListResponse
 import com.nlm.model.ImportExocticGoatRequest
+import com.nlm.model.ImportExoticGoatAddEditRequest
+import com.nlm.model.ImportExoticGoatAddEditResponse
 import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
@@ -58,6 +60,7 @@ class ViewModel : ViewModel() {
     var implementingAgencyAddResult = MutableLiveData<NLMIAResponse>()
     var stateSemenBankAddResult = MutableLiveData<StateSemenAddResponse>()
     var artificialInseminationAddResult = MutableLiveData<ArtificialInsemenationAddResponse>()
+    var importExoticGoatAddEditResult = MutableLiveData<ImportExoticGoatAddEditResponse>()
     var getProfileUploadFileResult = MutableLiveData<UploadDocument_Response>()
     var id = 0
 
@@ -470,6 +473,58 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 artificialInseminationAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
+    fun getImportExoticGoatAdd(context: Context, loader: Boolean, request: ImportExoticGoatAddEditRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getImportExoticGoatAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                importExoticGoatAddEditResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

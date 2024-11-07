@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/dp_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dp_7"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_5"
+            android:background="@drawable/curve_all_corner_dark_grey"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_weight="8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Number of Animals kept for Breeding"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <ImageView
+                    android:padding="@dimen/dp_10"
+                    android:id="@+id/btnDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_deleted" />
+            </LinearLayout>
+
+
+            <EditText
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:id="@+id/etNoOfAnimals"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="F1 Generation produced"
+                android:layout_marginTop="@dimen/dp_7"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etF1Generation"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="F2 Generation Produced"
+                android:layout_marginTop="@dimen/dp_7"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:id="@+id/etF2Generation"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="No of Animals Distributed out of F1 Generation"
+                android:layout_marginTop="@dimen/dp_7"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:id="@+id/etNoOfAnimalsDistributedF1"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Number of Animals Distributed out of F2 Generation"
+                android:layout_marginTop="@dimen/dp_7"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:id="@+id/etNoOfAnimalsDistributedF2"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Performance of the animals in the farmers doorstep."
+                android:layout_marginTop="@dimen/dp_7"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:id="@+id/etPerformanceOfTheAnimals"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Balance"
+                android:layout_marginTop="@dimen/dp_7"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:id="@+id/etBalance"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
+            <TextView
+                android:id="@+id/tvSubmit"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_50"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:background="@drawable/curve_fill_blue"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingVertical="@dimen/dp_10"
+                android:text="@string/submit"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

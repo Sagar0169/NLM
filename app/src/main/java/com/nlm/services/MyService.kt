@@ -13,6 +13,8 @@ import com.nlm.model.ImplementingAgencyResponse
 import com.nlm.model.ImplementingAgencyResponseNlm
 import com.nlm.model.ImportExocticGoatListResponse
 import com.nlm.model.ImportExocticGoatRequest
+import com.nlm.model.ImportExoticGoatAddEditRequest
+import com.nlm.model.ImportExoticGoatAddEditResponse
 import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
@@ -47,6 +49,7 @@ const val IMPORT_EXOTIC_GOAT_LIST = "nationalLivestockMission/importOfExoticGoat
 const val STATE_SEMEN_BANK_LIST = "nationalLivestockMission/stateSemenBankList"
 const val UPLOAD_DOCUMENT = "rest/uploadDocument"
 const val RSP_LAP_LIST = "nationalLivestockMission/rspLaboratorySemenList"
+const val IMPORT_EXOTIC_GOAT_ADDEDIT = "nationalLivestockMission/importOfExoticGoatAddEdit?qq"
 
 interface MyService {
 
@@ -81,6 +84,8 @@ interface MyService {
     suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<NLMIAResponse>
     @POST(ARTIFICIAL_INSEMINATION_ADD)
     suspend fun getArtificialInseminationAdd(@Body request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse>
+    @POST(IMPORT_EXOTIC_GOAT_ADDEDIT)
+    suspend fun getImportExoticGoatAdd(@Body request: ImportExoticGoatAddEditRequest): Response<ImportExoticGoatAddEditResponse>
 
     @Multipart
     @POST(UPLOAD_DOCUMENT)

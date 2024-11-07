@@ -89,7 +89,9 @@ data class ArtificialInsemenNationAddRequest(
     val role_id: Int?,
     val state_code: Int?,
     val total_sheep_goat_labs: Int?,
-    val user_id: Int?
+    val user_id: Int?,
+    val is_type: String?,
+    val id: Int?
 )
 
 data class ArtificialInseminationDocument(
@@ -104,7 +106,50 @@ data class ArtificialInseminationObservationByNlm(
     val quipment_available: String
 )
 
+data class ImportExoticGoatAddEditRequest(
+    val comment_by_nlm_whether: Int?,
+    val import_of_exotic_goat_achievement: MutableList<ImportOfExoticGoatAchievement>?,
+    val import_of_exotic_goat_detail_import: MutableList<ImportOfExoticGoatDetailImport>?,
+    val import_of_exotic_goat_verified_nlm: MutableList<ImportOfExoticGoatVerifiedNlm>?,
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: String?
+)
 
+data class ImportOfExoticGoatAchievement(
+    val balance: String?,
+    val f1_generation_produced: String?,
+    val f2_generation_produced: String?,
+    val no_of_animals_f1: Int?,
+    val no_of_animals_f2: Int?,
+    val number_of_animals: Int?,
+    val performance_animals_doorstep: String?,
+    val import_of_exotic_goat_id: Int?,
+    val id: Int?,
+)
+
+data class ImportOfExoticGoatDetailImport(
+    val place_of_induction: String?,
+    val place_of_procurement: String?,
+    val procurement_cost: Int?,
+    val species_breed: String?,
+    val unit: String?,
+    val year: String?,
+    val import_of_exotic_goat_id: Int?,
+    val id: Int?,
+)
+
+data class ImportOfExoticGoatVerifiedNlm(
+    val f1_generation_produced: String?,
+    val f2_generation_distributed: String?,
+    val f2_generation_produced: String?,
+    val id: Int?,
+    val import_of_exotic_goat_id: Int?,
+    val number_of_animals: Int?,
+    val species_breed: String?,
+    val year: String?
+
+)
 data class GetDropDownRequest(
     val limit: Int?,
     val model: String?,
@@ -219,11 +264,11 @@ data class StateSemenInfraGoat(
     val id: Int?,
 )
 
-data class ImplementingAgencyDocument(
-    val description: String?,
-    val id: Int?,
-    val name_doc: String?
-)
+//data class ImplementingAgencyDocument(
+//    val description: String?,
+//    val id: Int?,
+//    val name_doc: String?
+//)
 
 
 data class StateSemenBankNLMRequest(
@@ -281,10 +326,10 @@ data class StateSemenBankOtherManpower(
 
 data class ImplementingAgencyFundsReceived(
     val year: Int?,
-    val from_dahd: Double?,
-    val state_govt: Double?,
-    val any_other: Double?,
-    val physical_progress: Double?,
+    val from_dahd: Int?,
+    val state_govt: Int?,
+    val any_other: Int?,
+    val physical_progress: Int?,
     val id: Int?,
     val implementing_agency_id: Int?,
 )

@@ -26,7 +26,9 @@ import com.nlm.model.ArtificialInsemenNationAddRequest
 import com.nlm.model.ArtificialInseminationObservationByNlm
 import com.nlm.model.DocumentData
 import com.nlm.model.GetDropDownRequest
+import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
+import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
@@ -64,12 +66,14 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     val viewModel = ViewModel()
     var body: MultipartBody.Part? = null
     private lateinit var programmeList: MutableList<Array<String>>
-    private lateinit var DocumentList: MutableList<DocumentData>
+    private lateinit var DocumentList: MutableList<ImplementingAgencyDocument>
     private lateinit var ObservationBynlmList: MutableList<ArtificialInseminationObservationByNlm>
     private var DialogDocName:TextView?=null
     private var AddDocumentAdapter: SupportingDocumentAdapterWithDialog?=null
     private var districtId: Int? = null // Store selected state
     private var TotalNoOfGoat: String? = null // Store selected state
+    private var viewEdit: String? = null
+    private var itemId: Int? = null
 
     private val state = listOf(
         "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
@@ -82,10 +86,13 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        viewEdit = intent.getStringExtra("View/Edit")
+        itemId = intent.getIntExtra("itemId",0)
         ObservationBynlmList = mutableListOf()
         ObservationAIAdapter()
         DocumentList = mutableListOf()
         AddDocumentAdapter()
+
         mBinding?.etState?.text= getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_name
         mBinding?.etState?.isEnabled=false
 
@@ -106,6 +113,21 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
             mBinding?.etFrozenSemenStraws?.isEnabled=false
             mBinding?.etCryocans?.isEnabled=false
 
+        }
+        if(viewEdit=="view"){
+
+            mBinding?.etStateIa?.text= getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_name
+            mBinding?.etStateIa?.isEnabled=false
+            mBinding?.etDistrictIa?.isEnabled=false
+            mBinding?.etTotalNoOfSheep?.isEnabled=false
+            mBinding?.etTotalNoOfSheepIa?.isEnabled=false
+            mBinding?.etLiquidNitrogen?.isEnabled=false
+            mBinding?.etFrozenSemenStraws?.isEnabled=false
+            mBinding?.etCryocans?.isEnabled=false
+            ViewEditApi()
+        }
+        if(viewEdit=="edit"){
+            ViewEditApi()
         }
     }
 
@@ -154,6 +176,16 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                     showSnackbar(mBinding!!.main, userResponseModel.message)
                 }
                 else{
+                    if (viewEdit=="view"||viewEdit=="edit")
+                    {
+                        mBinding?.etDistrictIa?.text= userResponseModel._result.district_code.toString()
+                        mBinding?.etTotalNoOfSheep?.setText(userResponseModel._result.total_sheep_goat_labs.toString())
+                        mBinding?.etTotalNoOfSheepIa?.setText(userResponseModel._result.total_sheep_goat_labs.toString())
+                        mBinding?.etLiquidNitrogen?.setText(userResponseModel._result.liquid_nitrogen)
+                        mBinding?.etFrozenSemenStraws?.setText(userResponseModel._result.frozen_semen_straws)
+                        mBinding?.etCryocans?.setText(userResponseModel._result.cryocans)
+
+                    }
                     showSnackbar(mBinding!!.main, userResponseModel.message)
                 }
 //                else{
@@ -207,6 +239,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                     cryocans = mBinding?.etCryocans?.text.toString(),
                     exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
                     role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                    is_type = null,
+                    id = null,
                 )
             )}
             else{
@@ -227,6 +261,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                     cryocans = null,
                     exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
                     role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                    is_type = null,
+                    id = null,
                 )
             )}
         }
@@ -271,7 +307,13 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
             if (bindingDialog.etDescription.text.toString().isNotEmpty())
             {
 
-                DocumentList.add(DocumentData(bindingDialog.etDescription.text.toString(),DocumentName))
+                DocumentList.add(ImplementingAgencyDocument(
+                    description = bindingDialog.etDescription.text.toString(),
+                    ia_document = DocumentName,
+                    nlm_document = null,
+                    implementing_agency_id = null,
+                    id = null,
+                ))
 
                 DocumentList.size.minus(1).let {
                     AddDocumentAdapter?.notifyItemInserted(it)
@@ -449,5 +491,27 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
             }
         }
         dialog.show()
+    }
+    private fun ViewEditApi(){
+
+        viewModel.getArtificialInseminationAdd(this,true,
+            ArtificialInsemenNationAddRequest(
+                id = itemId,
+                state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                is_type = viewEdit,
+                role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
+                artificial_insemination_observation_by_nlm = null,
+                artificial_insemination_document = null,
+                is_deleted = null,
+                is_draft_nlm = null,
+                total_sheep_goat_labs = null,
+                liquid_nitrogen = null,
+                frozen_semen_straws = null,
+                cryocans = null,
+                exotic_sheep_goat = null,
+                district_code = null,
+            )
+        )
     }
 }

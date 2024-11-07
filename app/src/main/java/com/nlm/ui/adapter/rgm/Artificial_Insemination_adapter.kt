@@ -83,18 +83,19 @@ class Artificial_Insemination_adapter(private val implementingAgencyList: List<D
 
 
 //
-//    holder.mBinding.ivView.setOnClickListener {
-//        val intent = Intent(holder.itemView.context, ArtificialInseminationForms::class.java)
-//        intent.putExtra("nodalOfficer", item)
-//        intent.putExtra("isFrom", 2)
-//        holder.itemView.context.startActivity(intent)
-//    }
-//    holder.mBinding.ivEdit.setOnClickListener {
-//        val intent = Intent(holder.itemView.context, ArtificialInseminationForms::class.java)
-//        intent.putExtra("nodalOfficer", item)
-//        intent.putExtra("isFrom", 3)
-//        holder.itemView.context.startActivity(intent)
-//    }
+    holder.mBinding.ivView.setOnClickListener {
+        val intent = Intent(holder.itemView.context, ArtificialInseminationForms::class.java)
+        intent.putExtra("View/Edit", "view")
+        intent.putExtra("itemId", item.id)
+        holder.itemView.context.startActivity(intent)
+
+    }
+    holder.mBinding.ivEdit.setOnClickListener {
+        val intent = Intent(holder.itemView.context, ArtificialInseminationForms::class.java)
+        intent.putExtra("View/Edit", "edit")
+        intent.putExtra("itemId", item.id)
+        holder.itemView.context.startActivity(intent)
+    }
 
 
 

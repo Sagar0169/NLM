@@ -20,6 +20,7 @@ import com.nlm.databinding.FragmentStateSemenInfrastructureBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemStateSemenInfragoatBinding
 import com.nlm.model.DocumentData
+import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.StateSemenInfraGoat
 import com.nlm.ui.adapter.StateSemenInfrastructureAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
@@ -43,7 +44,7 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
     private var savedAsDraft: Boolean = false
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private var addDocumentAdapter: SupportingDocumentAdapterWithDialog?=null
-    private lateinit var DocumentList: MutableList<DocumentData>
+    private lateinit var DocumentList: MutableList<ImplementingAgencyDocument>
     private var DialogDocName: TextView?=null
     private var DocumentName:String?=null
     var body: MultipartBody.Part? = null
@@ -172,7 +173,13 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
             if (bindingDialog.etDescription.text.toString().isNotEmpty())
             {
 
-                DocumentList.add(DocumentData(bindingDialog.etDescription.text.toString(),DocumentName))
+                DocumentList.add(ImplementingAgencyDocument(
+                    description = bindingDialog.etDescription.text.toString(),
+                    ia_document = DocumentName,
+                    nlm_document = null,
+                    implementing_agency_id = null,
+                    id = null,
+                ))
 
                 DocumentList.size.minus(1).let {
                     addDocumentAdapter?.notifyItemInserted(it)

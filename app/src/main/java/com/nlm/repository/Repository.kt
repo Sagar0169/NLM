@@ -13,6 +13,8 @@ import com.nlm.model.ImplementingAgencyResponse
 import com.nlm.model.ImplementingAgencyResponseNlm
 import com.nlm.model.ImportExocticGoatListResponse
 import com.nlm.model.ImportExocticGoatRequest
+import com.nlm.model.ImportExoticGoatAddEditRequest
+import com.nlm.model.ImportExoticGoatAddEditResponse
 import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
@@ -94,6 +96,9 @@ object Repository {
 
     suspend fun getArtificialInseminationAdd(request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse> {
         return api.getArtificialInseminationAdd(request)
+    }
+    suspend fun getImportExoticGoatAdd(request: ImportExoticGoatAddEditRequest): Response<ImportExoticGoatAddEditResponse> {
+        return api.getImportExoticGoatAdd(request)
     }
     suspend fun getProfileFileUpload(
         user_id: Int?,

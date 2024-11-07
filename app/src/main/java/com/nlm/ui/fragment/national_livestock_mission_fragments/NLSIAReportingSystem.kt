@@ -218,11 +218,11 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
             ) {
                 nlmIAFundsRecievedList.add(
                     ImplementingAgencyFundsReceived(
-                        bindingDialog.etYear.text.toString().toInt(),
-                        bindingDialog.etFormDahd.text.toString().toDoubleOrNull(),
-                        bindingDialog.etStateGovt.text.toString().toDoubleOrNull(),
-                        bindingDialog.etAnyOther.text.toString().toDoubleOrNull(),
-                        bindingDialog.etPhysicalProgress.text.toString().toDoubleOrNull(),
+                        bindingDialog.etYear.text.toString().toIntOrNull(),
+                        bindingDialog.etFormDahd.text.toString().toIntOrNull(),
+                        bindingDialog.etStateGovt.text.toString().toIntOrNull(),
+                        bindingDialog.etAnyOther.text.toString().toIntOrNull(),
+                        bindingDialog.etPhysicalProgress.text.toString().toIntOrNull(),
                         null,
                         null,
 

@@ -31,6 +31,13 @@ class NlmIACompositionOFGoverningAdapter(
 
     override fun onBindViewHolder(holder: NlmIACompositionOFGoverning, position: Int) {
         val currentItem = programmeList[position]
+        if (viewEdit=="view")
+        {
+            holder.binding.nameOfOfficial.isEnabled=false
+            holder.binding.nameOfDesignation.isEnabled=false
+            holder.binding.nameOfOrganization.isEnabled=false
+            holder.binding.btnDelete.visibility=View.GONE
+        }
         holder.binding.nameOfOfficial.setText(currentItem.name_of_the_official)
         holder.binding.nameOfDesignation.setText(currentItem.designation)
         holder.binding.nameOfOrganization.setText(currentItem.organization)

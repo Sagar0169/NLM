@@ -197,7 +197,6 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                 id = itemId,
                 state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                is_deleted = 0,
                 is_type = viewEdit
             )
         )

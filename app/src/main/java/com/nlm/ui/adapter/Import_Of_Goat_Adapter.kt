@@ -59,13 +59,16 @@ class Import_Of_Goat_Adapter(private val implementingAgencyList: List<DataIE>,va
 
     holder.mBinding.ivView.setOnClickListener {
         val intent = Intent(holder.itemView.context, ImportOfExoticGoatForms::class.java)
-        intent.putExtra("isFrom", 2)
+        intent.putExtra("View/Edit", "view")
+        intent.putExtra("itemId", item.id)
         holder.itemView.context.startActivity(intent)
     }
     holder.mBinding.ivEdit.setOnClickListener {
         val intent = Intent(holder.itemView.context, ImportOfExoticGoatForms::class.java)
-        intent.putExtra("isFrom", 3)
+        intent.putExtra("View/Edit", "edit")
+        intent.putExtra("itemId", item.id)
         holder.itemView.context.startActivity(intent)
+
     }
     }
 
