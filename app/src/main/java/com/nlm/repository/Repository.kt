@@ -90,8 +90,12 @@ object Repository {
     }
 
 
-    suspend fun getStateSemenAdd(request: StateSemenBankNLMRequest): Response<StateSemenAddResponse> {
-        return api.getStateSemenAdd(request)
+    suspend fun getStateSemenAdd1(request: StateSemenBankNLMRequest): Response<StateSemenAddResponse> {
+        return api.getStateSemenAdd1(request)
+    }
+
+    suspend fun getStateSemenAdd2(request: StateSemenBankNLMRequest): Response<StateSemenAddResponse> {
+        return api.getStateSemenAdd2(request)
     }
 
     suspend fun getArtificialInseminationAdd(request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse> {

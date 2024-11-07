@@ -42,7 +42,8 @@ const val DASHBOARD = "rest/dashboard"
 const val GET_DROP_DOWN = "rest/getDropdown"
 const val IMPLEMENTING_AGENCY_LIST = "nationalLivestockMission/implimentingAgencyList"
 const val IMPLEMENTING_AGENCY_ADD = "nationalLivestockMission/implimentingAgencyAddEdit"
-const val STATE_SEMEN_ADD = "nationalLivestockMission/stateSemenBankAddEdit"
+const val STATE_SEMEN_ADD1 = "nationalLivestockMission/stateSemenBankAddEdit1"
+const val STATE_SEMEN_ADD2 = "nationalLivestockMission/stateSemenBankAddEdit2"
 const val ARTIFICIAL_INSEMINATION_ADD = "nationalLivestockMission/artificialInseminationAddEdit"
 const val ARTIFICIAL_INSEMINATION_LIST = "nationalLivestockMission/artificialInseminationList"
 const val IMPORT_EXOTIC_GOAT_LIST = "nationalLivestockMission/importOfExoticGoatList"
@@ -77,8 +78,10 @@ interface MyService {
     suspend fun getImportExocticGoatList(@Body request: ImportExocticGoatRequest): Response<ImportExocticGoatListResponse>
     @POST(STATE_SEMEN_BANK_LIST)
     suspend fun getStateSemenBank(@Body request: StateSemenBankRequest): Response<StateSemenBankResponse>
-    @POST(STATE_SEMEN_ADD)
-    suspend fun getStateSemenAdd(@Body request: StateSemenBankNLMRequest): Response<StateSemenAddResponse>
+    @POST(STATE_SEMEN_ADD1)
+    suspend fun getStateSemenAdd1(@Body request: StateSemenBankNLMRequest): Response<StateSemenAddResponse>
+    @POST(STATE_SEMEN_ADD2)
+    suspend fun getStateSemenAdd2(@Body request: StateSemenBankNLMRequest): Response<StateSemenAddResponse>
 
     @POST(IMPLEMENTING_AGENCY_ADD)
     suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<NLMIAResponse>

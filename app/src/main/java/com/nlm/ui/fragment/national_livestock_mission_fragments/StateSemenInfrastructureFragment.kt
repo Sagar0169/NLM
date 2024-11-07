@@ -20,11 +20,16 @@ import com.nlm.databinding.FragmentStateSemenInfrastructureBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemStateSemenInfragoatBinding
 import com.nlm.model.DocumentData
-import com.nlm.model.ImplementingAgencyDocument
+import com.nlm.model.Result
+import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenInfraGoat
 import com.nlm.ui.adapter.StateSemenInfrastructureAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
+import com.nlm.utilities.Preferences
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
@@ -43,10 +48,10 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
     private var listener: OnNextButtonClickListener? = null
     private var savedAsDraft: Boolean = false
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
-    private var addDocumentAdapter: SupportingDocumentAdapterWithDialog?=null
-    private lateinit var DocumentList: MutableList<ImplementingAgencyDocument>
-    private var DialogDocName: TextView?=null
-    private var DocumentName:String?=null
+    private var addDocumentAdapter: SupportingDocumentAdapterWithDialog? = null
+    private lateinit var DocumentList: MutableList<DocumentData>
+    private var DialogDocName: TextView? = null
+    private var DocumentName: String? = null
     var body: MultipartBody.Part? = null
     val viewModel = ViewModel()
 
@@ -56,7 +61,7 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
         DocumentList = mutableListOf()
         viewModel.init()
         stateSemenInfraGoatAdapter()
-        addDocumentAdapter=SupportingDocumentAdapterWithDialog(DocumentList)
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentList)
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -87,7 +92,30 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
     }
 
     override fun setObservers() {
+        viewModel.stateSemenBankAddResult.observe(viewLifecycleOwner){
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(requireContext())
+            }
+            if (userResponseModel!=null)
+            {
+                if(userResponseModel._resultflag==0){
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                }
+                else{
+                    if (savedAsDraft)
+                    {
+                        savedAsDraftClick?.onSaveAsDraft()
+                    }
+                    else{
+                        Preferences.setPreference_int(requireContext(),AppConstants.FORM_FILLED_ID,userResponseModel._result.id)
 
+                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                    }
+
+                }
+            }
+        }
     }
 
     private fun compositionOfGoverningNlmIaDialog(context: Context, isFrom: Int) {
@@ -111,7 +139,9 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
         bindingDialog.tvSubmit.showView()
 
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etListOfEquipment.text.toString().isNotEmpty() || bindingDialog.etYearOfProcurement.text.toString().isNotEmpty()) {
+            if (bindingDialog.etListOfEquipment.text.toString()
+                    .isNotEmpty() || bindingDialog.etYearOfProcurement.text.toString().isNotEmpty()
+            ) {
                 stateSemenInfraGoatList.add(
                     StateSemenInfraGoat(
                         bindingDialog.etListOfEquipment.text.toString(),
@@ -135,13 +165,82 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
 
 
     inner class ClickActions {
-        fun saveAsDraft(view: View) {}
-        fun save(view: View) {
-            listener?.onNextButtonClick()
+        fun saveAsDraft(view: View) {
+            viewModel.getStateSemenAddBankApi2(
+                requireContext(), true,
+                StateSemenBankNLMRequest(
+                    role_id = getPreferenceOfScheme(
+                        requireContext(),
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.role_id,
+                    state_code = getPreferenceOfScheme(
+                        requireContext(),
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code,
+                    user_id = getPreferenceOfScheme(
+                        requireContext(),
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.user_id.toString(),
+                    storage_capacity = mBinding?.etStorageCapacity?.text.toString(),
+                    state_semen_bank_infrastructure = stateSemenInfraGoatList,
+                    major_clients_coop_fin_year_one = mBinding?.etCoopOne?.text.toString(),
+                    major_clients_coop_fin_year_two = mBinding?.etCoopTwo?.text.toString(),
+                    major_clients_coop_fin_year_three = mBinding?.etCoopThree?.text.toString(),
+                    major_clients_ngo_fin_year_one = mBinding?.etNgoOne?.text.toString(),
+                    major_clients_ngo_fin_year_two = mBinding?.etNgoThree?.text.toString(),
+                    major_clients_ngo_fin_year_three = mBinding?.etNgoOne?.text.toString(),
+                    major_clients_other_states_fin_year_one = mBinding?.etOtherStateOne?.text.toString(),
+                    major_clients_other_states_fin_year_two = mBinding?.etOtherStateTwo?.text.toString(),
+                    major_clients_other_states_fin_year_three = mBinding?.etOtherStateThree?.text.toString(),
+                    state_semen_bank_document = DocumentList,
+                    is_draft = 1,
+                )
+            )
+            savedAsDraft = true
         }
-        fun addDocDialog(view: View){
+
+        fun save(view: View) {
+            viewModel.getStateSemenAddBankApi2(
+                requireContext(), true,
+                StateSemenBankNLMRequest(
+                    role_id = getPreferenceOfScheme(
+                        requireContext(),
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.role_id,
+                    state_code = getPreferenceOfScheme(
+                        requireContext(),
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code,
+                    user_id = getPreferenceOfScheme(
+                        requireContext(),
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.user_id.toString(),
+                    storage_capacity = mBinding?.etStorageCapacity?.text.toString(),
+                    state_semen_bank_infrastructure = stateSemenInfraGoatList,
+                    major_clients_coop_fin_year_one = mBinding?.etCoopOne?.text.toString(),
+                    major_clients_coop_fin_year_two = mBinding?.etCoopTwo?.text.toString(),
+                    major_clients_coop_fin_year_three = mBinding?.etCoopThree?.text.toString(),
+                    major_clients_ngo_fin_year_one = mBinding?.etNgoOne?.text.toString(),
+                    major_clients_ngo_fin_year_two = mBinding?.etNgoThree?.text.toString(),
+                    major_clients_ngo_fin_year_three = mBinding?.etNgoOne?.text.toString(),
+                    major_clients_other_states_fin_year_one = mBinding?.etOtherStateOne?.text.toString(),
+                    major_clients_other_states_fin_year_two = mBinding?.etOtherStateTwo?.text.toString(),
+                    major_clients_other_states_fin_year_three = mBinding?.etOtherStateThree?.text.toString(),
+                    state_semen_bank_document = DocumentList,
+                )
+            )
+        }
+
+        fun addDocDialog(view: View) {
             addDocumentDialog(requireContext())
         }
+
         fun otherManpowerPositionDialog(view: View) {
             compositionOfGoverningNlmIaDialog(requireContext(), 1)
         }
@@ -164,33 +263,31 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
-        DialogDocName=bindingDialog.etDoc
+        DialogDocName = bindingDialog.etDoc
         bindingDialog.tvChooseFile.setOnClickListener {
             openOnlyPdfAccordingToPosition()
         }
 
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
-            {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
 
-                DocumentList.add(ImplementingAgencyDocument(
-                    description = bindingDialog.etDescription.text.toString(),
-                    ia_document = DocumentName,
-                    nlm_document = null,
-                    implementing_agency_id = null,
-                    id = null,
-                ))
+                DocumentList.add(
+                    DocumentData(
+                        bindingDialog.etDescription.text.toString(),
+                        DocumentName
+                    )
+                )
 
                 DocumentList.size.minus(1).let {
                     addDocumentAdapter?.notifyItemInserted(it)
                     dialog.dismiss()
 //
                 }
-            }
-
-
-            else {
-                showSnackbar(mBinding!!.clParent, getString(R.string.please_enter_atleast_one_field))
+            } else {
+                showSnackbar(
+                    mBinding!!.clParent,
+                    getString(R.string.please_enter_atleast_one_field)
+                )
             }
         }
         dialog.show()
@@ -214,12 +311,18 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        val cursor = requireActivity().contentResolver.query(uri, projection, null, null, null)
+                        val cursor = requireActivity().contentResolver.query(
+                            uri,
+                            projection,
+                            null,
+                            null,
+                            null
+                        )
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName=
+                                DocumentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                DialogDocName?.text=DocumentName
+                                DialogDocName?.text = DocumentName
 
                                 val requestBody = convertToRequestBody(requireActivity(), uri)
                                 body = MultipartBody.Part.createFormData(
@@ -242,10 +345,9 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
                         }
                     }
                 }
-            }}
+            }
+        }
     }
-
-
 
 
 }
