@@ -152,23 +152,23 @@ class StateSemenBasicInformationFragment :
             }
         }
 
-        viewModel.stateSemenBankAddResult.observe(viewLifecycleOwner){
+        viewModel.stateSemenBankAddResult.observe(viewLifecycleOwner) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(requireContext())
             }
-            if (userResponseModel!=null)
-            {
-                if(userResponseModel._resultflag==0){
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                }
-                else{
-                    if (savedAsDraft)
-                    {
+                } else {
+                    if (savedAsDraft) {
                         savedAsDraftClick?.onSaveAsDraft()
-                    }
-                    else{
-                        Preferences.setPreference_int(requireContext(),AppConstants.FORM_FILLED_ID,userResponseModel._result.id)
+                    } else {
+                        Preferences.setPreference_int(
+                            requireContext(),
+                            AppConstants.FORM_FILLED_ID,
+                            userResponseModel._result.id
+                        )
                         listener?.onNextButtonClick()
                         showSnackbar(mBinding!!.clParent, userResponseModel.message)
                     }
@@ -269,8 +269,9 @@ class StateSemenBasicInformationFragment :
                     is_draft = 1,
                 )
             )
-            savedAsDraft=true
+            savedAsDraft = true
         }
+
         fun save(view: View) {
             viewModel.getStateSemenAddBankApi(
                 requireContext(), true,
@@ -279,8 +280,8 @@ class StateSemenBasicInformationFragment :
                     area_fodder_cultivation = mBinding?.etAreaForFodder?.text.toString(),
                     area_under_buildings = mBinding?.etAreaUnderBuild?.text.toString(),
                     district_code = districtId,
-                    phone_no = mBinding?.etPhone?.text.toString().toLong(),
-                    pin_code = mBinding?.etPincode?.text.toString().toInt(),
+                    phone_no = mBinding?.etPhone?.text?.toString()?.toLongOrNull(),
+                    pin_code = mBinding?.etPincode?.text?.toString()?.toIntOrNull(),
                     quality_status = mBinding?.etQuality?.text.toString(),
                     role_id = getPreferenceOfScheme(
                         requireContext(),
@@ -304,6 +305,7 @@ class StateSemenBasicInformationFragment :
                 )
             )
         }
+
         fun otherManpowerPositionDialog(view: View) {
             compositionOfGoverningNlmIaDialog(requireContext(), 1)
         }
@@ -319,8 +321,16 @@ class StateSemenBasicInformationFragment :
                 20,
                 "Districts",
                 currentPage,
-                getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
-                getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
+                getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
             )
         )
     }

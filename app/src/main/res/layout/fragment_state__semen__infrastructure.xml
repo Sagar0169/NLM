@@ -84,7 +84,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
-                    android:id="@+id/etUsername"
+                    android:id="@+id/etStorageCapacity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -145,12 +145,12 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etCoopOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
@@ -171,6 +171,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etCoopTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -196,6 +197,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etCoopThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -253,6 +255,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etNgoOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -279,6 +282,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etNgoTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -304,6 +308,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etNgoThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -361,6 +366,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etPrivateOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -387,6 +393,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etPrivateTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -412,6 +419,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etPrivateThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -469,6 +477,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etOtherStateOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -495,6 +504,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etOtherStateTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -520,6 +530,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
+                            android:id="@+id/etOtherStateThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
