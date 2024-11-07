@@ -1,6 +1,7 @@
 package com.nlm.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
@@ -25,7 +26,13 @@ class NlmIAProjectMonitoringCommitteeAdapter(
     override fun onBindViewHolder(holder: NlmIACompositionOFGoverning, position: Int) {
 
         val currentItem = programmeList[position]
-
+        if (viewEdit=="view")
+        {
+            holder.binding.nameOfOfficial.isEnabled=false
+            holder.binding.nameOfDesignation.isEnabled=false
+            holder.binding.nameOfOrganization.isEnabled=false
+            holder.binding.btnDelete.visibility= View.GONE
+        }
         holder.binding.nameOfOfficial.setText(currentItem.name_of_official)
         holder.binding.nameOfDesignation.setText(currentItem.designation)
         holder.binding.nameOfOrganization.setText(currentItem.organization)

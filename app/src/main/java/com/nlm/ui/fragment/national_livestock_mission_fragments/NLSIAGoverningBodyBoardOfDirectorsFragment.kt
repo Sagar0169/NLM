@@ -51,8 +51,19 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
-        if (viewEdit=="view"||viewEdit=="edit")
-        {ViewEditApi()}
+        if (viewEdit=="view")
+        {
+             mBinding?.tvAddMore1?.hideView()
+             mBinding?.tvAddMore2?.hideView()
+            ViewEditApi()
+
+        }
+        else   if (viewEdit=="edit")
+        {
+
+            ViewEditApi()
+
+        }
         nlmIACompositionOFGoverningAdapter()
         nlmIAProjectMonitoringCommitteeAdapter()
 

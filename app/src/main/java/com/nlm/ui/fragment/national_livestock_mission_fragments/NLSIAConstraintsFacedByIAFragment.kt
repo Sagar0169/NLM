@@ -15,6 +15,7 @@ import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.hideView
 import com.nlm.viewModel.ViewModel
 
 class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAConstraintsFacedByIABinding>(){
@@ -30,6 +31,20 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        if (viewEdit=="view")
+        {
+            mBinding?.etInfrastructural?.isEnabled=false
+            mBinding?.etOrganizational?.isEnabled=false
+            mBinding?.etFunds?.isEnabled=false
+            mBinding?.etAnyOther?.isEnabled=false
+            mBinding?.etAnyOfTheAsset?.isEnabled=false
+
+            ViewEditApi()
+        }
+        else if (viewEdit=="edit"){
+            ViewEditApi()
+
+        }
 
     }
 
@@ -56,9 +71,20 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
                         savedAsDraftClick?.onSaveAsDraft()
                     }else
                     {
-                        listener?.onNextButtonClick()
+                        if (viewEdit=="view"||viewEdit=="edit")
+                        {
+                            mBinding?.etInfrastructural?.setText(userResponseModel._result.infrastructural)
+                            mBinding?.etOrganizational?.setText(userResponseModel._result.organizational)
+                            mBinding?.etFunds?.setText(userResponseModel._result.funds)
+                            mBinding?.etAnyOther?.setText(userResponseModel._result.any_other)
+                            mBinding?.etAnyOfTheAsset?.setText(userResponseModel._result.any_assets_created)
+
+                        }
+                        else{
+
+                            listener?.onNextButtonClick()
                         showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                    }}
+                    }}}
             }
         }
     }
@@ -104,5 +130,17 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
         super.onDetach()
         listener = null
         savedAsDraftClick = null
+    }
+    private fun ViewEditApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                part = "part6",
+                id = itemId,
+                state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                is_deleted = 0,
+                is_type = viewEdit
+            )
+        )
     }
 }

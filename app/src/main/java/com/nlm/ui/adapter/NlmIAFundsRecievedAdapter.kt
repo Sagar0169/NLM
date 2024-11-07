@@ -17,7 +17,8 @@ import com.nlm.databinding.ItemQualityBuckBinding
 import com.nlm.model.ImplementingAgencyFundsReceived
 
 class NlmIAFundsRecievedAdapter(
-    private val programmeList: MutableList<ImplementingAgencyFundsReceived>
+    private val programmeList: MutableList<ImplementingAgencyFundsReceived>,
+    private val viewEdit: String?
     ) : RecyclerView.Adapter<NlmIAFundsRecievedAdapter.NlmIAFundsRecieved>() {
 
 
@@ -34,7 +35,17 @@ class NlmIAFundsRecievedAdapter(
     override fun onBindViewHolder(holder: NlmIAFundsRecieved, position: Int) {
 
         val currentItem = programmeList[position]
+        if (viewEdit=="view")
+        {
+            holder.binding.etYear.isEnabled=false
+            holder.binding.etFormDahd.isEnabled=false
+            holder.binding.etStateGovt.isEnabled=false
+            holder.binding.etAnyOther.isEnabled=false
+            holder.binding.etPhysicalProgress.isEnabled=false
 
+            holder.binding.btnDelete.visibility= View.GONE
+            holder.binding.tvSubmit.visibility= View.GONE
+        }
         holder.binding.etYear.setText(currentItem.year?.toString())
         holder.binding.etFormDahd.setText(currentItem.from_dahd?.toString())
         holder.binding.etStateGovt.setText(currentItem.state_govt?.toString())

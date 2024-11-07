@@ -58,6 +58,25 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
         mBinding?.clickAction = ClickActions()
         DocumentList = mutableListOf()
         viewModel.init()
+        if (viewEdit=="view")
+        {
+            mBinding?.etAssessmentOfGreen?.isEnabled=false
+            mBinding?.etAvailabilityOfGreen?.isEnabled=false
+            mBinding?.etAvailibilityOfDry?.isEnabled=false
+            mBinding?.AvailabilityOfConcentrate?.isEnabled=false
+            mBinding?.etAvailabilityCommon?.isEnabled=false
+            mBinding?.etEffortsOfState?.isEnabled=false
+            mBinding?.etNameOfAgency?.isEnabled=false
+            mBinding?.etQuantityOfFodder?.isEnabled=false
+            mBinding?.etDistributionChannel?.isEnabled=false
+            mBinding?.etNumberOfFodder?.isEnabled=false
+
+            ViewEditApi()
+        }
+        else if (viewEdit=="edit"){
+            ViewEditApi()
+
+        }
         AddDocumentAdapter=SupportingDocumentAdapterWithDialog(DocumentList)
         mBinding?.recyclerView1?.adapter = AddDocumentAdapter
         mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(requireContext())
@@ -86,8 +105,24 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                         savedAsDraftClick?.onSaveAsDraft()
                     }else
                     {
+                        if (viewEdit=="view"||viewEdit=="edit")
+                        {
+                            mBinding?.etAssessmentOfGreen?.setText(userResponseModel._result.assessments_of_green)
+                            mBinding?.etAvailabilityOfGreen?.setText(userResponseModel._result.availability_of_green_area)
+                            mBinding?.etAvailibilityOfDry?.setText(userResponseModel._result.availability_of_dry)
+                            mBinding?.AvailabilityOfConcentrate?.setText(userResponseModel._result.availability_of_concentrate)
+                            mBinding?.etAvailabilityCommon?.setText(userResponseModel._result.availability_of_common)
+                            mBinding?.etEffortsOfState?.setText(userResponseModel._result.efforts_of_state)
+                            mBinding?.etNameOfAgency?.setText(userResponseModel._result.name_of_the_agency)
+                            mBinding?.etQuantityOfFodder?.setText(userResponseModel._result.quantity_of_fodder)
+                            mBinding?.etDistributionChannel?.setText(userResponseModel._result.distribution_channel)
+                            mBinding?.etNumberOfFodder?.setText(userResponseModel._result.number_of_fodder)
+
+                        }
+                        else{
                         listener?.onNextButtonClick()
                         showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        }
                     }}
             }
         }
@@ -267,5 +302,17 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                     }
                 }
             }}
+    }
+    private fun ViewEditApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                part = "part7",
+                id = itemId,
+                state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                is_deleted = 0,
+                is_type = viewEdit
+            )
+        )
     }
 }

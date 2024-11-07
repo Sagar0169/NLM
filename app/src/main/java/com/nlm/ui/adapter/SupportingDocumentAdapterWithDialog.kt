@@ -18,7 +18,7 @@ import com.nlm.model.DocumentData
 import com.nlm.model.ImplementingAgencyDocument
 
 class SupportingDocumentAdapterWithDialog(
-    private val programmeList: MutableList<DocumentData>,
+    private val programmeList: MutableList<ImplementingAgencyDocument>,
 ) : RecyclerView.Adapter<SupportingDocumentAdapterWithDialog.SupportingDocument>() {
 
 
@@ -37,7 +37,7 @@ class SupportingDocumentAdapterWithDialog(
         val items=programmeList[position]
         // Handle visibility of add/delete buttons
         holder.binding.etDescription.text=items.description
-        holder.binding.etFile.text=items.name_doc
+        holder.binding.etFile.text=items.ia_document
         // Delete row
         holder.binding.btnDelete.setOnClickListener {
             if (position >= 0 && position < programmeList.size) {

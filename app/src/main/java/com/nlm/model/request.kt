@@ -298,7 +298,7 @@ data class StateSemenBankNLMRequest(
     val quality_status: String?=null,
     val role_id: Int?=null,
     val state_code: Int?=null,
-    val state_semen_bank_document: List<DocumentData>?=null,
+    val state_semen_bank_document: List<ImplementingAgencyDocument>?=null,
     val state_semen_bank_infrastructure: List<StateSemenInfraGoat>?=null,
     val state_semen_bank_other_manpower: List<StateSemenBankOtherManpower>?=null,
     val status: Int?=null,
@@ -325,7 +325,7 @@ data class StateSemenBankOtherManpower(
 )
 
 data class ImplementingAgencyFundsReceived(
-    val year: Int?,
+    val year: String?,
     val from_dahd: Int?,
     val state_govt: Int?,
     val any_other: Int?,
@@ -335,11 +335,11 @@ data class ImplementingAgencyFundsReceived(
 )
 
 data class ImplementingAgencyInvolvedDistrictWise(
-    val name_of_district: Int?,
+    val name_of_district: String?,
     val location_of_ai_centre: String?,
     val ai_performed: String?,
     val id: Int?,
-    val year: Int?,
+    val year: Any?,
     val implementing_agency_id: Int?,
 )
 

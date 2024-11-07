@@ -58,12 +58,24 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        if (viewEdit=="view")
+        {mBinding?.tvAddMore1?.hideView()
+            mBinding?.etNoOfAiTechnician?.isEnabled=false
+            mBinding?.etNumberOfAiTechnicianTrained?.isEnabled=false
+            mBinding?.etTotalNoOfParavetTrained?.isEnabled=false
+
+            ViewEditApi()
+        }
+        else if (viewEdit=="edit"){
+            ViewEditApi()
+
+        }
         NlmIADistrictWiseNoAdapterFun()
     }
    private fun NlmIADistrictWiseNoAdapterFun() {
        mBinding?.recyclerViewDistrictWiseOfAi?.layoutManager = LinearLayoutManager(requireContext())
        mNlmIADistrictWiseNoList = mutableListOf()
-       mNlmIADistrictWiseNoAdapter = NlmIADistrictWiseNoAdapter  (mNlmIADistrictWiseNoList)
+       mNlmIADistrictWiseNoAdapter = NlmIADistrictWiseNoAdapter  (mNlmIADistrictWiseNoList,viewEdit)
        mBinding?.recyclerViewDistrictWiseOfAi?.adapter = mNlmIADistrictWiseNoAdapter
    }
    override fun setVariables() {
@@ -82,9 +94,36 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                         savedAsDraftClick?.onSaveAsDraft()
                     }else
                     {
+                        if (viewEdit=="view"||viewEdit=="edit")
+                        {
+                            userResponseModel._result.no_of_al_technicians?.toString().let { it1 ->
+                                mBinding?.etNoOfAiTechnician?.setText(
+                                    it1
+                                )
+                            }
+                            userResponseModel._result.number_of_ai?.toString().let { it1 ->
+                                mBinding?.etNumberOfAiTechnicianTrained?.setText(
+                                    it1
+                                )
+                            }
+                            userResponseModel._result.total_paravet_trained?.toString().let { it1 ->
+                                mBinding?.etTotalNoOfParavetTrained?.setText(
+                                    it1
+                                )
+                            }
+
+                            mNlmIADistrictWiseNoList.clear()
+                            userResponseModel._result.implementing_agency_involved_district_wise?.let { it1 ->
+                                mNlmIADistrictWiseNoList.addAll(
+                                    it1
+                                )
+                                mNlmIADistrictWiseNoAdapter.notifyDataSetChanged()
+                            }
+                        }
+                        else{
                     listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                }}
+                }}}
             }
         }
     }
@@ -246,5 +285,17 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
         super.onDetach()
         listener = null
         savedAsDraftClick = null
+    }
+    private fun ViewEditApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                part = "part5",
+                id = itemId,
+                state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                is_deleted = 0,
+                is_type = viewEdit
+            )
+        )
     }
 }

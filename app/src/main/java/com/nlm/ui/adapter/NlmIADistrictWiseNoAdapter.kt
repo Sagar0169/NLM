@@ -24,6 +24,7 @@ import com.nlm.model.ImplementingAgencyInvolvedDistrictWise
 
 class NlmIADistrictWiseNoAdapter(
     private val programmeList: MutableList<ImplementingAgencyInvolvedDistrictWise>,
+    private val viewEdit: String?
 ) : RecyclerView.Adapter<NlmIADistrictWiseNoAdapter.NlmIADistrictWiseNo>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NlmIADistrictWiseNo {
@@ -38,6 +39,14 @@ class NlmIADistrictWiseNoAdapter(
     override fun onBindViewHolder(holder: NlmIADistrictWiseNo, position: Int) {
 
         val currentItem = programmeList[position]
+        if (viewEdit=="view")
+        {
+            holder.binding.etState.isEnabled=false
+            holder.binding.etLocationOfAi.isEnabled=false
+            holder.binding.etAiPerformed.isEnabled=false
+            holder.binding.btnDelete.visibility= View.GONE
+            holder.binding.tvSubmit.visibility= View.GONE
+        }
         holder.binding.etState.text=currentItem.name_of_district.toString()
         holder.binding.etLocationOfAi.setText(currentItem.location_of_ai_centre)
         holder.binding.etAiPerformed.setText(currentItem.ai_performed)
@@ -51,20 +60,6 @@ class NlmIADistrictWiseNoAdapter(
 
     override fun getItemCount(): Int = programmeList.size
     // Helper method to manage button visibility
-
-
-
-    private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
-        drawable?.mutate() // Mutate the drawable to avoid affecting other instances
-
-        val rotateDrawable = RotateDrawable()
-        rotateDrawable.drawable = drawable
-        rotateDrawable.fromDegrees = 0f
-        rotateDrawable.toDegrees = angle
-        rotateDrawable.level = 10000 // Needed to apply the rotation
-
-        return rotateDrawable
-    }
     inner class NlmIADistrictWiseNo(val binding: ItemDistrictWiseNoNlsiaBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

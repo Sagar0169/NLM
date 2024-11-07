@@ -46,6 +46,23 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        if (viewEdit=="view")
+        {mBinding?.tvAddMore?.hideView()
+            mBinding?.etFrequencyOfMonitoring1?.isEnabled=false
+            mBinding?.etFrequencyOfMonitoring2?.isEnabled=false
+            mBinding?.etReportingMechanismToStateGovt1?.isEnabled=false
+            mBinding?.etReportingMechanismToStateGovt2?.isEnabled=false
+            mBinding?.etRegularity1?.isEnabled=false
+            mBinding?.etRegularity2?.isEnabled=false
+            mBinding?.etSubmission1?.isEnabled=false
+            mBinding?.etSubmission2?.isEnabled=false
+            mBinding?.etStudiesConducted?.isEnabled=false
+            ViewEditApi()
+        }
+        else if (viewEdit=="edit"){
+            ViewEditApi()
+
+        }
         nlmIAFundsRecievedAdapter()
     }
 
@@ -60,13 +77,37 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
                 else{
+
                     if (savedAsDraft)
                     {
                         savedAsDraftClick?.onSaveAsDraft()
                     }else
+
                     {
+                        if (viewEdit=="view"||viewEdit=="edit")
+                        {
+                            mBinding?.etFrequencyOfMonitoring1?.setText(userResponseModel._result.frequency_of_monitoring_1)
+                            mBinding?.etFrequencyOfMonitoring2?.setText(userResponseModel._result.frequency_of_monitoring_2)
+                            mBinding?.etReportingMechanismToStateGovt1?.setText(userResponseModel._result.reporting_mechanism_1)
+                            mBinding?.etReportingMechanismToStateGovt2?.setText(userResponseModel._result.reporting_mechanism_2)
+                            mBinding?.etRegularity1?.setText(userResponseModel._result.regularity_1)
+                            mBinding?.etRegularity2?.setText(userResponseModel._result.regularity_2)
+                            mBinding?.etSubmission1?.setText(userResponseModel._result.submission_of_quarterly_1)
+                            mBinding?.etSubmission2?.setText(userResponseModel._result.submission_of_quarterly_2)
+                            mBinding?.etStudiesConducted?.setText(userResponseModel._result.studies_surveys_conducted)
+                            nlmIAFundsRecievedList.clear()
+                            userResponseModel._result.implementing_agency_funds_received?.let { it1 ->
+                                nlmIAFundsRecievedList.addAll(
+                                    it1
+                                )
+                                nlmIAFundsRecievedAdapter?.notifyDataSetChanged()
+                            }
+                        }
+                        else{
+
+
                     listener?.onNextButtonClick()
-                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)}
                 }}
             }
         }
@@ -183,7 +224,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
     private fun nlmIAFundsRecievedAdapter() {
         nlmIAFundsRecievedList = mutableListOf()
         nlmIAFundsRecievedAdapter =
-            NlmIAFundsRecievedAdapter(nlmIAFundsRecievedList)
+            NlmIAFundsRecievedAdapter(nlmIAFundsRecievedList,viewEdit)
         mBinding?.rvFundRecieved?.adapter = nlmIAFundsRecievedAdapter
         mBinding?.rvFundRecieved?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -218,7 +259,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
             ) {
                 nlmIAFundsRecievedList.add(
                     ImplementingAgencyFundsReceived(
-                        bindingDialog.etYear.text.toString().toIntOrNull(),
+                        bindingDialog.etYear.text.toString(),
                         bindingDialog.etFormDahd.text.toString().toIntOrNull(),
                         bindingDialog.etStateGovt.text.toString().toIntOrNull(),
                         bindingDialog.etAnyOther.text.toString().toIntOrNull(),
@@ -252,4 +293,17 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
         listener = null
         savedAsDraftClick = null
     }
+    private fun ViewEditApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                part = "part4",
+                id = itemId,
+                state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                is_deleted = 0,
+                is_type = viewEdit
+            )
+        )
+    }
+
 }
