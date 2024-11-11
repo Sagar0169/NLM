@@ -258,6 +258,13 @@ data class ImplementingAgencyAdvisoryCommittee(
     val implementing_agency_id: Int?,
     val id: Int?,
 )
+data class IdAndDetails(
+    val name_of_the_official: String?,
+    val designation: String?,
+    val organization: String?,
+    val implementing_agency_id: Int?,
+    val id: Int?,
+)
 
 data class StateSemenManPower(
     val designation: String?,

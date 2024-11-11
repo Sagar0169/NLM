@@ -1,6 +1,7 @@
 package com.nlm.callBack
 
 import androidx.fragment.app.Fragment
+import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyFundsReceived
 import com.nlm.model.ImplementingAgencyProjectMonitoring
@@ -8,9 +9,9 @@ import com.nlm.model.ImplementingAgencyProjectMonitoring
 //interface SingleCallBackItem {
 //    fun onClickItem(selectedItem: IdAndName)
 //}
-//interface CallBackItemType {
-//    fun onClickItem(selectedItem: IdAndName)
-//}
+interface CallBackItemTypeIACompositionListEdit {
+    fun onClickItem(selectedItem: IdAndDetails)
+}
 //interface CallBackIdType {
 //    fun onClickItem(ID: Int?,position:Int)
 //}
