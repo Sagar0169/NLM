@@ -10,10 +10,12 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.CallBackItemTypeIACompositionListEdit
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAGoverningBodyBoardOfDirectorsBinding
 import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
+import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyProjectMonitoring
@@ -32,7 +34,8 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
 
-class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAGoverningBodyBoardOfDirectorsBinding>(){
+class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAGoverningBodyBoardOfDirectorsBinding>(),
+    CallBackItemTypeIACompositionListEdit {
     val viewModel = ViewModel()
     private var mBinding: FragmentNLSIAGoverningBodyBoardOfDirectorsBinding?=null
     private var nlmIACompositionOFGoverningAdapter: NlmIACompositionOFGoverningAdapter ?= null
@@ -120,7 +123,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
     private fun nlmIACompositionOFGoverningAdapter() {
         nlmIACompositionOFGoverningList = mutableListOf()
         nlmIACompositionOFGoverningAdapter =
-            NlmIACompositionOFGoverningAdapter(nlmIACompositionOFGoverningList,viewEdit)
+            NlmIACompositionOFGoverningAdapter(nlmIACompositionOFGoverningList,viewEdit,this)
         mBinding?.rvNlmIACompositionOFGoverning?.adapter = nlmIACompositionOFGoverningAdapter
         mBinding?.rvNlmIACompositionOFGoverning?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -160,14 +163,14 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
         }
 
         fun compositionOfGoverningNlmIaDialog(view: View) {
-            compositionOfGoverningNlmIaDialog(requireContext(),1)
+            compositionOfGoverningNlmIaDialog(requireContext(),1,null)
         }
         fun nlmIAProjectMonitoringCommitteeDialog(view: View) {
-            compositionOfGoverningNlmIaDialog(requireContext(),2)
+            compositionOfGoverningNlmIaDialog(requireContext(),2, null)
         }
     }
 
-    private fun compositionOfGoverningNlmIaDialog(context: Context,isFrom:Int) {
+    private fun compositionOfGoverningNlmIaDialog(context: Context,isFrom:Int,selectedItem: IdAndDetails?) {
         val bindingDialog: ItemCompositionOfGoverningNlmIaBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_composition_of_governing_nlm_ia,
@@ -186,7 +189,13 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
         dialog.window!!.setGravity(Gravity.CENTER)
         bindingDialog.btnDelete.hideView()
         bindingDialog.tvSubmit.showView()
+        if(selectedItem!=null && isFrom == 1)
+        {
+            bindingDialog.nameOfOfficial.setText(selectedItem.name_of_the_official)
+            bindingDialog.nameOfDesignation.setText(selectedItem.designation)
+            bindingDialog.nameOfOrganization.setText(selectedItem.organization)
 
+        }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.nameOfOfficial.text.toString().isNotEmpty()||bindingDialog.nameOfDesignation.text.toString().isNotEmpty()||bindingDialog.nameOfOrganization.text.toString().isNotEmpty())
             {
@@ -206,6 +215,18 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                     dialog.dismiss()
                 }
                 else if(isFrom == 1){
+                    if(selectedItem!=null)
+                    {
+                        nlmIACompositionOFGoverningList.add(
+                            ImplementingAgencyAdvisoryCommittee(
+                                bindingDialog.nameOfOfficial.text.toString(),
+                                bindingDialog.nameOfDesignation.text.toString(),
+                                bindingDialog.nameOfOrganization.text.toString(),
+                                selectedItem.implementing_agency_id,
+                                selectedItem.id
+                            )
+                        )
+                    }
                     nlmIACompositionOFGoverningList.add(
                         ImplementingAgencyAdvisoryCommittee(
                             bindingDialog.nameOfOfficial.text.toString(),
@@ -221,6 +242,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                     dialog.dismiss()
                 }
             }
+
             else {
                 showSnackbar(mBinding!!.clParent, getString(R.string.please_enter_atleast_one_field))
             }
@@ -250,5 +272,9 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                 is_type = viewEdit
             )
         )
+    }
+
+    override fun onClickItem(selectedItem: IdAndDetails) {
+        compositionOfGoverningNlmIaDialog(requireContext(),1,selectedItem)
     }
 }
