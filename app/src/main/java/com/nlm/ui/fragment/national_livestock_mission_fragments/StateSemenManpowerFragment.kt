@@ -21,6 +21,7 @@ import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.Result
 import com.nlm.model.StateSemenBankNLMRequest
+import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.model.StateSemenBankOtherManpower
 import com.nlm.model.StateSemenManPower
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
@@ -44,7 +45,7 @@ class StateSemenManpowerFragment : BaseFragment<FragmentStateSemenManpowerBindin
     private var mBinding: FragmentStateSemenManpowerBinding? = null
     private var viewModel = ViewModel()
 
-    private lateinit var stateSemenManPowerList: MutableList<StateSemenBankOtherManpower>
+    private lateinit var stateSemenManPowerList: MutableList<StateSemenBankOtherAddManpower>
     private var stateSemenManPowerAdapter: RspManPowerAdapter? = null
     private lateinit var nlmIAProjectMonitoringCommitteeList: MutableList<ImplementingAgencyProjectMonitoring>
 
@@ -61,7 +62,7 @@ class StateSemenManpowerFragment : BaseFragment<FragmentStateSemenManpowerBindin
     private fun stateSemenManPowerAdapter() {
         stateSemenManPowerList = mutableListOf()
         stateSemenManPowerAdapter =
-            RspManPowerAdapter(stateSemenManPowerList)
+            RspManPowerAdapter(stateSemenManPowerList,"view")
         mBinding?.recyclerView1?.adapter = stateSemenManPowerAdapter
         mBinding?.recyclerView1?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -138,7 +139,7 @@ class StateSemenManpowerFragment : BaseFragment<FragmentStateSemenManpowerBindin
                     .isNotEmpty() || bindingDialog.etTrainingStatus.text.toString().isNotEmpty()
             ) {
                 stateSemenManPowerList.add(
-                    StateSemenBankOtherManpower(
+                    StateSemenBankOtherAddManpower(
                         bindingDialog.etDesignation.text.toString(),
                         bindingDialog.etQualification.text.toString(),
                         bindingDialog.etExperience.text.toString(),

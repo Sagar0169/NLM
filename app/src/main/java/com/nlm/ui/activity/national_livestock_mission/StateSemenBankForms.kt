@@ -20,12 +20,17 @@ class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>(),
         get() = R.layout.activity_state_semen_bank
     private var mBinding: ActivityStateSemenBankBinding? = null
     private var mDoubleBackToExitPressedOnce = false
-
+    private var viewEdit: String? = null
+    private var itemId: Int? = null
+    private var dId: Int? = null
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         setupTabLayout()
-        loadFragment(StateSemenBasicInformationFragment())
+        viewEdit = intent.getStringExtra("View/Edit")
+        itemId = intent.getIntExtra("itemId", 0)
+        dId = intent.getIntExtra("dId", 0)
+        loadFragment(StateSemenBasicInformationFragment(viewEdit, itemId,dId))
     }
 
     override fun setVariables() {
@@ -56,10 +61,11 @@ class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>(),
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
                         0 -> {
-                            loadFragment(StateSemenBasicInformationFragment())
+                            loadFragment(StateSemenBasicInformationFragment(viewEdit, itemId,dId))
                         }
+
                         1 -> {
-                            loadFragment(StateSemenInfrastructureFragment())
+                            loadFragment(StateSemenInfrastructureFragment(viewEdit, itemId,dId))
                         }
                     }
                 }
@@ -89,8 +95,7 @@ class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>(),
 
     override fun onNavigateToFirstFragment() {
         // Load the first fragment (Implementing Agency)
-        loadFragment(StateSemenBasicInformationFragment())
-
+        loadFragment(StateSemenBasicInformationFragment(viewEdit, itemId,dId))
         // Select the first tab
         mBinding?.tabLayout?.getTabAt(0)?.select()
     }

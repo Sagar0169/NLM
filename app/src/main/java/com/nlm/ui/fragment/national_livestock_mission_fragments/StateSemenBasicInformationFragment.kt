@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +30,7 @@ import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.StateSemenBankNLMRequest
+import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.model.StateSemenBankOtherManpower
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
@@ -47,7 +49,11 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
 
-class StateSemenBasicInformationFragment :
+class StateSemenBasicInformationFragment(
+    private val viewEdit: String?,
+    private val itemId: Int?,
+    private val dId: Int?
+) :
     BaseFragment<FragmentStateSemenBasicInformationBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_state_semen__basic_information
@@ -62,17 +68,19 @@ class StateSemenBasicInformationFragment :
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private lateinit var stateAdapter: BottomSheetAdapter
     private var districtId: Int? = null // Store selected state
+    private var typeOfSemen: String? = null // Store selected state
     private var currentPage = 1
     private var totalPage = 1
     private var districtList = ArrayList<ResultGetDropDown>()
     private var loading = true
     private var layoutManager: LinearLayoutManager? = null
-    private lateinit var stateSemenManPowerList: MutableList<StateSemenBankOtherManpower>
+    private lateinit var stateSemenManPowerList: MutableList<StateSemenBankOtherAddManpower>
     private var stateSemenManPowerAdapter: RspManPowerAdapter? = null
 
 
-    private val state = listOf(
-        "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
+    private val typeSemen = listOf(
+        ResultGetDropDown(id = 1, name = "Individual"),
+        ResultGetDropDown(id = 2, name = "Integrated")
     )
 
     private val district = listOf(
@@ -91,6 +99,32 @@ class StateSemenBasicInformationFragment :
         )?.state_name
         mBinding?.etState?.isEnabled = false
         mActivityMain = activity as StateSemenBankForms
+        if (viewEdit == "view") {
+            showToast(dId.toString())
+            mBinding?.etState?.isEnabled = false
+            mBinding?.tvDistrict?.isEnabled = false
+            mBinding?.etLocation?.isEnabled = false
+            mBinding?.etPincode?.isEnabled = false
+            mBinding?.etPhone?.isEnabled = false
+            mBinding?.etyear?.isEnabled = false
+            mBinding?.etQuality?.isEnabled = false
+            mBinding?.tvSemenStation?.isEnabled = false
+            mBinding?.etAddress?.isEnabled = false
+            mBinding?.etAreaUnderBuild?.isEnabled = false
+            mBinding?.etAreaForFodder?.isEnabled = false
+            mBinding?.etManPower?.isEnabled = false
+            mBinding?.etOfficerInCharge?.isEnabled = false
+            mBinding?.tvAddMore1?.isEnabled = false
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
+            viewEditApi()
+        }
+        if (viewEdit == "edit") {
+            viewEditApi()
+        }
+        mBinding?.tvSemenStation?.setOnClickListener {
+            showBottomSheetDialog("typeSemen")
+        }
         stateSemenManPowerAdapter()
 
     }
@@ -98,7 +132,7 @@ class StateSemenBasicInformationFragment :
     private fun stateSemenManPowerAdapter() {
         stateSemenManPowerList = mutableListOf()
         stateSemenManPowerAdapter =
-            RspManPowerAdapter(stateSemenManPowerList)
+            RspManPowerAdapter(stateSemenManPowerList, viewEdit)
         mBinding?.recyclerView1?.adapter = stateSemenManPowerAdapter
         mBinding?.recyclerView1?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -164,14 +198,36 @@ class StateSemenBasicInformationFragment :
                     if (savedAsDraft) {
                         savedAsDraftClick?.onSaveAsDraft()
                     } else {
-                        Preferences.setPreference_int(
-                            requireContext(),
-                            AppConstants.FORM_FILLED_ID,
-                            userResponseModel._result.id
-                        )
-                        listener?.onNextButtonClick()
-                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        if (viewEdit == "view" || viewEdit == "edit") {
+                            mBinding?.etLocation?.setText(userResponseModel._result.location)
+                            mBinding?.tvDistrict?.text = userResponseModel._result.district_name
+                            mBinding?.tvSemenStation?.text =
+                                userResponseModel._result.type_of_semen_station
+                            mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
+                            mBinding?.etPhone?.setText(userResponseModel._result.phone_no.toString())
+                            mBinding?.etyear?.setText(userResponseModel._result.year_of_establishment)
+                            mBinding?.etQuality?.setText(userResponseModel._result.quality_status)
+                            mBinding?.etAddress?.setText(userResponseModel._result.address)
+                            mBinding?.etAreaForFodder?.setText(userResponseModel._result.area_fodder_cultivation)
+                            mBinding?.etAreaUnderBuild?.setText(userResponseModel._result.area_under_buildings)
+                            mBinding?.etManPower?.setText(userResponseModel._result.manpower_no_of_people.toString())
+                            mBinding?.etOfficerInCharge?.setText(userResponseModel._result.officer_in_charge_name)
+                            stateSemenManPowerList.clear()
+                            stateSemenManPowerList.addAll(userResponseModel._result.state_semen_bank_other_manpower)
+                            stateSemenManPowerAdapter?.notifyDataSetChanged()
+
+                        } else {
+
+                            Preferences.setPreference_int(
+                                requireContext(),
+                                AppConstants.FORM_FILLED_ID,
+                                userResponseModel._result.id
+                            )
+                            listener?.onNextButtonClick()
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        }
                     }
+
 
                 }
             }
@@ -206,7 +262,7 @@ class StateSemenBasicInformationFragment :
                     .isNotEmpty() || bindingDialog.etTrainingStatus.text.toString().isNotEmpty()
             ) {
                 stateSemenManPowerList.add(
-                    StateSemenBankOtherManpower(
+                    StateSemenBankOtherAddManpower(
                         bindingDialog.etDesignation.text.toString(),
                         bindingDialog.etQualification.text.toString(),
                         bindingDialog.etExperience.text.toString(),
@@ -242,11 +298,13 @@ class StateSemenBasicInformationFragment :
                 StateSemenBankNLMRequest(
                     Address = mBinding?.etAddress?.text.toString(),
                     area_fodder_cultivation = mBinding?.etAreaForFodder?.text.toString(),
+                    location = mBinding?.etLocation?.text.toString(),
                     area_under_buildings = mBinding?.etAreaUnderBuild?.text.toString(),
                     district_code = districtId,
-                    phone_no = mBinding?.etPhone?.text.toString().toLong(),
-                    pin_code = mBinding?.etPincode?.text.toString().toInt(),
+                    phone_no = mBinding?.etPhone?.text.toString().toLongOrNull(),
+                    pin_code = mBinding?.etPincode?.text.toString().toIntOrNull(),
                     quality_status = mBinding?.etQuality?.text.toString(),
+                    type_of_semen_station = typeOfSemen,
                     role_id = getPreferenceOfScheme(
                         requireContext(),
                         AppConstants.SCHEME,
@@ -273,16 +331,62 @@ class StateSemenBasicInformationFragment :
         }
 
         fun save(view: View) {
+            // Get the text from the input fields
+            val address = mBinding?.etAddress?.text.toString()
+            val areaForFodder = mBinding?.etAreaForFodder?.text.toString()
+            val location = mBinding?.etLocation?.text.toString()
+            val areaUnderBuilding = mBinding?.etAreaUnderBuild?.text.toString()
+            val phoneNumber = mBinding?.etPhone?.text.toString()
+            val pincode = mBinding?.etPincode?.text.toString()
+            val qualityStatus = mBinding?.etQuality?.text.toString()
+            val yearOfEstablishment = mBinding?.etyear?.text.toString()
+            val manpower = mBinding!!.etManPower.text.toString()
+            val officerInCharge = mBinding!!.etOfficerInCharge.text.toString()
+
+            // Validation checks
+            if (address.isEmpty()) {
+                showError("Address is required")
+                return
+            }
+
+            if (location.isEmpty()) {
+                showError("Location is required")
+                return
+            }
+
+            if (districtId== null) {
+                showError("District is required")
+                return
+            }
+
+            if (pincode.isEmpty()) {
+                showError("Pincode is required")
+                return
+            }
+
+            if (phoneNumber.isEmpty() || phoneNumber.length < 10) {
+                showError("Valid phone number is required")
+                return
+            }
+
+            if (yearOfEstablishment.isEmpty()) {
+                showError("Year of establishment is required")
+                return
+            }
+
+            // If all required fields are filled, proceed with the API call
             viewModel.getStateSemenAddBankApi(
                 requireContext(), true,
                 StateSemenBankNLMRequest(
-                    Address = mBinding?.etAddress?.text.toString(),
-                    area_fodder_cultivation = mBinding?.etAreaForFodder?.text.toString(),
-                    area_under_buildings = mBinding?.etAreaUnderBuild?.text.toString(),
+                    Address = address,
+                    area_fodder_cultivation = areaForFodder,
+                    location = location,
+                    area_under_buildings = areaUnderBuilding,
                     district_code = districtId,
-                    phone_no = mBinding?.etPhone?.text?.toString()?.toLongOrNull(),
-                    pin_code = mBinding?.etPincode?.text?.toString()?.toIntOrNull(),
-                    quality_status = mBinding?.etQuality?.text.toString(),
+                    phone_no = phoneNumber.toLongOrNull(),
+                    pin_code = pincode.toIntOrNull(),
+                    quality_status = qualityStatus,
+                    type_of_semen_station = typeOfSemen,
                     role_id = getPreferenceOfScheme(
                         requireContext(),
                         AppConstants.SCHEME,
@@ -298,18 +402,51 @@ class StateSemenBasicInformationFragment :
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.user_id.toString(),
-                    year_of_establishment = mBinding?.etyear?.text.toString(),
-                    manpower_no_of_people = mBinding!!.etManPower.text.toString().toIntOrNull(),
-                    officer_in_charge_name = mBinding!!.etOfficerInCharge.text.toString(),
+                    year_of_establishment = yearOfEstablishment,
+                    manpower_no_of_people = manpower.toIntOrNull(),
+                    officer_in_charge_name = officerInCharge,
                     state_semen_bank_other_manpower = stateSemenManPowerList,
                 )
             )
         }
 
+        // Utility function to show error messages
+        private fun showError(message: String) {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+
+
         fun otherManpowerPositionDialog(view: View) {
             compositionOfGoverningNlmIaDialog(requireContext(), 1)
         }
 
+    }
+
+    private fun viewEditApi() {
+
+        viewModel.getStateSemenAddBankApi(
+            requireContext(), true,
+            StateSemenBankNLMRequest(
+                id = itemId,
+                state_code = getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                district_code = dId,
+                role_id = getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                is_type = viewEdit
+            )
+        )
     }
 
     private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
@@ -357,11 +494,10 @@ class StateSemenBasicInformationFragment :
 
         // Initialize based on type
         when (type) {
-//            "State" -> {
-//                dropDownApiCall(paginate = false, loader = true)
-//                selectedList = stateList
-//                selectedTextView = binding!!.tvState
-//            }
+            "typeSemen" -> {
+                selectedList = typeSemen
+                selectedTextView = mBinding!!.tvSemenStation
+            }
 //
 //            "StateNDD" -> {
 //                selectedList = stateList
@@ -391,10 +527,13 @@ class StateSemenBasicInformationFragment :
         stateAdapter = BottomSheetAdapter(requireContext(), selectedList) { selectedItem, id ->
             // Handle state item click
             selectedTextView.text = selectedItem
+            typeOfSemen = selectedItem
             districtId = id
             selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             bottomSheetDialog.dismiss()
         }
+
+
 
         layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

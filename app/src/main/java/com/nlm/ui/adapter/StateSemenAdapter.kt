@@ -12,8 +12,10 @@ import com.nlm.databinding.ItemStateSemenBinding
 import com.nlm.model.DataSemen
 import com.nlm.model.NLMIA_data
 import com.nlm.model.State_Semen_Bank
+import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 
 import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
+import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
 
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -83,32 +85,21 @@ class StateSemenAdapter(private val implementingAgencyList: ArrayList<DataSemen>
             holder.mBinding.ivEdit.hideView()
         }
 
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, StateSemenBankForms::class.java)
+            intent.putExtra("View/Edit", "view")
+            intent.putExtra("itemId", item.id)
+            intent.putExtra("dId", item.district_code)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
+            val intent = Intent(holder.itemView.context, StateSemenBankForms::class.java)
+            intent.putExtra("View/Edit", "edit")
+            intent.putExtra("itemId", item.id)
+            intent.putExtra("dId", item.district_code)
+            holder.itemView.context.startActivity(intent)
+        }
 
-
-
-
-
-//    holder.mBinding.ivView.setOnClickListener {
-//        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-////        intent.putExtra("nodalOfficer", item)
-////        intent.putExtra("isFrom", 2)
-//        holder.itemView.context.startActivity(intent)
-//    }
-//    holder.mBinding.ivEdit.setOnClickListener {
-//        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-////        intent.putExtra("nodalOfficer", item)
-////        intent.putExtra("isFrom", 3)
-//        holder.itemView.context.startActivity(intent)
-//    }
-
-
-
-
-
-//
-//        holder.tvStateName.setOnClickListener {
-//            callBackItemDistrict.onClickItemDistrict(stateName)
-//        }
     }
 
     // Return the total number of items

@@ -4,14 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 import com.nlm.databinding.ItemStateSemenInfrastructureBinding
 import com.nlm.model.StateSemenInfraGoat
 import com.nlm.ui.adapter.RspManPowerAdapter.RspManPowerViewHolder
+import com.nlm.utilities.hideView
 
 class StateSemenInfrastructureAdapter(
     private val programmeList: MutableList<StateSemenInfraGoat>,
+    private val viewEdit: String?,
 ) : RecyclerView.Adapter<StateSemenInfrastructureAdapter.StateSemenInfrastructureViewHolder>() {
 
 
@@ -27,8 +30,13 @@ class StateSemenInfrastructureAdapter(
 
     override fun onBindViewHolder(holder: StateSemenInfrastructureViewHolder, position: Int) {
         val currentItem = programmeList[position]
-        holder.binding.etListOfEquipment.setText(currentItem.listOfEquipment)
-        holder.binding.etYearOfProcurement.setText(currentItem.yearOfProcurement)
+        if (viewEdit == "view") {
+            holder.binding.etListOfEquipment.isEnabled = false
+            holder.binding.etYearOfProcurement.isEnabled = false
+            holder.binding.btnDelete.hideView()
+        }
+        holder.binding.etListOfEquipment.setText(currentItem.infrastructure_list_of_equipment)
+        holder.binding.etYearOfProcurement.setText(currentItem.infrastructure_year_of_procurement)
         // Delete row
         holder.binding.btnDelete.setOnClickListener {
             programmeList.removeAt(position)
