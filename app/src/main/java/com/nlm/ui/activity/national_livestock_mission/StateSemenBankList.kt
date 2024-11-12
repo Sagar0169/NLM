@@ -1,28 +1,35 @@
 package com.nlm.ui.activity.national_livestock_mission
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityStateSemenBankListBinding
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.DataSemen
+import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
+import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.State_Semen_Bank
 
 import com.nlm.ui.activity.FilterStateActivity
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion.FILTER_REQUEST_CODE
 import com.nlm.ui.adapter.StateSemenAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
-class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
+class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), CallBackDeleteAtId {
     private var mBinding: ActivityStateSemenBankListBinding? = null
 
     override val layoutId: Int
@@ -31,9 +38,15 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
     private var currentPage = 1
     private var totalPage = 1
     private var loading = true
+    private var itemPosition : Int ?= null
     private var viewModel = ViewModel()
     private lateinit var nodalOfficerList: ArrayList<DataSemen>
     private var layoutManager: LinearLayoutManager? = null
+    var stateId: Int = 0
+    var districtId: Int = 0
+    var nameOfLocation: String = ""
+    var districtName: String = ""
+    var phoneNo: String = ""
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction=ClickActions()
@@ -44,7 +57,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
 //        }
         nodalOfficerList = arrayListOf()
         implementingAgency()
-        stateSemenBankAPICall(paginate = false, loader = true)
+        stateSemenBankAPICall(paginate = false, loader = true,nameOfLocation,districtId,phoneNo)
         swipeForRefreshImplementingAgency()
         mBinding!!.fabAddAgency.setOnClickListener{
             val intent = Intent(this@StateSemenBankList, StateSemenBankForms::class.java).putExtra("isFrom",1)
@@ -90,10 +103,30 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
                 }
             }
         }
+
+        viewModel.stateSemenBankAddResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel!=null)
+            {
+                if(userResponseModel._resultflag==0){
+
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+
+                }
+                else{
+
+                    itemPosition?.let { it1 -> implementingAdapter.onDeleteButtonClick(it1) }
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                }
+            }
+        }
     }
     private fun swipeForRefreshImplementingAgency() {
         mBinding?.srlImplementingAgency?.setOnRefreshListener {
-            stateSemenBankAPICall(paginate = false, loader = true)
+            stateSemenBankAPICall(paginate = false, loader = true,nameOfLocation,districtId,phoneNo)
             mBinding?.srlImplementingAgency?.isRefreshing = false
         }
     }
@@ -102,15 +135,38 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
             onBackPressed()
         }
         fun filter(view: View) {
-            val intent = Intent(
-                this@StateSemenBankList,
-                FilterStateActivity::class.java
-            ).putExtra("isFrom", 34)
-            startActivity(intent)
+            val intent =
+                Intent(this@StateSemenBankList, FilterStateActivity::class.java)
+            intent.putExtra("isFrom", 34)
+            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("districtId", districtId) // previously selected state ID
+            intent.putExtra("selectedLocation", nameOfLocation)
+            intent.putExtra("phoneNo", phoneNo)
+            intent.putExtra("districtName", districtName)
+            startActivityForResult(intent, FILTER_REQUEST_CODE)
         }
 
     }
-    private fun stateSemenBankAPICall(paginate: Boolean, loader: Boolean) {
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == FILTER_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Retrieve the data passed from FilterStateActivity
+            districtId = data?.getIntExtra("districtId", 0)!!
+            stateId = data.getIntExtra("stateId", 0)
+            nameOfLocation = data.getStringExtra("nameLocation").toString()
+            phoneNo = data.getStringExtra("etPhoneno").toString()
+            districtName = data.getStringExtra("districtName").toString()
+            //Need to add year also
+            // Log the data
+            stateSemenBankAPICall(paginate = false, loader = true, nameOfLocation,districtId,phoneNo)
+            Log.d("FilterResult", "Received data from FilterStateActivity: $nameOfLocation")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $stateId")
+        }
+    }
+    private fun stateSemenBankAPICall(paginate: Boolean, loader: Boolean,location:String,district:Int,phone:String) {
         if (paginate) {
             currentPage++
         }
@@ -119,13 +175,16 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
                 getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
                 getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
                 getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                location,
+                phone,
+                district,
                 10,
                 currentPage
             )
         )
     }
     private fun implementingAgency() {
-        implementingAdapter = StateSemenAdapter(nodalOfficerList,2,Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
+        implementingAdapter = StateSemenAdapter(this,nodalOfficerList,2,Utility.getPreferenceString(this, AppConstants.ROLE_NAME),this)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvStateSemenLabView.layoutManager = layoutManager
         mBinding!!.rvStateSemenLabView.adapter = implementingAdapter
@@ -144,11 +203,37 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>() {
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                stateSemenBankAPICall(paginate = true, loader = true)
+                                stateSemenBankAPICall(paginate = true, loader = true,nameOfLocation,districtId,phoneNo)
                             }
                         }
                     }
                 }
             }
         }
+
+    override fun onClickItem(ID: Int?, position: Int) {
+        viewModel.getStateSemenAddBankApi(
+            this, true,
+            StateSemenBankNLMRequest(
+                id= ID,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                   this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                is_deleted = 1
+            )
+        )
+        itemPosition = position
+    }
 }

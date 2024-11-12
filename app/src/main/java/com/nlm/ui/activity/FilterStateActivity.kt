@@ -40,6 +40,8 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
     private var stateList = ArrayList<ResultGetDropDown>()
     private var layoutManager: LinearLayoutManager? = null
     private var stateId: Int? = null // Store selected state
+    private var districtId: Int? = null // Store selected state
+    private var districtName: String? = null // Store selected state
 
 
     //    private val stateList = listOf(
@@ -67,7 +69,10 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         viewModel.init()
         val isFrom = intent?.getIntExtra("isFrom", 0)
         val selectedStateId = intent.getIntExtra("selectedStateId", 0)
+        val selectedDistrictId = intent.getIntExtra("districtId", 0)
         val selectedLocation = intent.getStringExtra("selectedLocation")
+        val phoneNo = intent.getStringExtra("phoneNo")
+        districtName = intent.getStringExtra("districtName")
 
         when (isFrom) {
 
@@ -334,8 +339,48 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             34 -> {
                 binding!!.tvState.showView()
                 binding!!.tvTitleState.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvPhoneNo.showView()
+                binding!!.etPhoneno.showView()
                 binding!!.tvTitleLoc.showView()
                 binding!!.etLoc.showView()
+                binding!!.tvYear.showView()
+                binding!!.tvTitleYear.showView()
+
+                if (selectedLocation != null) {
+                    binding?.etLoc?.setText(selectedLocation)
+                }
+                if (phoneNo != null) {
+                    binding?.etPhoneno?.setText(phoneNo)
+                }
+                if (districtName != null) {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
+
+
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+
 
             }
 
@@ -366,6 +411,29 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         binding!!.tvStatus.setOnClickListener { showBottomSheetDialog("Status") }
         binding!!.tvReadingMaterial.setOnClickListener { showBottomSheetDialog("Reading") }
 
+    }
+
+    private fun dropDownApiCallDistrict(paginate: Boolean, loader: Boolean) {
+        if (paginate) {
+            currentPage++
+        }
+        viewModel.getDropDownApi(
+            this, loader, GetDropDownRequest(
+                20,
+                "Districts",
+                currentPage,
+                getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+            )
+        )
     }
 
     private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
@@ -417,39 +485,36 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             }
 
             "District" -> {
-                selectedList = stateList
+                dropDownApiCallDistrict(paginate = false, loader = true)
+                selectedList = stateList // Update the list to districtList for District
                 selectedTextView = binding!!.tvDistrict
             }
-
-//            "Status" -> {
-//                selectedList = status
-//                selectedTextView = binding!!.tvStatus
-//            }
-//
-//            "Reading" -> {
-//                selectedList = reading
-//                selectedTextView = binding!!.tvReadingMaterial
-//            }
 
             else -> return
         }
 
         // Set up the adapter
         stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
-            // Handle state item click
+            // Handle item click
             selectedTextView.text = selectedItem
-            stateId = id
+
+            // Store the appropriate ID based on the type
+            if (type == "State") {
+                stateId = id  // Save the selected state ID
+            } else if (type == "District") {
+                districtName = selectedItem
+                districtId = id  // Save the selected district ID
+            }
+
             selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
             bottomSheetDialog.dismiss()
         }
 
-        layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvBottomSheet.layoutManager = layoutManager
         rvBottomSheet.adapter = stateAdapter
         rvBottomSheet.addOnScrollListener(recyclerScrollListener)
         bottomSheetDialog.setContentView(view)
-
 
         // Rotate drawable
         val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
@@ -553,11 +618,19 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+
         fun clear(view: View) {
             val isFrom = intent?.getIntExtra("isFrom", 0)
 
             if (isFrom == 0 && stateId != null) {
-               binding!!.etLocationNDD.setText("")
+                binding!!.etLocationNDD.setText("")
+            }
+            if (isFrom == 34 && stateId != null) {
+                // Prepare intent to send the result back
+                binding!!.etPhoneno.setText("")
+                binding!!.etLoc.setText("")
+                binding!!.tvDistrict.text = "Please Select"
+                districtId = null
             }
         }
 
@@ -574,6 +647,20 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 toast(stateId.toString())
                 finish()
             }
+            if (isFrom == 34 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("nameLocation", binding!!.etLoc.text.toString())
+                resultIntent.putExtra("etPhoneno", binding!!.etPhoneno.text.toString())
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                resultIntent.putExtra("districtId", districtId) // Add selected data to intent
+                resultIntent.putExtra("districtName", districtName) // Add selected data to intent
+                resultIntent.putExtra("year", stateId) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                toast(stateId.toString())
+                finish()
+            }
+
 
             // Close the activity
 

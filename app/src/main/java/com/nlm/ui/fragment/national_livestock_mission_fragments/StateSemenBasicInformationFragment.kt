@@ -100,7 +100,6 @@ class StateSemenBasicInformationFragment(
         mBinding?.etState?.isEnabled = false
         mActivityMain = activity as StateSemenBankForms
         if (viewEdit == "view") {
-            showToast(dId.toString())
             mBinding?.etState?.isEnabled = false
             mBinding?.tvDistrict?.isEnabled = false
             mBinding?.etLocation?.isEnabled = false
@@ -121,9 +120,11 @@ class StateSemenBasicInformationFragment(
         }
         if (viewEdit == "edit") {
             viewEditApi()
+            showToast(itemId.toString())
+
         }
         mBinding?.tvSemenStation?.setOnClickListener {
-            showBottomSheetDialog("typeSemen")
+            showBottomSheetDialog2("typeSemen")
         }
         stateSemenManPowerAdapter()
 
@@ -216,6 +217,7 @@ class StateSemenBasicInformationFragment(
                             stateSemenManPowerList.addAll(userResponseModel._result.state_semen_bank_other_manpower)
                             stateSemenManPowerAdapter?.notifyDataSetChanged()
 
+
                         } else {
 
                             Preferences.setPreference_int(
@@ -296,7 +298,8 @@ class StateSemenBasicInformationFragment(
             viewModel.getStateSemenAddBankApi(
                 requireContext(), true,
                 StateSemenBankNLMRequest(
-                    Address = mBinding?.etAddress?.text.toString(),
+                    id= itemId,
+                    address = mBinding?.etAddress?.text.toString(),
                     area_fodder_cultivation = mBinding?.etAreaForFodder?.text.toString(),
                     location = mBinding?.etLocation?.text.toString(),
                     area_under_buildings = mBinding?.etAreaUnderBuild?.text.toString(),
@@ -378,7 +381,8 @@ class StateSemenBasicInformationFragment(
             viewModel.getStateSemenAddBankApi(
                 requireContext(), true,
                 StateSemenBankNLMRequest(
-                    Address = address,
+                    id= itemId,
+                    address = address,
                     area_fodder_cultivation = areaForFodder,
                     location = location,
                     area_under_buildings = areaUnderBuilding,
@@ -406,6 +410,7 @@ class StateSemenBasicInformationFragment(
                     manpower_no_of_people = manpower.toIntOrNull(),
                     officer_in_charge_name = officerInCharge,
                     state_semen_bank_other_manpower = stateSemenManPowerList,
+                    is_draft = 1,
                 )
             )
         }
@@ -494,10 +499,10 @@ class StateSemenBasicInformationFragment(
 
         // Initialize based on type
         when (type) {
-            "typeSemen" -> {
-                selectedList = typeSemen
-                selectedTextView = mBinding!!.tvSemenStation
-            }
+//            "typeSemen" -> {
+//                selectedList = typeSemen
+//                selectedTextView = mBinding!!.tvSemenStation
+//            }
 //
 //            "StateNDD" -> {
 //                selectedList = stateList
@@ -527,7 +532,6 @@ class StateSemenBasicInformationFragment(
         stateAdapter = BottomSheetAdapter(requireContext(), selectedList) { selectedItem, id ->
             // Handle state item click
             selectedTextView.text = selectedItem
-            typeOfSemen = selectedItem
             districtId = id
             selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             bottomSheetDialog.dismiss()
@@ -562,6 +566,96 @@ class StateSemenBasicInformationFragment(
         // Show the bottom sheet
         bottomSheetDialog.show()
     }
+
+    private fun showBottomSheetDialog2(type: String) {
+        bottomSheetDialog = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
+        view.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
+        val close = view.findViewById<TextView>(R.id.tvClose)
+
+        close.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        // Define a variable for the selected list and TextView
+        val selectedList: List<ResultGetDropDown>
+        val selectedTextView: TextView
+
+        // Initialize based on type
+        when (type) {
+            "typeSemen" -> {
+                selectedList = typeSemen
+                selectedTextView = mBinding!!.tvSemenStation
+            }
+//
+//            "StateNDD" -> {
+//                selectedList = stateList
+//                selectedTextView = binding!!.tvStateNDD
+//            }
+
+//            "District" -> {
+//                dropDownApiCall(paginate = false, loader = true)
+//                selectedList = districtList
+//                selectedTextView = mBinding!!.tvDistrict
+//            }
+
+//            "Status" -> {
+//                selectedList = status
+//                selectedTextView = binding!!.tvStatus
+//            }
+//
+//            "Reading" -> {
+//                selectedList = reading
+//                selectedTextView = binding!!.tvReadingMaterial
+//            }
+
+            else -> return
+        }
+
+        // Set up the adapter
+        stateAdapter = BottomSheetAdapter(requireContext(), selectedList) { selectedItem, id ->
+            // Handle state item click
+            selectedTextView.text = selectedItem
+            typeOfSemen= selectedItem
+            selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            bottomSheetDialog.dismiss()
+        }
+
+
+
+        layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.layoutManager = layoutManager
+        rvBottomSheet.adapter = stateAdapter
+        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
+        bottomSheetDialog.setContentView(view)
+
+
+        // Rotate drawable
+        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_arrow_down)
+        var rotatedDrawable = rotateDrawable(drawable, 180f)
+        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+
+        // Set a dismiss listener to reset the view visibility
+        bottomSheetDialog.setOnDismissListener {
+            rotatedDrawable = rotateDrawable(drawable, 0f)
+            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                rotatedDrawable,
+                null
+            )
+        }
+
+        // Show the bottom sheet
+        bottomSheetDialog.show()
+    }
+
 
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
         drawable?.mutate() // Mutate the drawable to avoid affecting other instances

@@ -77,7 +77,11 @@ data class StateSemenBankRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val location: String?,
+    val phone_no: String?,
+    val district_code: Int,
     val limit: Int,
+
     val page: Int
 )
 
@@ -289,7 +293,7 @@ data class StateSemenInfraGoat(
 
 data class StateSemenBankNLMRequest(
     val is_type: String? = null,
-    val Address: String? = null,
+    val address: String? = null,
     val area_fodder_cultivation: String? = null,
     val area_under_buildings: String? = null,
     val district_code: Int? = null,
