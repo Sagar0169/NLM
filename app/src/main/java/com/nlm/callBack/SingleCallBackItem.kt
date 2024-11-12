@@ -10,7 +10,7 @@ import com.nlm.model.ImplementingAgencyProjectMonitoring
 //    fun onClickItem(selectedItem: IdAndName)
 //}
 interface CallBackItemTypeIACompositionListEdit {
-    fun onClickItem(selectedItem: IdAndDetails)
+    fun onClickItem(selectedItem: IdAndDetails,position:Int)
 }
 //interface CallBackIdType {
 //    fun onClickItem(ID: Int?,position:Int)

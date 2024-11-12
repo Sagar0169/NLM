@@ -36,7 +36,8 @@ import com.nlm.viewModel.ViewModel
 
 
 class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAGoverningBodyBoardOfDirectorsBinding>(),
-    CallBackItemTypeIACompositionListEdit {
+    CallBackItemTypeIACompositionListEdit
+{
     val viewModel = ViewModel()
     private var mBinding: FragmentNLSIAGoverningBodyBoardOfDirectorsBinding?=null
     private var nlmIACompositionOFGoverningAdapter: NlmIACompositionOFGoverningAdapter ?= null
@@ -124,7 +125,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
     private fun nlmIACompositionOFGoverningAdapter() {
         nlmIACompositionOFGoverningList = mutableListOf()
         nlmIACompositionOFGoverningAdapter =
-            NlmIACompositionOFGoverningAdapter(nlmIACompositionOFGoverningList,viewEdit,this)
+            NlmIACompositionOFGoverningAdapter(requireActivity(),nlmIACompositionOFGoverningList,viewEdit,this)
         mBinding?.rvNlmIACompositionOFGoverning?.adapter = nlmIACompositionOFGoverningAdapter
         mBinding?.rvNlmIACompositionOFGoverning?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -166,14 +167,14 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
         }}
 
         fun compositionOfGoverningNlmIaDialog(view: View) {
-            compositionOfGoverningNlmIaDialog(requireContext(),1,null)
+            compositionOfGoverningNlmIaDialog(requireContext(),1,null,null)
         }
         fun nlmIAProjectMonitoringCommitteeDialog(view: View) {
-            compositionOfGoverningNlmIaDialog(requireContext(),2, null)
+            compositionOfGoverningNlmIaDialog(requireContext(),2, null,null)
         }
     }
 
-    private fun compositionOfGoverningNlmIaDialog(context: Context,isFrom:Int,selectedItem: IdAndDetails?) {
+     fun compositionOfGoverningNlmIaDialog(context: Context,isFrom:Int,selectedItem: IdAndDetails?,position: Int?) {
         val bindingDialog: ItemCompositionOfGoverningNlmIaBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_composition_of_governing_nlm_ia,
@@ -220,15 +221,18 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                 else if(isFrom == 1){
                     if(selectedItem!=null)
                     {
-                        nlmIACompositionOFGoverningList.add(
-                            ImplementingAgencyAdvisoryCommittee(
-                                bindingDialog.nameOfOfficial.text.toString(),
-                                bindingDialog.nameOfDesignation.text.toString(),
-                                bindingDialog.nameOfOrganization.text.toString(),
-                                selectedItem.implementing_agency_id,
-                                selectedItem.id
-                            )
-                        )
+                        if (position != null) {
+                            nlmIACompositionOFGoverningList[position] =
+                                ImplementingAgencyAdvisoryCommittee(
+                                    bindingDialog.nameOfOfficial.text.toString(),
+                                    bindingDialog.nameOfDesignation.text.toString(),
+                                    bindingDialog.nameOfOrganization.text.toString(),
+                                    selectedItem.implementing_agency_id,
+                                    selectedItem.id
+                                )
+                            nlmIAProjectMonitoringCommitteeAdapter?.notifyItemChanged(position)
+                        }
+
                     }
                     nlmIACompositionOFGoverningList.add(
                         ImplementingAgencyAdvisoryCommittee(
@@ -277,8 +281,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
         )
     }
 
-    override fun onClickItem(selectedItem: IdAndDetails) {
-        compositionOfGoverningNlmIaDialog(requireContext(),1,selectedItem)
+    override fun onClickItem(selectedItem: IdAndDetails,position:Int) {
+        compositionOfGoverningNlmIaDialog(requireContext(),1,selectedItem,position)
     }
     private fun saveDataApi(){
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
