@@ -276,6 +276,13 @@ data class IdAndDetails(
     val implementing_agency_id: Int?,
     val id: Int?,
 )
+data class manPower(
+    val name_of_the_official: String?,
+    val designation: String?,
+    val organization: String?,
+    val implementing_agency_id: Int?,
+    val id: Int?,
+)
 
 data class StateSemenManPower(
     val designation: String?,
