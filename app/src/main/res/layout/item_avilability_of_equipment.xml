@@ -1,118 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/llone"
-        app:layout_constraintTop_toTopOf="parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/dp_10"
-        android:paddingVertical="@dimen/dp_5"
-        android:background="@drawable/curve_all_corner_dark_grey"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="List of equipment"
-            android:layout_marginTop="@dimen/dp_7"
-
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_16" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_7"
-            android:background="@drawable/curve_all_corner_grey"
-            android:fontFamily="@font/opensans_regular"
-
-            android:maxLength="50"
-            android:paddingHorizontal="@dimen/dp_10"
-            android:paddingVertical="@dimen/dp_5"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:textSize="@dimen/sp_16" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="Make"
-            android:layout_marginTop="@dimen/dp_7"
-
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_16" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_7"
-            android:background="@drawable/curve_all_corner_grey"
-            android:fontFamily="@font/opensans_regular"
-
-            android:maxLength="50"
-            android:paddingHorizontal="@dimen/dp_10"
-            android:paddingVertical="@dimen/dp_5"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:textSize="@dimen/sp_16" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/opensans_semibold"
-            android:text="Year of procurement"
-            android:layout_marginTop="@dimen/dp_7"
-
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_16" />
-
-        <EditText
+        <LinearLayout
+            android:id="@+id/llParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/dp_7"
-            android:background="@drawable/curve_all_corner_grey"
-            android:fontFamily="@font/opensans_regular"
-            android:maxLength="50"
+            android:background="@drawable/curve_all_corner_dark_grey"
+            android:orientation="vertical"
             android:paddingHorizontal="@dimen/dp_10"
             android:paddingVertical="@dimen/dp_5"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:textSize="@dimen/sp_16" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
 
-    </LinearLayout>
-    <ImageButton
-        android:id="@+id/btnDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Delete row"
-        android:src="@android:drawable/ic_delete"
-        android:layout_below="@+id/llone"
-        android:layout_toStartOf="@+id/btnAdd"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-        app:layout_constraintTop_toBottomOf="@+id/llone"
-        android:layout_alignParentEnd="true"
-        app:tint="@android:color/holo_red_dark" />
-    <ImageButton
-        android:layout_below="@+id/llone"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Add row"
-        android:src="@android:drawable/ic_input_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llone"
-        app:tint="@android:color/holo_green_dark" />
-</RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:layout_weight="8"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="List of equipment"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <ImageView
+                        android:id="@+id/btnDelete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/dp_10"
+                        android:src="@drawable/ic_deleted" />
+                </LinearLayout>
+
+
+                <EditText
+                    android:id="@+id/etListOfEquipment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:id="@+id/tvMake"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Make"
+                    android:visibility="gone"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:id="@+id/etMake"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:id="@+id/tv11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Year of procurement"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:id="@+id/etYearOfProcurement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/sp_16" />
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/dp_50"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:background="@drawable/curve_fill_blue"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingVertical="@dimen/dp_10"
+                android:text="@string/submit"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

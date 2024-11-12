@@ -6,57 +6,49 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.databinding.ItemAvilabilityOfEquipmentBinding
+import com.nlm.model.RspBasicInfoEquipment
+import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 
 class AvailabilityOfEquipmentAdapter(
-    private val programmeList: MutableList<Array<String>>,
+    private val programmeList: MutableList<RspBasicInfoEquipment>,
 ) : RecyclerView.Adapter<AvailabilityOfEquipmentAdapter.AvailabilityOfEquipmentViewHolder>() {
 
 
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): AvailabilityOfEquipmentViewHolder {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AvailabilityOfEquipmentViewHolder {
+        val binding = ItemAvilabilityOfEquipmentBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return AvailabilityOfEquipmentViewHolder(binding)
 
-                val binding = ItemAvilabilityOfEquipmentBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false
-                )
-        return    AvailabilityOfEquipmentViewHolder(binding)
-
-        }
+    }
 
     override fun onBindViewHolder(holder: AvailabilityOfEquipmentViewHolder, position: Int) {
-
-
-        // Handle visibility of add/delete buttons
-        handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
-
-        // Add new row
-        holder.binding.btnAdd.setOnClickListener {
-            programmeList.add(arrayOf("", "",""))
-            notifyItemInserted(programmeList.size - 1)
-            notifyItemChanged(position)
-        }
+        val currentItem = programmeList[position]
+//        if (viewEdit == "view") {
+//            holder.binding.etListOfEquipment.isEnabled = false
+//            holder.binding.etYearOfProcurement.isEnabled = false
+//            holder.binding.btnDelete.hideView()
+//        }
+        holder.binding.etListOfEquipment.setText(currentItem.rsp_list_of_equipment)
+        holder.binding.etMake.setText(currentItem.rsp_make)
+        holder.binding.etMake.showView()
+        holder.binding.tvMake.showView()
+        holder.binding.etYearOfProcurement.setText(currentItem.rsp_year_of_procurement)
         // Delete row
         holder.binding.btnDelete.setOnClickListener {
-            if (programmeList.size > 1) {
-                programmeList.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, programmeList.size)
-            }
+            programmeList.removeAt(position)
+            notifyItemRemoved(position)
         }
     }
 
     override fun getItemCount(): Int = programmeList.size
-    // Helper method to manage button visibility
-    private fun handleButtonVisibility(btnAdd: ImageButton, btnDelete: ImageButton, position: Int) {
-        if (position == programmeList.size - 1) {
-            // Last item, show Add button, hide Delete button
-            btnAdd.visibility = View.VISIBLE
-            btnDelete.visibility = View.GONE
-        } else {
-            // Hide Add button, show Delete button for other items
-            btnAdd.visibility = View.GONE
-            btnDelete.visibility = View.VISIBLE
-        }
-    }
+
+
     inner class AvailabilityOfEquipmentViewHolder(val binding: ItemAvilabilityOfEquipmentBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

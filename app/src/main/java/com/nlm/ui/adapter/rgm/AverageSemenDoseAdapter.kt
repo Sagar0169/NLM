@@ -7,9 +7,11 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 
 import com.nlm.databinding.ItemQualityBuckBinding
+import com.nlm.model.RspAddBucksList
+import com.nlm.utilities.showView
 
 class AverageSemenDoseAdapter(
-    private val programmeList: MutableList<Array<String>>,
+    private val programmeList: MutableList<RspAddBucksList>,
 ) : RecyclerView.Adapter<AverageSemenDoseAdapter.AverageSemenDoseViewHolder>() {
 
 
@@ -24,40 +26,25 @@ class AverageSemenDoseAdapter(
         }
 
     override fun onBindViewHolder(holder: AverageSemenDoseViewHolder, position: Int) {
-
-
-        // Handle visibility of add/delete buttons
-        handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
-
-        // Add new row
-        holder.binding.btnAdd.setOnClickListener {
-            programmeList.add(arrayOf("", "",""))
-            notifyItemInserted(programmeList.size - 1)
-            notifyItemChanged(position)
-        }
+        val currentItem = programmeList[position]
+//        if (viewEdit == "view") {
+//            holder.binding.etListOfEquipment.isEnabled = false
+//            holder.binding.etYearOfProcurement.isEnabled = false
+//            holder.binding.btnDelete.hideView()
+//        }
+        holder.binding.etBreedMaintained.setText(currentItem.etBreedMaintained)
+        holder.binding.etAnimal.setText(currentItem.etAnimal)
+        holder.binding.etAvgAge.setText(currentItem.etAvgAge)
         // Delete row
         holder.binding.btnDelete.setOnClickListener {
-            if (programmeList.size > 1) {
-                programmeList.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, programmeList.size)
-            }
+            programmeList.removeAt(position)
+            notifyItemRemoved(position)
         }
+
     }
 
     override fun getItemCount(): Int = programmeList.size
-    // Helper method to manage button visibility
-    private fun handleButtonVisibility(btnAdd: ImageButton, btnDelete: ImageButton, position: Int) {
-        if (position == programmeList.size - 1) {
-            // Last item, show Add button, hide Delete button
-            btnAdd.visibility = View.VISIBLE
-            btnDelete.visibility = View.GONE
-        } else {
-            // Hide Add button, show Delete button for other items
-            btnAdd.visibility = View.GONE
-            btnDelete.visibility = View.VISIBLE
-        }
-    }
+
     inner class AverageSemenDoseViewHolder(val binding: ItemQualityBuckBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

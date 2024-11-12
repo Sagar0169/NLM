@@ -20,14 +20,7 @@ class RSPSuggestionsForImprovement : BaseFragment<FragmentRSPSuggestionsForImpro
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction=ClickActions()
-        recyclerView = mBinding?.recyclerView1!!
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        programmeList = mutableListOf()
-        programmeList.add(arrayOf("", "", "",""))
-
-        adapter = AverageSemenDoseAdapter(programmeList)
-        recyclerView.adapter = adapter
 
     }
 

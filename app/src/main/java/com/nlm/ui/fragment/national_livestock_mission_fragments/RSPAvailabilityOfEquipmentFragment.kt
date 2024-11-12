@@ -17,13 +17,13 @@ class RSPAvailabilityOfEquipmentFragment : BaseFragment<FragmentRSPAvailabilityO
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction=ClickActions()
-        mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
-
-        programmeList = mutableListOf()
-        programmeList.add(arrayOf("", "", ""))
-
-        adapter = AvailabilityOfEquipmentAdapter(programmeList)
-        mBinding?.recyclerView2?.adapter = adapter
+//        mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
+//
+//        programmeList = mutableListOf()
+//        programmeList.add(arrayOf("", "", ""))
+//
+//        adapter = AvailabilityOfEquipmentAdapter(programmeList)
+//        mBinding?.recyclerView2?.adapter = adapter
     }
 
     override fun setVariables() {

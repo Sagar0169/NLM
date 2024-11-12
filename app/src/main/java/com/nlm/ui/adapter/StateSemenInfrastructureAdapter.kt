@@ -18,15 +18,17 @@ class StateSemenInfrastructureAdapter(
 ) : RecyclerView.Adapter<StateSemenInfrastructureAdapter.StateSemenInfrastructureViewHolder>() {
 
 
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): StateSemenInfrastructureViewHolder {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StateSemenInfrastructureViewHolder {
+        val binding = ItemStateSemenInfrastructureBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return StateSemenInfrastructureViewHolder(binding)
 
-                val binding = ItemStateSemenInfrastructureBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false
-                )
-        return    StateSemenInfrastructureViewHolder(binding)
-
-        }
+    }
 
     override fun onBindViewHolder(holder: StateSemenInfrastructureViewHolder, position: Int) {
         val currentItem = programmeList[position]

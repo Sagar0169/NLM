@@ -335,6 +335,7 @@ class StateSemenBasicInformationFragment(
 
         fun save(view: View) {
             // Get the text from the input fields
+
             val address = mBinding?.etAddress?.text.toString()
             val areaForFodder = mBinding?.etAreaForFodder?.text.toString()
             val location = mBinding?.etLocation?.text.toString()

@@ -291,6 +291,21 @@ data class StateSemenInfraGoat(
     val id: Int?,
 )
 
+data class RspBasicInfoEquipment(
+    val rsp_list_of_equipment: String?,
+    val rsp_year_of_procurement: String?,
+    val rsp_make: String?,
+    val id: Int?,
+)
+data class RspAddBucksList(
+    val etBreedMaintained: String?,
+    val etAnimal: String?,
+    val etAvgAge: String?,
+    val id: Int?,
+)
+
+
+
 //data class ImplementingAgencyDocument(
 //    val description: String?,
 //    val id: Int?,
