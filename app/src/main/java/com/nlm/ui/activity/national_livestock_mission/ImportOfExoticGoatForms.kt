@@ -182,7 +182,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         }
     }
     private fun AddDocumentAdapter(){
-        AddDocumentAdapter= SupportingDocumentAdapterWithDialog(DocumentList)
+        AddDocumentAdapter= SupportingDocumentAdapterWithDialog(DocumentList,"viewEdit")
         mBinding?.AddDocumentRv?.adapter = AddDocumentAdapter
         mBinding?.AddDocumentRv?.layoutManager = LinearLayoutManager(this)
     }

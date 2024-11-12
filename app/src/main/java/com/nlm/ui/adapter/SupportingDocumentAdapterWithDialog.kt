@@ -19,7 +19,7 @@ import com.nlm.model.ImplementingAgencyDocument
 
 class SupportingDocumentAdapterWithDialog(
     private val programmeList: MutableList<ImplementingAgencyDocument>,
-
+    private val viewEdit: String?,
 ) : RecyclerView.Adapter<SupportingDocumentAdapterWithDialog.SupportingDocument>() {
 
 
@@ -40,6 +40,10 @@ class SupportingDocumentAdapterWithDialog(
         holder.binding.etDescription.text=items.description
         holder.binding.etFile.text=items.ia_document
         // Delete row
+        if(viewEdit=="view")
+        {
+            holder.binding.btnDelete.visibility=View.GONE
+        }
         holder.binding.btnDelete.setOnClickListener {
             if (position >= 0 && position < programmeList.size) {
                 programmeList.removeAt(position)
@@ -51,17 +55,7 @@ class SupportingDocumentAdapterWithDialog(
 
     override fun getItemCount(): Int = programmeList.size
     // Helper method to manage button visibility
-    private fun handleButtonVisibility(btnAdd: ImageButton, btnDelete: ImageButton, position: Int) {
-        if (position == programmeList.size - 1) {
-            // Last item, show Add button, hide Delete button
-            btnAdd.visibility = View.VISIBLE
-            btnDelete.visibility = View.GONE
-        } else {
-            // Hide Add button, show Delete button for other items
-            btnAdd.visibility = View.GONE
-            btnDelete.visibility = View.VISIBLE
-        }
-    }
+
     inner class SupportingDocument(val binding: ItemAddDocumentBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

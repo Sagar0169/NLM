@@ -50,7 +50,7 @@
                     android:layout_toStartOf="@+id/btnDelete"
                     android:padding="@dimen/dp_10"
                     android:src="@drawable/baseline_edit_24"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/btnDelete"

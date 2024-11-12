@@ -422,7 +422,7 @@ data class ResultIA(
     val goat_breeding_farm_number: Int?,
     val id: Int?,
     val implementing_agency_advisory_committee: List<ImplementingAgencyAdvisoryCommittee>?,
-    val implementing_agency_document: List<ImplementingAgencyDocument>?,
+    val implementing_agency_document: MutableList<ImplementingAgencyDocument>?,
     val implementing_agency_funds_received: List<ImplementingAgencyFundsReceived>?,
     val implementing_agency_involved_district_wise: List<ImplementingAgencyInvolvedDistrictWise>?,
     val implementing_agency_project_monitoring: List<ImplementingAgencyProjectMonitoring>?,
