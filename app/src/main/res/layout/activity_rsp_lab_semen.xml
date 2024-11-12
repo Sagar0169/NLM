@@ -48,27 +48,12 @@
                 />
         </RelativeLayout>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            app:tabIndicatorFullWidth="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/darkBlue"
-            android:layout_below="@+id/rlToolbar"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            app:tabIndicatorColor="@color/orange"
-            app:tabSelectedTextColor="@color/orange"
-            app:tabMode="scrollable"
-            app:tabTextColor="@color/white" />
-
-
         <FrameLayout
             android:id="@+id/frameLayout"
-            android:layout_below="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_below="@id/rlToolbar"
             android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
