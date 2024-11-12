@@ -426,6 +426,17 @@ data class ArtificialInseminationAddEditRequest(
     val user_id: String
 )
 
+data class NlmAssistanceForQFSPListRequest(
+    val district_code: Int?=null,
+    val limit: Int?=null,
+    val name_of_organization: String?=null,
+    val organogram: String?=null,
+    val page: Int?=null,
+    val role_id: Int?=null,
+    val state_code: Int?=null,
+    val user_id: Int?=null
+)
+
 //data class ArtificialInseminationObservationByNlm(
 //    val description: String,
 //    val id: Int

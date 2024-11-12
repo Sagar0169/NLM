@@ -55,24 +55,21 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/srlImplementingAgency"
+            android:id="@+id/srlImportOfExoticGoat"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rlToolbar">
 
-        <LinearLayout
-            android:id="@+id/llParent"
+        <RelativeLayout
+            android:id="@+id/rlParent"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/employee_home_bg"
             android:backgroundTint="@color/white"
             android:elevation="@dimen/dp_5"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rlToolbar">
-
+            android:padding="@dimen/dp_10">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvArtificialInsemination"
                 android:layout_width="match_parent"
@@ -82,7 +79,6 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvNoDataFound"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/lexend_bold"
@@ -90,7 +86,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_20"
                 android:visibility="gone" />
-        </LinearLayout>
+        </RelativeLayout>
         <!-- Floating Action Button -->
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -104,6 +100,7 @@
             android:contentDescription="Add New Agency"
             android:src="@drawable/ic_add"
             app:fabSize="normal"
+            android:onClick="@{ClickAction::add}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@android:color/white" />

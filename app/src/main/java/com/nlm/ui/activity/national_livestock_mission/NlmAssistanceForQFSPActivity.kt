@@ -3,27 +3,51 @@ package com.nlm.ui.activity.national_livestock_mission
 import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityNlmAssistanceForQfspactivityBinding
+import com.nlm.model.ImportExocticGoatRequest
+import com.nlm.model.NlmAssistanceForQFSPData
+import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmFpForest
+import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
-import com.nlm.ui.adapter.NlmFpForestAdapter
+import com.nlm.ui.adapter.NlmAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
+import com.nlm.viewModel.ViewModel
 
-class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspactivityBinding>() {
+class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspactivityBinding>(),
+    CallBackDeleteAtId {
     private var mBinding: ActivityNlmAssistanceForQfspactivityBinding? = null
-    private lateinit var onlyCreatedAdapter: NlmFpForestAdapter
-    private lateinit var onlyCreated: List<NlmFpForest>
+    private var nlmAssistanceForQFSPAdapter: NlmAdapter?= null
+    private var nlmAssistanceForQFSPList = ArrayList<NlmAssistanceForQFSPData>()
     private var layoutManager: LinearLayoutManager? = null
-    private var isFrom: Int = 0
+    private val viewModel= ViewModel()
+    private var currentPage = 1
+    private var totalPage = 1
+    private var loading = true
 
     override val layoutId: Int
         get() = R.layout.activity_nlm_assistance_for_qfspactivity
 
+    override fun initView() {
+        mBinding = viewDataBinding
+        viewModel.init()
+        mBinding?.clickAction = ClickActions()
+        nlmAssistanceForQFSPAdapter()
+        swipeForRefreshNlmAssistanceForQFSP()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        nlmAssistanceForQFSPAPICall(paginate = false, loader = true)
+    }
 
     inner class ClickActions {
         fun backPress(view: View) {
@@ -36,67 +60,102 @@ class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspac
             ).putExtra("isFrom", 13)
             startActivity(intent)
         }
-
+        fun add(view: View) {
+            startActivity(Intent(this@NlmAssistanceForQFSPActivity, AddNlmAssistanceForQFSPActivity::class.java))
+        }
     }
 
-
-    override fun initView() {
-        mBinding = viewDataBinding
-        mBinding?.clickAction = ClickActions()
-        isFrom = 4
-//
-//        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
-//        {
-//            mBinding!!.fabAddAgency.hideView()
-//        }
-        onlyCreated = listOf(
-            NlmFpForest(
-                "GUJARAT",
-                "DAHOD",
-                "test",
-                "Murray and Shepard LLC",
-                "N/A",
-                "2024-08-21",
-                "Aut dolore illum officiis veniam unde",
-                "Iusto blanditiis rerum enim magni et exe",
-            ),
-            NlmFpForest(
-                "DELHI",
-                "NORTH WEST",
-                "test",
-                "Clayton Sullivan Co",
-                "N/A",
-                "2024-08-21",
-                "Qui praesentium aut accusamus dolorem se",
-                "Veritatis perferendis totam ipsum sunt",
-            ),
+    private fun nlmAssistanceForQFSPAPICall(paginate: Boolean, loader: Boolean) {
+        if (paginate) {
+            currentPage++
+        }
+        viewModel.getAssistanceForQfspList(
+            this, loader, NlmAssistanceForQFSPListRequest(
+                role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
+                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
+                page = currentPage,
+                limit = 10
+            )
         )
+    }
 
-
-
-
-        mBinding!!.fabAddAgency.setOnClickListener {
-            val intent =
-                Intent(this, AddNlmAssistanceForQFSPActivity::class.java).putExtra("isFrom", isFrom)
-            startActivity(intent)
+    private var recyclerScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val visibleItemCount: Int? = layoutManager?.childCount
+                    val totalItemCount: Int? = layoutManager?.itemCount
+                    val pastVisiblesItems: Int? = layoutManager?.findFirstVisibleItemPosition()
+                    if (loading) {
+                        if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
+                            loading = false
+                            if (currentPage < totalPage) {
+                                //Call API here
+                                nlmAssistanceForQFSPAPICall(paginate = true, loader = true)
+                            }
+                        }
+                    }
+                }
+            }
         }
 
-
-        onlyCreatedAdapter()
-
+    private fun swipeForRefreshNlmAssistanceForQFSP() {
+        mBinding?.srlNlmAssistanceForQFSP?.setOnRefreshListener {
+            nlmAssistanceForQFSPAPICall(paginate = false, loader = true)
+            mBinding?.srlNlmAssistanceForQFSP?.isRefreshing = false
+        }
     }
 
-    private fun onlyCreatedAdapter() {
-        onlyCreatedAdapter = NlmFpForestAdapter(onlyCreated, isFrom,
-            Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
+    private fun nlmAssistanceForQFSPAdapter() {
+        nlmAssistanceForQFSPAdapter = NlmAdapter(this,nlmAssistanceForQFSPList,this)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding!!.rvNlmEdp.layoutManager = layoutManager
-        mBinding!!.rvNlmEdp.adapter = onlyCreatedAdapter
+        mBinding?.rvNlmAssistanceForQFSP?.layoutManager = layoutManager
+        mBinding?.rvNlmAssistanceForQFSP?.adapter = nlmAssistanceForQFSPAdapter
+        mBinding?.rvNlmAssistanceForQFSP?.addOnScrollListener(recyclerScrollListener)
     }
 
     override fun setVariables() {
     }
 
     override fun setObservers() {
+        viewModel.nlmAssistanceForQFSPResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            } else {
+                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                    if (currentPage == 1) {
+                        nlmAssistanceForQFSPList.clear()
+
+                        val remainingCount = userResponseModel._result.total_count % 10
+                        totalPage = if (remainingCount == 0) {
+                            val count = userResponseModel._result.total_count / 10
+                            count
+                        } else {
+                            val count = userResponseModel._result.total_count / 10
+                            count + 1
+                        }
+                    }
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
+                    nlmAssistanceForQFSPList.addAll(userResponseModel._result.data)
+                    nlmAssistanceForQFSPAdapter?.notifyDataSetChanged()
+                    mBinding?.tvNoDataFound?.hideView()
+                    mBinding?.rvNlmAssistanceForQFSP?.showView()
+                } else {
+                    mBinding?.tvNoDataFound?.showView()
+                    mBinding?.rvNlmAssistanceForQFSP?.hideView()
+                }
+            }
+        }
+    }
+
+    override fun onClickItem(ID: Int?, position: Int) {
+
     }
 }

@@ -31,6 +31,8 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
     CallBackDeleteAtId {
     private var mBinding: ActivityArtificialInseminationListBinding? = null
     private var viewModel = ViewModel()
+    private lateinit var implementingAdapter: Artificial_Insemination_adapter
+    private lateinit var nodalOfficerList: List<ArtificialInsemenation>
     private var artificialInseminationList = ArrayList<DataArtificialInsemination>()
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
@@ -47,9 +49,6 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
 
     override val layoutId: Int
         get() = R.layout.activity_artificial_insemination_list
-    private lateinit var implementingAdapter: Artificial_Insemination_adapter
-
-    private lateinit var nodalOfficerList: List<ArtificialInsemenation>
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
