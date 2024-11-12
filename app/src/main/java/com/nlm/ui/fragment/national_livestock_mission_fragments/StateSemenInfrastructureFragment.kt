@@ -30,6 +30,7 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.Preferences.getPreference_int
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
@@ -39,7 +40,12 @@ import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
 
 
-class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastructureBinding>() {
+class StateSemenInfrastructureFragment(
+    private val viewEdit: String?,
+    private val itemId: Int?,
+    private val dId: Int?
+) :
+    BaseFragment<FragmentStateSemenInfrastructureBinding>() {
 
     override val layoutId: Int
         get() = R.layout.fragment_state__semen__infrastructure
@@ -65,12 +71,64 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
         addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentList)
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
+        if (viewEdit == "view") {
+            showToast(dId.toString())
+            mBinding?.tvAddMore1?.isEnabled = false
+            mBinding?.tvAddMore2?.isEnabled = false
+            mBinding?.etStorageCapacity?.isEnabled = false
+            mBinding?.etCoopOne?.isEnabled = false
+            mBinding?.etCoopTwo?.isEnabled = false
+            mBinding?.etCoopThree?.isEnabled = false
+            mBinding?.etNgoOne?.isEnabled = false
+            mBinding?.etNgoTwo?.isEnabled = false
+            mBinding?.etNgoTwo?.isEnabled = false
+            mBinding?.etPrivateOne?.isEnabled = false
+            mBinding?.etPrivateTwo?.isEnabled = false
+            mBinding?.etPrivateThree?.isEnabled = false
+            mBinding?.etOtherStateOne?.isEnabled = false
+            mBinding?.etOtherStateTwo?.isEnabled = false
+            mBinding?.etOtherStateThree?.isEnabled = false
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
+            viewEditApi()
+        }
+        if (viewEdit == "edit") {
+            viewEditApi()
+        }
+        showToast(getPreference_int(requireContext(), AppConstants.FORM_FILLED_ID).toString(),)
+    }
+
+    private fun viewEditApi() {
+
+        viewModel.getStateSemenAddBankApi2(
+            requireContext(), true,
+            StateSemenBankNLMRequest(
+                id = itemId,
+                state_code = getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                district_code = dId,
+                role_id = getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                is_type = viewEdit
+            )
+        )
     }
 
     private fun stateSemenInfraGoatAdapter() {
         stateSemenInfraGoatList = mutableListOf()
         stateSemenInfraGoatAdapter =
-            StateSemenInfrastructureAdapter(stateSemenInfraGoatList)
+            StateSemenInfrastructureAdapter(stateSemenInfraGoatList, viewEdit)
         mBinding?.recyclerView1?.adapter = stateSemenInfraGoatAdapter
         mBinding?.recyclerView1?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -93,24 +151,44 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
     }
 
     override fun setObservers() {
-        viewModel.stateSemenBankAddResult.observe(viewLifecycleOwner){
+        viewModel.stateSemenBankAddResult.observe(viewLifecycleOwner) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(requireContext())
             }
-            if (userResponseModel!=null)
-            {
-                if(userResponseModel._resultflag==0){
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                }
-                else{
-                    if (savedAsDraft)
-                    {
+                } else {
+                    if (savedAsDraft) {
                         savedAsDraftClick?.onSaveAsDraft()
                     }
-                    else{
-                        Preferences.setPreference_int(requireContext(),AppConstants.FORM_FILLED_ID,userResponseModel._result.id)
+                    if (viewEdit == "view" || viewEdit == "edit") {
+                        mBinding?.etStorageCapacity?.setText(userResponseModel._result.storage_capacity)
+                        mBinding?.etCoopOne?.setText(userResponseModel._result.major_clients_coop_fin_year_one)
+                        mBinding?.etCoopTwo?.setText(userResponseModel._result.major_clients_coop_fin_year_two)
+                        mBinding?.etCoopThree?.setText(userResponseModel._result.major_clients_coop_fin_year_three)
+                        mBinding?.etNgoOne?.setText(userResponseModel._result.major_clients_ngo_fin_year_one)
+                        mBinding?.etNgoTwo?.setText(userResponseModel._result.major_clients_ngo_fin_year_two)
+                        mBinding?.etNgoThree?.setText(userResponseModel._result.major_clients_ngo_fin_year_three)
+                        mBinding?.etPrivateOne?.setText(userResponseModel._result.major_clients_private_fin_year_one)
+                        mBinding?.etPrivateTwo?.setText(userResponseModel._result.major_clients_private_fin_year_two)
+                        mBinding?.etPrivateThree?.setText(userResponseModel._result.major_clients_private_fin_year_three)
+                        mBinding?.etOtherStateOne?.setText(userResponseModel._result.major_clients_other_states_fin_year_one)
+                        mBinding?.etOtherStateTwo?.setText(userResponseModel._result.major_clients_other_states_fin_year_two)
+                        mBinding?.etOtherStateThree?.setText(userResponseModel._result.major_clients_other_states_fin_year_three)
+                        stateSemenInfraGoatList.clear()
+                        stateSemenInfraGoatList.addAll(userResponseModel._result.state_semen_bank_infrastructure)
+                        stateSemenInfraGoatAdapter?.notifyDataSetChanged()
 
+                    } else {
+
+                        Preferences.setPreference_int(
+                            requireContext(),
+                            AppConstants.FORM_FILLED_ID,
+                            userResponseModel._result.id
+                        )
+                        listener?.onNextButtonClick()
                         showSnackbar(mBinding!!.clParent, userResponseModel.message)
                     }
 
@@ -217,6 +295,7 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.state_code,
+                    id = getPreference_int(requireContext(), AppConstants.FORM_FILLED_ID),
                     user_id = getPreferenceOfScheme(
                         requireContext(),
                         AppConstants.SCHEME,
@@ -276,7 +355,7 @@ class StateSemenInfrastructureFragment : BaseFragment<FragmentStateSemenInfrastr
                     ImplementingAgencyDocument(
                         bindingDialog.etDescription.text.toString(),
                         ia_document = DocumentName,
-                        id=null,
+                        id = null,
                         implementing_agency_id = null,
                         null
                     )

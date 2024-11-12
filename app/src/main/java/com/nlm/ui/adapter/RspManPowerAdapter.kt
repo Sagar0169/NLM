@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.nlm.databinding.ItemQualityBuckBinding
 import com.nlm.databinding.ItemRspManpowerBinding
+import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.model.StateSemenBankOtherManpower
 import com.nlm.model.StateSemenManPower
+import com.nlm.utilities.hideView
 
 class RspManPowerAdapter(
-    private val programmeList: MutableList<StateSemenBankOtherManpower>,
+    private val programmeList: MutableList<StateSemenBankOtherAddManpower>,
+    private val viewEdit: String?,
 ) : RecyclerView.Adapter<RspManPowerAdapter.RspManPowerViewHolder>() {
 
 
@@ -27,6 +30,13 @@ class RspManPowerAdapter(
 
     override fun onBindViewHolder(holder: RspManPowerViewHolder, position: Int) {
         val currentItem = programmeList[position]
+        if (viewEdit == "view") {
+            holder.binding.etDesignation.isEnabled = false
+            holder.binding.etQualification.isEnabled = false
+            holder.binding.etExperience.isEnabled = false
+            holder.binding.etTrainingStatus.isEnabled = false
+            holder.binding.btnDelete.hideView()
+        }
         holder.binding.etDesignation.setText(currentItem.designation)
         holder.binding.etQualification.setText(currentItem.qualification)
         holder.binding.etExperience.setText(currentItem.experience)

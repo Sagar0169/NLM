@@ -330,12 +330,13 @@ data class StateSemenAddResponse(
 )
 
 data class StateSemenAddResult(
-    val Address: String,
+    val address: String,
     val area_fodder_cultivation: String,
     val area_under_buildings: String,
     val created: String,
     val created_by: Int,
     val district_code: Int,
+    val district_name: String,
     val id: Int,
     val is_deleted: Int,
     val is_draft: Int,
@@ -360,8 +361,8 @@ data class StateSemenAddResult(
     val role_id: Int,
     val state_code: Int,
     val state_semen_bank_document: List<StateSemenBankAddDocument>,
-    val state_semen_bank_infrastructure: List<StateSemenBankAddInfrastructure>,
-    val state_semen_bank_other_manpower: List<StateSemenBankOtherAddManpower>,
+    val state_semen_bank_infrastructure: List<StateSemenInfraGoat>,
+    val state_semen_bank_other_manpower: MutableList<StateSemenBankOtherAddManpower>,
     val status: Int,
     val storage_capacity: String,
     val type_of_semen_station: String,
@@ -382,15 +383,7 @@ data class StateSemenBankAddInfrastructure(
     val state_semen_bank_id: Int
 )
 
-data class StateSemenBankOtherAddManpower(
-    val created: String,
-    val designation: String,
-    val experience: String,
-    val id: Int,
-    val qualification: String,
-    val state_semen_bank_id: Int,
-    val training_status: String
-)
+
 data class NLMIAResponse(
     val _result: ResultIA,
     val _resultflag: Int,

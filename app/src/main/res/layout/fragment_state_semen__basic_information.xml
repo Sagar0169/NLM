@@ -382,129 +382,129 @@
                     </LinearLayout>
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Manpower:"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_20"
-                            android:background="@drawable/curve_all_corner_black"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_dark_grey"
                             android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_10">
+                            android:paddingVertical="@dimen/dp_5">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Manpower:"
+                                android:text="Manpower (No of People)"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <LinearLayout
+                            <EditText
+                                android:id="@+id/etManPower"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_dark_grey"
-                                android:orientation="vertical"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:inputType="number"
+                                android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:fontFamily="@font/opensans_semibold"
-                                    android:text="Manpower (No of People)"
-
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/sp_16" />
-
-                                <EditText
-                                    android:id="@+id/etManPower"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:background="@drawable/curve_all_corner_grey"
-                                    android:fontFamily="@font/opensans_regular"
-                                    android:inputType="number"
-                                    android:maxLength="50"
-                                    android:paddingHorizontal="@dimen/dp_10"
-                                    android:paddingVertical="@dimen/dp_5"
-                                    android:singleLine="true"
-                                    android:textColor="@color/black"
-                                    android:textColorHint="@color/grey"
-                                    android:textSize="@dimen/sp_16" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:fontFamily="@font/opensans_semibold"
-                                    android:text="Officer in charge name"
-
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/sp_16" />
-
-                                <EditText
-                                    android:id="@+id/etOfficerInCharge"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:background="@drawable/curve_all_corner_grey"
-                                    android:fontFamily="@font/opensans_regular"
-                                    android:layout_marginBottom="@dimen/dp_10"
-                                    android:maxLength="50"
-                                    android:paddingHorizontal="@dimen/dp_10"
-                                    android:paddingVertical="@dimen/dp_5"
-                                    android:singleLine="true"
-                                    android:textColor="@color/black"
-                                    android:textColorHint="@color/grey"
-                                    android:textSize="@dimen/sp_16" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_20"
-                            android:background="@drawable/curve_all_corner_black"
-                            android:orientation="vertical"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_10">
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="Other Manpower Position:"
+                                android:text="Officer in charge name"
+
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:onClick="@{ClickAction::otherManpowerPositionDialog}"
-                                android:id="@+id/tvAddMore1"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:layout_width="wrap_content"
-                                android:layout_gravity="end"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/curve_fill_blue"
-                                android:clickable="true"
-                                android:fontFamily="@font/poppins_medium"
-                                android:paddingHorizontal="@dimen/dp_20"
-                                android:paddingVertical="@dimen/dp_10"
-                                android:text="Add More"
-                                android:textColor="@color/white" />
 
-                            <com.nlm.utilities.NonScrollableRecyclerView
-                                android:id="@+id/recyclerView1"
+                            <EditText
+                                android:id="@+id/etOfficerInCharge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingTop="8dp" />
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:layout_marginBottom="@dimen/dp_10"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
 
                         </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Other Manpower Position:"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:id="@+id/tvAddMore1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_fill_blue"
+                            android:clickable="true"
+                            android:fontFamily="@font/poppins_medium"
+                            android:onClick="@{ClickAction::otherManpowerPositionDialog}"
+                            android:paddingHorizontal="@dimen/dp_20"
+                            android:paddingVertical="@dimen/dp_10"
+                            android:text="Add More"
+                            android:textColor="@color/white" />
+
+                        <com.nlm.utilities.NonScrollableRecyclerView
+                            android:id="@+id/recyclerView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="8dp" />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
