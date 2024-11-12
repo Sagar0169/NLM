@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
+import com.nlm.callBack.CallBackItemNLMDistrictWiseListEdit
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding
 import com.nlm.databinding.ItemDistrictWiseNoNlsiaBinding
+import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyInvolvedDistrictWise
 import com.nlm.model.Result
@@ -39,12 +41,13 @@ import com.nlm.viewModel.ViewModel
 
 
 class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val itemId:Int?):
-    BaseFragment<FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding>() {
+    BaseFragment<FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding>(),CallBackItemNLMDistrictWiseListEdit {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__agencies_involved_in_genetic_improvement_goat_sheep
     private lateinit var stateAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var savedAsDraft:Boolean=false
+    private var savedAsEdit:Boolean=false
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
     val viewModel = ViewModel()
     private val district = listOf(
@@ -76,7 +79,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
    private fun NlmIADistrictWiseNoAdapterFun() {
        mBinding?.recyclerViewDistrictWiseOfAi?.layoutManager = LinearLayoutManager(requireContext())
        mNlmIADistrictWiseNoList = mutableListOf()
-       mNlmIADistrictWiseNoAdapter = NlmIADistrictWiseNoAdapter  (mNlmIADistrictWiseNoList,viewEdit)
+       mNlmIADistrictWiseNoAdapter = NlmIADistrictWiseNoAdapter  (mNlmIADistrictWiseNoList,viewEdit,this)
        mBinding?.recyclerViewDistrictWiseOfAi?.adapter = mNlmIADistrictWiseNoAdapter
    }
    override fun setVariables() {
@@ -97,6 +100,11 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                     {
                         if (viewEdit=="view"||viewEdit=="edit")
                         {
+                            if (savedAsEdit)
+                            {
+                                listener?.onNextButtonClick()
+                            }
+                            else{
                             userResponseModel._result.no_of_al_technicians?.toString().let { it1 ->
                                 mBinding?.etNoOfAiTechnician?.setText(
                                     it1
@@ -120,7 +128,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                                 )
                                 mNlmIADistrictWiseNoAdapter.notifyDataSetChanged()
                             }
-                        }
+                        }}
                         else{
                     listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
@@ -131,7 +139,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
 
     inner class ClickActions {
       fun AddDistrictWiseNoAiDialog(view: View){
-          compositionOfGoverningNlmIaDialog(requireContext())
+          compositionOfGoverningNlmIaDialog(requireContext(),null,null)
       }
         fun saveAndNext(view: View) {
             if (itemId==0)
@@ -142,6 +150,10 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
 
             }
             else {
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
                 saveDataApi()
         }}
         fun saveAsDraft(view: View) {
@@ -153,6 +165,10 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
 
             }
             else {
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
                 saveDataApi()
             savedAsDraft=true
         }}
@@ -217,7 +233,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
         // Show the bottom sheet
         bottomSheetDialog.show()
     }
-    private fun compositionOfGoverningNlmIaDialog(context: Context) {
+    private fun compositionOfGoverningNlmIaDialog(context: Context, selectedItem: ImplementingAgencyInvolvedDistrictWise?, position: Int?) {
         val bindingDialog: ItemDistrictWiseNoNlsiaBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_district_wise_no_nlsia,
@@ -236,11 +252,32 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
         dialog.window!!.setGravity(Gravity.CENTER)
         bindingDialog.btnDelete.hideView()
         bindingDialog.tvSubmit.showView()
-
+        if(selectedItem!=null)
+        {
+            bindingDialog.etState.text = selectedItem.name_of_district
+            bindingDialog.etAiPerformed.setText(selectedItem.ai_performed)
+            bindingDialog.etLocationOfAi.setText(selectedItem.location_of_ai_centre)
+        }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etState.text.toString().isNotEmpty()||bindingDialog.etAiPerformed.text.toString().isNotEmpty()||bindingDialog.etLocationOfAi.text.toString().isNotEmpty())
             {
+                if(selectedItem!=null)
+                {
+                    if (position != null) {
+                        mNlmIADistrictWiseNoList.set(position,
+                            ImplementingAgencyInvolvedDistrictWise(
+                               name_of_district =  bindingDialog.etState.toString(),
+                                location_of_ai_centre = bindingDialog.etLocationOfAi.text.toString(),
+                               ai_performed =  bindingDialog.etAiPerformed.text.toString(),
+                                selectedItem.id,
+                                selectedItem.year,
+                                selectedItem.implementing_agency_id,
+                            )
+                        )
+                        mNlmIADistrictWiseNoAdapter.notifyItemChanged(position)
 
+                    }                    }
+                    else{
                     mNlmIADistrictWiseNoList.add(
                         ImplementingAgencyInvolvedDistrictWise(
                             null,
@@ -253,7 +290,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                     )
                     mNlmIADistrictWiseNoList.size.minus(1).let {
                         mNlmIADistrictWiseNoAdapter.notifyItemInserted(it)
-                    }
+                    }}
                     dialog.dismiss()
 
 
@@ -300,9 +337,13 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
                implementing_agency_document = null,
                is_deleted = 0,
-               id =Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-               is_draft = 1
+               id =itemId,
+               is_draft = 1,
            )
        )
    }
+
+    override fun onClickItem(selectedItem: ImplementingAgencyInvolvedDistrictWise, position: Int) {
+        compositionOfGoverningNlmIaDialog(requireContext(),selectedItem,position)
+    }
 }

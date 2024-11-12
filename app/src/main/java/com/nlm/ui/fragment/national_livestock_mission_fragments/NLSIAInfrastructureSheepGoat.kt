@@ -34,6 +34,7 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
     private var savedAsDraft:Boolean=false
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private var mBinding: FragmentNLSIAInfrastructureSheepGoatBinding?=null
+    private var savedAsEdit:Boolean=false
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
@@ -90,6 +91,11 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                     }else
                     {
                         if (viewEdit == "view" || viewEdit == "edit") {
+                            if (savedAsEdit)
+                            {
+                                listener?.onNextButtonClick()
+                            }
+                            else{
                             mBinding?.etFrozenSemenNumber?.setText(userResponseModel._result.frozen_semen_goat_number?.toString() ?: "")
                             mBinding?.etFrozenSemenLocation?.setText(userResponseModel._result.frozen_semen_goat_location ?: "")
                             mBinding?.etLiquidSemenNumber?.setText(userResponseModel._result.liquid_semen_sheep_number?.toString() ?: "")
@@ -104,7 +110,7 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                             mBinding?.etNoOfDosesOfSemenNeighbouringnLocation?.setText(userResponseModel._result.no_semen_neighboring_location ?: "")
                             mBinding?.etAvailabilityOfLiquidNitrogenNumber?.setText(userResponseModel._result.availability_liquid_nitrogen_number?.toString() ?: "")
                             mBinding?.etAvailabilityOfLiquidNitrogenLocation?.setText(userResponseModel._result.availability_liquid_nitrogen_location ?: "")
-                        }
+                        }}
                         else{
                             Utility.clearAllFormFilledID(requireContext())
                             listener?.onNextButtonClick()
@@ -125,6 +131,10 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
 
             }
             else{
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
                 saveDataApi()
             }
         }
@@ -137,6 +147,10 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
 
             }
             else {
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
                 saveDataApi()
 
             savedAsDraft=true}
@@ -213,10 +227,7 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                     Result::class.java
                 )?.user_id.toString(),
                 is_deleted = 0,
-                id = Preferences.getPreference_int(
-                    requireContext(),
-                    AppConstants.FORM_FILLED_ID
-                ),
+                id = itemId,
                 is_draft = 1
 
             )

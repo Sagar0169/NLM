@@ -35,6 +35,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
     private lateinit var mActivityMain: NLMIAForm
     private var listener: OnNextButtonClickListener? = null
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
+    private var savedAsEdit:Boolean=false
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var mBinding:FragmentNLSIAFormBinding?=null
 
@@ -97,6 +98,11 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
 
                       if (viewEdit=="view"||viewEdit=="edit")
                       {
+                          if (savedAsEdit)
+                          {
+                              listener?.onNextButtonClick()
+                          }
+                          else{
                           mBinding?.etNameAndLocationOfIa?.setText(userResponseModel._result.name_location_of_ai)
                           mBinding?.etDirectorDGCeoName?.setText(userResponseModel._result.director_dg_ceo_name)
                           mBinding?.etTechnicalStaffRegularDepute?.setText(userResponseModel._result.technical_staff_regular_employee.toString())
@@ -106,7 +112,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                           mBinding?.etOtherStaffEmployeeDepute?.setText(userResponseModel._result.other_staff_regular_employee.toString())
                           mBinding?.etOtherStaffManpowerDepute?.setText(userResponseModel._result.other_staff_manpower_deputed.toString())
                           mBinding?.etOrganisationalChart?.setText(userResponseModel._result.organizational_chart)
-                      }
+                      }}
                       else{
                           userResponseModel._result.id?.let { it1 ->
                               Preferences.setPreference_int(requireContext(),AppConstants.FORM_FILLED_ID,
@@ -163,8 +169,16 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
             }
 
             else{
-
-                saveDataApi()
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
+                  if(itemId!=null) {
+                      saveDataApi(itemId)
+                  }
+                else{
+                      saveDataApi(null)
+                  }
             }
         }
         fun saveAsDraft(view: View){
@@ -173,9 +187,16 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                 showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
             }
             else{
-
-
-                saveDataApi()
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
+                if(itemId!=null) {
+                    saveDataApi(itemId)
+                }
+                else{
+                    saveDataApi(null)
+                }
             savedAsDraft=true
         }}
     }
@@ -232,7 +253,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
 
         bottomSheetDialog.show()
     }
-    private  fun saveDataApi(){
+    private  fun saveDataApi(itemId: Int?){
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(
                 part = "part1",
@@ -249,6 +270,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
                 is_deleted = 0,
                 is_draft = 1,
+                id = itemId
             )
         )
     }

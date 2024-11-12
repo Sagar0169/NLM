@@ -7,6 +7,8 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.callBack.AddItemCallBackFundsRecieved
+import com.nlm.callBack.CallBackItemFundsReceivedListEdit
+import com.nlm.callBack.CallBackItemTypeIACompositionListEdit
 import com.nlm.databinding.ItemAvilabilityOfEquipmentBinding
 import com.nlm.databinding.ItemCompositionOfGoverningBinding
 import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
@@ -14,11 +16,14 @@ import com.nlm.databinding.ItemDistrictWiseNoNlsiaBinding
 import com.nlm.databinding.ItemFundsReceivedNlsiaBinding
 
 import com.nlm.databinding.ItemQualityBuckBinding
+import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyFundsReceived
+import com.nlm.utilities.showView
 
 class NlmIAFundsRecievedAdapter(
     private val programmeList: MutableList<ImplementingAgencyFundsReceived>,
-    private val viewEdit: String?
+    private val viewEdit: String?,
+    private val callBackEdit: CallBackItemFundsReceivedListEdit
     ) : RecyclerView.Adapter<NlmIAFundsRecievedAdapter.NlmIAFundsRecieved>() {
 
 
@@ -46,6 +51,9 @@ class NlmIAFundsRecievedAdapter(
             holder.binding.btnDelete.visibility= View.GONE
             holder.binding.tvSubmit.visibility= View.GONE
         }
+        else if (viewEdit=="edit"){
+            holder.binding.btnEdit.showView()
+        }
         holder.binding.etYear.setText(currentItem.year?.toString())
         holder.binding.etFormDahd.setText(currentItem.from_dahd?.toString())
         holder.binding.etStateGovt.setText(currentItem.state_govt?.toString())
@@ -56,6 +64,19 @@ class NlmIAFundsRecievedAdapter(
         holder.binding.btnDelete.setOnClickListener {
                 programmeList.removeAt(position)
                 notifyItemRemoved(position)
+        }
+        holder.binding.btnEdit.setOnClickListener{
+            callBackEdit.onClickItem(
+                ImplementingAgencyFundsReceived(
+                year = currentItem.year,
+                from_dahd = currentItem.from_dahd,
+                state_govt = currentItem.state_govt,
+                 any_other = currentItem.any_other,
+                physical_progress = currentItem.physical_progress,
+                id = currentItem.id,
+                implementing_agency_id = currentItem.implementing_agency_id
+            ),position)
+//            (context as NLSIAGoverningBodyBoardOfDirectorsFragment).compositionOfGoverningNlmIaDialog(context,1,
         }
     }
 

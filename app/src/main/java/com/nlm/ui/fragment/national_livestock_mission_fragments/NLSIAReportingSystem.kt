@@ -11,10 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.CallBackItemFundsReceivedListEdit
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAReportingSystemBinding
 import com.nlm.databinding.ItemFundsReceivedNlsiaBinding
+import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyFundsReceived
 import com.nlm.model.ImplementingAgencyProjectMonitoring
@@ -31,7 +33,8 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
 
-class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int?): BaseFragment<FragmentNLSIAReportingSystemBinding>() {
+class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int?): BaseFragment<FragmentNLSIAReportingSystemBinding>(),
+    CallBackItemFundsReceivedListEdit {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__reporting__system
 
@@ -42,6 +45,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
     private var nlmIAFundsRecievedAdapter: NlmIAFundsRecievedAdapter? = null
     private lateinit var nlmIAFundsRecievedList: MutableList<ImplementingAgencyFundsReceived>
     private var listener: OnNextButtonClickListener? = null
+    private var savedAsEdit:Boolean=false
 
     override fun init() {
         mBinding=viewDataBinding
@@ -87,6 +91,11 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                     {
                         if (viewEdit=="view"||viewEdit=="edit")
                         {
+                            if (savedAsEdit)
+                            {
+                                listener?.onNextButtonClick()
+                            }
+                            else {
                             mBinding?.etFrequencyOfMonitoring1?.setText(userResponseModel._result.frequency_of_monitoring_1)
                             mBinding?.etFrequencyOfMonitoring2?.setText(userResponseModel._result.frequency_of_monitoring_2)
                             mBinding?.etReportingMechanismToStateGovt1?.setText(userResponseModel._result.reporting_mechanism_1)
@@ -103,6 +112,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                                 )
                                 nlmIAFundsRecievedAdapter?.notifyDataSetChanged()
                             }
+                        }
                         }
                         else{
 
@@ -124,6 +134,10 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
 
             }
             else {
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
                 saveDataApi()
         }}
 
@@ -136,24 +150,28 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
 
             }
             else {
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
                 saveDataApi()
             savedAsDraft=true
         }}
         fun nlmIAFundsRecievedDialog(view: View) {
-            nlmIAFundsRecievedDialog(requireContext())
+            nlmIAFundsRecievedDialog(requireContext(),null,null)
         }
     }
 
     private fun nlmIAFundsRecievedAdapter() {
         nlmIAFundsRecievedList = mutableListOf()
         nlmIAFundsRecievedAdapter =
-            NlmIAFundsRecievedAdapter(nlmIAFundsRecievedList,viewEdit)
+            NlmIAFundsRecievedAdapter(nlmIAFundsRecievedList,viewEdit,this)
         mBinding?.rvFundRecieved?.adapter = nlmIAFundsRecievedAdapter
         mBinding?.rvFundRecieved?.layoutManager =
             LinearLayoutManager(requireContext())
     }
 
-    private fun nlmIAFundsRecievedDialog(context: Context) {
+    private fun nlmIAFundsRecievedDialog(context: Context, selectedItem: ImplementingAgencyFundsReceived?, position: Int?) {
         val bindingDialog: ItemFundsReceivedNlsiaBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_funds_received_nlsia,
@@ -171,8 +189,16 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
         )
         dialog.window!!.setGravity(Gravity.CENTER)
         bindingDialog.btnDelete.hideView()
+        bindingDialog.btnEdit.hideView()
         bindingDialog.tvSubmit.showView()
-
+        if(selectedItem!=null )
+        {
+            selectedItem.from_dahd?.toString().let { bindingDialog.etFormDahd.setText(it) }
+            selectedItem.state_govt?.toString().let { bindingDialog.etStateGovt.setText(it) }
+            selectedItem.any_other?.toString().let { bindingDialog.etAnyOther.setText(it) }
+            selectedItem.physical_progress?.toString().let { bindingDialog.etPhysicalProgress.setText(it) }
+            bindingDialog.etYear.setText(selectedItem.year.toString())
+        }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etYear.text.toString()
                     .isNotEmpty() || bindingDialog.etFormDahd.text.toString()
@@ -180,6 +206,23 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                     .isNotEmpty() || bindingDialog.etAnyOther.text.toString().isNotEmpty()
                                   || bindingDialog.etPhysicalProgress.text.toString().isNotEmpty()
             ) {
+                if(selectedItem!=null)
+                {
+                    if (position != null) {
+
+                        nlmIAFundsRecievedList[position] = ImplementingAgencyFundsReceived(
+                            bindingDialog.etYear.text.toString(),
+                            bindingDialog.etFormDahd.text.toString().toIntOrNull(),
+                            bindingDialog.etStateGovt.text.toString().toIntOrNull(),
+                            bindingDialog.etAnyOther.text.toString().toIntOrNull(),
+                            bindingDialog.etPhysicalProgress.text.toString().toIntOrNull(),
+                            selectedItem.id,
+                            selectedItem.implementing_agency_id,
+
+                            )
+                        nlmIAFundsRecievedAdapter?.notifyItemChanged(position)
+                    }  }
+                    else{
                 nlmIAFundsRecievedList.add(
                     ImplementingAgencyFundsReceived(
                         bindingDialog.etYear.text.toString(),
@@ -194,7 +237,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                 )
                 nlmIAFundsRecievedList.size.minus(1).let {
                     nlmIAFundsRecievedAdapter?.notifyItemInserted(it)
-                }
+                }}
                 dialog.dismiss()
             } else {
                 showSnackbar(
@@ -242,10 +285,15 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                 submission_of_quarterly_2 = mBinding?.etSubmission2?.text.toString(),
                 studies_surveys_conducted = mBinding?.etStudiesConducted?.text.toString(),
                 implementing_agency_funds_received = nlmIAFundsRecievedList,
-                id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                id = itemId,
                 is_draft = 1,
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString()
             )
         )
+    }
+
+    override fun onClickItem(selectedItem: ImplementingAgencyFundsReceived, position: Int) {
+        nlmIAFundsRecievedDialog(requireContext(),selectedItem,position)
     }
 
 }
