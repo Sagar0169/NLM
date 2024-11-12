@@ -296,6 +296,7 @@ data class StateSemenInfraGoat(
     val infrastructure_list_of_equipment: String?,
     val infrastructure_year_of_procurement: String?,
     val id: Int?,
+    val infra_goat_id:Int?
 )
 
 data class RspBasicInfoEquipment(

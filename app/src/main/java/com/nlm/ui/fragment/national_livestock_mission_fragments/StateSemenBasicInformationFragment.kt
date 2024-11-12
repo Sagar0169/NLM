@@ -9,7 +9,6 @@ import android.graphics.drawable.RotateDrawable
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -23,20 +22,13 @@ import com.nlm.R
 import com.nlm.callBack.CallBackItemManPower
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
-import com.nlm.databinding.FragmentNLSIAFormBinding
 import com.nlm.databinding.FragmentStateSemenBasicInformationBinding
 import com.nlm.databinding.ItemStateSemenManpowerBinding
 import com.nlm.model.GetDropDownRequest
-import com.nlm.model.IdAndDetails
-import com.nlm.model.ImplementingAgencyAddRequest
-import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankOtherAddManpower
-import com.nlm.model.StateSemenBankOtherManpower
-import com.nlm.model.StateSemenBankRequest
-import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.RspManPowerAdapter
@@ -208,7 +200,7 @@ class StateSemenBasicInformationFragment(
                                 listener?.onNextButtonClick()
                                 return@observe
                             }
-                            districtId=userResponseModel._result.district_code
+                            districtId = userResponseModel._result.district_code
                             mBinding?.etLocation?.setText(userResponseModel._result.location)
                             mBinding?.tvDistrict?.text = userResponseModel._result.district_name
                             mBinding?.tvSemenStation?.text =
