@@ -1,5 +1,6 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -36,7 +37,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
     private var savedAsDraft:Boolean=false
     private lateinit var tabLayout: TabLayout
     private lateinit var bottomSheetAdapter: StateAdapter
-    protected lateinit var mActivityMain: NLMIAForm
+    private lateinit var mActivityMain: NLMIAForm
     private var listener: OnNextButtonClickListener? = null
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -118,6 +119,8 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                                   it1
                               )
                           }
+                          Log.d("ID_response",userResponseModel._result.id.toString())
+                          mActivityMain.itemId=userResponseModel._result.id
                           listener?.onNextButtonClick()
                           showSnackbar(mBinding!!.clParent, userResponseModel.message)
                       }
@@ -149,45 +152,38 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
             {
                 listener?.onNextButtonClick()
             }
-            viewModel.getImplementingAgencyAddApi(requireContext(),true,
-                ImplementingAgencyAddRequest(
-                    part = "part1",
-                    state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
-                    name_location_of_ai = mBinding?.etNameAndLocationOfIa?.text.toString(),
-                    director_dg_ceo_name = mBinding?.etDirectorDGCeoName?.text.toString(),
-                    technical_staff_regular_employee = mBinding?.etTechnicalStaffRegularDepute?.text.toString().toIntOrNull(),
-                    technical_staff_manpower_deputed = mBinding?.etTechnicalStaffManpowerDepute?.text.toString().toIntOrNull(),
-                    admn_staff_regular_employee = mBinding?.etAdminStaffEmployeeDepute?.text.toString().toIntOrNull(),
-                    admn_staff_manpower_deputed = mBinding?.etAdminStaffManpowerDepute?.text.toString().toIntOrNull(),
-                    other_staff_regular_employee = mBinding?.etOtherStaffEmployeeDepute?.text.toString().toIntOrNull(),
-                    other_staff_manpower_deputed = mBinding?.etOtherStaffManpowerDepute?.text.toString().toIntOrNull(),
-                    organizational_chart = mBinding?.etOrganisationalChart?.text.toString(),
-                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                    is_deleted = 0,
-                )
-            )
+            val stateText = mBinding?.etState?.text?.toString()?.trim().orEmpty()
+            val nameAndLocationText = mBinding?.etNameAndLocationOfIa?.text?.toString()?.trim().orEmpty()
+            val directorDGCeoNameText = mBinding?.etDirectorDGCeoName?.text?.toString()?.trim().orEmpty()
+            if ( stateText.isEmpty())
+            {
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+            }
+           else if ( nameAndLocationText.isEmpty())
+            {
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+            }
+          else if ( directorDGCeoNameText.isEmpty())
+            {
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+            }
+
+            else{
+
+                saveDataApi()
+            }
         }
         fun saveAsDraft(view: View){
-            viewModel.getImplementingAgencyAddApi(requireContext(),true,
-                ImplementingAgencyAddRequest(
-                    part = "part1",
-                    state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
-                    name_location_of_ai = mBinding?.etNameAndLocationOfIa?.text.toString(),
-                    director_dg_ceo_name = mBinding?.etDirectorDGCeoName?.text.toString(),
-                    technical_staff_regular_employee = mBinding?.etTechnicalStaffRegularDepute?.text.toString().toIntOrNull(),
-                    technical_staff_manpower_deputed = mBinding?.etTechnicalStaffManpowerDepute?.text.toString().toIntOrNull(),
-                    admn_staff_regular_employee = mBinding?.etAdminStaffEmployeeDepute?.text.toString().toIntOrNull(),
-                    admn_staff_manpower_deputed = mBinding?.etAdminStaffManpowerDepute?.text.toString().toIntOrNull(),
-                    other_staff_regular_employee = mBinding?.etOtherStaffEmployeeDepute?.text.toString().toIntOrNull(),
-                    other_staff_manpower_deputed = mBinding?.etOtherStaffManpowerDepute?.text.toString().toIntOrNull(),
-                    organizational_chart = mBinding?.etOrganisationalChart?.text.toString(),
-                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                    is_deleted = 0,
-                    is_draft = 1,
-                )
-            )
+            if (mBinding?.etState?.text.isNullOrEmpty() && mBinding?.etNameAndLocationOfIa?.text.isNullOrEmpty() && mBinding?.etDirectorDGCeoName?.text.isNullOrEmpty() )
+            {
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+            }
+            else{
+
+
+                saveDataApi()
             savedAsDraft=true
-        }
+        }}
     }
     private fun ViewEditApi(){
 
@@ -241,6 +237,26 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
         bottomSheetDialog.setContentView(view)
 
         bottomSheetDialog.show()
+    }
+    private  fun saveDataApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                part = "part1",
+                state_code = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.state_code,
+                name_location_of_ai = mBinding?.etNameAndLocationOfIa?.text.toString(),
+                director_dg_ceo_name = mBinding?.etDirectorDGCeoName?.text.toString(),
+                technical_staff_regular_employee = mBinding?.etTechnicalStaffRegularDepute?.text.toString().toIntOrNull(),
+                technical_staff_manpower_deputed = mBinding?.etTechnicalStaffManpowerDepute?.text.toString().toIntOrNull(),
+                admn_staff_regular_employee = mBinding?.etAdminStaffEmployeeDepute?.text.toString().toIntOrNull(),
+                admn_staff_manpower_deputed = mBinding?.etAdminStaffManpowerDepute?.text.toString().toIntOrNull(),
+                other_staff_regular_employee = mBinding?.etOtherStaffEmployeeDepute?.text.toString().toIntOrNull(),
+                other_staff_manpower_deputed = mBinding?.etOtherStaffManpowerDepute?.text.toString().toIntOrNull(),
+                organizational_chart = mBinding?.etOrganisationalChart?.text.toString(),
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                is_deleted = 0,
+                is_draft = 1,
+            )
+        )
     }
 
 

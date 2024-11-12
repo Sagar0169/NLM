@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -133,39 +134,28 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
           compositionOfGoverningNlmIaDialog(requireContext())
       }
         fun saveAndNext(view: View) {
-            viewModel.getImplementingAgencyAddApi(
-                context = requireContext(), loader = true,
-                request = ImplementingAgencyAddRequest(
-                    part = "part5",
-                    no_of_al_technicians = mBinding?.etNoOfAiTechnician?.text.toString().toIntOrNull(),
-                    number_of_ai = mBinding?.etNumberOfAiTechnicianTrained?.text.toString().toIntOrNull(),
-                    total_paravet_trained = mBinding?.etTotalNoOfParavetTrained?.text.toString().toIntOrNull(),
-                    implementing_agency_involved_district_wise = mNlmIADistrictWiseNoList,
-                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                    implementing_agency_document = null,
-                    is_deleted = 0,
-                    id =Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-                )
-            )
-        }
+            if (itemId==0)
+            {
+                activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+                listener?.onNavigateToFirstFragment()
+
+            }
+            else {
+                saveDataApi()
+        }}
         fun saveAsDraft(view: View) {
-            viewModel.getImplementingAgencyAddApi(
-                context = requireContext(), loader = true,
-                request = ImplementingAgencyAddRequest(
-                    part = "part5",
-                    no_of_al_technicians = mBinding?.etNoOfAiTechnician?.text.toString().toIntOrNull(),
-                    number_of_ai = mBinding?.etNumberOfAiTechnicianTrained?.text.toString().toIntOrNull(),
-                    total_paravet_trained = mBinding?.etTotalNoOfParavetTrained?.text.toString().toIntOrNull(),
-                    implementing_agency_involved_district_wise = mNlmIADistrictWiseNoList,
-                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                    implementing_agency_document = null,
-                    is_deleted = 0,
-                    id =Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-                    is_draft = 1
-                )
-            )
+            if (itemId==0)
+            {
+                activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+                listener?.onNavigateToFirstFragment()
+
+            }
+            else {
+                saveDataApi()
             savedAsDraft=true
-        }
+        }}
     }
     private fun showBottomSheetDialog(type: String,textView: TextView) {
         // Initialize the BottomSheetDialog
@@ -298,4 +288,21 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
             )
         )
     }
+   private fun saveDataApi(){
+       viewModel.getImplementingAgencyAddApi(
+           context = requireContext(), loader = true,
+           request = ImplementingAgencyAddRequest(
+               part = "part5",
+               no_of_al_technicians = mBinding?.etNoOfAiTechnician?.text.toString().toIntOrNull(),
+               number_of_ai = mBinding?.etNumberOfAiTechnicianTrained?.text.toString().toIntOrNull(),
+               total_paravet_trained = mBinding?.etTotalNoOfParavetTrained?.text.toString().toIntOrNull(),
+               implementing_agency_involved_district_wise = mNlmIADistrictWiseNoList,
+               user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+               implementing_agency_document = null,
+               is_deleted = 0,
+               id =Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+               is_draft = 1
+           )
+       )
+   }
 }

@@ -1,5 +1,7 @@
 package com.nlm.ui.adapter.rgm
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,14 +9,17 @@ import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemArtificialInsemenationFormsBinding
 import com.nlm.model.ArtificialInsemenation
 import com.nlm.model.DataArtificialInsemination
 import com.nlm.ui.activity.national_livestock_mission.ArtificialInseminationForms
+import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
-class Artificial_Insemination_adapter(private val implementingAgencyList: List<DataArtificialInsemination>, val Role_name:String) :
+class Artificial_Insemination_adapter(val context: Context, private val implementingAgencyList: ArrayList<DataArtificialInsemination>, val Role_name:String,private val callBackDeleteAtId: CallBackDeleteAtId) :
     RecyclerView.Adapter<Artificial_Insemination_adapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
@@ -41,7 +46,7 @@ class Artificial_Insemination_adapter(private val implementingAgencyList: List<D
     }
 
     // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: ImplementingAgencyViewholder, position: Int) {
+    override fun onBindViewHolder(holder: ImplementingAgencyViewholder, @SuppressLint("RecyclerView") position: Int) {
 
         val item = implementingAgencyList[position]
         if (Role_name=="Super Admin")
@@ -80,6 +85,20 @@ class Artificial_Insemination_adapter(private val implementingAgencyList: List<D
         else{
             holder.mBinding.ivEdit.hideView()
         }
+        holder.mBinding.ivDelete.setOnClickListener {
+            Utility.showConfirmationAlertDialog(
+                context,
+                object :
+                    DialogCallback {
+                    override fun onYes() {
+                        if (item != null) {
+                            callBackDeleteAtId.onClickItem(item.id,position)
+                        }
+                    }
+                },
+                context.getString(R.string.are_you_sure_want_to_delete_your_post)
+            )
+        }
 
 
 //
@@ -116,6 +135,10 @@ class Artificial_Insemination_adapter(private val implementingAgencyList: List<D
 
     override fun getItemViewType(position: Int): Int {
         return position
+    }
+    fun onDeleteButtonClick(position: Int) {
+        implementingAgencyList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
 }

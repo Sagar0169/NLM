@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.callBack.OnBackSaveAsDraft
@@ -151,48 +152,30 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
     }
 
     inner class ClickActions {
+
         fun saveAndNext(view: View){
-            viewModel.getImplementingAgencyAddApi(requireContext(),true,
-                ImplementingAgencyAddRequest(
-                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                    part = "part7",
-                    assessments_of_green = mBinding?.etAssessmentOfGreen?.text.toString(),
-                    availability_of_green_area = mBinding?.etAvailabilityOfGreen?.text.toString(),
-                    availability_of_dry = mBinding?.etAvailibilityOfDry?.text.toString(),
-                    availability_of_concentrate = mBinding?.AvailabilityOfConcentrate?.text.toString(),
-                    availability_of_common = mBinding?.etAvailabilityCommon?.text.toString(),
-                    efforts_of_state = mBinding?.etEffortsOfState?.text.toString(),
-                    name_of_the_agency = mBinding?.etNameOfAgency?.text.toString(),
-                    quantity_of_fodder = mBinding?.etQuantityOfFodder?.text.toString(),
-                    distribution_channel =mBinding?.etDistributionChannel?.text.toString() ,
-                    number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
-                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+            if (itemId==0)
+            {
+                activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+                listener?.onNavigateToFirstFragment()
 
-                )
-
-            )
-        }
+            }
+            else {
+                saveDataApi()
+        }}
         fun saveAsDraft(view: View){
-            viewModel.getImplementingAgencyAddApi(requireContext(),true,
-                ImplementingAgencyAddRequest(
-                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                    part = "part7",
-                    assessments_of_green = mBinding?.etAssessmentOfGreen?.text.toString(),
-                    availability_of_green_area = mBinding?.etAvailabilityOfGreen?.text.toString(),
-                    availability_of_dry = mBinding?.etAvailibilityOfDry?.text.toString(),
-                    availability_of_concentrate = mBinding?.AvailabilityOfConcentrate?.text.toString(),
-                    availability_of_common = mBinding?.etAvailabilityCommon?.text.toString(),
-                    efforts_of_state = mBinding?.etEffortsOfState?.text.toString(),
-                    name_of_the_agency = mBinding?.etNameOfAgency?.text.toString(),
-                    quantity_of_fodder = mBinding?.etQuantityOfFodder?.text.toString(),
-                    distribution_channel =mBinding?.etDistributionChannel?.text.toString() ,
-                    number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
-                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-                    is_draft = 1,
-                    )
-            )
+            if (itemId==0)
+            {
+                activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+                listener?.onNavigateToFirstFragment()
+
+            }
+            else {
+                saveDataApi()
             savedAsDraft=true
-        }
+        }}
         fun addDocDialog(view: View){
             AddDocumentDialog(requireContext())
         }
@@ -312,6 +295,26 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
                 is_deleted = 0,
                 is_type = viewEdit
+            )
+        )
+    }
+    private fun saveDataApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                part = "part7",
+                assessments_of_green = mBinding?.etAssessmentOfGreen?.text.toString(),
+                availability_of_green_area = mBinding?.etAvailabilityOfGreen?.text.toString(),
+                availability_of_dry = mBinding?.etAvailibilityOfDry?.text.toString(),
+                availability_of_concentrate = mBinding?.AvailabilityOfConcentrate?.text.toString(),
+                availability_of_common = mBinding?.etAvailabilityCommon?.text.toString(),
+                efforts_of_state = mBinding?.etEffortsOfState?.text.toString(),
+                name_of_the_agency = mBinding?.etNameOfAgency?.text.toString(),
+                quantity_of_fodder = mBinding?.etQuantityOfFodder?.text.toString(),
+                distribution_channel =mBinding?.etDistributionChannel?.text.toString() ,
+                number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
+                id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                is_draft = 1,
             )
         )
     }

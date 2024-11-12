@@ -54,8 +54,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         implementingAgencyAdapter()
-        Toast.makeText(this,Preferences.getPreference_int(this,AppConstants.FORM_FILLED_ID).toString(),
-            Toast.LENGTH_LONG).show()
+
         swipeForRefreshImplementingAgency()
     }
 
@@ -167,8 +166,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
              nameOfLocation = data.getStringExtra("nameLocation").toString()
             // Log the data
             implementingAgencyAPICall(paginate = false, loader = true, nameOfLocation)
-            Log.d("FilterResult", "Received data from FilterStateActivity: $nameOfLocation")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $stateId")
+
         }
     }
 

@@ -249,8 +249,8 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="verification_of_tendering_process_sample_purchase_order_copies_photographs"><![CDATA[Verification of Tendering process (Sample purchase order copies & photographs)]]></string>
     <string name="feedback_promptness_quality_of_service"><![CDATA[Feedback-Promptness & Quality of service]]></string>
     <string name="name_of_the_retail_shop_milk_parlour_visited">Name of the Retail Shop\n/Milk Parlour Visited</string>
-    <string name="name_and_location_of_ia">Name and Location of IA</string>
-    <string name="director_dg_ceo_name">Director / DG / CEO - Name*</string>
+    <string name="name_and_location_of_ia">Name and Location of IA<font color="#FF0000">*</font></string>
+    <string name="director_dg_ceo_name">Director / DG / CEO - Name<font color="#FF0000">*</font></string>
     <string name="other_staff">Other Staff:</string>
     <string name="no_regular_employee_deputation">No. Regular employee/deputation</string>
     <string name="no_manpower_deputed">No.manpower Deputed</string>
@@ -273,7 +273,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="month_of_installati_on_make"><![CDATA[Month of installati on & make]]></string>
     <string name="glasswares_chemicals"><![CDATA[Glasswares & Chemicals]]></string>
     <string name="civil_work_including_electrical_interiors"><![CDATA[Civil Work (including electrical & Interiors)]]></string>
-    <string name="name_of_state">Name of State</string>
+    <string name="name_of_state">Name of State<font color="#FF0000">*</font></string>
     <string name="composition_of_governing_body_board_of_directors_of_regional_semen_bank">Composition of Governing Body / Board of Directors of Regional semen bank:</string>
     <string name="rsp_labotary_semen">Rsp Labotary Semen</string>
     <string name="location">Location*</string>

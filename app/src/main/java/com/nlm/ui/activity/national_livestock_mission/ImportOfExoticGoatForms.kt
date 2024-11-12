@@ -49,11 +49,12 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     private var AchievementAdapter: ImportExoticAchivementAdapter?=null
     private var VerifiedNlmAdapter: ImportOfExoticGoatVerifiedNlmAdapter?=null
     private lateinit var DocumentList: MutableList<ImplementingAgencyDocument>
-    private lateinit var DetailOfImportList: MutableList<ImportOfExoticGoatDetailImport>
-    private lateinit var AchievementList: MutableList<ImportOfExoticGoatAchievement>
-    private lateinit var VerifiedNlmList: MutableList<ImportOfExoticGoatVerifiedNlm>
+    private  var DetailOfImportList: MutableList<ImportOfExoticGoatDetailImport>? =null
+    private  var AchievementList: MutableList<ImportOfExoticGoatAchievement>?=null
+    private  var VerifiedNlmList: MutableList<ImportOfExoticGoatVerifiedNlm>?=null
     private var DialogDocName: TextView?=null
     private var DocumentName:String?=null
+    private var savedAsDraft:Boolean=false
     var body: MultipartBody.Part? = null
     val viewModel = ViewModel()
     var selectedValue: Int = 1
@@ -85,6 +86,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
 //            mBinding?.etStateIa?.text= getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_name
 //            mBinding?.etStateIa?.isEnabled=false
             mBinding?.rbMentally?.isEnabled=false
+            mBinding?.rbMentallyYes?.isEnabled=false
+            mBinding?.rbMentallyNo?.isEnabled=false
             ViewEditApi()
         }
         if(viewEdit=="edit"){
@@ -107,21 +110,49 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 if(userResponseModel._resultflag==0){
                     showSnackbar(mBinding!!.main, userResponseModel.message)
                 }
+
                 else{
+                    if (viewEdit=="view"||viewEdit=="edit")
+                    {
+                        AchievementList?.clear()
+                        VerifiedNlmList?.clear()
+                        DetailOfImportList?.clear()
+                        userResponseModel._result.import_of_exotic_goat_achievement?.let { it1 ->
+                            AchievementList?.addAll(
+                                it1
+                            )
+                        }
+                        userResponseModel._result.import_of_exotic_goat_verified_nlm?.let { it1 ->
+                            VerifiedNlmList?.addAll(
+                                it1
+                            )
+                        }
+                        userResponseModel._result.import_of_exotic_goat_detail_import?.let { it1 ->
+                            DetailOfImportList?.addAll(
+                                it1
+                            )
+                        }
+                        AchievementAdapter?.notifyDataSetChanged()
+                        DetailOfImportAdapter?.notifyDataSetChanged()
+                        VerifiedNlmAdapter?.notifyDataSetChanged()
+                        if (userResponseModel._result.comment_by_nlm_whether==1)
+                        {
+                            mBinding?.rbMentallyYes?.isChecked=true
+                        }
+                        else{
+                            mBinding?.rbMentallyNo?.isChecked=true
+                        }
+                    }
+                    if (savedAsDraft)
+                    {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
                     showSnackbar(mBinding!!.main, userResponseModel.message)
                 }
-//                else{
-//                    if (savedAsDraft)
-//                    {
-//                        savedAsDraftClick?.onSaveAsDraft()
-//                    }
-//                    else{
-//                        Preferences.setPreference_int(requireContext(),AppConstants.FORM_FILLED_ID,userResponseModel._result.id)
-//                        listener?.onNextButtonClick()
-//                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
-//                    }
-//
-//                }
+
+
+
+
             }
         }
     }
@@ -131,21 +162,11 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             onBackPressedDispatcher.onBackPressed()
         }
         fun saveAndNext(view: View){
-            viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
-                ImportExoticGoatAddEditRequest(
-                     comment_by_nlm_whether = selectedValue,
-                    import_of_exotic_goat_detail_import = DetailOfImportList,
-                    import_of_exotic_goat_achievement = AchievementList,
-                    import_of_exotic_goat_verified_nlm = VerifiedNlmList,
-                    state_code = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.state_code,
-                    user_id = getPreferenceOfScheme(
-                        this@ImportOfExoticGoatForms,
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.user_id.toString(),
-                    role_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id,
-                )
-            )
+            saveDataApi()
+        }
+        fun saveAsDraft(view: View){
+            saveDataApi()
+            savedAsDraft=true
         }
         fun addDocument(view: View){
             AddDocumentDialog(this@ImportOfExoticGoatForms)
@@ -166,17 +187,17 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         mBinding?.AddDocumentRv?.layoutManager = LinearLayoutManager(this)
     }
     private fun AddImportDetailAdapter(){
-        DetailOfImportAdapter= ImportExoticAdapterDetailOfImport(DetailOfImportList)
+        DetailOfImportAdapter= DetailOfImportList?.let { ImportExoticAdapterDetailOfImport(it,viewEdit) }
         mBinding?.DetailImportRv?.adapter = DetailOfImportAdapter
         mBinding?.DetailImportRv?.layoutManager = LinearLayoutManager(this)
     }
     private fun AddAcheivementAdapter(){
-        AchievementAdapter= ImportExoticAchivementAdapter(AchievementList)
+        AchievementAdapter= AchievementList?.let { ImportExoticAchivementAdapter(it,viewEdit) }
         mBinding?.AchivementRv?.adapter = AchievementAdapter
         mBinding?.AchivementRv?.layoutManager = LinearLayoutManager(this)
     }
     private fun AddVerifiedAdapter(){
-        VerifiedNlmAdapter= ImportOfExoticGoatVerifiedNlmAdapter(VerifiedNlmList)
+        VerifiedNlmAdapter= VerifiedNlmList?.let { ImportOfExoticGoatVerifiedNlmAdapter(it,viewEdit) }
         mBinding?.VerifiedNlmRv?.adapter = VerifiedNlmAdapter
         mBinding?.VerifiedNlmRv?.layoutManager = LinearLayoutManager(this)
     }
@@ -250,7 +271,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etSpeciesBreed.text.toString().isNotEmpty()||bindingDialog.etUnit.text.toString().isNotEmpty()||bindingDialog.etYear.text.toString().isNotEmpty()||bindingDialog.etProcurementCost.text.toString().isNotEmpty()||bindingDialog.etPlaceOfProcurement.text.toString().isNotEmpty()||bindingDialog.etPlaceOfInduction.text.toString().isNotEmpty())
             {
-                DetailOfImportList.add(ImportOfExoticGoatDetailImport(
+                DetailOfImportList?.add(ImportOfExoticGoatDetailImport(
                     species_breed =bindingDialog.etSpeciesBreed.text.toString(),
                     unit = bindingDialog.etUnit.text.toString(),
                     year = bindingDialog.etYear.text.toString(),
@@ -260,8 +281,10 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     import_of_exotic_goat_id = null,
                     id = null,
                 ))
-                DetailOfImportList.size.minus(1).let {
-                    DetailOfImportAdapter?.notifyItemInserted(it)
+                DetailOfImportList?.size?.minus(1).let {
+                    if (it != null) {
+                        DetailOfImportAdapter?.notifyItemInserted(it)
+                    }
                     dialog.dismiss()
                 }
             }
@@ -296,7 +319,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etNoOfAnimals.text.toString().isNotEmpty()||bindingDialog.etF1Generation.text.toString().isNotEmpty()||bindingDialog.etF2Generation.text.toString().isNotEmpty()||bindingDialog.etNoOfAnimalsDistributedF1.text.toString().isNotEmpty()||bindingDialog.etNoOfAnimalsDistributedF2.text.toString().isNotEmpty()||bindingDialog.etPerformanceOfTheAnimals.text.toString().isNotEmpty()||bindingDialog.etBalance.text.toString().isNotEmpty())
             {
-                AchievementList.add(ImportOfExoticGoatAchievement(
+                AchievementList?.add(ImportOfExoticGoatAchievement(
                  number_of_animals = bindingDialog.etNoOfAnimals.text.toString().toInt(),
                     f1_generation_produced = bindingDialog.etF1Generation.text.toString(),
                     f2_generation_produced = bindingDialog.etF2Generation.text.toString(),
@@ -307,8 +330,10 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     import_of_exotic_goat_id = null,
                     id = null,
                 ))
-                AchievementList.size.minus(1).let {
-                    AchievementAdapter?.notifyItemInserted(it)
+                AchievementList?.size?.minus(1).let {
+                    if (it != null) {
+                        AchievementAdapter?.notifyItemInserted(it)
+                    }
                     dialog.dismiss()
                 }
             }
@@ -342,7 +367,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etSpeciesBreed.text.toString().isNotEmpty()||bindingDialog.etYear.text.toString().isNotEmpty()||bindingDialog.etF1GenerationProduced.text.toString().isNotEmpty()||bindingDialog.etF2GenerationProduced.text.toString().isNotEmpty()||bindingDialog.etF2GenerationDistributed.text.toString().isNotEmpty())
             {
-                VerifiedNlmList.add(ImportOfExoticGoatVerifiedNlm(
+                VerifiedNlmList?.add(ImportOfExoticGoatVerifiedNlm(
                     number_of_animals = bindingDialog.etF2GenerationDistributed.text.toString().toInt(),
                     f1_generation_produced = bindingDialog.etF1GenerationProduced.text.toString(),
                     f2_generation_produced = bindingDialog.etF2GenerationProduced.text.toString(),
@@ -352,8 +377,10 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     id = null,
                     species_breed = bindingDialog.etSpeciesBreed.text.toString(),
                 ))
-                VerifiedNlmList.size.minus(1).let {
-                    VerifiedNlmAdapter?.notifyItemInserted(it)
+                VerifiedNlmList?.size?.minus(1).let {
+                    if (it != null) {
+                        VerifiedNlmAdapter?.notifyItemInserted(it)
+                    }
                     dialog.dismiss()
                 }
             }
@@ -411,21 +438,44 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             }}
     }
     private fun ViewEditApi(){
-//        viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
-//            ImportExoticGoatAddEditRequest(
-//                comment_by_nlm_whether = selectedValue,
-//                import_of_exotic_goat_detail_import = DetailOfImportList,
-//                import_of_exotic_goat_achievement = AchievementList,
-//                import_of_exotic_goat_verified_nlm = VerifiedNlmList,
-//                state_code = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.state_code,
-//                user_id = getPreferenceOfScheme(
-//                    this@ImportOfExoticGoatForms,
-//                    AppConstants.SCHEME,
-//                    Result::class.java
-//                )?.user_id.toString(),
-//                role_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id,
-//            )
-//        )
+        viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
+            ImportExoticGoatAddEditRequest(
+                comment_by_nlm_whether = null,
+                import_of_exotic_goat_detail_import = null,
+                import_of_exotic_goat_achievement = null,
+                import_of_exotic_goat_verified_nlm = null,
+                state_code = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this@ImportOfExoticGoatForms,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                role_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                is_type = viewEdit,
+                id = itemId,
+                is_draft = null
+            )
+        )
+    }
+    private fun saveDataApi(){
+        viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
+            ImportExoticGoatAddEditRequest(
+                comment_by_nlm_whether = selectedValue,
+                import_of_exotic_goat_detail_import = DetailOfImportList,
+                import_of_exotic_goat_achievement = AchievementList,
+                import_of_exotic_goat_verified_nlm = VerifiedNlmList,
+                state_code = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this@ImportOfExoticGoatForms,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                role_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                is_type = null,
+                id = null,
+                is_draft=1
+            )
+        )
     }
 
 }

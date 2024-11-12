@@ -15,6 +15,7 @@ import com.nlm.model.ImportOfExoticGoatDetailImport
 
 class ImportExoticAdapterDetailOfImport(
     private val programmeList: MutableList<ImportOfExoticGoatDetailImport>,
+    private var viewEdit: String?
 ) : RecyclerView.Adapter<ImportExoticAdapterDetailOfImport.ImportExoticAdapterDetailOfImportViewHolder>() {
 
 
@@ -32,6 +33,16 @@ class ImportExoticAdapterDetailOfImport(
 
          val items=programmeList[position]
         // Handle visibility of add/delete buttons
+         if (viewEdit=="view")
+         {
+             holder.binding.etSpeciesBreed.isEnabled=false
+             holder.binding.etYear.isEnabled=false
+             holder.binding.etPlaceOfProcurement.isEnabled=false
+             holder.binding.etPlaceOfInduction.isEnabled=false
+             holder.binding.etProcurementCost.isEnabled=false
+             holder.binding.etUnit.isEnabled=false
+             holder.binding.btnDelete.visibility= View.GONE
+         }
 
         holder.binding.etSpeciesBreed.setText(items.species_breed)
         holder.binding.etYear.setText(items.year)

@@ -578,9 +578,9 @@ data class ResultIEG(
     val comment_by_nlm_whether: Int,
     val created_by: Int,
     val id: Int,
-    val import_of_exotic_goat_achievement: List<ImportOfExoticGoatAchievement>,
-    val import_of_exotic_goat_detail_import: List<ImportOfExoticGoatDetailImport>,
-    val import_of_exotic_goat_verified_nlm: List<ImportOfExoticGoatVerifiedNlm>
+    val import_of_exotic_goat_achievement: List<ImportOfExoticGoatAchievement>?,
+    val import_of_exotic_goat_detail_import: List<ImportOfExoticGoatDetailImport>?,
+    val import_of_exotic_goat_verified_nlm: List<ImportOfExoticGoatVerifiedNlm>?
 )
 
 data class ArtificialInseminationDocumentResponse(

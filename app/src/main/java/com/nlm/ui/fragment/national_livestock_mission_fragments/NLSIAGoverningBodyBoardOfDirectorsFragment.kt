@@ -8,6 +8,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.callBack.CallBackItemTypeIACompositionListEdit
@@ -140,27 +141,29 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
 
     inner class ClickActions {
         fun saveAndNext(view: View) {
-       viewModel.getImplementingAgencyAddApi(requireContext(),true,
-           ImplementingAgencyAddRequest(
-               part = "part3",
-               implementing_agency_advisory_committee = nlmIACompositionOFGoverningList,
-               implementing_agency_project_monitoring = nlmIAProjectMonitoringCommitteeList,
-               id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-               )
-       )
+            if (itemId==0)
+            {
+                activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+                listener?.onNavigateToFirstFragment()
+
+            }
+            else {
+                saveDataApi()}
    }
         fun saveAsDraft(view: View) {
-            viewModel.getImplementingAgencyAddApi(requireContext(),true,
-                ImplementingAgencyAddRequest(
-                    part = "part3",
-                    implementing_agency_advisory_committee = nlmIACompositionOFGoverningList,
-                    implementing_agency_project_monitoring = nlmIAProjectMonitoringCommitteeList,
-                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-                )
-            )
+            if (itemId==0)
+            {
+                activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+                listener?.onNavigateToFirstFragment()
+
+            }
+            else {
+                saveDataApi()
             savedAsDraft=true
 
-        }
+        }}
 
         fun compositionOfGoverningNlmIaDialog(view: View) {
             compositionOfGoverningNlmIaDialog(requireContext(),1,null)
@@ -276,5 +279,16 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
 
     override fun onClickItem(selectedItem: IdAndDetails) {
         compositionOfGoverningNlmIaDialog(requireContext(),1,selectedItem)
+    }
+    private fun saveDataApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                part = "part3",
+                implementing_agency_advisory_committee = nlmIACompositionOFGoverningList,
+                implementing_agency_project_monitoring = nlmIAProjectMonitoringCommitteeList,
+                id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                is_draft = 1
+            )
+        )
     }
 }
