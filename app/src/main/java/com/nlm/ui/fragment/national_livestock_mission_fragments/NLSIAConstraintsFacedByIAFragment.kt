@@ -26,6 +26,7 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
     private var mBinding: FragmentNLSIAConstraintsFacedByIABinding?=null
     private var viewModel = ViewModel()
     private var savedAsDraft:Boolean=false
+    private var savedAsEdit:Boolean=false
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private var listener: OnNextButtonClickListener? = null
     override fun init() {
@@ -74,12 +75,17 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
                     {
                         if (viewEdit=="view"||viewEdit=="edit")
                         {
-                            mBinding?.etInfrastructural?.setText(userResponseModel._result.infrastructural)
-                            mBinding?.etOrganizational?.setText(userResponseModel._result.organizational)
-                            mBinding?.etFunds?.setText(userResponseModel._result.funds)
-                            mBinding?.etAnyOther?.setText(userResponseModel._result.any_other)
-                            mBinding?.etAnyOfTheAsset?.setText(userResponseModel._result.any_assets_created)
-
+                            if (savedAsEdit)
+                            {
+                                listener?.onNextButtonClick()
+                            }
+                            else {
+                                mBinding?.etInfrastructural?.setText(userResponseModel._result.infrastructural)
+                                mBinding?.etOrganizational?.setText(userResponseModel._result.organizational)
+                                mBinding?.etFunds?.setText(userResponseModel._result.funds)
+                                mBinding?.etAnyOther?.setText(userResponseModel._result.any_other)
+                                mBinding?.etAnyOfTheAsset?.setText(userResponseModel._result.any_assets_created)
+                            }
                         }
                         else{
 
@@ -99,6 +105,10 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
 
           }
           else {
+              if (viewEdit=="edit")
+              {
+                  savedAsEdit=true
+              }
               saveDataApi()
       }}
         fun saveAsDraft(view:View){
@@ -110,6 +120,10 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
 
             }
             else {
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
                 saveDataApi()
             savedAsDraft=true
         }}
@@ -147,7 +161,7 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
                funds = mBinding?.etFunds?.text.toString() ,
                any_other = mBinding?.etAnyOther?.text.toString() ,
                any_assets_created = mBinding?.etAnyOfTheAsset?.text.toString(),
-               id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+               id = itemId,
                is_draft = 1
            )
        )

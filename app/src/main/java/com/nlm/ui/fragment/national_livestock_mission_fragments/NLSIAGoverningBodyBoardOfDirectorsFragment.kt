@@ -46,6 +46,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
     private lateinit var nlmIAProjectMonitoringCommitteeList: MutableList<ImplementingAgencyProjectMonitoring>
     private var listener: OnNextButtonClickListener? = null
     private var savedAsDraft:Boolean=false
+    private var savedAsEdit:Boolean=false
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
 
     override val layoutId: Int
@@ -97,19 +98,25 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                     {
                         if (viewEdit=="view"||viewEdit=="edit")
                         {
-                            nlmIACompositionOFGoverningList.clear()
-                            nlmIAProjectMonitoringCommitteeList.clear()
-                            userResponseModel._result.implementing_agency_advisory_committee?.let { it1 ->
-                                nlmIACompositionOFGoverningList.addAll(
-                                    it1
-                                )
-                                userResponseModel._result.implementing_agency_project_monitoring?.let { it2 ->
-                                    nlmIAProjectMonitoringCommitteeList.addAll(
-                                        it2
+                            if (savedAsEdit)
+                            {
+                                listener?.onNextButtonClick()
+                            }
+                            else {
+                                nlmIACompositionOFGoverningList.clear()
+                                nlmIAProjectMonitoringCommitteeList.clear()
+                                userResponseModel._result.implementing_agency_advisory_committee?.let { it1 ->
+                                    nlmIACompositionOFGoverningList.addAll(
+                                        it1
                                     )
+                                    userResponseModel._result.implementing_agency_project_monitoring?.let { it2 ->
+                                        nlmIAProjectMonitoringCommitteeList.addAll(
+                                            it2
+                                        )
+                                    }
+                                    nlmIACompositionOFGoverningAdapter?.notifyDataSetChanged()
+                                    nlmIAProjectMonitoringCommitteeAdapter?.notifyDataSetChanged()
                                 }
-                                nlmIACompositionOFGoverningAdapter?.notifyDataSetChanged()
-                                nlmIAProjectMonitoringCommitteeAdapter?.notifyDataSetChanged()
                             }
                         }
                         else{
@@ -134,7 +141,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
     private fun nlmIAProjectMonitoringCommitteeAdapter() {
         nlmIAProjectMonitoringCommitteeList = mutableListOf()
         nlmIAProjectMonitoringCommitteeAdapter =
-            NlmIAProjectMonitoringCommitteeAdapter(nlmIAProjectMonitoringCommitteeList,viewEdit)
+            NlmIAProjectMonitoringCommitteeAdapter(nlmIAProjectMonitoringCommitteeList,viewEdit,this)
         mBinding?.rvNlmIAProjectMonitoringCommittee?.adapter = nlmIAProjectMonitoringCommitteeAdapter
         mBinding?.rvNlmIAProjectMonitoringCommittee?.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -150,7 +157,12 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
 
             }
             else {
-                saveDataApi()}
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
+                saveDataApi()
+            }
    }
         fun saveAsDraft(view: View) {
             if (itemId==0)
@@ -161,6 +173,10 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
 
             }
             else {
+                if (viewEdit=="edit")
+                {
+                    savedAsEdit=true
+                }
                 saveDataApi()
             savedAsDraft=true
 
@@ -198,12 +214,32 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
             bindingDialog.nameOfOfficial.setText(selectedItem.name_of_the_official)
             bindingDialog.nameOfDesignation.setText(selectedItem.designation)
             bindingDialog.nameOfOrganization.setText(selectedItem.organization)
-
         }
+         if(selectedItem!=null && isFrom == 2)
+         {
+             bindingDialog.nameOfOfficial.setText(selectedItem.name_of_the_official)
+             bindingDialog.nameOfDesignation.setText(selectedItem.designation)
+             bindingDialog.nameOfOrganization.setText(selectedItem.organization)
+         }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.nameOfOfficial.text.toString().isNotEmpty()||bindingDialog.nameOfDesignation.text.toString().isNotEmpty()||bindingDialog.nameOfOrganization.text.toString().isNotEmpty())
             {
                 if(isFrom == 2) {
+                    if(selectedItem!=null)
+                    {
+                        if (position != null) {
+                            nlmIAProjectMonitoringCommitteeList[position] =
+                                ImplementingAgencyProjectMonitoring(
+                                    bindingDialog.nameOfOfficial.text.toString(),
+                                    bindingDialog.nameOfDesignation.text.toString(),
+                                    bindingDialog.nameOfOrganization.text.toString(),
+                                    selectedItem.implementing_agency_id,
+                                    selectedItem.id
+                                )
+                            nlmIAProjectMonitoringCommitteeAdapter?.notifyItemChanged(position)
+                        }
+
+                    } else{
                     nlmIAProjectMonitoringCommitteeList.add(
                         ImplementingAgencyProjectMonitoring(
                             bindingDialog.nameOfOfficial.text.toString(),
@@ -215,7 +251,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                     )
                     nlmIAProjectMonitoringCommitteeList.size.minus(1).let {
                         nlmIAProjectMonitoringCommitteeAdapter?.notifyItemInserted(it)
-                    }
+                    }}
                     dialog.dismiss()
                 }
                 else if(isFrom == 1){
@@ -234,18 +270,21 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                         }
 
                     }
-//                    nlmIACompositionOFGoverningList.add(
-//                        ImplementingAgencyAdvisoryCommittee(
-//                            bindingDialog.nameOfOfficial.text.toString(),
-//                            bindingDialog.nameOfDesignation.text.toString(),
-//                            bindingDialog.nameOfOrganization.text.toString(),
-//                            null,
-//                            null
-//                        )
-//                    )
-//                    nlmIACompositionOFGoverningList.size.minus(1).let {
-//                        nlmIACompositionOFGoverningAdapter?.notifyItemInserted(it)
-//                    }
+                    else{
+                        nlmIACompositionOFGoverningList.add(
+                            ImplementingAgencyAdvisoryCommittee(
+                                bindingDialog.nameOfOfficial.text.toString(),
+                                bindingDialog.nameOfDesignation.text.toString(),
+                                bindingDialog.nameOfOrganization.text.toString(),
+                                null,
+                                null
+                            )
+                        )
+                        nlmIACompositionOFGoverningList.size.minus(1).let {
+                            nlmIACompositionOFGoverningAdapter?.notifyItemInserted(it)
+                    }
+
+                    }
                     dialog.dismiss()
                 }
             }
@@ -281,8 +320,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
         )
     }
 
-    override fun onClickItem(selectedItem: IdAndDetails,position:Int) {
-        compositionOfGoverningNlmIaDialog(requireContext(),1,selectedItem,position)
+    override fun onClickItem(selectedItem: IdAndDetails,position:Int,isFrom: Int) {
+        compositionOfGoverningNlmIaDialog(requireContext(),isFrom,selectedItem,position)
     }
     private fun saveDataApi(){
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
@@ -290,7 +329,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                 part = "part3",
                 implementing_agency_advisory_committee = nlmIACompositionOFGoverningList,
                 implementing_agency_project_monitoring = nlmIAProjectMonitoringCommitteeList,
-                id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                id = itemId,
                 is_draft = 1,
                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString()
             )

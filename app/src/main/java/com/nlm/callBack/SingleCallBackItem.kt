@@ -4,13 +4,20 @@ import androidx.fragment.app.Fragment
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyFundsReceived
+import com.nlm.model.ImplementingAgencyInvolvedDistrictWise
 import com.nlm.model.ImplementingAgencyProjectMonitoring
 
 //interface SingleCallBackItem {
 //    fun onClickItem(selectedItem: IdAndName)
 //}
 interface CallBackItemTypeIACompositionListEdit {
-    fun onClickItem(selectedItem: IdAndDetails,position:Int)
+    fun onClickItem(selectedItem: IdAndDetails,position:Int,isFrom:Int)
+}
+interface CallBackItemFundsReceivedListEdit {
+    fun onClickItem(selectedItem: ImplementingAgencyFundsReceived,position:Int)
+}
+interface CallBackItemNLMDistrictWiseListEdit {
+    fun onClickItem(selectedItem: ImplementingAgencyInvolvedDistrictWise, position:Int)
 }
 //interface CallBackIdType {
 //    fun onClickItem(ID: Int?,position:Int)

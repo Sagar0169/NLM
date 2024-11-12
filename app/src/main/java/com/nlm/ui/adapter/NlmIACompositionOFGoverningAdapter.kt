@@ -63,7 +63,7 @@ class NlmIACompositionOFGoverningAdapter(
                 organization = currentItem.organization,
                 id = currentItem.id,
                 implementing_agency_id = currentItem.implementing_agency_id
-            ),position)
+            ),position,1)
 //            (context as NLSIAGoverningBodyBoardOfDirectorsFragment).compositionOfGoverningNlmIaDialog(context,1,
         }
     }
