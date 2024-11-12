@@ -2,6 +2,7 @@ package com.nlm.ui.fragment.national_livestock_mission_fragments
 
 import android.content.Context
 import android.view.View
+import androidx.fragment.app.FragmentManager
 import com.nlm.R
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
@@ -90,35 +91,28 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
     }
     inner class ClickActions {
       fun saveAndNext(view:View){
-          viewModel.getImplementingAgencyAddApi(requireContext(),true,
-              ImplementingAgencyAddRequest(
-                  user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                  part = "part6",
-                  infrastructural =mBinding?.etInfrastructural?.text.toString() ,
-                  organizational =mBinding?.etOrganizational?.text.toString() ,
-                  funds = mBinding?.etFunds?.text.toString() ,
-                  any_other = mBinding?.etAnyOther?.text.toString() ,
-                  any_assets_created = mBinding?.etAnyOfTheAsset?.text.toString(),
-                  id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-              )
-          )
-      }
+          if (itemId==0)
+          {
+              activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+              showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+              listener?.onNavigateToFirstFragment()
+
+          }
+          else {
+              saveDataApi()
+      }}
         fun saveAsDraft(view:View){
-            viewModel.getImplementingAgencyAddApi(requireContext(),true,
-                ImplementingAgencyAddRequest(
-                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                    part = "part6",
-                    infrastructural =mBinding?.etInfrastructural?.text.toString() ,
-                    organizational =mBinding?.etOrganizational?.text.toString() ,
-                    funds = mBinding?.etFunds?.text.toString() ,
-                    any_other = mBinding?.etAnyOther?.text.toString() ,
-                    any_assets_created = mBinding?.etAnyOfTheAsset?.text.toString(),
-                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-                    is_draft = 1
-                )
-            )
+            if (itemId==0)
+            {
+                activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+                listener?.onNavigateToFirstFragment()
+
+            }
+            else {
+                saveDataApi()
             savedAsDraft=true
-        }
+        }}
     }
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -143,4 +137,19 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
             )
         )
     }
+   private fun saveDataApi(){
+       viewModel.getImplementingAgencyAddApi(requireContext(),true,
+           ImplementingAgencyAddRequest(
+               user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+               part = "part6",
+               infrastructural =mBinding?.etInfrastructural?.text.toString() ,
+               organizational =mBinding?.etOrganizational?.text.toString() ,
+               funds = mBinding?.etFunds?.text.toString() ,
+               any_other = mBinding?.etAnyOther?.text.toString() ,
+               any_assets_created = mBinding?.etAnyOfTheAsset?.text.toString(),
+               id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+               is_draft = 1
+           )
+       )
+   }
 }

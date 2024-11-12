@@ -56,7 +56,6 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     private var mBinding: ActivityArtificialInseminationBinding? = null
 
     private lateinit var bottomSheetDialog: BottomSheetDialog
-    private lateinit var recyclerView: RecyclerView
     private lateinit var mObservationAIAdapter: ObservationAIAdapter
     private var DocumentName:String?=null
     private var currentPage = 1
@@ -65,7 +64,6 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     private var districtList = ArrayList<ResultGetDropDown>()
     val viewModel = ViewModel()
     var body: MultipartBody.Part? = null
-    private lateinit var programmeList: MutableList<Array<String>>
     private lateinit var DocumentList: MutableList<ImplementingAgencyDocument>
     private lateinit var ObservationBynlmList: MutableList<ArtificialInseminationObservationByNlm>
     private var DialogDocName:TextView?=null

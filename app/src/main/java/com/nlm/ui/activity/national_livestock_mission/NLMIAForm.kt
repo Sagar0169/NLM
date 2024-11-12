@@ -30,7 +30,7 @@ import com.nlm.utilities.Utility
     private var mBinding: ActivityNlsiaFormBinding? = null
     private var mDoubleBackToExitPressedOnce = false
     private var viewEdit: String? = null
-    private var itemId: Int? = null
+        var itemId: Int? = null
 
     override fun initView() {
         mBinding = viewDataBinding

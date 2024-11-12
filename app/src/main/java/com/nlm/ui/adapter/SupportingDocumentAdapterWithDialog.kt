@@ -19,6 +19,7 @@ import com.nlm.model.ImplementingAgencyDocument
 
 class SupportingDocumentAdapterWithDialog(
     private val programmeList: MutableList<ImplementingAgencyDocument>,
+
 ) : RecyclerView.Adapter<SupportingDocumentAdapterWithDialog.SupportingDocument>() {
 
 

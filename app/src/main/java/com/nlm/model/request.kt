@@ -68,8 +68,12 @@ data class ImportExocticGoatRequest(
 data class ArtificialInseminationRequest(
     val role_id: Int?,
     val state_code: Int?,
+    val district_code: Int?,
     val user_id: Int?,
     val limit: Int,
+    val liquid_nitrogen: String?,
+    val frozen_semen_straws: String?,
+    val cryocans: String?,
     val page: Int
 )
 
@@ -123,7 +127,10 @@ data class ImportExoticGoatAddEditRequest(
     val import_of_exotic_goat_verified_nlm: MutableList<ImportOfExoticGoatVerifiedNlm>?,
     val role_id: Int?,
     val state_code: Int?,
-    val user_id: String?
+    val user_id: String?,
+    val is_type: String?,
+    val id: Int?,
+    val is_draft: Int?
 )
 
 data class ImportOfExoticGoatAchievement(

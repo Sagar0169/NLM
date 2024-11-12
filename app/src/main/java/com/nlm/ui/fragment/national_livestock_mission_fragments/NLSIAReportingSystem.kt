@@ -8,6 +8,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.callBack.OnBackSaveAsDraft
@@ -113,109 +114,31 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
         }
     }
     inner class ClickActions {
-        fun saveAndNext(view: View) {
-            viewModel.getImplementingAgencyAddApi(requireContext(),true,
-                ImplementingAgencyAddRequest(
-                    "part4",
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    mBinding?.etFrequencyOfMonitoring1?.text.toString(),
-                    mBinding?.etFrequencyOfMonitoring2?.text.toString(),
-                    mBinding?.etReportingMechanismToStateGovt1?.text.toString(),
-                    mBinding?.etReportingMechanismToStateGovt2?.text.toString(),
-                    mBinding?.etRegularity1?.text.toString(),
-                    mBinding?.etRegularity2?.text.toString(),
-                    mBinding?.etSubmission1?.text.toString(),
-                    mBinding?.etSubmission2?.text.toString(),
-                    mBinding?.etStudiesConducted?.text.toString(),
-                    nlmIAFundsRecievedList,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
 
-                    )
-            )
-        }
+        fun saveAndNext(view: View) {
+            if (itemId==0)
+            {
+                activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+                listener?.onNavigateToFirstFragment()
+
+            }
+            else {
+                saveDataApi()
+        }}
 
         fun saveAsDraft(view: View) {
-            viewModel.getImplementingAgencyAddApi(requireContext(),true,
-                ImplementingAgencyAddRequest(
-                    part = "part4",
-                   frequency_of_monitoring_1 =  mBinding?.etFrequencyOfMonitoring1?.text.toString(),
-                    frequency_of_monitoring_2 = mBinding?.etFrequencyOfMonitoring2?.text.toString(),
-                    reporting_mechanism_1 = mBinding?.etReportingMechanismToStateGovt1?.text.toString(),
-                    reporting_mechanism_2 = mBinding?.etReportingMechanismToStateGovt2?.text.toString(),
-                    regularity_1 = mBinding?.etRegularity1?.text.toString(),
-                    regularity_2 = mBinding?.etRegularity2?.text.toString(),
-                    submission_of_quarterly_1 = mBinding?.etSubmission1?.text.toString(),
-                    submission_of_quarterly_2 = mBinding?.etSubmission2?.text.toString(),
-                    studies_surveys_conducted = mBinding?.etStudiesConducted?.text.toString(),
-                    implementing_agency_funds_received = nlmIAFundsRecievedList,
-                    id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-                    is_draft = 1,
-                    )
-            )
+            if (itemId==0)
+            {
+                activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
+                listener?.onNavigateToFirstFragment()
+
+            }
+            else {
+                saveDataApi()
             savedAsDraft=true
-        }
+        }}
         fun nlmIAFundsRecievedDialog(view: View) {
             nlmIAFundsRecievedDialog(requireContext())
         }
@@ -302,6 +225,25 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
                 is_deleted = 0,
                 is_type = viewEdit
+            )
+        )
+    }
+    private fun saveDataApi(){
+        viewModel.getImplementingAgencyAddApi(requireContext(),true,
+            ImplementingAgencyAddRequest(
+                part = "part4",
+                frequency_of_monitoring_1 =  mBinding?.etFrequencyOfMonitoring1?.text.toString(),
+                frequency_of_monitoring_2 = mBinding?.etFrequencyOfMonitoring2?.text.toString(),
+                reporting_mechanism_1 = mBinding?.etReportingMechanismToStateGovt1?.text.toString(),
+                reporting_mechanism_2 = mBinding?.etReportingMechanismToStateGovt2?.text.toString(),
+                regularity_1 = mBinding?.etRegularity1?.text.toString(),
+                regularity_2 = mBinding?.etRegularity2?.text.toString(),
+                submission_of_quarterly_1 = mBinding?.etSubmission1?.text.toString(),
+                submission_of_quarterly_2 = mBinding?.etSubmission2?.text.toString(),
+                studies_surveys_conducted = mBinding?.etStudiesConducted?.text.toString(),
+                implementing_agency_funds_received = nlmIAFundsRecievedList,
+                id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                is_draft = 1,
             )
         )
     }

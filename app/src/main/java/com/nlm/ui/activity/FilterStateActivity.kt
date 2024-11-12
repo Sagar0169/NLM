@@ -42,6 +42,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
     private var stateId: Int? = null // Store selected state
     private var districtId: Int? = null // Store selected state
     private var districtName: String? = null // Store selected state
+    private var Model:String? = null // Store selected state
 
 
     //    private val stateList = listOf(
@@ -73,6 +74,12 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         val selectedLocation = intent.getStringExtra("selectedLocation")
         val phoneNo = intent.getStringExtra("phoneNo")
         districtName = intent.getStringExtra("districtName")
+
+       val LiquidNitrogen=intent.getStringExtra("LiquidNitrogen")
+        val FrozenSemen=intent.getStringExtra("FrozenSemen")
+        val Cryocans=intent.getStringExtra("Cryocans")
+        val districtname=intent.getStringExtra("districtName")
+
 
         when (isFrom) {
 
@@ -389,6 +396,45 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etVillageName.showView()
 
             }
+            36-> {
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvFrozenSemen.showView()
+                binding!!.etFrozenSemen.showView()
+                binding!!.etFrozenSemen.setText(FrozenSemen)
+
+                binding!!.tvLiquidNitrogen.showView()
+                binding!!.etLiquidNitrogen.showView()
+                binding!!.etLiquidNitrogen.setText(LiquidNitrogen)
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvDistrict.text=districtname
+                binding!!.tvCryocans.showView()
+                binding!!.etCryocans.setText(Cryocans)
+
+
+            }
 
 
             else -> {
@@ -437,19 +483,34 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
     }
 
     private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
+
         if (paginate) {
             currentPage++
         }
-        viewModel.getDropDownApi(
-            this, loader, GetDropDownRequest(
-                20,
-                "States",
-                currentPage,
-                null,
-                getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+        if (Model=="Districts") {
+            viewModel.getDropDownApi(
+                this, loader, GetDropDownRequest(
+                    20,
+                    Model,
+                    currentPage,
+                    state_code = stateId,
+                    getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                )
             )
-        )
-    }
+        }
+        else{
+            viewModel.getDropDownApi(
+                this, loader, GetDropDownRequest(
+                    20,
+                    Model,
+                    currentPage,
+                    null,
+                    getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                )
+            )
+        }
+        }
+
 
 
     private fun showBottomSheetDialog(type: String) {
@@ -474,6 +535,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         // Initialize based on type
         when (type) {
             "State" -> {
+                Model="State"
                 dropDownApiCall(paginate = false, loader = true)
                 selectedList = stateList
                 selectedTextView = binding!!.tvState
@@ -487,6 +549,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             "District" -> {
                 dropDownApiCallDistrict(paginate = false, loader = true)
                 selectedList = stateList // Update the list to districtList for District
+                Model="Districts"
                 selectedTextView = binding!!.tvDistrict
             }
 
@@ -506,6 +569,14 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 districtId = id  // Save the selected district ID
             }
 
+            if (Model=="Districts")
+            {
+                districtName=selectedItem
+                districtId=id
+            }
+            else{
+                stateId = id
+            }
             selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
             bottomSheetDialog.dismiss()
         }
@@ -625,6 +696,12 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             if (isFrom == 0 && stateId != null) {
                 binding!!.etLocationNDD.setText("")
             }
+            if (isFrom == 36 && stateId != null) {
+                binding!!.etFrozenSemen.setText("")
+                binding!!.etLiquidNitrogen.setText("")
+                binding!!.etCryocans.setText("")
+                binding!!.tvDistrict.text=""
+            }
             if (isFrom == 34 && stateId != null) {
                 // Prepare intent to send the result back
                 binding!!.etPhoneno.setText("")
@@ -644,7 +721,18 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("nameLocation", binding!!.etLocationNDD.text.toString())
                 resultIntent.putExtra("stateId", stateId) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
-                toast(stateId.toString())
+                finish()
+            }
+            if (isFrom == 36 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("FrozenSemen", binding!!.etFrozenSemen.text.toString())
+                resultIntent.putExtra("LiquidNitrogen", binding!!.etLiquidNitrogen.text.toString())
+                resultIntent.putExtra("Cryocans", binding!!.etCryocans.text.toString())
+                resultIntent.putExtra("DistrictId", districtId)
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                resultIntent.putExtra("districtName", districtName) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
                 finish()
             }
             if (isFrom == 34 && stateId != null) {

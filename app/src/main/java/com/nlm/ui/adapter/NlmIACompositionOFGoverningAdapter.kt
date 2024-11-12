@@ -1,5 +1,6 @@
 package com.nlm.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +16,11 @@ import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
 import com.nlm.databinding.ItemQualityBuckBinding
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
+import com.nlm.ui.fragment.national_livestock_mission_fragments.NLSIAGoverningBodyBoardOfDirectorsFragment
 import com.nlm.utilities.showView
 
 class NlmIACompositionOFGoverningAdapter(
+    private val context: Context,
     private val programmeList: MutableList<ImplementingAgencyAdvisoryCommittee>,
     private val viewEdit: String?,
     private val callBackEdit: CallBackItemTypeIACompositionListEdit
@@ -60,7 +63,8 @@ class NlmIACompositionOFGoverningAdapter(
                 organization = currentItem.organization,
                 id = currentItem.id,
                 implementing_agency_id = currentItem.implementing_agency_id
-            ))
+            ),position)
+//            (context as NLSIAGoverningBodyBoardOfDirectorsFragment).compositionOfGoverningNlmIaDialog(context,1,
         }
     }
 

@@ -16,9 +16,11 @@ import com.nlm.model.ArtificialInseminationObservationByNlm
 import com.nlm.model.ImportOfExoticGoatAchievement
 import com.nlm.model.ImportOfExoticGoatDetailImport
 import com.nlm.model.ImportOfExoticGoatVerifiedNlm
+import com.nlm.utilities.hideView
 
 class ImportOfExoticGoatVerifiedNlmAdapter(
     private val programmeList: MutableList<ImportOfExoticGoatVerifiedNlm>,
+    private var viewEdit: String?
 ) : RecyclerView.Adapter<ImportOfExoticGoatVerifiedNlmAdapter.ImportOfExoticGoatVerifiedNlmViewHolder>() {
 
 
@@ -36,9 +38,19 @@ class ImportOfExoticGoatVerifiedNlmAdapter(
 
          val items=programmeList[position]
         // Handle visibility of add/delete buttons
+         if (viewEdit=="view")
+         {
+             holder.binding.etSpeciesBreed.isEnabled=false
+             holder.binding.etYear.isEnabled=false
+             holder.binding.etF2GenerationDistributed.isEnabled=false
+             holder.binding.etF1GenerationProduced.isEnabled=false
+             holder.binding.etF2GenerationProduced.isEnabled=false
+             holder.binding.btnDelete.hideView()
+
+         }
         holder.binding.etSpeciesBreed.setText(items.species_breed)
         holder.binding.etYear.setText(items.year)
-        holder.binding.etF2GenerationDistributed
+
         holder.binding.etF1GenerationProduced.setText(items.f1_generation_produced)
         items.f2_generation_produced?.let { holder.binding.etF2GenerationProduced.setText(it) }
         items.f2_generation_distributed?.let { holder.binding.etF2GenerationDistributed.setText(it) }
