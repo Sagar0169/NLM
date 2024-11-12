@@ -516,9 +516,8 @@
                 android:layout_marginVertical="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_7"
                 android:background="@drawable/curve_all_corner_grey"
-
                 android:fontFamily="@font/opensans_regular"
-                android:hint="Enter Location"
+                android:hint=""
                 android:inputType="textPersonName"
                 android:maxLength="50"
                 android:paddingHorizontal="@dimen/dp_10"
@@ -940,6 +939,35 @@
                 android:visibility="gone" />
 
             <TextView
+                android:id="@+id/tvPhoneNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Phone No"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etPhoneno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/tvTitleReadingMaterial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -965,7 +993,31 @@
                 android:text="Please Select"
                 android:textColor="@color/black"
                 android:visibility="gone" />
+            <TextView
+                android:id="@+id/tvTitleYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Year"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
 
+            <TextView
+                android:id="@+id/tvYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:background="@drawable/curve_all_corner_grey"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:fontFamily="@font/opensans_regular"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:text="Please Select"
+                android:textColor="@color/black"
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/tvTitleCommentProgress"
                 android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.nlm.ui.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +8,8 @@ import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemNlspFormsBinding
 import com.nlm.databinding.ItemStateSemenBinding
 import com.nlm.model.DataSemen
@@ -16,16 +19,24 @@ import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 
 import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
+import com.nlm.utilities.Utility
 
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
 
-class StateSemenAdapter(private val implementingAgencyList: ArrayList<DataSemen>, val isFrom:Int, val Role_name:String) :
+class StateSemenAdapter(
+    val context: Context,
+    private val implementingAgencyList: ArrayList<DataSemen>,
+    val isFrom: Int,
+    val Role_name: String,
+    private val callBackDeleteAtId: CallBackDeleteAtId
+) :
     RecyclerView.Adapter<StateSemenAdapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
-    class ImplementingAgencyViewholder(val mBinding:ItemStateSemenBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    class ImplementingAgencyViewholder(val mBinding: ItemStateSemenBinding) :
+        RecyclerView.ViewHolder(mBinding.root) {
 
 
         val ivView: ImageView = itemView.findViewById(R.id.ivView)
@@ -51,8 +62,7 @@ class StateSemenAdapter(private val implementingAgencyList: ArrayList<DataSemen>
     override fun onBindViewHolder(holder: ImplementingAgencyViewholder, position: Int) {
 
         val item = implementingAgencyList[position]
-        if (Role_name=="Super Admin")
-        {
+        if (Role_name == "Super Admin") {
             holder.mBinding.ivView.hideView()
             holder.mBinding.ivEdit.hideView()
             holder.mBinding.ivDelete.hideView()
@@ -60,29 +70,40 @@ class StateSemenAdapter(private val implementingAgencyList: ArrayList<DataSemen>
 
 
 
-    holder.mBinding.etState.text = item.state_name
-    holder.mBinding.etDistricts.text = item.district_name
-    holder.mBinding.etEstablishment.text = item.year_of_establishment
-    holder.mBinding.etCreated.text = item.created
-    holder.mBinding.etStatus.text = item.is_draft
+        holder.mBinding.etState.text = item.state_name
+        holder.mBinding.etDistricts.text = item.district_name
+        holder.mBinding.etEstablishment.text = item.year_of_establishment
+        holder.mBinding.etCreated.text = item.created
+        holder.mBinding.etStatus.text = item.is_draft
 
-        if(item.is_view){
+        if (item.is_view) {
             holder.mBinding.ivView.showView()
-        }
-        else{
+        } else {
             holder.mBinding.ivView.hideView()
         }
-        if(item.is_delete){
+        if (item.is_delete) {
             holder.mBinding.ivDelete.showView()
-        }
-        else{
+        } else {
             holder.mBinding.ivDelete.hideView()
         }
-        if(item.is_edit){
+        if (item.is_edit) {
             holder.mBinding.ivEdit.showView()
-        }
-        else{
+        } else {
             holder.mBinding.ivEdit.hideView()
+        }
+        holder.mBinding.ivDelete.setOnClickListener {
+            Utility.showConfirmationAlertDialog(
+                context,
+                object :
+                    DialogCallback {
+                    override fun onYes() {
+                        if (item != null) {
+                            callBackDeleteAtId.onClickItem(item.id, position)
+                        }
+                    }
+                },
+                context.getString(R.string.are_you_sure_want_to_delete_your_post)
+            )
         }
 
         holder.mBinding.ivView.setOnClickListener {
@@ -105,5 +126,17 @@ class StateSemenAdapter(private val implementingAgencyList: ArrayList<DataSemen>
     // Return the total number of items
     override fun getItemCount(): Int {
         return implementingAgencyList.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+    fun onDeleteButtonClick(position: Int) {
+        implementingAgencyList.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

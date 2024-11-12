@@ -94,8 +94,8 @@ class StateSemenInfrastructureFragment(
         }
         if (viewEdit == "edit") {
             viewEditApi()
+            showToast(itemId.toString())
         }
-        showToast(getPreference_int(requireContext(), AppConstants.FORM_FILLED_ID).toString(),)
     }
 
     private fun viewEditApi() {
@@ -248,11 +248,13 @@ class StateSemenInfrastructureFragment(
             viewModel.getStateSemenAddBankApi2(
                 requireContext(), true,
                 StateSemenBankNLMRequest(
+                    id = itemId,
                     role_id = getPreferenceOfScheme(
                         requireContext(),
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.role_id,
+
                     state_code = getPreferenceOfScheme(
                         requireContext(),
                         AppConstants.SCHEME,
@@ -295,7 +297,7 @@ class StateSemenInfrastructureFragment(
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.state_code,
-                    id = getPreference_int(requireContext(), AppConstants.FORM_FILLED_ID),
+                    id = itemId,
                     user_id = getPreferenceOfScheme(
                         requireContext(),
                         AppConstants.SCHEME,
