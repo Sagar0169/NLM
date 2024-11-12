@@ -1,8 +1,6 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +15,7 @@ import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAFormBinding
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.Result
-import com.nlm.services.LOGOUT
 import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
-import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
@@ -28,7 +24,6 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
-
 
 class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAFormBinding>() {
     override val layoutId: Int
@@ -73,7 +68,6 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
         if(viewEdit=="edit"){
             ViewEditApi()
         }
-
     }
 
     override fun setVariables() {
@@ -258,6 +252,4 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
             )
         )
     }
-
-
 }

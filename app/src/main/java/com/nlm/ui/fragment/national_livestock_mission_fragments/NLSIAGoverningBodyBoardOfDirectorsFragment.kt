@@ -230,22 +230,22 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                                     selectedItem.implementing_agency_id,
                                     selectedItem.id
                                 )
-                            nlmIAProjectMonitoringCommitteeAdapter?.notifyItemChanged(position)
+                            nlmIACompositionOFGoverningAdapter?.notifyItemChanged(position)
                         }
 
                     }
-                    nlmIACompositionOFGoverningList.add(
-                        ImplementingAgencyAdvisoryCommittee(
-                            bindingDialog.nameOfOfficial.text.toString(),
-                            bindingDialog.nameOfDesignation.text.toString(),
-                            bindingDialog.nameOfOrganization.text.toString(),
-                            null,
-                            null
-                        )
-                    )
-                    nlmIACompositionOFGoverningList.size.minus(1).let {
-                        nlmIACompositionOFGoverningAdapter?.notifyItemInserted(it)
-                    }
+//                    nlmIACompositionOFGoverningList.add(
+//                        ImplementingAgencyAdvisoryCommittee(
+//                            bindingDialog.nameOfOfficial.text.toString(),
+//                            bindingDialog.nameOfDesignation.text.toString(),
+//                            bindingDialog.nameOfOrganization.text.toString(),
+//                            null,
+//                            null
+//                        )
+//                    )
+//                    nlmIACompositionOFGoverningList.size.minus(1).let {
+//                        nlmIACompositionOFGoverningAdapter?.notifyItemInserted(it)
+//                    }
                     dialog.dismiss()
                 }
             }
@@ -291,7 +291,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                 implementing_agency_advisory_committee = nlmIACompositionOFGoverningList,
                 implementing_agency_project_monitoring = nlmIAProjectMonitoringCommitteeList,
                 id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
-                is_draft = 1
+                is_draft = 1,
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString()
             )
         )
     }
