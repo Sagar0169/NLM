@@ -20,6 +20,8 @@ import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
 import com.nlm.model.NLMIAResponse
+import com.nlm.model.NlmAssistanceForQFSPListRequest
+import com.nlm.model.NlmAssistanceForQFSPListResponse
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
@@ -103,6 +105,9 @@ object Repository {
     }
     suspend fun getImportExoticGoatAdd(request: ImportExoticGoatAddEditRequest): Response<ImportExoticGoatAddEditResponse> {
         return api.getImportExoticGoatAdd(request)
+    }
+    suspend fun getAssistanceForQfspList(request: NlmAssistanceForQFSPListRequest): Response<NlmAssistanceForQFSPListResponse> {
+        return api.getAssistanceForQfspList(request)
     }
     suspend fun getProfileFileUpload(
         user_id: Int?,

@@ -422,7 +422,7 @@ data class ResultIA(
     val goat_breeding_farm_number: Int?,
     val id: Int?,
     val implementing_agency_advisory_committee: List<ImplementingAgencyAdvisoryCommittee>?,
-    val implementing_agency_document: List<ImplementingAgencyDocument>?,
+    val implementing_agency_document: MutableList<ImplementingAgencyDocument>?,
     val implementing_agency_funds_received: List<ImplementingAgencyFundsReceived>?,
     val implementing_agency_involved_district_wise: List<ImplementingAgencyInvolvedDistrictWise>?,
     val implementing_agency_project_monitoring: List<ImplementingAgencyProjectMonitoring>?,
@@ -718,4 +718,35 @@ data class RSPLabListData(
     val state_name: String,
     val updated_at: String,
     val year_of_establishment: String
+)
+
+data class NlmAssistanceForQFSPListResponse(
+    val _result: NlmAssistanceForQFSPResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NlmAssistanceForQFSPResult(
+    val data: List<NlmAssistanceForQFSPData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NlmAssistanceForQFSPData(
+    val created: String,
+    val created_by: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: String,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val name_of_organization: String,
+    val organogram: String,
+    val state_code: Int,
+    val state_name: String,
+    val technical_competance: String,
+    val updated: String
 )

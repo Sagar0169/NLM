@@ -20,6 +20,8 @@ import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
 import com.nlm.model.NLMIAResponse
+import com.nlm.model.NlmAssistanceForQFSPListRequest
+import com.nlm.model.NlmAssistanceForQFSPListResponse
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
@@ -50,7 +52,8 @@ const val IMPORT_EXOTIC_GOAT_LIST = "nationalLivestockMission/importOfExoticGoat
 const val STATE_SEMEN_BANK_LIST = "nationalLivestockMission/stateSemenBankList"
 const val UPLOAD_DOCUMENT = "rest/uploadDocument"
 const val RSP_LAP_LIST = "nationalLivestockMission/rspLaboratorySemenList"
-const val IMPORT_EXOTIC_GOAT_ADDEDIT = "nationalLivestockMission/importOfExoticGoatAddEdit?qq"
+const val IMPORT_EXOTIC_GOAT_ADD_EDIT = "nationalLivestockMission/importOfExoticGoatAddEdit"
+const val ASSISTANCE_FOR_QFSP_LIST = "nationalLivestockMission/assistanceForQfspList"
 
 interface MyService {
 
@@ -87,8 +90,11 @@ interface MyService {
     suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<NLMIAResponse>
     @POST(ARTIFICIAL_INSEMINATION_ADD)
     suspend fun getArtificialInseminationAdd(@Body request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse>
-    @POST(IMPORT_EXOTIC_GOAT_ADDEDIT)
+    @POST(IMPORT_EXOTIC_GOAT_ADD_EDIT)
     suspend fun getImportExoticGoatAdd(@Body request: ImportExoticGoatAddEditRequest): Response<ImportExoticGoatAddEditResponse>
+
+    @POST(ASSISTANCE_FOR_QFSP_LIST)
+    suspend fun getAssistanceForQfspList(@Body request: NlmAssistanceForQFSPListRequest): Response<NlmAssistanceForQFSPListResponse>
 
     @Multipart
     @POST(UPLOAD_DOCUMENT)

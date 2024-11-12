@@ -68,7 +68,7 @@ class StateSemenInfrastructureFragment(
         DocumentList = mutableListOf()
         viewModel.init()
         stateSemenInfraGoatAdapter()
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentList)
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentList,"viewEdit")
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
         if (viewEdit == "view") {

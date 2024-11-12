@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
@@ -52,6 +53,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
 
     private var listener: OnNextButtonClickListener? = null
     private var DialogDocName:TextView?=null
+    private var DocumentId:Int?=null
 
 
     override fun init() {
@@ -78,7 +80,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
             ViewEditApi()
 
         }
-        AddDocumentAdapter=SupportingDocumentAdapterWithDialog(DocumentList)
+        AddDocumentAdapter=SupportingDocumentAdapterWithDialog(DocumentList,viewEdit)
         mBinding?.recyclerView1?.adapter = AddDocumentAdapter
         mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -123,6 +125,13 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                                 mBinding?.etQuantityOfFodder?.setText(userResponseModel._result.quantity_of_fodder)
                                 mBinding?.etDistributionChannel?.setText(userResponseModel._result.distribution_channel)
                                 mBinding?.etNumberOfFodder?.setText(userResponseModel._result.number_of_fodder)
+                                userResponseModel._result.implementing_agency_document?.let { it1 ->
+                                    DocumentList.addAll(
+                                        it1
+                                    )
+                                }
+                                AddDocumentAdapter?.notifyDataSetChanged()
+
                             }
                         }
                         else{
@@ -144,7 +153,9 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                             userResponseModel.message
                         )
                     }
+
                 } else {
+                    DocumentId=userResponseModel._result.id
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -212,20 +223,29 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
         )
         dialog.window!!.setGravity(Gravity.CENTER)
         DialogDocName=bindingDialog.etDoc
+
         bindingDialog.tvChooseFile.setOnClickListener {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+            {
+                Log.d("VaLUEE",bindingDialog.etDescription.text.toString())
             openOnlyPdfAccordingToPosition()
         }
+            else{
+
+                mBinding?.clParent?.let { showSnackbar(it,"please enter description") }
+            }
+        }
+
 
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty())
             {
-
                 DocumentList.add(ImplementingAgencyDocument(
                     description = bindingDialog.etDescription.text.toString(),
                     ia_document = DocumentName,
                     nlm_document = null,
-                    implementing_agency_id = null,
-                    id = null,
+                    implementing_agency_id = itemId,
+                    id = DocumentId,
                 ))
 
                 DocumentList.size.minus(1).let {
@@ -291,7 +311,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                                 role_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id,
                                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
                                 table_name = getString(R.string.implementing_agency_document).toRequestBody(MultipartBody.FORM),
-                                implementing_agency_id = Preferences.getPreference_int(requireContext(),AppConstants.FORM_FILLED_ID),
+                                implementing_agency_id = itemId,
                                 nlm_document = body
                             )
                         }
@@ -326,6 +346,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                 quantity_of_fodder = mBinding?.etQuantityOfFodder?.text.toString(),
                 distribution_channel =mBinding?.etDistributionChannel?.text.toString() ,
                 number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
+                implementing_agency_document = DocumentList,
                 id = itemId,
                 is_draft = 1,
             )

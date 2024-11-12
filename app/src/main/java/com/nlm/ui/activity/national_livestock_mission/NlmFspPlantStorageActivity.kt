@@ -7,16 +7,14 @@ import com.nlm.R
 import com.nlm.databinding.ActivityNlmFspPlantStorageBinding
 import com.nlm.model.NlmFpForest
 import com.nlm.ui.activity.FilterStateActivity
-import com.nlm.ui.adapter.NlmFpForestAdapter
+import com.nlm.ui.adapter.NlmAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
-import com.nlm.utilities.hideView
 
 class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBinding>() {
     private var mBinding: ActivityNlmFspPlantStorageBinding? = null
-    private lateinit var onlyCreatedAdapter: NlmFpForestAdapter
+    private lateinit var onlyCreatedAdapter: NlmAdapter
     private lateinit var onlyCreated: List<NlmFpForest>
     private var layoutManager: LinearLayoutManager? = null
     private var isFrom: Int = 0
@@ -83,11 +81,11 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
                 Intent(this, AddNewFspPlantStorageActivity::class.java).putExtra("isFrom", 3)
             startActivity(intent)
         }
-        onlyCreatedAdapter()
+//        onlyCreatedAdapter()
     }
 
     private fun onlyCreatedAdapter() {
-        onlyCreatedAdapter = NlmFpForestAdapter(onlyCreated, 3,Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
+//        onlyCreatedAdapter = NlmAdapter(onlyCreated, 3,Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvNlmEdp.layoutManager = layoutManager
         mBinding!!.rvNlmEdp.adapter = onlyCreatedAdapter
