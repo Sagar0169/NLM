@@ -123,6 +123,10 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
     }
     inner class ClickActions {
         fun save(view: View){
+            if (viewEdit=="view")
+            {
+                listener?.onNextButtonClick()
+            }
             if (itemId==0)
             {
                 activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)

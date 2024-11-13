@@ -590,12 +590,12 @@ data class ArtificialInseminationObservationByNlmResponse(
 )
 
 data class Result_Doc(
-    val created_at: String,
-    val description: String,
-    val ia_document: String,
-    val id: Int,
-    val implementing_agency_id: Int,
-    val nlm_document: Any
+    val created_at: String?,
+    val description: String?,
+    val ia_document: String?,
+    val id: Int?,
+    val implementing_agency_id: Int?,
+    val nlm_document: String?
 )
 data class ResultNLMIA(
     val actual_production_location: String?,

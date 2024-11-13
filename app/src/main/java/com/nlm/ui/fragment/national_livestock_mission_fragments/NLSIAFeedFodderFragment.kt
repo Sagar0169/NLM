@@ -170,6 +170,10 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
     inner class ClickActions {
 
         fun saveAndNext(view: View){
+            if (viewEdit=="view")
+            {
+                listener?.onNextButtonClick()
+            }
             if (itemId==0)
             {
                 activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
@@ -243,7 +247,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                 DocumentList.add(ImplementingAgencyDocument(
                     description = bindingDialog.etDescription.text.toString(),
                     ia_document = DocumentName,
-                    nlm_document = null,
+                    nlm_document = DocumentName,
                     implementing_agency_id = itemId,
                     id = DocumentId,
                 ))
@@ -300,7 +304,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
 
                                 val requestBody = convertToRequestBody(requireActivity(), uri)
                                 body = MultipartBody.Part.createFormData(
-                                    "document_name",
+                                    "nlm_document",
                                     DocumentName,
                                     requestBody
                                 )
@@ -337,10 +341,10 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
                 part = "part7",
                 assessments_of_green = mBinding?.etAssessmentOfGreen?.text.toString(),
-                availability_of_green_area = mBinding?.etAvailabilityOfGreen?.text.toString(),
+                    availability_of_green_area = mBinding?.etAvailabilityOfGreen?.text.toString(),
                 availability_of_dry = mBinding?.etAvailibilityOfDry?.text.toString(),
                 availability_of_concentrate = mBinding?.AvailabilityOfConcentrate?.text.toString(),
-                availability_of_common = mBinding?.etAvailabilityCommon?.text.toString(),
+                    availability_of_common = mBinding?.etAvailabilityCommon?.text.toString(),
                 efforts_of_state = mBinding?.etEffortsOfState?.text.toString(),
                 name_of_the_agency = mBinding?.etNameOfAgency?.text.toString(),
                 quantity_of_fodder = mBinding?.etQuantityOfFodder?.text.toString(),
