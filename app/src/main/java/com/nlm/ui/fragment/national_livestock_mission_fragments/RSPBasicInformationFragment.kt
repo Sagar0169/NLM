@@ -71,9 +71,13 @@ class RSPBasicInformationFragment : BaseFragment<FragmentRSPBasicInformationBind
         mBinding?.clickAction = ClickActions()
         DocumentList = mutableListOf()
         DocumentListNLM = mutableListOf()
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentList,"viewEdit")
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentList, "view")
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
+
+//        addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentListNLM)
+//        mBinding?.rvNlmDoc?.adapter = addDocumentAdapter
+//        mBinding?.rvNlmDoc?.layoutManager = LinearLayoutManager(requireContext())
         rspEquipAdapter()
         rspBuckAdapter()
     }

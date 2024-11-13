@@ -14,12 +14,12 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.CallBackItemGoatSemen
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentStateSemenInfrastructureBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemStateSemenInfragoatBinding
-import com.nlm.model.DocumentData
 import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.Result
 import com.nlm.model.StateSemenBankNLMRequest
@@ -30,7 +30,6 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
-import com.nlm.utilities.Preferences.getPreference_int
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
@@ -45,7 +44,7 @@ class StateSemenInfrastructureFragment(
     private val itemId: Int?,
     private val dId: Int?
 ) :
-    BaseFragment<FragmentStateSemenInfrastructureBinding>() {
+    BaseFragment<FragmentStateSemenInfrastructureBinding>(), CallBackItemGoatSemen {
 
     override val layoutId: Int
         get() = R.layout.fragment_state__semen__infrastructure
@@ -68,7 +67,7 @@ class StateSemenInfrastructureFragment(
         DocumentList = mutableListOf()
         viewModel.init()
         stateSemenInfraGoatAdapter()
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentList,"viewEdit")
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentList, "viewEdit")
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
         if (viewEdit == "view") {
@@ -128,7 +127,7 @@ class StateSemenInfrastructureFragment(
     private fun stateSemenInfraGoatAdapter() {
         stateSemenInfraGoatList = mutableListOf()
         stateSemenInfraGoatAdapter =
-            StateSemenInfrastructureAdapter(stateSemenInfraGoatList, viewEdit)
+            StateSemenInfrastructureAdapter(stateSemenInfraGoatList, viewEdit, this)
         mBinding?.recyclerView1?.adapter = stateSemenInfraGoatAdapter
         mBinding?.recyclerView1?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -197,7 +196,12 @@ class StateSemenInfrastructureFragment(
         }
     }
 
-    private fun compositionOfGoverningNlmIaDialog(context: Context, isFrom: Int) {
+    private fun compositionOfGoverningNlmIaDialog(
+        context: Context,
+        isFrom: Int,
+        selectedItem: StateSemenInfraGoat?,
+        position: Int?
+    ) {
         val bindingDialog: ItemStateSemenInfragoatBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_state_semen_infragoat,
@@ -216,23 +220,43 @@ class StateSemenInfrastructureFragment(
         dialog.window!!.setGravity(Gravity.CENTER)
         bindingDialog.btnDelete.hideView()
         bindingDialog.tvSubmit.showView()
+        if (selectedItem != null && isFrom == 2) {
+            bindingDialog.etListOfEquipment.setText(selectedItem.infrastructure_list_of_equipment)
+            bindingDialog.etYearOfProcurement.setText(selectedItem.infrastructure_year_of_procurement)
 
+        }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etListOfEquipment.text.toString()
                     .isNotEmpty() || bindingDialog.etYearOfProcurement.text.toString().isNotEmpty()
             ) {
-                stateSemenInfraGoatList.add(
-                    StateSemenInfraGoat(
-                        bindingDialog.etListOfEquipment.text.toString(),
-                        bindingDialog.etYearOfProcurement.text.toString(),
-                        id = null,
+                if (selectedItem != null) {
+                    if (position != null) {
+                        stateSemenInfraGoatList[position] =
+                            StateSemenInfraGoat(
+                                bindingDialog.etListOfEquipment.text.toString(),
+                                bindingDialog.etYearOfProcurement.text.toString(),
+                                selectedItem.id,
+                                selectedItem.infra_goat_id
+                            )
+                        stateSemenInfraGoatAdapter?.notifyItemChanged(position)
+                    }
+
+                } else {
+                    stateSemenInfraGoatList.add(
+                        StateSemenInfraGoat(
+                            bindingDialog.etListOfEquipment.text.toString(),
+                            bindingDialog.etYearOfProcurement.text.toString(),
+                            id = null,
+                            null
+                        )
                     )
-                )
-                stateSemenInfraGoatList.size.minus(1).let {
-                    stateSemenInfraGoatAdapter?.notifyItemInserted(it)
+                    stateSemenInfraGoatList.size.minus(1).let {
+                        stateSemenInfraGoatAdapter?.notifyItemInserted(it)
+                    }
                 }
                 dialog.dismiss()
             } else {
+
                 showSnackbar(
                     mBinding!!.clParent,
                     getString(R.string.please_enter_atleast_one_field)
@@ -324,7 +348,7 @@ class StateSemenInfrastructureFragment(
         }
 
         fun otherManpowerPositionDialog(view: View) {
-            compositionOfGoverningNlmIaDialog(requireContext(), 1)
+            compositionOfGoverningNlmIaDialog(requireContext(), 1, null, null)
         }
     }
 
@@ -432,6 +456,11 @@ class StateSemenInfrastructureFragment(
                 }
             }
         }
+    }
+
+    override fun onClickItem(selectedItem: StateSemenInfraGoat, position: Int, isFrom: Int) {
+
+        compositionOfGoverningNlmIaDialog(requireContext(), isFrom, selectedItem, position)
     }
 
 

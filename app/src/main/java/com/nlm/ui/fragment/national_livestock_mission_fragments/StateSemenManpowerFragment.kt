@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
+import com.nlm.callBack.CallBackItemManPower
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentStateSemenManpowerBinding
@@ -39,7 +40,8 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
 
-class StateSemenManpowerFragment : BaseFragment<FragmentStateSemenManpowerBinding>() {
+class StateSemenManpowerFragment : BaseFragment<FragmentStateSemenManpowerBinding>(),
+    CallBackItemManPower {
     override val layoutId: Int
         get() = R.layout.fragment_state_semen_manpower
     private var mBinding: FragmentStateSemenManpowerBinding? = null
@@ -62,7 +64,7 @@ class StateSemenManpowerFragment : BaseFragment<FragmentStateSemenManpowerBindin
     private fun stateSemenManPowerAdapter() {
         stateSemenManPowerList = mutableListOf()
         stateSemenManPowerAdapter =
-            RspManPowerAdapter(stateSemenManPowerList,"view")
+            RspManPowerAdapter(stateSemenManPowerList,"view",this)
         mBinding?.recyclerView1?.adapter = stateSemenManPowerAdapter
         mBinding?.recyclerView1?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -219,6 +221,14 @@ class StateSemenManpowerFragment : BaseFragment<FragmentStateSemenManpowerBindin
         fun otherManpowerPositionDialog(view: View) {
             compositionOfGoverningNlmIaDialog(requireContext(), 1)
         }
+
+    }
+
+    override fun onClickItem(
+        selectedItem: StateSemenBankOtherAddManpower,
+        position: Int,
+        isFrom: Int
+    ) {
 
     }
 }

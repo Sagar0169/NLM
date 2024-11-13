@@ -36,42 +36,18 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
         mBinding = viewDataBinding
         mBinding?.clickAction=ClickActions()
         viewModel.init()
-        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
-        {
-            mBinding!!.fabAddAgency.hideView()
-        }
-        ImportExocticGoatList = arrayListOf(
-            DataIE(
-                "NA",
-                null,
-                null,
-                "NA",
-                "NA",
-                null,
-                null,
-                null,
-                null,
-                "NA",
-                "NA",
-
-        ))
         exocticGoatAPICall(paginate = false, loader = true)
         implementingAgency()
         swipeForRefreshImplementingAgency()
-
-        mBinding!!.fabAddAgency.setOnClickListener{
-            val intent = Intent(this@ImportOfExoticGoatList, ImportOfExoticGoatForms::class.java).putExtra("isFrom",1)
-            startActivity(intent)
-        }
     }
 
     override fun setVariables() {
 
     }
     private fun swipeForRefreshImplementingAgency() {
-        mBinding?.srlImplementingAgency?.setOnRefreshListener {
+        mBinding?.srlImportOfExoticGoat?.setOnRefreshListener {
             exocticGoatAPICall(paginate = false, loader = true)
-            mBinding?.srlImplementingAgency?.isRefreshing = false
+            mBinding?.srlImportOfExoticGoat?.isRefreshing = false
         }
     }
 
@@ -114,13 +90,17 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
         fun backPress(view: View){
             onBackPressed()
         }
+        fun add(view: View){
+            val intent = Intent(this@ImportOfExoticGoatList, ImportOfExoticGoatForms::class.java).putExtra("isFrom",1)
+            startActivity(intent)
+        }
     }
     private fun implementingAgency() {
         implementingAdapter = Import_Of_Goat_Adapter(ImportExocticGoatList,
             Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding!!.rvArtificialInsemination.layoutManager = layoutManager
-        mBinding!!.rvArtificialInsemination.adapter = implementingAdapter
+        mBinding?.rvArtificialInsemination?.layoutManager = layoutManager
+        mBinding?.rvArtificialInsemination?.adapter = implementingAdapter
         mBinding?.rvArtificialInsemination?.addOnScrollListener(recyclerScrollListener)
     }
     private fun exocticGoatAPICall(paginate: Boolean, loader: Boolean) {

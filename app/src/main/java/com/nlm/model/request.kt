@@ -276,6 +276,13 @@ data class IdAndDetails(
     val implementing_agency_id: Int?,
     val id: Int?,
 )
+data class manPower(
+    val name_of_the_official: String?,
+    val designation: String?,
+    val organization: String?,
+    val implementing_agency_id: Int?,
+    val id: Int?,
+)
 
 data class StateSemenManPower(
     val designation: String?,
@@ -289,6 +296,7 @@ data class StateSemenInfraGoat(
     val infrastructure_list_of_equipment: String?,
     val infrastructure_year_of_procurement: String?,
     val id: Int?,
+    val infra_goat_id:Int?
 )
 
 data class RspBasicInfoEquipment(
@@ -424,6 +432,17 @@ data class ArtificialInseminationAddEditRequest(
     val status: Int,
     val total_sheep_goat_labs: Int,
     val user_id: String
+)
+
+data class NlmAssistanceForQFSPListRequest(
+    val district_code: Int?=null,
+    val limit: Int?=null,
+    val name_of_organization: String?=null,
+    val organogram: String?=null,
+    val page: Int?=null,
+    val role_id: Int?=null,
+    val state_code: Int?=null,
+    val user_id: Int?=null
 )
 
 //data class ArtificialInseminationObservationByNlm(
