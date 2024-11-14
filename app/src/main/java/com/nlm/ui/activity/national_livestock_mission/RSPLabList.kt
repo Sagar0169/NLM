@@ -9,15 +9,18 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityRsplabBinding
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
+import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListData
 import com.nlm.model.Result
 import com.nlm.model.RspLabListRequest
+import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.RSPLABListAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
@@ -118,6 +121,27 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
                 }
             }
         }
+        viewModel.rspLabAddResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel!=null)
+            {
+                if(userResponseModel._resultflag==0){
+
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+
+                }
+                else{
+
+                    itemPosition?.let { it1 -> rSPLABListAdapter?.onDeleteButtonClick(it1) }
+//                    rSPLABListAdapter?.notifyDataSetChanged()
+//                    implementingAgencyAPICall(paginate = true, loader = true)
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                }
+            }
+        }
     }
 
     inner class ClickActions {
@@ -162,14 +186,30 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
     }
 
     override fun onClickItem(ID: Int?, position: Int) {
-//        viewModel.getImplementingAgencyAddApi(this,true,
-//            ImplementingAgencyAddRequest(
-//                user_id = getPreferenceOfScheme(this,AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-//                part = "part1",
-//                id= ID, is_deleted = 1
-//            )
-//        )
-//        itemPosition = position
+        viewModel.getRspLabAddApi(
+            this, true,
+            RSPAddRequest(
+                id= ID,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                is_deleted = 1
+            )
+        )
+        itemPosition = position
+        rSPLABListAdapter?.notifyDataSetChanged()
     }
 
     override fun onResume() {

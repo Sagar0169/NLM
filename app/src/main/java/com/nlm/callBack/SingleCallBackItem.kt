@@ -6,6 +6,9 @@ import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyFundsReceived
 import com.nlm.model.ImplementingAgencyInvolvedDistrictWise
 import com.nlm.model.ImplementingAgencyProjectMonitoring
+import com.nlm.model.RspAddAverage
+import com.nlm.model.RspAddBucksList
+import com.nlm.model.RspAddEquipment
 import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.model.StateSemenInfraGoat
 
@@ -17,6 +20,15 @@ interface CallBackItemTypeIACompositionListEdit {
 }
 interface CallBackItemManPower {
     fun onClickItem(selectedItem: StateSemenBankOtherAddManpower, position:Int, isFrom:Int)
+}
+interface CallBackAvilabilityEquipment {
+    fun onClickItem(selectedItem: RspAddEquipment, position:Int, isFrom:Int)
+}
+interface CallBackSemenDoseAvg {
+    fun onClickItem(selectedItem: RspAddBucksList, position:Int, isFrom:Int)
+}
+interface CallBackSemenDose {
+    fun onClickItem(selectedItem: RspAddAverage, position:Int, isFrom:Int)
 }
 interface CallBackItemGoatSemen {
     fun onClickItem(selectedItem: StateSemenInfraGoat, position:Int, isFrom:Int)

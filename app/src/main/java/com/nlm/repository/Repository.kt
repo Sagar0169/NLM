@@ -22,7 +22,9 @@ import com.nlm.model.LogoutResponse
 import com.nlm.model.NLMIAResponse
 import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmAssistanceForQFSPListResponse
+import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
+import com.nlm.model.RspAddResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
 import com.nlm.model.StateSemenAddResult
@@ -77,12 +79,18 @@ object Repository {
         return api.getRSPLabList(request)
     }
 
+    suspend fun getRSPLabAdd(request: RSPAddRequest): Response<RspAddResponse> {
+        return api.getRSPLabAdd(request)
+    }
+
     suspend fun getArtificialInsemination(request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse> {
         return api.getArtificialInsemination(request)
     }
+
     suspend fun getImportExocticGoatList(request: ImportExocticGoatRequest): Response<ImportExocticGoatListResponse> {
         return api.getImportExocticGoatList(request)
     }
+
     suspend fun getStateSemenBank(request: StateSemenBankRequest): Response<StateSemenBankResponse> {
         return api.getStateSemenBank(request)
     }
@@ -103,16 +111,19 @@ object Repository {
     suspend fun getArtificialInseminationAdd(request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse> {
         return api.getArtificialInseminationAdd(request)
     }
+
     suspend fun getImportExoticGoatAdd(request: ImportExoticGoatAddEditRequest): Response<ImportExoticGoatAddEditResponse> {
         return api.getImportExoticGoatAdd(request)
     }
+
     suspend fun getAssistanceForQfspList(request: NlmAssistanceForQFSPListRequest): Response<NlmAssistanceForQFSPListResponse> {
         return api.getAssistanceForQfspList(request)
     }
+
     suspend fun getProfileFileUpload(
         user_id: Int?,
         table_name: RequestBody?,
-        nlm_document:MultipartBody.Part?,
+        nlm_document: MultipartBody.Part?,
         implementing_agency_id: Int?,
         role_id: Int?,
     ): Response<UploadDocument_Response> {

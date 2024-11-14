@@ -750,3 +750,91 @@ data class NlmAssistanceForQFSPData(
     val technical_competance: String,
     val updated: String
 )
+
+data class RspAddResponse(
+    val _result: RspAddResult,
+    val _resultflag: Int,
+    val fileurl: Any,
+    val message: String,
+    val statuscode: Int
+)
+
+
+data class RspAddEquipment(
+    val id: Int?=null,
+    val list_of_equipment: String?=null,
+    val make: String?=null,
+    val year_of_procurement: String?=null,
+    val rsp_laboratory_semen_id: Int?=null,
+)
+data class RspAddAverage(
+    val id: Int?=null,
+    val name_of_breed: String,
+    val twentyOne_twentyTwo: String,
+    val twentyThree_twentyFour: String,
+    val twentyTwo_twentyThree: String,
+    val rsp_laboratory_semen_id: Int?=null,
+)
+data class RspAddDocument(
+    val description: String,
+    val id: Int,
+    val rsp_laboratory_semen_id: Int
+)
+data class RspAddResult(
+    val Infrastructure_faced_Institute: String,
+    val address: String,
+    val area_for_fodder_cultivation: String,
+    val area_under_buildings: Double,
+    val availability_no_of_computers: Int,
+    val availability_type_of_records: String,
+    val created: String,
+    val created_by: Int,
+    val district_code: Int,
+    val id: Int,
+    val is_deleted: Int,
+    val is_draft_ia: Int,
+    val location: String,
+    val is_draft_nlm: Int,
+    val major_clients_coop_one_year: String,
+    val major_clients_coop_three_year: String,
+    val district_name: String,
+    val major_clients_coop_two_year: String,
+    val major_clients_ngo_one_year: String,
+    val major_clients_ngo_three_year: String,
+    val major_clients_ngo_two_year: String,
+    val major_clients_other_states_one_year: String,
+    val major_clients_other_states_three_year: String,
+    val major_clients_other_states_two_year: String,
+    val major_clients_private_one_year: String,
+    val major_clients_private_three_year: String,
+    val major_clients_private_two_year: String,
+    val major_clients_sia_one_year: String,
+    val major_clients_sia_three_year: String,
+    val major_clients_sia_two_year: String,
+    val manpower: String,
+    val comments_infrastructure: String,
+    val equipments_per_msp: String,
+    val fund_properly_utilized: String,
+    val semen_straws_produced: String,
+    val suggestions_physical: String,
+    val suggestions_financial: String,
+    val suggestions_any_other: String,
+    val processing_semen: String,
+    val phone_no: Long,
+    val pin_code: Int,
+    val role_id: Int,
+    val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>?=null,
+    val rsp_laboratory_semen_average: List<RspAddAverage>,
+    val rsp_laboratory_semen_document: List<RspAddDocument>,
+    val rsp_laboratory_semen_station_quality_buck: List<RspAddBucksList>? = null,
+    val state_code: Int,
+    val user_id: String,
+    val year_of_establishment: String
+)
+data class RspAddBucksList(
+    val breed_maintained: String?,
+    val no_of_animals: Int?=null,
+    val average_age: String?,
+    val id: Int?,
+    val rsp_laboratory_semen_id: Int?=null,
+)

@@ -76,21 +76,21 @@ class StateSemenAdapter(
         holder.mBinding.etCreated.text = item.created
         holder.mBinding.etStatus.text = item.is_draft
 
-        if (item.is_view) {
-            holder.mBinding.ivView.showView()
-        } else {
-            holder.mBinding.ivView.hideView()
-        }
-        if (item.is_delete) {
-            holder.mBinding.ivDelete.showView()
-        } else {
-            holder.mBinding.ivDelete.hideView()
-        }
-        if (item.is_edit) {
-            holder.mBinding.ivEdit.showView()
-        } else {
-            holder.mBinding.ivEdit.hideView()
-        }
+            if (item.is_view) {
+                holder.mBinding.ivView.showView()
+            } else {
+                holder.mBinding.ivView.hideView()
+            }
+            if (item.is_delete) {
+                holder.mBinding.ivDelete.showView()
+            } else {
+                holder.mBinding.ivDelete.hideView()
+            }
+            if (item.is_edit) {
+                holder.mBinding.ivEdit.showView()
+            } else {
+                holder.mBinding.ivEdit.hideView()
+            }
         holder.mBinding.ivDelete.setOnClickListener {
             Utility.showConfirmationAlertDialog(
                 context,
