@@ -142,6 +142,10 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
           compositionOfGoverningNlmIaDialog(requireContext(),null,null)
       }
         fun saveAndNext(view: View) {
+            if (viewEdit=="view")
+            {
+                listener?.onNextButtonClick()
+            }
             if (itemId==0)
             {
                 activity?.supportFragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)

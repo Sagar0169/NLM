@@ -38,7 +38,12 @@ class SupportingDocumentAdapterWithDialog(
         val items=programmeList[position]
         // Handle visibility of add/delete buttons
         holder.binding.etDescription.text=items.description
-        holder.binding.etFile.text=items.ia_document
+        if (items.ia_document!=null)
+        {
+        holder.binding.etFile.text=items.ia_document}
+        else{
+            holder.binding.etFile.text=items.nlm_document
+        }
         // Delete row
         if(viewEdit=="view")
         {

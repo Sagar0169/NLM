@@ -18,10 +18,6 @@ class Import_Of_Goat_Adapter(private val implementingAgencyList: List<DataIE>,va
 
     // ViewHolder class to hold the view elements
     class ImplementingAgencyViewholder(val mBinding:ItemImportOfExoticGoatBinding) : RecyclerView.ViewHolder(mBinding.root) {
-
-
-        val ivView: ImageView = itemView.findViewById(R.id.ivView)
-        val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
     }
 
 
