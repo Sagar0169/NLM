@@ -34,7 +34,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
-        toast(getPreferenceString(this,PrefEntities.TOKEN ))
+//        toast(getPreferenceString(this,PrefEntities.TOKEN ))
         Log.d("Scheme",getPreferenceString(this,AppConstants.SCHEME))
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,

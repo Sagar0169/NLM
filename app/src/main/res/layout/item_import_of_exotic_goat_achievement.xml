@@ -210,6 +210,7 @@
                 android:background="@drawable/curve_all_corner_grey"
                 android:fontFamily="@font/opensans_regular"
                 android:id="@+id/etBalance"
+                android:inputType="number"
                 android:maxLength="50"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5"

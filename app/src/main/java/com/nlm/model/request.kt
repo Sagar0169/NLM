@@ -129,6 +129,7 @@ data class ImportExoticGoatAddEditRequest(
     val import_of_exotic_goat_document: MutableList<ImplementingAgencyDocument>?,
     val role_id: Int?,
     val state_code: Int?,
+    val number_of_farmers_benefited: Int?,
     val user_id: String?,
     val is_type: String?,
     val id: Int?,
@@ -144,7 +145,7 @@ data class ImportOfExoticGoatAchievement(
     val no_of_animals_f2: Int?,
     val number_of_animals: Int?,
     val performance_animals_doorstep: String?,
-    val import_of_exotic_goat_id: Int?,
+    val import_of_exotic_goat_id: Int?=null,
     val id: Int?,
 )
 

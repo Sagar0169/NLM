@@ -40,8 +40,23 @@ class ImportExoticAchivementAdapter(
     override fun onBindViewHolder(holder: ImportExoticAchivementViewHolder, position: Int) {
 
          val items=programmeList[position]
+        holder.binding.etNoOfAnimals.isEnabled=false
+        holder.binding.etF1Generation.isEnabled=false
+        holder.binding.etF2Generation.isEnabled=false
+        holder.binding.etNoOfAnimalsDistributedF1.isEnabled=false
+        holder.binding.etNoOfAnimalsDistributedF2.isEnabled=false
+        holder.binding.etPerformanceOfTheAnimals.isEnabled=false
+        holder.binding.etBalance.isEnabled=false
+        holder.binding.etNoOfAnimals.isFocusable=false
+        holder.binding.etF1Generation.isFocusable=false
+        holder.binding.etF2Generation.isFocusable=false
+        holder.binding.etNoOfAnimalsDistributedF1.isFocusable=false
+        holder.binding.etNoOfAnimalsDistributedF2.isFocusable=false
+        holder.binding.etPerformanceOfTheAnimals.isFocusable=false
+        holder.binding.etBalance.isFocusable=false
+        holder.binding.btnEdit.showView()
         if (viewEdit=="view")
-        {
+        {  holder.binding.btnEdit.hideView()
             holder.binding.etNoOfAnimals.isEnabled=false
             holder.binding.etF1Generation.isEnabled=false
             holder.binding.etF2Generation.isEnabled=false
@@ -58,16 +73,13 @@ class ImportExoticAchivementAdapter(
             holder.binding.etBalance.isFocusable=false
             holder.binding.btnDelete.hideView()
         }
-        else if (viewEdit=="edit"){
 
-            holder.binding.btnEdit.showView()
-        }
 
-        holder.binding.etNoOfAnimals.setText(items.number_of_animals.toString())
+        holder.binding.etNoOfAnimals.setText(items.number_of_animals?.toString() ?: "")
         holder.binding.etF1Generation.setText(items.f1_generation_produced)
         holder.binding.etF2Generation.setText(items.f2_generation_produced)
-       holder.binding.etNoOfAnimalsDistributedF1.setText(items.no_of_animals_f1.toString())
-       holder.binding.etNoOfAnimalsDistributedF2.setText(items.no_of_animals_f2.toString())
+        holder.binding.etNoOfAnimalsDistributedF1.setText(items.no_of_animals_f1?.toString() ?: "")
+        holder.binding.etNoOfAnimalsDistributedF2.setText(items.no_of_animals_f2?.toString() ?: "")
         holder.binding.etPerformanceOfTheAnimals.setText(items.performance_animals_doorstep)
         holder.binding.etBalance.setText(items.balance)
         // Delete row

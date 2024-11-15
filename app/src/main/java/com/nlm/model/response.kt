@@ -38,10 +38,10 @@ data class DashboardResponse(
 )
 
 data class DashData(
-    val no_of_covered_scheme: Int,
-    val total_visit: Int,
-    val no_of_state_covered: Int,
-    val report_submitted_by_nlm: Int,
+    val no_of_covered_scheme: Int?,
+    val total_visit: Int?,
+    val no_of_state_covered: Int?,
+    val report_submitted_by_nlm: Int?,
 )
 
 
@@ -481,11 +481,17 @@ data class ResultIA(
 //)
 //
 data class ImplementingAgencyDocument(
-    val description: String?,
-    val ia_document: String?,
-    val id: Int?,
-    val implementing_agency_id: Int?,
-    val nlm_document: String?
+    val description: String?=null,
+    val ia_document: String?=null,
+    val id: Int?=null,
+    val implementing_agency_id: Int?=null,
+    val rsp_laboratory_semen_id: Int?=null,
+    val state_semen_bank_id: Int?=null,
+    val artificial_insemination_id: Int?=null,
+    val import_of_exotic_goat_id: Int?=null,
+    val assistance_for_qfsp_id: Int?=null,
+    val fsp_plant_storage_id: Int?=null,
+    val nlm_document: String?=null
 )
 //
 //data class ImplementingAgencyFundsReceived(
@@ -573,11 +579,17 @@ data class ResultIEG(
     val comment_by_nlm_whether: Int,
     val created_by: Int,
     val id: Int,
+    val number_of_farmers_benefited: Int?,
     val import_of_exotic_goat_achievement: List<ImportOfExoticGoatAchievement>?,
     val import_of_exotic_goat_detail_import: List<ImportOfExoticGoatDetailImport>?,
-    val import_of_exotic_goat_verified_nlm: List<ImportOfExoticGoatVerifiedNlm>?
+    val import_of_exotic_goat_verified_nlm: List<ImportOfExoticGoatVerifiedNlm>?,
+    val import_of_exotic_goat_document: List<ImplementingAgencyDocument>?
 )
-
+data class ImportOfExoticgoatDocumnet(
+    val artificial_insemination_id: Int,
+    val description: String,
+    val id: Int
+)
 data class ArtificialInseminationDocumentResponse(
     val artificial_insemination_id: Int,
     val description: String,

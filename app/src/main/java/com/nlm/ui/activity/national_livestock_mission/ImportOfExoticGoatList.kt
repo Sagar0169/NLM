@@ -210,6 +210,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
                 is_draft=null,
                 import_of_exotic_goat_document = null,
                 is_deleted = 1,
+                number_of_farmers_benefited=null
             )
         )
         itemPosition = position

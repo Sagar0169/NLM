@@ -44,6 +44,7 @@ class ImportOfExoticGoatVerifiedNlmAdapter(
              holder.binding.etYear.isEnabled=false
              holder.binding.etF2GenerationDistributed.isEnabled=false
              holder.binding.etF1GenerationProduced.isEnabled=false
+             holder.binding.etF1GenerationDistributed.isEnabled=false
              holder.binding.etF2GenerationProduced.isEnabled=false
              holder.binding.btnDelete.hideView()
 
@@ -52,8 +53,9 @@ class ImportOfExoticGoatVerifiedNlmAdapter(
         holder.binding.etYear.setText(items.year)
 
         holder.binding.etF1GenerationProduced.setText(items.f1_generation_produced)
+        holder.binding.etF1GenerationDistributed.setText(items.f2_generation_distributed)
         items.f2_generation_produced?.let { holder.binding.etF2GenerationProduced.setText(it) }
-        items.f2_generation_distributed?.let { holder.binding.etF2GenerationDistributed.setText(it) }
+        items.number_of_animals?.let { holder.binding.etF2GenerationDistributed.setText(it.toString()) }?:holder.binding.etF2GenerationDistributed.setText("")
 
         // Delete row
         holder.binding.btnDelete.setOnClickListener {

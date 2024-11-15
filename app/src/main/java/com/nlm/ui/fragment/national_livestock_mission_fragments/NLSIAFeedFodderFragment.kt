@@ -316,7 +316,8 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
                                 table_name = getString(R.string.implementing_agency_document).toRequestBody(MultipartBody.FORM),
                                 implementing_agency_id = itemId,
-                                nlm_document = body
+                                nlm_document = body,
+                                ia_document = null
                             )
                         }
                     }
