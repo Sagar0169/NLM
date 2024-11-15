@@ -1,6 +1,7 @@
 package com.nlm.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,6 +11,8 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemRspLabListBinding
 import com.nlm.model.RSPLabListData
+import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
+import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -86,22 +89,36 @@ class RSPLABListAdapter(
             )
         }
 
-//    holder.mBinding.ivView.setOnClickListener {
-//        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-//        intent.putExtra("nodalOfficer", item)
-//        intent.putExtra("isFrom", 2)
-//        holder.itemView.context.startActivity(intent)
-//    }
-//    holder.mBinding.ivEdit.setOnClickListener {
-//        val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
-//        intent.putExtra("nodalOfficer", item)
-//        intent.putExtra("isFrom", 3)
-//        holder.itemView.context.startActivity(intent)
-//    }
+        holder.mBinding.ivView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
+            intent.putExtra("View/Edit", "view")
+            intent.putExtra("itemId", item.id)
+            intent.putExtra("dId", item.district_code)
+            holder.itemView.context.startActivity(intent)
+        }
+        holder.mBinding.ivEdit.setOnClickListener {
+            val intent = Intent(holder.itemView.context, RspLabSemenForms::class.java)
+            intent.putExtra("View/Edit", "edit")
+            intent.putExtra("itemId", item.id)
+            intent.putExtra("dId", item.district_code)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     // Return the total number of items
     override fun getItemCount(): Int {
         return implementingAgencyList.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+    fun onDeleteButtonClick(position: Int) {
+        implementingAgencyList.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

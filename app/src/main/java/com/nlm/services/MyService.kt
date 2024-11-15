@@ -22,7 +22,9 @@ import com.nlm.model.LogoutResponse
 import com.nlm.model.NLMIAResponse
 import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmAssistanceForQFSPListResponse
+import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
+import com.nlm.model.RspAddResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
 import com.nlm.model.StateSemenAddResult
@@ -52,6 +54,7 @@ const val IMPORT_EXOTIC_GOAT_LIST = "nationalLivestockMission/importOfExoticGoat
 const val STATE_SEMEN_BANK_LIST = "nationalLivestockMission/stateSemenBankList"
 const val UPLOAD_DOCUMENT = "rest/uploadDocument"
 const val RSP_LAP_LIST = "nationalLivestockMission/rspLaboratorySemenList"
+const val RSP_LAP_ADD = "nationalLivestockMission/rspLaboratorySemenAddEdit"
 const val IMPORT_EXOTIC_GOAT_ADD_EDIT = "nationalLivestockMission/importOfExoticGoatAddEdit"
 const val ASSISTANCE_FOR_QFSP_LIST = "nationalLivestockMission/assistanceForQfspList"
 
@@ -74,6 +77,10 @@ interface MyService {
 
     @POST(RSP_LAP_LIST)
     suspend fun getRSPLabList(@Body request: RspLabListRequest): Response<RSPLabListResponse>
+
+
+    @POST(RSP_LAP_ADD)
+    suspend fun getRSPLabAdd(@Body request: RSPAddRequest): Response<RspAddResponse>
 
     @POST(ARTIFICIAL_INSEMINATION_LIST)
     suspend fun getArtificialInsemination(@Body request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse>

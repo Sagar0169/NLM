@@ -26,7 +26,9 @@ import com.nlm.model.LogoutResponse
 import com.nlm.model.NLMIAResponse
 import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmAssistanceForQFSPListResponse
+import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
+import com.nlm.model.RspAddResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
 import com.nlm.model.StateSemenBankNLMRequest
@@ -56,6 +58,7 @@ class ViewModel : ViewModel() {
     var getDropDownResult = MutableLiveData<GetDropDownResponse>()
     var implementingAgencyResult = MutableLiveData<ImplementingAgencyResponse>()
     var rspLabListResult = MutableLiveData<RSPLabListResponse>()
+    var rspLabAddResult = MutableLiveData<RspAddResponse>()
     var artificialInseminationResult = MutableLiveData<ArtificialInseminationResponse>()
     var importExocticGoatResult = MutableLiveData<ImportExocticGoatListResponse>()
     var statesemenBankResult = MutableLiveData<StateSemenBankResponse>()
@@ -779,6 +782,60 @@ class ViewModel : ViewModel() {
             }
         }
     }
+
+    fun getRspLabAddApi(context: Context, loader: Boolean, request: RSPAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getRSPLabAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                rspLabAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
+
 
     fun getStateSemenBankApi(context: Context, loader: Boolean, request: StateSemenBankRequest) {
         // can be launched in a separate asynchronous job

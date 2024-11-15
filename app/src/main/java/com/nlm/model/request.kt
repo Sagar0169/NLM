@@ -309,12 +309,7 @@ data class RspBasicInfoEquipment(
     val rsp_make: String?,
     val id: Int?,
 )
-data class RspAddBucksList(
-    val etBreedMaintained: String?,
-    val etAnimal: String?,
-    val etAvgAge: String?,
-    val id: Int?,
-)
+
 
 
 
@@ -327,6 +322,7 @@ data class RspAddBucksList(
 
 data class StateSemenBankNLMRequest(
     val is_type: String? = null,
+
     val address: String? = null,
     val area_fodder_cultivation: String? = null,
     val area_under_buildings: String? = null,
@@ -447,6 +443,76 @@ data class NlmAssistanceForQFSPListRequest(
     val role_id: Int?=null,
     val state_code: Int?=null,
     val user_id: Int?=null
+)
+
+
+data class RSPAddRequest(
+    val Infrastructure_faced_Institute: String? = null,
+    val address: String? = null,
+    val location: String? = null,
+    val is_draft: Int? = null,
+    val area_for_fodder_cultivation: String? = null,
+    val area_under_buildings: Double? = null,
+    val availability_no_of_computers: Int? = null,
+    val availability_type_of_records: String? = null,
+    val district_code: Int? = null,
+    val is_deleted: Int? = null,
+    val is_draft_ia: Int? = null,
+    val is_draft_nlm: Int? = null,
+    val major_clients_coop_one_year: String? = null,
+    val major_clients_coop_three_year: String? = null,
+    val major_clients_coop_two_year: String? = null,
+    val major_clients_ngo_one_year: String? = null,
+    val major_clients_ngo_three_year: String? = null,
+    val major_clients_ngo_two_year: String? = null,
+    val major_clients_other_states_one_year: String? = null,
+    val major_clients_other_states_three_year: String? = null,
+    val major_clients_other_states_two_year: String? = null,
+    val major_clients_private_one_year: String? = null,
+    val major_clients_private_three_year: String? = null,
+    val major_clients_private_two_year: String? = null,
+    val major_clients_sia_one_year: String? = null,
+    val major_clients_sia_three_year: String? = null,
+    val major_clients_sia_two_year: String? = null,
+    val manpower: String? = null,
+    val phone_no: Long? = null,
+    val pin_code: Int? = null,
+    val role_id: Int? = null,
+    val is_type: String? = null,
+
+    val id: Int? = null,
+    val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>? = null,
+    val rsp_laboratory_semen_average: List<RspAddAverage>? = null,
+    val rsp_laboratory_semen_document: List<RspLaboratorySemenDocument>? = null,
+    val rsp_laboratory_semen_station_quality_buck: List<RspAddBucksList>? = null,
+    val state_code: Int? = null,
+    val user_id: String? = null,
+    val year_of_establishment: Int? = null,
+    val comments_infrastructure: String?= null,
+    val processing_semen: String?= null,
+    val equipments_per_msp: String?= null,
+    val fund_properly_utilized: String?= null,
+    val semen_straws_produced: String?= null,
+    val suggestions_physical: String?= null,
+    val suggestions_financial: String?= null,
+    val suggestions_any_other: String?= null,
+)
+
+data class RspLaboratorySemenAvailabilityEquipment(
+    val list_of_equipment: String? = null,
+    val make: String? = null,
+    val year_of_procurement: String? = null
+)
+
+data class RspLaboratorySemenAverage(
+    val name_of_breed: String? = null,
+    val twentyOne_twentyTwo: String? = null,
+    val twentyThree_twentyFour: String? = null,
+    val twentyTwo_twentyThree: String? = null
+)
+data class RspLaboratorySemenDocument(
+    val description: String? = null,
+    val id: Int? = null
 )
 
 //data class ArtificialInseminationObservationByNlm(

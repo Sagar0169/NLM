@@ -10,7 +10,7 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.national_livestock_mission_fragments.RSPBasicInformationFragment">
+        tools:context=".ui.fragment.national_livestock_mission_fragments.RSPIAFragment">
 
     <ScrollView
         android:id="@+id/scrollView"
