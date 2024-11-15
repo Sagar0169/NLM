@@ -37,7 +37,7 @@ import com.nlm.utilities.Utility
         mBinding?.clickAction = ClickActions()
         setupTabLayout()
          viewEdit = intent.getStringExtra("View/Edit")
-        itemId = intent.getIntExtra("itemId",0)
+        itemId = intent.extras?.getInt("itemId")
         loadFragment(NLSIAFormIAFragment(viewEdit,itemId))
     }
 

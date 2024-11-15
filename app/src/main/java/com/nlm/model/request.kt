@@ -58,11 +58,12 @@ data class RspLabListRequest(
 )
 
 data class ImportExocticGoatRequest(
-    val limit: String?,
-    val page: String?,
+    val limit: Int?,
+    val page: Int?,
     val role_id: String?,
     val state_code: String?,
     val user_id: String?,
+    val number_of_farmers_benefited: String?,
 )
 
 data class ArtificialInseminationRequest(
@@ -91,14 +92,14 @@ data class StateSemenBankRequest(
 
 data class ArtificialInsemenNationAddRequest(
 
-    val artificial_insemination_document: List<ArtificialInseminationDocument>?,
+    val artificial_insemination_document: ArrayList<ArtificialInseminationDocument>?,
     val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>?,
     val cryocans: String?,
     val district_code: Int?,
     val exotic_sheep_goat: String?,
     val frozen_semen_straws: String?,
     val is_deleted: Int?,
-    val is_draft_nlm: Int?,
+    val is_draft: Int?,
     val liquid_nitrogen: String?,
     val role_id: Int?,
     val state_code: Int?,
@@ -125,11 +126,13 @@ data class ImportExoticGoatAddEditRequest(
     val import_of_exotic_goat_achievement: MutableList<ImportOfExoticGoatAchievement>?,
     val import_of_exotic_goat_detail_import: MutableList<ImportOfExoticGoatDetailImport>?,
     val import_of_exotic_goat_verified_nlm: MutableList<ImportOfExoticGoatVerifiedNlm>?,
+    val import_of_exotic_goat_document: MutableList<ImplementingAgencyDocument>?,
     val role_id: Int?,
     val state_code: Int?,
     val user_id: String?,
     val is_type: String?,
     val id: Int?,
+    val is_deleted: Int?,
     val is_draft: Int?
 )
 

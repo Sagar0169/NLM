@@ -540,7 +540,7 @@ data class ResultArtificialInsemenation(
     val ai_centre_goat_frozen_semen: Int,
     val ai_performed_average: Double,
     val artificial_insemination_document: List<ArtificialInseminationDocumentResponse>,
-    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlmResponse>,
+    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>,
     val created: String,
     val created_by: Int,
     val cryocans: String,
@@ -557,7 +557,9 @@ data class ResultArtificialInsemenation(
     val state_code: Int?,
     val status: Int?,
     val total_sheep_goat_labs: Int?,
-    val user_id: String
+    val user_id: String,
+    val state_name: String,
+    val district_name: String
 )
 data class ImportExoticGoatAddEditResponse(
     val _result: ResultIEG,

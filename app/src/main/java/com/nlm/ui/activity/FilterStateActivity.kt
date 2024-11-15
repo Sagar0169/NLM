@@ -79,6 +79,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         val FrozenSemen=intent.getStringExtra("FrozenSemen")
         val Cryocans=intent.getStringExtra("Cryocans")
         val districtname=intent.getStringExtra("districtName")
+        val NoOfFarmer=intent.getStringExtra("NumberOfFarmers")
 
 
         when (isFrom) {
@@ -435,6 +436,11 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
 
 
             }
+            37 -> {
+                binding!!.tvNoOfFarmer.showView()
+                binding!!.etNoOfFarmer.showView()
+                binding!!.etNoOfFarmer.setText(NoOfFarmer)
+            }
 
 
             else -> {
@@ -746,6 +752,14 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("year", stateId) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
                 toast(stateId.toString())
+                finish()
+            }
+            if (isFrom == 37 ) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("NumberOfFarmers", binding!!.etNoOfFarmer.text.toString())
+                       // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
                 finish()
             }
 

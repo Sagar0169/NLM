@@ -6,6 +6,7 @@ import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyFundsReceived
 import com.nlm.model.ImplementingAgencyInvolvedDistrictWise
 import com.nlm.model.ImplementingAgencyProjectMonitoring
+import com.nlm.model.ImportOfExoticGoatAchievement
 import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.model.StateSemenInfraGoat
 
@@ -14,6 +15,9 @@ import com.nlm.model.StateSemenInfraGoat
 //}
 interface CallBackItemTypeIACompositionListEdit {
     fun onClickItem(selectedItem: IdAndDetails,position:Int,isFrom:Int)
+}
+interface CallBackItemImportExoticAchivementEdit {
+    fun onClickItem(selectedItem: ImportOfExoticGoatAchievement, position:Int, isFrom:Int)
 }
 interface CallBackItemManPower {
     fun onClickItem(selectedItem: StateSemenBankOtherAddManpower, position:Int, isFrom:Int)

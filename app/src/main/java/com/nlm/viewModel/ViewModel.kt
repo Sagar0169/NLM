@@ -890,6 +890,7 @@ class ViewModel : ViewModel() {
         user_id: Int?,
         table_name: RequestBody?,
         nlm_document:MultipartBody.Part?,
+        ia_document: MultipartBody.Part?,
         implementing_agency_id: Int?,
         role_id: Int?,
     ) {
@@ -898,7 +899,7 @@ class ViewModel : ViewModel() {
         job = scope.launch {
             try {
                 val response = repository.getProfileFileUpload(
-                    user_id,table_name, nlm_document,implementing_agency_id, role_id
+                    user_id,table_name, nlm_document,ia_document,implementing_agency_id, role_id
                 )
 
                 Log.e("response", response.toString())

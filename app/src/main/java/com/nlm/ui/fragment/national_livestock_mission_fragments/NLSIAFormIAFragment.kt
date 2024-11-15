@@ -173,7 +173,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                 {
                     savedAsEdit=true
                 }
-                  if(itemId!=null) {
+                  if(itemId!=0) {
                       saveDataApi(itemId)
                   }
                 else{
@@ -254,6 +254,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
         bottomSheetDialog.show()
     }
     private  fun saveDataApi(itemId: Int?){
+
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(
                 part = "part1",

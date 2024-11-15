@@ -161,8 +161,8 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
             val intent =
                 Intent(this@ArtificialInseminationList, FilterStateActivity::class.java)
             intent.putExtra("isFrom", 36)
-            intent.putExtra("FrozenSemen", LiquidNitrogen)
-            intent.putExtra("LiquidNitrogen",FrozenSemen)
+            intent.putExtra("FrozenSemen", FrozenSemen)
+            intent.putExtra("LiquidNitrogen",LiquidNitrogen)
             intent.putExtra("Cryocans",Cryocans)
             intent.putExtra("DistrictId", DistrictCode)
             intent.putExtra("stateId", stateId) // Add selected data to intent
@@ -243,18 +243,19 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
         viewModel.getArtificialInseminationAdd(this,true,
             ArtificialInsemenNationAddRequest(
                 state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
-                district_code = null,
                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                role_id =   getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
+                district_code = null,
                 artificial_insemination_observation_by_nlm = null,
                 artificial_insemination_document = null,
                 is_deleted = 1,
-                is_draft_nlm = null,
+                is_draft = null,
                 total_sheep_goat_labs =null,
                 liquid_nitrogen = null,
                 frozen_semen_straws = null,
                 cryocans = null,
                 exotic_sheep_goat = null,
-                role_id =   getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
+
                 is_type = null,
                 id = ID,
             )

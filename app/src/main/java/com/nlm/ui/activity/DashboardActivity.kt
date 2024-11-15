@@ -83,16 +83,16 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
 
-//        viewModel.getDashboardApi(
-//            this@DashboardActivity,
-//            LogoutRequest(
-//                Preferences.getPreferenceOfScheme(
-//                    this@DashboardActivity,
-//                    AppConstants.SCHEME,
-//                    Result::class.java
-//                ).user_id
-//            )
-//        )
+        viewModel.getDashboardApi(
+            this@DashboardActivity,
+            LogoutRequest(
+                Preferences.getPreferenceOfScheme(
+                    this@DashboardActivity,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                ).user_id
+            )
+        )
         setDefaultDrawables()
 
         mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {

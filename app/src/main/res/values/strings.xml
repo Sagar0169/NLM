@@ -348,7 +348,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="add_new_implementing_agency">Add New Implementing Agency</string>
     <string name="you_are_not_authorized_to_access_that_location">You are not authorized to access that location</string>
 
-    <string name="please_enter_atleast_one_field">Please Enter atleast One Field</string>
+    <string name="please_enter_atleast_one_field">Please Enter all Field</string>
     <string name="organization">Organization</string>
     <string name="studies_surveys_conducted">Studies / Surveys conducted:</string>
     <string name="enter_remarks">Enter Remarks</string>
@@ -372,5 +372,6 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="import_of_exotic_sheep_and_goat_gernplasm">Import of exotic sheep and goat gernplasm</string>
     <string name="implementing_agency_document">implementing_agency_document</string>
     <string name="rsp_lab">RSP Lab</string>
+    <string name="artificial_insemination_document">artificial_insemination_document</string>
 </resources>
 

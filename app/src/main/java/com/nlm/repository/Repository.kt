@@ -113,15 +113,19 @@ object Repository {
         user_id: Int?,
         table_name: RequestBody?,
         nlm_document:MultipartBody.Part?,
+        ia_document: MultipartBody.Part?,
         implementing_agency_id: Int?,
         role_id: Int?,
+
     ): Response<UploadDocument_Response> {
         return api.getProfileFileUpload(
             user_id,
             table_name,
             nlm_document,
+            ia_document,
             implementing_agency_id,
             role_id
+
         )
     }
 }

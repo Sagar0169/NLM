@@ -14,11 +14,13 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.CallBackItemImportExoticAchivementEdit
 import com.nlm.databinding.ActivityImportOfExoticGoatBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemImportExoticGermplasmBinding
 import com.nlm.databinding.ItemImportExoticVerifiedNlmBinding
 import com.nlm.databinding.ItemImportOfExoticGoatAchievementBinding
+import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.ImportExoticGoatAddEditRequest
 import com.nlm.model.ImportOfExoticGoatAchievement
@@ -40,7 +42,7 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
 
-class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>() {
+class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(),CallBackItemImportExoticAchivementEdit {
     override val layoutId: Int
         get() = R.layout.activity_import_of_exotic_goat
     private var mBinding: ActivityImportOfExoticGoatBinding? = null
@@ -55,6 +57,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     private var DialogDocName: TextView?=null
     private var DocumentName:String?=null
     private var savedAsDraft:Boolean=false
+    private var formId:Int?=null
     var body: MultipartBody.Part? = null
     val viewModel = ViewModel()
     var selectedValue: Int = 1
@@ -81,6 +84,19 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 else -> selectedValue    // Keep the existing value if neither is selected (unlikely)
             }
         }
+        if (getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+        {
+            mBinding?.llNLM?.hideView()
+            mBinding?.llSDRv?.hideView()
+            mBinding?.tvSupportingDocumentView?.hideView()
+
+        }
+        else{
+            mBinding?.tvAddDetail?.hideView()
+            mBinding?.tvAddDetail?.hideView()
+            mBinding?.tvAddAcheivement?.hideView()
+            ViewEditApi("view")
+        }
         if(viewEdit=="view"){
 
 //            mBinding?.etStateIa?.text= getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_name
@@ -88,10 +104,14 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             mBinding?.rbMentally?.isEnabled=false
             mBinding?.rbMentallyYes?.isEnabled=false
             mBinding?.rbMentallyNo?.isEnabled=false
-            ViewEditApi()
+            mBinding?.tvAddDetail?.hideView()
+            mBinding?.tvAddVerified?.hideView()
+            mBinding?.tvAddAcheivement?.hideView()
+            mBinding?.tvAddDocs?.hideView()
+            ViewEditApi(viewEdit)
         }
         if(viewEdit=="edit"){
-            ViewEditApi()
+            ViewEditApi(viewEdit)
         }
     }
 
@@ -114,6 +134,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 else{
                     if (viewEdit=="view"||viewEdit=="edit")
                     {
+                        formId=userResponseModel._result.id
                         AchievementList?.clear()
                         VerifiedNlmList?.clear()
                         DetailOfImportList?.clear()
@@ -162,10 +183,23 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             onBackPressedDispatcher.onBackPressed()
         }
         fun saveAndNext(view: View){
-            saveDataApi()
+            if(viewEdit=="view")
+            {
+                onBackPressedDispatcher.onBackPressed()
+            }
+            else{
+                saveDataApi(0)
+            }
+
         }
         fun saveAsDraft(view: View){
-            saveDataApi()
+            if(viewEdit=="view")
+            {
+                onBackPressedDispatcher.onBackPressed()
+            }
+            else{
+                saveDataApi(1)
+            }
             savedAsDraft=true
         }
         fun addDocument(view: View){
@@ -175,7 +209,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             AddImportDetailDialog(this@ImportOfExoticGoatForms)
         }
         fun addAchievement(view: View){
-            AddAchievementDialog(this@ImportOfExoticGoatForms)
+            AddAchievementDialog(this@ImportOfExoticGoatForms,null,null)
         }
         fun addVerifiedNlm(view: View){
             AddVerifiedNlmDialog(this@ImportOfExoticGoatForms)
@@ -192,7 +226,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         mBinding?.DetailImportRv?.layoutManager = LinearLayoutManager(this)
     }
     private fun AddAcheivementAdapter(){
-        AchievementAdapter= AchievementList?.let { ImportExoticAchivementAdapter(it,viewEdit) }
+        AchievementAdapter= AchievementList?.let { ImportExoticAchivementAdapter(it,viewEdit,this) }
         mBinding?.AchivementRv?.adapter = AchievementAdapter
         mBinding?.AchivementRv?.layoutManager = LinearLayoutManager(this)
     }
@@ -296,7 +330,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         }
         dialog.show()
     }
-    private fun AddAchievementDialog(context: Context) {
+    private fun AddAchievementDialog(context: Context,selectedItem: ImportOfExoticGoatAchievement?, position: Int?) {
         val bindingDialog: ItemImportOfExoticGoatAchievementBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_import_of_exotic_goat_achievement,
@@ -316,10 +350,24 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         dialog.window!!.setGravity(Gravity.CENTER)
         bindingDialog.tvSubmit.showView()
         bindingDialog.btnDelete.hideView()
+        if(selectedItem!=null )
+        {
+            selectedItem.number_of_animals?.let { bindingDialog.etNoOfAnimals.setText(it) }
+            bindingDialog.etF1Generation.setText(selectedItem.f1_generation_produced)
+            bindingDialog.etF2Generation.setText(selectedItem.f2_generation_produced)
+            selectedItem.no_of_animals_f1?.let { bindingDialog.etNoOfAnimalsDistributedF1.setText(it) }
+            selectedItem.no_of_animals_f2?.let { bindingDialog.etNoOfAnimalsDistributedF2.setText(it) }
+            bindingDialog.etBalance.setText(selectedItem.balance)
+            bindingDialog.etPerformanceOfTheAnimals.setText(selectedItem.performance_animals_doorstep)
+        }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etNoOfAnimals.text.toString().isNotEmpty()||bindingDialog.etF1Generation.text.toString().isNotEmpty()||bindingDialog.etF2Generation.text.toString().isNotEmpty()||bindingDialog.etNoOfAnimalsDistributedF1.text.toString().isNotEmpty()||bindingDialog.etNoOfAnimalsDistributedF2.text.toString().isNotEmpty()||bindingDialog.etPerformanceOfTheAnimals.text.toString().isNotEmpty()||bindingDialog.etBalance.text.toString().isNotEmpty())
             {
-                AchievementList?.add(ImportOfExoticGoatAchievement(
+                if(selectedItem!=null)
+                {
+                    if (position != null) {
+
+                AchievementList?.set(position,ImportOfExoticGoatAchievement(
                  number_of_animals = bindingDialog.etNoOfAnimals.text.toString().toInt(),
                     f1_generation_produced = bindingDialog.etF1Generation.text.toString(),
                     f2_generation_produced = bindingDialog.etF2Generation.text.toString(),
@@ -327,13 +375,29 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     no_of_animals_f2 = bindingDialog.etNoOfAnimalsDistributedF2.text.toString().toInt(),
                     balance = bindingDialog.etBalance.text.toString(),
                     performance_animals_doorstep = bindingDialog.etPerformanceOfTheAnimals.text.toString(),
-                    import_of_exotic_goat_id = null,
-                    id = null,
+                    import_of_exotic_goat_id = selectedItem.import_of_exotic_goat_id,
+                    id = selectedItem.id,
                 ))
-                AchievementList?.size?.minus(1).let {
-                    if (it != null) {
-                        AchievementAdapter?.notifyItemInserted(it)
+                        AchievementAdapter?.notifyItemChanged(position)
+                    }}
+                    else{
+                        AchievementList?.add(ImportOfExoticGoatAchievement(
+                            number_of_animals = bindingDialog.etNoOfAnimals.text.toString().toInt(),
+                            f1_generation_produced = bindingDialog.etF1Generation.text.toString(),
+                            f2_generation_produced = bindingDialog.etF2Generation.text.toString(),
+                            no_of_animals_f1 = bindingDialog.etNoOfAnimalsDistributedF1.text.toString().toInt(),
+                            no_of_animals_f2 = bindingDialog.etNoOfAnimalsDistributedF2.text.toString().toInt(),
+                            balance = bindingDialog.etBalance.text.toString(),
+                            performance_animals_doorstep = bindingDialog.etPerformanceOfTheAnimals.text.toString(),
+                            import_of_exotic_goat_id = null,
+                            id = null,
+                        ))
+                        AchievementList?.size?.minus(1).let {
+                            if (it != null) {
+                                AchievementAdapter?.notifyItemInserted(it)
+                            }
                     }
+
                     dialog.dismiss()
                 }
             }
@@ -368,7 +432,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             if (bindingDialog.etSpeciesBreed.text.toString().isNotEmpty()||bindingDialog.etYear.text.toString().isNotEmpty()||bindingDialog.etF1GenerationProduced.text.toString().isNotEmpty()||bindingDialog.etF2GenerationProduced.text.toString().isNotEmpty()||bindingDialog.etF2GenerationDistributed.text.toString().isNotEmpty())
             {
                 VerifiedNlmList?.add(ImportOfExoticGoatVerifiedNlm(
-                    number_of_animals = bindingDialog.etF2GenerationDistributed.text.toString().toInt(),
+                    number_of_animals = bindingDialog.etF2GenerationDistributed.text.toString().toIntOrNull(),
                     f1_generation_produced = bindingDialog.etF1GenerationProduced.text.toString(),
                     f2_generation_produced = bindingDialog.etF2GenerationProduced.text.toString(),
                     f2_generation_distributed =bindingDialog.etF1GenerationDistributed.text.toString() ,
@@ -437,7 +501,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 }
             }}
     }
-    private fun ViewEditApi(){
+    private fun ViewEditApi(viewEdit:String?){
         viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
             ImportExoticGoatAddEditRequest(
                 comment_by_nlm_whether = null,
@@ -453,11 +517,12 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 role_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id,
                 is_type = viewEdit,
                 id = itemId,
-                is_draft = null
+                is_draft = null,
+                import_of_exotic_goat_document = null, is_deleted = null
             )
         )
     }
-    private fun saveDataApi(){
+    private fun saveDataApi(isDraft:Int?){
         viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
             ImportExoticGoatAddEditRequest(
                 comment_by_nlm_whether = selectedValue,
@@ -472,10 +537,19 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 )?.user_id.toString(),
                 role_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id,
                 is_type = null,
-                id = null,
-                is_draft=1
+                id = formId,
+                is_draft=isDraft,
+                import_of_exotic_goat_document = null, is_deleted = null
             )
         )
+    }
+
+    override fun onClickItem(
+        selectedItem: ImportOfExoticGoatAchievement,
+        position: Int,
+        isFrom: Int
+    ) {
+        AddAchievementDialog(this,selectedItem,position)
     }
 
 }

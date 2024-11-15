@@ -186,7 +186,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                 {
                     savedAsEdit=true
                 }
-                saveDataApi()
+                saveDataApi(0)
         }}
         fun saveAsDraft(view: View){
             if (itemId==0)
@@ -201,7 +201,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                 {
                     savedAsEdit=true
                 }
-                saveDataApi()
+                saveDataApi(1)
             savedAsDraft=true
         }}
         fun addDocDialog(view: View){
@@ -335,7 +335,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
             )
         )
     }
-    private fun saveDataApi(){
+    private fun saveDataApi(isDraft:Int?){
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(
                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
@@ -352,7 +352,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                 number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
                 implementing_agency_document = DocumentList,
                 id = itemId,
-                is_draft = 1,
+                is_draft = isDraft,
             )
         )
     }

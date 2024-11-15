@@ -102,6 +102,7 @@ interface MyService {
         @Part("user_id") user_id: Int?,
         @Part("table_name") table_name: RequestBody?,
         @Part nlm_document: MultipartBody.Part?,
+        @Part ia_document: MultipartBody.Part?,
         @Part("implementing_agency_id") implementing_agency_id: Int?,
         @Part("role_id") role_id: Int?,
 

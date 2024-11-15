@@ -10,9 +10,11 @@ import com.nlm.databinding.ItemAiObservationBinding
 import com.nlm.databinding.ItemQualityBuckBinding
 import com.nlm.databinding.ItemRspManpowerBinding
 import com.nlm.model.ArtificialInseminationObservationByNlm
+import com.nlm.utilities.showView
 
 class ObservationAIAdapter(
     private val programmeList: MutableList<ArtificialInseminationObservationByNlm>,
+    private val viewEdit:String?
 ) : RecyclerView.Adapter<ObservationAIAdapter.ObservationAIViewHolder>() {
 
 
@@ -29,8 +31,18 @@ class ObservationAIAdapter(
     override fun onBindViewHolder(holder: ObservationAIViewHolder, position: Int) {
 
          val items=programmeList[position]
-        // Handle visibility of add/delete buttons
 
+        if (viewEdit=="view")
+        {
+            holder.binding.etNameOfTheCenter.isEnabled=false
+            holder.binding.etNumberOFAiPerformed.isEnabled=false
+            holder.binding.etWhetherManPowerTrainedForGoatAI.isEnabled=false
+            holder.binding.etEquipmentAvailable.isEnabled=false
+            holder.binding.btnDelete.visibility= View.GONE
+        }
+        else if (viewEdit=="edit"){
+            holder.binding.btnEdit.showView()
+        }
         holder.binding.etNameOfTheCenter.setText(items.name_of_center)
         holder.binding.etNumberOFAiPerformed.setText(items.number_of_ai_performed.toString())
         holder.binding.etWhetherManPowerTrainedForGoatAI.setText(items.power_trained_ai)
