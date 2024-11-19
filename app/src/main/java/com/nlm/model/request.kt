@@ -564,10 +564,10 @@ data class NLMEdpRequest(
 )
 
 data class NLMAhidfRequest(
-    val limit: String,
-    val page: String,
-    val role_id: String,
-    val state_code: String,
-    val user_id: String
+    val limit: Int?= null,
+    val page: Int?= null,
+    val role_id: Int?= null,
+    val state_code: Int?= null,
+    val user_id: Int?= null,
 )
 
