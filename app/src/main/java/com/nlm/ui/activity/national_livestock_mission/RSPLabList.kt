@@ -98,7 +98,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             } else {
-                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                if (userResponseModel?._result?.data!= null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
                         rSPLabList.clear()
 
@@ -121,6 +121,11 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvRspLabView?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvRspLabView?.hideView()
                 }

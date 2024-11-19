@@ -360,7 +360,7 @@ data class StateSemenAddResult(
     val quality_status: String,
     val role_id: Int,
     val state_code: Int,
-    val state_semen_bank_document: List<StateSemenBankAddDocument>,
+    val state_semen_bank_document: List<ImplementingAgencyDocument>,
     val state_semen_bank_infrastructure: List<StateSemenInfraGoat>,
     val state_semen_bank_other_manpower: MutableList<StateSemenBankOtherAddManpower>,
     val status: Int,
