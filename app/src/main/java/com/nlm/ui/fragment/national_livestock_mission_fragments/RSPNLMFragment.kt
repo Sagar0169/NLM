@@ -103,7 +103,7 @@ class RSPNLMFragment(
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         DocumentList = arrayListOf()
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, "view",this,this)
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, viewEdit,this,this)
         mBinding?.rvNlmDoc?.adapter = addDocumentAdapter
         mBinding?.rvNlmDoc?.layoutManager = LinearLayoutManager(requireContext())
         mBinding?.tvState?.text = getPreferenceOfScheme(
@@ -372,7 +372,7 @@ class RSPNLMFragment(
             if (itemId != 0) {
                 saveDataApi(itemId, 1)
             } else {
-                saveDataApi(getPreference_int(requireContext(), AppConstants.FORM_FILLED_ID), 1)
+                saveDataApi(null, 1)
             }
             savedAsDraft = true
         }
@@ -457,7 +457,7 @@ class RSPNLMFragment(
                 suggestions_physical = mBinding?.etPhysical?.text.toString(),
                 suggestions_any_other = mBinding?.etAnyOther?.text.toString(),
                 rsp_laboratory_semen_station_quality_buck = addBucksList,
-                is_draft = 1,
+                is_draft = draft,
             )
         )
     }
