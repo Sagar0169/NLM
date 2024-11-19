@@ -69,7 +69,8 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
         DocumentList = arrayListOf()
         viewModel.init()
         if (viewEdit=="view")
-        {
+        {mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
             mBinding?.etAssessmentOfGreen?.isEnabled=false
             mBinding?.tvAddMore2?.hideView()
             mBinding?.etAvailabilityOfGreen?.isEnabled=false
@@ -245,9 +246,10 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
             UploadedDocumentName=selectedItem.ia_document
                 bindingDialog.etDoc.text=selectedItem.ia_document}
             else{
+                if (getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id==8){
                 UploadedDocumentName=selectedItem.nlm_document
                 bindingDialog.etDoc.text=selectedItem.nlm_document
-            }
+            }}
             bindingDialog.etDescription.setText(selectedItem.description)
         }
 

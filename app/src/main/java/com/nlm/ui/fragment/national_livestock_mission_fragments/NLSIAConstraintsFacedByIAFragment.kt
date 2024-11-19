@@ -34,7 +34,8 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         if (viewEdit=="view")
-        {
+        {mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
             mBinding?.etInfrastructural?.isEnabled=false
             mBinding?.etOrganizational?.isEnabled=false
             mBinding?.etFunds?.isEnabled=false

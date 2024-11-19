@@ -59,7 +59,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         if (viewEdit=="view")
-        {
+        {mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
              mBinding?.tvAddMore1?.hideView()
              mBinding?.tvAddMore2?.hideView()
             ViewEditApi()

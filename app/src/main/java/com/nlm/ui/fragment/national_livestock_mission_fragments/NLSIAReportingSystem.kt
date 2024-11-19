@@ -54,6 +54,8 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
         viewModel.init()
         if (viewEdit=="view")
         {mBinding?.tvAddMore?.hideView()
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
             mBinding?.etFrequencyOfMonitoring1?.isEnabled=false
             mBinding?.etFrequencyOfMonitoring2?.isEnabled=false
             mBinding?.etReportingMechanismToStateGovt1?.isEnabled=false

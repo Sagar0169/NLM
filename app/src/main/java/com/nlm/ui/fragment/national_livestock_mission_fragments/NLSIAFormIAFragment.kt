@@ -23,6 +23,7 @@ import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.hideView
 import com.nlm.viewModel.ViewModel
 
 class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAFormBinding>() {
@@ -54,7 +55,8 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
         mActivityMain = activity as NLMIAForm
 
         if(viewEdit=="view"){
-
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
             mBinding?.etNameAndLocationOfIa?.isEnabled=false
             mBinding?.etDirectorDGCeoName?.isEnabled=false
             mBinding?.etTechnicalStaffRegularDepute?.isEnabled=false

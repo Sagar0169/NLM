@@ -23,10 +23,13 @@ import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding
 import com.nlm.databinding.ItemDistrictWiseNoNlsiaBinding
+import com.nlm.model.GetDropDownRequest
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyInvolvedDistrictWise
 import com.nlm.model.Result
+import com.nlm.model.ResultGetDropDown
+import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.NlmIADistrictWiseNoAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.AppConstants
@@ -34,6 +37,7 @@ import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.rotateDrawable
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
@@ -45,11 +49,18 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
     BaseFragment<FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding>(),CallBackItemNLMDistrictWiseListEdit {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__agencies_involved_in_genetic_improvement_goat_sheep
-    private lateinit var stateAdapter: StateAdapter
+    private lateinit var stateAdapter: BottomSheetAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var currentPage = 1
+    private var totalPage = 1
+    private var stateList = ArrayList<ResultGetDropDown>()
     private var savedAsDraft:Boolean=false
     private var savedAsEdit:Boolean=false
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
+    private var stateId: Int? = null // Store selected state
+    private var districtId: Int? = null // Store selected state
+    private var districtName: String? = null // Store selected state
+    private var Model:String? = null // Store selected state
     val viewModel = ViewModel()
     private val district = listOf(
         "Black", "Brown", "Blue", "Reddish", "Green", "Other"
@@ -65,6 +76,8 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
         viewModel.init()
         if (viewEdit=="view")
         {mBinding?.tvAddMore1?.hideView()
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
             mBinding?.etNoOfAiTechnician?.isEnabled=false
             mBinding?.etNumberOfAiTechnicianTrained?.isEnabled=false
             mBinding?.etTotalNoOfParavetTrained?.isEnabled=false
@@ -136,6 +149,35 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                 }}}
             }
         }
+        viewModel.getDropDownResult.observe(viewLifecycleOwner) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(requireContext())
+            } else {
+                if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
+                    if (currentPage == 1) {
+                        stateList.clear()
+
+                        val remainingCount = userResponseModel.total_count % 10
+                        totalPage = if (remainingCount == 0) {
+                            val count = userResponseModel.total_count / 10
+                            count
+                        } else {
+                            val count = userResponseModel.total_count / 10
+                            count + 1
+                        }
+                    }
+                    stateList.addAll(userResponseModel._result)
+                    stateAdapter.notifyDataSetChanged()
+
+//                    mBinding?.tvNoDataFound?.hideView()
+//                    mBinding?.rvArtificialInsemination?.showView()
+                } else {
+//                    mBinding?.tvNoDataFound?.showView()
+//                    mBinding?.rvArtificialInsemination?.hideView()
+                }
+            }
+        }
     }
 
     inner class ClickActions {
@@ -198,13 +240,15 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
         }
 
         // Define a variable for the selected list and TextView
-        val selectedList: List<String>
+        val selectedList: List<ResultGetDropDown>
         val selectedTextView: TextView
 
         // Initialize based on type
         when (type) {
-            "district" -> {
-                selectedList = district
+            "District" -> {
+                dropDownApiCallDistrict(paginate = false, loader = true)
+                selectedList = stateList // Update the list to districtList for District
+                Model="Districts"
                 selectedTextView = textView
             }
 
@@ -212,12 +256,27 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
         }
 
         // Set up the adapter for the bottom sheet
-        stateAdapter = StateAdapter(selectedList, requireContext()) { selectedItem ->
-            // Handle state item click
-            selectedTextView.text = selectedItem
-            selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-            bottomSheetDialog.dismiss()
-        }
+         stateAdapter = BottomSheetAdapter(requireContext(), selectedList) { selectedItem, id ->
+                    // Handle item click
+                    selectedTextView.text = selectedItem
+
+
+
+                        districtName = selectedItem
+                        districtId = id  // Save the selected district ID
+
+
+                    if (Model=="Districts")
+                    {
+                        districtName=selectedItem
+                        districtId=id
+                    }
+                    else{
+                        stateId = id
+                    }
+                    selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                    bottomSheetDialog.dismiss()
+                }
 
         rvBottomSheet.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rvBottomSheet.adapter = stateAdapter
@@ -260,6 +319,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.btnDelete.hideView()
         bindingDialog.tvSubmit.showView()
+        bindingDialog.etState.setOnClickListener { showBottomSheetDialog("District",bindingDialog.etState) }
         if(selectedItem!=null)
         {
             bindingDialog.etState.text = selectedItem.name_of_district
@@ -274,7 +334,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                     if (position != null) {
                         mNlmIADistrictWiseNoList.set(position,
                             ImplementingAgencyInvolvedDistrictWise(
-                               name_of_district =  bindingDialog.etState.toString(),
+                               name_of_district = districtName,
                                 location_of_ai_centre = bindingDialog.etLocationOfAi.text.toString(),
                                ai_performed =  bindingDialog.etAiPerformed.text.toString(),
                                 selectedItem.id,
@@ -353,5 +413,28 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
 
     override fun onClickItem(selectedItem: ImplementingAgencyInvolvedDistrictWise, position: Int) {
         compositionOfGoverningNlmIaDialog(requireContext(),selectedItem,position)
+    }
+
+    private fun dropDownApiCallDistrict(paginate: Boolean, loader: Boolean) {
+        if (paginate) {
+            currentPage++
+        }
+        viewModel.getDropDownApi(
+            requireContext(), loader, GetDropDownRequest(
+                20,
+                "Districts",
+                currentPage,
+                getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+            )
+        )
     }
 }

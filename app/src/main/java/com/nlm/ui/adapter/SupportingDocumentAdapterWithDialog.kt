@@ -110,7 +110,7 @@ class SupportingDocumentAdapterWithDialog(
                         import_of_exotic_goat_id = items.import_of_exotic_goat_id,
                         assistance_for_qfsp_id = items.assistance_for_qfsp_id,
                         fsp_plant_storage_id = items.fsp_plant_storage_id,
-                        nlm_document = items.ia_document,
+                        nlm_document = items.nlm_document,
 
                         ),position)
             }

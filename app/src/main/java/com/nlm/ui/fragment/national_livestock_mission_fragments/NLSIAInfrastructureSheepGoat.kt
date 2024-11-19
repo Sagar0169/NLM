@@ -21,6 +21,7 @@ import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.hideView
 import com.nlm.viewModel.ViewModel
 
 
@@ -41,6 +42,8 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
         viewModel.init()
 
         if(viewEdit=="view"){
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
             mBinding?.etFrozenSemenNumber?.isEnabled=false
             mBinding?.etFrozenSemenLocation?.isEnabled=false
             mBinding?.etLiquidSemenNumber?.isEnabled=false
@@ -110,7 +113,19 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                             mBinding?.etNoOfDosesOfSemenNeighbouringnLocation?.setText(userResponseModel._result.no_semen_neighboring_location ?: "")
                             mBinding?.etAvailabilityOfLiquidNitrogenNumber?.setText(userResponseModel._result.availability_liquid_nitrogen_number?.toString() ?: "")
                             mBinding?.etAvailabilityOfLiquidNitrogenLocation?.setText(userResponseModel._result.availability_liquid_nitrogen_location ?: "")
-                        }}
+                                mBinding?.etTotalNoOfReginalSemenBank?.setText(userResponseModel._result.total_reginal_semen_bank?.toString() ?: "")
+                                mBinding?.etBreedingFramsNumber?.setText(userResponseModel._result.breeding_farms_number?.toString() ?: "")
+                                mBinding?.etBreedingFramsLocation?.setText(userResponseModel._result.breeding_farms_location ?: "")
+                                mBinding?.etGoatBreedingFramsNumber?.setText(userResponseModel._result.goat_breeding_farm_number?.toString() ?: "")
+                                mBinding?.etGoatBreedingFramsLocation?.setText(userResponseModel._result.goat_breeding_farm_location ?: "")
+                                mBinding?.etTrainingCentersNumber?.setText(userResponseModel._result.training_centers_number?.toString() ?: "")
+                                mBinding?.etTrainingCentersLocation?.setText(userResponseModel._result.training_centers_location ?: "")
+                                mBinding?.etCatelAiNumber?.setText(userResponseModel._result.number_of_cattle_ai_number?.toString() ?: "")
+                                mBinding?.etCatelAiLocation?.setText(userResponseModel._result.number_of_cattle_ai_location ?: "")
+                                mBinding?.etTotalAiNumber?.setText(userResponseModel._result.total_ai_performed_number?.toString() ?: "")
+                                mBinding?.etTotalAiLocation?.setText(userResponseModel._result.total_ai_performed_location ?: "")
+
+                            }}
                         else{
                             Utility.clearAllFormFilledID(requireContext())
                             listener?.onNextButtonClick()
@@ -225,6 +240,7 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                 total_ai_performed_number = mBinding?.etTotalAiNumber?.text.toString()
                     .toIntOrNull(),
                 total_ai_performed_location = mBinding?.etTotalAiLocation?.text.toString(),
+                total_reginal_semen_bank = mBinding?.etTotalNoOfReginalSemenBank?.text.toString().toIntOrNull(),
                 user_id = getPreferenceOfScheme(
                     requireContext(),
                     AppConstants.SCHEME,
