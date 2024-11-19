@@ -61,7 +61,7 @@ data class ImportExocticGoatRequest(
     val limit: Int?,
     val page: Int?,
     val role_id: String?,
-    val state_code: String?,
+    val state_code: Int?,
     val user_id: String?,
     val number_of_farmers_benefited: String?,
 )
