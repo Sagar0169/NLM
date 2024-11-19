@@ -4,7 +4,15 @@ import com.nlm.model.ArtificialInsemenNationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
+import com.nlm.model.AssistanceForEARequest
+import com.nlm.model.AssistanceForEAResponse
 import com.nlm.model.DashboardResponse
+import com.nlm.model.FodderProductionFromNonForestRequest
+import com.nlm.model.FodderProductionFromNonForestResponse
+import com.nlm.model.FpFromForestLandRequest
+import com.nlm.model.FpFromForestLandResponse
+import com.nlm.model.FpsPlantStorageRequest
+import com.nlm.model.FspPlantStorageResponse
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
 import com.nlm.model.ImplementingAgencyAddRequest
@@ -19,9 +27,13 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.NLMAhidfRequest
+import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NLMIAResponse
+import com.nlm.model.NlmAhidfResponse
 import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmAssistanceForQFSPListResponse
+import com.nlm.model.NlmEdpResponse
 import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
@@ -112,13 +124,29 @@ object Repository {
     suspend fun getArtificialInseminationAdd(request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse> {
         return api.getArtificialInseminationAdd(request)
     }
-
     suspend fun getImportExoticGoatAdd(request: ImportExoticGoatAddEditRequest): Response<ImportExoticGoatAddEditResponse> {
         return api.getImportExoticGoatAdd(request)
     }
-
     suspend fun getAssistanceForQfspList(request: NlmAssistanceForQFSPListRequest): Response<NlmAssistanceForQFSPListResponse> {
         return api.getAssistanceForQfspList(request)
+    }
+    suspend fun getFpsPlantStorageList(request: FpsPlantStorageRequest): Response<FspPlantStorageResponse> {
+        return api.getFpsPlantStorageList(request)
+    }
+    suspend fun getFpFromNonForestList(request: FodderProductionFromNonForestRequest): Response<FodderProductionFromNonForestResponse> {
+        return api.getFpFromNonForestList(request)
+    }
+    suspend fun getFpFromForestLandList(request: FpFromForestLandRequest): Response<FpFromForestLandResponse> {
+        return api.getFpFromForestLandList(request)
+    }
+    suspend fun getAssistanceForEaList(request: AssistanceForEARequest): Response<AssistanceForEAResponse> {
+        return api.getAssistanceForEaList(request)
+    }
+    suspend fun getNlmEdpList(request: NLMEdpRequest): Response<NlmEdpResponse> {
+        return api.getNlmEdpList(request)
+    }
+    suspend fun getNlmAhidfList(request: NLMAhidfRequest): Response<NlmAhidfResponse> {
+        return api.getNlmAhidfList(request)
     }
 
     suspend fun getProfileFileUpload(

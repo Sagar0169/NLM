@@ -4,7 +4,15 @@ import com.nlm.model.ArtificialInsemenNationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
+import com.nlm.model.AssistanceForEARequest
+import com.nlm.model.AssistanceForEAResponse
 import com.nlm.model.DashboardResponse
+import com.nlm.model.FodderProductionFromNonForestRequest
+import com.nlm.model.FodderProductionFromNonForestResponse
+import com.nlm.model.FpFromForestLandRequest
+import com.nlm.model.FpFromForestLandResponse
+import com.nlm.model.FpsPlantStorageRequest
+import com.nlm.model.FspPlantStorageResponse
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
 import com.nlm.model.ImplementingAgencyAddRequest
@@ -19,9 +27,13 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.NLMAhidfRequest
+import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NLMIAResponse
+import com.nlm.model.NlmAhidfResponse
 import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmAssistanceForQFSPListResponse
+import com.nlm.model.NlmEdpResponse
 import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
@@ -58,6 +70,12 @@ const val RSP_LAP_LIST = "nationalLivestockMission/rspLaboratorySemenList"
 const val RSP_LAP_ADD = "nationalLivestockMission/rspLaboratorySemenAddEdit"
 const val IMPORT_EXOTIC_GOAT_ADD_EDIT = "nationalLivestockMission/importOfExoticGoatAddEdit"
 const val ASSISTANCE_FOR_QFSP_LIST = "nationalLivestockMission/assistanceForQfspList"
+const val FODDER_PRODUCTION_FROM_NON_FOREST = "nationalLivestockMission/FpFromNonForestList"
+const val FODDER_PRODUCTION_FROM_FOREST_LAND = "nationalLivestockMission/FpFromForestLandList"
+const val NLM_AHIDF = "nationalLivestockMission/ahidfList"
+const val NLM_EDP = "nationalLivestockMission/nlmEdpList"
+const val ASSISTANCE_FOR_EA = "nationalLivestockMission/assistanceForEaList"
+const val FPS_PLANT_STORAGE = "nationalLivestockMission/fspPlantStorageList"
 
 interface MyService {
 
@@ -103,6 +121,24 @@ interface MyService {
 
     @POST(ASSISTANCE_FOR_QFSP_LIST)
     suspend fun getAssistanceForQfspList(@Body request: NlmAssistanceForQFSPListRequest): Response<NlmAssistanceForQFSPListResponse>
+
+    @POST(FPS_PLANT_STORAGE)
+    suspend fun getFpsPlantStorageList(@Body request: FpsPlantStorageRequest): Response<FspPlantStorageResponse>
+
+    @POST(FODDER_PRODUCTION_FROM_NON_FOREST)
+    suspend fun getFpFromNonForestList(@Body request: FodderProductionFromNonForestRequest): Response<FodderProductionFromNonForestResponse>
+
+    @POST(FODDER_PRODUCTION_FROM_FOREST_LAND)
+    suspend fun getFpFromForestLandList(@Body request: FpFromForestLandRequest): Response<FpFromForestLandResponse>
+
+   @POST(ASSISTANCE_FOR_EA)
+    suspend fun getAssistanceForEaList(@Body request: AssistanceForEARequest): Response<AssistanceForEAResponse>
+
+   @POST(NLM_EDP)
+    suspend fun getNlmEdpList(@Body request: NLMEdpRequest): Response<NlmEdpResponse>
+
+   @POST(NLM_AHIDF)
+    suspend fun getNlmAhidfList(@Body request: NLMAhidfRequest): Response<NlmAhidfResponse>
 
     @Multipart
     @POST(UPLOAD_DOCUMENT)

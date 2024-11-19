@@ -8,13 +8,20 @@ import com.nlm.model.ArtificialInsemenNationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
+import com.nlm.model.AssistanceForEARequest
+import com.nlm.model.AssistanceForEAResponse
 import com.nlm.model.DashboardResponse
+import com.nlm.model.FodderProductionFromNonForestRequest
+import com.nlm.model.FodderProductionFromNonForestResponse
+import com.nlm.model.FpFromForestLandRequest
+import com.nlm.model.FpFromForestLandResponse
+import com.nlm.model.FpsPlantStorageRequest
+import com.nlm.model.FspPlantStorageResponse
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
-import com.nlm.model.ImplementingAgencyResponseNlm
 import com.nlm.model.ImportExocticGoatListResponse
 import com.nlm.model.ImportExocticGoatRequest
 import com.nlm.model.ImportExoticGoatAddEditRequest
@@ -23,9 +30,13 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.NLMAhidfRequest
+import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NLMIAResponse
+import com.nlm.model.NlmAhidfResponse
 import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmAssistanceForQFSPListResponse
+import com.nlm.model.NlmEdpResponse
 import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
@@ -68,6 +79,12 @@ class ViewModel : ViewModel() {
     var artificialInseminationAddResult = MutableLiveData<ArtificialInsemenationAddResponse>()
     var importExoticGoatAddEditResult = MutableLiveData<ImportExoticGoatAddEditResponse>()
     var nlmAssistanceForQFSPResult = MutableLiveData<NlmAssistanceForQFSPListResponse>()
+    var fpsPlantStorageResult = MutableLiveData<FspPlantStorageResponse>()
+    var fpFromNonForestResult = MutableLiveData<FodderProductionFromNonForestResponse>()
+    var fpFromForestLandResult = MutableLiveData<FpFromForestLandResponse>()
+    var assistanceForEaResult = MutableLiveData<AssistanceForEAResponse>()
+    var nlmEdpResult = MutableLiveData<NlmEdpResponse>()
+    var nlmAhidfResult = MutableLiveData<NlmAhidfResponse>()
     var getProfileUploadFileResult = MutableLiveData<TempUploadDocResponse>()
     var id = 0
 
@@ -726,6 +743,9 @@ class ViewModel : ViewModel() {
                 if (e is SocketTimeoutException) {
                     errors.postValue("Time out Please try again")
                 }
+                else{
+                    errors.postValue(e.message.toString())
+                }
                 dismissLoader()
             }
         }
@@ -779,6 +799,9 @@ class ViewModel : ViewModel() {
                 if (e is SocketTimeoutException) {
                     errors.postValue("Time out Please try again")
                 }
+                else{
+                    errors.postValue(e.message.toString())
+                }
                 dismissLoader()
             }
         }
@@ -831,6 +854,9 @@ class ViewModel : ViewModel() {
             } catch (e: Exception) {
                 if (e is SocketTimeoutException) {
                     errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
                 }
                 dismissLoader()
             }
@@ -886,6 +912,345 @@ class ViewModel : ViewModel() {
                 if (e is SocketTimeoutException) {
                     errors.postValue("Time out Please try again")
                 }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getFpsPlantStorageList(context: Context, loader: Boolean, request: FpsPlantStorageRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getFpsPlantStorageList(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                fpsPlantStorageResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getFpFromNonForestList(context: Context, loader: Boolean, request: FodderProductionFromNonForestRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getFpFromNonForestList(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                fpFromNonForestResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getFpFromForestLandList(context: Context, loader: Boolean, request: FpFromForestLandRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getFpFromForestLandList(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                fpFromForestLandResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getAssistanceForEaList(context: Context, loader: Boolean, request: AssistanceForEARequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getAssistanceForEaList(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                assistanceForEaResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getNlmEdp(context: Context, loader: Boolean, request: NLMEdpRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getNlmEdpList(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                nlmEdpResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getNlmAhidf(context: Context, loader: Boolean, request: NLMAhidfRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getNlmAhidfList(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                nlmAhidfResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
                 dismissLoader()
             }
         }
@@ -939,6 +1304,9 @@ class ViewModel : ViewModel() {
                 if (e is SocketTimeoutException) {
                     errors.postValue("Time out Please try again")
                 }
+                else{
+                    errors.postValue(e.message.toString())
+                }
                 dismissLoader()
             }
         }
@@ -947,18 +1315,14 @@ class ViewModel : ViewModel() {
         context: Context,
         user_id: Int?,
         table_name: RequestBody?,
-        document_name:MultipartBody.Part?,
-//        ia_document: MultipartBody.Part?,
-//        implementing_agency_id: Int?,
-//        role_id: Int?,
+        document_name:MultipartBody.Part?
     ) {
         networkCheck(context, true)
 
         job = scope.launch {
             try {
                 val response = repository.getProfileFileUpload(
-                    user_id,table_name, document_name,
-//                    ia_document,implementing_agency_id, role_id
+                    user_id,table_name,document_name
                 )
 
                 Log.e("response", response.toString())
@@ -1000,6 +1364,9 @@ class ViewModel : ViewModel() {
             } catch (e: Exception) {
                 if (e is SocketTimeoutException) {
                     errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
                 }
                 dismissLoader()
             }

@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
-import com.nlm.databinding.ActivityNlmFspPlantStorageBinding
-import com.nlm.model.FpsPlantStorageRequest
-import com.nlm.model.FspPlantStorageData
+import com.nlm.databinding.ActivityNlmFpFromNonForestBinding
+import com.nlm.model.FodderProductionFromNonForestData
+import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
-import com.nlm.ui.adapter.FpsPlantStorageAdapter
+import com.nlm.ui.adapter.FpFromNonForestAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
@@ -20,11 +20,11 @@ import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
-class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBinding>(),
+class NlmFpFromNonForestActivity : BaseActivity<ActivityNlmFpFromNonForestBinding>(),
     CallBackDeleteAtId {
-    private var mBinding: ActivityNlmFspPlantStorageBinding? = null
-    private var fpsPlantStorageAdapter: FpsPlantStorageAdapter?= null
-    private var fpsPlantStorageList= ArrayList<FspPlantStorageData>()
+    private var mBinding: ActivityNlmFpFromNonForestBinding? = null
+    private var fpFromNonForestAdapter: FpFromNonForestAdapter?= null
+    private var fpsFromNonForestList= ArrayList<FodderProductionFromNonForestData>()
     private var layoutManager: LinearLayoutManager? = null
     private val viewModel= ViewModel()
     private var currentPage = 1
@@ -32,27 +32,27 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
     private var loading = true
 
     override val layoutId: Int
-        get() = R.layout.activity_nlm_fsp_plant_storage
+        get() = R.layout.activity_nlm_fp_from_non_forest
 
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
-        fpsPlantStorageAdapter()
-        swipeForRefreshFpsPlantStorage()
+        fpFromNonForestAdapter()
+        swipeForRefreshFpFromNonForest()
     }
 
     override fun onResume() {
         super.onResume()
-        fpsPlantStorageAPICall(paginate = false, loader = true)
+        fpFromNonForestAPICall(paginate = false, loader = true)
     }
 
-    private fun fpsPlantStorageAPICall(paginate: Boolean, loader: Boolean) {
+    private fun fpFromNonForestAPICall(paginate: Boolean, loader: Boolean) {
         if (paginate) {
             currentPage++
         }
-        viewModel.getFpsPlantStorageList(
-            this, loader, FpsPlantStorageRequest(
+        viewModel.getFpFromNonForestList(
+            this, loader, FodderProductionFromNonForestRequest(
                 role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
                 state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
@@ -75,7 +75,7 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                fpsPlantStorageAPICall(paginate = true, loader = true)
+                                fpFromNonForestAPICall(paginate = true, loader = true)
                             }
                         }
                     }
@@ -83,35 +83,34 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
             }
         }
 
-    private fun swipeForRefreshFpsPlantStorage() {
-        mBinding?.srlFpsPlantStorage?.setOnRefreshListener {
-            fpsPlantStorageAPICall(paginate = false, loader = true)
-            mBinding?.srlFpsPlantStorage?.isRefreshing = false
+    private fun swipeForRefreshFpFromNonForest() {
+        mBinding?.srlFpFromNonForest?.setOnRefreshListener {
+            fpFromNonForestAPICall(paginate = false, loader = true)
+            mBinding?.srlFpFromNonForest?.isRefreshing = false
         }
     }
 
-    private fun fpsPlantStorageAdapter() {
-        fpsPlantStorageAdapter = FpsPlantStorageAdapter(this,fpsPlantStorageList,this)
+    private fun fpFromNonForestAdapter() {
+        fpFromNonForestAdapter = FpFromNonForestAdapter(this,fpsFromNonForestList,this)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding?.rvFpsPlantStorage?.layoutManager = layoutManager
-        mBinding?.rvFpsPlantStorage?.adapter = fpsPlantStorageAdapter
-        mBinding?.rvFpsPlantStorage?.addOnScrollListener(recyclerScrollListener)
+        mBinding?.rvNlmFpFromNonForest?.layoutManager = layoutManager
+        mBinding?.rvNlmFpFromNonForest?.adapter = fpFromNonForestAdapter
+        mBinding?.rvNlmFpFromNonForest?.addOnScrollListener(recyclerScrollListener)
     }
 
-    inner class ClickActions {
 
+    inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
-
         fun filter(view: View) {
             startActivity(Intent(
-                this@NlmFspPlantStorageActivity,
-                FilterStateActivity::class.java).putExtra("isFrom", 14))
+                this@NlmFpFromNonForestActivity,
+                FilterStateActivity::class.java
+            ).putExtra("isFrom", 15))
         }
-
         fun add(view: View){
-            startActivity(Intent(this@NlmFspPlantStorageActivity, AddNewFspPlantStorageActivity::class.java).putExtra("isFrom", 3))
+            startActivity(Intent(this@NlmFpFromNonForestActivity, AddNlmFpForestLandActivity::class.java))
         }
     }
 
@@ -120,14 +119,14 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
 
     override fun setObservers() {
 
-        viewModel.fpsPlantStorageResult.observe(this) {
+        viewModel.fpFromNonForestResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             } else {
                 if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
-                        fpsPlantStorageList.clear()
+                        fpsFromNonForestList.clear()
 
                         val remainingCount = userResponseModel._result.total_count % 10
                         totalPage = if (remainingCount == 0) {
@@ -143,16 +142,17 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
                     } else {
                         mBinding?.fabAddAgency?.hideView()
                     }
-                    fpsPlantStorageList.addAll(userResponseModel._result.data)
-                    fpsPlantStorageAdapter?.notifyDataSetChanged()
+                    fpsFromNonForestList.addAll(userResponseModel._result.data)
+                    fpFromNonForestAdapter?.notifyDataSetChanged()
                     mBinding?.tvNoDataFound?.hideView()
-                    mBinding?.rvFpsPlantStorage?.showView()
+                    mBinding?.rvNlmFpFromNonForest?.showView()
                 } else {
                     mBinding?.tvNoDataFound?.showView()
-                    mBinding?.rvFpsPlantStorage?.hideView()
+                    mBinding?.rvNlmFpFromNonForest?.hideView()
                 }
             }
         }
+
     }
 
     override fun onClickItem(ID: Int?, position: Int) {

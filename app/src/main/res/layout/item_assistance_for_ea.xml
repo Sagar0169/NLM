@@ -103,50 +103,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llCreated"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/llCreatedBy"
-                android:layout_marginTop="@dimen/dp_5"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvCreated"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Created"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:text=":"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/etCreated"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_5"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/inter_light"
-                    android:text="@string/na"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/llIAStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/llCreated"
+                android:layout_below="@id/llCreatedBy"
                 android:layout_marginTop="@dimen/dp_5"
                 android:orientation="horizontal">
 
@@ -222,12 +182,52 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/llCreated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llNlmStatus"
+                android:layout_marginTop="@dimen/dp_5"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCreated"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Created"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/etCreated"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_light"
+                    android:text="@string/na"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
             <!-- Icons for View, Edit, Delete -->
             <LinearLayout
                 android:id="@+id/llActions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/llNlmStatus"
+                android:layout_below="@id/llCreated"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="-5dp"

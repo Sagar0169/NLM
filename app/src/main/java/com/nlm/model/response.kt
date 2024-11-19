@@ -778,6 +778,98 @@ data class NlmAssistanceForQFSPData(
     val updated: String
 )
 
+data class FspPlantStorageResponse(
+    val _result: FspPlantStorageResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class FspPlantStorageResult(
+    val data: List<FspPlantStorageData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class FspPlantStorageData(
+    val created: String,
+    val created_by: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: String,
+    val is_draft_ia: Int,
+    val is_draft_nlm: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val name_of_organization: String,
+    val state_code: Int,
+    val state_name: String
+)
+
+data class FodderProductionFromNonForestResponse(
+    val _result: FodderProductionFromNonForestResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class FodderProductionFromNonForestResult(
+    val data: List<FodderProductionFromNonForestData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class FodderProductionFromNonForestData(
+    val area_covered: Int?= null,
+    val created: String?= null,
+    val created_by: String?= null,
+    val district_code: Int?= null,
+    val district_name: String?= null,
+    val id: Int?= null,
+    val is_delete: Boolean,
+    val is_draft: Int?= null,
+    val is_draft_ia: Int?= null,
+    val is_draft_nlm: Int?= null,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val name_implementing_agency: String?= null,
+    val state_code: Int?= null,
+    val state_name: String?= null
+)
+
+data class FpFromForestLandResponse(
+    val _result: FpFromForestLandResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class FpFromForestLandResult(
+    val data: List<FpFromForestLandData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class FpFromForestLandData(
+    val area_covered: String,
+    val created: String,
+    val created_by: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Int,
+    val is_draft_ia: Int,
+    val is_draft_nlm: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val name_implementing_agency: String,
+    val state_code: Int,
+    val state_name: String
+)
+
 data class RspAddResponse(
     val _result: RspAddResult,
     val _resultflag: Int,
@@ -865,3 +957,84 @@ data class RspAddBucksList(
     val id: Int?,
     val rsp_laboratory_semen_id: Int?=null,
 )
+
+data class NlmEdpResponse(
+    val _result: NlmEdpResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NlmEdpResult(
+    val data: List<NlmEdpData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NlmEdpData(
+    val created: String,
+    val created_by: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Int,
+    val is_draft_ia: Int,
+    val is_draft_nlm: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val state_code: Int,
+    val state_name: String
+)
+data class AssistanceForEAResponse(
+    val _result: AssistanceForEAResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class AssistanceForEAResult(
+    val data: List<AssistanceForEAData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class AssistanceForEAData(
+    val created: String,
+    val created_by: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Int,
+    val is_draft_ia: Int,
+    val is_draft_nlm: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val state_code: Int,
+    val state_name: String
+)
+
+data class NlmAhidfResponse(
+    val _result: NlmAhidfResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NlmAhidfResult(
+    val data: List<NlmAhidfData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NlmAhidfData(
+    val created: String,
+    val created_by: Any,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Any,
+    val is_draft_ia: Int,
+    val is_draft_nlm: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val state_code: Int,
+    val state_name: String
+)
+

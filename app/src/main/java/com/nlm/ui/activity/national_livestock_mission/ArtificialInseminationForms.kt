@@ -177,30 +177,6 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                 }
             }
         }
-        viewModel.getProfileUploadFileResult.observe(this) {
-            val userResponseModel = it
-            if (userResponseModel != null) {
-                if (userResponseModel.statuscode == 401) {
-                    Utility.logout(this)
-                } else if (userResponseModel._resultflag == 0) {
-                    mBinding?.main?.let { it1 ->
-                        showSnackbar(
-                            it1,
-                            userResponseModel.message
-                        )
-                    }
-
-                } else {
-                    DocumentId=userResponseModel._result.id
-                    mBinding?.main?.let { it1 ->
-                        showSnackbar(
-                            it1,
-                            userResponseModel.message
-                        )
-                    }
-                }
-            }
-        }
         viewModel.artificialInseminationAddResult.observe(this){
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {

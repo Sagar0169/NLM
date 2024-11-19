@@ -38,31 +38,57 @@ class AddNlmAssistanceForQFSPActivity :
 
 
     inner class ClickActions {
+
+        fun saveAsDraft(view: View){
+
+        }
+
+        fun saveAndNext(view: View){
+
+        }
+
+        fun addDocDialog(view: View){
+
+        }
+
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
 
-    }
+        fun state(view: View) {
+            showBottomSheetDialog("State")
+        }
 
+        fun district(view: View) {
+            showBottomSheetDialog("District")
+        }
+
+        fun districtName(view: View) {
+            showBottomSheetDialog("DistrictName")
+        }
+
+        fun fodderClass(view: View) {
+            showBottomSheetDialog("Variety")
+        }
+
+        fun targetClass(view: View) {
+            showBottomSheetDialog("VarietyTarget")
+        }
+
+        fun quantityClass(view: View) {
+            showBottomSheetDialog("VarietyQuantity")
+        }
+    }
 
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         isFrom = intent?.getIntExtra("isFrom", 0)!!
-        mBinding!!.tvState.setOnClickListener { showBottomSheetDialog("State") }
-        mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog("District") }
-        mBinding!!.tvDistrictName.setOnClickListener { showBottomSheetDialog("DistrictName") }
-        mBinding!!.tvFooderClass.setOnClickListener { showBottomSheetDialog("Variety") }
-        mBinding!!.tvTargetClass.setOnClickListener { showBottomSheetDialog("VarietyTarget") }
-        mBinding!!.tvQuantityClass.setOnClickListener { showBottomSheetDialog("VarietyQuantity") }
-
         when (isFrom) {
             1 -> {
                 mBinding!!.tvHeading.text = "Add New Fpfrom Non Forest"
             }
         }
-
-
     }
 
     private fun showBottomSheetDialog(type: String) {
@@ -96,10 +122,10 @@ class AddNlmAssistanceForQFSPActivity :
                 selectedTextView = mBinding!!.tvDistrict
             }
 
-            "DistrictName" -> {
-                selectedList = stateList
-                selectedTextView = mBinding!!.tvDistrictName
-            }
+//            "DistrictName" -> {
+//                selectedList = stateList
+//                selectedTextView = mBinding!!.tvDistrictName
+//            }
 
             "Variety" -> {
                 selectedList = variety
@@ -163,13 +189,6 @@ class AddNlmAssistanceForQFSPActivity :
 
         return rotateDrawable
     }
-
-//    private fun onlyCreatedAdapter() {
-//        onlyCreatedAdapter = NlmEdpAdapter(onlyCreated, isFrom)
-//        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        mBinding!!.rvNlmEdp.layoutManager = layoutManager
-//        mBinding!!.rvNlmEdp.adapter = onlyCreatedAdapter
-//    }
 
     override fun setVariables() {
     }

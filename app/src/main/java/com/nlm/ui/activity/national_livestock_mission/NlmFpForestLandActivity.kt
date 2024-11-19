@@ -3,30 +3,161 @@ package com.nlm.ui.activity.national_livestock_mission
 import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityNlmFpForestLandBinding
-import com.nlm.model.NlmFpForest
+import com.nlm.model.FodderProductionFromNonForestData
+import com.nlm.model.FpFromForestLandData
+import com.nlm.model.FpFromForestLandRequest
+import com.nlm.model.FpFromForestLandResponse
+import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
-import com.nlm.ui.adapter.NlmAdapter
+import com.nlm.ui.adapter.FpFromForestLandAdapter
+import com.nlm.ui.adapter.FpFromNonForestAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
+import com.nlm.viewModel.ViewModel
 
-class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>() {
+class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), CallBackDeleteAtId {
     private var mBinding: ActivityNlmFpForestLandBinding? = null
-    private lateinit var onlyCreatedAdapter: NlmAdapter
-    private lateinit var onlyCreated: List<NlmFpForest>
+    private var fpFromForestLandAdapter: FpFromForestLandAdapter? = null
+    private var fpsFromForestLandList = ArrayList<FpFromForestLandData>()
     private var layoutManager: LinearLayoutManager? = null
-    private var isFrom: Int = 0
+    private val viewModel = ViewModel()
+    private var currentPage = 1
+    private var totalPage = 1
+    private var loading = true
 
     override val layoutId: Int
         get() = R.layout.activity_nlm_fp_forest_land
 
+    override fun initView() {
+        mBinding = viewDataBinding
+        mBinding?.clickAction = ClickActions()
+        viewModel.init()
+        fpFromForestLandAdapter()
+        swipeForRefreshFpFromForestLand()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fpFromForestLandAPICall(paginate = false, loader = true)
+    }
+
+    private fun fpFromForestLandAPICall(paginate: Boolean, loader: Boolean) {
+        if (paginate) {
+            currentPage++
+        }
+        viewModel.getFpFromForestLandList(
+            this, loader, FpFromForestLandRequest(
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                page = currentPage,
+                limit = 10
+            )
+        )
+    }
+
+    private var recyclerScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val visibleItemCount: Int? = layoutManager?.childCount
+                    val totalItemCount: Int? = layoutManager?.itemCount
+                    val pastVisiblesItems: Int? = layoutManager?.findFirstVisibleItemPosition()
+                    if (loading) {
+                        if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
+                            loading = false
+                            if (currentPage < totalPage) {
+                                //Call API here
+                                fpFromForestLandAPICall(paginate = true, loader = true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    private fun swipeForRefreshFpFromForestLand() {
+        mBinding?.srlFpFromForestLand?.setOnRefreshListener {
+            fpFromForestLandAPICall(paginate = false, loader = true)
+            mBinding?.srlFpFromForestLand?.isRefreshing = false
+        }
+    }
+
+    private fun fpFromForestLandAdapter() {
+        fpFromForestLandAdapter = FpFromForestLandAdapter(this, fpsFromForestLandList, this)
+        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        mBinding?.rvFpFromForestLand?.layoutManager = layoutManager
+        mBinding?.rvFpFromForestLand?.adapter = fpFromForestLandAdapter
+        mBinding?.rvFpFromForestLand?.addOnScrollListener(recyclerScrollListener)
+    }
+
+    override fun setVariables() {
+    }
+
+    override fun setObservers() {
+
+        viewModel.fpFromForestLandResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            } else {
+                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                    if (currentPage == 1) {
+                        fpsFromForestLandList.clear()
+
+                        val remainingCount = userResponseModel._result.total_count % 10
+                        totalPage = if (remainingCount == 0) {
+                            val count = userResponseModel._result.total_count / 10
+                            count
+                        } else {
+                            val count = userResponseModel._result.total_count / 10
+                            count + 1
+                        }
+                    }
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
+                    fpsFromForestLandList.addAll(userResponseModel._result.data)
+                    fpFromForestLandAdapter?.notifyDataSetChanged()
+                    mBinding?.tvNoDataFound?.hideView()
+                    mBinding?.rvFpFromForestLand?.showView()
+                } else {
+                    mBinding?.tvNoDataFound?.showView()
+                    mBinding?.rvFpFromForestLand?.hideView()
+                }
+            }
+        }
+    }
 
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+
         fun filter(view: View) {
             val intent = Intent(
                 this@NlmFpForestLandActivity,
@@ -34,77 +165,8 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>() {
             ).putExtra("isFrom", 15)
             startActivity(intent)
         }
-
     }
 
-
-    override fun initView() {
-        mBinding = viewDataBinding
-        mBinding?.clickAction = ClickActions()
-        isFrom = intent?.getIntExtra("isFrom", 0)!!
-
-        when(isFrom){
-            1->{
-                mBinding!!.tvHeading.text="List of Fpfrom Non Forest"
-            }
-        }
-//        if(Utility.getPreferenceString(this, AppConstants.ROLE_NAME)=="Super Admin")
-//        {
-//            mBinding!!.fabAddAgency.hideView()
-//        }
-        onlyCreated = listOf(
-            NlmFpForest(
-                "GUJARAT",
-                "DAHOD",
-                "n/A",
-                "test",
-                "N/A",
-                "2024-08-21"
-            ),
-            NlmFpForest(
-                "DELHI",
-                "NORTH WEST",
-                "test",
-                "test",
-                "N/A",
-                "2024-08-21"
-            ),
-            NlmFpForest(
-                "GUJARAT",
-                "DAHOD",
-                "N/a",
-                "test",
-                "N/A",
-                "2024-08-21"
-            ),
-
-        )
-
-
-
-
-        mBinding!!.fabAddAgency.setOnClickListener {
-            val intent =
-                Intent(this, AddNlmFpForestLandActivity::class.java).putExtra("isFrom", isFrom)
-            startActivity(intent)
-        }
-
-
-//        onlyCreatedAdapter()
-
-    }
-
-    private fun onlyCreatedAdapter() {
-//        onlyCreatedAdapter = NlmAdapter(onlyCreated, isFrom,
-//            Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
-        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding!!.rvNlmEdp.layoutManager = layoutManager
-        mBinding!!.rvNlmEdp.adapter = onlyCreatedAdapter
-    }
-
-    override fun setVariables() {
-    }
-
-    override fun setObservers() {
+    override fun onClickItem(ID: Int?, position: Int) {
     }
 }
