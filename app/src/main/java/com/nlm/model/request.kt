@@ -63,7 +63,7 @@ data class ImportExocticGoatRequest(
     val limit: Int?,
     val page: Int?,
     val role_id: String?,
-    val state_code: String?,
+    val state_code: Int?,
     val user_id: String?,
     val number_of_farmers_benefited: String?,
 )
@@ -566,10 +566,10 @@ data class NLMEdpRequest(
 )
 
 data class NLMAhidfRequest(
-    val limit: String,
-    val page: String,
-    val role_id: String,
-    val state_code: String,
-    val user_id: String
+    val limit: Int?= null,
+    val page: Int?= null,
+    val role_id: Int?= null,
+    val state_code: Int?= null,
+    val user_id: Int?= null,
 )
 

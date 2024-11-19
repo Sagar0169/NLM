@@ -38,23 +38,28 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
     private var currentPage = 1
     private var itemPosition : Int ?= null
     private var totalPage = 1
+    var stateId: Int = 0
     var NoFarmers: String ?=null
     private var loading = true
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction=ClickActions()
         viewModel.init()
-        exocticGoatAPICall(paginate = false, loader = true,NoFarmers)
+
         implementingAgency()
         swipeForRefreshImplementingAgency()
     }
 
+    override fun onResume() {
+        super.onResume()
+        exocticGoatAPICall(paginate = false, loader = true,getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code)
+    }
     override fun setVariables() {
 
     }
     private fun swipeForRefreshImplementingAgency() {
         mBinding?.srlImportOfExoticGoat?.setOnRefreshListener {
-            exocticGoatAPICall(paginate = false, loader = true,NoFarmers)
+            exocticGoatAPICall(paginate = false, loader = true,getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code)
             mBinding?.srlImportOfExoticGoat?.isRefreshing = false
         }
     }
@@ -124,8 +129,8 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
         fun filter(view: View){
             val intent =
                 Intent(this@ImportOfExoticGoatList, FilterStateActivity::class.java)
-            intent.putExtra("isFrom", 37)
-            intent.putExtra("NumberOfFarmers", NoFarmers) // Add selected data to intent
+            intent.putExtra("isFrom", 1)
+            intent.putExtra("selectedStateId", stateId) // previously selected state ID
             startActivityForResult(intent, FILTER_REQUEST_CODE)
         }
     }
@@ -139,7 +144,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
         mBinding?.rvArtificialInsemination?.adapter = implementingAdapter
         mBinding?.rvArtificialInsemination?.addOnScrollListener(recyclerScrollListener)
     }
-    private fun exocticGoatAPICall(paginate: Boolean, loader: Boolean,NoFarmers:String?) {
+    private fun exocticGoatAPICall(paginate: Boolean, loader: Boolean,Stateid:Int?) {
         if (paginate) {
             currentPage++
         }
@@ -147,7 +152,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
             this, loader, ImportExocticGoatRequest(
                 role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id.toString(),
                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code.toString(),
+                state_code = Stateid,
                 page = currentPage,
                 limit = 10,
                 number_of_farmers_benefited=NoFarmers
@@ -169,7 +174,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                exocticGoatAPICall(paginate = true, loader = true,NoFarmers)
+                                exocticGoatAPICall(paginate = true, loader = true,getPreferenceOfScheme(this@ImportOfExoticGoatList, AppConstants.SCHEME, Result::class.java)?.state_code)
                             }
                         }
                     }
@@ -183,9 +188,9 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
             // Retrieve the data passed from FilterStateActivity
 
             if (data != null) {
-                NoFarmers=data.getStringExtra("NumberOfFarmers")
+                stateId = data.getIntExtra("stateId", 0)
             }
-            exocticGoatAPICall(paginate = false, loader = true,NoFarmers)
+            exocticGoatAPICall(paginate = false, loader = true,stateId)
 
 
         }

@@ -128,7 +128,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             this, PrefEntities.TOKEN,
                             it1
                         )
-
                     }
                         startActivity(
                             Intent(

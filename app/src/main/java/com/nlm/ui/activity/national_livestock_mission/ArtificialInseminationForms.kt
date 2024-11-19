@@ -177,6 +177,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                 }
             }
         }
+
         viewModel.artificialInseminationAddResult.observe(this){
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
@@ -403,11 +404,15 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName=bindingDialog.etDoc
+        bindingDialog.btnDelete.setOnClickListener{
+            dialog.dismiss()
+        }
         if(selectedItem!=null){
             if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24)
             {
                 UploadedDocumentName=selectedItem.ia_document
-                bindingDialog.etDoc.text=selectedItem.ia_document}
+                bindingDialog.etDoc.text=selectedItem.ia_document
+            }
             else{
                 UploadedDocumentName=selectedItem.nlm_document
                 bindingDialog.etDoc.text=selectedItem.nlm_document

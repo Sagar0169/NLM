@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +57,7 @@ import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(),CallBackItemImportExoticAchivementEdit,
     CallBackItemImportExoticDetailtEdit,CallBackDeleteAtId, CallBackItemUploadDocEdit {
@@ -82,6 +84,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     private var layoutManager: LinearLayoutManager? = null
     private var stateList = ArrayList<ResultGetDropDown>()
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var DocumentId:Int?=null
+    private var UploadedDocumentName:String?=null
     var body: MultipartBody.Part? = null
     val viewModel = ViewModel()
     var selectedValue: Int = 1
@@ -175,7 +179,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 }
 
                 else{
-                    if (viewEdit=="view")
+                    if (viewEdit=="view" )
                     {
                         userResponseModel._result.number_of_farmers_benefited?.let { it1 ->
                             mBinding?.etNoOfFarmer?.setText(it1.toString())
@@ -183,18 +187,23 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                         formId=userResponseModel._result.id
                         viewDocumentList.clear()
                         DocumentList.clear()
+                        Log.d("DATAAAAAAList",userResponseModel._result.import_of_exotic_goat_document.toString())
                         userResponseModel._result.import_of_exotic_goat_document?.forEach { document ->
                             if (document.nlm_document == null) {
                                 if(getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
                                 {
+                                    Log.d("DATAAAAAA",userResponseModel._result.import_of_exotic_goat_document.toString())
                                     DocumentList.add(document)
-                                }else{
+                                }
+                                else{
                                 // Add to DocumentList if ia_document is null
+
                                 viewDocumentList.add(document)}
                             } else  {
                                 DocumentList.add(document)
                             } }
-
+                        AddDocumentAdapter?.notifyDataSetChanged()
+                        ViewDocumentAdapter?.notifyDataSetChanged()
                         AchievementList?.clear()
                         VerifiedNlmList?.clear()
                         DetailOfImportList?.clear()
@@ -251,8 +260,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                         AchievementAdapter?.notifyDataSetChanged()
                         DetailOfImportAdapter?.notifyDataSetChanged()
                         VerifiedNlmAdapter?.notifyDataSetChanged()
-                        AddDocumentAdapter?.notifyDataSetChanged()
-                        ViewDocumentAdapter?.notifyDataSetChanged()
+
+
                         if (userResponseModel._result.comment_by_nlm_whether==1)
                         {
                             mBinding?.rbMentallyYes?.isChecked=true
@@ -264,6 +273,25 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
 
                     else if (viewEdit=="edit")
                     {
+                        viewDocumentList.clear()
+                        DocumentList.clear()
+                        Log.d("DATAAAAAAList",userResponseModel._result.import_of_exotic_goat_document.toString())
+                        userResponseModel._result.import_of_exotic_goat_document?.forEach { document ->
+                            if (document.nlm_document == null) {
+                                if(getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+                                {
+                                    Log.d("DATAAAAAA",userResponseModel._result.import_of_exotic_goat_document.toString())
+                                    DocumentList.add(document)
+                                }
+                                else{
+                                    // Add to DocumentList if ia_document is null
+
+                                    viewDocumentList.add(document)}
+                            } else  {
+                                DocumentList.add(document)
+                            } }
+                        AddDocumentAdapter?.notifyDataSetChanged()
+                        ViewDocumentAdapter?.notifyDataSetChanged()
                         formId=userResponseModel._result.id
                         AchievementList?.clear()
                         VerifiedNlmList?.clear()
@@ -308,6 +336,31 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
 
             }
         }
+        viewModel.getProfileUploadFileResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel != null) {
+                if (userResponseModel.statuscode == 401) {
+                    Utility.logout(this)
+                } else if (userResponseModel._resultflag == 0) {
+                    mBinding?.main?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+
+                } else {
+                    DocumentId=userResponseModel._result.id
+                    UploadedDocumentName=userResponseModel._result.document_name
+                    mBinding?.main?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+                }
+            }
+        }
     }
     inner class ClickActions {
         fun state(view: View){showBottomSheetDialog("state")}
@@ -322,7 +375,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             else{
                 saveDataApi(0)
             }
-
+            savedAsDraft=true
         }
         fun saveAsDraft(view: View){
             if(viewEdit=="view")
@@ -335,7 +388,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             savedAsDraft=true
         }
         fun addDocument(view: View){
-            AddDocumentDialog(this@ImportOfExoticGoatForms)
+            AddDocumentDialog(this@ImportOfExoticGoatForms,null,null)
         }
         fun addDetailOfImport(view: View){
             AddImportDetailDialog(this@ImportOfExoticGoatForms,null,null)
@@ -372,7 +425,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         mBinding?.VerifiedNlmRv?.adapter = VerifiedNlmAdapter
         mBinding?.VerifiedNlmRv?.layoutManager = LinearLayoutManager(this)
     }
-    private fun AddDocumentDialog(context: Context) {
+    private fun AddDocumentDialog(context: Context,selectedItem: ImplementingAgencyDocument?,position: Int?) {
         val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_add_document_dialog,
@@ -393,27 +446,104 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName=bindingDialog.etDoc
-        bindingDialog.tvChooseFile.setOnClickListener {
-            openOnlyPdfAccordingToPosition()
+        bindingDialog.btnDelete.setOnClickListener{
+            dialog.dismiss()
         }
+        if(selectedItem!=null){
+            if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+            {
+                UploadedDocumentName=selectedItem.ia_document
+                bindingDialog.etDoc.text=selectedItem.ia_document
+            }
+            else{
+                UploadedDocumentName=selectedItem.nlm_document
+                bindingDialog.etDoc.text=selectedItem.nlm_document
+            }
+            bindingDialog.etDescription.setText(selectedItem.description)
 
-        bindingDialog.tvSubmit.setOnClickListener {
+        }
+        bindingDialog.tvChooseFile.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty())
             {
 
-                DocumentList.add(ImplementingAgencyDocument(
-                    description = bindingDialog.etDescription.text.toString(),
-                    ia_document = DocumentName,
-                    nlm_document = null,
-                    implementing_agency_id = null,
-                    id = null,
-                ))
+                openOnlyPdfAccordingToPosition()
+            }
+            else{
 
-                DocumentList.size.minus(1).let {
-                    AddDocumentAdapter?.notifyItemInserted(it)
-                    dialog.dismiss()
+                mBinding?.main?.let { showSnackbar(it,"please enter description") }
+            }
+        }
+        bindingDialog.tvSubmit.setOnClickListener {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+            {
+                if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24) {
+                    if(selectedItem!=null)
+                    {
+                        if (position != null) {
+                            DocumentList[position] = ImplementingAgencyDocument(
+                                description = bindingDialog.etDescription.text.toString(),
+                                ia_document = UploadedDocumentName,
+                                nlm_document = null,
+                                import_of_exotic_goat_id = selectedItem.import_of_exotic_goat_id,
+                                id = selectedItem.id,
+                            )
+                            AddDocumentAdapter?.notifyItemChanged(position)
+                            dialog.dismiss()
+                        }
+
+                    } else{
+
+                        DocumentList.add(ImplementingAgencyDocument(
+                            description = bindingDialog.etDescription.text.toString(),
+                            ia_document = UploadedDocumentName,
+                            nlm_document = null,
+
+
+                            ))
+
+                        DocumentList.size.minus(1).let {
+                            AddDocumentAdapter?.notifyItemInserted(it)
+                            Log.d("DOCUMENTLIST",DocumentList.toString())
+                            dialog.dismiss()
 //
+                        }
+
+                    }                    }
+                else{
+                    if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==8) {
+                        if(selectedItem!=null)
+                        {
+                            if (position != null) {
+                                DocumentList?.set(position, ImplementingAgencyDocument(
+                                    description = bindingDialog.etDescription.text.toString(),
+                                    ia_document = null,
+                                    nlm_document = UploadedDocumentName,
+                                    import_of_exotic_goat_id = selectedItem.import_of_exotic_goat_id,
+                                    id = selectedItem.id,
+                                )
+                                )
+                                AddDocumentAdapter?.notifyItemChanged(position)
+                                dialog.dismiss()
+                            }
+
+                        } else{
+                            DocumentList?.add(
+                                ImplementingAgencyDocument(
+                                    description = bindingDialog.etDescription.text.toString(),
+                                    ia_document = null,
+                                    nlm_document = UploadedDocumentName,
+
+                                    )
+                            )
+                            DocumentList.size.minus(1).let {
+                                AddDocumentAdapter?.notifyItemInserted(it)
+                                dialog.dismiss()
+                            }
+                        }
+                    }
                 }
+
+
             }
 
 
@@ -421,6 +551,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 showSnackbar(mBinding!!.main, getString(R.string.please_enter_atleast_one_field))
             }
         }
+
         dialog.show()
     }
     private fun AddImportDetailDialog(context: Context,selectedItem: ImportOfExoticGoatDetailImport?, position: Int?) {
@@ -665,14 +796,12 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                 )
 //                                use this code to add new view with image name and uri
                             }
-//                            viewModel.getProfileUploadFile(
-//                                context = this,
-//                                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-//                                table_name = getString(R.string.implementing_agency_document).toRequestBody(
-//                                    MultipartBody.FORM),
-//                                null,
-//                                ia_document = body
-//                            )
+                            viewModel.getProfileUploadFile(
+                                context = this,
+                                document_name = body,
+                                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                                table_name = getString(R.string.artificial_insemination_document).toRequestBody(MultipartBody.FORM),
+                            )
                         }
                     }
                 }
@@ -717,7 +846,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 is_type = null,
                 id = formId,
                 is_draft=isDraft,
-                import_of_exotic_goat_document = null, is_deleted = null,
+                import_of_exotic_goat_document = DocumentList, is_deleted = null,
                 number_of_farmers_benefited=mBinding?.etNoOfFarmer?.text.toString().toIntOrNull()
             )
         )
@@ -922,6 +1051,6 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
-
+        AddDocumentDialog(this,selectedItem,position)
     }
 }

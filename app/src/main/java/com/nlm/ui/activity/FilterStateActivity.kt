@@ -119,6 +119,26 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             1 -> {
                 binding!!.tvTitleState.showView()
                 binding!!.tvState.showView()
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
             }
 
             2 -> {
@@ -773,6 +793,13 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 // Prepare intent to send the result back
                 val resultIntent = Intent()
                 resultIntent.putExtra("nameLocation", binding!!.etLocationNDD.text.toString())
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                finish()
+            }
+            if (isFrom == 1 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
                 resultIntent.putExtra("stateId", stateId) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
                 finish()
