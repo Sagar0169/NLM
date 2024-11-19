@@ -372,6 +372,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="import_of_exotic_sheep_and_goat_gernplasm">Import of exotic sheep and goat gernplasm</string>
     <string name="implementing_agency_document">implementing_agency_document</string>
     <string name="rsp_laboratory_semen_document">rsp_laboratory_semen_document</string>
+    <string name="state_semen_bank_document">state_semen_bank_document</string>
     <string name="rsp_lab">RSP Lab</string>
     <string name="artificial_insemination_document">artificial_insemination_document</string>
     <string name="animal_husbandry_infrastructure_development_fund_format_12"><ul><li>Animal Husbandry Infrastructure Development Fund(Format 12)</li></ul></string>

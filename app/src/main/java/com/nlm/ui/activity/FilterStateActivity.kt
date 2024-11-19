@@ -462,6 +462,48 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etNoOfFarmer.setText(NoOfFarmer)
             }
 
+            40 -> {
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvPhoneNo.showView()
+                binding!!.etPhoneno.showView()
+                binding!!.tvYear.showView()
+                binding!!.tvTitleYear.showView()
+
+                if (phoneNo != null) {
+                    binding?.etPhoneno?.setText(phoneNo)
+                }
+                if (districtName != null) {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
+
+
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+
+
+            }
 
             else -> {
                 binding!!.tvTitleState.showView()
@@ -735,6 +777,12 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvDistrict.text = "Please Select"
                 districtId = null
             }
+            if (isFrom == 40 && stateId != null) {
+                // Prepare intent to send the result back
+                binding!!.etPhoneno.setText("")
+                binding!!.tvDistrict.text = "Please Select"
+                districtId = null
+            }
         }
 
 
@@ -772,6 +820,18 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 // Prepare intent to send the result back
                 val resultIntent = Intent()
                 resultIntent.putExtra("nameLocation", binding!!.etLoc.text.toString())
+                resultIntent.putExtra("etPhoneno", binding!!.etPhoneno.text.toString())
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                resultIntent.putExtra("districtId", districtId) // Add selected data to intent
+                resultIntent.putExtra("districtName", districtName) // Add selected data to intent
+                resultIntent.putExtra("year", stateId) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                toast(stateId.toString())
+                finish()
+            }
+            if (isFrom == 40 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
                 resultIntent.putExtra("etPhoneno", binding!!.etPhoneno.text.toString())
                 resultIntent.putExtra("stateId", stateId) // Add selected data to intent
                 resultIntent.putExtra("districtId", districtId) // Add selected data to intent

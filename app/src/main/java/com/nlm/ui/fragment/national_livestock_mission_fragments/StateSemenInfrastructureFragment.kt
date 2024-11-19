@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.provider.MediaStore
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
@@ -23,6 +24,7 @@ import com.nlm.databinding.FragmentStateSemenInfrastructureBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemStateSemenInfragoatBinding
 import com.nlm.model.ImplementingAgencyDocument
+import com.nlm.model.RSPAddRequest
 import com.nlm.model.Result
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenInfraGoat
@@ -39,6 +41,7 @@ import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 
 class StateSemenInfrastructureFragment(
@@ -63,6 +66,10 @@ class StateSemenInfrastructureFragment(
     private var DocumentName: String? = null
     var body: MultipartBody.Part? = null
     val viewModel = ViewModel()
+    private var DocumentId: Int? = null
+    private var UploadedDocumentName: String? = null
+    private var savedAsEdit: Boolean = false
+
 
     override fun init() {
         mBinding = viewDataBinding
@@ -70,7 +77,7 @@ class StateSemenInfrastructureFragment(
         DocumentList = arrayListOf()
         viewModel.init()
         stateSemenInfraGoatAdapter()
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, "viewEdit",this,this)
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, viewEdit,this,this)
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
         if (viewEdit == "view") {
@@ -153,6 +160,31 @@ class StateSemenInfrastructureFragment(
     }
 
     override fun setObservers() {
+        viewModel.getProfileUploadFileResult.observe(viewLifecycleOwner) {
+            val userResponseModel = it
+            if (userResponseModel != null) {
+                if (userResponseModel.statuscode == 401) {
+                    Utility.logout(requireContext())
+                } else if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+
+                } else {
+                    DocumentId = userResponseModel._result.id
+                    UploadedDocumentName = userResponseModel._result.document_name
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+                }
+            }
+        }
         viewModel.stateSemenBankAddResult.observe(viewLifecycleOwner) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
@@ -182,6 +214,9 @@ class StateSemenInfrastructureFragment(
                         stateSemenInfraGoatList.clear()
                         stateSemenInfraGoatList.addAll(userResponseModel._result.state_semen_bank_infrastructure)
                         stateSemenInfraGoatAdapter?.notifyDataSetChanged()
+                        DocumentList.clear()
+                        DocumentList.addAll(userResponseModel._result.state_semen_bank_document)
+                        addDocumentAdapter?.notifyDataSetChanged()
 
                     } else {
 
@@ -272,82 +307,39 @@ class StateSemenInfrastructureFragment(
 
     inner class ClickActions {
         fun saveAsDraft(view: View) {
-            viewModel.getStateSemenAddBankApi2(
-                requireContext(), true,
-                StateSemenBankNLMRequest(
-                    id = itemId,
-                    role_id = getPreferenceOfScheme(
-                        requireContext(),
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.role_id,
+            if (viewEdit == "view") {
+                listener?.onNextButtonClick()
+            }
 
-                    state_code = getPreferenceOfScheme(
-                        requireContext(),
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.state_code,
-                    user_id = getPreferenceOfScheme(
-                        requireContext(),
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.user_id.toString(),
-                    storage_capacity = mBinding?.etStorageCapacity?.text.toString(),
-                    state_semen_bank_infrastructure = stateSemenInfraGoatList,
-                    major_clients_coop_fin_year_one = mBinding?.etCoopOne?.text.toString(),
-                    major_clients_coop_fin_year_two = mBinding?.etCoopTwo?.text.toString(),
-                    major_clients_coop_fin_year_three = mBinding?.etCoopThree?.text.toString(),
-                    major_clients_ngo_fin_year_one = mBinding?.etNgoOne?.text.toString(),
-                    major_clients_ngo_fin_year_two = mBinding?.etNgoThree?.text.toString(),
-                    major_clients_ngo_fin_year_three = mBinding?.etNgoOne?.text.toString(),
-                    major_clients_other_states_fin_year_one = mBinding?.etOtherStateOne?.text.toString(),
-                    major_clients_other_states_fin_year_two = mBinding?.etOtherStateTwo?.text.toString(),
-                    major_clients_other_states_fin_year_three = mBinding?.etOtherStateThree?.text.toString(),
-                    state_semen_bank_document = DocumentList,
-                    is_draft = 1,
-                )
-            )
+            if (viewEdit == "edit") {
+                savedAsEdit = true
+            }
+            if (itemId != 0) {
+                saveDataApi(itemId, 1)
+            } else {
+                saveDataApi(null, 1)
+            }
             savedAsDraft = true
         }
 
         fun save(view: View) {
-            viewModel.getStateSemenAddBankApi2(
-                requireContext(), true,
-                StateSemenBankNLMRequest(
-                    role_id = getPreferenceOfScheme(
-                        requireContext(),
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.role_id,
-                    state_code = getPreferenceOfScheme(
-                        requireContext(),
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.state_code,
-                    id = itemId,
-                    user_id = getPreferenceOfScheme(
-                        requireContext(),
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.user_id.toString(),
-                    storage_capacity = mBinding?.etStorageCapacity?.text.toString(),
-                    state_semen_bank_infrastructure = stateSemenInfraGoatList,
-                    major_clients_coop_fin_year_one = mBinding?.etCoopOne?.text.toString(),
-                    major_clients_coop_fin_year_two = mBinding?.etCoopTwo?.text.toString(),
-                    major_clients_coop_fin_year_three = mBinding?.etCoopThree?.text.toString(),
-                    major_clients_ngo_fin_year_one = mBinding?.etNgoOne?.text.toString(),
-                    major_clients_ngo_fin_year_two = mBinding?.etNgoThree?.text.toString(),
-                    major_clients_ngo_fin_year_three = mBinding?.etNgoOne?.text.toString(),
-                    major_clients_other_states_fin_year_one = mBinding?.etOtherStateOne?.text.toString(),
-                    major_clients_other_states_fin_year_two = mBinding?.etOtherStateTwo?.text.toString(),
-                    major_clients_other_states_fin_year_three = mBinding?.etOtherStateThree?.text.toString(),
-                    state_semen_bank_document = DocumentList,
-                )
-            )
+            // Get the text from the input fields
+            if (viewEdit == "view") {
+                listener?.onNextButtonClick()
+            }
+
+            if (viewEdit == "edit") {
+                savedAsEdit = true
+            }
+            if (itemId != 0) {
+                saveDataApi(itemId, 0)
+            } else {
+                saveDataApi(null, 0)
+            }
         }
 
         fun addDocDialog(view: View) {
-            addDocumentDialog(requireContext())
+            addDocumentDialog(requireContext(),null,null)
         }
 
         fun otherManpowerPositionDialog(view: View) {
@@ -355,7 +347,51 @@ class StateSemenInfrastructureFragment(
         }
     }
 
-    private fun addDocumentDialog(context: Context) {
+    private fun saveDataApi(itemId: Int?, draft: Int?) {
+
+        viewModel.getStateSemenAddBankApi2(
+            requireContext(), true,
+            StateSemenBankNLMRequest(
+                id = itemId,
+                role_id = getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+
+                state_code = getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                storage_capacity = mBinding?.etStorageCapacity?.text.toString(),
+                state_semen_bank_infrastructure = stateSemenInfraGoatList,
+                major_clients_coop_fin_year_one = mBinding?.etCoopOne?.text.toString(),
+                major_clients_coop_fin_year_two = mBinding?.etCoopTwo?.text.toString(),
+                major_clients_coop_fin_year_three = mBinding?.etCoopThree?.text.toString(),
+                major_clients_ngo_fin_year_one = mBinding?.etNgoOne?.text.toString(),
+                major_clients_ngo_fin_year_two = mBinding?.etNgoThree?.text.toString(),
+                major_clients_ngo_fin_year_three = mBinding?.etNgoOne?.text.toString(),
+                major_clients_other_states_fin_year_one = mBinding?.etOtherStateOne?.text.toString(),
+                major_clients_other_states_fin_year_two = mBinding?.etOtherStateTwo?.text.toString(),
+                major_clients_other_states_fin_year_three = mBinding?.etOtherStateThree?.text.toString(),
+                state_semen_bank_document = DocumentList,
+                is_draft = draft,
+            )
+        )
+    }
+
+
+    private fun addDocumentDialog(
+        context: Context,
+        selectedItem: ImplementingAgencyDocument?,
+        position: Int?
+    ) {
         val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_add_document_dialog,
@@ -372,28 +408,56 @@ class StateSemenInfrastructureFragment(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
+
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+
         DialogDocName = bindingDialog.etDoc
+        if (selectedItem != null) {
+            UploadedDocumentName = selectedItem.nlm_document
+            bindingDialog.etDoc.text = selectedItem.nlm_document
+            bindingDialog.etDescription.setText(selectedItem.description)
+        }
         bindingDialog.tvChooseFile.setOnClickListener {
             openOnlyPdfAccordingToPosition()
         }
 
+        bindingDialog.btnDelete.setOnClickListener{
+            dialog.dismiss()
+        }
+
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
+                if (selectedItem != null) {
+                    if (position != null) {
+                        DocumentList[position] =
+                            ImplementingAgencyDocument(
+                                description = bindingDialog.etDescription.text.toString(),
+                                nlm_document = UploadedDocumentName,
+                                state_semen_bank_id = selectedItem.rsp_laboratory_semen_id,
+                                id = selectedItem.id,
+                            )
+                        addDocumentAdapter?.notifyItemChanged(position)
+                        dialog.dismiss()
+                    }
 
-                DocumentList.add(
-                    ImplementingAgencyDocument(
-                        bindingDialog.etDescription.text.toString(),
-                        ia_document = DocumentName,
-                        id = null,
-                        implementing_agency_id = null,
-                        null
+                } else {
+                    DocumentList.add(
+                        ImplementingAgencyDocument(
+                            bindingDialog.etDescription.text.toString(),
+                            nlm_document = UploadedDocumentName,
+                            id = null,
+                            implementing_agency_id = null,
+                            state_semen_bank_id=null
+                        )
                     )
-                )
 
-                DocumentList.size.minus(1).let {
-                    addDocumentAdapter?.notifyItemInserted(it)
-                    dialog.dismiss()
+                    DocumentList.size.minus(1).let {
+                        addDocumentAdapter?.notifyItemInserted(it)
+                        dialog.dismiss()
 //
+                    }
                 }
             } else {
                 showSnackbar(
@@ -444,16 +508,18 @@ class StateSemenInfrastructureFragment(
                                 )
 //                                use this code to add new view with image name and uri
                             }
-//                            viewModel.getProfileUploadFile(
-//                                context = requireActivity(),
-//                                role_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id,
-//                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
-//                                table_name = getString(R.string.implementing_agency_document).toRequestBody(
-//                                    MultipartBody.FORM),
-//                                implementing_agency_id = Preferences.getPreference_int(requireContext(),
-//                                    AppConstants.FORM_FILLED_ID),
-//                                nlm_document = body
-//                            )
+                            viewModel.getProfileUploadFile(
+                                context = requireActivity(),
+                                table_name = getString(R.string.state_semen_bank_document).toRequestBody(
+                                    MultipartBody.FORM
+                                ),
+                                document_name = body,
+                                user_id = getPreferenceOfScheme(
+                                    requireContext(),
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id,
+                            )
                         }
                     }
                 }
@@ -470,7 +536,7 @@ class StateSemenInfrastructureFragment(
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
-
+        addDocumentDialog(requireContext(), selectedItem, position)
     }
 
 }

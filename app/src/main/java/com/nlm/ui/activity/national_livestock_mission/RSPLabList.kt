@@ -1,6 +1,7 @@
 package com.nlm.ui.activity.national_livestock_mission
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,8 @@ import com.nlm.model.Result
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.ui.activity.FilterStateActivity
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion.FILTER_REQUEST_CODE
 import com.nlm.ui.adapter.RSPLABListAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -38,6 +41,10 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
     private var totalPage = 1
     private var loading = true
     private var itemPosition : Int ?= null
+    var stateId: Int = 0
+    var districtId: Int = 0
+    var districtName: String = ""
+    var phoneNo: String = ""
 
     override fun initView() {
         mBinding = viewDataBinding
@@ -46,9 +53,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
         rSPLABListAdapter()
         swipeForRefreshSrlRSPLab()
     }
-    companion object {
-        const val FILTER_REQUEST_CODE = 1002
-    }
+
     private fun rSPLABListAdapter() {
         rSPLABListAdapter = RSPLABListAdapter(this,rSPLabList,this)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -59,7 +64,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
 
     private fun swipeForRefreshSrlRSPLab() {
         mBinding?.SrlRSPLab?.setOnRefreshListener {
-            implementingAgencyAPICall(paginate = false, loader = true)
+            implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo)
             mBinding?.SrlRSPLab?.isRefreshing = false
         }
     }
@@ -77,7 +82,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                implementingAgencyAPICall(paginate = true, loader = true)
+                                implementingAgencyAPICall(paginate = true, loader = true,districtId,phoneNo)
                             }
                         }
                     }
@@ -93,7 +98,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             } else {
-                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                if (userResponseModel?._result?.data!= null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
                         rSPLabList.clear()
 
@@ -116,6 +121,11 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvRspLabView?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvRspLabView?.hideView()
                 }
@@ -154,11 +164,35 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
         }
 
         fun filter(view: View) {
-            startActivity(Intent(this@RSPLabList, FilterStateActivity::class.java))
+            val intent =
+                Intent(this@RSPLabList, FilterStateActivity::class.java)
+            intent.putExtra("isFrom", 40)
+            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("districtId", districtId) // previously selected state ID
+            intent.putExtra("phoneNo", phoneNo)
+            intent.putExtra("districtName", districtName)
+            startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
+        }
+    }
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == FILTER_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Retrieve the data passed from FilterStateActivity
+            districtId = data?.getIntExtra("districtId", 0)!!
+            stateId = data.getIntExtra("stateId", 0)
+            phoneNo = data.getStringExtra("etPhoneno").toString()
+            districtName = data.getStringExtra("districtName").toString()
+            //Need to add year also
+            // Log the data
+            implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo)
+            Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $stateId")
         }
     }
 
-    private fun implementingAgencyAPICall(paginate: Boolean, loader: Boolean) {
+    private fun implementingAgencyAPICall(paginate: Boolean, loader: Boolean,district:Int,phone:String) {
         if (paginate) {
             currentPage++
         }
@@ -179,6 +213,8 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.user_id,
+                phone,
+                district,
                 10,
                 currentPage
             )
@@ -214,6 +250,6 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
 
     override fun onResume() {
         super.onResume()
-        implementingAgencyAPICall(paginate = false, loader = true)
+        implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo)
     }
 }
