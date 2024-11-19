@@ -68,8 +68,7 @@ class RSPNLMFragment(
 ) : BaseFragment<FragmentRSPManpowerBinding>(
 
 ), CallBackSemenDoseAvg, CallBackItemUploadDocEdit,
-     CallBackDeleteAtId
-{
+    CallBackDeleteAtId {
     override val layoutId: Int
         get() = R.layout.fragment_r_s_p_manpower
     private var viewModel = ViewModel()
@@ -93,8 +92,8 @@ class RSPNLMFragment(
     private var layoutManager: LinearLayoutManager? = null
     private lateinit var stateAdapter: BottomSheetAdapter
     private var listener: OnNextButtonClickListener? = null
-    private var DocumentId:Int?=null
-    private var UploadedDocumentName:String?=null
+    private var DocumentId: Int? = null
+    private var UploadedDocumentName: String? = null
 
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     var body: MultipartBody.Part? = null
@@ -103,7 +102,13 @@ class RSPNLMFragment(
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         DocumentList = arrayListOf()
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, viewEdit,this,this)
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(
+            requireContext(),
+            DocumentList,
+            viewEdit,
+            this,
+            this
+        )
         mBinding?.rvNlmDoc?.adapter = addDocumentAdapter
         mBinding?.rvNlmDoc?.layoutManager = LinearLayoutManager(requireContext())
         mBinding?.tvState?.text = getPreferenceOfScheme(
@@ -208,7 +213,7 @@ class RSPNLMFragment(
     private fun rspBuckAdapter() {
         addBucksList = mutableListOf()
         addBuckAdapter =
-            AverageSemenDoseAdapter(requireContext(),addBucksList, viewEdit, this)
+            AverageSemenDoseAdapter(requireContext(), addBucksList, viewEdit, this)
         mBinding?.rvBuckNlm?.adapter = addBuckAdapter
         mBinding?.rvBuckNlm?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -262,8 +267,8 @@ class RSPNLMFragment(
                     }
 
                 } else {
-                    DocumentId=userResponseModel._result.id
-                    UploadedDocumentName=userResponseModel._result.document_name
+                    DocumentId = userResponseModel._result.id
+                    UploadedDocumentName = userResponseModel._result.document_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -312,6 +317,17 @@ class RSPNLMFragment(
                                 )
                             }
                             addBuckAdapter?.notifyDataSetChanged()
+                            if (
+                                getPreferenceOfScheme(
+                                    requireContext(),
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id == 8
+                            ){
+                                DocumentList.clear()
+                                DocumentList.addAll(userResponseModel._result.rsp_laboratory_semen_document)
+                                addDocumentAdapter?.notifyDataSetChanged()
+                            }
 
 
                         } else {
@@ -382,7 +398,7 @@ class RSPNLMFragment(
         }
 
         fun addDocDialog(view: View) {
-            addDocumentDialog(requireContext(),null,null)
+            addDocumentDialog(requireContext(), null, null)
         }
     }
 
@@ -410,7 +426,7 @@ class RSPNLMFragment(
         }
 
         if (pincode.isEmpty()) {
-            showError("Pincode is required")
+            showError("Pin code is required")
             return
         }
 
@@ -458,6 +474,7 @@ class RSPNLMFragment(
                 suggestions_any_other = mBinding?.etAnyOther?.text.toString(),
                 rsp_laboratory_semen_station_quality_buck = addBucksList,
                 is_draft = draft,
+                rsp_laboratory_semen_document=DocumentList
             )
         )
     }
@@ -466,7 +483,11 @@ class RSPNLMFragment(
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun addDocumentDialog(context: Context,selectedItem: ImplementingAgencyDocument?,position: Int?) {
+    private fun addDocumentDialog(
+        context: Context,
+        selectedItem: ImplementingAgencyDocument?,
+        position: Int?
+    ) {
         val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_add_document_dialog,
@@ -489,24 +510,27 @@ class RSPNLMFragment(
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
 
         DialogDocName = bindingDialog.etDoc
-        if(selectedItem!=null){
-            bindingDialog.etDoc.text=selectedItem.ia_document
+        if (selectedItem != null) {
+            UploadedDocumentName = selectedItem.nlm_document
+            bindingDialog.etDoc.text = selectedItem.nlm_document
             bindingDialog.etDescription.setText(selectedItem.description)
         }
         bindingDialog.tvChooseFile.setOnClickListener {
             openOnlyPdfAccordingToPosition()
         }
 
+        bindingDialog.btnDelete.setOnClickListener{
+            dialog.dismiss()
+        }
+
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
-                if(selectedItem!=null)
-                {
+                if (selectedItem != null) {
                     if (position != null) {
                         DocumentList[position] =
                             ImplementingAgencyDocument(
                                 description = bindingDialog.etDescription.text.toString(),
-                                ia_document = UploadedDocumentName,
-                                nlm_document = null,
+                                nlm_document = UploadedDocumentName,
                                 rsp_laboratory_semen_id = selectedItem.rsp_laboratory_semen_id,
                                 id = selectedItem.id,
                             )
@@ -514,25 +538,24 @@ class RSPNLMFragment(
                         dialog.dismiss()
                     }
 
-                }
-                else{
-                DocumentList.add(
-                    ImplementingAgencyDocument(
-                        bindingDialog.etDescription.text.toString(),
-                        ia_document = DocumentName,
-                        id = null,
-                        implementing_agency_id = null,
-                        null
+                } else {
+                    DocumentList.add(
+                        ImplementingAgencyDocument(
+                            bindingDialog.etDescription.text.toString(),
+                            nlm_document = UploadedDocumentName,
+                            id = null,
+                            implementing_agency_id = null,
+                            rsp_laboratory_semen_id=null
+                        )
                     )
-                )
 
-                DocumentList.size.minus(1).let {
-                    addDocumentAdapter?.notifyItemInserted(it)
-                    dialog.dismiss()
+                    DocumentList.size.minus(1).let {
+                        addDocumentAdapter?.notifyItemInserted(it)
+                        dialog.dismiss()
 //
+                    }
                 }
-            }
-            }else {
+            } else {
                 showSnackbar(
                     mBinding!!.clParent,
                     getString(R.string.please_enter_atleast_one_field)
@@ -583,9 +606,15 @@ class RSPNLMFragment(
                             }
                             viewModel.getProfileUploadFile(
                                 context = requireActivity(),
-                                table_name = getString(R.string.rsp_laboratory_semen_document).toRequestBody(MultipartBody.FORM),
+                                table_name = getString(R.string.rsp_laboratory_semen_document).toRequestBody(
+                                    MultipartBody.FORM
+                                ),
                                 document_name = body,
-                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
+                                user_id = getPreferenceOfScheme(
+                                    requireContext(),
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id,
                             )
                         }
                     }
@@ -834,6 +863,6 @@ class RSPNLMFragment(
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
-        addDocumentDialog(requireContext(),selectedItem,position)
+        addDocumentDialog(requireContext(), selectedItem, position)
     }
 }

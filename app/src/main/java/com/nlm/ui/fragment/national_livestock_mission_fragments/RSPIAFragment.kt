@@ -70,7 +70,7 @@ class RSPIAFragment(
     private val itemId: Int?,
     private val dId: Int?
 ) : BaseFragment<FragmentRSPBasicInformationBinding>(), CallBackAvilabilityEquipment,
-    CallBackDeleteAtId,CallBackItemUploadDocEdit,
+    CallBackDeleteAtId, CallBackItemUploadDocEdit,
     CallBackSemenDose {
     override val layoutId: Int
         get() = R.layout.fragment_r_s_p__basic_information
@@ -84,7 +84,7 @@ class RSPIAFragment(
     private var savedAsDraft: Boolean = false
     private var viewModel = ViewModel()
     private var addDocumentAdapter: SupportingDocumentAdapterWithDialog? = null
-    private lateinit var DocumentList:ArrayList<ImplementingAgencyDocument>
+    private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var DocumentListNLM: MutableList<ImplementingAgencyDocument>
     var body: MultipartBody.Part? = null
     private var rspEquipList = ArrayList<RspAddEquipment>()
@@ -101,8 +101,8 @@ class RSPIAFragment(
     private lateinit var stateAdapter: BottomSheetAdapter
     private var districtId: Int? = null // Store selected state
     private var listener: OnNextButtonClickListener? = null
-    private var DocumentId:Int?=null
-    private var UploadedDocumentName:String?=null
+    private var DocumentId: Int? = null
+    private var UploadedDocumentName: String? = null
 
     private val state = listOf(
         "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
@@ -123,7 +123,13 @@ class RSPIAFragment(
             Result::class.java
         )?.state_name
         mBinding?.tvState?.isEnabled = false
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, viewEdit,this,this)
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(
+            requireContext(),
+            DocumentList,
+            viewEdit,
+            this,
+            this
+        )
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
         if (viewEdit == "view" ||
@@ -211,7 +217,7 @@ class RSPIAFragment(
 
     private fun semenDoseAdapter() {
         semenAdapter =
-            SemenDoseAdapter(requireContext(),semenDoseList, viewEdit, this)
+            SemenDoseAdapter(requireContext(), semenDoseList, viewEdit, this)
         mBinding?.rvSemenDose?.adapter = semenAdapter
         mBinding?.rvSemenDose?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -220,7 +226,7 @@ class RSPIAFragment(
 
     private fun rspEquipAdapter() {
         rspEquipAdapter =
-            AvailabilityOfEquipmentAdapter(requireContext(),rspEquipList, viewEdit, this)
+            AvailabilityOfEquipmentAdapter(requireContext(), rspEquipList, viewEdit, this)
         mBinding?.recyclerView4?.adapter = rspEquipAdapter
         mBinding?.recyclerView4?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -314,9 +320,18 @@ class RSPIAFragment(
                                     it1
                                 )
                             }
-                            DocumentList.clear()
-                            DocumentList.addAll(userResponseModel._result.rsp_laboratory_semen_document)
-                            addDocumentAdapter?.notifyDataSetChanged()
+                            if (
+                                getPreferenceOfScheme(
+                                    requireContext(),
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id == 24
+                            ) {
+                                DocumentList.clear()
+                                DocumentList.addAll(userResponseModel._result.rsp_laboratory_semen_document)
+                                addDocumentAdapter?.notifyDataSetChanged()
+                            }
+
                             semenDoseList.clear()
                             userResponseModel._result.rsp_laboratory_semen_average.let { it1 ->
                                 semenDoseList.addAll(
@@ -357,8 +372,8 @@ class RSPIAFragment(
                     }
 
                 } else {
-                    DocumentId=userResponseModel._result.id
-                    UploadedDocumentName=userResponseModel._result.document_name
+                    DocumentId = userResponseModel._result.id
+                    UploadedDocumentName = userResponseModel._result.document_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -416,7 +431,7 @@ class RSPIAFragment(
         }
 
         fun addDocDialog(view: View) {
-            addDocumentDialog(requireContext(),null,null)
+            addDocumentDialog(requireContext(), null, null)
         }
 
         fun otherManpowerPositionDialog(view: View) {
@@ -523,7 +538,7 @@ class RSPIAFragment(
                 rsp_laboratory_semen_availability_equipment = rspEquipList,
                 rsp_laboratory_semen_average = semenDoseList,
                 is_draft = draft,
-                rsp_laboratory_semen_document=DocumentList
+                rsp_laboratory_semen_document = DocumentList
             )
         )
     }
@@ -737,7 +752,11 @@ class RSPIAFragment(
         dialog.show()
     }
 
-    private fun addDocumentDialog(context: Context,selectedItem: ImplementingAgencyDocument?,position: Int?) {
+    private fun addDocumentDialog(
+        context: Context,
+        selectedItem: ImplementingAgencyDocument?,
+        position: Int?
+    ) {
         val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_add_document_dialog,
@@ -758,18 +777,21 @@ class RSPIAFragment(
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName = bindingDialog.etDoc
-        if(selectedItem!=null){
-            bindingDialog.etDoc.text=selectedItem.ia_document
+        if (selectedItem != null) {
+            bindingDialog.etDoc.text = selectedItem.ia_document
             bindingDialog.etDescription.setText(selectedItem.description)
         }
         bindingDialog.tvChooseFile.setOnClickListener {
             openOnlyPdfAccordingToPosition()
         }
+        bindingDialog.btnDelete.setOnClickListener {
+            dialog.dismiss()
+        }
+
 
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
-                if(selectedItem!=null)
-                {
+                if (selectedItem != null) {
                     if (position != null) {
                         DocumentList[position] =
                             ImplementingAgencyDocument(
@@ -783,23 +805,23 @@ class RSPIAFragment(
                         dialog.dismiss()
                     }
 
-                }
-                else{
-                DocumentList.add(
-                    ImplementingAgencyDocument(
-                        bindingDialog.etDescription.text.toString(),
-                        ia_document = DocumentName,
-                        id = null,
-                        implementing_agency_id = null,
-                        null
+                } else {
+                    DocumentList.add(
+                        ImplementingAgencyDocument(
+                            bindingDialog.etDescription.text.toString(),
+                            ia_document = DocumentName,
+                            id = null,
+                            implementing_agency_id = null,
+                            null
+                        )
                     )
-                )
 
-                DocumentList.size.minus(1).let {
-                    addDocumentAdapter?.notifyItemInserted(it)
-                    dialog.dismiss()
+                    DocumentList.size.minus(1).let {
+                        addDocumentAdapter?.notifyItemInserted(it)
+                        dialog.dismiss()
 //
-                }}
+                    }
+                }
             } else {
                 showSnackbar(
                     mBinding!!.clParent,
@@ -851,9 +873,15 @@ class RSPIAFragment(
                             }
                             viewModel.getProfileUploadFile(
                                 context = requireActivity(),
-                                table_name = getString(R.string.rsp_laboratory_semen_document).toRequestBody(MultipartBody.FORM),
+                                table_name = getString(R.string.rsp_laboratory_semen_document).toRequestBody(
+                                    MultipartBody.FORM
+                                ),
                                 document_name = body,
-                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
+                                user_id = getPreferenceOfScheme(
+                                    requireContext(),
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id,
                             )
                         }
                     }
@@ -1029,11 +1057,12 @@ class RSPIAFragment(
         semenDoseDialog(requireContext(), isFrom, selectedItem, position)
 
     }
+
     override fun onClickItem(ID: Int?, position: Int) {
         position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
-        addDocumentDialog(requireContext(),selectedItem,position)
+        addDocumentDialog(requireContext(), selectedItem, position)
     }
 }

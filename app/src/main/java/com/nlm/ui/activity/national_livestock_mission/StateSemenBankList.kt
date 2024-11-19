@@ -236,4 +236,5 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
         )
         itemPosition = position
     }
+
 }
