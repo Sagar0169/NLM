@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.national_livestock_mission.NlmEdpActivity.ClickActions" />
+            type="com.nlm.ui.activity.national_livestock_mission.NlmAnimalHidfActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="List of NLM EDP"
+                android:text="List of Animal Husbandry Infrastructure Development Fund"
                 android:textColor="@color/white"
                 android:fontFamily="@font/lexend_semibold"
                 android:textSize="20sp"
@@ -64,40 +64,40 @@
                 app:layout_constraintTop_toTopOf="@+id/tvHeading" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/srlNlmEdp"
+            android:id="@+id/srlNlmAhidf"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rlToolbar">
 
-        <RelativeLayout
-            android:id="@+id/rlParent"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/employee_home_bg"
-            android:backgroundTint="@color/white"
-            android:elevation="@dimen/dp_5"
-            android:orientation="vertical"
-            android:padding="@dimen/dp_10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rlToolbar">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNlmEdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10" />
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvNoDataFound"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/lexend_bold"
-                android:text="@string/no_data_found"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_20"
-                android:visibility="gone" />
-        </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlParent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/employee_home_bg"
+                android:backgroundTint="@color/white"
+                android:elevation="@dimen/dp_5"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rlToolbar">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvNlmAhidf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNoDataFound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/lexend_bold"
+                    android:text="@string/no_data_found"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_20"
+                    android:visibility="gone" />
+            </RelativeLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <!-- Floating Action Button -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -107,7 +107,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/black"
-            android:contentDescription="Add New Agency"
+            android:contentDescription="Add New"
             android:src="@drawable/ic_add"
             app:fabSize="normal"
             android:onClick="@{ClickAction::add}"

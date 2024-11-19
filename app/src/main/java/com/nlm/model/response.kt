@@ -1026,10 +1026,10 @@ data class NlmAhidfResult(
 
 data class NlmAhidfData(
     val created: String,
-    val created_by: Any,
+    val created_by: String,
     val id: Int,
     val is_delete: Boolean,
-    val is_draft: Any,
+    val is_draft: Int,
     val is_draft_ia: Int,
     val is_draft_nlm: Int,
     val is_edit: Boolean,

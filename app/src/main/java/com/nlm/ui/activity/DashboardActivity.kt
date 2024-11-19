@@ -30,6 +30,7 @@ import com.nlm.ui.activity.national_dairy_development.StateCenterLabVisitNDDActi
 import com.nlm.ui.activity.national_livestock_mission.ArtificialInseminationList
 import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatList
 import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList
+import com.nlm.ui.activity.national_livestock_mission.NlmAnimalHidfActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmAssistanceForEa
 import com.nlm.ui.activity.national_livestock_mission.NlmAssistanceForQFSPActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmEdpActivity
@@ -264,6 +265,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
         mBinding?.leftDrawerMenu?.tvNlmEdp?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, NlmEdpActivity::class.java)
+            startActivity(intent)
+        }
+        mBinding?.leftDrawerMenu?.tvNlmAhidf?.setOnClickListener {
+            val intent = Intent(this@DashboardActivity, NlmAnimalHidfActivity::class.java)
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvAssistanceForEa?.setOnClickListener {
@@ -602,88 +607,158 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             Log.d("Matching Scheme IDs", matchingSchemeIds.toString())
             Log.d("Matching Form IDs", matchingFormIds.toString())
             for (matchingSchemeId in matchingSchemeIds) {
-                if (matchingSchemeId == 198) {
-                    mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
-                    for (matchingFormId in matchingFormIds) {
-                        if (matchingFormId == 206) {
-                            mBinding?.leftDrawerMenu?.tvVaccinationProgramme?.showView()
-                        } else if (matchingFormId == 207) {
-                            mBinding?.leftDrawerMenu?.tvMobileVeterinaryUnits?.showView()
-                        } else if (matchingFormId == 208) {
-                            mBinding?.leftDrawerMenu?.tvAscad?.showView()
+                when (matchingSchemeId) {
+                    198 -> {
+                        mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.showView()
+                        for (matchingFormId in matchingFormIds) {
+                            when (matchingFormId) {
+                                206 -> {
+                                    mBinding?.leftDrawerMenu?.tvVaccinationProgramme?.showView()
+                                }
+
+                                207 -> {
+                                    mBinding?.leftDrawerMenu?.tvMobileVeterinaryUnits?.showView()
+                                }
+
+                                208 -> {
+                                    mBinding?.leftDrawerMenu?.tvAscad?.showView()
+                                }
+                            }
                         }
                     }
-                } else if (matchingSchemeId == 199) {
-                    mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
-                    for (matchingFormId in matchingFormIds) {
-                        if (matchingFormId == 203) {
-                            mBinding?.leftDrawerMenu?.tvImplementingAgency?.showView()
-                        } else if (matchingFormId == 221) {
-                            mBinding?.leftDrawerMenu?.tvRspLaboratorySemen?.showView()
-                        } else if (matchingFormId == 222) {
-                            mBinding?.leftDrawerMenu?.tvStateSemenBank?.showView()
-                        } else if (matchingFormId == 223) {
-                            mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
-                        } else if (matchingFormId == 224) {
-                            mBinding?.leftDrawerMenu?.tvImportExoticGoat?.showView()
-                        } else if (matchingFormId == 225) {
-                            mBinding?.leftDrawerMenu?.tvAssistanceQfps?.showView()
-                        } else if (matchingFormId == 226) {
-                            mBinding?.leftDrawerMenu?.tvFpsPlanStorage?.showView()
-                        } else if (matchingFormId == 227) {
-                            mBinding?.leftDrawerMenu?.tvFpsFromNonForest?.showView()
-                        } else if (matchingFormId == 228) {
-                            mBinding?.leftDrawerMenu?.tvFpsFromForest?.showView()
-                        } else if (matchingFormId == 229) {
-                            mBinding?.leftDrawerMenu?.tvAssistanceForEa?.showView()
-                        } else if (matchingFormId == 230) {
-                            mBinding?.leftDrawerMenu?.tvNlmEdp?.showView()
+                    199 -> {
+                        mBinding?.leftDrawerMenu?.tvNationalLiveStockMission?.showView()
+                        for (matchingFormId in matchingFormIds) {
+                            when (matchingFormId) {
+                                203 -> {
+                                    mBinding?.leftDrawerMenu?.tvImplementingAgency?.showView()
+                                }
+
+                                221 -> {
+                                    mBinding?.leftDrawerMenu?.tvRspLaboratorySemen?.showView()
+                                }
+
+                                222 -> {
+                                    mBinding?.leftDrawerMenu?.tvStateSemenBank?.showView()
+                                }
+
+                                223 -> {
+                                    mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
+                                }
+
+                                224 -> {
+                                    mBinding?.leftDrawerMenu?.tvImportExoticGoat?.showView()
+                                }
+
+                                225 -> {
+                                    mBinding?.leftDrawerMenu?.tvAssistanceQfps?.showView()
+                                }
+
+                                226 -> {
+                                    mBinding?.leftDrawerMenu?.tvFpsPlanStorage?.showView()
+                                }
+
+                                227 -> {
+                                    mBinding?.leftDrawerMenu?.tvFpsFromNonForest?.showView()
+                                }
+
+                                228 -> {
+                                    mBinding?.leftDrawerMenu?.tvFpsFromForest?.showView()
+                                }
+
+                                229 -> {
+                                    mBinding?.leftDrawerMenu?.tvAssistanceForEa?.showView()
+                                }
+
+                                230 -> {
+                                    mBinding?.leftDrawerMenu?.tvNlmEdp?.showView()
+                                }
+
+                                418 -> {
+                                    mBinding?.leftDrawerMenu?.tvNlmAhidf?.showView()
+                                }
+                            }
                         }
                     }
-                } else if (matchingSchemeId == 201) {
-                    mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
-                    for (matchingFormId in matchingFormIds) {
-                        if (matchingFormId == 219) {
-                            mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.showView()
-                        } else if (matchingFormId == 234) {
-                            mBinding?.leftDrawerMenu?.tvReportsOfNlm?.showView()
-                        } else if (matchingFormId == 220) {
-                            mBinding?.leftDrawerMenu?.tvNationalLevelComponentB?.showView()
-                        } else if (matchingFormId == 209) {
-                            mBinding?.leftDrawerMenu?.tvMilkUnionVisitReport?.showView()
-                        } else if (matchingFormId == 205) {
-                            mBinding?.leftDrawerMenu?.tvDairyPlantVisitReport?.showView()
-                        } else if (matchingFormId == 210) {
-                            mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.showView()
-                        } else if (matchingFormId == 211) {
-                            mBinding?.leftDrawerMenu?.tvStateCenterLabVisitReport?.showView()
-                        } else if (matchingFormId == 212) {
-                            mBinding?.leftDrawerMenu?.tvMilkProcessing?.showView()
-                        } else if (matchingFormId == 213) {
-                            mBinding?.leftDrawerMenu?.tvMilkProductMarketing?.showView()
-                        } else if (matchingFormId == 214) {
-                            mBinding?.leftDrawerMenu?.tvProductivityEnhancementServices?.showView()
+                    201 -> {
+                        mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment?.showView()
+                        for (matchingFormId in matchingFormIds) {
+                            when (matchingFormId) {
+                                219 -> {
+                                    mBinding?.leftDrawerMenu?.tvNationalLevelComponentA?.showView()
+                                }
+
+                                234 -> {
+                                    mBinding?.leftDrawerMenu?.tvReportsOfNlm?.showView()
+                                }
+
+                                220 -> {
+                                    mBinding?.leftDrawerMenu?.tvNationalLevelComponentB?.showView()
+                                }
+
+                                209 -> {
+                                    mBinding?.leftDrawerMenu?.tvMilkUnionVisitReport?.showView()
+                                }
+
+                                205 -> {
+                                    mBinding?.leftDrawerMenu?.tvDairyPlantVisitReport?.showView()
+                                }
+
+                                210 -> {
+                                    mBinding?.leftDrawerMenu?.tvDcsBmsCenterVisitReport?.showView()
+                                }
+
+                                211 -> {
+                                    mBinding?.leftDrawerMenu?.tvStateCenterLabVisitReport?.showView()
+                                }
+
+                                212 -> {
+                                    mBinding?.leftDrawerMenu?.tvMilkProcessing?.showView()
+                                }
+
+                                213 -> {
+                                    mBinding?.leftDrawerMenu?.tvMilkProductMarketing?.showView()
+                                }
+
+                                214 -> {
+                                    mBinding?.leftDrawerMenu?.tvProductivityEnhancementServices?.showView()
+                                }
+                            }
                         }
                     }
-                } else if (matchingSchemeId == 204) {
-                    mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
-                    for (matchingFormId in matchingFormIds) {
-                        if (matchingFormId == 202) {
-                            mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.showView()
-                        } else if (matchingFormId == 236) {
-                            mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
-                        } else if (matchingFormId == 237) {
-                            mBinding?.leftDrawerMenu?.tvSemenStation?.showView()
-                        } else if (matchingFormId == 238) {
-                            mBinding?.leftDrawerMenu?.tvTrainingCenters?.showView()
-                        } else if (matchingFormId == 239) {
-                            mBinding?.leftDrawerMenu?.tvBullMotherFarms?.showView()
-                        } else if (matchingFormId == 240) {
-                            mBinding?.leftDrawerMenu?.tvBreedMultiplication?.showView()
+                    204 -> {
+                        mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission?.showView()
+                        for (matchingFormId in matchingFormIds) {
+                            when (matchingFormId) {
+                                202 -> {
+                                    mBinding?.leftDrawerMenu?.tvStateImplementingAgency?.showView()
+                                }
+
+                                236 -> {
+                                    mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
+                                }
+
+                                237 -> {
+                                    mBinding?.leftDrawerMenu?.tvSemenStation?.showView()
+                                }
+
+                                238 -> {
+                                    mBinding?.leftDrawerMenu?.tvTrainingCenters?.showView()
+                                }
+
+                                239 -> {
+                                    mBinding?.leftDrawerMenu?.tvBullMotherFarms?.showView()
+                                }
+
+                                240 -> {
+                                    mBinding?.leftDrawerMenu?.tvBreedMultiplication?.showView()
+                                }
+                            }
                         }
                     }
-                } else if (matchingSchemeId == 1) {
-                    mBinding?.leftDrawerMenu?.tvUsers?.showView()
+                    1 -> {
+                        mBinding?.leftDrawerMenu?.tvUsers?.showView()
+                    }
                 }
             }
         } else {
