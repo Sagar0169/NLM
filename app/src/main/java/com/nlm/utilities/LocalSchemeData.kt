@@ -28,6 +28,7 @@ object LocalSchemeData {
                 Form("index", "FpFromForestLand", 228, "Fodder Production From Forest Land (Format9)", 199),
                 Form("index", "AssistanceForEa", 229, "Assistance For Extension Activities(Format10)", 199),
                 Form("index", "NlmEdp", 230, "NLM Entrepreneur Development Programme(Format11)", 199),
+                Form("index", "Ahidf", 418, "Animal Husbandry Infrastructure Development Fund(Format12)", 199),
             )
         ),
         // New schemes and forms

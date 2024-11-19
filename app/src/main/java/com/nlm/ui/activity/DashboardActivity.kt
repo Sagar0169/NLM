@@ -72,7 +72,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     val matchingSchemeIds = mutableListOf<Int>()
     val matchingFormIds = mutableListOf<Int>()
 
-
+//NOTE: UPDATE THE LOCAL SCHEME DATA WHEN NEW ID OR FORM IS ADDED
     override val layoutId: Int
         get() = R.layout.activity_dashboard
 
@@ -570,6 +570,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
     }
 
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     override fun onBackPressed() {
         finishAffinity()
         // This will close the app and all the activities in the task.
