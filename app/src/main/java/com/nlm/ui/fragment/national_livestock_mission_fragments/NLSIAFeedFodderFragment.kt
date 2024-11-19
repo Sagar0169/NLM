@@ -242,16 +242,13 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
         if(selectedItem!=null){
             if (getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id==24)
             {
-            UploadedDocumentName=selectedItem.ia_document}
+            UploadedDocumentName=selectedItem.ia_document
+                bindingDialog.etDoc.text=selectedItem.ia_document}
             else{
                 UploadedDocumentName=selectedItem.nlm_document
-            }
-            bindingDialog.etDescription.setText(selectedItem.description)
-            if (getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id==24) {
-            bindingDialog.etDoc.text=selectedItem.ia_document}
-            else{
                 bindingDialog.etDoc.text=selectedItem.nlm_document
             }
+            bindingDialog.etDescription.setText(selectedItem.description)
         }
 
         bindingDialog.btnDelete.setOnClickListener {
