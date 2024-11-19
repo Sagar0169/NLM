@@ -3,6 +3,7 @@ package com.nlm.callBack
 import androidx.fragment.app.Fragment
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
+import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.ImplementingAgencyFundsReceived
 import com.nlm.model.ImplementingAgencyInvolvedDistrictWise
 import com.nlm.model.ImplementingAgencyProjectMonitoring
@@ -19,6 +20,9 @@ import com.nlm.model.StateSemenInfraGoat
 //}
 interface CallBackItemTypeIACompositionListEdit {
     fun onClickItem(selectedItem: IdAndDetails,position:Int,isFrom:Int)
+}
+interface CallBackItemUploadDocEdit {
+    fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position:Int)
 }
 interface CallBackItemImportExoticAchivementEdit {
     fun onClickItem(selectedItem: ImportOfExoticGoatAchievement, position:Int, isFrom:Int)

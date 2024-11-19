@@ -69,7 +69,7 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
         )
 
         implementingAgency()
-        implementingAgencyAPICall(paginate = false, loader = true,LiquidNitrogen,FrozenSemen,Cryocans,DistrictCode)
+
         swipeForRefreshImplementingAgency()
 
 
@@ -77,6 +77,11 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
 
     override fun setVariables() {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        implementingAgencyAPICall(paginate = false, loader = true,LiquidNitrogen,FrozenSemen,Cryocans,DistrictCode)
     }
 
     override fun setObservers() {

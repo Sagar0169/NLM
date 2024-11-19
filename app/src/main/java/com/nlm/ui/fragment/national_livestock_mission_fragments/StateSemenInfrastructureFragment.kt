@@ -14,7 +14,9 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemGoatSemen
+import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentStateSemenInfrastructureBinding
@@ -44,7 +46,8 @@ class StateSemenInfrastructureFragment(
     private val itemId: Int?,
     private val dId: Int?
 ) :
-    BaseFragment<FragmentStateSemenInfrastructureBinding>(), CallBackItemGoatSemen {
+    BaseFragment<FragmentStateSemenInfrastructureBinding>(), CallBackItemGoatSemen ,
+    CallBackDeleteAtId, CallBackItemUploadDocEdit {
 
     override val layoutId: Int
         get() = R.layout.fragment_state__semen__infrastructure
@@ -55,7 +58,7 @@ class StateSemenInfrastructureFragment(
     private var savedAsDraft: Boolean = false
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private var addDocumentAdapter: SupportingDocumentAdapterWithDialog? = null
-    private lateinit var DocumentList: MutableList<ImplementingAgencyDocument>
+    private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private var DialogDocName: TextView? = null
     private var DocumentName: String? = null
     var body: MultipartBody.Part? = null
@@ -64,10 +67,10 @@ class StateSemenInfrastructureFragment(
     override fun init() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        DocumentList = mutableListOf()
+        DocumentList = arrayListOf()
         viewModel.init()
         stateSemenInfraGoatAdapter()
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(DocumentList, "viewEdit")
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, "viewEdit",this,this)
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
         if (viewEdit == "view") {
@@ -462,6 +465,12 @@ class StateSemenInfrastructureFragment(
 
         compositionOfGoverningNlmIaDialog(requireContext(), isFrom, selectedItem, position)
     }
+    override fun onClickItem(ID: Int?, position: Int) {
+        position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+    }
 
+    override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
+
+    }
 
 }

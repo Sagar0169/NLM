@@ -9,6 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/dp_5"
+        android:background="@drawable/curve_all_corner_dark_grey"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -21,8 +22,17 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/dp_10"
             android:paddingVertical="@dimen/dp_5"
-            android:background="@drawable/curve_all_corner_dark_grey"
+            android:backgroundTint="#F5F5F5"
+            android:background="@drawable/curve_all_corner_grey_dialog"
             android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey_dialog"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dp_10"
+            android:paddingVertical="@dimen/dp_5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -165,7 +175,7 @@
                 android:textAlignment="center"
                 android:visibility="gone"
                 android:textColor="@color/white" />
-        </LinearLayout>
+        </LinearLayout></LinearLayout>
 
 
     </RelativeLayout>

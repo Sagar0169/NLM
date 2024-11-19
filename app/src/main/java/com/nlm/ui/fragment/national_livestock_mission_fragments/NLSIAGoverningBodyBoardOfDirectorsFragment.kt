@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
@@ -211,6 +212,9 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
+         val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+         lp.dimAmount = 0.5f
+         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.btnDelete.hideView()
         bindingDialog.tvSubmit.showView()
         if(selectedItem!=null && isFrom == 1)

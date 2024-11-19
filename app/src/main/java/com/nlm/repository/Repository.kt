@@ -31,6 +31,7 @@ import com.nlm.model.StateSemenAddResult
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.TempUploadDocResponse
 import com.nlm.model.UploadDocument_Response
 import com.nlm.services.MyService
 import com.nlm.services.ServiceGenerator
@@ -123,19 +124,19 @@ object Repository {
     suspend fun getProfileFileUpload(
         user_id: Int?,
         table_name: RequestBody?,
-        nlm_document:MultipartBody.Part?,
-        ia_document: MultipartBody.Part?,
-        implementing_agency_id: Int?,
-        role_id: Int?,
+        document_name:MultipartBody.Part?,
+//        ia_document: MultipartBody.Part?,
+//        implementing_agency_id: Int?,
+//        role_id: Int?,
 
-    ): Response<UploadDocument_Response> {
+    ): Response<TempUploadDocResponse> {
         return api.getProfileFileUpload(
             user_id,
             table_name,
-            nlm_document,
-            ia_document,
-            implementing_agency_id,
-            role_id
+            document_name,
+//            ia_document,
+//            implementing_agency_id,
+//            role_id
 
         )
     }

@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/dp_7"
-            android:background="@drawable/curve_all_corner_grey"
+            android:background="@drawable/curve_all_corner_grey_dialog"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/dp_10"
             android:paddingVertical="@dimen/dp_5">

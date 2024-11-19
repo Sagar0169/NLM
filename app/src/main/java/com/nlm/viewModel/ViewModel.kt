@@ -34,6 +34,7 @@ import com.nlm.model.StateSemenAddResponse
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.TempUploadDocResponse
 import com.nlm.model.UploadDocument_Response
 import com.nlm.repository.Repository
 import com.nlm.utilities.Utility
@@ -67,7 +68,7 @@ class ViewModel : ViewModel() {
     var artificialInseminationAddResult = MutableLiveData<ArtificialInsemenationAddResponse>()
     var importExoticGoatAddEditResult = MutableLiveData<ImportExoticGoatAddEditResponse>()
     var nlmAssistanceForQFSPResult = MutableLiveData<NlmAssistanceForQFSPListResponse>()
-    var getProfileUploadFileResult = MutableLiveData<UploadDocument_Response>()
+    var getProfileUploadFileResult = MutableLiveData<TempUploadDocResponse>()
     var id = 0
 
     val errors = MutableLiveData<String>()
@@ -946,17 +947,18 @@ class ViewModel : ViewModel() {
         context: Context,
         user_id: Int?,
         table_name: RequestBody?,
-        nlm_document:MultipartBody.Part?,
-        ia_document: MultipartBody.Part?,
-        implementing_agency_id: Int?,
-        role_id: Int?,
+        document_name:MultipartBody.Part?,
+//        ia_document: MultipartBody.Part?,
+//        implementing_agency_id: Int?,
+//        role_id: Int?,
     ) {
         networkCheck(context, true)
 
         job = scope.launch {
             try {
                 val response = repository.getProfileFileUpload(
-                    user_id,table_name, nlm_document,ia_document,implementing_agency_id, role_id
+                    user_id,table_name, document_name,
+//                    ia_document,implementing_agency_id, role_id
                 )
 
                 Log.e("response", response.toString())

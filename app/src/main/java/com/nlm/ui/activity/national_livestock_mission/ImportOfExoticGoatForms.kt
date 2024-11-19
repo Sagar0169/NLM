@@ -12,6 +12,7 @@ import android.provider.MediaStore
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -20,8 +21,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemImportExoticAchivementEdit
 import com.nlm.callBack.CallBackItemImportExoticDetailtEdit
+import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.databinding.ActivityImportOfExoticGoatBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemImportExoticGermplasmBinding
@@ -55,7 +58,7 @@ import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
 
 class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(),CallBackItemImportExoticAchivementEdit,
-    CallBackItemImportExoticDetailtEdit {
+    CallBackItemImportExoticDetailtEdit,CallBackDeleteAtId, CallBackItemUploadDocEdit {
     override val layoutId: Int
         get() = R.layout.activity_import_of_exotic_goat
     private var mBinding: ActivityImportOfExoticGoatBinding? = null
@@ -64,7 +67,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     private var DetailOfImportAdapter: ImportExoticAdapterDetailOfImport?=null
     private var AchievementAdapter: ImportExoticAchivementAdapter?=null
     private var VerifiedNlmAdapter: ImportOfExoticGoatVerifiedNlmAdapter?=null
-    private lateinit var DocumentList: MutableList<ImplementingAgencyDocument>
+    private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var viewDocumentList: MutableList<ImplementingAgencyDocument>
     private  var DetailOfImportList: MutableList<ImportOfExoticGoatDetailImport>? =null
     private  var AchievementList: MutableList<ImportOfExoticGoatAchievement>?=null
@@ -96,7 +99,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         viewModel.init()
         viewEdit = intent.getStringExtra("View/Edit")
         itemId = intent.getIntExtra("itemId",0)
-        DocumentList = mutableListOf()
+        DocumentList = arrayListOf()
         viewDocumentList = mutableListOf()
         DetailOfImportList = mutableListOf()
         AchievementList = mutableListOf()
@@ -345,7 +348,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         }
     }
     private fun AddDocumentAdapter(){
-        AddDocumentAdapter= SupportingDocumentAdapterWithDialog(DocumentList,viewEdit)
+        AddDocumentAdapter= SupportingDocumentAdapterWithDialog(this,DocumentList,viewEdit,this,this)
         mBinding?.AddDocumentRv?.adapter = AddDocumentAdapter
         mBinding?.AddDocumentRv?.layoutManager = LinearLayoutManager(this)
     }
@@ -386,6 +389,9 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName=bindingDialog.etDoc
         bindingDialog.tvChooseFile.setOnClickListener {
             openOnlyPdfAccordingToPosition()
@@ -434,6 +440,9 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.tvSubmit.showView()
         bindingDialog.btnDelete.hideView()
         if(selectedItem!=null )
@@ -509,6 +518,9 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.tvSubmit.showView()
         bindingDialog.btnDelete.hideView()
         if(selectedItem!=null )
@@ -588,6 +600,9 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.tvSubmit.showView()
         bindingDialog.btnDelete.hideView()
         bindingDialog.tvSubmit.setOnClickListener {
@@ -901,5 +916,12 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         isFrom: Int
     ) {
         AddImportDetailDialog(this,selectedItem,position)
+    }
+    override fun onClickItem(ID: Int?, position: Int) {
+        position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
+    }
+
+    override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
+
     }
 }

@@ -10,12 +10,15 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentNLSIAFeedFodderBinding
@@ -23,6 +26,7 @@ import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.model.DocumentData
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyDocument
+import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.Result
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
@@ -32,12 +36,14 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.hideView
 import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 
-class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAFeedFodderBinding>() {
+class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAFeedFodderBinding>()
+, CallBackDeleteAtId,CallBackItemUploadDocEdit {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__feed_fodder
 
@@ -48,22 +54,24 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
     var body: MultipartBody.Part? = null
     private var savedAsEdit:Boolean=false
     private var AddDocumentAdapter: SupportingDocumentAdapterWithDialog?=null
-    private lateinit var DocumentList: MutableList<ImplementingAgencyDocument>
+    private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
-
+    private var UploadedDocumentName:String?=null
     private var listener: OnNextButtonClickListener? = null
     private var DialogDocName:TextView?=null
     private var DocumentId:Int?=null
+    private var itemPosition : Int ?= null
 
 
     override fun init() {
         mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
-        DocumentList = mutableListOf()
+        DocumentList = arrayListOf()
         viewModel.init()
         if (viewEdit=="view")
         {
             mBinding?.etAssessmentOfGreen?.isEnabled=false
+            mBinding?.tvAddMore2?.hideView()
             mBinding?.etAvailabilityOfGreen?.isEnabled=false
             mBinding?.etAvailibilityOfDry?.isEnabled=false
             mBinding?.AvailabilityOfConcentrate?.isEnabled=false
@@ -80,7 +88,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
             ViewEditApi()
 
         }
-        AddDocumentAdapter=SupportingDocumentAdapterWithDialog(DocumentList,viewEdit)
+        AddDocumentAdapter=SupportingDocumentAdapterWithDialog(requireContext(),DocumentList,viewEdit,this,this)
         mBinding?.recyclerView1?.adapter = AddDocumentAdapter
         mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -156,6 +164,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
 
                 } else {
                     DocumentId=userResponseModel._result.id
+                    UploadedDocumentName=userResponseModel._result.document_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -205,11 +214,11 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
             savedAsDraft=true
         }}
         fun addDocDialog(view: View){
-            AddDocumentDialog(requireContext())
+            AddDocumentDialog(requireContext(),null,null)
         }
 
     }
-    private fun AddDocumentDialog(context: Context) {
+    private fun AddDocumentDialog(context: Context,selectedItem: ImplementingAgencyDocument?,position: Int?) {
         val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_add_document_dialog,
@@ -218,7 +227,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
         )
         val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
         dialog.setCancelable(true)
-        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCanceledOnTouchOutside(false)
         dialog.setContentView(bindingDialog.root)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window!!.setLayout(
@@ -226,12 +235,33 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName=bindingDialog.etDoc
+        if(selectedItem!=null){
+            if (getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id==24)
+            {
+            UploadedDocumentName=selectedItem.ia_document}
+            else{
+                UploadedDocumentName=selectedItem.nlm_document
+            }
+            bindingDialog.etDescription.setText(selectedItem.description)
+            if (getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id==24) {
+            bindingDialog.etDoc.text=selectedItem.ia_document}
+            else{
+                bindingDialog.etDoc.text=selectedItem.nlm_document
+            }
+        }
+
+        bindingDialog.btnDelete.setOnClickListener {
+            dialog.dismiss()
+        }
 
         bindingDialog.tvChooseFile.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty())
             {
-                Log.d("VaLUEE",bindingDialog.etDescription.text.toString())
+
             openOnlyPdfAccordingToPosition()
         }
             else{
@@ -242,21 +272,73 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
 
 
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+            if (bindingDialog.etDescription.text.toString().isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty())
             {
-                DocumentList.add(ImplementingAgencyDocument(
-                    description = bindingDialog.etDescription.text.toString(),
-                    ia_document = DocumentName,
-                    nlm_document = DocumentName,
-                    implementing_agency_id = itemId,
-                    id = DocumentId,
-                ))
+                if (getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id==24) {
+                    if(selectedItem!=null)
+                    {
+                        if (position != null) {
+                            DocumentList[position] =
+                                ImplementingAgencyDocument(
+                                    description = bindingDialog.etDescription.text.toString(),
+                                    ia_document = UploadedDocumentName,
+                                    nlm_document = null,
+                                 implementing_agency_id = selectedItem.implementing_agency_id,
+                                    id = selectedItem.id,
+                                )
+                            AddDocumentAdapter?.notifyItemChanged(position)
+                            dialog.dismiss()
+                        }
 
-                DocumentList.size.minus(1).let {
-                    AddDocumentAdapter?.notifyItemInserted(it)
-                    dialog.dismiss()
-//
+                    } else{  DocumentList.add(
+                        ImplementingAgencyDocument(
+                            description = bindingDialog.etDescription.text.toString(),
+                            ia_document = UploadedDocumentName,
+                            nlm_document = null,
+//                            implementing_agency_id = itemId,
+//                            id = DocumentId,
+                        )
+                    )
+                        DocumentList.size.minus(1).let {
+                            AddDocumentAdapter?.notifyItemInserted(it)
+                            dialog.dismiss()
+                        }}
+
                 }
+                else{
+                    if (getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id==8) {
+                        if(selectedItem!=null)
+                        {
+                            if (position != null) {
+                                DocumentList[position] =
+                                    ImplementingAgencyDocument(
+                                        description = bindingDialog.etDescription.text.toString(),
+                                        ia_document = null,
+                                        nlm_document = UploadedDocumentName,
+                                        implementing_agency_id = selectedItem.implementing_agency_id,
+                                        id = selectedItem.id,
+                                    )
+                                AddDocumentAdapter?.notifyItemChanged(position)
+                                dialog.dismiss()
+                            }
+
+                        } else{  DocumentList.add(
+                            ImplementingAgencyDocument(
+                                description = bindingDialog.etDescription.text.toString(),
+                                ia_document = null,
+                                nlm_document = UploadedDocumentName,
+//                            implementing_agency_id = itemId,
+//                            id = DocumentId,
+                            )
+                        )
+                            DocumentList.size.minus(1).let {
+                                AddDocumentAdapter?.notifyItemInserted(it)
+                                dialog.dismiss()
+                            }}
+                    }
+                }
+
+
             }
 
 
@@ -304,21 +386,19 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
 
                                 val requestBody = convertToRequestBody(requireActivity(), uri)
                                 body = MultipartBody.Part.createFormData(
-                                    "nlm_document",
+                                    "document_name",
                                     DocumentName,
                                     requestBody
                                 )
+                                viewModel.getProfileUploadFile(
+                                    context = requireActivity(),
+                                    table_name = getString(R.string.implementing_agency_document).toRequestBody(MultipartBody.FORM),
+                                    document_name = body,
+                                    user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
+                                    )
 //                                use this code to add new view with image name and uri
                         }
-                            viewModel.getProfileUploadFile(
-                                context = requireActivity(),
-                                role_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.role_id,
-                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.implementing_agency_document).toRequestBody(MultipartBody.FORM),
-                                implementing_agency_id = itemId,
-                                nlm_document = body,
-                                ia_document = null
-                            )
+
                         }
                     }
                 }
@@ -356,5 +436,13 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                 is_draft = isDraft,
             )
         )
+    }
+
+    override fun onClickItem(ID: Int?, position: Int) {
+        position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
+    }
+
+    override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
+        AddDocumentDialog(requireContext(),selectedItem,position)
     }
 }

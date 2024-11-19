@@ -92,7 +92,7 @@ data class StateSemenBankRequest(
 
 data class ArtificialInsemenNationAddRequest(
 
-    val artificial_insemination_document: ArrayList<ArtificialInseminationDocument>?,
+    val artificial_insemination_document: ArrayList<ImplementingAgencyDocument>?,
     val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>?,
     val cryocans: String?,
     val district_code: Int?,
@@ -483,7 +483,7 @@ data class RSPAddRequest(
     val id: Int? = null,
     val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>? = null,
     val rsp_laboratory_semen_average: List<RspAddAverage>? = null,
-    val rsp_laboratory_semen_document: List<RspLaboratorySemenDocument>? = null,
+    val rsp_laboratory_semen_document: List<ImplementingAgencyDocument>? = null,
     val rsp_laboratory_semen_station_quality_buck: List<RspAddBucksList>? = null,
     val state_code: Int? = null,
     val user_id: String? = null,

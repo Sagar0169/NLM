@@ -30,22 +30,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_grey"
+                android:background="@drawable/curve_all_corner_grey_dialog"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5">
-
-
-                <TextView
-                    android:id="@+id/tv11"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Description"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="8"
+                        android:id="@+id/tv11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Description"
+
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <ImageView
+                        android:padding="@dimen/dp_10"
+                        android:id="@+id/btnEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:src="@drawable/baseline_edit_24" />
+                    <ImageView
+                        android:padding="@dimen/dp_10"
+                        android:id="@+id/btnDelete"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_close_24" />
+                </LinearLayout>
+
+
 
                 <EditText
                     android:id="@+id/etDescription"
@@ -109,7 +131,8 @@
                         android:layout_weight="1.6"
                         android:gravity="center"
                         android:padding="@dimen/dp_10"
-                        android:text="No File Chosen"
+                        android:hint="No File Chosen"
+                        android:textColorHint="@color/grey"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_14" />
 

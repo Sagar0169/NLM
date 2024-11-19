@@ -35,13 +35,28 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5">
-                <ImageView
-                    android:padding="@dimen/dp_5"
-                    android:id="@+id/btnDelete"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_gravity="bottom|end"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_deleted" />
+                    android:layout_gravity="bottom|end"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:padding="@dimen/dp_5"
+                        android:id="@+id/btnEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_edit_24" />
+                    <ImageView
+                        android:padding="@dimen/dp_5"
+
+                        android:id="@+id/btnDelete"
+                        android:layout_gravity="end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_deleted" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

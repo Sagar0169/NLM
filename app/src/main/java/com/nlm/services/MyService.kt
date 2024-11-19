@@ -31,6 +31,7 @@ import com.nlm.model.StateSemenAddResult
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.TempUploadDocResponse
 import com.nlm.model.UploadDocument_Response
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -52,7 +53,7 @@ const val ARTIFICIAL_INSEMINATION_ADD = "nationalLivestockMission/artificialInse
 const val ARTIFICIAL_INSEMINATION_LIST = "nationalLivestockMission/artificialInseminationList"
 const val IMPORT_EXOTIC_GOAT_LIST = "nationalLivestockMission/importOfExoticGoatList"
 const val STATE_SEMEN_BANK_LIST = "nationalLivestockMission/stateSemenBankList"
-const val UPLOAD_DOCUMENT = "rest/uploadDocument"
+const val UPLOAD_DOCUMENT = "rest/tempUploadDocument"
 const val RSP_LAP_LIST = "nationalLivestockMission/rspLaboratorySemenList"
 const val RSP_LAP_ADD = "nationalLivestockMission/rspLaboratorySemenAddEdit"
 const val IMPORT_EXOTIC_GOAT_ADD_EDIT = "nationalLivestockMission/importOfExoticGoatAddEdit"
@@ -108,12 +109,12 @@ interface MyService {
     suspend fun getProfileFileUpload(
         @Part("user_id") user_id: Int?,
         @Part("table_name") table_name: RequestBody?,
-        @Part nlm_document: MultipartBody.Part?,
-        @Part ia_document: MultipartBody.Part?,
-        @Part("implementing_agency_id") implementing_agency_id: Int?,
-        @Part("role_id") role_id: Int?,
+        @Part document_name: MultipartBody.Part?,
+//        @Part ia_document: MultipartBody.Part?,
+//        @Part("implementing_agency_id") implementing_agency_id: Int?,
+//        @Part("role_id") role_id: Int?,
 
-    ): Response<UploadDocument_Response>
+    ): Response<TempUploadDocResponse>
 
 }
 

@@ -545,7 +545,7 @@ data class ResultArtificialInsemenation(
     val ai_centre_cattle_buffalo: Int,
     val ai_centre_goat_frozen_semen: Int,
     val ai_performed_average: Double,
-    val artificial_insemination_document: List<ArtificialInseminationDocumentResponse>,
+    val artificial_insemination_document: ArrayList<ImplementingAgencyDocument>,
     val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>,
     val created: String,
     val created_by: Int,
@@ -602,7 +602,20 @@ data class ArtificialInseminationObservationByNlmResponse(
     val power_trained_ai: String,
     val quipment_available: String
 )
+data class TempUploadDocResponse(
+    val _result: ResultDoc,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
 
+data class ResultDoc(
+    val created: String?,
+    val document_name: String?,
+    val id: Int?,
+    val table_name: String?,
+    val user_id: String?
+)
 data class Result_Doc(
     val created_at: String?,
     val description: String?,
@@ -839,7 +852,7 @@ data class RspAddResult(
     val role_id: Int,
     val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>?=null,
     val rsp_laboratory_semen_average: List<RspAddAverage>,
-    val rsp_laboratory_semen_document: List<RspAddDocument>,
+    val rsp_laboratory_semen_document: List<ImplementingAgencyDocument>,
     val rsp_laboratory_semen_station_quality_buck: List<RspAddBucksList>? = null,
     val state_code: Int,
     val user_id: String,
