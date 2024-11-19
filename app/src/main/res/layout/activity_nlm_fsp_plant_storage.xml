@@ -63,11 +63,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvHeading" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/llParent"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srlFpsPlantStorage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlToolbar">
+        <RelativeLayout
+            android:id="@+id/rlParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/employee_home_bg"
             android:backgroundTint="@color/white"
             android:elevation="@dimen/dp_5"
@@ -77,12 +82,24 @@
             app:layout_constraintTop_toBottomOf="@id/rlToolbar">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvNlmEdp"
+                android:id="@+id/rvFpsPlantStorage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10" />
-        </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNoDataFound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/lexend_bold"
+                android:text="@string/no_data_found"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                android:visibility="gone" />
+        </RelativeLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <!-- Floating Action Button -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddAgency"

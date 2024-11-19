@@ -1,55 +1,44 @@
 package com.nlm.ui.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.DialogCallback
-import com.nlm.databinding.ItemAssistanceForEaBinding
-import com.nlm.databinding.ItemNlmEdpBinding
-import com.nlm.model.AssistanceForEAData
-import com.nlm.model.NlmEdp
-import com.nlm.model.NlmEdpData
-import com.nlm.ui.activity.national_livestock_mission.AddNewAssistanceForEaActivity
+import com.nlm.databinding.ItemFpFromForestLandBinding
+import com.nlm.model.FpFromForestLandData
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
-import com.nlm.ui.activity.national_livestock_mission.AddNlmEdpActivity
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
-
-class NlmEdpAdapter(
+class FpFromForestLandAdapter(
     val context: Context,
-    private val list: ArrayList<NlmEdpData>,
+    private val list: ArrayList<FpFromForestLandData>,
     private val callBackDeleteAtId: CallBackDeleteAtId
-) :
-    RecyclerView.Adapter<NlmEdpAdapter.NlmEdpAdapterViewHolder>() {
+) : RecyclerView.Adapter<FpFromForestLandAdapter.FpFromForestLandViewHolder>() {
 
     // ViewHolder class to hold the view elements
-    class NlmEdpAdapterViewHolder(val mBinding: ItemNlmEdpBinding) : RecyclerView.ViewHolder(mBinding.root) {
-    }
+    class FpFromForestLandViewHolder(val mBinding: ItemFpFromForestLandBinding) : RecyclerView.ViewHolder(mBinding.root)
 
-    // Inflate the item layout and create the holder
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): NlmEdpAdapterViewHolder {
-        val mBinding: ItemNlmEdpBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context), R.layout.item_nlm_edp, parent, false
+    ): FpFromForestLandViewHolder {
+        val mBinding: ItemFpFromForestLandBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context), R.layout.item_fp_from_forest_land, parent, false
         )
-        return NlmEdpAdapterViewHolder(mBinding)
+        return FpFromForestLandViewHolder(mBinding)
     }
 
     // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: NlmEdpAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FpFromForestLandViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val item = list[position]
 
         if(item.is_view){
@@ -71,7 +60,10 @@ class NlmEdpAdapter(
             holder.mBinding.ivEdit.hideView()
         }
 
+        holder.mBinding.etNameOfAgency.text = item.name_implementing_agency
+        holder.mBinding.etAreaCovered.text = item.area_covered
         holder.mBinding.etState.text = item.state_name
+        holder.mBinding.etDistrict.text = item.district_name
         holder.mBinding.etCreatedBy.text = item.created_by
         holder.mBinding.etCreated.text = item.created
         holder.mBinding.etNlmStatus.text = item.is_draft_nlm.toString()
@@ -97,13 +89,10 @@ class NlmEdpAdapter(
                 context.getString(R.string.are_you_sure_want_to_delete_your_post)
             )
         }
-
     }
 
     // Return the total number of items
     override fun getItemCount(): Int {
         return list.size
-
-
     }
 }

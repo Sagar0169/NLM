@@ -515,7 +515,59 @@ data class RspLaboratorySemenDocument(
     val id: Int? = null
 )
 
-//data class ArtificialInseminationObservationByNlm(
-//    val description: String,
-//    val id: Int
-//)
+data class FpsPlantStorageRequest(
+    val user_id: Int?= null,
+    val role_id: Int?= null,
+    val state_code: Int?= null,
+    val district_code: Int?=null,
+    val name_of_organization: String?=null,
+    val limit: Int?= null,
+    val page: Int?= null
+)
+
+data class FodderProductionFromNonForestRequest(
+    val area_covered: Int?= null,
+    val district_code: Int?= null,
+    val limit: Int?= null,
+    val name_implementing_agency: String?= null,
+    val page: Int?= null,
+    val role_id: Int?= null,
+    val state_code: Int?= null,
+    val user_id: Int?= null
+)
+
+data class FpFromForestLandRequest(
+    val area_covered: String?= null,
+    val district_code: Int?=null,
+    val limit: Int?=null,
+    val name_implementing_agency: String?=null,
+    val page: Int?= null,
+    val role_id: Int?= null,
+    val state_code: Int?=null,
+    val user_id: Int?=null
+)
+
+data class AssistanceForEARequest(
+    val limit: Int?= null,
+    val page: Int?= null,
+    val role_id: Int?= null,
+    val state_code: Int?= null,
+    val user_id: Int?= null,
+)
+
+data class NLMEdpRequest(
+    val limit: Int?= null,
+    val page: Int?= null,
+    val role_id: Int?= null,
+    val state_code: Int?= null,
+    val user_id: Int?= null,
+)
+
+data class NLMAhidfRequest(
+    val limit: String,
+    val page: String,
+    val role_id: String,
+    val state_code: String,
+    val user_id: String
+)
+

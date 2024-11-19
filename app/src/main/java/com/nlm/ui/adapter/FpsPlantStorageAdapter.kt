@@ -4,52 +4,44 @@ package com.nlm.ui.adapter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.DialogCallback
-import com.nlm.databinding.ItemAssistanceForEaBinding
-import com.nlm.databinding.ItemNlmEdpBinding
-import com.nlm.model.AssistanceForEAData
-import com.nlm.model.NlmEdp
-import com.nlm.model.NlmEdpData
-import com.nlm.ui.activity.national_livestock_mission.AddNewAssistanceForEaActivity
+import com.nlm.databinding.ItemFpForestBinding
+import com.nlm.databinding.ItemFpsPlantStorageBinding
+import com.nlm.model.FspPlantStorageData
+import com.nlm.model.NlmAssistanceForQFSPData
+import com.nlm.model.NlmFpForest
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
-import com.nlm.ui.activity.national_livestock_mission.AddNlmEdpActivity
+import com.nlm.ui.activity.national_livestock_mission.AddNlmAssistanceForQFSPActivity
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
-
-class NlmEdpAdapter(
+class FpsPlantStorageAdapter(
     val context: Context,
-    private val list: ArrayList<NlmEdpData>,
+    private val list: ArrayList<FspPlantStorageData>,
     private val callBackDeleteAtId: CallBackDeleteAtId
-) :
-    RecyclerView.Adapter<NlmEdpAdapter.NlmEdpAdapterViewHolder>() {
+) : RecyclerView.Adapter<FpsPlantStorageAdapter.FpsPlantStorageViewHolder>() {
 
     // ViewHolder class to hold the view elements
-    class NlmEdpAdapterViewHolder(val mBinding: ItemNlmEdpBinding) : RecyclerView.ViewHolder(mBinding.root) {
-    }
+    class FpsPlantStorageViewHolder(val mBinding: ItemFpsPlantStorageBinding) : RecyclerView.ViewHolder(mBinding.root)
 
-    // Inflate the item layout and create the holder
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): NlmEdpAdapterViewHolder {
-        val mBinding: ItemNlmEdpBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context), R.layout.item_nlm_edp, parent, false
+    ): FpsPlantStorageViewHolder {
+        val mBinding: ItemFpsPlantStorageBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context), R.layout.item_fps_plant_storage, parent, false
         )
-        return NlmEdpAdapterViewHolder(mBinding)
+        return FpsPlantStorageViewHolder(mBinding)
     }
 
     // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: NlmEdpAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FpsPlantStorageViewHolder, position: Int) {
         val item = list[position]
 
         if(item.is_view){
@@ -71,7 +63,9 @@ class NlmEdpAdapter(
             holder.mBinding.ivEdit.hideView()
         }
 
+        holder.mBinding.etOrganizationName.text = item.name_of_organization
         holder.mBinding.etState.text = item.state_name
+        holder.mBinding.etDistrict.text = item.district_name
         holder.mBinding.etCreatedBy.text = item.created_by
         holder.mBinding.etCreated.text = item.created
         holder.mBinding.etNlmStatus.text = item.is_draft_nlm.toString()
@@ -97,13 +91,10 @@ class NlmEdpAdapter(
                 context.getString(R.string.are_you_sure_want_to_delete_your_post)
             )
         }
-
     }
 
     // Return the total number of items
     override fun getItemCount(): Int {
         return list.size
-
-
     }
 }

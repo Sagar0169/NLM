@@ -123,7 +123,7 @@ class RSPIAFragment(
             Result::class.java
         )?.state_name
         mBinding?.tvState?.isEnabled = false
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, "view",this,this)
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, viewEdit,this,this)
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
         if (viewEdit == "view" ||
