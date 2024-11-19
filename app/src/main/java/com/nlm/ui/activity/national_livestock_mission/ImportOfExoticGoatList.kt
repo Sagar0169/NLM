@@ -44,11 +44,15 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
         mBinding = viewDataBinding
         mBinding?.clickAction=ClickActions()
         viewModel.init()
-        exocticGoatAPICall(paginate = false, loader = true,NoFarmers)
+
         implementingAgency()
         swipeForRefreshImplementingAgency()
     }
 
+    override fun onResume() {
+        super.onResume()
+        exocticGoatAPICall(paginate = false, loader = true,NoFarmers)
+    }
     override fun setVariables() {
 
     }
