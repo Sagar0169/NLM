@@ -47,6 +47,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
     var nameOfLocation: String = ""
     var districtName: String = ""
     var phoneNo: String = ""
+    var year: String = ""
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction=ClickActions()
@@ -57,7 +58,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
 //        }
         nodalOfficerList = arrayListOf()
         implementingAgency()
-        stateSemenBankAPICall(paginate = false, loader = true,nameOfLocation,districtId,phoneNo)
+        stateSemenBankAPICall(paginate = false, loader = true,nameOfLocation,districtId,phoneNo,year)
         swipeForRefreshImplementingAgency()
         mBinding!!.fabAddAgency.setOnClickListener{
             val intent = Intent(this@StateSemenBankList, StateSemenBankForms::class.java).putExtra("isFrom",1)
@@ -131,7 +132,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
     }
     private fun swipeForRefreshImplementingAgency() {
         mBinding?.srlImplementingAgency?.setOnRefreshListener {
-            stateSemenBankAPICall(paginate = false, loader = true,nameOfLocation,districtId,phoneNo)
+            stateSemenBankAPICall(paginate = false, loader = true,nameOfLocation,districtId,phoneNo,year)
             mBinding?.srlImplementingAgency?.isRefreshing = false
         }
     }
@@ -148,6 +149,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
             intent.putExtra("selectedLocation", nameOfLocation)
             intent.putExtra("phoneNo", phoneNo)
             intent.putExtra("districtName", districtName)
+            intent.putExtra("year", year)
             startActivityForResult(intent, FILTER_REQUEST_CODE)
         }
 
@@ -162,16 +164,17 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
             stateId = data.getIntExtra("stateId", 0)
             nameOfLocation = data.getStringExtra("nameLocation").toString()
             phoneNo = data.getStringExtra("etPhoneno").toString()
+            year = data.getStringExtra("year").toString()
             districtName = data.getStringExtra("districtName").toString()
             //Need to add year also
             // Log the data
-            stateSemenBankAPICall(paginate = false, loader = true, nameOfLocation,districtId,phoneNo)
+            stateSemenBankAPICall(paginate = false, loader = true, nameOfLocation,districtId,phoneNo,year)
             Log.d("FilterResult", "Received data from FilterStateActivity: $nameOfLocation")
             Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $stateId")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $year")
         }
     }
-    private fun stateSemenBankAPICall(paginate: Boolean, loader: Boolean,location:String,district:Int,phone:String) {
+    private fun stateSemenBankAPICall(paginate: Boolean, loader: Boolean,location:String,district:Int,phone:String,year:String) {
         if (paginate) {
             currentPage++
         }
@@ -182,6 +185,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
                 getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
                 location,
                 phone,
+                year,
                 district,
                 10,
                 currentPage
@@ -208,7 +212,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                stateSemenBankAPICall(paginate = true, loader = true,nameOfLocation,districtId,phoneNo)
+                                stateSemenBankAPICall(paginate = true, loader = true,nameOfLocation,districtId,phoneNo,year)
                             }
                         }
                     }

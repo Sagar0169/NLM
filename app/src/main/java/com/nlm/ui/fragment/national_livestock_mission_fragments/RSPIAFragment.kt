@@ -170,8 +170,11 @@ class RSPIAFragment(
             mBinding?.etInfra?.isEnabled = false
 
             mBinding?.tvAddMore1?.isEnabled = false
+            mBinding?.tvAddMore1?.hideView()
             mBinding?.tvAddMore2?.isEnabled = false
+            mBinding?.tvAddMore2?.hideView()
             mBinding?.tvAddSemenDose?.isEnabled = false
+            mBinding?.tvAddSemenDose?.hideView()
 
             mBinding?.tvSaveDraft?.hideView()
             mBinding?.tvSendOtp?.hideView()
@@ -289,6 +292,7 @@ class RSPIAFragment(
                             districtId = userResponseModel._result.district_code
                             mBinding?.etLocation?.setText(userResponseModel._result.location)
                             mBinding?.tvDistrict?.text = userResponseModel._result.district_name
+                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
                             mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
                             mBinding?.etPhone?.setText(userResponseModel._result.phone_no.toString())
                             mBinding?.etYear?.setText(userResponseModel._result.year_of_establishment)

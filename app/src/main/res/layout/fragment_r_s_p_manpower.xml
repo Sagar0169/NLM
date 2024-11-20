@@ -85,7 +85,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_10"
                                 android:fontFamily="@font/opensans_semibold"
-                                android:text="States"
+                                android:text="@string/states"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
@@ -380,19 +380,10 @@
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:background="@drawable/curve_all_corner_black"
-                            android:orientation="vertical"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_10">
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
+                                android:layout_marginTop="@dimen/dp_10"
                                 android:fontFamily="@font/opensans_semibold"
                                 android:text="Whether the Station has quality Buck? If so please provide the information"
                                 android:textColor="@color/black"
@@ -401,7 +392,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_20"
+                                android:layout_marginTop="@dimen/dp_10"
                                 android:background="@drawable/curve_all_corner_black"
                                 android:orientation="vertical"
                                 android:paddingHorizontal="@dimen/dp_10"
@@ -427,7 +418,7 @@
                                     android:layout_marginBottom="@dimen/dp_7"
                                     android:paddingTop="8dp" />
                             </LinearLayout>
-                        </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -459,14 +450,12 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
-
                                 android:id="@+id/etPhysical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:inputType="textMultiLine"
-                                android:maxLength="500"
+                                android:inputType="textEmailAddress"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:textColor="@color/black"
@@ -491,8 +480,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:inputType="textMultiLine"
-                                android:maxLength="500"
+                                android:inputType="textEmailAddress"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:textColor="@color/black"
@@ -517,8 +505,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
-                                android:inputType="textMultiLine"
-                                android:maxLength="500"
+                                android:inputType="textEmailAddress"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:textColor="@color/black"
@@ -529,10 +516,17 @@
                                 android:overScrollMode="always" />
 
                         </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Add Supporting Documents"                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_20"
+                            android:layout_marginTop="@dimen/dp_10"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
@@ -549,7 +543,7 @@
                                 android:paddingHorizontal="@dimen/dp_20"
                                 android:onClick="@{ClickAction::addDocDialog}"
                                 android:paddingVertical="@dimen/dp_10"
-                                android:text="Add Supporting Documents"
+                                android:text="Add Documents"
                                 android:textColor="@color/white" />
                             <com.nlm.utilities.NonScrollableRecyclerView
                                 android:id="@+id/rvNlmDoc"

@@ -45,6 +45,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
     var districtId: Int = 0
     var districtName: String = ""
     var phoneNo: String = ""
+    var year: String = ""
 
     override fun initView() {
         mBinding = viewDataBinding
@@ -64,7 +65,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
 
     private fun swipeForRefreshSrlRSPLab() {
         mBinding?.SrlRSPLab?.setOnRefreshListener {
-            implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo)
+            implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo,year)
             mBinding?.SrlRSPLab?.isRefreshing = false
         }
     }
@@ -82,7 +83,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                implementingAgencyAPICall(paginate = true, loader = true,districtId,phoneNo)
+                                implementingAgencyAPICall(paginate = true, loader = true,districtId,phoneNo,year)
                             }
                         }
                     }
@@ -171,6 +172,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
             intent.putExtra("districtId", districtId) // previously selected state ID
             intent.putExtra("phoneNo", phoneNo)
             intent.putExtra("districtName", districtName)
+            intent.putExtra("year", year)
             startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
         }
     }
@@ -183,16 +185,17 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
             districtId = data?.getIntExtra("districtId", 0)!!
             stateId = data.getIntExtra("stateId", 0)
             phoneNo = data.getStringExtra("etPhoneno").toString()
+            year = data.getStringExtra("year").toString()
             districtName = data.getStringExtra("districtName").toString()
             //Need to add year also
             // Log the data
-            implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo)
+            implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo,year)
             Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $stateId")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $year")
         }
     }
 
-    private fun implementingAgencyAPICall(paginate: Boolean, loader: Boolean,district:Int,phone:String) {
+    private fun implementingAgencyAPICall(paginate: Boolean, loader: Boolean,district:Int,phone:String,year:String) {
         if (paginate) {
             currentPage++
         }
@@ -214,6 +217,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
                     Result::class.java
                 )?.user_id,
                 phone,
+                year,
                 district,
                 10,
                 currentPage
@@ -250,6 +254,6 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
 
     override fun onResume() {
         super.onResume()
-        implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo)
+        implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo,year)
     }
 }

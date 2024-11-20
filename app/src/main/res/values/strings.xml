@@ -276,11 +276,11 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="name_of_state">Name of State<font color="#FF0000">*</font></string>
     <string name="composition_of_governing_body_board_of_directors_of_regional_semen_bank">Composition of Governing Body / Board of Directors of Regional semen bank:</string>
     <string name="rsp_labotary_semen">Rsp Labotary Semen</string>
-    <string name="location">Location*</string>
-    <string name="adress">Address*</string>
-    <string name="pin_codes">Pin Code*</string>
-    <string name="phone_no">Phone No.</string>
-    <string name="year_of_establishment">Year of Establishment</string>
+    <string name="location">Location<font color="#FF0000">*</font></string>
+    <string name="adress">Address<font color="#FF0000">*</font></string>
+    <string name="pin_codes">Pin Code<font color="#FF0000">*</font></string>
+    <string name="phone_no">Phone No.<font color="#FF0000">*</font></string>
+    <string name="year_of_establishment">Year of Establishment<font color="#FF0000">*</font></string>
     <string name="area_of_goat_sheep_station_acres">Area of Goat/Sheep Station (Acres)</string>
     <string name="basic_information">Basic Information</string>
     <string name="major_clients_of_semen_quantity_supplied"><![CDATA[Major clients of semen& Quantity supplied]]></string>
@@ -377,5 +377,6 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="artificial_insemination_document">artificial_insemination_document</string>
     <string name="animal_husbandry_infrastructure_development_fund_format_12"><ul><li>Animal Husbandry Infrastructure Development Fund(Format 12)</li></ul></string>
     <string name="import_of_exotic_goat_document">import_of_exotic_goat_document</string>
+    <string name="states">States<font color="#FF0000">*</font></string>
 </resources>
 

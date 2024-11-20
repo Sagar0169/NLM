@@ -94,6 +94,7 @@ class RSPNLMFragment(
     private var listener: OnNextButtonClickListener? = null
     private var DocumentId: Int? = null
     private var UploadedDocumentName: String? = null
+    private var isSubmitted: Boolean = false
 
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     var body: MultipartBody.Part? = null
@@ -138,7 +139,9 @@ class RSPNLMFragment(
             mBinding?.etMsp?.isEnabled = false
             mBinding?.etUnit?.isEnabled = false
             mBinding?.tvAddMore3?.isEnabled = false
+            mBinding?.tvAddMore3?.hideView()
             mBinding?.tvAddMore4?.isEnabled = false
+            mBinding?.tvAddMore4?.hideView()
             mBinding?.etPhysical?.isEnabled = false
             mBinding?.etFinancial?.isEnabled = false
             mBinding?.etAnyOther?.isEnabled = false
@@ -298,6 +301,7 @@ class RSPNLMFragment(
                             districtId = userResponseModel._result.district_code
                             mBinding?.etLocation?.setText(userResponseModel._result.location)
                             mBinding?.tvDistrict?.text = userResponseModel._result.district_name
+                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
                             mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
                             mBinding?.etPhone?.setText(userResponseModel._result.phone_no.toString())
                             mBinding?.etYear?.setText(userResponseModel._result.year_of_establishment)
@@ -323,7 +327,7 @@ class RSPNLMFragment(
                                     AppConstants.SCHEME,
                                     Result::class.java
                                 )?.role_id == 8
-                            ){
+                            ) {
                                 DocumentList.clear()
                                 DocumentList.addAll(userResponseModel._result.rsp_laboratory_semen_document)
                                 addDocumentAdapter?.notifyDataSetChanged()
@@ -331,15 +335,10 @@ class RSPNLMFragment(
 
 
                         } else {
-
-                            Preferences.setPreference_int(
-                                requireContext(),
-                                AppConstants.FORM_FILLED_ID,
-                                userResponseModel._result.id
-                            )
-                            listener?.onNextButtonClick()
+                            savedAsDraftClick?.onSaveAsDraft()
                             showSnackbar(mBinding!!.clParent, userResponseModel.message)
                         }
+
                     }
 
 
@@ -360,6 +359,7 @@ class RSPNLMFragment(
 
         fun save(view: View) {
             // Get the text from the input fields
+            isSubmitted = true
             if (viewEdit == "view") {
                 listener?.onNextButtonClick()
             }
@@ -474,7 +474,7 @@ class RSPNLMFragment(
                 suggestions_any_other = mBinding?.etAnyOther?.text.toString(),
                 rsp_laboratory_semen_station_quality_buck = addBucksList,
                 is_draft = draft,
-                rsp_laboratory_semen_document=DocumentList
+                rsp_laboratory_semen_document = DocumentList
             )
         )
     }
@@ -519,7 +519,7 @@ class RSPNLMFragment(
             openOnlyPdfAccordingToPosition()
         }
 
-        bindingDialog.btnDelete.setOnClickListener{
+        bindingDialog.btnDelete.setOnClickListener {
             dialog.dismiss()
         }
 
@@ -545,7 +545,7 @@ class RSPNLMFragment(
                             nlm_document = UploadedDocumentName,
                             id = null,
                             implementing_agency_id = null,
-                            rsp_laboratory_semen_id=null
+                            rsp_laboratory_semen_id = null
                         )
                     )
 
