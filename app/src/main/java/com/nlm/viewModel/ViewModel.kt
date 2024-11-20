@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.nlm.model.ArtificialInsemenNationAddRequest
+import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
@@ -46,7 +46,6 @@ import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.TempUploadDocResponse
-import com.nlm.model.UploadDocument_Response
 import com.nlm.repository.Repository
 import com.nlm.utilities.Utility
 import kotlinx.coroutines.CoroutineScope
@@ -535,7 +534,7 @@ class ViewModel : ViewModel() {
         }
     }
 
-    fun getArtificialInseminationAdd(context: Context, loader: Boolean, request: ArtificialInsemenNationAddRequest) {
+    fun getArtificialInseminationAdd(context: Context, loader: Boolean, request: ArtificialInseminationAddRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
 

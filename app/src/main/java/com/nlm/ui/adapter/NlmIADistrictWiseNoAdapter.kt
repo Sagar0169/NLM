@@ -43,11 +43,11 @@ class NlmIADistrictWiseNoAdapter(
     override fun onBindViewHolder(holder: NlmIADistrictWiseNo, position: Int) {
 
         val currentItem = programmeList[position]
+        holder.binding.etState.isEnabled=false
+        holder.binding.etLocationOfAi.isEnabled=false
+        holder.binding.etAiPerformed.isEnabled=false
         if (viewEdit=="view")
         {
-            holder.binding.etState.isEnabled=false
-            holder.binding.etLocationOfAi.isEnabled=false
-            holder.binding.etAiPerformed.isEnabled=false
             holder.binding.btnDelete.visibility= View.GONE
             holder.binding.tvSubmit.visibility= View.GONE
         }

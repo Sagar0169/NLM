@@ -38,6 +38,7 @@ class SupportingDocumentAdapterViewOnly(
         val items=programmeList[position]
         // Handle visibility of add/delete buttons
         holder.binding.btnDelete.visibility=View.GONE
+        holder.binding.btnEdit.visibility=View.GONE
         holder.binding.etDescription.text=items.description
         holder.binding.etFile.text=items.ia_document
     }

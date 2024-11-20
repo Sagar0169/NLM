@@ -7,19 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityArtificialInseminationListBinding
-import com.nlm.model.ArtificialInsemenNationAddRequest
-import com.nlm.model.ArtificialInsemenation
+import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.DataArtificialInsemination
-import com.nlm.model.DataImplementingAgency
-import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion.FILTER_REQUEST_CODE
-import com.nlm.ui.adapter.rgm.Artificial_Insemination_adapter
+import com.nlm.ui.adapter.rgm.ArtificialInseminationAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
@@ -31,8 +27,7 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
     CallBackDeleteAtId {
     private var mBinding: ActivityArtificialInseminationListBinding? = null
     private var viewModel = ViewModel()
-    private lateinit var implementingAdapter: Artificial_Insemination_adapter
-    private lateinit var nodalOfficerList: List<ArtificialInsemenation>
+    private lateinit var implementingAdapter: ArtificialInseminationAdapter
     private var artificialInseminationList = ArrayList<DataArtificialInsemination>()
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
@@ -53,30 +48,11 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
-
-        if (Utility.getPreferenceString(this, AppConstants.ROLE_NAME) == "Super Admin") {
-            mBinding!!.fabAddAgency.hideView()
-        }
-        nodalOfficerList = listOf(
-            ArtificialInsemenation(
-                "NA",
-                "NA",
-                "NA",
-                "NA",
-                "NA",
-                "NA",
-            )
-        )
-
         implementingAgency()
-
         swipeForRefreshImplementingAgency()
-
-
     }
 
     override fun setVariables() {
-
     }
 
     override fun onResume() {
@@ -122,7 +98,6 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvArtificialInsemination?.hideView()
                 }
-
             }
         }
         viewModel.artificialInseminationAddResult.observe(this){
@@ -133,12 +108,9 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
             if (userResponseModel!=null)
             {
                 if(userResponseModel._resultflag==0){
-
                     showSnackbar(mBinding!!.main, userResponseModel.message)
-
                 }
                 else{
-
                     itemPosition?.let { it1 -> implementingAdapter.onDeleteButtonClick(it1) }
                     showSnackbar(mBinding!!.main, userResponseModel.message)
                 }
@@ -158,8 +130,6 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
             DistrictCode=data.getIntExtra("DistrictId",0)
             DistrictName=data.getStringExtra("districtName")
             implementingAgencyAPICall(paginate = false, loader = true,LiquidNitrogen,FrozenSemen,Cryocans,DistrictCode)
-
-
         }
     }
 
@@ -222,52 +192,36 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
             currentPage++
         }
         viewModel.getArtificialInseminationApi(
-            this, loader, ArtificialInseminationRequest(
+            this, loader,
+            ArtificialInseminationRequest(
                role_id =  getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
                state_code =  getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
-                 user_id =    getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                limit = 10,
+               user_id =    getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+               limit = 10,
                page =  currentPage,
-                district_code =DistrictCode,
-                frozen_semen_straws = FrozenSemen,
-                liquid_nitrogen = LiquidNitrogen,
-                cryocans=Cryocans
-
+               district_code =DistrictCode,
+               frozen_semen_straws = FrozenSemen,
+               liquid_nitrogen = LiquidNitrogen,
+               cryocans=Cryocans
             )
         )
     }
 
     private fun implementingAgency() {
-        implementingAdapter = Artificial_Insemination_adapter(this,
-            artificialInseminationList,
-            Utility.getPreferenceString(this, AppConstants.ROLE_NAME),this
-        )
+        implementingAdapter = ArtificialInseminationAdapter(this, artificialInseminationList,this)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding!!.rvArtificialInsemination.layoutManager = layoutManager
-        mBinding!!.rvArtificialInsemination.adapter = implementingAdapter
+        mBinding?.rvArtificialInsemination?.layoutManager = layoutManager
+        mBinding?.rvArtificialInsemination?.adapter = implementingAdapter
         mBinding?.rvArtificialInsemination?.addOnScrollListener(recyclerScrollListener)
-
     }
 
     override fun onClickItem(ID: Int?, position: Int) {
         viewModel.getArtificialInseminationAdd(this,true,
-            ArtificialInsemenNationAddRequest(
+            ArtificialInseminationAddRequest(
                 state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                role_id =   getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
-                district_code = null,
-                artificial_insemination_observation_by_nlm = null,
-                artificial_insemination_document = null,
-                is_deleted = 1,
-                is_draft = null,
-                total_sheep_goat_labs =null,
-                liquid_nitrogen = null,
-                frozen_semen_straws = null,
-                cryocans = null,
-                exotic_sheep_goat = null,
-
-                is_type = null,
-                id = ID,
+                role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
+                id = ID
             )
         )
         itemPosition = position

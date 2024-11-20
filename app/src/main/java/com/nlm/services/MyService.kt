@@ -1,6 +1,6 @@
 package com.nlm.services
 
-import com.nlm.model.ArtificialInsemenNationAddRequest
+import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
@@ -18,7 +18,6 @@ import com.nlm.model.GetDropDownResponse
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
-import com.nlm.model.ImplementingAgencyResponseNlm
 import com.nlm.model.ImportExocticGoatListResponse
 import com.nlm.model.ImportExocticGoatRequest
 import com.nlm.model.ImportExoticGoatAddEditRequest
@@ -39,12 +38,10 @@ import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
-import com.nlm.model.StateSemenAddResult
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.TempUploadDocResponse
-import com.nlm.model.UploadDocument_Response
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -115,7 +112,7 @@ interface MyService {
     @POST(IMPLEMENTING_AGENCY_ADD)
     suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<NLMIAResponse>
     @POST(ARTIFICIAL_INSEMINATION_ADD)
-    suspend fun getArtificialInseminationAdd(@Body request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse>
+    suspend fun getArtificialInseminationAdd(@Body request: ArtificialInseminationAddRequest): Response<ArtificialInsemenationAddResponse>
     @POST(IMPORT_EXOTIC_GOAT_ADD_EDIT)
     suspend fun getImportExoticGoatAdd(@Body request: ImportExoticGoatAddEditRequest): Response<ImportExoticGoatAddEditResponse>
 

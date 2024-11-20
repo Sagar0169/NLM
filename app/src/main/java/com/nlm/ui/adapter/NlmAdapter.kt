@@ -15,6 +15,7 @@ import com.nlm.model.NlmAssistanceForQFSPData
 import com.nlm.model.NlmFpForest
 import com.nlm.ui.activity.national_livestock_mission.AddNlmAssistanceForQFSPActivity
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
@@ -64,7 +65,7 @@ class NlmAdapter(
         holder.mBinding.etState.text = item.state_name
         holder.mBinding.etDistrict.text = item.district_name
         holder.mBinding.etOrganogram.text = item.organogram
-        holder.mBinding.etCreatedAt.text = item.created
+        holder.mBinding.etCreatedAt.text = convertDate(item.created)
         holder.mBinding.etNlmStatus.text = item.is_draft
         holder.mBinding.ivView.setOnClickListener {
             context.startActivity(Intent(context, AddNlmAssistanceForQFSPActivity::class.java))

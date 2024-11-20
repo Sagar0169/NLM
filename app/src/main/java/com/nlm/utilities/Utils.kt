@@ -53,6 +53,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.security.SecureRandom
 import java.text.*
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -216,6 +218,20 @@ object Utility {
         } catch (e: Exception) {
             ""
         }
+    }
+
+    fun convertDate(inputDate: String): String {
+        // Define the input format
+        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+
+        // Parse the input date string
+        val parsedDate = ZonedDateTime.parse(inputDate, inputFormatter)
+
+        // Define the output format
+        val outputFormatter = DateTimeFormatter.ofPattern("dd MMM,yyyy")
+
+        // Format the parsed date to the desired format
+        return parsedDate.format(outputFormatter)
     }
 
     fun dateConvertToFormat(dateString: String): String {

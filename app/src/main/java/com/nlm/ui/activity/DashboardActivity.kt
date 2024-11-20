@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.bumptech.glide.Glide
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
 import com.nlm.model.LogoutRequest
@@ -49,13 +48,12 @@ import com.nlm.ui.activity.rashtriya_gokul_mission.SemenStationList
 import com.nlm.ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.LocalSchemeData
 import com.nlm.utilities.Nlm
-import com.nlm.utilities.PrefEntities
 
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
-import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.utilities.toast

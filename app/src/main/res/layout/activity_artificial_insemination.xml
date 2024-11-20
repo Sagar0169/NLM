@@ -277,7 +277,33 @@
 
                 </LinearLayout>
 
+
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvSupportingDocumentView"
+                android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Supporting Documents"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <LinearLayout
+                android:id="@+id/llSDRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/curve_all_corner_black"
+                android:paddingVertical="@dimen/dp_10">
+                <com.nlm.utilities.NonScrollableRecyclerView
+                    android:id="@+id/ShowDocumentRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_7"
+                    android:paddingTop="8dp" /></LinearLayout>
             <LinearLayout
                 android:id="@+id/llObservationByNlm"
                 android:layout_width="match_parent"
@@ -436,6 +462,15 @@
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvSupportingDocument"
+                android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Supporting Documents"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
                 <TextView
                     android:id="@+id/tvAddDocs"
                     android:layout_marginVertical="@dimen/dp_7"
@@ -450,13 +485,23 @@
                     android:paddingVertical="@dimen/dp_10"
                     android:text="Add Documents"
                     android:textColor="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/llDrv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/curve_all_corner_black"
+                android:paddingVertical="@dimen/dp_10">
                 <com.nlm.utilities.NonScrollableRecyclerView
                     android:id="@+id/AddDocumentRv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_7"
                     android:paddingTop="8dp" />
-
+            </LinearLayout>
 
 
         </LinearLayout>
