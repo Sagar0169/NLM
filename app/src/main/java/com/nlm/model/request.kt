@@ -92,23 +92,23 @@ data class StateSemenBankRequest(
     val page: Int
 )
 
-data class ArtificialInsemenNationAddRequest(
+data class ArtificialInseminationAddRequest(
 
-    val artificial_insemination_document: ArrayList<ImplementingAgencyDocument>?,
-    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>?,
-    val cryocans: String?,
-    val district_code: Int?,
-    val exotic_sheep_goat: String?,
-    val frozen_semen_straws: String?,
-    val is_deleted: Int?,
-    val is_draft: Int?,
-    val liquid_nitrogen: String?,
-    val role_id: Int?,
-    val state_code: Int?,
-    val total_sheep_goat_labs: Int?,
-    val user_id: Int?,
-    val is_type: String?,
-    val id: Int?
+    val artificial_insemination_document: ArrayList<ImplementingAgencyDocument>?=null,
+    val artificial_insemination_observation_by_nlm: List<ArtificialInseminationObservationByNlm>?=null,
+    val cryocans: String?=null,
+    val district_code: Int?=null,
+    val exotic_sheep_goat: String?=null,
+    val frozen_semen_straws: String?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val liquid_nitrogen: String?=null,
+    val role_id: Int?=null,
+    val state_code: Int?=null,
+    val total_sheep_goat_labs: Int?=null,
+    val user_id: Int?=null,
+    val is_type: String?=null,
+    val id: Int?=null
 )
 
 data class ArtificialInseminationDocument(

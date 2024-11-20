@@ -20,6 +20,7 @@ import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.convertDate
 
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -73,7 +74,7 @@ class StateSemenAdapter(
         holder.mBinding.etState.text = item.state_name
         holder.mBinding.etDistricts.text = item.district_name
         holder.mBinding.etEstablishment.text = item.year_of_establishment
-        holder.mBinding.etCreated.text = item.created
+        holder.mBinding.etCreated.text = convertDate(item.created)
         holder.mBinding.etStatus.text = item.is_draft
 
             if (item.is_view) {

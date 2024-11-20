@@ -25,25 +25,17 @@ import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.databinding.ActivityArtificialInseminationBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemAiObservationBinding
-import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
-import com.nlm.model.ArtificialInsemenNationAddRequest
+import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInseminationObservationByNlm
-import com.nlm.model.DocumentData
 import com.nlm.model.GetDropDownRequest
-import com.nlm.model.ImplementingAgencyAddRequest
-import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyDocument
-import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.ui.adapter.BottomSheetAdapter
-import com.nlm.ui.adapter.NlmIACompositionOFGoverningAdapter
 import com.nlm.ui.adapter.ObservationAIAdapter
-import com.nlm.ui.adapter.StateAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
@@ -280,7 +272,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
             {
 
                 viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
-                    ArtificialInsemenNationAddRequest(
+                    ArtificialInseminationAddRequest(
                         state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
                         district_code = districtId,
                         user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
@@ -302,7 +294,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
 
 
                 viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
-                    ArtificialInsemenNationAddRequest(
+                    ArtificialInseminationAddRequest(
                         state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
                         district_code = districtId,
                         user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
@@ -327,7 +319,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
             {
 
             viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
-                ArtificialInsemenNationAddRequest(
+                ArtificialInseminationAddRequest(
                     state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
                     district_code = districtId,
                     user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
@@ -349,7 +341,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
 
 
             viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
-                ArtificialInsemenNationAddRequest(
+                ArtificialInseminationAddRequest(
                     state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
                     district_code = districtId,
                     user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
@@ -685,7 +677,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     }
     private fun ViewEditApi(){
         viewModel.getArtificialInseminationAdd(this,true,
-            ArtificialInsemenNationAddRequest(
+            ArtificialInseminationAddRequest(
                 id = itemId,
                 state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,

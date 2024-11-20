@@ -14,6 +14,7 @@ import com.nlm.model.RSPLabListData
 import com.nlm.ui.activity.national_livestock_mission.RspLabSemenForms
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
@@ -51,7 +52,7 @@ class RSPLABListAdapter(
     holder.mBinding.etDistricts.text = item.district_name
     holder.mBinding.etPhone.text = item.phone_no.toString()
     holder.mBinding.etEstablishment.text = item.year_of_establishment
-    holder.mBinding.etCreated.text = item.created_at
+    holder.mBinding.etCreated.text = convertDate(item.created_at)
     holder.mBinding.etStatus.text = item.is_draft_ia
     holder.mBinding.etNlmStatus.text = item.is_draft_nlm
 

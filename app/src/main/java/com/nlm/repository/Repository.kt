@@ -1,6 +1,6 @@
 package com.nlm.repository
 
-import com.nlm.model.ArtificialInsemenNationAddRequest
+import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
@@ -18,7 +18,6 @@ import com.nlm.model.GetDropDownResponse
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
-import com.nlm.model.ImplementingAgencyResponseNlm
 import com.nlm.model.ImportExocticGoatListResponse
 import com.nlm.model.ImportExocticGoatRequest
 import com.nlm.model.ImportExoticGoatAddEditRequest
@@ -39,12 +38,10 @@ import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
 import com.nlm.model.RspLabListRequest
 import com.nlm.model.StateSemenAddResponse
-import com.nlm.model.StateSemenAddResult
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.TempUploadDocResponse
-import com.nlm.model.UploadDocument_Response
 import com.nlm.services.MyService
 import com.nlm.services.ServiceGenerator
 import com.nlm.services.ServiceGeneratorLogin
@@ -121,7 +118,7 @@ object Repository {
         return api.getStateSemenAdd2(request)
     }
 
-    suspend fun getArtificialInseminationAdd(request: ArtificialInsemenNationAddRequest): Response<ArtificialInsemenationAddResponse> {
+    suspend fun getArtificialInseminationAdd(request: ArtificialInseminationAddRequest): Response<ArtificialInsemenationAddResponse> {
         return api.getArtificialInseminationAdd(request)
     }
     suspend fun getImportExoticGoatAdd(request: ImportExoticGoatAddEditRequest): Response<ImportExoticGoatAddEditResponse> {
