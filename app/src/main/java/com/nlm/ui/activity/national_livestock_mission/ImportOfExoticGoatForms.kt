@@ -187,17 +187,15 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                         formId=userResponseModel._result.id
                         viewDocumentList.clear()
                         DocumentList.clear()
-                        Log.d("DATAAAAAAList",userResponseModel._result.import_of_exotic_goat_document.toString())
+
                         userResponseModel._result.import_of_exotic_goat_document?.forEach { document ->
                             if (document.nlm_document == null) {
                                 if(getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
                                 {
-                                    Log.d("DATAAAAAA",userResponseModel._result.import_of_exotic_goat_document.toString())
+
                                     DocumentList.add(document)
                                 }
                                 else{
-                                // Add to DocumentList if ia_document is null
-
                                 viewDocumentList.add(document)}
                             } else  {
                                 DocumentList.add(document)
@@ -275,17 +273,13 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     {
                         viewDocumentList.clear()
                         DocumentList.clear()
-                        Log.d("DATAAAAAAList",userResponseModel._result.import_of_exotic_goat_document.toString())
                         userResponseModel._result.import_of_exotic_goat_document?.forEach { document ->
                             if (document.nlm_document == null) {
                                 if(getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
                                 {
-                                    Log.d("DATAAAAAA",userResponseModel._result.import_of_exotic_goat_document.toString())
                                     DocumentList.add(document)
                                 }
                                 else{
-                                    // Add to DocumentList if ia_document is null
-
                                     viewDocumentList.add(document)}
                             } else  {
                                 DocumentList.add(document)
