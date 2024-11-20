@@ -378,5 +378,10 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="animal_husbandry_infrastructure_development_fund_format_12"><ul><li>Animal Husbandry Infrastructure Development Fund(Format 12)</li></ul></string>
     <string name="import_of_exotic_goat_document">import_of_exotic_goat_document</string>
     <string name="states">States<font color="#FF0000">*</font></string>
+    <string name="please_enter_a_old_password">Please enter a old password</string>
+    <string name="please_enter_a_new_password">Please enter a New password</string>
+    <string name="password_should_contain_at_least_one_lowercase_letter_one_uppercase_letter_one_digit_and_one_special_character">Password should contain at least one lowercase letter, one uppercase letter, one digit, and one special character.</string>
+    <string name="please_confirm_your_password">Please confirm your password</string>
+    <string name="passwords_do_not_match">Passwords do not match</string>
 </resources>
 

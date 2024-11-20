@@ -150,8 +150,6 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
                 page = currentPage,
                 limit = 10,
                 number_of_farmers_benefited=NoFarmers
-
-
             )
         )
     }

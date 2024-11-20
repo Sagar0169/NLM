@@ -9,10 +9,8 @@ import com.nlm.R
 import com.nlm.databinding.ActivityAboutUsBinding
 import com.nlm.databinding.ActivityEditProfileBinding
 
-class EditProfileActivity() : BaseActivity<ActivityEditProfileBinding>() {
+class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>() {
     private var mBinding: ActivityEditProfileBinding? = null
-
-
 
     override val layoutId: Int
         get() = R.layout.activity_edit_profile
@@ -35,6 +33,4 @@ class EditProfileActivity() : BaseActivity<ActivityEditProfileBinding>() {
             onBackPressedDispatcher.onBackPressed()
         }
     }
-
-
 }

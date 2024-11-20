@@ -14,9 +14,6 @@ import com.nlm.databinding.ActivityChangePasswordBinding
 class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
     private var mBinding: ActivityChangePasswordBinding? = null
     private var passVisible: Boolean = true
-    private lateinit var etPassword: EditText
-    private lateinit var etConfirmPassword: EditText
-    private lateinit var etOldPassword: EditText
 
     override val layoutId: Int
         get() = R.layout.activity_change_password
@@ -53,8 +50,8 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
 
-        mBinding!!.ivEyeVisible1.setOnClickListener {
-            togglePasswordVisibility(mBinding!!.etOldPassword, mBinding!!.ivEyeVisible1)
+        mBinding?.ivEyeVisible1?.setOnClickListener {
+            togglePasswordVisibility(mBinding?.etOldPassword, mBinding?.ivEyeVisible1)
         }
 
         mBinding!!.ivEyeVisible2.setOnClickListener {
@@ -74,32 +71,23 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
     }
 
     private fun validateFields(): Boolean {
-        etOldPassword = mBinding!!.etOldPassword
-        etPassword = mBinding!!.etNewPassword
-        etConfirmPassword = mBinding!!.etConfirmPassword
-
-
-        val oldPassword = etOldPassword.text.toString().trim()
-        val password = etPassword.text.toString().trim()
-        val confirmPassword = etConfirmPassword.text.toString().trim()
-
-        if (oldPassword.isEmpty()) {
-            etOldPassword.error = "Please enter a password"
+        if (mBinding?.etOldPassword?.text.toString().trim().isEmpty()) {
+            mBinding?.etOldPassword?.error = getString(R.string.please_enter_a_old_password)
             return false
         }
-        if (password.isEmpty()) {
-            etPassword.error = "Please enter a password"
+        if (mBinding?.etNewPassword?.text.toString().trim().isEmpty()) {
+            mBinding?.etNewPassword?.error = getString(R.string.please_enter_a_new_password)
             return false
-        } else if (!isValidPassword(password)) {
-            etPassword.error =
-                "Password should contain at least one lowercase letter, one uppercase letter, one digit, and one special character."
+        } else if (!isValidPassword(mBinding?.etNewPassword?.text.toString().trim())) {
+            mBinding?.etNewPassword?.error =
+                getString(R.string.password_should_contain_at_least_one_lowercase_letter_one_uppercase_letter_one_digit_and_one_special_character)
             return false
         }
-        if (confirmPassword.isEmpty()) {
-            etConfirmPassword.error = "Please confirm your password"
+        if (mBinding?.etConfirmPassword?.text.toString().trim().isEmpty()) {
+            mBinding?.etConfirmPassword?.error = getString(R.string.please_confirm_your_password)
             return false
-        } else if (confirmPassword != password) {
-            etConfirmPassword.error = "Passwords do not match"
+        } else if (mBinding?.etConfirmPassword?.text.toString().trim() != mBinding?.etNewPassword?.text.toString().trim()) {
+            mBinding?.etConfirmPassword?.error = getString(R.string.passwords_do_not_match)
             return false
         }
 
@@ -112,14 +100,14 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding>() {
         return pattern.matches(password)
     }
 
-    private fun togglePasswordVisibility(editText: EditText, imageView: ImageView) {
-        if (editText.text.isNotEmpty()) {
+    private fun togglePasswordVisibility(editText: EditText?, imageView: ImageView?) {
+        if (editText?.text?.isNotEmpty() == true) {
             if (passVisible) {
                 editText.transformationMethod = null
-                imageView.setImageResource(R.drawable.ic_login_hide_eye)
+                imageView?.setImageResource(R.drawable.ic_login_hide_eye)
             } else {
                 editText.transformationMethod = PasswordTransformationMethod()
-                imageView.setImageResource(R.drawable.ic_eye_open)
+                imageView?.setImageResource(R.drawable.ic_eye_open)
             }
             editText.setSelection(editText.text.length)
             passVisible = !passVisible
