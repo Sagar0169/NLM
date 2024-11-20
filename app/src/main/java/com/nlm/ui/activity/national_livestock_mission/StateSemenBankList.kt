@@ -65,7 +65,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
             startActivity(intent)
         }
     }
-//done
+//do
     override fun setVariables() {
 
     }
