@@ -14,6 +14,7 @@ import com.nlm.databinding.ItemNlspFormsBinding
 import com.nlm.model.DataImplementingAgency
 import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
@@ -45,7 +46,7 @@ class NationalLiveStockMissionIAAdapter(
 
         holder.mBinding.etState.text = item.state_name
         holder.mBinding.etCreatedBy.text = item.name_location_of_ai
-        holder.mBinding.etCreated.text = item.created
+        holder.mBinding.etCreated.text = convertDate(item.created)
         holder.mBinding.etStatus.text = item.is_draft
         if(item.is_view){
            holder.mBinding.ivView.showView()

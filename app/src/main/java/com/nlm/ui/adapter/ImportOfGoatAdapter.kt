@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
@@ -13,15 +12,14 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemImportOfExoticGoatBinding
 import com.nlm.model.DataIE
-import com.nlm.model.ImportOfGoat
 import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatForms
 import com.nlm.utilities.Utility
-import com.nlm.utilities.hideView
 
-class Import_Of_Goat_Adapter(private val context: Context,
-                             private val callBackDeleteAtId: CallBackDeleteAtId,
-                             private val implementingAgencyList: ArrayList<DataIE>, val Role_name:String) :
-    RecyclerView.Adapter<Import_Of_Goat_Adapter.ImplementingAgencyViewholder>() {
+class ImportOfGoatAdapter(private val context: Context,
+                          private val callBackDeleteAtId: CallBackDeleteAtId,
+                          private val implementingAgencyList: ArrayList<DataIE>,
+) :
+    RecyclerView.Adapter<ImportOfGoatAdapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
     class ImplementingAgencyViewholder(val mBinding:ItemImportOfExoticGoatBinding) : RecyclerView.ViewHolder(mBinding.root) {
@@ -47,14 +45,6 @@ class Import_Of_Goat_Adapter(private val context: Context,
     override fun onBindViewHolder(holder: ImplementingAgencyViewholder, @SuppressLint("RecyclerView") position: Int) {
 
         val item = implementingAgencyList[position]
-
-        if (Role_name=="Super Admin")
-        {
-            holder.mBinding.ivView.hideView()
-            holder.mBinding.ivEdit.hideView()
-            holder.mBinding.ivDelete.hideView()
-        }
-
     holder.mBinding.etState.text = item.state_name
     holder.mBinding.etCreatedBy.text = item.created_by
     holder.mBinding.etCreated.text = item.created_at

@@ -12,22 +12,22 @@ import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemArtificialInsemenationFormsBinding
-import com.nlm.model.ArtificialInsemenation
 import com.nlm.model.DataArtificialInsemination
 import com.nlm.ui.activity.national_livestock_mission.ArtificialInseminationForms
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
-class Artificial_Insemination_adapter(val context: Context, private val implementingAgencyList: ArrayList<DataArtificialInsemination>, val Role_name:String,private val callBackDeleteAtId: CallBackDeleteAtId) :
-    RecyclerView.Adapter<Artificial_Insemination_adapter.ImplementingAgencyViewholder>() {
+class ArtificialInseminationAdapter(
+    val context: Context,
+    private val implementingAgencyList: ArrayList<DataArtificialInsemination>,
+    private val callBackDeleteAtId: CallBackDeleteAtId
+) :
+    RecyclerView.Adapter<ArtificialInseminationAdapter.ImplementingAgencyViewholder>() {
 
     // ViewHolder class to hold the view elements
     class ImplementingAgencyViewholder(val mBinding:ItemArtificialInsemenationFormsBinding) : RecyclerView.ViewHolder(mBinding.root) {
-
-
-        val ivView: ImageView = itemView.findViewById(R.id.ivView)
-        val ivEdit: ImageView = itemView.findViewById(R.id.ivEdit)
     }
 
 
@@ -49,21 +49,14 @@ class Artificial_Insemination_adapter(val context: Context, private val implemen
     override fun onBindViewHolder(holder: ImplementingAgencyViewholder, @SuppressLint("RecyclerView") position: Int) {
 
         val item = implementingAgencyList[position]
-        if (Role_name=="Super Admin")
-        {
-            holder.mBinding.ivView.hideView()
-            holder.mBinding.ivEdit.hideView()
-            holder.mBinding.ivDelete.hideView()
-        }
 
-
-    holder.mBinding.etState.text = item.state_name
+        holder.mBinding.etState.text = item.state_name
         holder.mBinding.etDistrict.text = item.district_name
     holder.mBinding.etLiquidNitrogen.text = item.liquid_nitrogen
 //        holder.mBinding.phoneNumber.text = item.phone
     holder.mBinding.etFrozenSemen.text = item.frozen_semen_straws
     holder.mBinding.etCryocans.text=item.cryocans
-    holder.mBinding.etCreated.text=item.created
+    holder.mBinding.etCreated.text=convertDate(item.created)
     holder.mBinding.etStatus.text=item.is_draft_ia
     holder.mBinding.etStatusNlm.text=item.is_draft_nlm
 
@@ -98,22 +91,21 @@ class Artificial_Insemination_adapter(val context: Context, private val implemen
                 },
                 context.getString(R.string.are_you_sure_want_to_delete_your_post)
             )
-        }
+        }   
 
 
 //
     holder.mBinding.ivView.setOnClickListener {
-        val intent = Intent(holder.itemView.context, ArtificialInseminationForms::class.java)
-        intent.putExtra("View/Edit", "view")
-        intent.putExtra("itemId", item.id)
-        holder.itemView.context.startActivity(intent)
+        context.startActivity(Intent(holder.itemView.context, ArtificialInseminationForms::class.java)
+        .putExtra("View/Edit", "view")
+        .putExtra("itemId", item.id))
 
     }
     holder.mBinding.ivEdit.setOnClickListener {
-        val intent = Intent(holder.itemView.context, ArtificialInseminationForms::class.java)
+        val intent = Intent(context, ArtificialInseminationForms::class.java)
         intent.putExtra("View/Edit", "edit")
         intent.putExtra("itemId", item.id)
-        holder.itemView.context.startActivity(intent)
+        context.startActivity(intent)
     }
 
 

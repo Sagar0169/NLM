@@ -121,7 +121,7 @@ class NlmAnimalHidfActivity : BaseActivity<ActivityNlmAnimalHidfBinding>(), Call
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             } else {
-                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                if (userResponseModel?._result?.data != null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
                         ahidfEdpList.clear()
 
@@ -144,6 +144,11 @@ class NlmAnimalHidfActivity : BaseActivity<ActivityNlmAnimalHidfBinding>(), Call
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvNlmAhidf?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvNlmAhidf?.hideView()
                 }

@@ -823,7 +823,7 @@ data class FodderProductionFromNonForestResult(
 
 data class FodderProductionFromNonForestData(
     val area_covered: Int?= null,
-    val created: String?= null,
+    val created: String,
     val created_by: String?= null,
     val district_code: Int?= null,
     val district_name: String?= null,

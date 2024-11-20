@@ -22,6 +22,7 @@ import com.nlm.ui.activity.national_livestock_mission.AddNewAssistanceForEaActiv
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
 import com.nlm.ui.activity.national_livestock_mission.AddNlmEdpActivity
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 
@@ -73,7 +74,7 @@ class NlmEdpAdapter(
 
         holder.mBinding.etState.text = item.state_name
         holder.mBinding.etCreatedBy.text = item.created_by
-        holder.mBinding.etCreated.text = item.created
+        holder.mBinding.etCreated.text = convertDate(item.created)
         holder.mBinding.etNlmStatus.text = item.is_draft_nlm.toString()
         holder.mBinding.etIAStatus.text = item.is_draft_ia.toString()
         holder.mBinding.ivView.setOnClickListener {

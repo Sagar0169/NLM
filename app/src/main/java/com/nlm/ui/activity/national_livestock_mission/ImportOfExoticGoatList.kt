@@ -7,18 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityImportOfExoticGoatListBinding
-import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.DataIE
 import com.nlm.model.ImportExocticGoatRequest
 import com.nlm.model.ImportExoticGoatAddEditRequest
-import com.nlm.model.ImportOfGoat
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion.FILTER_REQUEST_CODE
-import com.nlm.ui.adapter.Import_Of_Goat_Adapter
+import com.nlm.ui.adapter.ImportOfGoatAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
@@ -31,7 +28,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
     override val layoutId: Int
         get() = R.layout.activity_import_of_exotic_goat_list
     private var mBinding: ActivityImportOfExoticGoatListBinding? = null
-    private lateinit var implementingAdapter: Import_Of_Goat_Adapter
+    private lateinit var implementingAdapter: ImportOfGoatAdapter
     private var layoutManager: LinearLayoutManager? = null
     private  var ImportExocticGoatList= ArrayList<DataIE>()
     private val viewModel= ViewModel()
@@ -52,14 +49,14 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
 
     override fun onResume() {
         super.onResume()
-        exocticGoatAPICall(paginate = false, loader = true,getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code)
+        exoticGoatAPICall(paginate = false, loader = true,getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code)
     }
     override fun setVariables() {
 
     }
     private fun swipeForRefreshImplementingAgency() {
         mBinding?.srlImportOfExoticGoat?.setOnRefreshListener {
-            exocticGoatAPICall(paginate = false, loader = true,getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code)
+            exoticGoatAPICall(paginate = false, loader = true,getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code)
             mBinding?.srlImportOfExoticGoat?.isRefreshing = false
         }
     }
@@ -135,16 +132,13 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
         }
     }
     private fun implementingAgency() {
-        implementingAdapter = Import_Of_Goat_Adapter(this,this
-
-                ,ImportExocticGoatList,
-            Utility.getPreferenceString(this, AppConstants.ROLE_NAME))
+        implementingAdapter = ImportOfGoatAdapter(this,this,ImportExocticGoatList)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding?.rvArtificialInsemination?.layoutManager = layoutManager
         mBinding?.rvArtificialInsemination?.adapter = implementingAdapter
         mBinding?.rvArtificialInsemination?.addOnScrollListener(recyclerScrollListener)
     }
-    private fun exocticGoatAPICall(paginate: Boolean, loader: Boolean,Stateid:Int?) {
+    private fun exoticGoatAPICall(paginate: Boolean, loader: Boolean, Stateid:Int?) {
         if (paginate) {
             currentPage++
         }
@@ -174,7 +168,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                exocticGoatAPICall(paginate = true, loader = true,getPreferenceOfScheme(this@ImportOfExoticGoatList, AppConstants.SCHEME, Result::class.java)?.state_code)
+                                exoticGoatAPICall(paginate = true, loader = true,getPreferenceOfScheme(this@ImportOfExoticGoatList, AppConstants.SCHEME, Result::class.java)?.state_code)
                             }
                         }
                     }
@@ -190,7 +184,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
             if (data != null) {
                 stateId = data.getIntExtra("stateId", 0)
             }
-            exocticGoatAPICall(paginate = false, loader = true,stateId)
+            exoticGoatAPICall(paginate = false, loader = true,stateId)
 
 
         }
