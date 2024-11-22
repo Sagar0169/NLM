@@ -1,5 +1,7 @@
 package com.nlm.repository
 
+import com.nlm.model.AddFspPlantStorageRequest
+import com.nlm.model.AddFspPlantStorageResponse
 import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
@@ -129,6 +131,10 @@ object Repository {
     }
     suspend fun getFpsPlantStorageList(request: FpsPlantStorageRequest): Response<FspPlantStorageResponse> {
         return api.getFpsPlantStorageList(request)
+    }
+
+    suspend fun getFpsPlantStorageADD(request: AddFspPlantStorageRequest): Response<AddFspPlantStorageResponse> {
+        return api.getFpsPlantStorageADD(request)
     }
     suspend fun getFpFromNonForestList(request: FodderProductionFromNonForestRequest): Response<FodderProductionFromNonForestResponse> {
         return api.getFpFromNonForestList(request)

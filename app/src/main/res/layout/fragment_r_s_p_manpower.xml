@@ -197,7 +197,7 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:inputType="phone"
-                                android:maxLength="80"
+                                android:maxLength="6"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"

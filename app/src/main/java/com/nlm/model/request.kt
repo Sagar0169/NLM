@@ -453,6 +453,7 @@ data class NlmAssistanceForQFSPListRequest(
 data class RSPAddRequest(
     val Infrastructure_faced_Institute: String? = null,
     val address: String? = null,
+
     val location: String? = null,
     val is_draft: Int? = null,
     val area_for_fodder_cultivation: String? = null,
@@ -575,3 +576,35 @@ data class NLMAhidfRequest(
     val user_id: Int?= null,
 )
 
+data class AddFspPlantStorageRequest(
+    val assistance_for_qfsp_document: List<ImplementingAgencyDocument>?=null,
+    val capacity_of_plant: String?=null,
+    val is_type: String? = null,
+    val certification_recognition: String?=null,
+    val created_at: String?=null,
+    val created_by: Int?=null,
+    val district_code: Int?=null,
+    val fsp_plant_storage_comments_of_nlm: List<FspPlantStorageCommentsOfNlm>?=null,
+    val fsp_plant_storage_document: List<ImplementingAgencyDocument>?=null,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val is_draft_ia: Int?=null,
+    val location_address: String?=null,
+    val machinery_equipment_available: String?=null,
+    val name_of_organization: String?=null,
+    val purpose_of_establishment: String?=null,
+    val quantity_fodder_seed_class: String?=null,
+    val quantity_fodder_seed_variety: String?=null,
+    val role_id: Int?=null,
+    val state_code: Int?=null,
+    val status: Int?=null,
+    val technical_expertise: String?=null,
+    val user_id: String?=null
+)
+data class FspPlantStorageCommentsByNlm(
+    val address: String,
+    val infrastructure_available: String,
+    val name_of_agency: String,
+    val quantity_of_seed_graded: String
+)

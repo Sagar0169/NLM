@@ -220,19 +220,29 @@ object Utility {
         }
     }
 
-    fun convertDate(inputDate: String): String {
-        // Define the input format
-        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+    fun convertDate(inputDate: String?): String {
+        // Check for null or empty input
+        if (inputDate.isNullOrEmpty()) {
+            return ""
+        }
+        return try {
+            // Define the input format
+            val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
 
-        // Parse the input date string
-        val parsedDate = ZonedDateTime.parse(inputDate, inputFormatter)
+            // Parse the input date string
+            val parsedDate = ZonedDateTime.parse(inputDate, inputFormatter)
 
-        // Define the output format
-        val outputFormatter = DateTimeFormatter.ofPattern("dd MMM,yyyy")
+            // Define the output format
+            val outputFormatter = DateTimeFormatter.ofPattern("dd MMM, yyyy")
 
-        // Format the parsed date to the desired format
-        return parsedDate.format(outputFormatter)
+            // Format the parsed date to the desired format
+            parsedDate.format(outputFormatter)
+        } catch (e: Exception) {
+            // Return an empty string if parsing fails
+            ""
+        }
     }
+
 
     fun dateConvertToFormat(dateString: String): String {
         return try {

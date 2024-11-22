@@ -799,8 +799,8 @@ data class FspPlantStorageData(
     val id: Int,
     val is_delete: Boolean,
     val is_draft: String,
-    val is_draft_ia: Int,
-    val is_draft_nlm: Int,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
     val is_edit: Boolean,
     val is_view: Boolean,
     val name_of_organization: String,
@@ -890,8 +890,8 @@ data class RspAddAverage(
     val id: Int?=null,
     val name_of_breed: String,
     val twentyOne_twentyTwo: String,
-    val twentyThree_twentyFour: String,
     val twentyTwo_twentyThree: String,
+    val twentyThree_twentyFour: String,
     val rsp_laboratory_semen_id: Int?=null,
 )
 data class RspAddDocument(
@@ -953,7 +953,7 @@ data class RspAddResult(
 data class RspAddBucksList(
     val breed_maintained: String?,
     val no_of_animals: Int?=null,
-    val average_age: String?,
+    val average_age: String?=null,
     val id: Int?,
     val rsp_laboratory_semen_id: Int?=null,
 )
@@ -1036,5 +1036,50 @@ data class NlmAhidfData(
     val is_view: Boolean,
     val state_code: Int,
     val state_name: String
+)
+
+data class AddFspPlantStorageResponse(
+    val _result: AddFspPlantStorageResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class AddFspPlantStorageResult(
+    val assistance_for_qfsp_document: List<ImplementingAgencyDocument>?=null,
+    val capacity_of_plant: String?=null,
+    val certification_recognition: String?=null,
+    val created_at: String?=null,
+    val created_by: Int?=null,
+    val district_code: Int?=null,
+    val fsp_plant_storage_comments_of_nlm: ArrayList<FspPlantStorageCommentsOfNlm>,
+    val fsp_plant_storage_document: List<ImplementingAgencyDocument>,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val is_draft_ia: Int?=null,
+    val location_address: String?=null,
+    val district_name: String?=null,
+    val machinery_equipment_available: String?=null,
+    val name_of_organization: String?=null,
+    val purpose_of_establishment: String?=null,
+    val quantity_fodder_seed_class: String?=null,
+    val quantity_fodder_seed_variety: String?=null,
+    val role_id: String?=null,
+    val state_code: Int?=null,
+    val status: Int?=null,
+    val technical_expertise: String?=null,
+    val user_id: String?=null
+)
+
+
+
+data class FspPlantStorageCommentsOfNlm(
+    val id: Int?=null,
+    val name_of_agency: String?=null,
+    val address: String?=null,
+    val quantity_of_seed_graded: String?=null,
+    val infrastructure_available: String?=null,
+    val fsp_plant_storage_id: Int?=null,
 )
 

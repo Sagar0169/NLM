@@ -196,10 +196,13 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                     DocumentList.add(document)
                                 }
                                 else{
-                                viewDocumentList.add(document)}
-                            } else  {
+                                viewDocumentList.add(document)
+                                }
+                            }
+                            else  {
                                 DocumentList.add(document)
-                            } }
+                            }
+                        }
                         AddDocumentAdapter?.notifyDataSetChanged()
                         ViewDocumentAdapter?.notifyDataSetChanged()
                         AchievementList?.clear()

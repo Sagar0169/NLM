@@ -1,6 +1,7 @@
 package com.nlm.callBack
 
 import androidx.fragment.app.Fragment
+import com.nlm.model.FspPlantStorageCommentsOfNlm
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyDocument
@@ -42,6 +43,9 @@ interface CallBackSemenDoseAvg {
 interface CallBackSemenDose {
     fun onClickItem(selectedItem: RspAddAverage, position:Int, isFrom:Int)
 }
+interface CallBackFspCommentNlm {
+    fun onClickItem(selectedItem: FspPlantStorageCommentsOfNlm, position:Int, isFrom:Int)
+}
 interface CallBackItemGoatSemen {
     fun onClickItem(selectedItem: StateSemenInfraGoat, position:Int, isFrom:Int)
 }
@@ -64,6 +68,9 @@ interface DialogCallback {
 }
 interface CallBackDeleteAtId {
     fun onClickItem(ID: Int?,position:Int)
+}
+interface CallBackDeleteFSPAtId {
+    fun onClickItemDelete(ID: Int?,position:Int)
 }
 interface SwitchFragmentCallBack {
     fun onClickItem(fragment:Fragment,Tab_id:Int)

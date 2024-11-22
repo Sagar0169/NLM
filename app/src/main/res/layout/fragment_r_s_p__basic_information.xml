@@ -1131,7 +1131,7 @@
                         android:onClick="@{ClickAction::save}"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
-                        android:text="@string/save_and_next"
+                        android:text="@string/submit"
 
                         android:textAlignment="center"
                         android:textColor="@color/white"

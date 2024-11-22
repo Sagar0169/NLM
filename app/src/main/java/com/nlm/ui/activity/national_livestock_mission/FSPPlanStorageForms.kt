@@ -1,5 +1,4 @@
 package com.nlm.ui.activity.national_livestock_mission
-
 import android.os.Handler
 import android.os.Looper
 import android.view.View
@@ -9,46 +8,29 @@ import com.google.android.material.tabs.TabLayout
 import com.nlm.R
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
-import com.nlm.databinding.ActivityRspLabSemenBinding
-import com.nlm.model.Result
-import com.nlm.ui.fragment.national_livestock_mission_fragments.RSPIAFragment
-import com.nlm.ui.fragment.national_livestock_mission_fragments.RSPNLMFragment
+import com.nlm.databinding.ActivityFspplanStorageFormsBinding
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenBasicInformationFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenInfrastructureFragment
-import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
-import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 
-class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>(), OnNextButtonClickListener,
-    OnBackSaveAsDraft {
+class FSPPlanStorageForms : BaseActivity<ActivityFspplanStorageFormsBinding>(),
+    OnNextButtonClickListener, OnBackSaveAsDraft {
     override val layoutId: Int
-        get() = R.layout.activity_rsp_lab_semen
-    private var mBinding: ActivityRspLabSemenBinding? = null
-    private var viewEdit: String? = null
-    private var itemId: Int? = null
-    private var dId: Int? = null
+        get() = R.layout.activity_fspplan_storage_forms
+    private var mBinding: ActivityFspplanStorageFormsBinding? = null
     private var mDoubleBackToExitPressedOnce = false
+    private var viewEdit: String? = null
+    var itemId: Int? = null
+    private var dId: Int? = null
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        viewEdit = intent.getStringExtra("View/Edit")
-        itemId = intent.extras?.getInt("itemId")
-        dId = intent.getIntExtra("dId", 0)
         setupTabLayout()
-        loadFragment(RSPIAFragment(viewEdit, itemId, dId))
-    }
-
-    inner class ClickActions {
-        fun backPress(view: View) {
-            onBackPressed()
-        }
-
-
-        fun group(view: View) {
-
-        }
-
+        viewEdit = intent.getStringExtra("View/Edit")
+        itemId = intent.getIntExtra("itemId", 0)
+        dId = intent.getIntExtra("dId", 0)
+        loadFragment(StateSemenBasicInformationFragment(viewEdit, itemId,dId))
     }
 
     override fun setVariables() {
@@ -59,28 +41,31 @@ class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>(), OnNextBut
 
     }
 
+    fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameLayout, fragment)
+        transaction.commit()
+    }
+
+    inner class ClickActions {
+        fun backPress(view: View) {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
     private fun setupTabLayout() {
         mBinding?.tabLayout?.apply {
             addTab(newTab().setText("To Be Filled By IA"))
-            if (getPreferenceOfScheme(
-                    this@RspLabSemenForms,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id == 8
-            ) {
-                addTab(newTab().setText("To Be Filled By NLM"))
-
-            }
-
+            addTab(newTab().setText("To Be Filled By NLM"))
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
                         0 -> {
-                            loadFragment(RSPIAFragment(viewEdit, itemId, dId))
+                            loadFragment(StateSemenBasicInformationFragment(viewEdit, itemId,dId))
                         }
 
                         1 -> {
-                            loadFragment(RSPNLMFragment(viewEdit, itemId, dId))
+                            loadFragment(StateSemenInfrastructureFragment(viewEdit, itemId,dId))
                         }
                     }
                 }
@@ -110,7 +95,7 @@ class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>(), OnNextBut
 
     override fun onNavigateToFirstFragment() {
         // Load the first fragment (Implementing Agency)
-        loadFragment(RSPIAFragment(viewEdit, itemId, dId))
+        loadFragment(StateSemenBasicInformationFragment(viewEdit, itemId,dId))
         // Select the first tab
         mBinding?.tabLayout?.getTabAt(0)?.select()
     }
@@ -118,19 +103,12 @@ class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>(), OnNextBut
     override fun onSaveAsDraft() {
         onBackPressedDispatcher.onBackPressed()
     }
-
-
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frameLayout, fragment)
-        transaction.commit()
-    }
-
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             super.onBackPressed()
-        } else {
-            Utility.clearAllFormFilledID(this@RspLabSemenForms)
+        }
+        else {
+            Utility.clearAllFormFilledID(this@FSPPlanStorageForms)
             onBackPressedDispatcher.onBackPressed()
             if (mDoubleBackToExitPressedOnce) {
                 super.onBackPressed()
@@ -150,6 +128,5 @@ class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>(), OnNextBut
 
         }
     }
-
 
 }
