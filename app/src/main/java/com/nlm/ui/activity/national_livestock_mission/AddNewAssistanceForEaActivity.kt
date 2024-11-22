@@ -4,11 +4,12 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.databinding.ActivityAddNewAssistanceForEaBinding
-import com.nlm.model.NlmEdp
-import com.nlm.ui.adapter.NlmEdpAdapter
+import com.nlm.ui.adapter.Format6YearWiseFinancialProgressAdapter
+import com.nlm.ui.adapter.ImportExoticAdapterDetailOfImport
 import com.nlm.utilities.BaseActivity
 
 class AddNewAssistanceForEaActivity : BaseActivity<ActivityAddNewAssistanceForEaBinding>() {
+
     private var mBinding: ActivityAddNewAssistanceForEaBinding? = null
 
     override val layoutId: Int
@@ -29,6 +30,7 @@ class AddNewAssistanceForEaActivity : BaseActivity<ActivityAddNewAssistanceForEa
 
     override fun setVariables() {
     }
+
 
     override fun setObservers() {
     }

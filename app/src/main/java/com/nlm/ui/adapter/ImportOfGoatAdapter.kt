@@ -57,7 +57,7 @@ class ImportOfGoatAdapter(private val context: Context,
                 object :
                     DialogCallback {
                     override fun onYes() {
-                        callBackDeleteAtId.onClickItem(item.id,position)
+                        callBackDeleteAtId.onClickItem(item.id,position,0)
                     }
                 },
                 context.getString(R.string.are_you_sure_want_to_delete_your_post)

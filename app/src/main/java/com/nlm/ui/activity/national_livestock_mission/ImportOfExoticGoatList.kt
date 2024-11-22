@@ -67,7 +67,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             } else {
-                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                if (userResponseModel?._result?.data != null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
                         ImportExocticGoatList.clear()
 
@@ -90,6 +90,11 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvArtificialInsemination?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvArtificialInsemination?.hideView()
                 }
@@ -150,8 +155,6 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
                 page = currentPage,
                 limit = 10,
                 number_of_farmers_benefited=NoFarmers
-
-
             )
         )
     }
@@ -190,7 +193,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
         }
     }
 
-    override fun onClickItem(ID: Int?, position: Int) {
+    override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatList,true,
             ImportExoticGoatAddEditRequest(
                 comment_by_nlm_whether = null,

@@ -91,7 +91,7 @@ class NlmEdpAdapter(
                     DialogCallback {
                     override fun onYes() {
                         if (item != null) {
-                            callBackDeleteAtId.onClickItem(item.id,position)
+                            callBackDeleteAtId.onClickItem(item.id,position,0)
                         }
                     }
                 },

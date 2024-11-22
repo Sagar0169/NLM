@@ -25,6 +25,7 @@ import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemImportExoticAchivementEdit
 import com.nlm.callBack.CallBackItemImportExoticDetailtEdit
+import com.nlm.callBack.CallBackItemImportExoticVerifiedByNlm
 import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.databinding.ActivityImportOfExoticGoatBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
@@ -60,7 +61,8 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(),CallBackItemImportExoticAchivementEdit,
-    CallBackItemImportExoticDetailtEdit,CallBackDeleteAtId, CallBackItemUploadDocEdit {
+    CallBackItemImportExoticDetailtEdit,CallBackDeleteAtId, CallBackItemUploadDocEdit,
+    CallBackItemImportExoticVerifiedByNlm {
     override val layoutId: Int
         get() = R.layout.activity_import_of_exotic_goat
     private var mBinding: ActivityImportOfExoticGoatBinding? = null
@@ -75,7 +77,6 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     private  var AchievementList: MutableList<ImportOfExoticGoatAchievement>?=null
     private  var VerifiedNlmList: MutableList<ImportOfExoticGoatVerifiedNlm>?=null
     private lateinit var stateAdapter: BottomSheetAdapter
-    private var DialogDocName: TextView?=null
     private var DocumentName:String?=null
     private var savedAsDraft:Boolean=false
     private var formId:Int?=null
@@ -85,6 +86,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     private var stateList = ArrayList<ResultGetDropDown>()
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var DocumentId:Int?=null
+    private var DialogDocName: TextView?=null
     private var UploadedDocumentName:String?=null
     var body: MultipartBody.Part? = null
     val viewModel = ViewModel()
@@ -394,7 +396,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             AddAchievementDialog(this@ImportOfExoticGoatForms,null,null)
         }
         fun addVerifiedNlm(view: View){
-            AddVerifiedNlmDialog(this@ImportOfExoticGoatForms)
+            AddVerifiedNlmDialog(this@ImportOfExoticGoatForms,null,null)
         }
     }
     private fun AddDocumentAdapter(){
@@ -408,17 +410,17 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         mBinding?.ShowDocumentRv?.layoutManager = LinearLayoutManager(this)
     }
     private fun AddImportDetailAdapter(){
-        DetailOfImportAdapter= DetailOfImportList?.let { ImportExoticAdapterDetailOfImport(it,viewEdit,this) }
+        DetailOfImportAdapter= DetailOfImportList?.let { ImportExoticAdapterDetailOfImport(this,it,viewEdit,this,this) }
         mBinding?.DetailImportRv?.adapter = DetailOfImportAdapter
         mBinding?.DetailImportRv?.layoutManager = LinearLayoutManager(this)
     }
     private fun AddAcheivementAdapter(){
-        AchievementAdapter= AchievementList?.let { ImportExoticAchivementAdapter(it,viewEdit,this) }
+        AchievementAdapter= AchievementList?.let { ImportExoticAchivementAdapter(this,it,viewEdit,this,this) }
         mBinding?.AchivementRv?.adapter = AchievementAdapter
         mBinding?.AchivementRv?.layoutManager = LinearLayoutManager(this)
     }
     private fun AddVerifiedAdapter(){
-        VerifiedNlmAdapter= VerifiedNlmList?.let { ImportOfExoticGoatVerifiedNlmAdapter(it,viewEdit) }
+        VerifiedNlmAdapter= VerifiedNlmList?.let { ImportOfExoticGoatVerifiedNlmAdapter(this,it,this,viewEdit,this) }
         mBinding?.VerifiedNlmRv?.adapter = VerifiedNlmAdapter
         mBinding?.VerifiedNlmRv?.layoutManager = LinearLayoutManager(this)
     }
@@ -711,7 +713,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         }
         dialog.show()
     }
-    private fun AddVerifiedNlmDialog(context: Context) {
+    private fun AddVerifiedNlmDialog(context: Context,selectedItem: ImportOfExoticGoatVerifiedNlm?, position: Int?) {
         val bindingDialog: ItemImportExoticVerifiedNlmBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_import_exotic_verified_nlm,
@@ -733,9 +735,37 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.tvSubmit.showView()
         bindingDialog.btnDelete.hideView()
+        if(selectedItem!=null )
+        {
+            selectedItem.number_of_animals?.let { bindingDialog.etF2GenerationDistributed.setText(it.toString()) }?: bindingDialog.etF2GenerationDistributed.setText("")
+            bindingDialog.etF1GenerationProduced.setText(selectedItem.f1_generation_produced)
+            bindingDialog.etF2GenerationProduced.setText(selectedItem.f2_generation_produced)
+            selectedItem.f2_generation_distributed?.let { bindingDialog.etF1GenerationDistributed.setText(it.toString()) }?: bindingDialog.etF1GenerationDistributed.setText("")
+            bindingDialog.etYear.setText(selectedItem.year)
+            bindingDialog.etSpeciesBreed.setText(selectedItem.species_breed)
+        }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etSpeciesBreed.text.toString().isNotEmpty()||bindingDialog.etYear.text.toString().isNotEmpty()||bindingDialog.etF1GenerationProduced.text.toString().isNotEmpty()||bindingDialog.etF2GenerationProduced.text.toString().isNotEmpty()||bindingDialog.etF2GenerationDistributed.text.toString().isNotEmpty())
             {
+                if(selectedItem!=null)
+                {
+                    if (position != null) {
+                        VerifiedNlmList?.set(position,ImportOfExoticGoatVerifiedNlm(
+                            number_of_animals = bindingDialog.etF2GenerationDistributed.text.toString().toIntOrNull(),
+                            f1_generation_produced = bindingDialog.etF1GenerationProduced.text.toString(),
+                            f2_generation_produced = bindingDialog.etF2GenerationProduced.text.toString(),
+                            f2_generation_distributed =bindingDialog.etF1GenerationDistributed.text.toString() ,
+                            year = bindingDialog.etYear.text.toString(),
+                            import_of_exotic_goat_id = selectedItem.import_of_exotic_goat_id,
+                            id = selectedItem.id,
+                            species_breed = bindingDialog.etSpeciesBreed.text.toString(),
+                        ))
+
+                        VerifiedNlmAdapter?.notifyItemChanged(position)
+                        dialog.dismiss()
+                                           }
+                }
+                    else{
                 VerifiedNlmList?.add(ImportOfExoticGoatVerifiedNlm(
                     number_of_animals = bindingDialog.etF2GenerationDistributed.text.toString().toIntOrNull(),
                     f1_generation_produced = bindingDialog.etF1GenerationProduced.text.toString(),
@@ -750,8 +780,9 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     if (it != null) {
                         VerifiedNlmAdapter?.notifyItemInserted(it)
                     }
+
                     dialog.dismiss()
-                }
+                }}
             }
 
 
@@ -1043,11 +1074,31 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     ) {
         AddImportDetailDialog(this,selectedItem,position)
     }
-    override fun onClickItem(ID: Int?, position: Int) {
-        position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
+    override fun onClickItem(ID: Int?, position: Int,isFrom: Int) {
+        if (isFrom==1){
+            position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
+        }
+        else if(isFrom==2){
+            position.let { it1 -> DetailOfImportAdapter?.onDeleteButtonClick(it1) }
+        }
+        else if(isFrom==3){
+            position.let { it1 -> AchievementAdapter?.onDeleteButtonClick(it1) }
+        }
+        else if(isFrom==4){
+            position.let { it1 -> VerifiedNlmAdapter?.onDeleteButtonClick(it1) }
+        }
+
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
         AddDocumentDialog(this,selectedItem,position)
+    }
+
+    override fun onClickItem(
+        selectedItem: ImportOfExoticGoatVerifiedNlm,
+        position: Int,
+        isFrom: Int
+    ) {
+        AddVerifiedNlmDialog(this,selectedItem,position)
     }
 }

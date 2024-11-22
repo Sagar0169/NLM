@@ -1,6 +1,7 @@
 package com.nlm.callBack
 
 import androidx.fragment.app.Fragment
+import com.nlm.model.AssistanceForQfspFinancialProgres
 import com.nlm.model.FspPlantStorageCommentsOfNlm
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
@@ -10,6 +11,7 @@ import com.nlm.model.ImplementingAgencyInvolvedDistrictWise
 import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.ImportOfExoticGoatAchievement
 import com.nlm.model.ImportOfExoticGoatDetailImport
+import com.nlm.model.ImportOfExoticGoatVerifiedNlm
 import com.nlm.model.RspAddAverage
 import com.nlm.model.RspAddBucksList
 import com.nlm.model.RspAddEquipment
@@ -27,6 +29,13 @@ interface CallBackItemUploadDocEdit {
 }
 interface CallBackItemImportExoticAchivementEdit {
     fun onClickItem(selectedItem: ImportOfExoticGoatAchievement, position:Int, isFrom:Int)
+
+}
+interface CallBackItemFormat6Delete {
+    fun onClickItem(selectedItem: AssistanceForQfspFinancialProgres, position:Int, isFrom:Int)}
+
+interface CallBackItemImportExoticVerifiedByNlm {
+    fun onClickItem(selectedItem: ImportOfExoticGoatVerifiedNlm, position:Int, isFrom:Int)
 }
 interface CallBackItemImportExoticDetailtEdit {
     fun onClickItemDetail(selectedItem: ImportOfExoticGoatDetailImport, position:Int, isFrom:Int)
@@ -67,7 +76,7 @@ interface DialogCallback {
 
 }
 interface CallBackDeleteAtId {
-    fun onClickItem(ID: Int?,position:Int)
+    fun onClickItem(ID: Int?,position:Int,isFrom: Int)
 }
 interface CallBackDeleteFSPAtId {
     fun onClickItemDelete(ID: Int?,position:Int)

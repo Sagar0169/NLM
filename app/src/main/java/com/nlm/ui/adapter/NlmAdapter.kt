@@ -1,6 +1,7 @@
 package com.nlm.ui.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.nlm.databinding.ItemFpForestBinding
 import com.nlm.model.NlmAssistanceForQFSPData
 import com.nlm.model.NlmFpForest
 import com.nlm.ui.activity.national_livestock_mission.AddNlmAssistanceForQFSPActivity
+import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatForms
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
@@ -39,7 +41,7 @@ class NlmAdapter(
     }
 
     // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: NlmViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NlmViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val item = list[position]
 
         if(item.is_view){
@@ -68,10 +70,17 @@ class NlmAdapter(
         holder.mBinding.etCreatedAt.text = convertDate(item.created)
         holder.mBinding.etNlmStatus.text = item.is_draft
         holder.mBinding.ivView.setOnClickListener {
-            context.startActivity(Intent(context, AddNlmAssistanceForQFSPActivity::class.java))
+            val intent = Intent(holder.itemView.context, AddNlmAssistanceForQFSPActivity::class.java)
+            intent.putExtra("View/Edit", "view")
+            intent.putExtra("itemId", item.id)
+            holder.itemView.context.startActivity(intent)
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            context.startActivity(Intent(holder.itemView.context, AddNlmAssistanceForQFSPActivity::class.java))
+            val intent = Intent(holder.itemView.context, AddNlmAssistanceForQFSPActivity::class.java)
+            intent.putExtra("View/Edit", "edit")
+            intent.putExtra("itemId", item.id)
+            holder.itemView.context.startActivity(intent)
+
         }
 
         holder.mBinding.ivDelete.setOnClickListener {
@@ -81,7 +90,7 @@ class NlmAdapter(
                     DialogCallback {
                     override fun onYes() {
                         if (item != null) {
-                            callBackDeleteAtId.onClickItem(item.id,position)
+                            callBackDeleteAtId.onClickItem(item.id,position,0)
                         }
                     }
                 },

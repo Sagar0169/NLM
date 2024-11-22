@@ -174,6 +174,6 @@ class NlmAssistanceForEa : BaseActivity<ActivityNlmAssistanceforEaBinding>(), Ca
         }
     }
 
-    override fun onClickItem(ID: Int?, position: Int) {
+    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
     }
 }

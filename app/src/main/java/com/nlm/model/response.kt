@@ -278,7 +278,80 @@ data class ResultArtificialInsemination(
     val is_add: Boolean,
     val total_count: Int
 )
+data class Format6AssistanceForQspAddResponse(
+    val _result: ResultFormat6,
+    val _resultflag: Int,
+    val fileurl: Any,
+    val message: String,
+    val statuscode: Int
+)
 
+data class ResultFormat6(
+    val area_under_production: Int?=null,
+    val assistance_for_qfsp_cost_assistance: List<AssistanceForQfspCostAssistance>?=null,
+    val assistance_for_qfsp_document: ArrayList<ImplementingAgencyDocument>?=null,
+    val assistance_for_qfsp_financial_progress: List<AssistanceForQfspFinancialProgres>?=null,
+    val created: String?=null,
+    val created_by: Int?=null,
+    val district_code: Int?=null,
+    val effective_seed: Any?=null,
+    val effective_seed_inputs: String?=null,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val location_address: String?=null,
+    val name_of_organization: String?=null,
+    val organogram: String?=null,
+    val quantity_of_fodder_seed_class: String?=null,
+    val quantity_of_fodder_seed_variety: String?=null,
+    val quantity_of_seed_class: String?=null,
+    val quantity_of_seed_variety: String?=null,
+    val source_of_seed: String?=null,
+    val state_code: Int?=null,
+    val status: Int?=null,
+    val target_achievement_class: String?=null,
+    val target_achievement_variety: String?=null,
+    val technical_competance: String?=null,
+    val updated: String?=null
+)
+
+data class AssistanceForQfspCostAssistance(
+    val assistance_for_qfsp_id: Int?=null,
+    val cost_assistance_first_year: String?=null,
+    val cost_assistance_second_year: Any?=null,
+    val cost_assistance_third_year: Any?=null,
+    val created: String?=null,
+    val created_by: Any?=null,
+    val id: Int?=null,
+    val name_of_fodder_seed: String?=null,
+    val seed_produced_first_year: String?=null,
+    val seed_produced_second_year: Any?=null,
+    val seed_produced_third_year: Any?=null,
+    val status: Any?=null,
+    val updated: Any?=null
+)
+
+data class AssistanceForQfspFinancialProgres(
+    val amount_utilized_second: Any?=null,
+    val amount_utilized_state_first: Int?=null,
+    val area_covered_first: Int?=null,
+    val area_covered_second: Any?=null,
+    val assistance_for_qfsp_id: Int?=null,
+    val assistance_provided_first: String?=null,
+    val assistance_provided_second: Any?=null,
+    val assistance_provided_third: Any?=null,
+    val created: String?=null,
+    val created_by: Any?=null,
+    val farmers_impacted_first: String?=null,
+    val farmers_impacted_second: Any?=null,
+    val financial_year_first: Any?=null,
+    val financial_year_second: Any?=null,
+    val financial_year_third: Any?=null,
+    val id: Int?=null,
+    val name_of_district: String?=null,
+    val status: Any?=null,
+    val updated: String?=null
+)
 data class DataArtificialInsemination(
     val state_code: Int,
     val state_name: String,
@@ -579,7 +652,7 @@ data class ResultIEG(
     val comment_by_nlm_whether: Int,
     val created_by: Int,
     val id: Int,
-    val number_of_farmers_benefited: Int?,
+    val number_of_farmers_benefited: String?,
     val import_of_exotic_goat_achievement: List<ImportOfExoticGoatAchievement>?,
     val import_of_exotic_goat_detail_import: List<ImportOfExoticGoatDetailImport>?,
     val import_of_exotic_goat_verified_nlm: List<ImportOfExoticGoatVerifiedNlm>?,

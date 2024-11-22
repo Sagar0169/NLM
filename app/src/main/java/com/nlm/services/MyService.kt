@@ -11,12 +11,16 @@ import com.nlm.model.AssistanceForEAResponse
 import com.nlm.model.DashboardResponse
 import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FodderProductionFromNonForestResponse
+import com.nlm.model.Format6AssistanceForQspAddEdit
+import com.nlm.model.Format6AssistanceForQspAddResponse
 import com.nlm.model.FpFromForestLandRequest
 import com.nlm.model.FpFromForestLandResponse
 import com.nlm.model.FpsPlantStorageRequest
 import com.nlm.model.FspPlantStorageResponse
+
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
+import com.nlm.model.GetNlmDropDownRequest
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
@@ -56,6 +60,7 @@ const val LOGIN = "rest/login"
 const val LOGOUT = "rest/logout"
 const val DASHBOARD = "rest/dashboard"
 const val GET_DROP_DOWN = "rest/getDropdown"
+const val GET_NLM_DROP_DOWN = "nationalLivestockMission/nlmDropdown"
 const val IMPLEMENTING_AGENCY_LIST = "nationalLivestockMission/implimentingAgencyList"
 const val IMPLEMENTING_AGENCY_ADD = "nationalLivestockMission/implimentingAgencyAddEdit"
 const val STATE_SEMEN_ADD1 = "nationalLivestockMission/stateSemenBankAddEdit1"
@@ -69,6 +74,7 @@ const val RSP_LAP_LIST = "nationalLivestockMission/rspLaboratorySemenList"
 const val RSP_LAP_ADD = "nationalLivestockMission/rspLaboratorySemenAddEdit"
 const val IMPORT_EXOTIC_GOAT_ADD_EDIT = "nationalLivestockMission/importOfExoticGoatAddEdit"
 const val ASSISTANCE_FOR_QFSP_LIST = "nationalLivestockMission/assistanceForQfspList"
+const val ASSISTANCE_FOR_QFSP_ADD_EDIT = "nationalLivestockMission/assistanceForQfspAddEdit"
 const val FODDER_PRODUCTION_FROM_NON_FOREST = "nationalLivestockMission/FpFromNonForestList"
 const val FODDER_PRODUCTION_FROM_FOREST_LAND = "nationalLivestockMission/FpFromForestLandList"
 const val NLM_AHIDF = "nationalLivestockMission/ahidfList"
@@ -90,6 +96,8 @@ interface MyService {
 
     @POST(GET_DROP_DOWN)
     suspend fun getDropDown(@Body request: GetDropDownRequest): Response<GetDropDownResponse>
+    @POST(GET_NLM_DROP_DOWN)
+    suspend fun getNlmDropDown(@Body request: GetNlmDropDownRequest): Response<GetDropDownResponse>
 
     @POST(IMPLEMENTING_AGENCY_LIST)
     suspend fun getImplementingAgency(@Body request: ImplementingAgencyRequest): Response<ImplementingAgencyResponse>
@@ -121,6 +129,8 @@ interface MyService {
 
     @POST(ASSISTANCE_FOR_QFSP_LIST)
     suspend fun getAssistanceForQfspList(@Body request: NlmAssistanceForQFSPListRequest): Response<NlmAssistanceForQFSPListResponse>
+    @POST(ASSISTANCE_FOR_QFSP_ADD_EDIT)
+    suspend fun getAssistanceForQfspAddEdit(@Body request: Format6AssistanceForQspAddEdit): Response<Format6AssistanceForQspAddResponse>
 
     @POST(FPS_PLANT_STORAGE)
     suspend fun getFpsPlantStorageList(@Body request: FpsPlantStorageRequest): Response<FspPlantStorageResponse>

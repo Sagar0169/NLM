@@ -718,8 +718,10 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         )
     }
 
-    override fun onClickItem(ID: Int?, position: Int) {
-        position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
+    override fun onClickItem(ID: Int?, position: Int,isFrom: Int) {
+        if (isFrom==1){
+            position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
+        }
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {

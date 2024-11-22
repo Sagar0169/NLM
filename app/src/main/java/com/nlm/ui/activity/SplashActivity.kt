@@ -11,7 +11,7 @@ import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
 
 
-class SplashActivity() : BaseActivity<ActivitySplashBinding>() {
+class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_splash
     private var mBinding: ActivitySplashBinding? = null

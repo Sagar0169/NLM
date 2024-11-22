@@ -15,12 +15,15 @@ import com.nlm.model.AssistanceForEAResponse
 import com.nlm.model.DashboardResponse
 import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FodderProductionFromNonForestResponse
+import com.nlm.model.Format6AssistanceForQspAddEdit
+import com.nlm.model.Format6AssistanceForQspAddResponse
 import com.nlm.model.FpFromForestLandRequest
 import com.nlm.model.FpFromForestLandResponse
 import com.nlm.model.FpsPlantStorageRequest
 import com.nlm.model.FspPlantStorageResponse
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
+import com.nlm.model.GetNlmDropDownRequest
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
@@ -69,6 +72,7 @@ class ViewModel : ViewModel() {
     var logoutResult = MutableLiveData<LogoutResponse>()
     var dashboardResult = MutableLiveData<DashboardResponse>()
     var getDropDownResult = MutableLiveData<GetDropDownResponse>()
+    var getNlmDropDownResult = MutableLiveData<GetDropDownResponse>()
     var implementingAgencyResult = MutableLiveData<ImplementingAgencyResponse>()
     var rspLabListResult = MutableLiveData<RSPLabListResponse>()
     var rspLabAddResult = MutableLiveData<RspAddResponse>()
@@ -80,6 +84,7 @@ class ViewModel : ViewModel() {
     var artificialInseminationAddResult = MutableLiveData<ArtificialInsemenationAddResponse>()
     var importExoticGoatAddEditResult = MutableLiveData<ImportExoticGoatAddEditResponse>()
     var nlmAssistanceForQFSPResult = MutableLiveData<NlmAssistanceForQFSPListResponse>()
+    var foramt6AssistanceForQspAddEditResult = MutableLiveData<Format6AssistanceForQspAddResponse>()
     var fpsPlantStorageResult = MutableLiveData<FspPlantStorageResponse>()
     var fpsPlantStorageADDResult = MutableLiveData<AddFspPlantStorageResponse>()
     var fpFromNonForestResult = MutableLiveData<FodderProductionFromNonForestResponse>()
@@ -277,7 +282,6 @@ class ViewModel : ViewModel() {
     fun getDropDownApi(context: Context, loader: Boolean, request: GetDropDownRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
-
         job = scope.launch {
             try {
                 val response = repository.getDropDown(request)
@@ -288,6 +292,58 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 getDropDownResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
+    fun getNlmDropDown(context: Context, loader: Boolean, request: GetNlmDropDownRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getNlmDropDown(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                getNlmDropDownResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }
@@ -1328,6 +1384,61 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 nlmAssistanceForQFSPResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+    fun getAssistanceForQfspAddEdit(context: Context, loader: Boolean, request: Format6AssistanceForQspAddEdit) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getAssistanceForQfspAddEdit(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                foramt6AssistanceForQspAddEditResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

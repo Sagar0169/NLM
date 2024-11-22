@@ -52,8 +52,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             if (valid())
                 viewModel.getLoginApi(
                     this@LoginActivity, LoginRequest(
-                        mBinding!!.etUsername.text.toString().trim(),
-                        mBinding!!.etPassword.text.toString().trim()
+                        mBinding?.etUsername?.text.toString().trim(),
+                        mBinding?.etPassword?.text.toString().trim()
                     )
                 )
         }
@@ -81,18 +81,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     private fun valid(): Boolean {
-        if (mBinding!!.etUsername.text.toString().trim()
-                .isEmpty() && mBinding!!.etPassword.text.toString().trim().isEmpty()
+        if (mBinding?.etUsername?.text.toString().trim()
+                .isEmpty() && mBinding?.etPassword?.text.toString().trim().isEmpty()
         ) {
-            showSnackbar(mBinding!!.clParent, getString(R.string.mandatory_fields))
+            mBinding?.clParent?.let { showSnackbar(it, getString(R.string.mandatory_fields)) }
             return false
         }
-        return if (mBinding!!.etUsername.text.toString().trim().isEmpty()) {
-            showSnackbar(mBinding!!.clParent, getString(R.string.please_enter_email_id))
+        return if (mBinding?.etUsername?.text.toString().trim().isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it, getString(R.string.please_enter_email_id)) }
             false
         }
-        else if (mBinding!!.etPassword.text.toString().trim().isEmpty()) {
-            showSnackbar(mBinding!!.clParent, getString(R.string.Please_enter_password))
+        else if (mBinding?.etPassword?.text.toString().trim().isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it, getString(R.string.Please_enter_password)) }
             false
         } else true
     }
@@ -107,7 +107,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             val userResponseModel = it
             if (userResponseModel != null) {
                 if (userResponseModel._resultflag == 0) {
-                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                    mBinding?.clParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
                 } else {
                     Preferences.setPreference(
                         this,AppConstants.SCHEME,Result(
@@ -140,7 +140,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         }
 
         viewModel.errors.observe(this) {
-            showSnackbar(mBinding!!.clParent, it)
+            mBinding?.clParent?.let { it1 -> showSnackbar(it1, it) }
         }
     }
 }

@@ -73,7 +73,7 @@ class SupportingDocumentAdapterWithDialog(
                     object :
                         DialogCallback {
                         override fun onYes() {
-                            callBackDeleteAtId.onClickItem(items.id,position)
+                            callBackDeleteAtId.onClickItem(items.id,position,1)
                         }
                     },
                     context.getString(R.string.are_you_sure_want_to_delete_your_post)

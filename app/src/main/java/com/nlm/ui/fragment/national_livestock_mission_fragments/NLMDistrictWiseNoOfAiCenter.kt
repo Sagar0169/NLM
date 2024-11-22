@@ -101,6 +101,9 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
     override fun setObservers() {
         viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
             val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(requireContext())
+            } else {
             if (userResponseModel!=null)
             {
                 if(userResponseModel._resultflag==0){
@@ -147,7 +150,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                     listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }}}
-            }
+            }}
         }
         viewModel.getDropDownResult.observe(viewLifecycleOwner) {
             val userResponseModel = it
@@ -348,7 +351,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                     else{
                     mNlmIADistrictWiseNoList.add(
                         ImplementingAgencyInvolvedDistrictWise(
-                            null,
+                            districtName,
                             bindingDialog.etLocationOfAi.text.toString(),
                             bindingDialog.etAiPerformed.text.toString(),
                             null,

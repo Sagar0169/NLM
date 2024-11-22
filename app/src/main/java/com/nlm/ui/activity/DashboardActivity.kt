@@ -103,14 +103,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
             override fun onDrawerOpened(drawerView: View) {
                 // Lock the drawer to prevent interaction with the content behind
-                mBinding!!.contentNav.ivDrawer.hideView()
+                mBinding?.contentNav?.ivDrawer?.hideView()
 
                 Log.d("Drawer", "Open")
             }
 
             override fun onDrawerClosed(drawerView: View) {
                 // Unlock the drawer to allow interaction with the content
-                mBinding!!.contentNav.ivDrawer.showView()
+                mBinding?.contentNav?.ivDrawer?.showView()
                 Log.d("Drawer", "Close")
             }
 
@@ -125,8 +125,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 //            toggleMenuItem(
 //                isUserOpen,
 //                R.drawable.ic_user,
-//                mBinding!!.leftDrawerMenu.llUsers,
-//                mBinding!!.leftDrawerMenu.tvUsers
+//                mBinding?.leftDrawerMenu?.llUsers,
+//                mBinding?.leftDrawerMenu?.tvUsers
 //            )
 //            isUserOpen = !isUserOpen
 //        }
@@ -135,8 +135,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             toggleMenuItem(
                 isLiveStockOpen,
                 R.drawable.ic_lhd,
-                mBinding!!.leftDrawerMenu.llLivestockHealthDisease,
-                mBinding!!.leftDrawerMenu.tvLivestockHealthDisease
+                mBinding?.leftDrawerMenu?.llLivestockHealthDisease,
+                mBinding?.leftDrawerMenu?.tvLivestockHealthDisease
             )
             isLiveStockOpen = !isLiveStockOpen
         }
@@ -145,8 +145,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             toggleMenuItem(
                 isNationLiveStockOpen,
                 R.drawable.ic_nlm,
-                mBinding!!.leftDrawerMenu.llNationalLivestockMission,
-                mBinding!!.leftDrawerMenu.tvNationalLiveStockMission
+                mBinding?.leftDrawerMenu?.llNationalLivestockMission,
+                mBinding?.leftDrawerMenu?.tvNationalLiveStockMission
             )
             isNationLiveStockOpen = !isNationLiveStockOpen
         }
@@ -155,8 +155,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             toggleMenuItem(
                 isNationDairyOpen,
                 R.drawable.ic_ndd,
-                mBinding!!.leftDrawerMenu.llNationalDairyDevelopment,
-                mBinding!!.leftDrawerMenu.tvNationalDairyDevelopment
+                mBinding?.leftDrawerMenu?.llNationalDairyDevelopment,
+                mBinding?.leftDrawerMenu?.tvNationalDairyDevelopment
             )
             isNationDairyOpen = !isNationDairyOpen
         }
@@ -165,8 +165,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             toggleMenuItem(
                 isGokulOpen,
                 R.drawable.ic_rgm,
-                mBinding!!.leftDrawerMenu.llRashtriyaGokulMission,
-                mBinding!!.leftDrawerMenu.tvRashtriyaGokulMission
+                mBinding?.leftDrawerMenu?.llRashtriyaGokulMission,
+                mBinding?.leftDrawerMenu?.tvRashtriyaGokulMission
             )
             isGokulOpen = !isGokulOpen
         }
@@ -436,20 +436,19 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             }
             if (userResponseModel != null) {
                 if (userResponseModel._resultflag == 0) {
-                    mBinding!!.contentNav.tvNoOfSchemeCovered.text =
+                    mBinding?.contentNav?.tvNoOfSchemeCovered?.text =
                         userResponseModel._result.no_of_covered_scheme.toString()
-                    mBinding!!.contentNav.tvTotalVisits.text =
+                    mBinding?.contentNav?.tvTotalVisits?.text =
                         userResponseModel._result.total_visit.toString()
-                    mBinding!!.contentNav.tvNoOfStateCovered.text =
+                    mBinding?.contentNav?.tvNoOfStateCovered?.text =
                         userResponseModel._result.no_of_state_covered.toString()
-                    mBinding!!.contentNav.tvReportSubmittedNLM.text =
+                    mBinding?.contentNav?.tvReportSubmittedNLM?.text =
                         userResponseModel._result.report_submitted_by_nlm.toString()
                 }
             }
             viewModel.errors.observe(this) {
                 mBinding?.contentNav?.rlParent?.let { it1 -> Utility.showSnackbar(it1, it) }
             }
-
         }
 
         viewModel.logoutResult.observe(this) {
@@ -468,13 +467,13 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     private fun toggleMenuItem(
         isOpen: Boolean,
         drawableStartId: Int,
-        layoutToShow: View,
-        textViewToUpdate: TextView
+        layoutToShow: View?,
+        textViewToUpdate: TextView?
     ) {
         closeAllMenus()
 
         if (isOpen) {
-            layoutToShow.hideView()
+            layoutToShow?.hideView()
             setDrawableWithArrow(
                 this,
                 textViewToUpdate,
@@ -482,7 +481,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                 false
             )
         } else {
-            layoutToShow.showView()
+            layoutToShow?.showView()
             setDrawableWithArrow(
                 this,
                 textViewToUpdate,
@@ -494,11 +493,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     // Close all other menu items and reset arrows
     private fun closeAllMenus() {
-//        mBinding!!.leftDrawerMenu.llUsers.hideView()
-        mBinding!!.leftDrawerMenu.llLivestockHealthDisease.hideView()
-        mBinding!!.leftDrawerMenu.llNationalLivestockMission.hideView()
-        mBinding!!.leftDrawerMenu.llNationalDairyDevelopment.hideView()
-        mBinding!!.leftDrawerMenu.llRashtriyaGokulMission.hideView()
+//        mBinding?.leftDrawerMenu?.llUsers.hideView()
+        mBinding?.leftDrawerMenu?.llLivestockHealthDisease?.hideView()
+        mBinding?.leftDrawerMenu?.llNationalLivestockMission?.hideView()
+        mBinding?.leftDrawerMenu?.llNationalDairyDevelopment?.hideView()
+        mBinding?.leftDrawerMenu?.llRashtriyaGokulMission?.hideView()
         setDefaultDrawables() // Reset arrows to default position
     }
 

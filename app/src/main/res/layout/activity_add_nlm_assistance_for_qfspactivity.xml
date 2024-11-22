@@ -9,6 +9,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -41,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="Add NewAssistance For Qfsp"
+                android:text="@string/monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_quality_fodder_seed_production"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -74,45 +75,52 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_quality_fodder_seed_production"
+                    android:text="@string/format_for_assistance_for_quality_fodder_seed_production"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_15" />
+                    android:textSize="@dimen/sp_18" />
+                <RelativeLayout
+                    android:id="@+id/rlWelcome"
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp"
+                    android:background="@color/orange"
+                    android:padding="@dimen/dp_10">
+
+                    <TextView
+                        android:id="@+id/tvWelcome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="To be filled by the NLM Team"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_20"
+                        android:textStyle="bold" />
+                </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/dp_10"
+
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/curve_all_corner_black"
+
                 android:orientation="vertical"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:paddingHorizontal="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_10">
+                >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lexend_bold"
-                android:text="To be filled by the NLM Team"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_dark_grey"
+
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_5">
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_20"
+
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Name of Organization"
                     android:textColor="@color/black"
@@ -121,7 +129,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:id="@+id/etNameOfOrganization"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
@@ -137,7 +145,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Organogram"
@@ -147,7 +155,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:id="@+id/etOrganogram"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
@@ -163,7 +171,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Technical Competance"
@@ -173,7 +181,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:id="@+id/etTechnicalCompetance"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
@@ -190,7 +198,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_10"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="States"
@@ -201,7 +209,7 @@
                     android:id="@+id/tvState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
@@ -218,7 +226,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Districts"
@@ -229,7 +237,6 @@
                     android:id="@+id/tvDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
@@ -247,7 +254,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginVertical="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
                     android:fontFamily="@font/opensans_semibold"
@@ -258,11 +265,10 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:id="@+id/etLocation"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint=""
                     android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_20"
@@ -275,23 +281,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Area Covered(In Hectare)"
+                    android:text="Area Under Production(In Hectare)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
                     android:hint=""
+                    android:inputType="numberDecimal"
                     android:maxLength="50"
-
+                    android:id="@+id/etAreaUnderProduction"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -302,7 +308,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Quantity of fodder Seed produced (class /variety wise)"
@@ -310,10 +316,9 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tvFooderClass"
+                    android:id="@+id/tvQuantityOfFodder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
@@ -331,7 +336,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Quantity Of Fodder Seed Variety"
@@ -341,13 +345,12 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:inputType="number"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
-                    android:hint=""
                     android:maxLength="50"
-
+                    android:id="@+id/etQuantityOfFodderSeedVariety"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -358,7 +361,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Target/Achievement (class / variety wise)"
@@ -369,7 +372,7 @@
                     android:id="@+id/tvTargetClass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
@@ -386,7 +389,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Target Achievement Variety"
@@ -396,13 +399,13 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
                     android:hint=""
                     android:maxLength="50"
-
+                       android:id="@+id/etTargetAchievementVariety"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -413,7 +416,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Quantity of seed available/sold/produced (class / variety wise)"
@@ -424,7 +427,7 @@
                     android:id="@+id/tvQuantityClass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:clickable="false"
@@ -441,7 +444,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Quantity Of Seed Variety"
@@ -451,13 +454,13 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:id="@+id/etQuantityOfSeedVariety"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
                     android:hint=""
                     android:maxLength="50"
-
+                    android:inputType="number"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
@@ -469,7 +472,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Source of seed"
@@ -479,7 +482,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:id="@+id/etSourceOfSeed"
                     android:layout_marginVertical="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
                     android:fontFamily="@font/opensans_regular"
@@ -495,7 +498,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/curve_all_corner_black"
                     android:orientation="vertical"
@@ -506,7 +508,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
-                        android:fontFamily="@font/lexend_bold"
                         android:text="Cost assistance per kg for different seed categories"
                         android:textColor="@color/black"
                         android:textAlignment="center"
@@ -583,7 +584,9 @@
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:hint=""
+                                android:id="@+id/etCostAssistance"
                                 android:maxLength="50"
+                                android:inputType="number"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"
@@ -603,11 +606,13 @@
 
                             <EditText
                                 android:layout_width="match_parent"
+                                android:id="@+id/etSeedProduced"
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:hint=""
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -626,7 +631,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_10"
                     android:fontFamily="@font/opensans_semibold"
                     android:text="Effective seed production chain establishment"
@@ -637,7 +642,7 @@
                     android:id="@+id/rbMentally"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
@@ -667,25 +672,36 @@
                 </RadioGroup>
 
 
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Year-wise financial progress"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:id="@+id/tvAddMore"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/curve_fill_blue"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:onClick="@{ClickAction::addMore}"
+                    android:paddingVertical="@dimen/dp_10"
+                    android:text="Add More"
+                    android:textColor="@color/white" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/curve_all_corner_black"
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:fontFamily="@font/lexend_bold"
-                        android:text="Year-wise financial progress"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+
 
                     <com.nlm.utilities.NonScrollableRecyclerView
                         android:id="@+id/rvYearWiseFinancialProgress"
@@ -693,63 +709,49 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10" />
 
-                    <TextView
-                        android:id="@+id/tvAddMore"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/curve_fill_blue"
-                        android:clickable="true"
-                        android:fontFamily="@font/poppins_medium"
-                        android:paddingHorizontal="@dimen/dp_20"
-                        android:onClick="@{ClickAction::addDocDialog}"
-                        android:paddingVertical="@dimen/dp_10"
-                        android:text="Add More"
-                        android:textColor="@color/white" />
-
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvSupportingDocument"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Supporting Documents"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:id="@+id/tvAddDocs"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/curve_fill_blue"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:onClick="@{ClickAction::addDocDialog}"
+                    android:paddingVertical="@dimen/dp_10"
+                    android:text="Add Documents"
+                    android:textColor="@color/white" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_10">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:fontFamily="@font/lexend_bold"
-                        android:text="Supporting Document"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-                <com.nlm.utilities.NonScrollableRecyclerView
-                    android:id="@+id/recyclerView1"
+                    android:id="@+id/llDrv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_7"
-
-                    android:paddingTop="8dp" />
-                    <TextView
-                        android:id="@+id/tvAddMore2"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="end"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:paddingVertical="@dimen/dp_10">
+                    <com.nlm.utilities.NonScrollableRecyclerView
+                        android:id="@+id/AddDocumentRv"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/curve_fill_blue"
-                        android:clickable="true"
-                        android:fontFamily="@font/poppins_medium"
-                        android:paddingHorizontal="@dimen/dp_20"
-                        android:onClick="@{ClickAction::addDocDialog}"
-                        android:paddingVertical="@dimen/dp_10"
-                        android:text="Add Documents"
-                        android:textColor="@color/white" />
+                        android:layout_marginBottom="@dimen/dp_7"
+                        android:paddingTop="8dp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
