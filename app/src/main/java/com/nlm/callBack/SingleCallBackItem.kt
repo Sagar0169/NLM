@@ -1,6 +1,7 @@
 package com.nlm.callBack
 
 import androidx.fragment.app.Fragment
+import com.nlm.model.AssistanceForEaTrainingInstitute
 import com.nlm.model.AssistanceForQfspFinancialProgres
 import com.nlm.model.FspPlantStorageCommentsOfNlm
 import com.nlm.model.IdAndDetails
@@ -54,6 +55,9 @@ interface CallBackSemenDose {
 }
 interface CallBackFspCommentNlm {
     fun onClickItem(selectedItem: FspPlantStorageCommentsOfNlm, position:Int, isFrom:Int)
+}
+interface CallBackAssistanceEANlm {
+    fun onClickItem(selectedItem: AssistanceForEaTrainingInstitute, position:Int, isFrom:Int)
 }
 interface CallBackItemGoatSemen {
     fun onClickItem(selectedItem: StateSemenInfraGoat, position:Int, isFrom:Int)

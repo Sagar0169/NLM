@@ -9,11 +9,9 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityNlmAssistanceforEaBinding
 import com.nlm.model.AssistanceForEAData
 import com.nlm.model.AssistanceForEARequest
-import com.nlm.model.FpFromForestLandData
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.AssistanceForEaAdapter
-import com.nlm.ui.adapter.FpFromForestLandAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
@@ -168,7 +166,7 @@ class NlmAssistanceForEa : BaseActivity<ActivityNlmAssistanceforEaBinding>(), Ca
             startActivity(
                 Intent(
                     this@NlmAssistanceForEa,
-                    AddNlmFpForestLandActivity::class.java
+                    AddNLMExtensionActivity::class.java
                 )
             )
         }

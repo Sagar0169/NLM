@@ -1,5 +1,7 @@
 package com.nlm.repository
 
+import com.nlm.model.AddAssistanceEARequest
+import com.nlm.model.AddAssistanceEAResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
 import com.nlm.model.ArtificialInseminationAddRequest
@@ -153,6 +155,9 @@ object Repository {
     }
     suspend fun getAssistanceForEaList(request: AssistanceForEARequest): Response<AssistanceForEAResponse> {
         return api.getAssistanceForEaList(request)
+    }
+    suspend fun getAssistanceForEaADD(request: AddAssistanceEARequest): Response<AddAssistanceEAResponse> {
+        return api.getAssistanceForEaADD(request)
     }
     suspend fun getNlmEdpList(request: NLMEdpRequest): Response<NlmEdpResponse> {
         return api.getNlmEdpList(request)

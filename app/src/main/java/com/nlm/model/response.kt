@@ -1076,8 +1076,8 @@ data class AssistanceForEAData(
     val id: Int,
     val is_delete: Boolean,
     val is_draft: Int,
-    val is_draft_ia: Int,
-    val is_draft_nlm: Int,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
     val is_edit: Boolean,
     val is_view: Boolean,
     val state_code: Int,
@@ -1156,3 +1156,43 @@ data class FspPlantStorageCommentsOfNlm(
     val fsp_plant_storage_id: Int?=null,
 )
 
+data class AddAssistanceEAResponse(
+    val _result: AddAssistanceEAResult?,
+    val _resultflag: Int?,
+    val message: String,
+    val statuscode: Int?
+)
+
+data class AddAssistanceEAResult(
+    val assistance_for_ea_document: List<ImplementingAgencyDocument>?=null,
+    val assistance_for_ea_training_institute: List<AssistanceForEaTrainingInstitute>?=null,
+    val created: String?=null,
+    val created_at: String?=null,
+    val created_by: Int?=null,
+    val details_of_training_programmes: String?=null,
+    val district_code: Int?=null,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val is_draft_ia: Int?=null,
+    val no_of_camps: Int?=null,
+    val no_of_participants: Int?=null,
+    val role_id: String?=null,
+    val state_code: Int?=null,
+    val status: Int?=null,
+    val user_id: String?=null,
+    val whether_the_state_developed: String?=null,
+    val whether_the_state_trainers: String?=null
+)
+
+
+data class AssistanceForEaTrainingInstitute(
+    val id: Int?=null,
+    val name_of_institute: String?=null,
+    val address_for_training: String?=null,
+    val training_courses_run: String?=null,
+    val no_of_participants_trained: Int?=null,
+    val no_of_provide_information: Int?=null,
+    val assistance_for_ea_id: Int?=null,
+
+)

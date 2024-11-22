@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nlm.model.AddAssistanceEARequest
+import com.nlm.model.AddAssistanceEAResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
 import com.nlm.model.ArtificialInseminationAddRequest
@@ -90,6 +92,7 @@ class ViewModel : ViewModel() {
     var fpFromNonForestResult = MutableLiveData<FodderProductionFromNonForestResponse>()
     var fpFromForestLandResult = MutableLiveData<FpFromForestLandResponse>()
     var assistanceForEaResult = MutableLiveData<AssistanceForEAResponse>()
+    var assistanceForEaADDResult = MutableLiveData<AddAssistanceEAResponse>()
     var nlmEdpResult = MutableLiveData<NlmEdpResponse>()
     var nlmAhidfResult = MutableLiveData<NlmAhidfResponse>()
     var getProfileUploadFileResult = MutableLiveData<TempUploadDocResponse>()
@@ -1216,6 +1219,63 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 assistanceForEaResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+
+    fun getAssistanceForEaADD(context: Context, loader: Boolean, request: AddAssistanceEARequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getAssistanceForEaADD(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                assistanceForEaADDResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

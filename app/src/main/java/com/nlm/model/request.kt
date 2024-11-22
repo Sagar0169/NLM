@@ -646,3 +646,22 @@ data class FspPlantStorageCommentsByNlm(
     val name_of_agency: String,
     val quantity_of_seed_graded: String
 )
+
+data class AddAssistanceEARequest(
+    val assistance_for_ea_document: List<ImplementingAgencyDocument?>?=null,
+    val assistance_for_ea_training_institute: List<AssistanceForEaTrainingInstitute?>??=null,
+    val created_by: Int?=null,
+    val details_of_training_programmes: String?=null,
+    val district_code: Int?=null,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val no_of_camps: Int?=null,
+    val no_of_participants: Int?=null,
+    val role_id: Int?=null,
+    val state_code: Int?=null,
+    val status: Int?=null,
+    val user_id: String?=null,
+    val whether_the_state_developed: String?=null,
+    val whether_the_state_trainers: String?=null
+)
