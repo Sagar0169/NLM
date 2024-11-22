@@ -12,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityAddNewFspPlantStorageBinding
 import com.nlm.model.NlmEdp
+import com.nlm.ui.adapter.Format6YearWiseFinancialProgressAdapter
 import com.nlm.ui.adapter.NlmEdpAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.utilities.BaseActivity
@@ -21,7 +22,7 @@ class AddNewFspPlantStorageActivity : BaseActivity<ActivityAddNewFspPlantStorage
     private lateinit var onlyCreatedAdapter: NlmEdpAdapter
     private lateinit var onlyCreated: List<NlmEdp>
     private lateinit var stateAdapter: StateAdapter
-
+    private var YearWiseFinancialProgressAdapter: Format6YearWiseFinancialProgressAdapter?=null
     private lateinit var bottomSheetDialog: BottomSheetDialog
 
     private var layoutManager: LinearLayoutManager? = null
@@ -165,4 +166,5 @@ class AddNewFspPlantStorageActivity : BaseActivity<ActivityAddNewFspPlantStorage
 
     override fun setObservers() {
     }
+
 }

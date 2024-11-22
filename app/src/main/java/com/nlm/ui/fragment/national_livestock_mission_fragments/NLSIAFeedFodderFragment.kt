@@ -437,7 +437,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
         )
     }
 
-    override fun onClickItem(ID: Int?, position: Int) {
+    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
         position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
     }
 

@@ -28,6 +28,7 @@ import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -79,6 +80,9 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
     override fun setObservers() {
         viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
             val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(requireContext())
+            } else {
             if (userResponseModel!=null)
             {
                 if(userResponseModel._resultflag==0){
@@ -124,7 +128,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)}
                 }}
             }
-        }
+        }}
     }
     inner class ClickActions {
 

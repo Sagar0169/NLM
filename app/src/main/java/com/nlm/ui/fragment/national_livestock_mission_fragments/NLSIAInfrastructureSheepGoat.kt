@@ -71,6 +71,9 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
     override fun setObservers() {
         viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
             val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(requireContext())
+            } else {
             if (userResponseModel!=null)
             {
                 if(userResponseModel._resultflag==0){
@@ -134,7 +137,7 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }}
             }
-        }
+        }}
     }
     inner class ClickActions {
         fun save(view: View){
@@ -236,7 +239,7 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                 training_centers_location = mBinding?.etTrainingCentersLocation?.text.toString(),
                 number_of_cattle_ai_number = mBinding?.etCatelAiNumber?.text.toString()
                     .toIntOrNull(),
-                number_of_cattle_ai_location = mBinding?.etCatelAiNumber?.text.toString(),
+                number_of_cattle_ai_location = mBinding?.etCatelAiLocation?.text.toString(),
                 total_ai_performed_number = mBinding?.etTotalAiNumber?.text.toString()
                     .toIntOrNull(),
                 total_ai_performed_location = mBinding?.etTotalAiLocation?.text.toString(),

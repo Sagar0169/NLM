@@ -16,7 +16,7 @@ import com.nlm.model.FspPlantStorageData
 import com.nlm.model.NlmAssistanceForQFSPData
 import com.nlm.model.NlmFpForest
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
-import com.nlm.ui.activity.national_livestock_mission.AddNlmAssistanceForQFSPActivity
+
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
@@ -85,7 +85,7 @@ class FpsPlantStorageAdapter(
                     DialogCallback {
                     override fun onYes() {
                         if (item != null) {
-                            callBackDeleteAtId.onClickItem(item.id,position)
+                            callBackDeleteAtId.onClickItem(item.id,position,0)
                         }
                     }
                 },

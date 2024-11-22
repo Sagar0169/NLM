@@ -1058,7 +1058,7 @@ class RSPIAFragment(
 
     }
 
-    override fun onClickItem(ID: Int?, position: Int) {
+    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
         position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
     }
 

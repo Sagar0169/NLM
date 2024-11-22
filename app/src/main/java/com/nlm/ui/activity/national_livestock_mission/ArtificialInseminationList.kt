@@ -215,7 +215,7 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
         mBinding?.rvArtificialInsemination?.addOnScrollListener(recyclerScrollListener)
     }
 
-    override fun onClickItem(ID: Int?, position: Int) {
+    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
         viewModel.getArtificialInseminationAdd(this,true,
             ArtificialInseminationAddRequest(
                 state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,

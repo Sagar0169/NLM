@@ -91,6 +91,41 @@ data class StateSemenBankRequest(
 
     val page: Int
 )
+data class Format6AssistanceForQspAddEdit(
+    val area_under_production: Double?=null,
+    val assistance_for_qfsp_cost_assistance: List<AssistanceForQfspCostAssistance>?=null,
+    val assistance_for_qfsp_document: List<ImplementingAgencyDocument>?=null,
+    val assistance_for_qfsp_financial_progress: List<AssistanceForQfspFinancialProgres>?=null,
+    val created_by: Int?=null,
+    val district_code: Int?=null,
+    val effective_seed: Int?=null,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val is_type: String?=null,
+    val location_address: String?=null,
+    val name_of_organization: String?=null,
+    val organogram: String?=null,
+    val quantity_of_fodder_seed_class: Int?=null,
+    val quantity_of_fodder_seed_variety: Int?=null,
+    val quantity_of_seed_class: Int?=null,
+    val quantity_of_seed_variety: Int?=null,
+    val role_id: Int?=null,
+    val source_of_seed: String?=null,
+    val state_code: Int?=null,
+    val status: Int?=null,
+    val target_achievement_class: Int?=null,
+    val target_achievement_variety: String?=null,
+    val technical_competance: String?=null,
+    val user_id: String?=null
+)
+
+
+
+data class AssistanceForQfspDocument(
+    val description: String
+)
+
 
 data class ArtificialInseminationAddRequest(
 
@@ -173,7 +208,10 @@ data class ImportOfExoticGoatVerifiedNlm(
     val year: String?
 
 )
-
+data class GetNlmDropDownRequest(
+    val column: String?,
+    val user_id: Int?
+)
 data class GetDropDownRequest(
     val limit: Int?,
     val model: String?,

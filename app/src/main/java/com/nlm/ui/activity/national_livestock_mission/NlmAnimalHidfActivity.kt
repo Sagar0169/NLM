@@ -179,6 +179,6 @@ class NlmAnimalHidfActivity : BaseActivity<ActivityNlmAnimalHidfBinding>(), Call
         }
     }
 
-    override fun onClickItem(ID: Int?, position: Int) {
+    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
     }
 }

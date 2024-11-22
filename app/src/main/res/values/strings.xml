@@ -325,7 +325,8 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="national_livestock_mission_entrepreneur_development_programme_edp_monitoring_of_nlm_by_national_level_monitors_format_for_nlm_edp">National Livestock Mission Entrepreneur Development Programme (EDP)\nMonitoring of NLM by National Level Monitors\nFormat for NLM-EDP</string>
     <string name="feed_and_fodder_development_monitoring_of_nlm_by_national_level_monitors_format_for_fodder_production_from_forest_land">Feed and fodder development\nMONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for Fodder production from forest land</string>
     <string name="monitoring_of_nlm_by_national_level_monitors_format_for_fodder_seed_processing_plant_storage">MONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for fodder seed processing plant/ storage</string>
-    <string name="monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_quality_fodder_seed_production">MONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for Assistance for quality Fodder seed production</string>
+    <string name="monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_quality_fodder_seed_production"> Monitoring of Nlm By National Level Monitors</string>
+    <string name="format_for_assistance_for_quality_fodder_seed_production">Format for Assistance for quality Fodder seed production</string>
     <string name="format_for_artifical_insemination_center_to_be_provided_for_govt_inst_dairy_co_operatives_others_separately">FORMAT FOR ARTIFICIAL INSEMINATION CENTER\n(To be provided for Govt. Inst / Dairy Co-operatives / Others separately)</string>
     <string name="save_next"><![CDATA[Save & Next]]></string>
     <string name="staff_details">Staff Details:</string>
@@ -375,6 +376,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="state_semen_bank_document">state_semen_bank_document</string>
     <string name="rsp_lab">RSP Lab</string>
     <string name="artificial_insemination_document">artificial_insemination_document</string>
+    <string name="assistance_for_qfsp_document">assistance_for_qfsp_document</string>
     <string name="animal_husbandry_infrastructure_development_fund_format_12"><ul><li>Animal Husbandry Infrastructure Development Fund(Format 12)</li></ul></string>
     <string name="import_of_exotic_goat_document">import_of_exotic_goat_document</string>
 </resources>

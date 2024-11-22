@@ -9,12 +9,15 @@ import com.nlm.model.AssistanceForEAResponse
 import com.nlm.model.DashboardResponse
 import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FodderProductionFromNonForestResponse
+import com.nlm.model.Format6AssistanceForQspAddEdit
+import com.nlm.model.Format6AssistanceForQspAddResponse
 import com.nlm.model.FpFromForestLandRequest
 import com.nlm.model.FpFromForestLandResponse
 import com.nlm.model.FpsPlantStorageRequest
 import com.nlm.model.FspPlantStorageResponse
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
+import com.nlm.model.GetNlmDropDownRequest
 import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyRequest
 import com.nlm.model.ImplementingAgencyResponse
@@ -80,6 +83,9 @@ object Repository {
     suspend fun getDropDown(request: GetDropDownRequest): Response<GetDropDownResponse> {
         return api.getDropDown(request)
     }
+    suspend fun getNlmDropDown(request: GetNlmDropDownRequest): Response<GetDropDownResponse> {
+        return api.getNlmDropDown(request)
+    }
 
     suspend fun getImplementingAgency(request: ImplementingAgencyRequest): Response<ImplementingAgencyResponse> {
         return api.getImplementingAgency(request)
@@ -126,6 +132,9 @@ object Repository {
     }
     suspend fun getAssistanceForQfspList(request: NlmAssistanceForQFSPListRequest): Response<NlmAssistanceForQFSPListResponse> {
         return api.getAssistanceForQfspList(request)
+    }
+    suspend fun getAssistanceForQfspAddEdit(request: Format6AssistanceForQspAddEdit): Response<Format6AssistanceForQspAddResponse> {
+        return api.getAssistanceForQfspAddEdit(request)
     }
     suspend fun getFpsPlantStorageList(request: FpsPlantStorageRequest): Response<FspPlantStorageResponse> {
         return api.getFpsPlantStorageList(request)

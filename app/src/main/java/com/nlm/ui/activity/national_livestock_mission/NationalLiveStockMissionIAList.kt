@@ -232,7 +232,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
         )
     }
 
-    override fun onClickItem(ID: Int?, position: Int) {
+    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
         viewModel.getImplementingAgencyAddApi(this,true,
             ImplementingAgencyAddRequest(
                 user_id = getPreferenceOfScheme(this,AppConstants.SCHEME, Result::class.java)?.user_id.toString(),

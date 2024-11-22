@@ -216,7 +216,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
             }
         }
 
-    override fun onClickItem(ID: Int?, position: Int) {
+    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
         viewModel.getStateSemenAddBankApi(
             this, true,
             StateSemenBankNLMRequest(

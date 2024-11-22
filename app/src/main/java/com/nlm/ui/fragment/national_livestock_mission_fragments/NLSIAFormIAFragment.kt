@@ -80,8 +80,11 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
     override fun setObservers() {
 
       viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
+
           val userResponseModel = it
-          Log.e("responseAdd", it.toString())
+          if (userResponseModel.statuscode == 401) {
+              Utility.logout(requireContext())
+          } else {
           if (userResponseModel.statuscode == 401) {
               Utility.logout(requireContext())
           }
@@ -132,7 +135,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
 
               }
           }
-      }
+      }}
     }
 
     override fun onAttach(context: Context) {

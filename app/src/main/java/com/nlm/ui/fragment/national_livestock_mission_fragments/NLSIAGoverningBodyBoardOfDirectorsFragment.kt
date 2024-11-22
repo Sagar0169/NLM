@@ -29,6 +29,7 @@ import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreference
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.setSafeOnClickListener
@@ -85,6 +86,9 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
         viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
 
             val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(requireContext())
+            } else {
             if (userResponseModel!=null)
             {
                 if(userResponseModel._resultflag==0){
@@ -128,7 +132,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }}
             }
-        }
+        }}
     }
 
     private fun nlmIACompositionOFGoverningAdapter() {

@@ -155,6 +155,6 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
         }
     }
 
-    override fun onClickItem(ID: Int?, position: Int) {
+    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
     }
 }
