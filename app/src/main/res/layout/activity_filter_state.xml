@@ -1033,20 +1033,23 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/tvYear"
+            <EditText
+                android:id="@+id/etYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
                 android:background="@drawable/curve_all_corner_grey"
-                android:drawableEnd="@drawable/ic_arrow_down"
                 android:fontFamily="@font/opensans_regular"
-                android:maxLength="50"
+                android:hint=""
+                android:inputType="phone"
+                android:maxLength="4"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5"
                 android:singleLine="true"
-                android:text="Please Select"
                 android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
             <TextView
                 android:id="@+id/tvTitleCommentProgress"

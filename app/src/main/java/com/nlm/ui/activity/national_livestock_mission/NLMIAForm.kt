@@ -157,8 +157,6 @@ import com.nlm.utilities.Utility
     }
 
     override fun onSaveAsDraft() {
-
-
         onBackPressedDispatcher.onBackPressed()
     }
 

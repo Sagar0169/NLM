@@ -1,6 +1,9 @@
 package com.nlm.ui.activity.national_livestock_mission
 
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
@@ -12,6 +15,7 @@ import com.nlm.ui.fragment.national_livestock_mission_fragments.RSPNLMFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenBasicInformationFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenInfrastructureFragment
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Utility
 
 class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>(), OnNextButtonClickListener,
     OnBackSaveAsDraft {
@@ -21,6 +25,7 @@ class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>(), OnNextBut
     private var viewEdit: String? = null
     private var itemId: Int? = null
     private var dId: Int? = null
+    private var mDoubleBackToExitPressedOnce = false
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
@@ -107,6 +112,31 @@ class RspLabSemenForms() : BaseActivity<ActivityRspLabSemenBinding>(), OnNextBut
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout, fragment)
         transaction.commit()
+    }
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            super.onBackPressed()
+        }
+        else {
+            Utility.clearAllFormFilledID(this@RspLabSemenForms)
+            onBackPressedDispatcher.onBackPressed()
+            if (mDoubleBackToExitPressedOnce) {
+                super.onBackPressed()
+                return
+            }
+            mDoubleBackToExitPressedOnce = true
+            Toast.makeText(
+                this,
+                getString(R.string.press_back_again),
+                Toast.LENGTH_SHORT
+            )
+                .show()
+            Handler(Looper.getMainLooper()).postDelayed(
+                { mDoubleBackToExitPressedOnce = false },
+                2000
+            )
+
+        }
     }
 
 

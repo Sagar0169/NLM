@@ -42,6 +42,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
     private var stateId: Int? = null // Store selected state
     private var districtId: Int? = null // Store selected state
     private var districtName: String? = null // Store selected state
+    private var year: String? = null // Store selected state
     private var Model:String? = null // Store selected state
 
 
@@ -73,6 +74,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         val selectedDistrictId = intent.getIntExtra("districtId", 0)
         val selectedLocation = intent.getStringExtra("selectedLocation")
         val phoneNo = intent.getStringExtra("phoneNo")
+        year = intent.getStringExtra("year")
         districtName = intent.getStringExtra("districtName")
 
        val LiquidNitrogen=intent.getStringExtra("LiquidNitrogen")
@@ -373,7 +375,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etPhoneno.showView()
                 binding!!.tvTitleLoc.showView()
                 binding!!.etLoc.showView()
-                binding!!.tvYear.showView()
+                binding!!.etYear.showView()
                 binding!!.tvTitleYear.showView()
 
                 if (selectedLocation != null) {
@@ -381,6 +383,9 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 }
                 if (phoneNo != null) {
                     binding?.etPhoneno?.setText(phoneNo)
+                }
+                if (year != null) {
+                    binding?.etYear?.setText(year)
                 }
                 if (districtName != null) {
                     binding?.tvDistrict?.text = districtName
@@ -469,11 +474,14 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvDistrict.showView()
                 binding!!.tvPhoneNo.showView()
                 binding!!.etPhoneno.showView()
-                binding!!.tvYear.showView()
+                binding!!.etYear.showView()
                 binding!!.tvTitleYear.showView()
 
                 if (phoneNo != null) {
                     binding?.etPhoneno?.setText(phoneNo)
+                }
+                if (year != null) {
+                    binding?.etYear?.setText(year)
                 }
                 if (districtName != null) {
                     binding?.tvDistrict?.text = districtName
@@ -774,12 +782,14 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 // Prepare intent to send the result back
                 binding!!.etPhoneno.setText("")
                 binding!!.etLoc.setText("")
+                binding!!.etYear.setText("")
                 binding!!.tvDistrict.text = "Please Select"
                 districtId = null
             }
             if (isFrom == 40 && stateId != null) {
                 // Prepare intent to send the result back
                 binding!!.etPhoneno.setText("")
+                binding!!.etYear.setText("")
                 binding!!.tvDistrict.text = "Please Select"
                 districtId = null
             }
@@ -824,7 +834,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("stateId", stateId) // Add selected data to intent
                 resultIntent.putExtra("districtId", districtId) // Add selected data to intent
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
-                resultIntent.putExtra("year", stateId) // Add selected data to intent
+                resultIntent.putExtra("year", binding!!.etYear.text.toString()) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
                 toast(stateId.toString())
                 finish()
@@ -836,7 +846,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("stateId", stateId) // Add selected data to intent
                 resultIntent.putExtra("districtId", districtId) // Add selected data to intent
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
-                resultIntent.putExtra("year", stateId) // Add selected data to intent
+                resultIntent.putExtra("year", binding!!.etYear.text.toString()) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
                 toast(stateId.toString())
                 finish()

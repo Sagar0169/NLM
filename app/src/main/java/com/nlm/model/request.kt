@@ -54,6 +54,7 @@ data class RspLabListRequest(
     val state_code: Int?,
     val user_id: Int?,
     val phone_no: String?,
+    val year_of_establishment: String?,
     val district_code: Int,
     val limit: Int,
     val page: Int
@@ -86,6 +87,7 @@ data class StateSemenBankRequest(
     val user_id: Int?,
     val location: String?,
     val phone_no: String?,
+    val year_of_establishment: String?,
     val district_code: Int,
     val limit: Int,
 

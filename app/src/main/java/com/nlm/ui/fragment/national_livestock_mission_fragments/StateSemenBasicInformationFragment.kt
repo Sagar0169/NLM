@@ -29,6 +29,7 @@ import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankOtherAddManpower
+import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.RspManPowerAdapter
@@ -96,6 +97,7 @@ class StateSemenBasicInformationFragment(
         mBinding?.etState?.isEnabled = false
         mActivityMain = activity as StateSemenBankForms
         if (viewEdit == "view") {
+            mBinding?.tvAddMore1?.hideView()
             mBinding?.etState?.isEnabled = false
             mBinding?.tvDistrict?.isEnabled = false
             mBinding?.etLocation?.isEnabled = false
@@ -203,8 +205,10 @@ class StateSemenBasicInformationFragment(
                             districtId = userResponseModel._result.district_code
                             mBinding?.etLocation?.setText(userResponseModel._result.location)
                             mBinding?.tvDistrict?.text = userResponseModel._result.district_name
+                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
                             mBinding?.tvSemenStation?.text =
                                 userResponseModel._result.type_of_semen_station
+                            mBinding?.tvSemenStation?.setTextColor(Color.parseColor("#000000"))
                             mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
                             mBinding?.etPhone?.setText(userResponseModel._result.phone_no.toString())
                             mBinding?.etyear?.setText(userResponseModel._result.year_of_establishment)
@@ -226,6 +230,7 @@ class StateSemenBasicInformationFragment(
                                 AppConstants.FORM_FILLED_ID,
                                 userResponseModel._result.id
                             )
+                            mActivityMain.itemId=userResponseModel._result.id
                             listener?.onNextButtonClick()
                             showSnackbar(mBinding!!.clParent, userResponseModel.message)
                         }
@@ -330,7 +335,7 @@ class StateSemenBasicInformationFragment(
             if (viewEdit == "edit") {
                 savedAsEdit = true
             }
-            if (itemId != null) {
+            if (itemId != 0) {
                 saveDataApi(itemId)
             } else {
                 saveDataApi(null)
@@ -347,7 +352,7 @@ class StateSemenBasicInformationFragment(
             if (viewEdit == "edit") {
                 savedAsEdit = true
             }
-            if (itemId != null) {
+            if (itemId != 0) {
                 saveDataApi(itemId)
             } else {
                 saveDataApi(null)

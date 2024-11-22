@@ -1,6 +1,9 @@
 package com.nlm.ui.activity.national_livestock_mission
 
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
@@ -13,6 +16,7 @@ import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenBasicI
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenInfrastructureFragment
 import com.nlm.ui.fragment.national_livestock_mission_fragments.StateSemenMajorClientsFragment
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Utility
 
 class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>(),
     OnNextButtonClickListener, OnBackSaveAsDraft {
@@ -21,7 +25,7 @@ class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>(),
     private var mBinding: ActivityStateSemenBankBinding? = null
     private var mDoubleBackToExitPressedOnce = false
     private var viewEdit: String? = null
-    private var itemId: Int? = null
+    var itemId: Int? = null
     private var dId: Int? = null
     override fun initView() {
         mBinding = viewDataBinding
@@ -102,6 +106,31 @@ class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>(),
 
     override fun onSaveAsDraft() {
         onBackPressedDispatcher.onBackPressed()
+    }
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            super.onBackPressed()
+        }
+        else {
+            Utility.clearAllFormFilledID(this@StateSemenBankForms)
+            onBackPressedDispatcher.onBackPressed()
+            if (mDoubleBackToExitPressedOnce) {
+                super.onBackPressed()
+                return
+            }
+            mDoubleBackToExitPressedOnce = true
+            Toast.makeText(
+                this,
+                getString(R.string.press_back_again),
+                Toast.LENGTH_SHORT
+            )
+                .show()
+            Handler(Looper.getMainLooper()).postDelayed(
+                { mDoubleBackToExitPressedOnce = false },
+                2000
+            )
+
+        }
     }
 
 }

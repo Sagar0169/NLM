@@ -49,7 +49,7 @@ class StateSemenInfrastructureFragment(
     private val itemId: Int?,
     private val dId: Int?
 ) :
-    BaseFragment<FragmentStateSemenInfrastructureBinding>(), CallBackItemGoatSemen ,
+    BaseFragment<FragmentStateSemenInfrastructureBinding>(), CallBackItemGoatSemen,
     CallBackDeleteAtId, CallBackItemUploadDocEdit {
 
     override val layoutId: Int
@@ -77,20 +77,28 @@ class StateSemenInfrastructureFragment(
         DocumentList = arrayListOf()
         viewModel.init()
         stateSemenInfraGoatAdapter()
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(requireContext(),DocumentList, viewEdit,this,this)
+        addDocumentAdapter = SupportingDocumentAdapterWithDialog(
+            requireContext(),
+            DocumentList,
+            viewEdit,
+            this,
+            this
+        )
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
         if (viewEdit == "view") {
             showToast(dId.toString())
             mBinding?.tvAddMore1?.isEnabled = false
+            mBinding?.tvAddMore1?.hideView()
             mBinding?.tvAddMore2?.isEnabled = false
+            mBinding?.tvAddMore2?.hideView()
             mBinding?.etStorageCapacity?.isEnabled = false
             mBinding?.etCoopOne?.isEnabled = false
             mBinding?.etCoopTwo?.isEnabled = false
             mBinding?.etCoopThree?.isEnabled = false
             mBinding?.etNgoOne?.isEnabled = false
             mBinding?.etNgoTwo?.isEnabled = false
-            mBinding?.etNgoTwo?.isEnabled = false
+            mBinding?.etNgoThree?.isEnabled = false
             mBinding?.etPrivateOne?.isEnabled = false
             mBinding?.etPrivateTwo?.isEnabled = false
             mBinding?.etPrivateThree?.isEnabled = false
@@ -219,15 +227,10 @@ class StateSemenInfrastructureFragment(
                         addDocumentAdapter?.notifyDataSetChanged()
 
                     } else {
-
-                        Preferences.setPreference_int(
-                            requireContext(),
-                            AppConstants.FORM_FILLED_ID,
-                            userResponseModel._result.id
-                        )
-                        listener?.onNextButtonClick()
+                        savedAsDraftClick?.onSaveAsDraft()
                         showSnackbar(mBinding!!.clParent, userResponseModel.message)
                     }
+
 
                 }
             }
@@ -339,7 +342,7 @@ class StateSemenInfrastructureFragment(
         }
 
         fun addDocDialog(view: View) {
-            addDocumentDialog(requireContext(),null,null)
+            addDocumentDialog(requireContext(), null, null)
         }
 
         fun otherManpowerPositionDialog(view: View) {
@@ -375,8 +378,11 @@ class StateSemenInfrastructureFragment(
                 major_clients_coop_fin_year_two = mBinding?.etCoopTwo?.text.toString(),
                 major_clients_coop_fin_year_three = mBinding?.etCoopThree?.text.toString(),
                 major_clients_ngo_fin_year_one = mBinding?.etNgoOne?.text.toString(),
-                major_clients_ngo_fin_year_two = mBinding?.etNgoThree?.text.toString(),
-                major_clients_ngo_fin_year_three = mBinding?.etNgoOne?.text.toString(),
+                major_clients_ngo_fin_year_two = mBinding?.etNgoTwo?.text.toString(),
+                major_clients_ngo_fin_year_three = mBinding?.etNgoThree?.text.toString(),
+                major_clients_private_fin_year_one = mBinding?.etPrivateOne?.text.toString(),
+                major_clients_private_fin_year_two = mBinding?.etPrivateTwo?.text.toString(),
+                major_clients_private_fin_year_three = mBinding?.etPrivateThree?.text.toString(),
                 major_clients_other_states_fin_year_one = mBinding?.etOtherStateOne?.text.toString(),
                 major_clients_other_states_fin_year_two = mBinding?.etOtherStateTwo?.text.toString(),
                 major_clients_other_states_fin_year_three = mBinding?.etOtherStateThree?.text.toString(),
@@ -423,7 +429,7 @@ class StateSemenInfrastructureFragment(
             openOnlyPdfAccordingToPosition()
         }
 
-        bindingDialog.btnDelete.setOnClickListener{
+        bindingDialog.btnDelete.setOnClickListener {
             dialog.dismiss()
         }
 
@@ -449,7 +455,7 @@ class StateSemenInfrastructureFragment(
                             nlm_document = UploadedDocumentName,
                             id = null,
                             implementing_agency_id = null,
-                            state_semen_bank_id=null
+                            state_semen_bank_id = null
                         )
                     )
 
@@ -531,7 +537,8 @@ class StateSemenInfrastructureFragment(
 
         compositionOfGoverningNlmIaDialog(requireContext(), isFrom, selectedItem, position)
     }
-    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
+
+    override fun onClickItem(ID: Int?, position: Int) {
         position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
     }
 
