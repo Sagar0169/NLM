@@ -659,6 +659,7 @@ data class AddAssistanceEARequest(
     val no_of_camps: Int?=null,
     val no_of_participants: Int?=null,
     val role_id: Int?=null,
+    val is_type: String? = null,
     val state_code: Int?=null,
     val status: Int?=null,
     val user_id: String?=null,

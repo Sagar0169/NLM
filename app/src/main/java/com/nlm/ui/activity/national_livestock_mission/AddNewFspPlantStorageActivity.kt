@@ -228,8 +228,7 @@ class AddNewFspPlantStorageActivity(
             )?.role_id == 8
         ) {
             mBinding?.tvIADoc?.hideView()
-            mBinding?.recyclerView2?.adapter = addDocumentAdapter
-            mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(this)
+            nlmAdapter()
         }
         if (getPreferenceOfScheme(
                 this,
@@ -363,6 +362,18 @@ class AddNewFspPlantStorageActivity(
         mBinding?.recyclerView1?.adapter = plantStorageAdapter
         mBinding?.recyclerView1?.layoutManager =
             LinearLayoutManager(this@AddNewFspPlantStorageActivity)
+    }
+
+    private fun nlmAdapter() {
+        addDocumentAdapter = RSPSupportingDocumentAdapter(
+            this,
+            DocumentList,
+            viewEdit,
+            this,
+            this
+        )
+        mBinding?.recyclerView2?.adapter = addDocumentAdapter
+        mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(this)
     }
 
     private fun iaAdapter() {
@@ -575,7 +586,7 @@ class AddNewFspPlantStorageActivity(
                                     id = selectedItem.id,
                                 )
                         } else {
-                            DocumentList[position] =
+                            viewDocumentList[position] =
                                 ImplementingAgencyDocument(
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = UploadedDocumentName,
@@ -606,7 +617,7 @@ class AddNewFspPlantStorageActivity(
                             )
                         )
                     } else {
-                        DocumentList.add(
+                        viewDocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
                                 ia_document = DocumentName,
@@ -617,8 +628,12 @@ class AddNewFspPlantStorageActivity(
                         )
                     }
 
-
                     DocumentList.size.minus(1).let {
+                        addDocumentAdapter?.notifyItemInserted(it)
+                        dialog.dismiss()
+//
+                    }
+                    viewDocumentList.size.minus(1).let {
                         addDocumentAdapter?.notifyItemInserted(it)
                         dialog.dismiss()
 //
@@ -977,18 +992,16 @@ class AddNewFspPlantStorageActivity(
                             DocumentList.clear()
                             totalListDocument.clear()
                             viewDocumentList.clear()
+                            val dummyData = ImplementingAgencyDocument(
+                                id = 0, // Or null, depending on your use case
+                                description = "",
+                                ia_document = "",
+                                nlm_document = "",
+                                fsp_plant_storage_id = 0 // Or null, depending on your use case
+                            )
                             if (userResponseModel._result.fsp_plant_storage_document.isEmpty() && viewEdit == "view") {
-                                // Add dummy data with default values
-                                val dummyData = ImplementingAgencyDocument(
-                                    id = 0, // Or null, depending on your use case
-                                    description = "",
-                                    ia_document = "",
-                                    nlm_document = "",
-                                    fsp_plant_storage_id = 0 // Or null, depending on your use case
-                                )
-
                                 DocumentList.add(dummyData)
-                                iaAdapter()
+                                viewDocumentList.add(dummyData)
                             } else {
                                 userResponseModel._result.fsp_plant_storage_document.forEach { document ->
                                     if (document.ia_document == null) {
@@ -998,8 +1011,16 @@ class AddNewFspPlantStorageActivity(
 
                                     }
                                 }
+                                // Check if viewDocumentList is empty after the loop
+                                if (viewDocumentList.isEmpty() && viewEdit == "view") {
+                                    viewDocumentList.add(dummyData)
+                                }
+                                if (DocumentList.isEmpty() && viewEdit == "view") {
+                                    DocumentList.add(dummyData)
+                                }
                             }
-
+                            iaAdapter()
+                            nlmAdapter()
                             addDocumentAdapter?.notifyDataSetChanged()
 
                         } else {
@@ -1016,7 +1037,7 @@ class AddNewFspPlantStorageActivity(
 
     }
 
-    override fun onClickItem(ID: Int?, position: Int,isFrom: Int) {
+    override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
     }
 

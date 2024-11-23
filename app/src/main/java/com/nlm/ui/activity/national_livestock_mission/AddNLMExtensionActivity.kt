@@ -87,8 +87,8 @@ class AddNLMExtensionActivity(
     private var DocumentName: String? = null
     private var chooseDocName: String? = null
     var body: MultipartBody.Part? = null
-    private lateinit var plantStorageList: ArrayList<AssistanceForEaTrainingInstitute>
-    private var plantStorageAdapter
+    private lateinit var ea_training_institute: ArrayList<AssistanceForEaTrainingInstitute>
+    private var assistanceEAAdapter
             : AssistanceEAAdapter? = null
     private var viewEdit: String? = null
     var itemId: Int? = null
@@ -197,7 +197,7 @@ class AddNLMExtensionActivity(
         DocumentList = arrayListOf()
         totalListDocument = arrayListOf()
         viewDocumentList = arrayListOf()
-        plantStorageList = arrayListOf()
+        ea_training_institute = arrayListOf()
         isFrom = intent?.getIntExtra("isFrom", 0)!!
         mBinding?.tvState?.text = getPreferenceOfScheme(
             this,
@@ -221,8 +221,7 @@ class AddNLMExtensionActivity(
             )?.role_id == 8
         ) {
             mBinding?.tvIADoc?.hideView()
-            mBinding?.recyclerView2?.adapter = addDocumentAdapter
-            mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(this)
+            nlmAdapter()
         }
         if (getPreferenceOfScheme(
                 this,
@@ -260,6 +259,8 @@ class AddNLMExtensionActivity(
                 )?.role_id == 8
             ) {
                 mBinding?.tvState?.isEnabled = false
+                mBinding?.etNoa?.isEnabled = false
+                mBinding?.etParticipant?.isEnabled = false
                 mBinding?.tvIADoc?.hideView()
             }
             if (getPreferenceOfScheme(
@@ -269,6 +270,8 @@ class AddNLMExtensionActivity(
                 )?.role_id == 24
             ) {
                 mBinding?.etEOA?.isEnabled = false
+                mBinding?.etParticipateNlm?.isEnabled = false
+
                 mBinding?.tvNLMComment?.isEnabled = false
                 mBinding?.tvNLMComment?.hideView()
                 mBinding?.tvNLMDoc?.hideView()
@@ -278,6 +281,12 @@ class AddNLMExtensionActivity(
                 mBinding?.tvState?.isEnabled = false
                 mBinding?.tvIADoc?.hideView()
                 mBinding?.etEOA?.isEnabled = false
+                mBinding?.etParticipateNlm?.isEnabled = false
+                mBinding?.etNoa?.isEnabled = false
+                mBinding?.etModule?.isEnabled = false
+                mBinding?.etTrainer?.isEnabled = false
+                mBinding?.etDetails?.isEnabled = false
+                mBinding?.etParticipant?.isEnabled = false
                 mBinding?.tvNLMComment?.isEnabled = false
                 mBinding?.tvNLMComment?.hideView()
                 mBinding?.tvNLMDoc?.hideView()
@@ -288,14 +297,14 @@ class AddNLMExtensionActivity(
         if (viewEdit == "edit") {
             viewEditApi()
         }
-        semenDoseAdapter()
+        assistanceEAAdapter()
     }
 
     private fun viewEditApi() {
 
-        viewModel.getFpsPlantStorageADD(
+        viewModel.getAssistanceForEaADD(
             this, true,
-            AddFspPlantStorageRequest(
+            AddAssistanceEARequest(
                 id = itemId,
                 state_code = getPreferenceOfScheme(
                     this,
@@ -318,18 +327,30 @@ class AddNLMExtensionActivity(
         )
     }
 
-    private fun semenDoseAdapter() {
-        plantStorageAdapter =
+    private fun assistanceEAAdapter() {
+        assistanceEAAdapter =
             AssistanceEAAdapter(
                 this@AddNLMExtensionActivity,
-                plantStorageList,
+                ea_training_institute,
                 viewEdit,
                 this@AddNLMExtensionActivity,
-                this, this
+                this
             )
-        mBinding?.recyclerView1?.adapter = plantStorageAdapter
+        mBinding?.recyclerView1?.adapter = assistanceEAAdapter
         mBinding?.recyclerView1?.layoutManager =
             LinearLayoutManager(this@AddNLMExtensionActivity)
+    }
+
+    private fun nlmAdapter() {
+        addDocumentAdapter = RSPSupportingDocumentAdapter(
+            this,
+            DocumentList,
+            viewEdit,
+            this,
+            this
+        )
+        mBinding?.recyclerView2?.adapter = addDocumentAdapter
+        mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(this)
     }
 
     private fun iaAdapter() {
@@ -366,15 +387,23 @@ class AddNLMExtensionActivity(
                     Result::class.java
                 )?.user_id.toString(),
                 is_draft = draft,
-                no_of_camps = mBinding?.etEOA?.text.toString().toIntOrNull()
-//                if (mBinding?.etNOC?.text.isNullOrEmpty()) {
-//                    mBinding?.etEOA?.text.toString().toIntOrNull()
-//                } else {
-//                    mBinding?.etNOC?.text.toString().toIntOrNull()
-//                } ,
-                ,
-                no_of_participants= mBinding?.etParticipateNlm?.text.toString().toIntOrNull(),
-                assistance_for_ea_document=totalListDocument
+                no_of_camps =
+                if (mBinding?.etNoa?.text.isNullOrEmpty()) {
+                    mBinding?.etEOA?.text.toString().toIntOrNull()
+                } else {
+                    mBinding?.etNoa?.text.toString().toIntOrNull()
+                },
+                no_of_participants =
+                if (mBinding?.etParticipateNlm?.text.isNullOrEmpty()) {
+                    mBinding?.etParticipant?.text.toString().toIntOrNull()
+                } else {
+                    mBinding?.etParticipateNlm?.text.toString().toIntOrNull()
+                },
+                whether_the_state_developed = mBinding?.etModule?.text.toString(),
+                whether_the_state_trainers = mBinding?.etTrainer?.text.toString(),
+                details_of_training_programmes = mBinding?.etDetails?.text.toString(),
+                assistance_for_ea_document = totalListDocument,
+                assistance_for_ea_training_institute = ea_training_institute
             )
         )
     }
@@ -424,34 +453,39 @@ class AddNLMExtensionActivity(
             ) {
                 if (selectedItem != null) {
                     if (position != null) {
-                        plantStorageList[position] =
+                        ea_training_institute[position] =
                             AssistanceForEaTrainingInstitute(
                                 selectedItem.id,
                                 bindingDialog.etNameInstitute.text.toString(),
                                 bindingDialog.etAddress.text.toString(),
                                 bindingDialog.etTraining.text.toString(),
-                                bindingDialog.etNoParticipants.text.toString().toIntOrNull(),
-                                bindingDialog.etNoProvide.text.toString().toIntOrNull(),
+                                if (bindingDialog.etNoParticipants.text.isNullOrEmpty()) null else bindingDialog.etNoParticipants.text.toString()
+                                    .toIntOrNull(),
+                                if (bindingDialog.etNoProvide.text.isNullOrEmpty()) null else bindingDialog.etNoProvide.text.toString()
+                                    .toIntOrNull(),
                                 selectedItem.assistance_for_ea_id
                             )
-                        plantStorageAdapter
+                        assistanceEAAdapter
                             ?.notifyItemChanged(position)
                     }
 
                 } else {
-                    plantStorageList.add(
+                    ea_training_institute.add(
                         AssistanceForEaTrainingInstitute(
-                            null,
-                            bindingDialog.etNameInstitute.text.toString(),
-                            bindingDialog.etAddress.text.toString(),
-                            bindingDialog.etTraining.text.toString(),
-                            bindingDialog.etNoParticipants.text.toString().toIntOrNull(),
-                            bindingDialog.etNoProvide.text.toString().toIntOrNull(),
+                            id = null,
+                            name_of_institute = bindingDialog.etNameInstitute.text.toString(),
+                            address_for_training = bindingDialog.etAddress.text.toString(),
+                            training_courses_run = bindingDialog.etTraining.text.toString(),
+                            no_of_participants_trained = if (bindingDialog.etNoParticipants.text.isNullOrEmpty()) null else bindingDialog.etNoParticipants.text.toString()
+                                .toIntOrNull(),
+                            no_of_provide_information = if (bindingDialog.etNoProvide.text.isNullOrEmpty()) null else bindingDialog.etNoProvide.text.toString()
+                                .toIntOrNull(),
                             null
                         )
                     )
-                    plantStorageList.size.minus(1).let {
-                        plantStorageAdapter
+
+                    ea_training_institute.size.minus(1).let {
+                        assistanceEAAdapter
                             ?.notifyItemInserted(it)
                     }
                 }
@@ -539,7 +573,7 @@ class AddNLMExtensionActivity(
                                     id = selectedItem.id,
                                 )
                         } else {
-                            DocumentList[position] =
+                            viewDocumentList[position] =
                                 ImplementingAgencyDocument(
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = UploadedDocumentName,
@@ -560,6 +594,7 @@ class AddNLMExtensionActivity(
                             Result::class.java
                         )?.role_id == 8
                     ) {
+                        toast("document")
                         DocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
@@ -570,7 +605,8 @@ class AddNLMExtensionActivity(
                             )
                         )
                     } else {
-                        DocumentList.add(
+                        toast("View")
+                        viewDocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
                                 ia_document = DocumentName,
@@ -583,6 +619,11 @@ class AddNLMExtensionActivity(
 
 
                     DocumentList.size.minus(1).let {
+                        addDocumentAdapter?.notifyItemInserted(it)
+                        dialog.dismiss()
+//
+                    }
+                    viewDocumentList.size.minus(1).let {
                         addDocumentAdapter?.notifyItemInserted(it)
                         dialog.dismiss()
 //
@@ -627,7 +668,7 @@ class AddNLMExtensionActivity(
                             if (it.moveToFirst()) {
                                 DocumentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                    DialogDocName?.text = DocumentName
+                                DialogDocName?.text = DocumentName
 
 
                                 val requestBody = convertToRequestBody(this, uri)
@@ -640,7 +681,7 @@ class AddNLMExtensionActivity(
                             }
                             viewModel.getProfileUploadFile(
                                 context = this,
-                                table_name = getString(R.string.fsp_plant_storage_document).toRequestBody(
+                                table_name = getString(R.string.assistance_for_ea_document).toRequestBody(
                                     MultipartBody.FORM
                                 ),
                                 document_name = body,
@@ -889,12 +930,18 @@ class AddNLMExtensionActivity(
                     } else {
                         if (viewEdit == "view" || viewEdit == "edit") {
                             if (savedAsEdit) {
-//                                listener?.onNextButtonClick()
                                 onBackPressedDispatcher.onBackPressed()
                                 return@observe
                             }
+                            mBinding?.etNoa?.setText(userResponseModel._result?.no_of_camps.toString())
+                            mBinding?.etParticipant?.setText(userResponseModel._result?.no_of_participants.toString())
+                            mBinding?.etEOA?.setText(userResponseModel._result?.no_of_camps.toString())
+                            mBinding?.etParticipateNlm?.setText(userResponseModel._result?.no_of_participants.toString())
+                            mBinding?.etModule?.setText(userResponseModel._result?.whether_the_state_developed)
+                            mBinding?.etTrainer?.setText(userResponseModel._result?.whether_the_state_trainers)
+                            mBinding?.etDetails?.setText(userResponseModel._result?.details_of_training_programmes)
 
-                            plantStorageList.clear()
+                            ea_training_institute.clear()
                             val comments =
                                 userResponseModel._result?.assistance_for_ea_training_institute
                                     ?: emptyList()
@@ -905,31 +952,32 @@ class AddNLMExtensionActivity(
                                     name_of_institute = "",
                                     address_for_training = "",
                                     training_courses_run = "",
-                                    no_of_participants_trained = null,
-                                    no_of_provide_information = null,
+                                    -1, -1
                                 )
-                                plantStorageList.add(dummyData)
+                                ea_training_institute.add(dummyData)
                             } else {
-                                plantStorageList.addAll(comments)
+                                ea_training_institute.addAll(comments)
                             }
 
 
-                            plantStorageAdapter?.notifyDataSetChanged()
+                            assistanceEAAdapter?.notifyDataSetChanged()
                             DocumentList.clear()
                             totalListDocument.clear()
                             viewDocumentList.clear()
+                            val dummyData = ImplementingAgencyDocument(
+                                id = 0, // Or null, depending on your use case
+                                description = "",
+                                ia_document = "",
+                                nlm_document = "",
+                                assistance_for_ea_id = 0 // Or null, depending on your use case
+                            )
                             if (userResponseModel._result?.assistance_for_ea_document?.isEmpty() == true && viewEdit == "view") {
                                 // Add dummy data with default values
-                                val dummyData = ImplementingAgencyDocument(
-                                    id = 0, // Or null, depending on your use case
-                                    description = "",
-                                    ia_document = "",
-                                    nlm_document = "",
-                                    fsp_plant_storage_id = 0 // Or null, depending on your use case
-                                )
+
 
                                 DocumentList.add(dummyData)
-                                iaAdapter()
+                                viewDocumentList.add(dummyData)
+
                             } else {
                                 userResponseModel._result?.assistance_for_ea_document?.forEach { document ->
                                     if (document.ia_document == null) {
@@ -939,8 +987,17 @@ class AddNLMExtensionActivity(
 
                                     }
                                 }
+                                // Check if viewDocumentList is empty after the loop
+                                if (viewDocumentList.isEmpty() && viewEdit == "view") {
+                                    viewDocumentList.add(dummyData)
+                                }
+                                if (DocumentList.isEmpty() && viewEdit == "view") {
+                                    DocumentList.add(dummyData)
+                                }
                             }
 
+                            iaAdapter()
+                            nlmAdapter()
                             addDocumentAdapter?.notifyDataSetChanged()
 
                         } else {
@@ -957,7 +1014,7 @@ class AddNLMExtensionActivity(
 
     }
 
-    override fun onClickItem(ID: Int?, position: Int,isFrom: Int) {
+    override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
     }
 
@@ -966,10 +1023,8 @@ class AddNLMExtensionActivity(
     }
 
 
-
-
     override fun onClickItemDelete(ID: Int?, position: Int) {
-        position.let { it1 -> plantStorageAdapter?.onDeleteButtonClick(it1) }
+        position.let { it1 -> assistanceEAAdapter?.onDeleteButtonClick(it1) }
     }
 
     override fun onClickItem(

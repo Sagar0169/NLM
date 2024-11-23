@@ -374,6 +374,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="implementing_agency_document">implementing_agency_document</string>
     <string name="rsp_laboratory_semen_document">rsp_laboratory_semen_document</string>
     <string name="fsp_plant_storage_document">fsp_plant_storage_document</string>
+    <string name="assistance_for_ea_document">assistance_for_ea_document</string>
     <string name="state_semen_bank_document">state_semen_bank_document</string>
     <string name="rsp_lab">RSP Lab</string>
     <string name="artificial_insemination_document">artificial_insemination_document</string>

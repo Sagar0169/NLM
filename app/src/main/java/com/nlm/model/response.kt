@@ -408,7 +408,7 @@ data class StateSemenAddResult(
     val area_under_buildings: String,
     val created: String,
     val created_by: Int,
-    val district_code: Int,
+    val district_code: Int?=null,
     val district_name: String,
     val id: Int,
     val is_deleted: Int,
@@ -564,6 +564,7 @@ data class ImplementingAgencyDocument(
     val import_of_exotic_goat_id: Int?=null,
     val assistance_for_qfsp_id: Int?=null,
     val fsp_plant_storage_id: Int?=null,
+    val assistance_for_ea_id: Int?=null,
     val nlm_document: String?=null
 )
 //
@@ -1191,8 +1192,8 @@ data class AssistanceForEaTrainingInstitute(
     val name_of_institute: String?=null,
     val address_for_training: String?=null,
     val training_courses_run: String?=null,
-    val no_of_participants_trained: Int?=null,
-    val no_of_provide_information: Int?=null,
+    val no_of_participants_trained: Int?,
+    val no_of_provide_information: Int?,
     val assistance_for_ea_id: Int?=null,
 
 )
