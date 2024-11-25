@@ -14,6 +14,7 @@ import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemFpFromForestLandBinding
 import com.nlm.model.FpFromForestLandData
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
+import com.nlm.ui.activity.national_livestock_mission.AddNlmFpForestLandActivity
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
@@ -70,10 +71,10 @@ class FpFromForestLandAdapter(
         holder.mBinding.etNlmStatus.text = item.is_draft_nlm.toString()
         holder.mBinding.etIAStatus.text = item.is_draft_ia.toString()
         holder.mBinding.ivView.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(Intent(context, AddNlmFpForestLandActivity::class.java))
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(Intent(context, AddNlmFpForestLandActivity::class.java))
         }
 
         holder.mBinding.ivDelete.setOnClickListener {

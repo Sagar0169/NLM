@@ -11,6 +11,8 @@ import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FodderProductionFromNonForestResponse
 import com.nlm.model.Format6AssistanceForQspAddEdit
 import com.nlm.model.Format6AssistanceForQspAddResponse
+import com.nlm.model.FpFromForestLandAddEditFormat9Request
+import com.nlm.model.FpFromForestLandAddEditFormat9Response
 import com.nlm.model.FpFromForestLandRequest
 import com.nlm.model.FpFromForestLandResponse
 import com.nlm.model.FpsPlantStorageRequest
@@ -144,6 +146,9 @@ object Repository {
     }
     suspend fun getFpFromForestLandList(request: FpFromForestLandRequest): Response<FpFromForestLandResponse> {
         return api.getFpFromForestLandList(request)
+    }
+    suspend fun getFpFromForestLandAddEdit(request: FpFromForestLandAddEditFormat9Request): Response<FpFromForestLandAddEditFormat9Response> {
+        return api.getFpFromForestLandAddEdit(request)
     }
     suspend fun getAssistanceForEaList(request: AssistanceForEARequest): Response<AssistanceForEAResponse> {
         return api.getAssistanceForEaList(request)

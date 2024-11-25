@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityNlmAssistanceForQfspactivityBinding
+import com.nlm.model.ArtificialInseminationAddRequest
+import com.nlm.model.Format6AssistanceForQspAddEdit
 import com.nlm.model.ImportExocticGoatRequest
 import com.nlm.model.NlmAssistanceForQFSPData
 import com.nlm.model.NlmAssistanceForQFSPListRequest
@@ -18,6 +20,7 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
@@ -32,7 +35,7 @@ class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspac
     private var currentPage = 1
     private var totalPage = 1
     private var loading = true
-
+    private var itemPosition : Int ?= null
     override val layoutId: Int
         get() = R.layout.activity_nlm_assistance_for_qfspactivity
 
@@ -153,9 +156,33 @@ class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspac
                 }
             }
         }
+        viewModel.foramt6AssistanceForQspAddEditResult.observe(this){
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel!=null)
+            {
+                if(userResponseModel._resultflag==0){
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                }
+                else{
+                    itemPosition?.let { it1 -> nlmAssistanceForQFSPAdapter?.onDeleteButtonClick(it1) }
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                }
+            }
+        }
     }
 
     override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
-
+        viewModel.getAssistanceForQfspAddEdit(this,true,
+            Format6AssistanceForQspAddEdit(
+                state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
+                id = ID
+            )
+        )
+        itemPosition = position
     }
 }

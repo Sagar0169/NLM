@@ -82,7 +82,7 @@
                 <RelativeLayout
                     android:id="@+id/rlWelcome"
                     android:layout_width="match_parent"
-                    android:layout_height="68dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/orange"
                     android:padding="@dimen/dp_10">
 
@@ -90,7 +90,6 @@
                         android:id="@+id/tvWelcome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:text="To be filled by the NLM Team"
                         android:textColor="@color/white"
                         android:textSize="@dimen/sp_20"

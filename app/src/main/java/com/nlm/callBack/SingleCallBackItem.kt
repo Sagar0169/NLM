@@ -2,6 +2,7 @@ package com.nlm.callBack
 
 import androidx.fragment.app.Fragment
 import com.nlm.model.AssistanceForQfspFinancialProgres
+import com.nlm.model.FpFromForestLandFilledByNlm
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.ImplementingAgencyDocument
@@ -30,8 +31,10 @@ interface CallBackItemImportExoticAchivementEdit {
     fun onClickItem(selectedItem: ImportOfExoticGoatAchievement, position:Int, isFrom:Int)
 
 }
-interface CallBackItemFormat6Delete {
+interface CallBackItemFormat6Edit {
     fun onClickItem(selectedItem: AssistanceForQfspFinancialProgres, position:Int, isFrom:Int)}
+interface CallBackItemFormat9Edit {
+    fun onClickItem(selectedItem: FpFromForestLandFilledByNlm, position:Int, isFrom:Int)}
 
 interface CallBackItemImportExoticVerifiedByNlm {
     fun onClickItem(selectedItem: ImportOfExoticGoatVerifiedNlm, position:Int, isFrom:Int)

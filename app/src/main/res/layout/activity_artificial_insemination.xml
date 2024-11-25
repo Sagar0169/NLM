@@ -543,7 +543,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
-                        android:text="@string/save_next"
+                        android:text="@string/submit"
                         android:textSize="20sp"
                         android:onClick="@{ClickAction::saveAndNext}"
                         android:textAlignment="center"

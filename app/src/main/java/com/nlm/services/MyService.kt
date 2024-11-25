@@ -11,6 +11,8 @@ import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FodderProductionFromNonForestResponse
 import com.nlm.model.Format6AssistanceForQspAddEdit
 import com.nlm.model.Format6AssistanceForQspAddResponse
+import com.nlm.model.FpFromForestLandAddEditFormat9Request
+import com.nlm.model.FpFromForestLandAddEditFormat9Response
 import com.nlm.model.FpFromForestLandRequest
 import com.nlm.model.FpFromForestLandResponse
 import com.nlm.model.FpsPlantStorageRequest
@@ -75,6 +77,7 @@ const val ASSISTANCE_FOR_QFSP_LIST = "nationalLivestockMission/assistanceForQfsp
 const val ASSISTANCE_FOR_QFSP_ADD_EDIT = "nationalLivestockMission/assistanceForQfspAddEdit"
 const val FODDER_PRODUCTION_FROM_NON_FOREST = "nationalLivestockMission/FpFromNonForestList"
 const val FODDER_PRODUCTION_FROM_FOREST_LAND = "nationalLivestockMission/FpFromForestLandList"
+const val FODDER_PRODUCTION_FROM_FOREST_LAND_ADD_EDIT = "nationalLivestockMission/fpFromForestLandAddEdit"
 const val NLM_AHIDF = "nationalLivestockMission/ahidfList"
 const val NLM_EDP = "nationalLivestockMission/nlmEdpList"
 const val ASSISTANCE_FOR_EA = "nationalLivestockMission/assistanceForEaList"
@@ -137,6 +140,9 @@ interface MyService {
 
     @POST(FODDER_PRODUCTION_FROM_FOREST_LAND)
     suspend fun getFpFromForestLandList(@Body request: FpFromForestLandRequest): Response<FpFromForestLandResponse>
+
+    @POST(FODDER_PRODUCTION_FROM_FOREST_LAND_ADD_EDIT)
+    suspend fun getFpFromForestLandAddEdit(@Body request: FpFromForestLandAddEditFormat9Request): Response<FpFromForestLandAddEditFormat9Response>
 
    @POST(ASSISTANCE_FOR_EA)
     suspend fun getAssistanceForEaList(@Body request: AssistanceForEARequest): Response<AssistanceForEAResponse>

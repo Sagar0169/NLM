@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
-import com.nlm.callBack.CallBackItemFormat6Delete
+import com.nlm.callBack.CallBackItemFormat6Edit
 import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.databinding.ActivityAddNlmAssistanceForQfspactivityBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
@@ -58,7 +58,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 
 class AddNlmAssistanceForQFSPActivity :
     BaseActivity<ActivityAddNlmAssistanceForQfspactivityBinding>(), CallBackDeleteAtId,
-    CallBackItemUploadDocEdit, CallBackItemFormat6Delete {
+    CallBackItemUploadDocEdit, CallBackItemFormat6Edit {
     private var mBinding: ActivityAddNlmAssistanceForQfspactivityBinding? = null
     private var YearWiseFinancialProgressAdapter: Format6YearWiseFinancialProgressAdapter?=null
     private var AddDocumentAdapter: SupportingDocumentAdapterWithDialog?=null
@@ -67,6 +67,7 @@ class AddNlmAssistanceForQFSPActivity :
     private lateinit var stateAdapter: BottomSheetAdapter
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private var layoutManager: LinearLayoutManager? = null
+    private var savedAsDraft:Boolean=false
     private var stateId: Int? = null // Store selected state
     private var districtId: Int? = null // Store selected state
     private var QuantityOfFodderSeedID: Int? = null // Store selected state
@@ -76,7 +77,7 @@ class AddNlmAssistanceForQFSPActivity :
     private var TargetAcheivementName: String? = null // Store selected state
     private var QuantityOfFodderSeedName: String? = null // Store selected state
     private var QuantityOfSeedName: String? = null // Store selected state
-    private var viewEdit: String? = null
+
     private var DocumentId:Int?=null
     var body: MultipartBody.Part? = null
     private var DocumentName:String?=null
@@ -86,6 +87,7 @@ class AddNlmAssistanceForQFSPActivity :
     private var Model:String? = null // Store selected state
     private var stateList = ArrayList<ResultGetDropDown>()
     private var formId:Int?=null
+    private var viewEdit: String? = null
     private var itemId: Int? = null
     private var loading = true
     private var currentPage = 1
@@ -111,11 +113,13 @@ class AddNlmAssistanceForQFSPActivity :
     inner class ClickActions {
 
         fun saveAsDraft(view: View){
+            savedAsDraft=true
             saveDataApi(1)
         }
 
         fun saveAndNext(view: View){
-
+            savedAsDraft=true
+            saveDataApi(0)
         }
 
         fun addDocDialog(view: View){
@@ -490,8 +494,11 @@ class AddNlmAssistanceForQFSPActivity :
                             YearWiseFinancialProgressAdapter?.notifyDataSetChanged()
                         }
                         else{
-                            showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                            onBackPressedDispatcher.onBackPressed()
+                            if (savedAsDraft)
+                            {
+                                onBackPressedDispatcher.onBackPressed()
+                                showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                            }
                         }
 
                     }
@@ -622,7 +629,7 @@ class AddNlmAssistanceForQFSPActivity :
             }
         }
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+            if (bindingDialog.etDescription.text.toString().isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty())
             {
                 if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24) {
                     if(selectedItem!=null)
@@ -747,7 +754,7 @@ class AddNlmAssistanceForQFSPActivity :
             }}
     }
     private fun AddYearWiseFinancialProgressAdapter(){
-        YearWiseFinancialProgressAdapter= YearWiseFinancialProgressList?.let { Format6YearWiseFinancialProgressAdapter(it,viewEdit,this) }
+        YearWiseFinancialProgressAdapter= YearWiseFinancialProgressList?.let { Format6YearWiseFinancialProgressAdapter(this,it,viewEdit,this,this) }
         mBinding?.rvYearWiseFinancialProgress?.adapter = YearWiseFinancialProgressAdapter
         mBinding?.rvYearWiseFinancialProgress?.layoutManager = LinearLayoutManager(this)
     }
@@ -760,45 +767,63 @@ class AddNlmAssistanceForQFSPActivity :
         if (isFrom==1){
             position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
         }
+        else if (isFrom==2){
+            position.let { it1 -> YearWiseFinancialProgressAdapter?.onDeleteButtonClick(it1) }
+        }
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
         AddDocumentDialog(this,selectedItem,position)
     }
-    private fun saveDataApi(isDraft:Int?){
-        viewModel.getAssistanceForQfspAddEdit(this,true, Format6AssistanceForQspAddEdit(
-            state_code = getPreferenceOfScheme(this@AddNlmAssistanceForQFSPActivity, AppConstants.SCHEME, Result::class.java)?.state_code,
-            user_id = getPreferenceOfScheme(
-                this@AddNlmAssistanceForQFSPActivity,
-                AppConstants.SCHEME,
-                Result::class.java
-            )?.user_id.toString(),
-            role_id = getPreferenceOfScheme(this@AddNlmAssistanceForQFSPActivity, AppConstants.SCHEME, Result::class.java)?.role_id,
-            id = formId,
-            is_draft = isDraft,
-            assistance_for_qfsp_document = DocumentList,
-            assistance_for_qfsp_financial_progress = YearWiseFinancialProgressList,
-            name_of_organization = mBinding?.etNameOfOrganization?.text.toString(),
-            organogram = mBinding?.etOrganogram?.text.toString(),
-            technical_competance = mBinding?.etTechnicalCompetance?.text.toString(),
-             district_code = districtId,
-            location_address = mBinding?.etLocation?.text.toString(),
-            area_under_production = mBinding?.etAreaUnderProduction?.text?.toString()?.toDoubleOrNull(),
-            quantity_of_fodder_seed_variety = mBinding?.etQuantityOfFodderSeedVariety?.text?.toString()?.toIntOrNull(),
-            quantity_of_fodder_seed_class = QuantityOfFodderSeedID,
-            quantity_of_seed_class = QuantityOfSeedID,
-            target_achievement_class = TargetAcheivementID,
-            target_achievement_variety =mBinding?.etTargetAchievementVariety?.text.toString(),
-            quantity_of_seed_variety = mBinding?.etQuantityOfSeedVariety?.text.toString().toIntOrNull(),
-            source_of_seed = mBinding?.etSourceOfSeed?.text.toString(),
-            assistance_for_qfsp_cost_assistance= arrayListOf(AssistanceForQfspCostAssistance(
-                name_of_fodder_seed = mBinding?.etCategoryProject?.text.toString(),
-                seed_produced_first_year = mBinding?.etSeedProduced?.text?.toString(),
-                cost_assistance_first_year = mBinding?.etCostAssistance?.text.toString()
-                )),
-            effective_seed = selectedValue
+    private fun saveDataApi(isDraft: Int?) {
+        viewModel.getAssistanceForQfspAddEdit(
+            this, true, Format6AssistanceForQspAddEdit(
+                state_code = getPreferenceOfScheme(
+                    this@AddNlmAssistanceForQFSPActivity,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this@AddNlmAssistanceForQFSPActivity,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                role_id = getPreferenceOfScheme(
+                    this@AddNlmAssistanceForQFSPActivity,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                id = formId,
+                is_draft = isDraft,
+                assistance_for_qfsp_document = DocumentList,
+                assistance_for_qfsp_financial_progress = YearWiseFinancialProgressList,
+                name_of_organization = mBinding?.etNameOfOrganization?.text.toString(),
+                organogram = mBinding?.etOrganogram?.text.toString(),
+                technical_competance = mBinding?.etTechnicalCompetance?.text.toString(),
+                district_code = districtId,
+                location_address = mBinding?.etLocation?.text.toString(),
+                area_under_production = mBinding?.etAreaUnderProduction?.text?.toString()
+                    ?.toDoubleOrNull(),
+                quantity_of_fodder_seed_variety = mBinding?.etQuantityOfFodderSeedVariety?.text?.toString()
+                    ?.toIntOrNull(),
+                quantity_of_fodder_seed_class = QuantityOfFodderSeedID,
+                quantity_of_seed_class = QuantityOfSeedID,
+                target_achievement_class = TargetAcheivementID,
+                target_achievement_variety = mBinding?.etTargetAchievementVariety?.text.toString(),
+                quantity_of_seed_variety = mBinding?.etQuantityOfSeedVariety?.text.toString()
+                    .toIntOrNull(),
+                source_of_seed = mBinding?.etSourceOfSeed?.text.toString(),
+                assistance_for_qfsp_cost_assistance = arrayListOf(
+                    AssistanceForQfspCostAssistance(
+                        name_of_fodder_seed = mBinding?.etCategoryProject?.text.toString(),
+                        seed_produced_first_year = mBinding?.etSeedProduced?.text?.toString(),
+                        cost_assistance_first_year = mBinding?.etCostAssistance?.text.toString()
+                    )
+                ),
+                effective_seed = selectedValue
 
-        ))
+            )
+        )
 
     }
     private var recyclerScrollListener: RecyclerView.OnScrollListener =
@@ -873,7 +898,7 @@ class AddNlmAssistanceForQFSPActivity :
                     this@AddNlmAssistanceForQFSPActivity,
                     AppConstants.SCHEME,
                     Result::class.java
-                )?.user_id.toString(),
+                )?.user_id,
                 role_id = getPreferenceOfScheme(this@AddNlmAssistanceForQFSPActivity, AppConstants.SCHEME, Result::class.java)?.role_id,
                 is_type = viewEdit,
                 id = itemId,
@@ -887,7 +912,7 @@ class AddNlmAssistanceForQFSPActivity :
         position: Int,
         isFrom: Int
     ) {
-
+        AddFinancialYearProgressDialog(this,selectedItem,position)
     }
     private fun AddFinancialYearProgressDialog(context: Context, selectedItem: AssistanceForQfspFinancialProgres?, position: Int?) {
         val bindingDialog: ItemYearWiseFinancialProgressBinding = DataBindingUtil.inflate(
@@ -915,20 +940,20 @@ class AddNlmAssistanceForQFSPActivity :
         {
             selectedItem.farmers_impacted_first?.let {
                 bindingDialog.etFrarmersImpacted.setText(
-                    it
+                    it.toString()
                 )
             } ?: run {
                 bindingDialog.etFrarmersImpacted.setText("")}
             selectedItem.area_covered_first?.let {
                 bindingDialog.etAreaCovered.setText(
-                    it
+                    it.toString()
                 )
             } ?: run {
                 bindingDialog.etAreaCovered.setText("")}
 
             selectedItem.amount_utilized_state_first?.let {
                 bindingDialog.etAmountUtilizedByState.setText(
-                    it
+                    it.toString()
                 )
             } ?: run {
                 bindingDialog.etAmountUtilizedByState.setText("")}

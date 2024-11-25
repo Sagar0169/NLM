@@ -15,6 +15,8 @@ import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FodderProductionFromNonForestResponse
 import com.nlm.model.Format6AssistanceForQspAddEdit
 import com.nlm.model.Format6AssistanceForQspAddResponse
+import com.nlm.model.FpFromForestLandAddEditFormat9Request
+import com.nlm.model.FpFromForestLandAddEditFormat9Response
 import com.nlm.model.FpFromForestLandRequest
 import com.nlm.model.FpFromForestLandResponse
 import com.nlm.model.FpsPlantStorageRequest
@@ -86,6 +88,7 @@ class ViewModel : ViewModel() {
     var fpsPlantStorageResult = MutableLiveData<FspPlantStorageResponse>()
     var fpFromNonForestResult = MutableLiveData<FodderProductionFromNonForestResponse>()
     var fpFromForestLandResult = MutableLiveData<FpFromForestLandResponse>()
+    var fpFromForestLandAddEditResult = MutableLiveData<FpFromForestLandAddEditFormat9Response>()
     var assistanceForEaResult = MutableLiveData<AssistanceForEAResponse>()
     var nlmEdpResult = MutableLiveData<NlmEdpResponse>()
     var nlmAhidfResult = MutableLiveData<NlmAhidfResponse>()
@@ -1101,6 +1104,61 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 fpFromForestLandResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+    fun getFpFromForestLandAddEdit(context: Context, loader: Boolean, request: FpFromForestLandAddEditFormat9Request) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getFpFromForestLandAddEdit(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                fpFromForestLandAddEditResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

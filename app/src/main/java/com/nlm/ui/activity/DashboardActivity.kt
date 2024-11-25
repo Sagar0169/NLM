@@ -436,14 +436,16 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             }
             if (userResponseModel != null) {
                 if (userResponseModel._resultflag == 0) {
-                    mBinding?.contentNav?.tvNoOfSchemeCovered?.text =
-                        userResponseModel._result.no_of_covered_scheme.toString()
+                    val noOfCoveredScheme = userResponseModel._result.no_of_covered_scheme
+                    mBinding?.contentNav?.tvNoOfSchemeCovered?.text = noOfCoveredScheme?.toString() ?: "0"
                     mBinding?.contentNav?.tvTotalVisits?.text =
-                        userResponseModel._result.total_visit.toString()
+                        userResponseModel._result?.total_visit?.toString() ?: "0"
+
                     mBinding?.contentNav?.tvNoOfStateCovered?.text =
-                        userResponseModel._result.no_of_state_covered.toString()
+                        userResponseModel._result?.no_of_state_covered?.toString() ?: "0"
+
                     mBinding?.contentNav?.tvReportSubmittedNLM?.text =
-                        userResponseModel._result.report_submitted_by_nlm.toString()
+                        userResponseModel._result?.report_submitted_by_nlm?.toString() ?: "0"
                 }
             }
             viewModel.errors.observe(this) {

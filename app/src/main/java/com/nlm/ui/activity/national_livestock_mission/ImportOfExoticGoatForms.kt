@@ -72,6 +72,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     private var AchievementAdapter: ImportExoticAchivementAdapter?=null
     private var VerifiedNlmAdapter: ImportOfExoticGoatVerifiedNlmAdapter?=null
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
+    private lateinit var TotalDocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var viewDocumentList: MutableList<ImplementingAgencyDocument>
     private  var DetailOfImportList: MutableList<ImportOfExoticGoatDetailImport>? =null
     private  var AchievementList: MutableList<ImportOfExoticGoatAchievement>?=null
@@ -110,6 +111,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         DetailOfImportList = mutableListOf()
         AchievementList = mutableListOf()
         VerifiedNlmList = mutableListOf()
+        TotalDocumentList = arrayListOf()
         ViewDocumentAdapter()
         AddDocumentAdapter()
         AddImportDetailAdapter()
@@ -200,7 +202,11 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                 else{
                                 viewDocumentList.add(document)}
                             } else  {
-                                DocumentList.add(document)
+                                if(getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id==8)
+                                {
+
+                                    DocumentList.add(document)
+                                }
                             } }
                         AddDocumentAdapter?.notifyDataSetChanged()
                         ViewDocumentAdapter?.notifyDataSetChanged()
@@ -284,7 +290,11 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                 else{
                                     viewDocumentList.add(document)}
                             } else  {
-                                DocumentList.add(document)
+                                if(getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id==8)
+                                {
+
+                                    DocumentList.add(document)
+                                }
                             } }
                         AddDocumentAdapter?.notifyDataSetChanged()
                         ViewDocumentAdapter?.notifyDataSetChanged()
@@ -364,16 +374,25 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             onBackPressedDispatcher.onBackPressed()
         }
         fun saveAndNext(view: View){
+            TotalDocumentList.clear()
+            TotalDocumentList.addAll(DocumentList)
+            TotalDocumentList.addAll(viewDocumentList)
+
             if(viewEdit=="view")
             {
                 onBackPressedDispatcher.onBackPressed()
             }
             else{
+
                 saveDataApi(0)
             }
             savedAsDraft=true
         }
         fun saveAsDraft(view: View){
+            TotalDocumentList.clear()
+            TotalDocumentList.addAll(DocumentList)
+            TotalDocumentList.addAll(viewDocumentList)
+
             if(viewEdit=="view")
             {
                 onBackPressedDispatcher.onBackPressed()
@@ -470,7 +489,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             }
         }
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+            if (bindingDialog.etDescription.text.toString().isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty())
             {
                 if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24) {
                     if(selectedItem!=null)
@@ -871,7 +890,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 is_type = null,
                 id = formId,
                 is_draft=isDraft,
-                import_of_exotic_goat_document = DocumentList, is_deleted = null,
+                import_of_exotic_goat_document = TotalDocumentList, is_deleted = null,
                 number_of_farmers_benefited=mBinding?.etNoOfFarmer?.text.toString().toIntOrNull()
             )
         )
