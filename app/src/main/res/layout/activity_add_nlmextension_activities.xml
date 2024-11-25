@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity.ClickActions" />
+            type="com.nlm.ui.activity.national_livestock_mission.AddNLMExtensionActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/monitoring_of_nlm_by_national_level_monitors_format_for_fodder_seed_processing_plant_storage"
+                    android:text="@string/extension_activities_monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_extension_activitie"
                     android:textAlignment="center"
                     android:background="@color/orange"
                     android:padding="@dimen/dp_5"
@@ -146,35 +146,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Districts"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:id="@+id/tvDistrict"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:clickable="false"
-                            android:onClick="@{ClickAction::district}"
-                            android:drawableEnd="@drawable/ic_arrow_down"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:text="Please Select"
-                            android:textColor="@color/grey" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Name of Organization*"
+                            android:text="No. of Camps"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -187,6 +159,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:hint=""
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -194,139 +167,18 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Certification / recognition"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <LinearLayout
-                            android:id="@+id/llApplicantPhoto"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:onClick="@{ClickAction::chooseFile}"
-
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <TextView
-                                android:id="@+id/tvChooseFile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".4"
-                                android:background="@drawable/back_number_gray"
-                                android:enabled="false"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:text="Choose File"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14" />
-
-                            <View
-                                android:layout_width="@dimen/dp_1"
-                                android:layout_height="match_parent"
-                                android:background="#909090" />
-
-                            <TextView
-                                android:id="@+id/tvDoc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.6"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
-                                android:textColor="@color/grey"
-                                android:textSize="@dimen/sp_14" />
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/tvMaxSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:text="Upload JPG,PNG,Pdf Files Under 5MB"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_13" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Location / Address*"
+                            android:text="No. of participants trained"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-                            android:id="@+id/etLoc"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginBottom="@dimen/dp_5"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_20"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Purpose of establishment"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etPurposeOfEst"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginBottom="@dimen/dp_5"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_20"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Capacity of Plant"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etCapacityofPlant"
+                            android:id="@+id/etParticipant"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
@@ -334,81 +186,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:hint=""
-                            android:maxLength="50"
-
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Machinery/Equipment available"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etMachinery"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:maxLength="50"
-
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Quantity of fodder seed produced / stored"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:id="@+id/tvQuality"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:clickable="false"
-                            android:onClick="@{ClickAction::quality}"
-                            android:drawableEnd="@drawable/ic_arrow_down"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:text="Select"
-                            android:textColor="@color/grey" />
-
-                        <EditText
-                            android:id="@+id/etQuality"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -417,32 +195,7 @@
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Technical Expertise"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
 
-                        <EditText
-                            android:id="@+id/etTechnical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -519,64 +272,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_20"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="States"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:id="@+id/tvStateNlm"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:clickable="false"
-                            android:onClick="@{ClickAction::state}"
-                            android:drawableEnd="@drawable/ic_arrow_down"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:text="Please Select"
-                            android:textColor="@color/grey" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Districts"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:id="@+id/tvDistrictNlm"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:clickable="false"
-                            android:onClick="@{ClickAction::districtNLM}"
-                            android:drawableEnd="@drawable/ic_arrow_down"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:text="Please Select"
-                            android:textColor="@color/grey" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Name of Organization*"
+                            android:text="No. of Camps"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -589,6 +287,34 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:hint=""
+                            android:inputType="number"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="No. of participants trained"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:id="@+id/etParticipateNlm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint=""
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -601,7 +327,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Plant Storage Comment of NLM"
+                            android:text="Whether the state has training institute"
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginVertical="@dimen/dp_7"
                             android:textColor="@color/black"
@@ -621,7 +347,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
                                 android:layout_marginVertical="@dimen/dp_7"
-                                android:onClick="@{ClickAction::semenDose}"
+                                android:onClick="@{ClickAction::trainingInstitute}"
                                 android:background="@drawable/curve_fill_blue"
                                 android:clickable="true"
                                 android:fontFamily="@font/poppins_medium"
@@ -637,6 +363,98 @@
                                 android:paddingTop="8dp" />
 
                         </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Whether the state has developed Training Materials/Module"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:id="@+id/etModule"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint=""
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Whether the state has master trainer"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:id="@+id/etTrainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint=""
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Details of training programmes? If so, give details"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:id="@+id/etDetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint=""
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Note: please collect the brochures giving the type of programmes being conducted syllabus and reading material prepared"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:layout_marginVertical="@dimen/dp_10"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/sp_14" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

@@ -1,5 +1,9 @@
 package com.nlm.services
 
+import com.nlm.model.AddAssistanceEARequest
+import com.nlm.model.AddAssistanceEAResponse
+import com.nlm.model.AddFspPlantStorageRequest
+import com.nlm.model.AddFspPlantStorageResponse
 import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
@@ -81,7 +85,10 @@ const val FODDER_PRODUCTION_FROM_FOREST_LAND_ADD_EDIT = "nationalLivestockMissio
 const val NLM_AHIDF = "nationalLivestockMission/ahidfList"
 const val NLM_EDP = "nationalLivestockMission/nlmEdpList"
 const val ASSISTANCE_FOR_EA = "nationalLivestockMission/assistanceForEaList"
+const val ADD_ASSISTANCE_FOR_EA = "nationalLivestockMission/assistanceForEaAddEdit"
 const val FPS_PLANT_STORAGE = "nationalLivestockMission/fspPlantStorageList"
+const val ADD_FPS_PLANT_STORAGE = "nationalLivestockMission/fspPlantStorageAddEdit"
+
 
 interface MyService {
 
@@ -135,6 +142,9 @@ interface MyService {
     @POST(FPS_PLANT_STORAGE)
     suspend fun getFpsPlantStorageList(@Body request: FpsPlantStorageRequest): Response<FspPlantStorageResponse>
 
+    @POST(ADD_FPS_PLANT_STORAGE)
+    suspend fun getFpsPlantStorageADD(@Body request: AddFspPlantStorageRequest): Response<AddFspPlantStorageResponse>
+
     @POST(FODDER_PRODUCTION_FROM_NON_FOREST)
     suspend fun getFpFromNonForestList(@Body request: FodderProductionFromNonForestRequest): Response<FodderProductionFromNonForestResponse>
 
@@ -146,6 +156,9 @@ interface MyService {
 
    @POST(ASSISTANCE_FOR_EA)
     suspend fun getAssistanceForEaList(@Body request: AssistanceForEARequest): Response<AssistanceForEAResponse>
+
+    @POST(ADD_ASSISTANCE_FOR_EA)
+    suspend fun getAssistanceForEaADD(@Body request: AddAssistanceEARequest): Response<AddAssistanceEAResponse>
 
    @POST(NLM_EDP)
     suspend fun getNlmEdpList(@Body request: NLMEdpRequest): Response<NlmEdpResponse>

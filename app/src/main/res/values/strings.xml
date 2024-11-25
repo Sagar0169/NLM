@@ -374,6 +374,8 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="import_of_exotic_sheep_and_goat_gernplasm">Import of exotic sheep and goat gernplasm</string>
     <string name="implementing_agency_document">implementing_agency_document</string>
     <string name="rsp_laboratory_semen_document">rsp_laboratory_semen_document</string>
+    <string name="fsp_plant_storage_document">fsp_plant_storage_document</string>
+    <string name="assistance_for_ea_document">assistance_for_ea_document</string>
     <string name="state_semen_bank_document">state_semen_bank_document</string>
     <string name="rsp_lab">RSP Lab</string>
     <string name="artificial_insemination_document">artificial_insemination_document</string>
@@ -386,5 +388,6 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="password_should_contain_at_least_one_lowercase_letter_one_uppercase_letter_one_digit_and_one_special_character">Password should contain at least one lowercase letter, one uppercase letter, one digit, and one special character.</string>
     <string name="please_confirm_your_password">Please confirm your password</string>
     <string name="passwords_do_not_match">Passwords do not match</string>
+    <string name="extension_activities_monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_extension_activitie">Extension Activities MONITORING OF NLM BY NATIONAL LEVEL MONITORS Format for Assistance for Extension Activities</string>
 </resources>
 

@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,7 @@ import com.nlm.model.RspLaboratorySemenAverage
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
 import com.nlm.ui.adapter.SemenDoseAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
@@ -83,8 +85,10 @@ class RSPIAFragment(
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
     private var viewModel = ViewModel()
-    private var addDocumentAdapter: SupportingDocumentAdapterWithDialog? = null
+    private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
+    private lateinit var viewDocumentList: MutableList<ImplementingAgencyDocument>
+    private lateinit var totalListDocument: ArrayList<ImplementingAgencyDocument>
     private lateinit var DocumentListNLM: MutableList<ImplementingAgencyDocument>
     var body: MultipartBody.Part? = null
     private var rspEquipList = ArrayList<RspAddEquipment>()
@@ -117,13 +121,15 @@ class RSPIAFragment(
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         DocumentList = arrayListOf()
+        totalListDocument = arrayListOf()
+        viewDocumentList = arrayListOf()
         mBinding?.tvState?.text = getPreferenceOfScheme(
             requireContext(),
             AppConstants.SCHEME,
             Result::class.java
         )?.state_name
         mBinding?.tvState?.isEnabled = false
-        addDocumentAdapter = SupportingDocumentAdapterWithDialog(
+        addDocumentAdapter = RSPSupportingDocumentAdapter(
             requireContext(),
             DocumentList,
             viewEdit,
@@ -319,41 +325,83 @@ class RSPIAFragment(
                             mBinding?.etOtherState3?.setText(userResponseModel._result.major_clients_other_states_three_year)
                             mBinding?.etInfra?.setText(userResponseModel._result.Infrastructure_faced_Institute)
                             rspEquipList.clear()
-                            userResponseModel._result.rsp_laboratory_semen_availability_equipment?.let { it1 ->
-                                rspEquipList.addAll(
-                                    it1
+                            if (userResponseModel._result.rsp_laboratory_semen_availability_equipment?.isEmpty() == true && viewEdit == "view") {
+                                // Add dummy data with default values
+                                val dummyData = RspAddEquipment(
+                                    id = 0, // Or null, depending on your use case
+                                    list_of_equipment="",
+                                    make="",
+                                    year_of_procurement="",
+
                                 )
+
+                                rspEquipList.add(dummyData)
                             }
-                            if (
-                                getPreferenceOfScheme(
-                                    requireContext(),
-                                    AppConstants.SCHEME,
-                                    Result::class.java
-                                )?.role_id == 24
-                            ) {
-                                DocumentList.clear()
-                                DocumentList.addAll(userResponseModel._result.rsp_laboratory_semen_document)
-                                addDocumentAdapter?.notifyDataSetChanged()
+                            else{
+                                userResponseModel._result.rsp_laboratory_semen_availability_equipment?.let { it1 ->
+                                    rspEquipList.addAll(
+                                        it1
+                                    )
+                                }
                             }
 
-                            semenDoseList.clear()
-                            userResponseModel._result.rsp_laboratory_semen_average.let { it1 ->
-                                semenDoseList.addAll(
-                                    it1
+                            DocumentList.clear()
+                            totalListDocument.clear()
+                            viewDocumentList.clear()
+                            if (userResponseModel._result.rsp_laboratory_semen_document.isEmpty() && viewEdit == "view") {
+                                // Add dummy data with default values
+                                val dummyData = ImplementingAgencyDocument(
+                                    id = 0, // Or null, depending on your use case
+                                    description = "",
+                                    ia_document = "",
+                                    nlm_document = "",
+                                    fsp_plant_storage_id = 0 // Or null, depending on your use case
                                 )
+
+                                DocumentList.add(dummyData)
+                            } else {
+                                userResponseModel._result.rsp_laboratory_semen_document.forEach { document ->
+                                    if (document.nlm_document == null) {
+                                        DocumentList.add(document)
+                                        showToast("1")
+                                    } else {
+                                        viewDocumentList.add(document)
+
+                                    }
+
+                                }
                             }
+
+                            addDocumentAdapter?.notifyDataSetChanged()
+
+
+                            semenDoseList.clear()
+                            if (userResponseModel._result.rsp_laboratory_semen_average.isEmpty() && viewEdit == "view") {
+                                // Add dummy data with default values
+                                val dummyData = RspAddAverage(
+                                    id = 0, // Or null, depending on your use case
+                                    name_of_breed="",
+                                    twentyOne_twentyTwo="",
+                                    twentyTwo_twentyThree="",
+                                    twentyThree_twentyFour="",
+                                )
+
+                                semenDoseList.add(dummyData)
+                            }
+                            else{
+                                userResponseModel._result.rsp_laboratory_semen_average.let { it1 ->
+                                    semenDoseList.addAll(
+                                        it1
+                                    )
+                                }
+                            }
+
                             semenAdapter?.notifyDataSetChanged()
                             rspEquipAdapter?.notifyDataSetChanged()
 
 
                         } else {
-
-                            Preferences.setPreference_int(
-                                requireContext(),
-                                AppConstants.FORM_FILLED_ID,
-                                userResponseModel._result.id
-                            )
-                            listener?.onNextButtonClick()
+                            requireActivity().onBackPressedDispatcher.onBackPressed()
                             showSnackbar(mBinding!!.clParent, userResponseModel.message)
                         }
                     }
@@ -400,7 +448,10 @@ class RSPIAFragment(
         }
 
         fun save(view: View) {
-            // Get the text from the input fields
+            totalListDocument.clear()
+            totalListDocument.addAll(DocumentList)
+            totalListDocument.addAll(viewDocumentList)
+            Log.d("Data check", totalListDocument.toString())
             if (viewEdit == "view") {
                 listener?.onNextButtonClick()
             }
@@ -413,12 +464,15 @@ class RSPIAFragment(
             } else {
                 saveDataApi(null, 0)
             }
-
+            savedAsDraft = true
 
         }
 
 
         fun saveAsDraft(view: View) {
+            totalListDocument.clear()
+            totalListDocument.addAll(DocumentList)
+            totalListDocument.addAll(viewDocumentList)
             if (viewEdit == "view") {
                 listener?.onNextButtonClick()
             }
@@ -517,7 +571,7 @@ class RSPIAFragment(
                     Result::class.java
                 )?.user_id.toString(),
                 year_of_establishment = yearOfEstablishment.toIntOrNull(),
-                area_under_buildings = etAreaBuildings.toDoubleOrNull(),
+                area_under_buildings = mBinding?.etAreaBuildings?.text.toString().toDoubleOrNull(),
                 area_for_fodder_cultivation = etAreaFodder,
                 manpower = etManpower,
                 availability_no_of_computers = mBinding?.etNofcomp?.text.toString()
@@ -542,7 +596,7 @@ class RSPIAFragment(
                 rsp_laboratory_semen_availability_equipment = rspEquipList,
                 rsp_laboratory_semen_average = semenDoseList,
                 is_draft = draft,
-                rsp_laboratory_semen_document = DocumentList
+                rsp_laboratory_semen_document = totalListDocument
             )
         )
     }

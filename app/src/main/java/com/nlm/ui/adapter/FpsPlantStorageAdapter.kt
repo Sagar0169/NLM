@@ -1,6 +1,7 @@
 package com.nlm.ui.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -16,7 +17,7 @@ import com.nlm.model.FspPlantStorageData
 import com.nlm.model.NlmAssistanceForQFSPData
 import com.nlm.model.NlmFpForest
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
-
+import com.nlm.ui.activity.national_livestock_mission.AddNlmAssistanceForQFSPActivity
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
@@ -29,7 +30,8 @@ class FpsPlantStorageAdapter(
 ) : RecyclerView.Adapter<FpsPlantStorageAdapter.FpsPlantStorageViewHolder>() {
 
     // ViewHolder class to hold the view elements
-    class FpsPlantStorageViewHolder(val mBinding: ItemFpsPlantStorageBinding) : RecyclerView.ViewHolder(mBinding.root)
+    class FpsPlantStorageViewHolder(val mBinding: ItemFpsPlantStorageBinding) :
+        RecyclerView.ViewHolder(mBinding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -42,25 +44,25 @@ class FpsPlantStorageAdapter(
     }
 
     // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: FpsPlantStorageViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: FpsPlantStorageViewHolder,
+        @SuppressLint("RecyclerView") position: Int
+    ) {
         val item = list[position]
 
-        if(item.is_view){
+        if (item.is_view) {
             holder.mBinding.ivView.showView()
-        }
-        else{
+        } else {
             holder.mBinding.ivView.hideView()
         }
-        if(item.is_delete){
+        if (item.is_delete) {
             holder.mBinding.ivDelete.showView()
-        }
-        else{
+        } else {
             holder.mBinding.ivDelete.hideView()
         }
-        if(item.is_edit){
+        if (item.is_edit) {
             holder.mBinding.ivEdit.showView()
-        }
-        else{
+        } else {
             holder.mBinding.ivEdit.hideView()
         }
 
@@ -72,10 +74,20 @@ class FpsPlantStorageAdapter(
         holder.mBinding.etNlmStatus.text = item.is_draft_nlm.toString()
         holder.mBinding.etIAStatus.text = item.is_draft_ia.toString()
         holder.mBinding.ivView.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(
+                Intent(context, AddNewFspPlantStorageActivity()::class.java)
+                    .putExtra("View/Edit", "view")
+                    .putExtra("itemId", item.id)
+                    .putExtra("dId", item.district_code)
+            )
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(
+                Intent(context, AddNewFspPlantStorageActivity::class.java)
+                    .putExtra("View/Edit", "edit")
+                    .putExtra("itemId", item.id)
+                    .putExtra("dId", item.district_code)
+            )
         }
 
         holder.mBinding.ivDelete.setOnClickListener {
@@ -85,7 +97,7 @@ class FpsPlantStorageAdapter(
                     DialogCallback {
                     override fun onYes() {
                         if (item != null) {
-                            callBackDeleteAtId.onClickItem(item.id,position,0)
+                            callBackDeleteAtId.onClickItem(item.id, position,0)
                         }
                     }
                 },
@@ -97,5 +109,17 @@ class FpsPlantStorageAdapter(
     // Return the total number of items
     override fun getItemCount(): Int {
         return list.size
+    }
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    fun onDeleteButtonClick(position: Int) {
+        list.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

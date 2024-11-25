@@ -12,6 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/clParent"
         android:layout_height="match_parent"
         android:background="@drawable/job_details_bg1">
 
@@ -110,6 +111,7 @@
             android:backgroundTint="@color/black"
             android:contentDescription="Add New Agency"
             android:src="@drawable/ic_add"
+            android:onClick="@{ClickAction::add}"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

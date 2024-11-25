@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
+import com.nlm.callBack.CallBackAssistanceEANlm
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackDeleteFSPAtId
 import com.nlm.callBack.CallBackFspCommentNlm
@@ -28,9 +29,13 @@ import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.callBack.CallBackSemenDose
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.databinding.ActivityAddNewFspPlantStorageBinding
+import com.nlm.databinding.ActivityAddNlmextensionActivitiesBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemFspPlantStorageBinding
+import com.nlm.databinding.ItemNlmTrainingInstituteBinding
+import com.nlm.model.AddAssistanceEARequest
 import com.nlm.model.AddFspPlantStorageRequest
+import com.nlm.model.AssistanceForEaTrainingInstitute
 import com.nlm.model.FspPlantStorageCommentsOfNlm
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.ImplementingAgencyDocument
@@ -38,6 +43,7 @@ import com.nlm.model.RSPAddRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.RspAddAverage
+import com.nlm.ui.adapter.AssistanceEAAdapter
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.FspPlantStorageNLMAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
@@ -55,10 +61,10 @@ import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class AddNewFspPlantStorageActivity(
-) : BaseActivity<ActivityAddNewFspPlantStorageBinding>(), CallBackDeleteAtId,
-    CallBackItemUploadDocEdit, CallBackFspCommentNlm, CallBackDeleteFSPAtId {
-    private var mBinding: ActivityAddNewFspPlantStorageBinding? = null
+class AddNLMExtensionActivity(
+) : BaseActivity<ActivityAddNlmextensionActivitiesBinding>(), CallBackDeleteAtId,
+    CallBackItemUploadDocEdit, CallBackAssistanceEANlm, CallBackDeleteFSPAtId {
+    private var mBinding: ActivityAddNlmextensionActivitiesBinding? = null
     private lateinit var stateAdapter: BottomSheetAdapter
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var viewDocumentList: ArrayList<ImplementingAgencyDocument>
@@ -81,9 +87,9 @@ class AddNewFspPlantStorageActivity(
     private var DocumentName: String? = null
     private var chooseDocName: String? = null
     var body: MultipartBody.Part? = null
-    private lateinit var plantStorageList: ArrayList<FspPlantStorageCommentsOfNlm>
-    private var plantStorageAdapter
-            : FspPlantStorageNLMAdapter? = null
+    private lateinit var ea_training_institute: ArrayList<AssistanceForEaTrainingInstitute>
+    private var assistanceEAAdapter
+            : AssistanceEAAdapter? = null
     private var viewEdit: String? = null
     var itemId: Int? = null
     private var dId: Int? = null
@@ -103,11 +109,11 @@ class AddNewFspPlantStorageActivity(
         }
 
         fun state(view: View) {
-            showBottomSheetDialog("state")
+//            showBottomSheetDialog("state")
         }
 
         fun quality(view: View) {
-            showBottomSheetDialog("Variety")
+//            showBottomSheetDialog("Variety")
         }
 
         fun chooseFile(view: View) {
@@ -117,20 +123,20 @@ class AddNewFspPlantStorageActivity(
         }
 
         fun district(view: View) {
-            showBottomSheetDialog("District")
+//            showBottomSh/eetDialog("District")
         }
 
         fun districtNLM(view: View) {
-            showBottomSheetDialog("DistrictNLM")
+//            showBottomSheetDialog("DistrictNLM")
         }
 
         fun addDocDialog(view: View) {
-            addDocumentDialog(this@AddNewFspPlantStorageActivity, null, null)
+            addDocumentDialog(this@AddNLMExtensionActivity, null, null)
             img = 0
         }
 
-        fun semenDose(view: View) {
-            semenDoseDialog(this@AddNewFspPlantStorageActivity, 1, null, null)
+        fun trainingInstitute(view: View) {
+            trainingInstitute(this@AddNLMExtensionActivity, 1, null, null)
         }
 
         fun save(view: View) {
@@ -179,15 +185,9 @@ class AddNewFspPlantStorageActivity(
     }
 
     override val layoutId: Int
-        get() = R.layout.activity_add_new_fsp_plant_storage
+        get() = R.layout.activity_add_nlmextension_activities
 
     override fun initView() {
-        when (isFrom) {
-            1 -> {
-                mBinding!!.tvHeading.text = "Add New Fpfrom Non Forest"
-            }
-        }
-
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
@@ -197,7 +197,7 @@ class AddNewFspPlantStorageActivity(
         DocumentList = arrayListOf()
         totalListDocument = arrayListOf()
         viewDocumentList = arrayListOf()
-        plantStorageList = arrayListOf()
+        ea_training_institute = arrayListOf()
         isFrom = intent?.getIntExtra("isFrom", 0)!!
         mBinding?.tvState?.text = getPreferenceOfScheme(
             this,
@@ -206,13 +206,6 @@ class AddNewFspPlantStorageActivity(
         )?.state_name
         mBinding?.tvState?.isEnabled = false
 
-        mBinding?.tvStateNlm?.text = getPreferenceOfScheme(
-            this,
-            AppConstants.SCHEME,
-            Result::class.java
-        )?.state_name
-        mBinding?.tvStateNlm?.isEnabled = false
-        mBinding?.tvStateNlm?.setTextColor(Color.parseColor("#000000"))
         mBinding?.tvState?.setTextColor(Color.parseColor("#000000"))
         addDocumentAdapter = RSPSupportingDocumentAdapter(
             this,
@@ -266,17 +259,8 @@ class AddNewFspPlantStorageActivity(
                 )?.role_id == 8
             ) {
                 mBinding?.tvState?.isEnabled = false
-                mBinding?.tvDistrict?.isEnabled = false
                 mBinding?.etNoa?.isEnabled = false
-                mBinding?.etLoc?.isEnabled = false
-                mBinding?.etPurposeOfEst?.isEnabled = false
-                mBinding?.etCapacityofPlant?.isEnabled = false
-                mBinding?.etMachinery?.isEnabled = false
-                mBinding?.llApplicantPhoto?.isEnabled = false
-                mBinding?.tvChooseFile?.isEnabled = false
-                mBinding?.etQuality?.isEnabled = false
-                mBinding?.tvQuality?.isEnabled = false
-                mBinding?.etTechnical?.isEnabled = false
+                mBinding?.etParticipant?.isEnabled = false
                 mBinding?.tvIADoc?.hideView()
             }
             if (getPreferenceOfScheme(
@@ -285,9 +269,9 @@ class AddNewFspPlantStorageActivity(
                     Result::class.java
                 )?.role_id == 24
             ) {
-                mBinding?.tvStateNlm?.isEnabled = false
-                mBinding?.tvDistrictNlm?.isEnabled = false
                 mBinding?.etEOA?.isEnabled = false
+                mBinding?.etParticipateNlm?.isEnabled = false
+
                 mBinding?.tvNLMComment?.isEnabled = false
                 mBinding?.tvNLMComment?.hideView()
                 mBinding?.tvNLMDoc?.hideView()
@@ -295,21 +279,14 @@ class AddNewFspPlantStorageActivity(
             if (viewEdit == "view") {
                 viewEditApi()
                 mBinding?.tvState?.isEnabled = false
-                mBinding?.tvDistrict?.isEnabled = false
-                mBinding?.etNoa?.isEnabled = false
-                mBinding?.etLoc?.isEnabled = false
-                mBinding?.etPurposeOfEst?.isEnabled = false
-                mBinding?.etCapacityofPlant?.isEnabled = false
-                mBinding?.etMachinery?.isEnabled = false
-                mBinding?.llApplicantPhoto?.isEnabled = false
-                mBinding?.tvChooseFile?.isEnabled = false
-                mBinding?.etQuality?.isEnabled = false
-                mBinding?.tvQuality?.isEnabled = false
-                mBinding?.etTechnical?.isEnabled = false
                 mBinding?.tvIADoc?.hideView()
-                mBinding?.tvStateNlm?.isEnabled = false
-                mBinding?.tvDistrictNlm?.isEnabled = false
                 mBinding?.etEOA?.isEnabled = false
+                mBinding?.etParticipateNlm?.isEnabled = false
+                mBinding?.etNoa?.isEnabled = false
+                mBinding?.etModule?.isEnabled = false
+                mBinding?.etTrainer?.isEnabled = false
+                mBinding?.etDetails?.isEnabled = false
+                mBinding?.etParticipant?.isEnabled = false
                 mBinding?.tvNLMComment?.isEnabled = false
                 mBinding?.tvNLMComment?.hideView()
                 mBinding?.tvNLMDoc?.hideView()
@@ -320,14 +297,14 @@ class AddNewFspPlantStorageActivity(
         if (viewEdit == "edit") {
             viewEditApi()
         }
-        semenDoseAdapter()
+        assistanceEAAdapter()
     }
 
     private fun viewEditApi() {
 
-        viewModel.getFpsPlantStorageADD(
+        viewModel.getAssistanceForEaADD(
             this, true,
-            AddFspPlantStorageRequest(
+            AddAssistanceEARequest(
                 id = itemId,
                 state_code = getPreferenceOfScheme(
                     this,
@@ -350,18 +327,18 @@ class AddNewFspPlantStorageActivity(
         )
     }
 
-    private fun semenDoseAdapter() {
-        plantStorageAdapter =
-            FspPlantStorageNLMAdapter(
-                this@AddNewFspPlantStorageActivity,
-                plantStorageList,
+    private fun assistanceEAAdapter() {
+        assistanceEAAdapter =
+            AssistanceEAAdapter(
+                this@AddNLMExtensionActivity,
+                ea_training_institute,
                 viewEdit,
-                this@AddNewFspPlantStorageActivity,
-                this, this
+                this@AddNLMExtensionActivity,
+                this
             )
-        mBinding?.recyclerView1?.adapter = plantStorageAdapter
+        mBinding?.recyclerView1?.adapter = assistanceEAAdapter
         mBinding?.recyclerView1?.layoutManager =
-            LinearLayoutManager(this@AddNewFspPlantStorageActivity)
+            LinearLayoutManager(this@AddNLMExtensionActivity)
     }
 
     private fun nlmAdapter() {
@@ -390,11 +367,10 @@ class AddNewFspPlantStorageActivity(
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
 
-        viewModel.getFpsPlantStorageADD(
-            this@AddNewFspPlantStorageActivity, true,
-            AddFspPlantStorageRequest(
+        viewModel.getAssistanceForEaADD(
+            this@AddNLMExtensionActivity, true,
+            AddAssistanceEARequest(
                 id = itemId,
-                district_code = districtId,
                 role_id = getPreferenceOfScheme(
                     this,
                     AppConstants.SCHEME,
@@ -411,35 +387,37 @@ class AddNewFspPlantStorageActivity(
                     Result::class.java
                 )?.user_id.toString(),
                 is_draft = draft,
-                name_of_organization = if (mBinding?.etNoa?.text.isNullOrEmpty()) {
-                    mBinding?.etEOA?.text.toString()
+                no_of_camps =
+                if (mBinding?.etNoa?.text.isNullOrEmpty()) {
+                    mBinding?.etEOA?.text.toString().toIntOrNull()
                 } else {
-                    mBinding?.etNoa?.text.toString()
+                    mBinding?.etNoa?.text.toString().toIntOrNull()
                 },
-                location_address = mBinding?.etLoc?.text.toString(),
-                purpose_of_establishment = mBinding?.etPurposeOfEst?.text.toString(),
-                capacity_of_plant = mBinding?.etCapacityofPlant?.text.toString(),
-                machinery_equipment_available = mBinding?.etMachinery?.text.toString(),
-                quantity_fodder_seed_class = mBinding?.etQuality?.text.toString(),
-                quantity_fodder_seed_variety = mBinding?.tvQuality?.text.toString(),
-                technical_expertise = mBinding?.etTechnical?.text.toString(),
-                certification_recognition = chooseDocName,
-                fsp_plant_storage_comments_of_nlm = plantStorageList,
-                fsp_plant_storage_document = DocumentList
+                no_of_participants =
+                if (mBinding?.etParticipateNlm?.text.isNullOrEmpty()) {
+                    mBinding?.etParticipant?.text.toString().toIntOrNull()
+                } else {
+                    mBinding?.etParticipateNlm?.text.toString().toIntOrNull()
+                },
+                whether_the_state_developed = mBinding?.etModule?.text.toString(),
+                whether_the_state_trainers = mBinding?.etTrainer?.text.toString(),
+                details_of_training_programmes = mBinding?.etDetails?.text.toString(),
+                assistance_for_ea_document = totalListDocument,
+                assistance_for_ea_training_institute = ea_training_institute
             )
         )
     }
 
 
-    private fun semenDoseDialog(
+    private fun trainingInstitute(
         context: Context,
         isFrom: Int,
-        selectedItem: FspPlantStorageCommentsOfNlm?,
+        selectedItem: AssistanceForEaTrainingInstitute?,
         position: Int?
     ) {
-        val bindingDialog: ItemFspPlantStorageBinding = DataBindingUtil.inflate(
+        val bindingDialog: ItemNlmTrainingInstituteBinding = DataBindingUtil.inflate(
             layoutInflater,
-            R.layout.item_fsp_plant_storage,
+            R.layout.item_nlm_training_institute,
             null,
             false
         )
@@ -460,45 +438,54 @@ class AddNewFspPlantStorageActivity(
         bindingDialog.btnEdit.hideView()
         bindingDialog.tvSubmit.showView()
         if (selectedItem != null && isFrom == 2) {
-            bindingDialog.etNameOfAgency.setText(selectedItem.name_of_agency)
-            bindingDialog.etAddress.setText(selectedItem.address)
-            bindingDialog.etQuantity.setText(selectedItem.quantity_of_seed_graded)
-            bindingDialog.etInfra.setText(selectedItem.infrastructure_available)
+            bindingDialog.etNameInstitute.setText(selectedItem.name_of_institute)
+            bindingDialog.etAddress.setText(selectedItem.address_for_training)
+            bindingDialog.etTraining.setText(selectedItem.training_courses_run)
+            bindingDialog.etNoParticipants.setText(selectedItem.no_of_participants_trained.toString())
+            bindingDialog.etNoProvide.setText(selectedItem.no_of_provide_information.toString())
         }
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etNameOfAgency.text.toString().isNotEmpty()
+            if (bindingDialog.etNameInstitute.text.toString().isNotEmpty()
                 || bindingDialog.etAddress.text.toString().isNotEmpty()
-                || bindingDialog.etQuantity.text.toString().isNotEmpty()
-                || bindingDialog.etInfra.text.toString().isNotEmpty()
+                || bindingDialog.etTraining.text.toString().isNotEmpty()
+                || bindingDialog.etNoParticipants.text.toString().isNotEmpty()
+                || bindingDialog.etNoProvide.text.toString().isNotEmpty()
             ) {
                 if (selectedItem != null) {
                     if (position != null) {
-                        plantStorageList[position] =
-                            FspPlantStorageCommentsOfNlm(
+                        ea_training_institute[position] =
+                            AssistanceForEaTrainingInstitute(
                                 selectedItem.id,
-                                bindingDialog.etNameOfAgency.text.toString(),
+                                bindingDialog.etNameInstitute.text.toString(),
                                 bindingDialog.etAddress.text.toString(),
-                                bindingDialog.etQuantity.text.toString(),
-                                bindingDialog.etInfra.text.toString(),
-                                selectedItem.fsp_plant_storage_id
+                                bindingDialog.etTraining.text.toString(),
+                                if (bindingDialog.etNoParticipants.text.isNullOrEmpty()) null else bindingDialog.etNoParticipants.text.toString()
+                                    .toIntOrNull(),
+                                if (bindingDialog.etNoProvide.text.isNullOrEmpty()) null else bindingDialog.etNoProvide.text.toString()
+                                    .toIntOrNull(),
+                                selectedItem.assistance_for_ea_id
                             )
-                        plantStorageAdapter
+                        assistanceEAAdapter
                             ?.notifyItemChanged(position)
                     }
 
                 } else {
-                    plantStorageList.add(
-                        FspPlantStorageCommentsOfNlm(
-                            null,
-                            bindingDialog.etNameOfAgency.text.toString(),
-                            bindingDialog.etAddress.text.toString(),
-                            bindingDialog.etQuantity.text.toString(),
-                            bindingDialog.etInfra.text.toString(),
+                    ea_training_institute.add(
+                        AssistanceForEaTrainingInstitute(
+                            id = null,
+                            name_of_institute = bindingDialog.etNameInstitute.text.toString(),
+                            address_for_training = bindingDialog.etAddress.text.toString(),
+                            training_courses_run = bindingDialog.etTraining.text.toString(),
+                            no_of_participants_trained = if (bindingDialog.etNoParticipants.text.isNullOrEmpty()) null else bindingDialog.etNoParticipants.text.toString()
+                                .toIntOrNull(),
+                            no_of_provide_information = if (bindingDialog.etNoProvide.text.isNullOrEmpty()) null else bindingDialog.etNoProvide.text.toString()
+                                .toIntOrNull(),
                             null
                         )
                     )
-                    plantStorageList.size.minus(1).let {
-                        plantStorageAdapter
+
+                    ea_training_institute.size.minus(1).let {
+                        assistanceEAAdapter
                             ?.notifyItemInserted(it)
                     }
                 }
@@ -607,6 +594,7 @@ class AddNewFspPlantStorageActivity(
                             Result::class.java
                         )?.role_id == 8
                     ) {
+                        toast("document")
                         DocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
@@ -617,6 +605,7 @@ class AddNewFspPlantStorageActivity(
                             )
                         )
                     } else {
+                        toast("View")
                         viewDocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
@@ -627,6 +616,7 @@ class AddNewFspPlantStorageActivity(
                             )
                         )
                     }
+
 
                     DocumentList.size.minus(1).let {
                         addDocumentAdapter?.notifyItemInserted(it)
@@ -678,13 +668,7 @@ class AddNewFspPlantStorageActivity(
                             if (it.moveToFirst()) {
                                 DocumentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                if (img == 1) {
-                                    mBinding?.tvDoc?.text = DocumentName
-                                    chooseDocName = DocumentName
-                                } else {
-                                    DialogDocName?.text = DocumentName
-
-                                }
+                                DialogDocName?.text = DocumentName
 
 
                                 val requestBody = convertToRequestBody(this, uri)
@@ -697,7 +681,7 @@ class AddNewFspPlantStorageActivity(
                             }
                             viewModel.getProfileUploadFile(
                                 context = this,
-                                table_name = getString(R.string.fsp_plant_storage_document).toRequestBody(
+                                table_name = getString(R.string.assistance_for_ea_document).toRequestBody(
                                     MultipartBody.FORM
                                 ),
                                 document_name = body,
@@ -715,106 +699,106 @@ class AddNewFspPlantStorageActivity(
     }
 
 
-    private fun showBottomSheetDialog(type: String) {
-        bottomSheetDialog = BottomSheetDialog(this)
-        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
-        view.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-
-        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
-        val close = view.findViewById<TextView>(R.id.tvClose)
-
-        close.setOnClickListener {
-            bottomSheetDialog.dismiss()
-        }
-
-        // Define a variable for the selected list and TextView
-        val selectedList: List<ResultGetDropDown>
-        val selectedTextView: TextView
-
-        // Initialize based on type
-        when (type) {
-//            "typeSemen" -> {
-//                selectedList = typeSemen
-//                selectedTextView = mBinding!!.tvSemenStation
-//            }
+//    private fun showBottomSheetDialog(type: String) {
+//        bottomSheetDialog = BottomSheetDialog(this)
+//        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
+//        view.layoutParams = ViewGroup.LayoutParams(
+//            ViewGroup.LayoutParams.MATCH_PARENT,
+//            ViewGroup.LayoutParams.WRAP_CONTENT
+//        )
 //
-//            "StateNDD" -> {
-//                selectedList = stateList
-//                selectedTextView = binding!!.tvStateNDD
-//            }
-
-            "District" -> {
-                dropDownApiCall(paginate = false, loader = true)
-                selectedList = districtList
-                selectedTextView = mBinding!!.tvDistrict
-            }
-
-            "DistrictNLM" -> {
-                dropDownApiCall(paginate = false, loader = true)
-                selectedList = districtList
-                selectedTextView = mBinding!!.tvDistrictNlm
-            }
-
-            "Variety" -> {
-                img = 2
-                selectedList = variety
-                selectedTextView = mBinding!!.tvQuality
-            }
-
-//            "Status" -> {
-//                selectedList = status
-//                selectedTextView = binding!!.tvStatus
-//            }
+//        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
+//        val close = view.findViewById<TextView>(R.id.tvClose)
 //
-//            "Reading" -> {
-//                selectedList = reading
-//                selectedTextView = binding!!.tvReadingMaterial
-//            }
-
-            else -> return
-        }
-
-        // Set up the adapter
-        stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
-            // Handle state item click
-            selectedTextView.text = selectedItem
-            districtId = id
-            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
-            bottomSheetDialog.dismiss()
-        }
-
-
-
-        layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvBottomSheet.layoutManager = layoutManager
-        rvBottomSheet.adapter = stateAdapter
-        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
-        bottomSheetDialog.setContentView(view)
-
-
-        // Rotate drawable
-        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
-        var rotatedDrawable = rotateDrawable(drawable, 180f)
-        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
-
-        // Set a dismiss listener to reset the view visibility
-        bottomSheetDialog.setOnDismissListener {
-            rotatedDrawable = rotateDrawable(drawable, 0f)
-            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
-                null,
-                null,
-                rotatedDrawable,
-                null
-            )
-        }
-
-        // Show the bottom sheet
-        bottomSheetDialog.show()
-    }
+//        close.setOnClickListener {
+//            bottomSheetDialog.dismiss()
+//        }
+//
+//        // Define a variable for the selected list and TextView
+//        val selectedList: List<ResultGetDropDown>
+//        val selectedTextView: TextView
+//
+//        // Initialize based on type
+//        when (type) {
+////            "typeSemen" -> {
+////                selectedList = typeSemen
+////                selectedTextView = mBinding!!.tvSemenStation
+////            }
+////
+////            "StateNDD" -> {
+////                selectedList = stateList
+////                selectedTextView = binding!!.tvStateNDD
+////            }
+////
+////            "District" -> {
+////                dropDownApiCall(paginate = false, loader = true)
+////                selectedList = districtList
+////                selectedTextView = mBinding!!.tvDistrict
+////            }
+//
+////            "DistrictNLM" -> {
+////                dropDownApiCall(paginate = false, loader = true)
+////                selectedList = districtList
+////                selectedTextView = mBinding!!.tvDistrictNlm
+////            }
+//
+////            "Variety" -> {
+////                img = 2
+////                selectedList = variety
+////                selectedTextView = mBinding!!.tvQuality
+////            }
+//
+////            "Status" -> {
+////                selectedList = status
+////                selectedTextView = binding!!.tvStatus
+////            }
+////
+////            "Reading" -> {
+////                selectedList = reading
+////                selectedTextView = binding!!.tvReadingMaterial
+////            }
+//
+//            else -> return
+//        }
+//
+//        // Set up the adapter
+//        stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
+//            // Handle state item click
+//            selectedTextView.text = selectedItem
+//            districtId = id
+//            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
+//            bottomSheetDialog.dismiss()
+//        }
+//
+//
+//
+//        layoutManager =
+//            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//        rvBottomSheet.layoutManager = layoutManager
+//        rvBottomSheet.adapter = stateAdapter
+//        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
+//        bottomSheetDialog.setContentView(view)
+//
+//
+//        // Rotate drawable
+//        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
+//        var rotatedDrawable = rotateDrawable(drawable, 180f)
+//        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+//
+//        // Set a dismiss listener to reset the view visibility
+//        bottomSheetDialog.setOnDismissListener {
+//            rotatedDrawable = rotateDrawable(drawable, 0f)
+//            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+//                null,
+//                null,
+//                rotatedDrawable,
+//                null
+//            )
+//        }
+//
+//        // Show the bottom sheet
+//        bottomSheetDialog.show()
+//    }
 
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
         drawable?.mutate() // Mutate the drawable to avoid affecting other instances
@@ -879,7 +863,7 @@ class AddNewFspPlantStorageActivity(
         viewModel.getDropDownResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
-                Utility.logout(this@AddNewFspPlantStorageActivity)
+                Utility.logout(this@AddNLMExtensionActivity)
             } else {
                 if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
                     if (currentPage == 1) {
@@ -932,7 +916,7 @@ class AddNewFspPlantStorageActivity(
             }
         }
 
-        viewModel.fpsPlantStorageADDResult.observe(this) {
+        viewModel.assistanceForEaADDResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
@@ -946,49 +930,37 @@ class AddNewFspPlantStorageActivity(
                     } else {
                         if (viewEdit == "view" || viewEdit == "edit") {
                             if (savedAsEdit) {
-//                                listener?.onNextButtonClick()
                                 onBackPressedDispatcher.onBackPressed()
                                 return@observe
                             }
-                            districtId = userResponseModel._result.district_code
-                            mBinding?.etLoc?.setText(userResponseModel._result.location_address)
-                            mBinding?.tvDistrict?.text = userResponseModel._result.district_name
-                            mBinding?.tvDistrictNlm?.text = userResponseModel._result.district_name
-                            mBinding?.tvDoc?.text =
-                                userResponseModel._result.certification_recognition
-                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
-                            mBinding?.tvDistrictNlm?.setTextColor(Color.parseColor("#000000"))
-                            mBinding?.etNoa?.setText(userResponseModel._result.name_of_organization)
-                            mBinding?.etEOA?.setText(userResponseModel._result.name_of_organization)
-                            mBinding?.etPurposeOfEst?.setText(userResponseModel._result.purpose_of_establishment)
-                            mBinding?.etCapacityofPlant?.setText(userResponseModel._result.capacity_of_plant)
-                            mBinding?.etMachinery?.setText(userResponseModel._result.machinery_equipment_available)
-                            mBinding?.etQuality?.setText(userResponseModel._result.quantity_fodder_seed_class)
-                            mBinding?.tvQuality?.text =
-                                userResponseModel._result.quantity_fodder_seed_variety
-                            mBinding?.etTechnical?.setText(userResponseModel._result.technical_expertise)
+                            mBinding?.etNoa?.setText(userResponseModel._result?.no_of_camps.toString())
+                            mBinding?.etParticipant?.setText(userResponseModel._result?.no_of_participants.toString())
+                            mBinding?.etEOA?.setText(userResponseModel._result?.no_of_camps.toString())
+                            mBinding?.etParticipateNlm?.setText(userResponseModel._result?.no_of_participants.toString())
+                            mBinding?.etModule?.setText(userResponseModel._result?.whether_the_state_developed)
+                            mBinding?.etTrainer?.setText(userResponseModel._result?.whether_the_state_trainers)
+                            mBinding?.etDetails?.setText(userResponseModel._result?.details_of_training_programmes)
 
-                            plantStorageList.clear()
+                            ea_training_institute.clear()
                             val comments =
-                                userResponseModel._result.fsp_plant_storage_comments_of_nlm
+                                userResponseModel._result?.assistance_for_ea_training_institute
                                     ?: emptyList()
 
                             if (comments.isEmpty() && viewEdit == "view") {
-                                val dummyData = FspPlantStorageCommentsOfNlm(
+                                val dummyData = AssistanceForEaTrainingInstitute(
                                     id = 0,
-                                    name_of_agency = "",
-                                    address = "",
-                                    quantity_of_seed_graded = "",
-                                    infrastructure_available = "",
-                                    fsp_plant_storage_id = 0
+                                    name_of_institute = "",
+                                    address_for_training = "",
+                                    training_courses_run = "",
+                                    -1, -1
                                 )
-                                plantStorageList.add(dummyData)
+                                ea_training_institute.add(dummyData)
                             } else {
-                                plantStorageList.addAll(comments)
+                                ea_training_institute.addAll(comments)
                             }
 
 
-                            plantStorageAdapter?.notifyDataSetChanged()
+                            assistanceEAAdapter?.notifyDataSetChanged()
                             DocumentList.clear()
                             totalListDocument.clear()
                             viewDocumentList.clear()
@@ -997,13 +969,17 @@ class AddNewFspPlantStorageActivity(
                                 description = "",
                                 ia_document = "",
                                 nlm_document = "",
-                                fsp_plant_storage_id = 0 // Or null, depending on your use case
+                                assistance_for_ea_id = 0 // Or null, depending on your use case
                             )
-                            if (userResponseModel._result.fsp_plant_storage_document.isEmpty() && viewEdit == "view") {
+                            if (userResponseModel._result?.assistance_for_ea_document?.isEmpty() == true && viewEdit == "view") {
+                                // Add dummy data with default values
+
+
                                 DocumentList.add(dummyData)
                                 viewDocumentList.add(dummyData)
+
                             } else {
-                                userResponseModel._result.fsp_plant_storage_document.forEach { document ->
+                                userResponseModel._result?.assistance_for_ea_document?.forEach { document ->
                                     if (document.ia_document == null) {
                                         DocumentList.add(document)//nlm
                                     } else {
@@ -1019,6 +995,7 @@ class AddNewFspPlantStorageActivity(
                                     DocumentList.add(dummyData)
                                 }
                             }
+
                             iaAdapter()
                             nlmAdapter()
                             addDocumentAdapter?.notifyDataSetChanged()
@@ -1042,20 +1019,20 @@ class AddNewFspPlantStorageActivity(
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
-        addDocumentDialog(this@AddNewFspPlantStorageActivity, selectedItem, position)
+        addDocumentDialog(this@AddNLMExtensionActivity, selectedItem, position)
     }
 
 
+    override fun onClickItemDelete(ID: Int?, position: Int) {
+        position.let { it1 -> assistanceEAAdapter?.onDeleteButtonClick(it1) }
+    }
+
     override fun onClickItem(
-        selectedItem: FspPlantStorageCommentsOfNlm,
+        selectedItem: AssistanceForEaTrainingInstitute,
         position: Int,
         isFrom: Int
     ) {
-        semenDoseDialog(this@AddNewFspPlantStorageActivity, isFrom, selectedItem, position)
-    }
-
-    override fun onClickItemDelete(ID: Int?, position: Int) {
-        position.let { it1 -> plantStorageAdapter?.onDeleteButtonClick(it1) }
+        trainingInstitute(this@AddNLMExtensionActivity, isFrom, selectedItem, position)
     }
 
 }

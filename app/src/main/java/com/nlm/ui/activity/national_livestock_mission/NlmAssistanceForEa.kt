@@ -7,17 +7,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityNlmAssistanceforEaBinding
+import com.nlm.model.AddAssistanceEARequest
+import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AssistanceForEAData
 import com.nlm.model.AssistanceForEARequest
-import com.nlm.model.FpFromForestLandData
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.AssistanceForEaAdapter
-import com.nlm.ui.adapter.FpFromForestLandAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
@@ -31,6 +32,7 @@ class NlmAssistanceForEa : BaseActivity<ActivityNlmAssistanceforEaBinding>(), Ca
     private var currentPage = 1
     private var totalPage = 1
     private var loading = true
+    private var itemPosition: Int? = null
 
     override val layoutId: Int
         get() = R.layout.activity_nlm_assistancefor_ea
@@ -150,6 +152,24 @@ class NlmAssistanceForEa : BaseActivity<ActivityNlmAssistanceforEaBinding>(), Ca
                 }
             }
         }
+
+        viewModel.assistanceForEaADDResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+
+                } else {
+
+                    itemPosition?.let { it1 -> assistanceForEaAdapter?.onDeleteButtonClick(it1) }
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                }
+            }
+        }
     }
 
     inner class ClickActions {
@@ -168,12 +188,35 @@ class NlmAssistanceForEa : BaseActivity<ActivityNlmAssistanceforEaBinding>(), Ca
             startActivity(
                 Intent(
                     this@NlmAssistanceForEa,
-                    AddNlmFpForestLandActivity::class.java
+                    AddNLMExtensionActivity::class.java
                 )
             )
         }
     }
 
     override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
+        viewModel.getAssistanceForEaADD(
+            this, true,
+            AddAssistanceEARequest(
+                id = ID,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                is_deleted = 1
+            )
+        )
+        itemPosition = position
     }
 }

@@ -42,6 +42,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
     private var stateId: Int? = null // Store selected state
     private var districtId: Int? = null // Store selected state
     private var districtName: String? = null // Store selected state
+    private var NOA: String? = null // Store selected state
     private var year: String? = null // Store selected state
     private var Model:String? = null // Store selected state
 
@@ -76,6 +77,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         val phoneNo = intent.getStringExtra("phoneNo")
         year = intent.getStringExtra("year")
         districtName = intent.getStringExtra("districtName")
+        NOA = intent.getStringExtra("NOA")
 
        val LiquidNitrogen=intent.getStringExtra("LiquidNitrogen")
         val FrozenSemen=intent.getStringExtra("FrozenSemen")
@@ -250,10 +252,34 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvDistrict.showView()
                 binding!!.tvTitleNoa.showView()
                 binding!!.etNoa.showView()
-                binding!!.tvTitleLocationAddress.showView()
-                binding!!.etLocationAddress.showView()
-                binding!!.tvTitleCapacityofPlant.showView()
-                binding!!.etCapacityofPlant.showView()
+
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+                if (NOA != null) {
+                    binding?.etNoa?.setText(NOA)
+                }
+                if (districtName != null) {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
             }
 
             15 -> {
@@ -793,6 +819,12 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvDistrict.text = "Please Select"
                 districtId = null
             }
+            if (isFrom == 14 && stateId != null) {
+                // Prepare intent to send the result back
+                binding!!.etNoa.setText("")
+                binding!!.tvDistrict.text = "Please Select"
+                districtId = null
+            }
         }
 
 
@@ -835,6 +867,17 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("districtId", districtId) // Add selected data to intent
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 resultIntent.putExtra("year", binding!!.etYear.text.toString()) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                toast(stateId.toString())
+                finish()
+            }
+            if (isFrom == 14 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("NOA", binding!!.etNoa.text.toString())
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                resultIntent.putExtra("districtId", districtId) // Add selected data to intent
+                resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
                 toast(stateId.toString())
                 finish()
