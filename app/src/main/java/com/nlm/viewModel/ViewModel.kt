@@ -50,6 +50,8 @@ import com.nlm.model.NlmAhidfResponse
 import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmAssistanceForQFSPListResponse
 import com.nlm.model.NlmEdpResponse
+import com.nlm.model.NlmFpFromNonForestAddRequest
+import com.nlm.model.NlmFpFromNonForestAddResponse
 import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
@@ -93,6 +95,7 @@ class ViewModel : ViewModel() {
     var importExoticGoatAddEditResult = MutableLiveData<ImportExoticGoatAddEditResponse>()
     var nlmAssistanceForQFSPResult = MutableLiveData<NlmAssistanceForQFSPListResponse>()
     var foramt6AssistanceForQspAddEditResult = MutableLiveData<Format6AssistanceForQspAddResponse>()
+    var nlmFpFromNonForestAddEditResult = MutableLiveData<NlmFpFromNonForestAddResponse>()
     var fpsPlantStorageResult = MutableLiveData<FspPlantStorageResponse>()
     var fpsPlantStorageADDResult = MutableLiveData<AddFspPlantStorageResponse>()
     var fpFromNonForestResult = MutableLiveData<FodderProductionFromNonForestResponse>()
@@ -1716,6 +1719,63 @@ class ViewModel : ViewModel() {
             }
         }
     }
+
+    fun getNlmFpFromNonForestAddEdit(context: Context, loader: Boolean, request: NlmFpFromNonForestAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getNlmFpFromNonForestAddEdit(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                nlmFpFromNonForestAddEditResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
     fun getProfileUploadFile(
         context: Context,
         user_id: Int?,

@@ -62,7 +62,7 @@
             android:name=".ui.activity.national_livestock_mission.NlmAnimalHidfActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.national_livestock_mission.NlmFpFromNonForestActivity"
+            android:name=".ui.activity.national_livestock_mission.NlmFpFromNonForestListActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.NlmComponentBDairyDevelopment"
@@ -87,9 +87,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.RGMIAList"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.RGMStateImplementingAgency"
@@ -157,6 +154,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.AddNlmFpForestLandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.national_livestock_mission.AddNlmFpFromNonForestActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmFpForestLandActivity"

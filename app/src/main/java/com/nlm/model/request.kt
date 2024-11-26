@@ -389,7 +389,6 @@ data class RspBasicInfoEquipment(
 
 data class StateSemenBankNLMRequest(
     val is_type: String? = null,
-
     val address: String? = null,
     val area_fodder_cultivation: String? = null,
     val area_under_buildings: String? = null,
@@ -442,6 +441,7 @@ data class StateSemenBankOtherManpower(
     val qualification: String? = null,
     val training_status: String? = null
 )
+
 data class StateSemenBankOtherAddManpower(
     val designation: String? = null,
     val experience: String? = null,
@@ -512,7 +512,6 @@ data class NlmAssistanceForQFSPListRequest(
     val user_id: Int?=null
 )
 
-
 data class RSPAddRequest(
     val Infrastructure_faced_Institute: String? = null,
     val address: String? = null,
@@ -547,7 +546,6 @@ data class RSPAddRequest(
     val pin_code: Int? = null,
     val role_id: Int? = null,
     val is_type: String? = null,
-
     val id: Int? = null,
     val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>? = null,
     val rsp_laboratory_semen_average: List<RspAddAverage>? = null,
@@ -578,6 +576,7 @@ data class RspLaboratorySemenAverage(
     val twentyThree_twentyFour: String? = null,
     val twentyTwo_twentyThree: String? = null
 )
+
 data class RspLaboratorySemenDocument(
     val description: String? = null,
     val id: Int? = null
@@ -621,6 +620,39 @@ data class AssistanceForEARequest(
     val role_id: Int?= null,
     val state_code: Int?= null,
     val user_id: Int?= null,
+)
+
+data class NlmFpFromNonForestAddRequest(
+    val area_covered: Double?= null,
+    val created_by: Int?= null,
+    val district_code: Int?= null,
+    val fp_from_non_forest_document: List<ImplementingAgencyDocument>?= null,
+    val fp_from_non_forest_filled_by_nlm_team: List<FpFromNonForestFilledByNlmTeam>?= null,
+    val grant_received: String?= null,
+    val id: Int?= null,
+    val is_deleted: Int?= null,
+    val is_draft: Int?= null,
+    val location: String?= null,
+    val name_implementing_agency: String?= null,
+    val role_id: Int?= null,
+    val scheme_guidelines: String?= null,
+    val state_code: Int?= null,
+    val status: Int?= null,
+    val target_achievement: String?= null,
+    val type_of_agency: String?= null,
+    val type_of_land: String?= null,
+    val user_id: String?= null,
+    val variety_of_fodder: String?= null
+)
+
+data class FpFromNonForestFilledByNlmTeam(
+    val agency_involved: String?= null,
+    val area_covered: String?= null,
+    val block_name: String?= null,
+    val consumer_fodder: String?= null,
+    val district_code: Int?= null,
+    val estimated_quantity: String?= null,
+    val village_name: String?= null
 )
 
 data class NLMEdpRequest(

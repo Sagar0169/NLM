@@ -34,7 +34,7 @@ import com.nlm.ui.activity.national_livestock_mission.NlmAssistanceForEa
 import com.nlm.ui.activity.national_livestock_mission.NlmAssistanceForQFSPActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmEdpActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmFpForestLandActivity
-import com.nlm.ui.activity.national_livestock_mission.NlmFpFromNonForestActivity
+import com.nlm.ui.activity.national_livestock_mission.NlmFpFromNonForestListActivity
 import com.nlm.ui.activity.national_livestock_mission.NlmFspPlantStorageActivity
 import com.nlm.ui.activity.national_livestock_mission.RSPLabList
 import com.nlm.ui.activity.national_livestock_mission.ReportsOfNlmComponentActivity
@@ -285,7 +285,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
         mBinding?.leftDrawerMenu?.tvFpsFromNonForest?.setOnClickListener {
-            startActivity(Intent(this@DashboardActivity, NlmFpFromNonForestActivity::class.java))
+            startActivity(Intent(this@DashboardActivity, NlmFpFromNonForestListActivity::class.java))
         }
         mBinding?.leftDrawerMenu?.tvFpsPlanStorage?.setOnClickListener {
             val intent = Intent(

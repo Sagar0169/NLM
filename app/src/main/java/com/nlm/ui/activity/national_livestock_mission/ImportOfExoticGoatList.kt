@@ -113,7 +113,6 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
 
                 }
                 else{
-
                     itemPosition?.let { it1 -> implementingAdapter.onDeleteButtonClick(it1) }
                     showSnackbar(mBinding!!.main, userResponseModel.message)
                 }
@@ -188,8 +187,6 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
                 stateId = data.getIntExtra("stateId", 0)
             }
             exoticGoatAPICall(paginate = false, loader = true,stateId)
-
-
         }
     }
 

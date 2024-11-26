@@ -47,6 +47,9 @@ import com.nlm.model.NlmAhidfResponse
 import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmAssistanceForQFSPListResponse
 import com.nlm.model.NlmEdpResponse
+import com.nlm.model.NlmFpFromNonForestAddRequest
+import com.nlm.model.NlmFpFromNonForestAddResponse
+import com.nlm.model.NlmFpFromNonForestAddResult
 import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
@@ -93,6 +96,7 @@ const val ADD_NLM_EDP = "nationalLivestockMission/nlmEdpAddEdit"
 const val ASSISTANCE_FOR_EA = "nationalLivestockMission/assistanceForEaList"
 const val ADD_ASSISTANCE_FOR_EA = "nationalLivestockMission/assistanceForEaAddEdit"
 const val FPS_PLANT_STORAGE = "nationalLivestockMission/fspPlantStorageList"
+const val NLM_FP_FROM_NON_FOREST = "nationalLivestockMission/fpFromNonForestAddEdit"
 const val ADD_FPS_PLANT_STORAGE = "nationalLivestockMission/fspPlantStorageAddEdit"
 
 
@@ -152,6 +156,9 @@ interface MyService {
 
     @POST(ASSISTANCE_FOR_QFSP_ADD_EDIT)
     suspend fun getAssistanceForQfspAddEdit(@Body request: Format6AssistanceForQspAddEdit): Response<Format6AssistanceForQspAddResponse>
+
+    @POST(NLM_FP_FROM_NON_FOREST)
+    suspend fun getNlmFpFromNonForestAddEdit(@Body request: NlmFpFromNonForestAddRequest): Response<NlmFpFromNonForestAddResponse>
 
     @POST(FPS_PLANT_STORAGE)
     suspend fun getFpsPlantStorageList(@Body request: FpsPlantStorageRequest): Response<FspPlantStorageResponse>

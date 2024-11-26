@@ -46,6 +46,8 @@ import com.nlm.model.NlmAhidfResponse
 import com.nlm.model.NlmAssistanceForQFSPListRequest
 import com.nlm.model.NlmAssistanceForQFSPListResponse
 import com.nlm.model.NlmEdpResponse
+import com.nlm.model.NlmFpFromNonForestAddRequest
+import com.nlm.model.NlmFpFromNonForestAddResponse
 import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
@@ -145,6 +147,9 @@ object Repository {
     }
     suspend fun getAssistanceForQfspAddEdit(request: Format6AssistanceForQspAddEdit): Response<Format6AssistanceForQspAddResponse> {
         return api.getAssistanceForQfspAddEdit(request)
+    }
+    suspend fun getNlmFpFromNonForestAddEdit(request: NlmFpFromNonForestAddRequest): Response<NlmFpFromNonForestAddResponse> {
+        return api.getNlmFpFromNonForestAddEdit(request)
     }
     suspend fun getFpsPlantStorageList(request: FpsPlantStorageRequest): Response<FspPlantStorageResponse> {
         return api.getFpsPlantStorageList(request)

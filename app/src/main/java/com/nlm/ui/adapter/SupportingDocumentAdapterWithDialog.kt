@@ -114,18 +114,7 @@ class SupportingDocumentAdapterWithDialog(
 
                         ),position)
             }
-
-//            (context as NLSIAGoverningBodyBoardOfDirectorsFragment).compositionOfGoverningNlmIaDialog(context,1,
         }
-//        holder.binding.btnDelete.setOnClickListener {
-//            // add alert here
-//
-//            if (position >= 0 && position < programmeList.size) {
-//                programmeList.removeAt(position)
-//                notifyItemRemoved(position)
-//                notifyItemRangeChanged(position, programmeList.size) // Notify changes in the range
-//            }
-//        }
     }
 
     override fun getItemCount(): Int = programmeList.size
@@ -145,6 +134,5 @@ class SupportingDocumentAdapterWithDialog(
             Log.e("Error", "Invalid index: $position for programmeList of size ${programmeList.size}")
         }
     }
-
 }
 

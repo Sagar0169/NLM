@@ -9,6 +9,7 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityNlmFpFromNonForestBinding
 import com.nlm.model.FodderProductionFromNonForestData
 import com.nlm.model.FodderProductionFromNonForestRequest
+import com.nlm.model.NlmFpFromNonForestAddRequest
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.FpFromNonForestAdapter
@@ -16,11 +17,12 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
-class NlmFpFromNonForestActivity : BaseActivity<ActivityNlmFpFromNonForestBinding>(),
+class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBinding>(),
     CallBackDeleteAtId {
     private var mBinding: ActivityNlmFpFromNonForestBinding? = null
     private var fpFromNonForestAdapter: FpFromNonForestAdapter?= null
@@ -30,6 +32,7 @@ class NlmFpFromNonForestActivity : BaseActivity<ActivityNlmFpFromNonForestBindin
     private var currentPage = 1
     private var totalPage = 1
     private var loading = true
+    private var itemPosition : Int ?= null
 
     override val layoutId: Int
         get() = R.layout.activity_nlm_fp_from_non_forest
@@ -105,12 +108,12 @@ class NlmFpFromNonForestActivity : BaseActivity<ActivityNlmFpFromNonForestBindin
         }
         fun filter(view: View) {
             startActivity(Intent(
-                this@NlmFpFromNonForestActivity,
+                this@NlmFpFromNonForestListActivity,
                 FilterStateActivity::class.java
             ).putExtra("isFrom", 15))
         }
         fun add(view: View){
-            startActivity(Intent(this@NlmFpFromNonForestActivity, AddNlmFpForestLandActivity::class.java))
+            startActivity(Intent(this@NlmFpFromNonForestListActivity, AddNlmFpFromNonForestActivity::class.java))
         }
     }
 
@@ -152,9 +155,39 @@ class NlmFpFromNonForestActivity : BaseActivity<ActivityNlmFpFromNonForestBindin
                 }
             }
         }
-
+        viewModel.nlmFpFromNonForestAddEditResult.observe(this){
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel!=null)
+            {
+                if(userResponseModel._resultflag==0){
+                    mBinding?.rlParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
+                }
+                else{
+                    itemPosition?.let { it1 -> fpFromNonForestAdapter?.onDeleteButtonClick(it1) }
+                    mBinding?.rlParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
+                }
+            }
+        }
     }
 
     override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
+        viewModel.getNlmFpFromNonForestAddEdit(this,true,
+            NlmFpFromNonForestAddRequest(
+                state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
+                id = ID,
+                is_draft=null,
+                is_deleted = 1
+            )
+        )
+        itemPosition = position
     }
 }

@@ -14,6 +14,7 @@ import com.nlm.databinding.ItemFpFromNonForestBinding
 import com.nlm.databinding.ItemFpsPlantStorageBinding
 import com.nlm.model.FodderProductionFromNonForestData
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
+import com.nlm.ui.activity.national_livestock_mission.AddNlmFpFromNonForestActivity
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
@@ -70,10 +71,14 @@ class FpFromNonForestAdapter(
         holder.mBinding.etNlmStatus.text = item.is_draft_nlm.toString()
         holder.mBinding.etIAStatus.text = item.is_draft_ia.toString()
         holder.mBinding.ivView.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(Intent(context, AddNlmFpFromNonForestActivity::class.java)
+            .putExtra("View/Edit", "view")
+            .putExtra("itemId", item.id))
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(Intent(context, AddNlmFpFromNonForestActivity::class.java)
+                .putExtra("View/Edit", "edit")
+                .putExtra("itemId", item.id))
         }
 
         holder.mBinding.ivDelete.setOnClickListener {
@@ -90,6 +95,11 @@ class FpFromNonForestAdapter(
                 context.getString(R.string.are_you_sure_want_to_delete_your_post)
             )
         }
+    }
+
+    fun onDeleteButtonClick(position: Int) {
+        list.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     // Return the total number of items

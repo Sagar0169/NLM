@@ -565,7 +565,9 @@ data class ImplementingAgencyDocument(
     val assistance_for_qfsp_id: Int?=null,
     val fsp_plant_storage_id: Int?=null,
     val assistance_for_ea_id: Int?=null,
-    val nlm_document: String?=null
+    val nlm_document: String?=null,
+    val fp_from_non_forest_id: Int?=null,
+
 )
 //
 //data class ImplementingAgencyFundsReceived(
@@ -896,7 +898,7 @@ data class FodderProductionFromNonForestResult(
 )
 
 data class FodderProductionFromNonForestData(
-    val area_covered: Int?= null,
+    val area_covered: Double?= null,
     val created: String,
     val created_by: String?= null,
     val district_code: Int?= null,
@@ -904,8 +906,8 @@ data class FodderProductionFromNonForestData(
     val id: Int?= null,
     val is_delete: Boolean,
     val is_draft: Int?= null,
-    val is_draft_ia: Int?= null,
-    val is_draft_nlm: Int?= null,
+    val is_draft_ia: String?= null,
+    val is_draft_nlm: String?= null,
     val is_edit: Boolean,
     val is_view: Boolean,
     val name_implementing_agency: String?= null,
@@ -1138,6 +1140,38 @@ data class AssistanceForEAData(
     val state_name: String
 )
 
+data class NlmFpFromNonForestAddResponse(
+    val _result: NlmFpFromNonForestAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NlmFpFromNonForestAddResult(
+    val created: String,
+    val created_at: String,
+    val created_by: Int,
+    val district_code: Int,
+    val fp_from_non_forest_document: List<ImplementingAgencyDocument>,
+    val fp_from_non_forest_filled_by_nlm_team: List<FpFromNonForestFilledByNlmTeam>,
+    val id: Int,
+    val is_deleted: Int,
+    val is_draft: Int,
+    val is_draft_nlm: Int,
+    val name_implementing_agency: String,
+    val role_id: String,
+    val state_code: Int,
+    val status: Int,
+    val user_id: String,
+    val area_covered: Double,
+    val grant_received: String,
+    val location: String,
+    val scheme_guidelines: String,
+    val target_achievement: String,
+    val type_of_agency: String,
+    val type_of_land: String,
+    val variety_of_fodder: String
+)
 data class NlmAhidfResponse(
     val _result: NlmAhidfResult,
     val _resultflag: Int,

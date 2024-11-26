@@ -111,7 +111,6 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         DetailOfImportList = mutableListOf()
         AchievementList = mutableListOf()
         VerifiedNlmList = mutableListOf()
-        TotalDocumentList = arrayListOf()
         ViewDocumentAdapter()
         AddDocumentAdapter()
         AddImportDetailAdapter()
@@ -202,11 +201,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                 else{
                                 viewDocumentList.add(document)}
                             } else  {
-                                if(getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id==8)
-                                {
-
-                                    DocumentList.add(document)
-                                }
+                                DocumentList.add(document)
                             } }
                         AddDocumentAdapter?.notifyDataSetChanged()
                         ViewDocumentAdapter?.notifyDataSetChanged()
@@ -336,10 +331,6 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                         showSnackbar(mBinding!!.main, userResponseModel.message)
                     }
                 }
-
-
-
-
             }
         }
         viewModel.getProfileUploadFileResult.observe(this) {
@@ -489,7 +480,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             }
         }
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty())
+            if (bindingDialog.etDescription.text.toString().isNotEmpty())
             {
                 if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24) {
                     if(selectedItem!=null)
@@ -868,7 +859,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 is_type = viewEdit,
                 id = itemId,
                 is_draft = null,
-                import_of_exotic_goat_document = null, is_deleted = null,
+                import_of_exotic_goat_document = null,
+                is_deleted = null,
                 number_of_farmers_benefited=null
             )
         )
@@ -890,7 +882,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 is_type = null,
                 id = formId,
                 is_draft=isDraft,
-                import_of_exotic_goat_document = TotalDocumentList, is_deleted = null,
+                import_of_exotic_goat_document = DocumentList,
+                is_deleted = null,
                 number_of_farmers_benefited=mBinding?.etNoOfFarmer?.text.toString().toIntOrNull()
             )
         )
@@ -954,8 +947,6 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             )
         }
     }
-
-
 
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(this)
