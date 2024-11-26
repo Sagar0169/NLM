@@ -21,22 +21,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
+import com.nlm.callBack.CallBackAnimalFund
 import com.nlm.callBack.CallBackAssistanceEANlm
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackDeleteFSPAtId
 import com.nlm.callBack.CallBackDeleteFormatAtId
 import com.nlm.callBack.CallBackItemUploadDocEdit
+import com.nlm.callBack.CallBackNlmAnimalMonitor
 import com.nlm.callBack.CallBackNlmEdpFormat
 import com.nlm.callBack.CallBackNlmEdpMonitor
 import com.nlm.callBack.OnBackSaveAsDraft
+import com.nlm.databinding.ActivityAddAnimalHusbandryBinding
 import com.nlm.databinding.ActivityAddNlmEdpBinding
 import com.nlm.databinding.ActivityAddNlmextensionActivitiesBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
+import com.nlm.databinding.ItemNlmAnimalBinding
 import com.nlm.databinding.ItemNlmEdpFormatBinding
 import com.nlm.databinding.ItemNlmEdpMonitotringBinding
+import com.nlm.databinding.ItemNlmIaAnimalFundBinding
 import com.nlm.databinding.ItemNlmTrainingInstituteBinding
+import com.nlm.model.AddAnimalRequest
 import com.nlm.model.AddAssistanceEARequest
 import com.nlm.model.AddNlmEdpRequest
+import com.nlm.model.AhidfFormatForNlm
+import com.nlm.model.AhidfMonitoring
 import com.nlm.model.AssistanceForEaTrainingInstitute
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.ImplementingAgencyDocument
@@ -46,6 +54,8 @@ import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.ui.adapter.AssistanceEAAdapter
 import com.nlm.ui.adapter.BottomSheetAdapter
+import com.nlm.ui.adapter.NlmAnimalFundAdapter
+import com.nlm.ui.adapter.NlmAnimalMonitoringAdapter
 import com.nlm.ui.adapter.NlmEDPFormatAdapter
 import com.nlm.ui.adapter.NlmEDPMonitoringAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
@@ -62,11 +72,11 @@ import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class AddNlmEdpActivity(
-) : BaseActivity<ActivityAddNlmEdpBinding>(), CallBackDeleteAtId,
-    CallBackItemUploadDocEdit, CallBackNlmEdpMonitor, CallBackDeleteFSPAtId, CallBackNlmEdpFormat,
+class AddAnimalHusbandryActivity(
+) : BaseActivity<ActivityAddAnimalHusbandryBinding>(), CallBackDeleteAtId,
+    CallBackItemUploadDocEdit, CallBackNlmAnimalMonitor, CallBackDeleteFSPAtId, CallBackAnimalFund,
     CallBackDeleteFormatAtId {
-    private var mBinding: ActivityAddNlmEdpBinding? = null
+    private var mBinding: ActivityAddAnimalHusbandryBinding? = null
     private lateinit var stateAdapter: BottomSheetAdapter
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var viewDocumentList: ArrayList<ImplementingAgencyDocument>
@@ -89,10 +99,10 @@ class AddNlmEdpActivity(
     private var DocumentName: String? = null
     private var chooseDocName: String? = null
     var body: MultipartBody.Part? = null
-    private lateinit var nlmEdpTrainingList: ArrayList<NlmEdpMonitoring>
-    private lateinit var nlmEdpFormatList: ArrayList<NlmEdpFormatForNlm>
-    private var nlmEDPMonitoringAdapter: NlmEDPMonitoringAdapter? = null
-    private var nlmEDPFormatAdapter: NlmEDPFormatAdapter? = null
+    private lateinit var nlmEdpTrainingList: ArrayList<AhidfMonitoring>
+    private lateinit var nlmEdpFormatList: ArrayList<AhidfFormatForNlm>
+    private var nlmEDPMonitoringAdapter: NlmAnimalMonitoringAdapter? = null
+    private var nlmEDPFormatAdapter: NlmAnimalFundAdapter? = null
     private var viewEdit: String? = null
     var itemId: Int? = null
     private var dId: Int? = null
@@ -104,6 +114,11 @@ class AddNlmEdpActivity(
     private val variety = listOf(
         ResultGetDropDown(0, "YES"),
         ResultGetDropDown(0, "NO")
+    )
+
+    private val projectFinance = listOf(
+        ResultGetDropDown(0, "Subsidy Loan"),
+        ResultGetDropDown(0, "Self Finance")
     )
 
     inner class ClickActions {
@@ -131,15 +146,16 @@ class AddNlmEdpActivity(
         }
 
         fun addDocDialog(view: View) {
-            addDocumentDialog(this@AddNlmEdpActivity, null, null)
+            addDocumentDialog(this@AddAnimalHusbandryActivity, null, null)
             img = 0
         }
 
         fun trainingInstitute(view: View) {
-            trainingInstitute(this@AddNlmEdpActivity, 1, null, null)
+            trainingInstitute(this@AddAnimalHusbandryActivity, 1, null, null)
         }
+
         fun formatNlmEdp(view: View) {
-            formatNlmEdp(this@AddNlmEdpActivity, 1, null, null)
+            formatNlmEdp(this@AddAnimalHusbandryActivity, 1, null, null)
         }
 
         fun save(view: View) {
@@ -188,7 +204,7 @@ class AddNlmEdpActivity(
     }
 
     override val layoutId: Int
-        get() = R.layout.activity_add_nlm_edp
+        get() = R.layout.activity_add_animal_husbandry
 
     override fun initView() {
         mBinding = viewDataBinding
@@ -311,9 +327,9 @@ class AddNlmEdpActivity(
 
     private fun viewEditApi() {
 
-        viewModel.getNlmEdpADD(
+        viewModel.getNlmAhidfADD(
             this, true,
-            AddNlmEdpRequest(
+            AddAnimalRequest(
                 id = itemId,
                 state_code = getPreferenceOfScheme(
                     this,
@@ -337,29 +353,30 @@ class AddNlmEdpActivity(
 
     private fun nlmEDPMonitoringAdapter() {
         nlmEDPMonitoringAdapter =
-            NlmEDPMonitoringAdapter(
-                this@AddNlmEdpActivity,
+            NlmAnimalMonitoringAdapter(
+                this@AddAnimalHusbandryActivity,
                 nlmEdpTrainingList,
                 viewEdit,
-                this@AddNlmEdpActivity,
+                this@AddAnimalHusbandryActivity,
                 this
             )
         mBinding?.recyclerView1?.adapter = nlmEDPMonitoringAdapter
         mBinding?.recyclerView1?.layoutManager =
-            LinearLayoutManager(this@AddNlmEdpActivity)
+            LinearLayoutManager(this@AddAnimalHusbandryActivity)
     }
+
     private fun nlmEDPFormatAdapter() {
         nlmEDPFormatAdapter =
-            NlmEDPFormatAdapter(
-                this@AddNlmEdpActivity,
+            NlmAnimalFundAdapter(
+                this@AddAnimalHusbandryActivity,
                 nlmEdpFormatList,
                 viewEdit,
-                this@AddNlmEdpActivity,
+                this@AddAnimalHusbandryActivity,
                 this
             )
         mBinding?.rvIANLMEDP?.adapter = nlmEDPFormatAdapter
         mBinding?.rvIANLMEDP?.layoutManager =
-            LinearLayoutManager(this@AddNlmEdpActivity)
+            LinearLayoutManager(this@AddAnimalHusbandryActivity)
     }
 
     private fun nlmAdapter() {
@@ -388,9 +405,9 @@ class AddNlmEdpActivity(
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
 
-        viewModel.getNlmEdpADD(
-            this@AddNlmEdpActivity, true,
-            AddNlmEdpRequest(
+        viewModel.getNlmAhidfADD(
+            this@AddAnimalHusbandryActivity, true,
+            AddAnimalRequest(
                 id = itemId,
                 role_id = getPreferenceOfScheme(
                     this,
@@ -409,9 +426,9 @@ class AddNlmEdpActivity(
                 )?.user_id.toString(),
                 is_draft = draft,
                 remarks_by_nlm = mBinding?.etNLMComment?.text.toString(),
-                nlm_edp_document = totalListDocument,
-                nlm_edp_monitoring = nlmEdpTrainingList,
-                nlm_edp_format_for_nlm = nlmEdpFormatList,
+                ahidf_document = totalListDocument,
+                ahidf_monitoring = nlmEdpTrainingList,
+                ahidf_format_for_nlm = nlmEdpFormatList,
             )
         )
     }
@@ -420,12 +437,12 @@ class AddNlmEdpActivity(
     private fun trainingInstitute(
         context: Context,
         isFrom: Int,
-        selectedItem: NlmEdpMonitoring?,
+        selectedItem: AhidfMonitoring?,
         position: Int?
     ) {
-        val bindingDialog: ItemNlmEdpMonitotringBinding = DataBindingUtil.inflate(
+        val bindingDialog: ItemNlmAnimalBinding = DataBindingUtil.inflate(
             layoutInflater,
-            R.layout.item_nlm_edp_monitotring,
+            R.layout.item_nlm_animal,
             null,
             false
         )
@@ -446,51 +463,64 @@ class AddNlmEdpActivity(
         bindingDialog.btnEdit.hideView()
         bindingDialog.tvSubmit.showView()
         bindingDialog.tvFull.setOnClickListener {
-            showBottomSheetDialog("whetherFull",bindingDialog.tvFull)
+            showBottomSheetDialog("whetherFull", bindingDialog.tvFull)
         }
+        bindingDialog.etProcessingCapacity.setOnClickListener {
+            showBottomSheetDialog("whetherFull", bindingDialog.etProcessingCapacity)
+        }
+        bindingDialog.tvProjectFinancing.setOnClickListener {
+            showBottomSheetDialog("projectFinance", bindingDialog.tvProjectFinancing)
+        }
+        var processing = ""
+
         if (selectedItem != null && isFrom == 2) {
+            processing = if (selectedItem.processing_capacity_nlm.toString().toInt() == 0) {
+                "No"
+            } else {
+                "Yes"
+            }
             bindingDialog.etNameOfBeneficiary.setText(selectedItem.name_of_beneficiary)
             bindingDialog.etCategory.setText(selectedItem.category_of_project)
-            bindingDialog.etProjcetFinancing.setText(selectedItem.project_financing)
+            bindingDialog.tvProjectFinancing.text = selectedItem.project_financing
             bindingDialog.etTypeofFarming.setText(selectedItem.type_of_farming)
             bindingDialog.etCapacity.setText(selectedItem.capacity)
             bindingDialog.tvFull.text = selectedItem.whether_full
-            bindingDialog.etFinacial.setText(selectedItem.financial_status)
-            bindingDialog.etNoAnimals.setText(selectedItem.number_of_animals_marketed.toString())
-            bindingDialog.etBalance.setText(selectedItem.balance_of_animal.toString())
-            bindingDialog.etNoFarmers.setText(selectedItem.number_of_farmers.toString())
+            bindingDialog.etProcessingCapacity.text =
+                processing
+            bindingDialog.etNumberOfFarmer.setText(selectedItem.number_of_farmers.toString())
+            bindingDialog.etFinacial.setText(selectedItem.financial_status.toString())
             bindingDialog.etNoJob.setText(selectedItem.number_of_job.toString())
         }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etNameOfBeneficiary.text.toString().isNotEmpty()
                 || bindingDialog.etCategory.text.toString().isNotEmpty()
-                || bindingDialog.etProjcetFinancing.text.toString().isNotEmpty()
+                || bindingDialog.tvProjectFinancing.text.toString().isNotEmpty()
                 || bindingDialog.etTypeofFarming.text.toString().isNotEmpty()
                 || bindingDialog.etCapacity.text.toString().isNotEmpty()
                 || bindingDialog.tvFull.text.toString().isNotEmpty()
                 || bindingDialog.etFinacial.text.toString().isNotEmpty()
-                || bindingDialog.etNoAnimals.text.toString().isNotEmpty()
-                || bindingDialog.etBalance.text.toString().isNotEmpty()
-                || bindingDialog.etNoFarmers.text.toString().isNotEmpty()
+                || bindingDialog.etProcessingCapacity.text.toString().isNotEmpty()
+                || bindingDialog.etNumberOfFarmer.text.toString().isNotEmpty()
                 || bindingDialog.etNoJob.text.toString().isNotEmpty()
             ) {
                 if (selectedItem != null) {
                     if (position != null) {
                         nlmEdpTrainingList[position] =
-                            NlmEdpMonitoring(
+                            AhidfMonitoring(
                                 selectedItem.id,
                                 bindingDialog.etNameOfBeneficiary.text.toString(),
                                 bindingDialog.etCategory.text.toString(),
-                                bindingDialog.etProjcetFinancing.text.toString(),
+                                bindingDialog.tvProjectFinancing.text.toString(),
                                 bindingDialog.etTypeofFarming.text.toString(),
                                 bindingDialog.etCapacity.text.toString(),
                                 bindingDialog.tvFull.text.toString(),
-                                bindingDialog.etFinacial.text.toString(),
-                                bindingDialog.etNoAnimals.text.toString().toIntOrNull(),
-                                bindingDialog.etBalance.text.toString().toIntOrNull(),
-                                bindingDialog.etNoFarmers.text.toString().toIntOrNull(),
+                                bindingDialog.etFinacial.text.toString().toIntOrNull(),
+                                if (bindingDialog.etProcessingCapacity.text.toString()
+                                        .equals("Yes", ignoreCase = true)
+                                ) 1 else 0, // Check for Yes/No
+                                bindingDialog.etNumberOfFarmer.text.toString().toIntOrNull(),
                                 bindingDialog.etNoJob.text.toString().toIntOrNull(),
-                                selectedItem.nlm_edp_id,
+                                selectedItem.ahidf_id,
                             )
                         nlmEDPMonitoringAdapter
                             ?.notifyItemChanged(position)
@@ -498,20 +528,21 @@ class AddNlmEdpActivity(
 
                 } else {
                     nlmEdpTrainingList.add(
-                        NlmEdpMonitoring(
-                            id = null,
+                        AhidfMonitoring(
+                            null,
                             bindingDialog.etNameOfBeneficiary.text.toString(),
                             bindingDialog.etCategory.text.toString(),
-                            bindingDialog.etProjcetFinancing.text.toString(),
+                            bindingDialog.tvProjectFinancing.text.toString(),
                             bindingDialog.etTypeofFarming.text.toString(),
                             bindingDialog.etCapacity.text.toString(),
                             bindingDialog.tvFull.text.toString(),
-                            bindingDialog.etFinacial.text.toString(),
-                            bindingDialog.etNoAnimals.text.toString().toIntOrNull(),
-                            bindingDialog.etBalance.text.toString().toIntOrNull(),
-                            bindingDialog.etNoFarmers.text.toString().toIntOrNull(),
+                            bindingDialog.etFinacial.text.toString().toIntOrNull(),
+                            if (bindingDialog.etProcessingCapacity.text.toString()
+                                    .equals("Yes", ignoreCase = true)
+                            ) 1 else 0, // Check for Yes/No
+                            bindingDialog.etNumberOfFarmer.text.toString().toIntOrNull(),
                             bindingDialog.etNoJob.text.toString().toIntOrNull(),
-                            null
+                            null,
                         )
                     )
 
@@ -536,12 +567,12 @@ class AddNlmEdpActivity(
     private fun formatNlmEdp(
         context: Context,
         isFrom: Int,
-        selectedItem: NlmEdpFormatForNlm?,
+        selectedItem: AhidfFormatForNlm?,
         position: Int?
     ) {
-        val bindingDialog: ItemNlmEdpFormatBinding = DataBindingUtil.inflate(
+        val bindingDialog: ItemNlmIaAnimalFundBinding = DataBindingUtil.inflate(
             layoutInflater,
-            R.layout.item_nlm_edp_format,
+            R.layout.item_nlm_ia_animal_fund,
             null,
             false
         )
@@ -565,9 +596,9 @@ class AddNlmEdpActivity(
             bindingDialog.etCategory.setText(selectedItem.category_of_project)
             bindingDialog.etNoProject.setText(selectedItem.no_of_project.toString())
             bindingDialog.etCostOfProject.setText(selectedItem.cost_of_project.toString())
-            bindingDialog.etTotalAnimal.setText(selectedItem.total_animal_inducted.toString())
-            bindingDialog.etTotalFarmers.setText(selectedItem.total_farmers_impacted.toString())
+            bindingDialog.etTermLoan.setText(selectedItem.term_loan.toString())
             bindingDialog.etTotalNoEmp.setText(selectedItem.total_employment_generated.toString())
+            bindingDialog.etProcessing.setText(selectedItem.processing_capacity.toString())
             bindingDialog.etBirth.setText(selectedItem.birth_percentage.toString())
             bindingDialog.etAvg.setText(selectedItem.average_revenue_earned.toString())
         }
@@ -575,26 +606,26 @@ class AddNlmEdpActivity(
             if (bindingDialog.etCategory.text.toString().isNotEmpty()
                 || bindingDialog.etNoProject.text.toString().isNotEmpty()
                 || bindingDialog.etCostOfProject.text.toString().isNotEmpty()
-                || bindingDialog.etTotalAnimal.text.toString().isNotEmpty()
-                || bindingDialog.etTotalFarmers.text.toString().isNotEmpty()
+                || bindingDialog.etTermLoan.text.toString().isNotEmpty()
                 || bindingDialog.etTotalNoEmp.text.toString().isNotEmpty()
+                || bindingDialog.etProcessing.text.toString().isNotEmpty()
                 || bindingDialog.etBirth.text.toString().isNotEmpty()
                 || bindingDialog.etAvg.text.toString().isNotEmpty()
             ) {
                 if (selectedItem != null) {
                     if (position != null) {
                         nlmEdpFormatList[position] =
-                            NlmEdpFormatForNlm(
+                            AhidfFormatForNlm(
                                 selectedItem.id,
                                 bindingDialog.etCategory.text.toString(),
                                 bindingDialog.etNoProject.text.toString().toIntOrNull(),
                                 bindingDialog.etCostOfProject.text.toString().toDoubleOrNull(),
-                                bindingDialog.etTotalAnimal.text.toString().toIntOrNull(),
-                                bindingDialog.etTotalFarmers.text.toString().toIntOrNull(),
+                                bindingDialog.etTermLoan.text.toString().toIntOrNull(),
                                 bindingDialog.etTotalNoEmp.text.toString().toIntOrNull(),
+                                bindingDialog.etProcessing.text.toString().toDoubleOrNull(),
                                 bindingDialog.etBirth.text.toString().toIntOrNull(),
                                 bindingDialog.etAvg.text.toString().toDoubleOrNull(),
-                                selectedItem.nlm_edp_id,
+                                selectedItem.ahidf_id,
                             )
                         nlmEDPFormatAdapter
                             ?.notifyItemChanged(position)
@@ -602,17 +633,17 @@ class AddNlmEdpActivity(
 
                 } else {
                     nlmEdpFormatList.add(
-                        NlmEdpFormatForNlm(
-                            id = null,
+                        AhidfFormatForNlm(
+                            null,
                             bindingDialog.etCategory.text.toString(),
                             bindingDialog.etNoProject.text.toString().toIntOrNull(),
                             bindingDialog.etCostOfProject.text.toString().toDoubleOrNull(),
-                            bindingDialog.etTotalAnimal.text.toString().toIntOrNull(),
-                            bindingDialog.etTotalFarmers.text.toString().toIntOrNull(),
+                            bindingDialog.etTermLoan.text.toString().toIntOrNull(),
                             bindingDialog.etTotalNoEmp.text.toString().toIntOrNull(),
+                            bindingDialog.etProcessing.text.toString().toDoubleOrNull(),
                             bindingDialog.etBirth.text.toString().toIntOrNull(),
                             bindingDialog.etAvg.text.toString().toDoubleOrNull(),
-                            null
+                            null,
                         )
                     )
 
@@ -766,6 +797,8 @@ class AddNlmEdpActivity(
                             dialog.dismiss()
                         }
                     }
+
+
                 }
             } else {
                 showSnackbar(
@@ -819,7 +852,7 @@ class AddNlmEdpActivity(
                             }
                             viewModel.getProfileUploadFile(
                                 context = this,
-                                table_name = getString(R.string.nlm_edp_document).toRequestBody(
+                                table_name = getString(R.string.ahidf_document).toRequestBody(
                                     MultipartBody.FORM
                                 ),
                                 document_name = body,
@@ -837,7 +870,7 @@ class AddNlmEdpActivity(
     }
 
 
-    private fun showBottomSheetDialog(type: String,full:TextView) {
+    private fun showBottomSheetDialog(type: String, full: TextView) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
         view.layoutParams = ViewGroup.LayoutParams(
@@ -883,6 +916,12 @@ class AddNlmEdpActivity(
             "whetherFull" -> {
                 img = 2
                 selectedList = variety
+                selectedTextView = full
+            }
+
+            "projectFinance" -> {
+                img = 2
+                selectedList = projectFinance
                 selectedTextView = full
             }
 
@@ -1001,7 +1040,7 @@ class AddNlmEdpActivity(
         viewModel.getDropDownResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
-                Utility.logout(this@AddNlmEdpActivity)
+                Utility.logout(this@AddAnimalHusbandryActivity)
             } else {
                 if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
                     if (currentPage == 1) {
@@ -1054,7 +1093,7 @@ class AddNlmEdpActivity(
             }
         }
 
-        viewModel.nlmEdpADDResult.observe(this) {
+        viewModel.nlmAhidfADDResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
@@ -1073,28 +1112,26 @@ class AddNlmEdpActivity(
                             }
                             toast(viewEdit.toString())
 
-                            mBinding?.etNLMComment?.setText(userResponseModel._result?.remarks_by_nlm)
+                            mBinding?.etNLMComment?.setText(userResponseModel._result.remarks_by_nlm)
                             nlmEdpTrainingList.clear()
                             val comments =
-                                userResponseModel._result?.nlm_edp_monitoring
+                                userResponseModel._result.ahidf_monitoring
                                     ?: emptyList()
 
                             if (comments.isEmpty() && viewEdit == "view") {
-                                val dummyData = NlmEdpMonitoring(
+                                val dummyData = AhidfMonitoring(
                                     id = 0,
-                                   "",
-                                   "",
-                                   "",
-                                   "",
-                                   "",
-                                   "",
-                                   "",
-                                   0,
-                                   0,
-                                   0,
-                                   0,
-                                   0,
-                                   "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    0,
                                 )
                                 nlmEdpTrainingList.add(dummyData)
                             } else {
@@ -1106,18 +1143,18 @@ class AddNlmEdpActivity(
 
                             nlmEdpFormatList.clear()
                             val commentss =
-                                userResponseModel._result?.nlm_edp_format_for_nlm
+                                userResponseModel._result.ahidf_format_for_nlm
                                     ?: emptyList()
 
                             if (commentss.isEmpty() && viewEdit == "view") {
-                                val dummyData = NlmEdpFormatForNlm(
+                                val dummyData = AhidfFormatForNlm(
                                     id = 0,
                                     "",
                                     0,
                                     0.0,
                                     0,
                                     0,
-                                    0,
+                                    0.0,
                                     0,
                                     0.0,
                                     null
@@ -1139,7 +1176,7 @@ class AddNlmEdpActivity(
                                 nlm_document = "",
                                 assistance_for_ea_id = 0 // Or null, depending on your use case
                             )
-                            if (userResponseModel._result?.nlm_edp_document?.isEmpty() == true && viewEdit == "view") {
+                            if (userResponseModel._result.ahidf_document?.isEmpty() == true && viewEdit == "view") {
                                 // Add dummy data with default values
 
 
@@ -1147,7 +1184,7 @@ class AddNlmEdpActivity(
                                 viewDocumentList.add(dummyData)
 
                             } else {
-                                userResponseModel._result?.nlm_edp_document?.forEach { document ->
+                                userResponseModel._result?.ahidf_document?.forEach { document ->
                                     if (document.ia_document == null) {
                                         DocumentList.add(document)//nlm
                                     } else {
@@ -1187,7 +1224,7 @@ class AddNlmEdpActivity(
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
-        addDocumentDialog(this@AddNlmEdpActivity, selectedItem, position)
+        addDocumentDialog(this@AddAnimalHusbandryActivity, selectedItem, position)
     }
 
 
@@ -1196,18 +1233,20 @@ class AddNlmEdpActivity(
     }
 
     override fun onClickItem(
-        selectedItem: NlmEdpMonitoring,
+        selectedItem: AhidfMonitoring,
         position: Int,
         isFrom: Int
     ) {
-        trainingInstitute(this@AddNlmEdpActivity, isFrom, selectedItem, position)
+        trainingInstitute(this@AddAnimalHusbandryActivity, isFrom, selectedItem, position)
     }
 
-    override fun onClickItem(selectedItem: NlmEdpFormatForNlm, position: Int, isFrom: Int) {
-        formatNlmEdp(this@AddNlmEdpActivity, isFrom, selectedItem, position)    }
+    override fun onClickItem(selectedItem: AhidfFormatForNlm, position: Int, isFrom: Int) {
+        formatNlmEdp(this@AddAnimalHusbandryActivity, isFrom, selectedItem, position)
+    }
 
     override fun onClickItemFormatDelete(ID: Int?, position: Int) {
         position.let { it1 -> nlmEDPFormatAdapter?.onDeleteButtonClick(it1) }
     }
+
 
 }

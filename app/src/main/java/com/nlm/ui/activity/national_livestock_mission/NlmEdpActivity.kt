@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityNlmEdpBinding
+import com.nlm.model.AddFspPlantStorageRequest
+import com.nlm.model.AddNlmEdpRequest
 import com.nlm.model.AssistanceForEARequest
 import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NlmEdpData
@@ -18,6 +20,7 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
@@ -31,6 +34,8 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>(), CallBackDeleteAtId
     private var currentPage = 1
     private var totalPage = 1
     private var loading = true
+    private var itemPosition: Int? = null
+
 
     override val layoutId: Int
         get() = R.layout.activity_nlm_edp
@@ -150,6 +155,24 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>(), CallBackDeleteAtId
                 }
             }
         }
+
+        viewModel.nlmEdpADDResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+
+                } else {
+
+                    itemPosition?.let { it1 -> nlmEdpAdapter?.onDeleteButtonClick(it1) }
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                }
+            }
+        }
     }
 
     inner class ClickActions {
@@ -168,12 +191,35 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>(), CallBackDeleteAtId
             startActivity(
                 Intent(
                     this@NlmEdpActivity,
-                    AddNlmFpForestLandActivity::class.java
+                    AddNlmEdpActivity::class.java
                 )
             )
         }
     }
 
     override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
+        viewModel.getNlmEdpADD(
+            this, true,
+            AddNlmEdpRequest(
+                id = ID,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                is_deleted = 1
+            )
+        )
+        itemPosition = position
     }
 }

@@ -666,3 +666,40 @@ data class AddAssistanceEARequest(
     val whether_the_state_developed: String?=null,
     val whether_the_state_trainers: String?=null
 )
+
+
+data class AddNlmEdpRequest(
+    val created_by: Int?= null,
+    val id: Int?= null,
+    val is_type: String? = null,
+    val remarks_by_nlm: String? = null,
+    val is_deleted: Int?= null,
+    val is_draft: Int?=null,
+    val is_draft_nlm: Int?= null,
+    val nlm_edp_document: List<ImplementingAgencyDocument?>?= null,
+    val nlm_edp_format_for_nlm: List<NlmEdpFormatForNlm>?= null,
+    val nlm_edp_monitoring: List<NlmEdpMonitoring>?= null,
+    val role_id: Int?= null,
+    val state_code: Int?= null,
+    val status: Int?= null,
+    val user_id: String?= null
+)
+
+
+data class AddAnimalRequest(
+    val ahidf_document: List<ImplementingAgencyDocument>?=null,
+    val ahidf_format_for_nlm: List<AhidfFormatForNlm>?=null,
+    val ahidf_monitoring: List<AhidfMonitoring>?=null,
+    val created_by: Int?= null,
+    val is_deleted: Int?= null,
+    val id: Int?= null,
+    val remarks_by_nlm: String? = null,
+    val is_type: String? = null,
+    val is_draft: Int?= null,
+    val role_id: Int?= null,
+    val state_code: Int?= null,
+    val status: Int?= null,
+    val user_id: String?= null
+)
+
+

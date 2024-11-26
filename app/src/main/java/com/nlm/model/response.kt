@@ -1051,8 +1051,8 @@ data class NlmEdpData(
     val id: Int,
     val is_delete: Boolean,
     val is_draft: Int,
-    val is_draft_ia: Int,
-    val is_draft_nlm: Int,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
     val is_edit: Boolean,
     val is_view: Boolean,
     val state_code: Int,
@@ -1104,8 +1104,8 @@ data class NlmAhidfData(
     val id: Int,
     val is_delete: Boolean,
     val is_draft: Int,
-    val is_draft_ia: Int,
-    val is_draft_nlm: Int,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
     val is_edit: Boolean,
     val is_view: Boolean,
     val state_code: Int,
@@ -1195,5 +1195,123 @@ data class AssistanceForEaTrainingInstitute(
     val no_of_participants_trained: Int?,
     val no_of_provide_information: Int?,
     val assistance_for_ea_id: Int?=null,
+
+)
+
+
+data class AddNlmEdpResponse(
+    val _result: AddNlmEdpResult?,
+    val _resultflag: Int?,
+    val message: String,
+    val statuscode: Int?
+)
+
+data class AddNlmEdpResult(
+    val created: String?,
+    val remarks_by_nlm: String?,
+    val created_at: String?,
+    val created_by: Int?,
+    val id: Int?,
+    val is_deleted: Int?,
+    val is_draft_nlm: Any?,
+    val nlm_edp_document: List<ImplementingAgencyDocument>?,
+    val nlm_edp_format_for_nlm: List<NlmEdpFormatForNlm>?,
+    val nlm_edp_monitoring: List<NlmEdpMonitoring>?,
+    val role_id: String?,
+    val state_code: Int?,
+    val status: Int?,
+    val user_id: String?
+)
+
+
+data class NlmEdpFormatForNlm(
+    val id: Int?,
+    val category_of_project: String?,
+    val no_of_project: Int?,
+    val cost_of_project: Double?,
+    val total_animal_inducted: Int?,
+    val total_farmers_impacted: Int?,
+    val total_employment_generated: Int?,
+    val birth_percentage: Int?,
+    val average_revenue_earned: Double?,
+    val nlm_edp_id: Int?,
+    val created: String?=null,
+
+)
+
+data class NlmEdpMonitoring(
+    val id: Int?,
+    val name_of_beneficiary: String?,
+    val category_of_project: String?,
+    val project_financing: String?,
+    val type_of_farming: String?,
+    val capacity: String?,
+    val whether_full: String?,
+    val financial_status: String?,
+    val number_of_animals_marketed: Int?,
+    val balance_of_animal: Int?,
+    val number_of_farmers: Int?,
+    val number_of_job: Int?,
+    val nlm_edp_id: Int?,
+    val created: String?=null,
+
+)
+
+
+data class AddAnimalResponse(
+    val _result: AddAnimalResult,
+    val _resultflag: Int?,
+    val message: String,
+    val statuscode: Int?
+)
+
+data class AddAnimalResult(
+    val ahidf_document: List<ImplementingAgencyDocument>?,
+    val ahidf_format_for_nlm: List<AhidfFormatForNlm>?,
+    val ahidf_monitoring: List<AhidfMonitoring>?,
+    val created: String?,
+    val created_at: String?,
+    val remarks_by_nlm: String?,
+    val created_by: Int?,
+    val id: Int?,
+    val is_deleted: Int?,
+    val is_draft: Int?,
+    val is_draft_nlm: Int?,
+    val role_id: String?,
+    val state_code: Int?,
+    val status: Int?,
+    val user_id: String?
+)
+
+
+data class AhidfFormatForNlm(
+    val id: Int?,
+    val category_of_project: String?,
+    val no_of_project: Int?,
+    val cost_of_project: Double?,
+    val term_loan: Int?,
+    val total_employment_generated: Int?,
+    val processing_capacity: Double?,
+    val birth_percentage: Int?,
+    val average_revenue_earned: Double?,
+    val ahidf_id: Int?,
+    val created: String?=null,
+)
+
+data class AhidfMonitoring(
+    val id: Int?,
+    val name_of_beneficiary: String?,
+    val category_of_project: String?,
+    val project_financing: String?,
+    val type_of_farming: String?,
+    val capacity: String?,
+    val whether_full: String?,
+    val financial_status: Int?,
+    val processing_capacity_nlm: Int?,
+    val number_of_farmers: Int?,
+    val number_of_job: Int?,
+    val ahidf_id: Int?,
+    val created: String?=null,
+
 
 )

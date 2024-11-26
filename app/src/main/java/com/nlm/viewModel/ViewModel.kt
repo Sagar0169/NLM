@@ -4,10 +4,14 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nlm.model.AddAnimalRequest
+import com.nlm.model.AddAnimalResponse
 import com.nlm.model.AddAssistanceEARequest
 import com.nlm.model.AddAssistanceEAResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
+import com.nlm.model.AddNlmEdpRequest
+import com.nlm.model.AddNlmEdpResponse
 import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
@@ -94,7 +98,9 @@ class ViewModel : ViewModel() {
     var assistanceForEaResult = MutableLiveData<AssistanceForEAResponse>()
     var assistanceForEaADDResult = MutableLiveData<AddAssistanceEAResponse>()
     var nlmEdpResult = MutableLiveData<NlmEdpResponse>()
+    var nlmEdpADDResult = MutableLiveData<AddNlmEdpResponse>()
     var nlmAhidfResult = MutableLiveData<NlmAhidfResponse>()
+    var nlmAhidfADDResult = MutableLiveData<AddAnimalResponse>()
     var getProfileUploadFileResult = MutableLiveData<TempUploadDocResponse>()
     var id = 0
 
@@ -1374,6 +1380,62 @@ class ViewModel : ViewModel() {
         }
     }
 
+    fun getNlmEdpADD(context: Context, loader: Boolean, request: AddNlmEdpRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getNlmEdpADD(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                nlmEdpADDResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
     fun getNlmAhidf(context: Context, loader: Boolean, request: NLMAhidfRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
@@ -1388,6 +1450,62 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 nlmAhidfResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getNlmAhidfADD(context: Context, loader: Boolean, request: AddAnimalRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getNlmAhidfADD(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                nlmAhidfADDResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

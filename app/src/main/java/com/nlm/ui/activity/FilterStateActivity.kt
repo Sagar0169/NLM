@@ -302,8 +302,28 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             }
 
             17 -> {
-                binding!!.tvTitleCommentProgress.showView()
-                binding!!.etCommentProgress.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvState.showView()
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
 
             }
 

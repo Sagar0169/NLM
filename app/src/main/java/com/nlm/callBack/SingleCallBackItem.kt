@@ -1,6 +1,8 @@
 package com.nlm.callBack
 
 import androidx.fragment.app.Fragment
+import com.nlm.model.AhidfFormatForNlm
+import com.nlm.model.AhidfMonitoring
 import com.nlm.model.AssistanceForEaTrainingInstitute
 import com.nlm.model.AssistanceForQfspFinancialProgres
 import com.nlm.model.FspPlantStorageCommentsOfNlm
@@ -13,6 +15,8 @@ import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.ImportOfExoticGoatAchievement
 import com.nlm.model.ImportOfExoticGoatDetailImport
 import com.nlm.model.ImportOfExoticGoatVerifiedNlm
+import com.nlm.model.NlmEdpFormatForNlm
+import com.nlm.model.NlmEdpMonitoring
 import com.nlm.model.RspAddAverage
 import com.nlm.model.RspAddBucksList
 import com.nlm.model.RspAddEquipment
@@ -59,6 +63,19 @@ interface CallBackFspCommentNlm {
 interface CallBackAssistanceEANlm {
     fun onClickItem(selectedItem: AssistanceForEaTrainingInstitute, position:Int, isFrom:Int)
 }
+interface CallBackNlmEdpMonitor {
+    fun onClickItem(selectedItem: NlmEdpMonitoring, position:Int, isFrom:Int)
+}
+interface CallBackNlmAnimalMonitor {
+    fun onClickItem(selectedItem: AhidfMonitoring, position:Int, isFrom:Int)
+}
+interface CallBackNlmEdpFormat {
+    fun onClickItem(selectedItem: NlmEdpFormatForNlm, position:Int, isFrom:Int)
+}
+
+interface CallBackAnimalFund {
+    fun onClickItem(selectedItem: AhidfFormatForNlm, position:Int, isFrom:Int)
+}
 interface CallBackItemGoatSemen {
     fun onClickItem(selectedItem: StateSemenInfraGoat, position:Int, isFrom:Int)
 }
@@ -84,6 +101,9 @@ interface CallBackDeleteAtId {
 }
 interface CallBackDeleteFSPAtId {
     fun onClickItemDelete(ID: Int?,position:Int)
+}
+interface CallBackDeleteFormatAtId {
+    fun onClickItemFormatDelete(ID: Int?,position:Int)
 }
 interface SwitchFragmentCallBack {
     fun onClickItem(fragment:Fragment,Tab_id:Int)

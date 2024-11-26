@@ -1,6 +1,7 @@
 package com.nlm.ui.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -50,7 +51,7 @@ class NlmEdpAdapter(
     }
 
     // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: NlmEdpAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NlmEdpAdapterViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val item = list[position]
 
         if(item.is_view){
@@ -78,10 +79,15 @@ class NlmEdpAdapter(
         holder.mBinding.etNlmStatus.text = item.is_draft_nlm.toString()
         holder.mBinding.etIAStatus.text = item.is_draft_ia.toString()
         holder.mBinding.ivView.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(Intent(context, AddNlmEdpActivity::class.java)
+                .putExtra("View/Edit", "view")
+                .putExtra("itemId", item.id)            )
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(Intent(context, AddNlmEdpActivity::class.java)
+                .putExtra("View/Edit", "edit")
+                .putExtra("itemId", item.id)
+            )
         }
 
         holder.mBinding.ivDelete.setOnClickListener {
@@ -104,7 +110,17 @@ class NlmEdpAdapter(
     // Return the total number of items
     override fun getItemCount(): Int {
         return list.size
+    }
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
+    fun onDeleteButtonClick(position: Int) {
+        list.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

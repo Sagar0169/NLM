@@ -11,7 +11,8 @@ object AppConstants {
 
 
 
-    const val BASE_URL = "http://134.209.222.136/nlm/api/"
+    const val BASE_URL = "https://nlm.php-staging.com/api/"
+
     const val IMAGE_BASE_URL = ""
 
     const val NOTIFICATION_DATA = "NOTIFICATION_DATA"

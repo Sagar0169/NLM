@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.national_livestock_mission.AddNlmEdpActivity.ClickActions" />
+            type="com.nlm.ui.activity.national_livestock_mission.AddAnimalHusbandryActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,9 +1,13 @@
 package com.nlm.services
 
+import com.nlm.model.AddAnimalRequest
+import com.nlm.model.AddAnimalResponse
 import com.nlm.model.AddAssistanceEARequest
 import com.nlm.model.AddAssistanceEAResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
+import com.nlm.model.AddNlmEdpRequest
+import com.nlm.model.AddNlmEdpResponse
 import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
@@ -80,7 +84,9 @@ const val ASSISTANCE_FOR_QFSP_ADD_EDIT = "nationalLivestockMission/assistanceFor
 const val FODDER_PRODUCTION_FROM_NON_FOREST = "nationalLivestockMission/FpFromNonForestList"
 const val FODDER_PRODUCTION_FROM_FOREST_LAND = "nationalLivestockMission/FpFromForestLandList"
 const val NLM_AHIDF = "nationalLivestockMission/ahidfList"
+const val ADD_NLM_AHIDF = "nationalLivestockMission/ahidfAddEdit"
 const val NLM_EDP = "nationalLivestockMission/nlmEdpList"
+const val ADD_NLM_EDP = "nationalLivestockMission/nlmEdpAddEdit"
 const val ASSISTANCE_FOR_EA = "nationalLivestockMission/assistanceForEaList"
 const val ADD_ASSISTANCE_FOR_EA = "nationalLivestockMission/assistanceForEaAddEdit"
 const val FPS_PLANT_STORAGE = "nationalLivestockMission/fspPlantStorageList"
@@ -100,6 +106,7 @@ interface MyService {
 
     @POST(GET_DROP_DOWN)
     suspend fun getDropDown(@Body request: GetDropDownRequest): Response<GetDropDownResponse>
+
     @POST(GET_NLM_DROP_DOWN)
     suspend fun getNlmDropDown(@Body request: GetNlmDropDownRequest): Response<GetDropDownResponse>
 
@@ -115,24 +122,31 @@ interface MyService {
 
     @POST(ARTIFICIAL_INSEMINATION_LIST)
     suspend fun getArtificialInsemination(@Body request: ArtificialInseminationRequest): Response<ArtificialInseminationResponse>
+
     @POST(IMPORT_EXOTIC_GOAT_LIST)
     suspend fun getImportExocticGoatList(@Body request: ImportExocticGoatRequest): Response<ImportExocticGoatListResponse>
+
     @POST(STATE_SEMEN_BANK_LIST)
     suspend fun getStateSemenBank(@Body request: StateSemenBankRequest): Response<StateSemenBankResponse>
+
     @POST(STATE_SEMEN_ADD1)
     suspend fun getStateSemenAdd1(@Body request: StateSemenBankNLMRequest): Response<StateSemenAddResponse>
+
     @POST(STATE_SEMEN_ADD2)
     suspend fun getStateSemenAdd2(@Body request: StateSemenBankNLMRequest): Response<StateSemenAddResponse>
 
     @POST(IMPLEMENTING_AGENCY_ADD)
     suspend fun getImplementingAgencyAdd(@Body request: ImplementingAgencyAddRequest): Response<NLMIAResponse>
+
     @POST(ARTIFICIAL_INSEMINATION_ADD)
     suspend fun getArtificialInseminationAdd(@Body request: ArtificialInseminationAddRequest): Response<ArtificialInsemenationAddResponse>
+
     @POST(IMPORT_EXOTIC_GOAT_ADD_EDIT)
     suspend fun getImportExoticGoatAdd(@Body request: ImportExoticGoatAddEditRequest): Response<ImportExoticGoatAddEditResponse>
 
     @POST(ASSISTANCE_FOR_QFSP_LIST)
     suspend fun getAssistanceForQfspList(@Body request: NlmAssistanceForQFSPListRequest): Response<NlmAssistanceForQFSPListResponse>
+
     @POST(ASSISTANCE_FOR_QFSP_ADD_EDIT)
     suspend fun getAssistanceForQfspAddEdit(@Body request: Format6AssistanceForQspAddEdit): Response<Format6AssistanceForQspAddResponse>
 
@@ -148,17 +162,23 @@ interface MyService {
     @POST(FODDER_PRODUCTION_FROM_FOREST_LAND)
     suspend fun getFpFromForestLandList(@Body request: FpFromForestLandRequest): Response<FpFromForestLandResponse>
 
-   @POST(ASSISTANCE_FOR_EA)
+    @POST(ASSISTANCE_FOR_EA)
     suspend fun getAssistanceForEaList(@Body request: AssistanceForEARequest): Response<AssistanceForEAResponse>
 
     @POST(ADD_ASSISTANCE_FOR_EA)
     suspend fun getAssistanceForEaADD(@Body request: AddAssistanceEARequest): Response<AddAssistanceEAResponse>
 
-   @POST(NLM_EDP)
+    @POST(NLM_EDP)
     suspend fun getNlmEdpList(@Body request: NLMEdpRequest): Response<NlmEdpResponse>
 
-   @POST(NLM_AHIDF)
+    @POST(ADD_NLM_EDP)
+    suspend fun getNlmEdpADD(@Body request: AddNlmEdpRequest): Response<AddNlmEdpResponse>
+
+    @POST(NLM_AHIDF)
     suspend fun getNlmAhidfList(@Body request: NLMAhidfRequest): Response<NlmAhidfResponse>
+
+    @POST(ADD_NLM_AHIDF)
+    suspend fun getNlmAhidfADD(@Body request: AddAnimalRequest): Response<AddAnimalResponse>
 
     @Multipart
     @POST(UPLOAD_DOCUMENT)

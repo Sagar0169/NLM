@@ -1,9 +1,13 @@
 package com.nlm.repository
 
+import com.nlm.model.AddAnimalRequest
+import com.nlm.model.AddAnimalResponse
 import com.nlm.model.AddAssistanceEARequest
 import com.nlm.model.AddAssistanceEAResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
+import com.nlm.model.AddNlmEdpRequest
+import com.nlm.model.AddNlmEdpResponse
 import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
@@ -162,8 +166,14 @@ object Repository {
     suspend fun getNlmEdpList(request: NLMEdpRequest): Response<NlmEdpResponse> {
         return api.getNlmEdpList(request)
     }
+    suspend fun getNlmEdpADD(request: AddNlmEdpRequest): Response<AddNlmEdpResponse> {
+        return api.getNlmEdpADD(request)
+    }
     suspend fun getNlmAhidfList(request: NLMAhidfRequest): Response<NlmAhidfResponse> {
         return api.getNlmAhidfList(request)
+    }
+    suspend fun getNlmAhidfADD(request: AddAnimalRequest): Response<AddAnimalResponse> {
+        return api.getNlmAhidfADD(request)
     }
 
     suspend fun getProfileFileUpload(

@@ -628,15 +628,23 @@ class AddNewFspPlantStorageActivity(
                         )
                     }
 
-                    DocumentList.size.minus(1).let {
-                        addDocumentAdapter?.notifyItemInserted(it)
-                        dialog.dismiss()
+
+                    if (getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.role_id == 8
+                    ) {
+                        DocumentList.size.minus(1).let {
+                            addDocumentAdapter?.notifyItemInserted(it)
+                            dialog.dismiss()
 //
-                    }
-                    viewDocumentList.size.minus(1).let {
-                        addDocumentAdapter?.notifyItemInserted(it)
-                        dialog.dismiss()
-//
+                        }
+                    } else {
+                        viewDocumentList.size.minus(1).let {
+                            addDocumentAdapter?.notifyItemInserted(it)
+                            dialog.dismiss()
+                        }
                     }
                 }
             } else {

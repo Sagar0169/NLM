@@ -1,6 +1,7 @@
 package com.nlm.ui.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemNlmEdpBinding
 import com.nlm.model.NlmAhidfData
 import com.nlm.model.NlmEdpData
+import com.nlm.ui.activity.national_livestock_mission.AddAnimalHusbandryActivity
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
@@ -28,7 +30,8 @@ class NlmAhidfAdapter(
     RecyclerView.Adapter<NlmAhidfAdapter.NlmAhidfAdapterViewHolder>() {
 
     // ViewHolder class to hold the view elements
-    class NlmAhidfAdapterViewHolder(val mBinding: ItemNlmEdpBinding) : RecyclerView.ViewHolder(mBinding.root) {
+    class NlmAhidfAdapterViewHolder(val mBinding: ItemNlmEdpBinding) :
+        RecyclerView.ViewHolder(mBinding.root) {
     }
 
     // Inflate the item layout and create the holder
@@ -43,25 +46,25 @@ class NlmAhidfAdapter(
     }
 
     // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: NlmAhidfAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: NlmAhidfAdapterViewHolder,
+        @SuppressLint("RecyclerView") position: Int
+    ) {
         val item = list[position]
 
-        if(item.is_view){
+        if (item.is_view) {
             holder.mBinding.ivView.showView()
-        }
-        else{
+        } else {
             holder.mBinding.ivView.hideView()
         }
-        if(item.is_delete){
+        if (item.is_delete) {
             holder.mBinding.ivDelete.showView()
-        }
-        else{
+        } else {
             holder.mBinding.ivDelete.hideView()
         }
-        if(item.is_edit){
+        if (item.is_edit) {
             holder.mBinding.ivEdit.showView()
-        }
-        else{
+        } else {
             holder.mBinding.ivEdit.hideView()
         }
 
@@ -71,10 +74,22 @@ class NlmAhidfAdapter(
         holder.mBinding.etNlmStatus.text = item.is_draft_nlm.toString()
         holder.mBinding.etIAStatus.text = item.is_draft_ia.toString()
         holder.mBinding.ivView.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(
+                Intent(context, AddAnimalHusbandryActivity::class.java).putExtra(
+                    "View/Edit",
+                    "view"
+                )
+                    .putExtra("itemId", item.id)
+            )
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            context.startActivity(Intent(context, AddNewFspPlantStorageActivity::class.java))
+            context.startActivity(
+                Intent(context, AddAnimalHusbandryActivity::class.java).putExtra(
+                    "View/Edit",
+                    "edit"
+                )
+                    .putExtra("itemId", item.id)
+            )
         }
 
         holder.mBinding.ivDelete.setOnClickListener {
@@ -84,7 +99,7 @@ class NlmAhidfAdapter(
                     DialogCallback {
                     override fun onYes() {
                         if (item != null) {
-                            callBackDeleteAtId.onClickItem(item.id,position,0)
+                            callBackDeleteAtId.onClickItem(item.id, position, 0)
                         }
                     }
                 },
@@ -93,11 +108,20 @@ class NlmAhidfAdapter(
         }
 
     }
-
     // Return the total number of items
     override fun getItemCount(): Int {
         return list.size
+    }
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
+    fun onDeleteButtonClick(position: Int) {
+        list.removeAt(position)
+        notifyItemRemoved(position)
     }
 }
