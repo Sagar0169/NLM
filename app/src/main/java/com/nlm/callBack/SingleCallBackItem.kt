@@ -6,6 +6,7 @@ import com.nlm.model.AhidfMonitoring
 import com.nlm.model.AssistanceForEaTrainingInstitute
 import com.nlm.model.AssistanceForQfspFinancialProgres
 import com.nlm.model.FpFromForestLandFilledByNlm
+import com.nlm.model.FpFromNonForestFilledByNlmTeam
 import com.nlm.model.FspPlantStorageCommentsOfNlm
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
@@ -62,6 +63,10 @@ interface CallBackSemenDose {
 }
 interface CallBackFspCommentNlm {
     fun onClickItem(selectedItem: FspPlantStorageCommentsOfNlm, position:Int, isFrom:Int)
+}
+
+interface CallBackFspNonNlm {
+    fun onClickItem(selectedItem: FpFromNonForestFilledByNlmTeam, position:Int, isFrom:Int)
 }
 interface CallBackAssistanceEANlm {
     fun onClickItem(selectedItem: AssistanceForEaTrainingInstitute, position:Int, isFrom:Int)

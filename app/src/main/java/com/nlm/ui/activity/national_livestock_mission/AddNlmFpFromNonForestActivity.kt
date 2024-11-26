@@ -6,8 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.RotateDrawable
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -21,413 +22,457 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackDeleteFSPAtId
+import com.nlm.callBack.CallBackFspCommentNlm
+import com.nlm.callBack.CallBackFspNonNlm
 import com.nlm.callBack.CallBackItemUploadDocEdit
+import com.nlm.callBack.CallBackSemenDose
+import com.nlm.callBack.OnBackSaveAsDraft
+import com.nlm.databinding.ActivityAddNewFspPlantStorageBinding
 import com.nlm.databinding.ActivityAddNlmFpFromNonForestBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
-import com.nlm.databinding.ItemImportExoticGermplasmBinding
+import com.nlm.databinding.ItemFspNonPlantNlmBinding
+import com.nlm.databinding.ItemFspPlantStorageBinding
+import com.nlm.model.AddFspPlantStorageRequest
+import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FpFromNonForestFilledByNlmTeam
+import com.nlm.model.FspPlantStorageCommentsOfNlm
+import com.nlm.model.GetDropDownRequest
 import com.nlm.model.ImplementingAgencyDocument
-import com.nlm.model.ImportOfExoticGoatAchievement
-import com.nlm.model.ImportOfExoticGoatDetailImport
-import com.nlm.model.ImportOfExoticGoatVerifiedNlm
 import com.nlm.model.NlmFpFromNonForestAddRequest
+import com.nlm.model.RSPAddRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.model.RspAddAverage
 import com.nlm.ui.adapter.BottomSheetAdapter
-import com.nlm.ui.adapter.SupportingDocumentAdapterViewOnly
+import com.nlm.ui.adapter.FspNonPlantStorageNLMAdapter
+import com.nlm.ui.adapter.FspPlantStorageNLMAdapter
+import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
-import com.nlm.utilities.Utility.rotateDrawable
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
+import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class AddNlmFpFromNonForestActivity : BaseActivity<ActivityAddNlmFpFromNonForestBinding>(),
-    CallBackDeleteAtId, CallBackItemUploadDocEdit {
+class AddNlmFpFromNonForestActivity(
+) : BaseActivity<ActivityAddNlmFpFromNonForestBinding>(), CallBackDeleteAtId,
+    CallBackItemUploadDocEdit, CallBackFspNonNlm, CallBackDeleteFSPAtId {
     private var mBinding: ActivityAddNlmFpFromNonForestBinding? = null
-    private var savedAsDraft: Boolean = false
-    private var formId: Int? = null
+    private lateinit var stateAdapter: BottomSheetAdapter
+    private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
+    private lateinit var viewDocumentList: ArrayList<ImplementingAgencyDocument>
+    private lateinit var totalListDocument: ArrayList<ImplementingAgencyDocument>
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
+    private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
-    private var layoutManager: LinearLayoutManager? = null
-    private var stateList = ArrayList<ResultGetDropDown>()
-    private lateinit var bottomSheetDialog: BottomSheetDialog
-    private  var fpFromNonForestTeamList: MutableList<FpFromNonForestFilledByNlmTeam>? =null
-    private var AddDocumentAdapter: SupportingDocumentAdapterWithDialog? = null
-    private var ViewDocumentAdapter: SupportingDocumentAdapterViewOnly? = null
-    private var documentListNlm = ArrayList<ImplementingAgencyDocument>()
-    private var documentListIa = ArrayList<ImplementingAgencyDocument>()
-    private var documentList = ArrayList<ImplementingAgencyDocument>()
-    private lateinit var stateAdapter: BottomSheetAdapter
-    private var DocumentName: String? = null
-    private var DocumentId: Int? = null
-    private var DialogDocName: TextView? = null
-    private var UploadedDocumentName: String? = null
-    var body: MultipartBody.Part? = null
-    val viewModel = ViewModel()
-    var selectedValue: Int = 1
-    private var viewEdit: String? = null
-    private var itemId: Int? = null
-    private var stateId: Int? = null // Store selected state
-    private var districtId: Int? = null // Store selected state
-    private var districtName: String? = null // Store selected state
-    private var model: String? = null // Store selected state
+    private var savedAsDraftClick: OnBackSaveAsDraft? = null
+    private var districtList = ArrayList<ResultGetDropDown>()
     private var loading = true
-    private var recyclerScrollListener: RecyclerView.OnScrollListener =
-        object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0) {
-                    val visibleItemCount: Int? = layoutManager?.childCount
-                    val totalItemCount: Int? = layoutManager?.itemCount
-                    val pastVisiblesItems: Int? = layoutManager?.findFirstVisibleItemPosition()
-                    if (loading) {
-                        if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
-                            loading = false
-                            if (currentPage < totalPage) {
-                                //Call API here
-//                                dropDownApiCall(paginate = true, loader = true)
-                            }
-                        }
-                    }
-                }
-            }
+    private var isFrom: Int = 0
+    private var img: Int = 0
+    private var viewModel = ViewModel()
+    private var districtId: Int? = null // Store selected state
+    private var DocumentId: Int? = null
+    private var UploadedDocumentName: String? = null
+    private var DialogDocName: TextView? = null
+    private var DocumentName: String? = null
+    private var chooseDocName: String? = null
+    var body: MultipartBody.Part? = null
+    private lateinit var plantStorageList: ArrayList<FpFromNonForestFilledByNlmTeam>
+    private var plantStorageAdapter
+            : FspNonPlantStorageNLMAdapter? = null
+    private var viewEdit: String? = null
+    var itemId: Int? = null
+    private var dId: Int? = null
+    private var isSubmitted: Boolean = false
+    private var savedAsEdit: Boolean = false
+    private var savedAsDraft: Boolean = false
+
+
+    private val agency = listOf(
+        ResultGetDropDown(0, "GOVT"),
+        ResultGetDropDown(0, "Outsourced Agency")
+    )
+
+    private val land = listOf(
+        ResultGetDropDown(0, "CPR"),
+        ResultGetDropDown(0, "GOCHAR"),
+        ResultGetDropDown(0, "Government Farm"),
+        ResultGetDropDown(0, "Community Land"),
+        ResultGetDropDown(0, "Individual Land"),
+        ResultGetDropDown(0, "Waste Land"),
+    )
+
+
+    private val typeOfAgency = listOf(
+        ResultGetDropDown(0, "State Government"),
+        ResultGetDropDown(0, "Gaushala"),
+        ResultGetDropDown(0, "Outsourced Agent"),
+    )
+
+
+    inner class ClickActions {
+        fun backPress(view: View) {
+            onBackPressedDispatcher.onBackPressed()
         }
 
+        fun state(view: View) {
+            showBottomSheetDialog("state")
+        }
+
+        fun quality(view: View) {
+            showBottomSheetDialog("Variety")
+        }
+
+        fun agency(view: View) {
+            mBinding?.tvTypeOfAgency?.let { showBottomSheetDialogNonDis("typeOfAgency", it) }
+        }
+
+        fun land(view: View) {
+            mBinding?.tvLand?.let { showBottomSheetDialogNonDis("land", it) }
+        }
+
+        fun chooseFile(view: View) {
+            openOnlyPdfAccordingToPosition()
+            toast("Hi")
+            img = 1
+        }
+
+        fun district(view: View) {
+            showBottomSheetDialog("District")
+        }
+
+        fun districtNLM(view: View) {
+            showBottomSheetDialog("DistrictNLM")
+        }
+
+        fun addDocDialog(view: View) {
+            addDocumentDialog(this@AddNlmFpFromNonForestActivity, null, null)
+            img = 0
+        }
+
+        fun semenDose(view: View) {
+            semenDoseDialog(this@AddNlmFpFromNonForestActivity, 1, null, null)
+        }
+
+        fun save(view: View) {
+            totalListDocument.clear()
+
+            totalListDocument.addAll(DocumentList)
+            totalListDocument.addAll(viewDocumentList)
+            isSubmitted = true
+            if (viewEdit == "view") {
+//                listener?.onNextButtonClick()
+            }
+
+            if (viewEdit == "edit") {
+                savedAsEdit = true
+            }
+            if (itemId != 0) {
+                saveDataApi(itemId, 0)
+            } else {
+                saveDataApi(null, 0)
+            }
+
+
+        }
+
+
+        fun saveAsDraft(view: View) {
+            totalListDocument.clear()
+
+            totalListDocument.addAll(DocumentList)
+            totalListDocument.addAll(viewDocumentList)
+            if (viewEdit == "view") {
+//                listener?.onNextButtonClick()
+            }
+
+            if (viewEdit == "edit") {
+                savedAsEdit = true
+            }
+            if (itemId != 0) {
+                saveDataApi(itemId, 1)
+            } else {
+                saveDataApi(null, 1)
+            }
+            savedAsDraft = true
+        }
+
+    }
 
     override val layoutId: Int
         get() = R.layout.activity_add_nlm_fp_from_non_forest
 
     override fun initView() {
+        when (isFrom) {
+            1 -> {
+                mBinding!!.tvHeading.text = "Add New Fpfrom Non Forest"
+            }
+        }
+
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+        viewModel.init()
         viewEdit = intent.getStringExtra("View/Edit")
         itemId = intent.getIntExtra("itemId", 0)
-        if (viewEdit == "edit") {
-
-//            ViewEditApi(viewEdit)
-        }
-        addDocumentAdapterNlm()
-        addDocumentAdapterIa()
-    }
-
-    override fun setVariables() {
-
-        mBinding?.tvStateIa?.text =
-            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_name
+        dId = intent.getIntExtra("dId", 0)
+        DocumentList = arrayListOf()
+        totalListDocument = arrayListOf()
+        viewDocumentList = arrayListOf()
+        plantStorageList = arrayListOf()
+        isFrom = intent?.getIntExtra("isFrom", 0)!!
+        mBinding?.tvStateIa?.text = getPreferenceOfScheme(
+            this,
+            AppConstants.SCHEME,
+            Result::class.java
+        )?.state_name
         mBinding?.tvStateIa?.isEnabled = false
-        mBinding?.tvStateNlm?.text =
-            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_name
+
+        mBinding?.tvStateNlm?.text = getPreferenceOfScheme(
+            this,
+            AppConstants.SCHEME,
+            Result::class.java
+        )?.state_name
         mBinding?.tvStateNlm?.isEnabled = false
-        if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id == 24) {
+        mBinding?.tvStateNlm?.setTextColor(Color.parseColor("#000000"))
+        mBinding?.tvStateIa?.setTextColor(Color.parseColor("#000000"))
+        addDocumentAdapter = RSPSupportingDocumentAdapter(
+            this,
+            DocumentList,
+            viewEdit,
+            this,
+            this
+        )
+        if (getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 8
+        ) {
+            mBinding?.tvAddDocumentsIa?.hideView()
+            nlmAdapter()
+        }
+        if (getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 24
+        ) {
+
+            mBinding?.tvAddDocumentsNlm?.hideView()
             mBinding?.llNlm?.hideView()
             mBinding?.tvFilledByNlm?.hideView()
-        } else {
-            mBinding?.llIa?.hideView()
-            mBinding?.tvFilledByIa?.hideView()
-//            ViewEditApi("view")
-        }
-        if (viewEdit == "view") {
-            mBinding?.etLocation?.isEnabled = false
-            mBinding?.etImplementingAgencyIa?.isEnabled = false
-            mBinding?.etAreaCovered?.isEnabled = false
-            mBinding?.etVarietyOfFodder?.isEnabled = false
-            mBinding?.etSchemeGuidelines?.isEnabled = false
-            mBinding?.etGrantReceived?.isEnabled = false
-            mBinding?.etTarget?.isEnabled = false
-            mBinding?.etImplementingAgencyNlm?.isEnabled = false
-            mBinding?.tvAddAgency?.hideView()
-            mBinding?.tvAddDocumentsNlm?.hideView()
-            mBinding?.tvAddDocumentsIa?.hideView()
-//            ViewEditApi(viewEdit)
-        }
-    }
-
-    inner class ClickActions {
-        fun state(view: View) {
-//            showBottomSheetDialog("state")
+            iaAdapter()
         }
 
-        fun backPress(view: View) {
-            onBackPressedDispatcher.onBackPressed()
-        }
 
-        fun saveAndNext(view: View) {
-            if (viewEdit == "view") {
-                onBackPressedDispatcher.onBackPressed()
-            } else {
-                saveDataApi(0)
-            }
-            savedAsDraft = true
-        }
 
-        fun saveAsDraft(view: View) {
-            if (viewEdit == "view") {
-                onBackPressedDispatcher.onBackPressed()
-            } else {
-                saveDataApi(1)
-            }
-            savedAsDraft = true
-        }
 
-        fun addDocumentIa(view: View) {
-            addDocumentDialog(this@AddNlmFpFromNonForestActivity, null, null)
-        }
-
-        fun addDocumentNlm(view: View) {
-            addDocumentDialog(this@AddNlmFpFromNonForestActivity, null, null)
-        }
-
-        fun addAgency(view: View) {
-
-        }
-    }
-
-    override fun setObservers() {
-
-        viewModel.nlmFpFromNonForestAddEditResult.observe(this) {
-            val userResponseModel = it
-            if (userResponseModel.statuscode == 401) {
-                Utility.logout(this)
-            }
-            if (userResponseModel != null) {
-                if (userResponseModel._resultflag == 0) {
-                    mBinding?.llParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
-                }
-                else {
-                    if (viewEdit == "view") {
-
-                        formId = userResponseModel._result.id
-                        documentListNlm.clear()
-                        documentListIa.clear()
-
-                        userResponseModel._result.fp_from_non_forest_document.forEach { document ->
-                            if (document.nlm_document == null) {
-                                if (getPreferenceOfScheme(
-                                        this,
-                                        AppConstants.SCHEME,
-                                        Result::class.java
-                                    )?.role_id == 24
-                                ) {
-
-                                    documentListIa.add(document)
-                                } else {
-                                    documentListNlm.add(document)
-                                }
-                            } else {
-                                documentList.add(document)
-                            }
-                        }
-                        AddDocumentAdapter?.notifyDataSetChanged()
-                        ViewDocumentAdapter?.notifyDataSetChanged()
-
-//                        userResponseModel._result.import_of_exotic_goat_achievement?.let { it1 ->
-//                            AchievementList?.addAll(it1)
-//                        } ?: run {
-//                            // Add an item with empty fields if data is null
-//                            AchievementList?.add(
-//                                ImportOfExoticGoatAchievement(
-//                                    number_of_animals = null,
-//                                    f1_generation_produced = "",
-//                                    f2_generation_produced = "",
-//                                    no_of_animals_f1 = null,
-//                                    no_of_animals_f2 = null,
-//                                    balance = "",
-//                                    performance_animals_doorstep = "",
-//                                    import_of_exotic_goat_id = null,
-//                                    id = null,
-//                                )
-//                            )
-//                        }
-//                        AchievementAdapter?.notifyDataSetChanged()
-
-                    } else if (viewEdit == "edit") {
-                        documentListIa.clear()
-                        documentListNlm.clear()
-                        userResponseModel._result.fp_from_non_forest_document?.forEach { document ->
-                            if (document.nlm_document == null) {
-                                if (getPreferenceOfScheme(
-                                        this,
-                                        AppConstants.SCHEME,
-                                        Result::class.java
-                                    )?.role_id == 24
-                                ) {
-                                    documentListIa.add(document)
-                                } else {
-                                    documentListNlm.add(document)
-                                }
-                            } else {
-                                documentList.add(document)
-                            }
-                        }
-                        AddDocumentAdapter?.notifyDataSetChanged()
-                        ViewDocumentAdapter?.notifyDataSetChanged()
-                        formId = userResponseModel._result.id
-//                        AchievementList?.clear()
-//
-//                        userResponseModel._result.import_of_exotic_goat_achievement?.let { it1 ->
-//                            AchievementList?.addAll(
-//                                it1
-//                            )
-//                        }
-//                        AchievementAdapter?.notifyDataSetChanged()
-
-                    } else {
-                        mBinding?.llParent?.let { it1 ->
-                            showSnackbar(
-                                it1,
-                                userResponseModel.message
-                            )
-                        }
-                    }
-                    if (savedAsDraft) {
-                        onBackPressedDispatcher.onBackPressed()
-                        mBinding?.llParent?.let { it1 ->
-                            showSnackbar(
-                                it1,
-                                userResponseModel.message
-                            )
-                        }
-                    }
-                }
-            }
-        }
-
-        viewModel.getProfileUploadFileResult.observe(this) {
-            val userResponseModel = it
-            if (userResponseModel != null) {
-                if (userResponseModel.statuscode == 401) {
-                    Utility.logout(this)
-                } else if (userResponseModel._resultflag == 0) {
-                    mBinding?.llParent?.let { it1 ->
-                        showSnackbar(
-                            it1,
-                            userResponseModel.message
-                        )
-                    }
-
-                } else {
-                    DocumentId = userResponseModel._result.id
-                    UploadedDocumentName = userResponseModel._result.document_name
-                    mBinding?.llParent?.let { it1 ->
-                        showSnackbar(
-                            it1,
-                            userResponseModel.message
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                REQUEST_iMAGE_PDF -> {
-                    data?.data?.let { uri ->
-                        val projection = arrayOf(
-                            MediaStore.MediaColumns.DISPLAY_NAME,
-                            MediaStore.MediaColumns.SIZE
-                        )
-                        val cursor = contentResolver.query(uri, projection, null, null, null)
-                        cursor?.use {
-                            if (it.moveToFirst()) {
-                                DocumentName =
-                                    it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                DialogDocName?.text = DocumentName
-
-                                val requestBody = convertToRequestBody(this, uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
-//                                use this code to add new view with image name and uri
-                            }
-                            viewModel.getProfileUploadFile(
-                                context = this,
-                                document_name = body,
-                                user_id = getPreferenceOfScheme(
-                                    this,
-                                    AppConstants.SCHEME,
-                                    Result::class.java
-                                )?.user_id,
-                                table_name = getString(R.string.artificial_insemination_document).toRequestBody(
-                                    MultipartBody.FORM
-                                ),
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun addDocumentAdapterNlm() {
-        AddDocumentAdapter =
-            SupportingDocumentAdapterWithDialog(this, documentListNlm, viewEdit, this, this)
-        mBinding?.rvSupportDocumentNlm?.adapter = AddDocumentAdapter
-        mBinding?.rvSupportDocumentNlm?.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun addDocumentAdapterIa() {
-        ViewDocumentAdapter = SupportingDocumentAdapterViewOnly(documentListNlm, "viewEdit")
-        mBinding?.ShowDocumentRv?.adapter = ViewDocumentAdapter
-        mBinding?.ShowDocumentRv?.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun saveDataApi(isDraft: Int?) {
-        viewModel.getNlmFpFromNonForestAddEdit(
-            this, true,
-            NlmFpFromNonForestAddRequest(
-                area_covered = mBinding?.etAreaCovered?.text.toString().toDoubleOrNull(),
-                created_by = null,
-                district_code = districtId,
-                fp_from_non_forest_document = documentListNlm,
-                fp_from_non_forest_filled_by_nlm_team = null,
-                grant_received = mBinding?.etGrantReceived?.text.toString(),
-                id = formId,
-                is_deleted = null,
-                is_draft = isDraft,
-                location = mBinding?.etLocation?.text.toString(),
-                name_implementing_agency = mBinding?.etImplementingAgencyNlm?.text.toString(),
-                role_id = getPreferenceOfScheme(
+        if (viewEdit == "view" || (getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 24
+                    )
+            ||
+            (getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 8
+                    )
+        ) {
+            if (getPreferenceOfScheme(
                     this,
                     AppConstants.SCHEME,
                     Result::class.java
-                )?.role_id,
-                scheme_guidelines = mBinding?.etSchemeGuidelines?.text.toString(),
+                )?.role_id == 8
+            ) {
+                mBinding?.tvStateIa?.isEnabled = false
+                mBinding?.tvDistrictIa?.isEnabled = false
+                mBinding?.etImplementingAgencyIa?.isEnabled = false
+                mBinding?.etLocation?.isEnabled = false
+                mBinding?.etAreaCovered?.isEnabled = false
+                mBinding?.tvLand?.isEnabled = false
+                mBinding?.tvTypeOfAgency?.isEnabled = false
+                mBinding?.etVarietyOfFodder?.isEnabled = false
+                mBinding?.etSchemeGuidelines?.isEnabled = false
+                mBinding?.etGrantReceived?.isEnabled = false
+                mBinding?.etTarget?.isEnabled = false
+                mBinding?.tvAddDocumentsIa?.hideView()
+            }
+            if (getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id == 24
+            ) {
+                mBinding?.tvStateNlm?.isEnabled = false
+                mBinding?.tvDistrictNlm?.isEnabled = false
+                mBinding?.etImplementingAgencyNlm?.isEnabled = false
+                mBinding?.tvAddAgency?.isEnabled = false
+                mBinding?.tvAddDocumentsNlm?.hideView()
+                mBinding?.tvAddAgency?.hideView()
+                mBinding?.llNlm?.hideView()
+                mBinding?.tvFilledByNlm?.hideView()
+            }
+            if (viewEdit == "view") {
+                viewEditApi()
+                mBinding?.tvStateNlm?.isEnabled = false
+                mBinding?.tvDistrictNlm?.isEnabled = false
+                mBinding?.etImplementingAgencyNlm?.isEnabled = false
+                mBinding?.tvAddAgency?.isEnabled = false
+                mBinding?.tvAddDocumentsNlm?.hideView()
+                mBinding?.tvAddAgency?.hideView()
+                mBinding?.tvStateIa?.isEnabled = false
+                mBinding?.tvDistrictIa?.isEnabled = false
+                mBinding?.etImplementingAgencyIa?.isEnabled = false
+                mBinding?.etLocation?.isEnabled = false
+                mBinding?.etAreaCovered?.isEnabled = false
+                mBinding?.tvLand?.isEnabled = false
+                mBinding?.tvTypeOfAgency?.isEnabled = false
+                mBinding?.etVarietyOfFodder?.isEnabled = false
+                mBinding?.etSchemeGuidelines?.isEnabled = false
+                mBinding?.etGrantReceived?.isEnabled = false
+                mBinding?.etTarget?.isEnabled = false
+                mBinding?.tvAddDocumentsIa?.hideView()
+                mBinding?.tvSaveDraft?.hideView()
+                mBinding?.tvSendOtp?.hideView()
+            }
+        }
+        if (viewEdit == "edit") {
+            viewEditApi()
+        }
+        semenDoseAdapter()
+    }
+
+    private fun viewEditApi() {
+
+        viewModel.getNlmFpFromNonForestAddEdit(
+            this, true,
+            NlmFpFromNonForestAddRequest(
+                id = itemId,
                 state_code = getPreferenceOfScheme(
                     this,
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.state_code,
-                status = null,
-                target_achievement = mBinding?.etTarget?.text.toString(),
-                type_of_agency = mBinding?.tvTypeOfAgency?.text.toString(),
-                type_of_land = mBinding?.tvLand?.text.toString(),
                 user_id = getPreferenceOfScheme(
                     this,
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.user_id.toString(),
-                variety_of_fodder = mBinding?.etVarietyOfFodder?.text.toString(),
+                district_code = dId,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                is_type = viewEdit
             )
         )
     }
 
-    private fun addImportDetailDialog(context: Context,selectedItem: ImportOfExoticGoatDetailImport?, position: Int?) {
-        val bindingDialog: ItemImportExoticGermplasmBinding = DataBindingUtil.inflate(
+    private fun semenDoseAdapter() {
+        plantStorageAdapter =
+            FspNonPlantStorageNLMAdapter(
+                this@AddNlmFpFromNonForestActivity,
+                plantStorageList,
+                viewEdit,
+                this@AddNlmFpFromNonForestActivity,
+                this, this
+            )
+        mBinding?.rvAgency?.adapter = plantStorageAdapter
+        mBinding?.rvAgency?.layoutManager =
+            LinearLayoutManager(this@AddNlmFpFromNonForestActivity)
+    }
+
+    private fun nlmAdapter() {
+        addDocumentAdapter = RSPSupportingDocumentAdapter(
+            this,
+            DocumentList,
+            viewEdit,
+            this,
+            this
+        )
+        mBinding?.rvSupportDocumentNlm?.adapter = addDocumentAdapter
+        mBinding?.rvSupportDocumentNlm?.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun iaAdapter() {
+        addDocumentAdapter = RSPSupportingDocumentAdapter(
+            this,
+            viewDocumentList,
+            viewEdit,
+            this,
+            this
+        )
+        mBinding?.ShowDocumentRv?.adapter = addDocumentAdapter
+        mBinding?.ShowDocumentRv?.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun saveDataApi(itemId: Int?, draft: Int?) {
+
+        viewModel.getNlmFpFromNonForestAddEdit(
+            this@AddNlmFpFromNonForestActivity, true,
+            NlmFpFromNonForestAddRequest(
+                id = itemId,
+                district_code = districtId,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                is_draft = draft,
+                name_implementing_agency = if (mBinding?.etImplementingAgencyNlm?.text.isNullOrEmpty()) {
+                    mBinding?.etImplementingAgencyIa?.text.toString()
+                } else {
+                    mBinding?.etImplementingAgencyNlm?.text.toString()
+                },
+                location = mBinding?.etLocation?.text.toString(),
+                area_covered = mBinding?.etAreaCovered?.text.toString().toDoubleOrNull(),
+                type_of_land = mBinding?.tvLand?.text.toString(),
+                type_of_agency = mBinding?.tvTypeOfAgency?.text.toString(),
+                variety_of_fodder = mBinding?.etVarietyOfFodder?.text.toString(),
+                scheme_guidelines = mBinding?.etSchemeGuidelines?.text.toString(),
+                grant_received = mBinding?.etGrantReceived?.text.toString(),
+                target_achievement = mBinding?.etTarget?.text.toString(),
+                fp_from_non_forest_document= totalListDocument,
+                fp_from_non_forest_filled_by_nlm_team= plantStorageList,
+            )
+        )
+    }
+
+
+    private fun semenDoseDialog(
+        context: Context,
+        isFrom: Int,
+        selectedItem: FpFromNonForestFilledByNlmTeam?,
+        position: Int?
+    ) {
+        val bindingDialog: ItemFspNonPlantNlmBinding = DataBindingUtil.inflate(
             layoutInflater,
-            R.layout.item_import_exotic_germplasm,
+            R.layout.item_fsp_non_plant_nlm,
             null,
             false
         )
@@ -444,62 +489,83 @@ class AddNlmFpFromNonForestActivity : BaseActivity<ActivityAddNlmFpFromNonForest
         val lp: WindowManager.LayoutParams = dialog.window!!.attributes
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        bindingDialog.tvSubmit.showView()
         bindingDialog.btnDelete.hideView()
-        if(selectedItem!=null )
-        {
-            bindingDialog.etSpeciesBreed.setText(selectedItem.species_breed)
-            bindingDialog.etUnit.setText(selectedItem.unit)
-            bindingDialog.etYear.setText(selectedItem.year.toString())
-            bindingDialog.etProcurementCost.setText(selectedItem.procurement_cost.toString())
-            bindingDialog.etPlaceOfProcurement.setText(selectedItem.place_of_procurement)
-            bindingDialog.etPlaceOfInduction.setText(selectedItem.place_of_induction)
+        bindingDialog.btnEdit.hideView()
+        bindingDialog.tvSubmit.showView()
+        bindingDialog.tvAgency.setOnClickListener {
+            showBottomSheetDialogNonDis("agency", bindingDialog.tvAgency)
+        }
+//        bindingDialog.tvDistrict.setOnClickListener {
+//            showBottomSheetDialogNonDis("District", bindingDialog.tvAgency)
+//        }
+        if (selectedItem != null && isFrom == 2) {
+            bindingDialog.tvDistrict.text = selectedItem.district_code.toString()
+            bindingDialog.etBlock.setText(selectedItem.block_name)
+            bindingDialog.etVillage.setText(selectedItem.village_name)
+            bindingDialog.etArea.setText(selectedItem.area_covered)
+            bindingDialog.etEstimated.setText(selectedItem.estimated_quantity)
+            bindingDialog.etConsumer.setText(selectedItem.consumer_fodder)
+            bindingDialog.tvAgency.text = selectedItem.agency_involved
         }
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etSpeciesBreed.text.toString().isNotEmpty()||bindingDialog.etUnit.text.toString().isNotEmpty()||bindingDialog.etYear.text.toString().isNotEmpty()||bindingDialog.etProcurementCost.text.toString().isNotEmpty()||bindingDialog.etPlaceOfProcurement.text.toString().isNotEmpty()||bindingDialog.etPlaceOfInduction.text.toString().isNotEmpty())
-            {
-                if(selectedItem!=null)
-                {
+            if (bindingDialog.tvDistrict.text.toString().isNotEmpty()
+                || bindingDialog.etBlock.text.toString().isNotEmpty()
+                || bindingDialog.etVillage.text.toString().isNotEmpty()
+                || bindingDialog.etArea.text.toString().isNotEmpty()
+                || bindingDialog.etEstimated.text.toString().isNotEmpty()
+                || bindingDialog.etConsumer.text.toString().isNotEmpty()
+                || bindingDialog.tvAgency.text.toString().isNotEmpty()
+            ) {
+                if (selectedItem != null) {
                     if (position != null) {
-//                        DetailOfImportList?.set(position,ImportOfExoticGoatDetailImport(
-//                            species_breed =bindingDialog.etSpeciesBreed.text.toString(),
-//                            unit = bindingDialog.etUnit.text.toString(),
-//                            year = bindingDialog.etYear.text.toString(),
-//                            procurement_cost = bindingDialog.etProcurementCost.text.toString().toIntOrNull(),
-//                            place_of_procurement = bindingDialog.etPlaceOfProcurement.text.toString(),
-//                            place_of_induction = bindingDialog.etPlaceOfInduction.text.toString(),
-//                            import_of_exotic_goat_id = selectedItem.import_of_exotic_goat_id,
-//                            id = selectedItem.id,
-//                        ))
-//                        DetailOfImportAdapter?.notifyItemChanged(position)
-                    } }
-                else{
-//                    DetailOfImportList?.add(ImportOfExoticGoatDetailImport(
-//                        species_breed =bindingDialog.etSpeciesBreed.text.toString(),
-//                        unit = bindingDialog.etUnit.text.toString(),
-//                        year = bindingDialog.etYear.text.toString(),
-//                        procurement_cost = bindingDialog.etProcurementCost.text.toString().toIntOrNull(),
-//                        place_of_procurement = bindingDialog.etPlaceOfProcurement.text.toString(),
-//                        place_of_induction = bindingDialog.etPlaceOfInduction.text.toString(),
-//                        import_of_exotic_goat_id = null,
-//                        id = null,
-//                    ))
-//                    DetailOfImportList?.size?.minus(1).let {
-//                        if (it != null) {
-//                            DetailOfImportAdapter?.notifyItemInserted(it)
-//                        }
-//                    }
+                        plantStorageList[position] =
+                            FpFromNonForestFilledByNlmTeam(
+                                selectedItem.id,
+                                districtId,
+                                bindingDialog.etBlock.text.toString(),
+                                bindingDialog.etVillage.text.toString(),
+                                bindingDialog.etArea.text.toString(),
+                                bindingDialog.etEstimated.text.toString(),
+                                bindingDialog.etConsumer.text.toString(),
+                                bindingDialog.tvAgency.text.toString(),
+                                selectedItem.fp_from_non_forest_id
+                            )
+                        plantStorageAdapter
+                            ?.notifyItemChanged(position)
+                    }
+
+                } else {
+                    plantStorageList.add(
+                        FpFromNonForestFilledByNlmTeam(
+                            null,
+                            districtId,
+                            bindingDialog.etBlock.text.toString(),
+                            bindingDialog.etVillage.text.toString(),
+                            bindingDialog.etArea.text.toString(),
+                            bindingDialog.etEstimated.text.toString(),
+                            bindingDialog.etConsumer.text.toString(),
+                            bindingDialog.tvAgency.text.toString(),
+                            null
+                        )
+                    )
+                    plantStorageList.size.minus(1).let {
+                        plantStorageAdapter
+                            ?.notifyItemInserted(it)
+                    }
                 }
                 dialog.dismiss()
-            }
-            else {
-                mBinding?.llParent?.let { it1 -> showSnackbar(it1, getString(R.string.please_enter_atleast_one_field)) }
+
+            } else {
+
+                showSnackbar(
+                    mBinding!!.clParent,
+                    getString(R.string.please_enter_atleast_one_field)
+                )
             }
         }
         dialog.show()
     }
-
-    private fun showBottomSheetDialog(type: String) {
+    private fun showBottomSheetDialogNonDis(type: String, full: TextView) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
         view.layoutParams = ViewGroup.LayoutParams(
@@ -516,22 +582,47 @@ class AddNlmFpFromNonForestActivity : BaseActivity<ActivityAddNlmFpFromNonForest
 
         // Define a variable for the selected list and TextView
         val selectedList: List<ResultGetDropDown>
-        val selectedTextView: TextView?
+        val selectedTextView: TextView
 
         // Initialize based on type
         when (type) {
-            "State" -> {
-                model = "State"
+//            "typeSemen" -> {
+//                selectedList = typeSemen
+//                selectedTextView = mBinding!!.tvSemenStation
+//            }
+//
+//            "StateNDD" -> {
+//                selectedList = stateList
+//                selectedTextView = binding!!.tvStateNDD
+//            }
+//
+//            "District" -> {
 //                dropDownApiCall(paginate = false, loader = true)
-                selectedList = stateList
-                selectedTextView = mBinding?.tvStateNlm
+//                selectedList = districtList
+//                selectedTextView = mBinding!!.tvDistrict
+//            }
+
+//            "DistrictNLM" -> {
+//                dropDownApiCall(paginate = false, loader = true)
+//                selectedList = districtList
+//                selectedTextView = mBinding!!.tvDistrictNlm
+//            }
+
+            "agency" -> {
+                img = 2
+                selectedList = agency
+                selectedTextView = full
             }
 
-            "District" -> {
-//                dropDownApiCallDistrict(paginate = false, loader = true)
-                selectedList = stateList // Update the list to districtList for District
-                model = "Districts"
-                selectedTextView = mBinding?.tvDistrictNlm
+
+            "typeOfAgency" -> {
+                selectedList = typeOfAgency
+                selectedTextView = full
+            }
+
+            "land" -> {
+                selectedList = land
+                selectedTextView = full
             }
 
             else -> return
@@ -539,42 +630,31 @@ class AddNlmFpFromNonForestActivity : BaseActivity<ActivityAddNlmFpFromNonForest
 
         // Set up the adapter
         stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
-            // Handle item click
-            selectedTextView?.text = selectedItem
-
-            // Store the appropriate ID based on the type
-            if (type == "State") {
-                stateId = id  // Save the selected state ID
-            } else if (type == "District") {
-                districtName = selectedItem
-                districtId = id  // Save the selected district ID
-            }
-
-            if (model == "Districts") {
-                districtName = selectedItem
-                districtId = id
-            } else {
-                stateId = id
-            }
-            selectedTextView?.setTextColor(ContextCompat.getColor(this, R.color.black))
+            // Handle state item click
+            selectedTextView.text = selectedItem
+            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
             bottomSheetDialog.dismiss()
         }
 
-        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+
+        layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvBottomSheet.layoutManager = layoutManager
         rvBottomSheet.adapter = stateAdapter
         rvBottomSheet.addOnScrollListener(recyclerScrollListener)
         bottomSheetDialog.setContentView(view)
 
+
         // Rotate drawable
         val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
         var rotatedDrawable = rotateDrawable(drawable, 180f)
-        selectedTextView?.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
 
         // Set a dismiss listener to reset the view visibility
         bottomSheetDialog.setOnDismissListener {
             rotatedDrawable = rotateDrawable(drawable, 0f)
-            selectedTextView?.setCompoundDrawablesWithIntrinsicBounds(
+            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 null,
                 rotatedDrawable,
@@ -611,69 +691,63 @@ class AddNlmFpFromNonForestActivity : BaseActivity<ActivityAddNlmFpFromNonForest
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName = bindingDialog.etDoc
-        bindingDialog.btnDelete.setOnClickListener {
-            dialog.dismiss()
-        }
+
         if (selectedItem != null) {
             if (getPreferenceOfScheme(
                     this,
                     AppConstants.SCHEME,
                     Result::class.java
-                )?.role_id == 24
+                )?.role_id == 8
             ) {
-                UploadedDocumentName = selectedItem.ia_document
-                bindingDialog.etDoc.text = selectedItem.ia_document
-            } else {
-                UploadedDocumentName = selectedItem.nlm_document
                 bindingDialog.etDoc.text = selectedItem.nlm_document
+                bindingDialog.etDescription.setText(selectedItem.description)
+            } else {
+                bindingDialog.etDoc.text = selectedItem.ia_document
+                bindingDialog.etDescription.setText(selectedItem.description)
             }
-            bindingDialog.etDescription.setText(selectedItem.description)
 
         }
         bindingDialog.tvChooseFile.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
-
-                openOnlyPdfAccordingToPosition()
-            } else {
-                mBinding?.llParent?.let { showSnackbar(it, "please enter description") }
-            }
+            openOnlyPdfAccordingToPosition()
         }
+        bindingDialog.btnDelete.setOnClickListener {
+            dialog.dismiss()
+        }
+
+
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
-                if (getPreferenceOfScheme(
-                        this,
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.role_id == 24
-                ) {
-                    if (selectedItem != null) {
-                        if (position != null) {
-                            documentListIa[position] = ImplementingAgencyDocument(
-                                description = bindingDialog.etDescription.text.toString(),
-                                ia_document = UploadedDocumentName,
-                                nlm_document = null,
-                                import_of_exotic_goat_id = selectedItem.import_of_exotic_goat_id,
-                                id = selectedItem.id,
-                            )
-                            AddDocumentAdapter?.notifyItemChanged(position)
-                            dialog.dismiss()
+                if (selectedItem != null) {
+                    if (position != null) {
+                        if (getPreferenceOfScheme(
+                                this,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.role_id == 8
+                        ) {
+                            DocumentList[position] =
+                                ImplementingAgencyDocument(
+                                    description = bindingDialog.etDescription.text.toString(),
+                                    ia_document = null,
+                                    nlm_document = UploadedDocumentName,
+                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+                                    id = selectedItem.id,
+                                )
+                        } else {
+                            viewDocumentList[position] =
+                                ImplementingAgencyDocument(
+                                    description = bindingDialog.etDescription.text.toString(),
+                                    ia_document = UploadedDocumentName,
+                                    nlm_document = null,
+                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+                                    id = selectedItem.id,
+                                )
                         }
 
-                    } else {
-                        documentListIa.add(
-                            ImplementingAgencyDocument(
-                                description = bindingDialog.etDescription.text.toString(),
-                                ia_document = UploadedDocumentName,
-                                nlm_document = null,
-                            )
-                        )
-
-                        documentListNlm.size.minus(1).let {
-                            AddDocumentAdapter?.notifyItemInserted(it)
-                            Log.d("DOCUMENTLIST", documentListIa.toString())
-                            dialog.dismiss()
-                        }
+                        addDocumentAdapter?.notifyItemChanged(position)
+                        dialog.dismiss()
                     }
+
                 } else {
                     if (getPreferenceOfScheme(
                             this,
@@ -681,38 +755,49 @@ class AddNlmFpFromNonForestActivity : BaseActivity<ActivityAddNlmFpFromNonForest
                             Result::class.java
                         )?.role_id == 8
                     ) {
-                        if (selectedItem != null) {
-                            if (position != null) {
-                                documentListNlm[position] = ImplementingAgencyDocument(
-                                    description = bindingDialog.etDescription.text.toString(),
-                                    ia_document = null,
-                                    nlm_document = UploadedDocumentName,
-                                    fp_from_non_forest_id = selectedItem.fp_from_non_forest_id,
-                                    id = selectedItem.id,
-                                )
-                                AddDocumentAdapter?.notifyItemChanged(position)
-                                dialog.dismiss()
-                            }
-
-                        } else {
-                            documentListNlm.add(
-                                ImplementingAgencyDocument(
-                                    description = bindingDialog.etDescription.text.toString(),
-                                    ia_document = null,
-                                    nlm_document = UploadedDocumentName,
-
-                                    )
+                        DocumentList.add(
+                            ImplementingAgencyDocument(
+                                bindingDialog.etDescription.text.toString(),
+                                nlm_document = DocumentName,
+                                id = null,
+                                fsp_plant_storage_id = null,
+                                ia_document = null
                             )
-                            documentListNlm.size.minus(1).let {
-                                AddDocumentAdapter?.notifyItemInserted(it)
-                                dialog.dismiss()
-                            }
+                        )
+                    } else {
+                        viewDocumentList.add(
+                            ImplementingAgencyDocument(
+                                bindingDialog.etDescription.text.toString(),
+                                ia_document = DocumentName,
+                                id = null,
+                                fsp_plant_storage_id = null,
+                                nlm_document = null
+                            )
+                        )
+                    }
+
+
+                    if (getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.role_id == 8
+                    ) {
+                        DocumentList.size.minus(1).let {
+                            addDocumentAdapter?.notifyItemInserted(it)
+                            dialog.dismiss()
+//
+                        }
+                    } else {
+                        viewDocumentList.size.minus(1).let {
+                            addDocumentAdapter?.notifyItemInserted(it)
+                            dialog.dismiss()
                         }
                     }
                 }
             } else {
                 showSnackbar(
-                    mBinding!!.rlToolbar,
+                    mBinding!!.clParent,
                     getString(R.string.please_enter_atleast_one_field)
                 )
             }
@@ -728,13 +813,400 @@ class AddNlmFpFromNonForestActivity : BaseActivity<ActivityAddNlmFpFromNonForest
         startActivityForResult(intent, REQUEST_iMAGE_PDF)
     }
 
-    override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
-        if (isFrom == 1) {
-            position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_iMAGE_PDF -> {
+                    data?.data?.let { uri ->
+                        val projection = arrayOf(
+                            MediaStore.MediaColumns.DISPLAY_NAME,
+                            MediaStore.MediaColumns.SIZE
+                        )
+                        val cursor = this.contentResolver.query(
+                            uri,
+                            projection,
+                            null,
+                            null,
+                            null
+                        )
+                        cursor?.use {
+                            if (it.moveToFirst()) {
+                                DocumentName =
+                                    it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
+
+                                DialogDocName?.text = DocumentName
+
+
+                                val requestBody = convertToRequestBody(this, uri)
+                                body = MultipartBody.Part.createFormData(
+                                    "document_name",
+                                    DocumentName,
+                                    requestBody
+                                )
+//                                use this code to add new view with image name and uri
+                            }
+                            viewModel.getProfileUploadFile(
+                                context = this,
+                                table_name = getString(R.string.fp_from_non_forest_document).toRequestBody(
+                                    MultipartBody.FORM
+                                ),
+                                document_name = body,
+                                user_id = getPreferenceOfScheme(
+                                    this,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id,
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 
-    override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
-        addDocumentDialog(this, selectedItem, position)
+
+    private fun showBottomSheetDialog(type: String) {
+        bottomSheetDialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
+        view.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
+        val close = view.findViewById<TextView>(R.id.tvClose)
+
+        close.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        // Define a variable for the selected list and TextView
+        val selectedList: List<ResultGetDropDown>
+        val selectedTextView: TextView
+
+        // Initialize based on type
+        when (type) {
+//            "typeSemen" -> {
+//                selectedList = typeSemen
+//                selectedTextView = mBinding!!.tvSemenStation
+//            }
+//
+//            "StateNDD" -> {
+//                selectedList = stateList
+//                selectedTextView = binding!!.tvStateNDD
+//            }
+
+            "District" -> {
+                dropDownApiCall(paginate = false, loader = true)
+                selectedList = districtList
+                selectedTextView = mBinding!!.tvDistrictIa
+            }
+
+            "DistrictNLM" -> {
+                dropDownApiCall(paginate = false, loader = true)
+                selectedList = districtList
+                selectedTextView = mBinding!!.tvDistrictNlm
+            }
+
+
+//            "Status" -> {
+//                selectedList = status
+//                selectedTextView = binding!!.tvStatus
+//            }
+//
+//            "Reading" -> {
+//                selectedList = reading
+//                selectedTextView = binding!!.tvReadingMaterial
+//            }
+
+            else -> return
+        }
+
+        // Set up the adapter
+        stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
+            // Handle state item click
+            selectedTextView.text = selectedItem
+            districtId = id
+            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
+            bottomSheetDialog.dismiss()
+        }
+
+
+
+        layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.layoutManager = layoutManager
+        rvBottomSheet.adapter = stateAdapter
+        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
+        bottomSheetDialog.setContentView(view)
+
+
+        // Rotate drawable
+        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
+        var rotatedDrawable = rotateDrawable(drawable, 180f)
+        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+
+        // Set a dismiss listener to reset the view visibility
+        bottomSheetDialog.setOnDismissListener {
+            rotatedDrawable = rotateDrawable(drawable, 0f)
+            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                rotatedDrawable,
+                null
+            )
+        }
+
+        // Show the bottom sheet
+        bottomSheetDialog.show()
     }
+
+    private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
+        drawable?.mutate() // Mutate the drawable to avoid affecting other instances
+
+        val rotateDrawable = RotateDrawable()
+        rotateDrawable.drawable = drawable
+        rotateDrawable.fromDegrees = 0f
+        rotateDrawable.toDegrees = angle
+        rotateDrawable.level = 10000 // Needed to apply the rotation
+
+        return rotateDrawable
+    }
+
+    private var recyclerScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val visibleItemCount: Int? = layoutManager?.childCount
+                    val totalItemCount: Int? = layoutManager?.itemCount
+                    val pastVisiblesItems: Int? = layoutManager?.findFirstVisibleItemPosition()
+                    if (loading) {
+                        if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
+                            loading = false
+                            if (currentPage < totalPage) {
+                                //Call API here
+                                dropDownApiCall(paginate = true, loader = true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
+        if (paginate) {
+            currentPage++
+        }
+        viewModel.getDropDownApi(
+            this, loader, GetDropDownRequest(
+                20,
+                "Districts",
+                currentPage,
+                getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+            )
+        )
+    }
+
+    override fun setVariables() {
+    }
+
+    override fun setObservers() {
+        viewModel.getDropDownResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this@AddNlmFpFromNonForestActivity)
+            } else {
+                if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
+                    if (currentPage == 1) {
+                        districtList.clear()
+
+                        val remainingCount = userResponseModel.total_count % 10
+                        totalPage = if (remainingCount == 0) {
+                            val count = userResponseModel.total_count / 10
+                            count
+                        } else {
+                            val count = userResponseModel.total_count / 10
+                            count + 1
+                        }
+                    }
+                    districtList.addAll(userResponseModel._result)
+                    stateAdapter.notifyDataSetChanged()
+
+
+//                    mBinding?.tvNoDataFound?.hideView()
+//                    mBinding?.rvArtificialInsemination?.showView()
+                } else {
+//                    mBinding?.tvNoDataFound?.showView()
+//                    mBinding?.rvArtificialInsemination?.hideView()
+                }
+            }
+        }
+        viewModel.getProfileUploadFileResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel != null) {
+                if (userResponseModel.statuscode == 401) {
+                    Utility.logout(this)
+                } else if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+
+                } else {
+                    DocumentId = userResponseModel._result.id
+                    UploadedDocumentName = userResponseModel._result.document_name
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+                }
+            }
+        }
+
+        viewModel.nlmFpFromNonForestAddEditResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                } else {
+                    if (savedAsDraft) {
+                        onBackPressedDispatcher.onBackPressed()
+                    } else {
+                        if (viewEdit == "view" || viewEdit == "edit") {
+                            if (savedAsEdit) {
+//                                listener?.onNextButtonClick()
+                                onBackPressedDispatcher.onBackPressed()
+                                return@observe
+                            }
+                            districtId = userResponseModel._result.district_code
+                            mBinding?.tvStateIa?.text = userResponseModel._result.state_name
+                            mBinding?.tvStateNlm?.text = userResponseModel._result.state_name
+                            mBinding?.tvDistrictIa?.text = userResponseModel._result.district_name
+                            mBinding?.tvDistrictNlm?.text = userResponseModel._result.district_name
+                            mBinding?.tvDistrictIa?.setTextColor(Color.parseColor("#000000"))
+                            mBinding?.tvStateIa?.setTextColor(Color.parseColor("#000000"))
+                            mBinding?.tvStateNlm?.setTextColor(Color.parseColor("#000000"))
+                            mBinding?.tvDistrictNlm?.setTextColor(Color.parseColor("#000000"))
+                            mBinding?.etImplementingAgencyIa?.setText(userResponseModel._result.name_implementing_agency)
+                            mBinding?.etImplementingAgencyNlm?.setText(userResponseModel._result.name_implementing_agency)
+                            mBinding?.etLocation?.setText(userResponseModel._result.location)
+                            mBinding?.etAreaCovered?.setText(userResponseModel._result.area_covered.toString())
+                            mBinding?.tvLand?.text = userResponseModel._result.type_of_land
+                            mBinding?.tvTypeOfAgency?.setText(userResponseModel._result.type_of_agency)
+                            mBinding?.etVarietyOfFodder?.setText(userResponseModel._result.variety_of_fodder)
+                            mBinding?.etSchemeGuidelines?.setText(userResponseModel._result.scheme_guidelines)
+                            mBinding?.etGrantReceived?.setText(userResponseModel._result.grant_received)
+                            mBinding?.etTarget?.setText(userResponseModel._result.target_achievement)
+
+                            plantStorageList.clear()
+                            val comments =
+                                userResponseModel._result.fp_from_non_forest_filled_by_nlm_team
+                                    ?: emptyList()
+
+                            if (comments.isEmpty() && viewEdit == "view") {
+                                val dummyData = FpFromNonForestFilledByNlmTeam(
+                                  null,
+                                  null,
+                                  "",
+                                  "",
+                                  "",
+                                  "",
+                                  "",
+                                  "",
+                                  null,
+                                )
+                                plantStorageList.add(dummyData)
+                            } else {
+                                plantStorageList.addAll(comments)
+                            }
+
+
+                            plantStorageAdapter?.notifyDataSetChanged()
+                            DocumentList.clear()
+                            totalListDocument.clear()
+                            viewDocumentList.clear()
+                            val dummyData = ImplementingAgencyDocument(
+                                id = 0, // Or null, depending on your use case
+                                description = "",
+                                ia_document = "",
+                                nlm_document = "",
+                                fsp_plant_storage_id = 0 // Or null, depending on your use case
+                            )
+                            if (userResponseModel._result.fp_from_non_forest_document.isEmpty() && viewEdit == "view") {
+                                DocumentList.add(dummyData)
+                                viewDocumentList.add(dummyData)
+                            } else {
+                                userResponseModel._result.fp_from_non_forest_document.forEach { document ->
+                                    if (document.ia_document == null) {
+                                        DocumentList.add(document)//nlm
+                                    } else {
+                                        viewDocumentList.add(document)//ia
+
+                                    }
+                                }
+                                // Check if viewDocumentList is empty after the loop
+                                if (viewDocumentList.isEmpty() && viewEdit == "view") {
+                                    viewDocumentList.add(dummyData)
+                                }
+                                if (DocumentList.isEmpty() && viewEdit == "view") {
+                                    DocumentList.add(dummyData)
+                                }
+                            }
+                            iaAdapter()
+                            nlmAdapter()
+                            addDocumentAdapter?.notifyDataSetChanged()
+
+                        } else {
+                            onBackPressedDispatcher.onBackPressed()
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        }
+
+                    }
+
+
+                }
+            }
+        }
+
+    }
+
+    override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
+        position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+    }
+
+    override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
+        addDocumentDialog(this@AddNlmFpFromNonForestActivity, selectedItem, position)
+    }
+
+
+    override fun onClickItem(
+        selectedItem: FpFromNonForestFilledByNlmTeam,
+        position: Int,
+        isFrom: Int
+    ) {
+        semenDoseDialog(this, isFrom, selectedItem, position)
+    }
+
+    override fun onClickItemDelete(ID: Int?, position: Int) {
+        position.let { it1 -> plantStorageAdapter?.onDeleteButtonClick(it1) }
+    }
+
 }

@@ -549,11 +549,9 @@ class AddNewFspPlantStorageActivity(
                     Result::class.java
                 )?.role_id == 8
             ) {
-                UploadedDocumentName = selectedItem.nlm_document
                 bindingDialog.etDoc.text = selectedItem.nlm_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             } else {
-                UploadedDocumentName = selectedItem.ia_document
                 bindingDialog.etDoc.text = selectedItem.ia_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             }

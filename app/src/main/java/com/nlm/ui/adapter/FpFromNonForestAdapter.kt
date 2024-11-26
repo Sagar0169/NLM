@@ -1,6 +1,7 @@
 package com.nlm.ui.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -40,7 +41,7 @@ class FpFromNonForestAdapter(
     }
 
     // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: FpFromNonForestViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FpFromNonForestViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val item = list[position]
 
         if(item.is_view){

@@ -48,6 +48,7 @@ class AverageSemenDoseAdapter(
             holder.binding.etAnimal.isEnabled = false
             holder.binding.etAvgAge.isEnabled = false
             holder.binding.btnDelete.hideView()
+            holder.binding.btnEdit.hideView()
 
         } else if (viewEdit == "edit") {
             holder.binding.btnEdit.showView()

@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -158,6 +159,7 @@
                             android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:clickable="false"
+                            android:onClick="@{ClickAction::district}"
                             android:drawableEnd="@drawable/ic_arrow_down"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
@@ -242,6 +244,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:hint=""
                             android:maxLength="50"
+                            android:inputType="numberDecimal"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -267,6 +270,7 @@
                             android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:clickable="false"
+                            android:onClick="@{ClickAction::land}"
                             android:drawableEnd="@drawable/ic_arrow_down"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
@@ -294,6 +298,7 @@
                             android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:clickable="false"
+                            android:onClick="@{ClickAction::agency}"
                             android:drawableEnd="@drawable/ic_arrow_down"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
@@ -441,7 +446,7 @@
                             android:background="@drawable/curve_fill_blue"
                             android:clickable="true"
                             android:fontFamily="@font/poppins_medium"
-                            android:onClick="@{ClickAction::addDocumentIa}"
+                            android:onClick="@{ClickAction::addDocDialog}"
                             android:paddingHorizontal="@dimen/dp_20"
                             android:paddingVertical="@dimen/dp_10"
                             android:text="Add Documents"
@@ -521,6 +526,7 @@
                         android:layout_marginVertical="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_grey"
                         android:clickable="false"
+                        android:onClick="@{ClickAction::districtNLM}"
                         android:drawableEnd="@drawable/ic_arrow_down"
                         android:fontFamily="@font/opensans_regular"
                         android:maxLength="50"
@@ -533,7 +539,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/dp_10"
                         android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="Implementing Agency / outsourced agency*"
@@ -575,7 +580,7 @@
                             android:background="@drawable/curve_fill_blue"
                             android:clickable="true"
                             android:fontFamily="@font/poppins_medium"
-                            android:onClick="@{ClickAction::addAgency}"
+                            android:onClick="@{ClickAction::semenDose}"
                             android:paddingHorizontal="@dimen/dp_20"
                             android:paddingVertical="@dimen/dp_10"
                             android:text="Add"
@@ -617,7 +622,7 @@
                             android:background="@drawable/curve_fill_blue"
                             android:clickable="true"
                             android:fontFamily="@font/poppins_medium"
-                            android:onClick="@{ClickAction::addDocumentNlm}"
+                            android:onClick="@{ClickAction::addDocDialog}"
                             android:paddingHorizontal="@dimen/dp_20"
                             android:paddingVertical="@dimen/dp_10"
                             android:text="Add Documents"
@@ -674,7 +679,7 @@
                         android:paddingVertical="@dimen/dp_10"
                         android:text="@string/submit"
                         android:textSize="20sp"
-                        android:onClick="@{ClickAction::saveAndNext}"
+                        android:onClick="@{ClickAction::save}"
                         android:textAlignment="center"
                         android:textColor="@color/white" />
                 </LinearLayout>

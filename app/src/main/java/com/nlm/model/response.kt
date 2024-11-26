@@ -1163,6 +1163,8 @@ data class NlmFpFromNonForestAddResult(
     val state_code: Int,
     val status: Int,
     val user_id: String,
+    val state_name: String,
+    val district_name: String,
     val area_covered: Double,
     val grant_received: String,
     val location: String,

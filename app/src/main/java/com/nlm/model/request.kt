@@ -623,36 +623,70 @@ data class AssistanceForEARequest(
 )
 
 data class NlmFpFromNonForestAddRequest(
-    val area_covered: Double?= null,
-    val created_by: Int?= null,
-    val district_code: Int?= null,
-    val fp_from_non_forest_document: List<ImplementingAgencyDocument>?= null,
-    val fp_from_non_forest_filled_by_nlm_team: List<FpFromNonForestFilledByNlmTeam>?= null,
-    val grant_received: String?= null,
-    val id: Int?= null,
-    val is_deleted: Int?= null,
-    val is_draft: Int?= null,
-    val location: String?= null,
-    val name_implementing_agency: String?= null,
-    val role_id: Int?= null,
-    val scheme_guidelines: String?= null,
-    val state_code: Int?= null,
-    val status: Int?= null,
-    val target_achievement: String?= null,
-    val type_of_agency: String?= null,
-    val type_of_land: String?= null,
-    val user_id: String?= null,
-    val variety_of_fodder: String?= null
+    val created: String?=null,
+    val created_at: String?=null,
+    val created_by: Int?=null,
+    val district_code: Int?=null,
+    val fp_from_non_forest_document: List<ImplementingAgencyDocument>?=null,
+    val fp_from_non_forest_filled_by_nlm_team: List<FpFromNonForestFilledByNlmTeam>?=null,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val is_draft_nlm: Int?=null,
+    val name_implementing_agency: String?=null,
+    val role_id: Int?=null,
+    val state_code: Int?=null,
+    val status: Int?=null,
+    val user_id: String?=null,
+    val is_type: String?=null,
+    val area_covered: Double?=null,
+    val grant_received: String?=null,
+    val location: String?=null,
+    val scheme_guidelines: String?=null,
+    val target_achievement: String?=null,
+    val type_of_agency: String?=null,
+    val type_of_land: String?=null,
+    val variety_of_fodder: String?=null
 )
 
+
+
+
+//data class Result(
+//    val created: String?,
+//    val created_at: String?,
+//    val created_by: Int?,
+//    val district_code: Int?,
+//    val fp_from_non_forest_document: List<FpFromNonForestDocument?>?,
+//    val fp_from_non_forest_filled_by_nlm_team: List<FpFromNonForestFilledByNlmTeam?>?,
+//    val id: Int?,
+//    val is_deleted: Int?,
+//    val is_draft: Int?,
+//    val is_draft_nlm: Int?,
+//    val name_implementing_agency: String?,
+//    val role_id: String?,
+//    val state_code: Int?,
+//    val status: Int?,
+//    val user_id: String?
+//)
+
+//data class FpFromNonForestDocument(
+//    val description: String?,
+//    val fp_from_non_forest_id: Int?,
+////    val id: Int?,
+//    val nlm_document: String?
+//)
+
 data class FpFromNonForestFilledByNlmTeam(
-    val agency_involved: String?= null,
-    val area_covered: String?= null,
-    val block_name: String?= null,
-    val consumer_fodder: String?= null,
-    val district_code: Int?= null,
-    val estimated_quantity: String?= null,
-    val village_name: String?= null
+    val id: Int?,
+    val district_code: Int?,
+    val block_name: String?,
+    val village_name: String?,
+    val area_covered: String?,
+    val estimated_quantity: String?,
+    val consumer_fodder: String?,
+    val agency_involved: String?,
+    val fp_from_non_forest_id: Int?,
 )
 
 data class NLMEdpRequest(

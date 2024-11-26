@@ -1,6 +1,7 @@
 package com.nlm.ui.activity.national_livestock_mission
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.NlmFpFromNonForestAddRequest
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion.FILTER_REQUEST_CODE
 import com.nlm.ui.adapter.FpFromNonForestAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -33,6 +35,11 @@ class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBi
     private var totalPage = 1
     private var loading = true
     private var itemPosition : Int ?= null
+    var stateId: Int = 0
+    var districtId: Int = 0
+    var districtName: String = ""
+    var nameOfAgency: String = ""
+    var areaCovered: String = ""
 
     override val layoutId: Int
         get() = R.layout.activity_nlm_fp_from_non_forest
@@ -47,10 +54,10 @@ class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBi
 
     override fun onResume() {
         super.onResume()
-        fpFromNonForestAPICall(paginate = false, loader = true)
+        fpFromNonForestAPICall(paginate = false, loader = true,districtId,nameOfAgency,areaCovered)
     }
 
-    private fun fpFromNonForestAPICall(paginate: Boolean, loader: Boolean) {
+    private fun fpFromNonForestAPICall(paginate: Boolean, loader: Boolean,district:Int,nameOfAgency:String,areaCovered:String) {
         if (paginate) {
             currentPage++
         }
@@ -60,7 +67,10 @@ class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBi
                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
                 state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
                 page = currentPage,
-                limit = 10
+                limit = 10,
+                district_code = district,
+                name_implementing_agency = nameOfAgency,
+                area_covered = areaCovered.toIntOrNull()
             )
         )
     }
@@ -78,7 +88,7 @@ class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBi
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                fpFromNonForestAPICall(paginate = true, loader = true)
+                                fpFromNonForestAPICall(paginate = true, loader = true,districtId,nameOfAgency,areaCovered)
                             }
                         }
                     }
@@ -88,7 +98,7 @@ class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBi
 
     private fun swipeForRefreshFpFromNonForest() {
         mBinding?.srlFpFromNonForest?.setOnRefreshListener {
-            fpFromNonForestAPICall(paginate = false, loader = true)
+            fpFromNonForestAPICall(paginate = false, loader = true,districtId,nameOfAgency,areaCovered)
             mBinding?.srlFpFromNonForest?.isRefreshing = false
         }
     }
@@ -107,13 +117,36 @@ class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBi
             onBackPressedDispatcher.onBackPressed()
         }
         fun filter(view: View) {
-            startActivity(Intent(
-                this@NlmFpFromNonForestListActivity,
-                FilterStateActivity::class.java
-            ).putExtra("isFrom", 15))
+            val intent =
+                Intent(this@NlmFpFromNonForestListActivity, FilterStateActivity::class.java)
+            intent.putExtra("isFrom", 15)
+            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("districtId", districtId) // previously selected state ID
+            intent.putExtra("nameOfAgency", nameOfAgency)
+            intent.putExtra("districtName", districtName)
+            intent.putExtra("areaCovered", areaCovered)
+            startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
         }
         fun add(view: View){
             startActivity(Intent(this@NlmFpFromNonForestListActivity, AddNlmFpFromNonForestActivity::class.java))
+        }
+    }
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == FILTER_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Retrieve the data passed from FilterStateActivity
+            districtId = data?.getIntExtra("districtId", 0)!!
+            stateId = data.getIntExtra("stateId", 0)
+            nameOfAgency = data.getStringExtra("nameOfAgency").toString()
+            areaCovered = data.getStringExtra("areaCovered").toString()
+            districtName = data.getStringExtra("districtName").toString()
+            //Need to add year also
+            // Log the data
+            fpFromNonForestAPICall(paginate = false, loader = true,districtId,nameOfAgency,areaCovered)
+            Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $areaCovered")
         }
     }
 
@@ -127,7 +160,7 @@ class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBi
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             } else {
-                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                if (userResponseModel?._result?.data != null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
                         fpsFromNonForestList.clear()
 

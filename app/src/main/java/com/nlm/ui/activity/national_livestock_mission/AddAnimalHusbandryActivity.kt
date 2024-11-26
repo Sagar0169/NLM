@@ -138,7 +138,7 @@ class AddAnimalHusbandryActivity(
         }
 
         fun district(view: View) {
-//            showBottomSh/eetDialog("District")
+//            showBottomSheetDialog("District")
         }
 
         fun districtNLM(view: View) {
@@ -699,11 +699,11 @@ class AddAnimalHusbandryActivity(
                     Result::class.java
                 )?.role_id == 8
             ) {
-                UploadedDocumentName = selectedItem.nlm_document
+//                UploadedDocumentName = selectedItem.nlm_document
                 bindingDialog.etDoc.text = selectedItem.nlm_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             } else {
-                UploadedDocumentName = selectedItem.ia_document
+//                UploadedDocumentName = selectedItem.ia_document
                 bindingDialog.etDoc.text = selectedItem.ia_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             }

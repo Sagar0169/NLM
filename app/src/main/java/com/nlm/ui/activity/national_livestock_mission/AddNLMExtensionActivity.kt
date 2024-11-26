@@ -524,11 +524,9 @@ class AddNLMExtensionActivity(
                     Result::class.java
                 )?.role_id == 8
             ) {
-                UploadedDocumentName = selectedItem.nlm_document
                 bindingDialog.etDoc.text = selectedItem.nlm_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             } else {
-                UploadedDocumentName = selectedItem.ia_document
                 bindingDialog.etDoc.text = selectedItem.ia_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             }
@@ -605,16 +603,22 @@ class AddNLMExtensionActivity(
                         )
                     }
 
-
-                    DocumentList.size.minus(1).let {
-                        addDocumentAdapter?.notifyItemInserted(it)
-                        dialog.dismiss()
+                    if (getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.role_id == 8
+                    ) {
+                        DocumentList.size.minus(1).let {
+                            addDocumentAdapter?.notifyItemInserted(it)
+                            dialog.dismiss()
 //
-                    }
-                    viewDocumentList.size.minus(1).let {
-                        addDocumentAdapter?.notifyItemInserted(it)
-                        dialog.dismiss()
-//
+                        }
+                    } else {
+                        viewDocumentList.size.minus(1).let {
+                            addDocumentAdapter?.notifyItemInserted(it)
+                            dialog.dismiss()
+                        }
                     }
                 }
             } else {

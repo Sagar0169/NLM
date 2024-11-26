@@ -75,6 +75,8 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         val selectedDistrictId = intent.getIntExtra("districtId", 0)
         val selectedLocation = intent.getStringExtra("selectedLocation")
         val phoneNo = intent.getStringExtra("phoneNo")
+        val nameOfAgency = intent.getStringExtra("nameOfAgency")
+        val areaCovered = intent.getStringExtra("areaCovered")
         year = intent.getStringExtra("year")
         districtName = intent.getStringExtra("districtName")
         NOA = intent.getStringExtra("NOA")
@@ -289,10 +291,41 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvDistrict.showView()
                 binding!!.tvTitleNameofAgency.showView()
                 binding!!.etNameofAgency.showView()
-                binding!!.tvTitleLocationAddress.showView()
-                binding!!.etLocationAddress.showView()
                 binding!!.tvTitleAreaCovered.showView()
                 binding!!.etAreaCovered.showView()
+
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+                if (districtName != null) {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
+                if (nameOfAgency != null) {
+                    binding?.etNameofAgency?.setText(nameOfAgency)
+                }
+                if (areaCovered != null) {
+                    binding?.etAreaCovered?.setText(areaCovered)
+                }
+
+
             }
 
             16 -> {
@@ -839,6 +872,14 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvDistrict.text = "Please Select"
                 districtId = null
             }
+            if (isFrom == 15 && stateId != null) {
+                // Prepare intent to send the result back
+
+                binding!!.etNameofAgency.setText("")
+                binding!!.etAreaCovered.setText("")
+                binding!!.tvDistrict.text = "Please Select"
+                districtId = null
+            }
             if (isFrom == 14 && stateId != null) {
                 // Prepare intent to send the result back
                 binding!!.etNoa.setText("")
@@ -891,6 +932,18 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 toast(stateId.toString())
                 finish()
             }
+            if (isFrom == 15 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("nameOfAgency", binding!!.etNameofAgency.text.toString())
+                resultIntent.putExtra("areaCovered", binding!!.etAreaCovered.text.toString())
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                resultIntent.putExtra("districtId", districtId) // Add selected data to intent
+                resultIntent.putExtra("districtName", districtName) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                toast(stateId.toString())
+                finish()
+            }
             if (isFrom == 14 && stateId != null) {
                 // Prepare intent to send the result back
                 val resultIntent = Intent()
@@ -902,6 +955,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 toast(stateId.toString())
                 finish()
             }
+
             if (isFrom == 40 && stateId != null) {
                 // Prepare intent to send the result back
                 val resultIntent = Intent()
