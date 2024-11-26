@@ -42,6 +42,11 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
         viewModel.init()
         fpFromForestLandAdapter()
         swipeForRefreshFpFromForestLand()
+        mBinding?.fabAddAgency?.setOnClickListener {
+            val intent =
+                Intent(this@NlmFpForestLandActivity, AddNlmFpForestLandActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

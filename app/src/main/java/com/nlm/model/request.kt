@@ -119,7 +119,7 @@ data class Format6AssistanceForQspAddEdit(
     val target_achievement_class: Int?=null,
     val target_achievement_variety: String?=null,
     val technical_competance: String?=null,
-    val user_id: String?=null
+    val user_id: Int?=null
 )
 
 
@@ -127,6 +127,31 @@ data class Format6AssistanceForQspAddEdit(
 data class AssistanceForQfspDocument(
     val description: String
 )
+data class FpFromForestLandAddEditFormat9Request(
+    val area_covered: Int?=null,
+    val created_by: Int?=null,
+    val district_code: Int?=null,
+    val fp_from_forest_land_document: List<ImplementingAgencyDocument>?=null,
+    val fp_from_forest_land_filled_by_nlm: List<FpFromForestLandFilledByNlm>?=null,
+    val grant_received: String?=null,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val location_address: String?=null,
+    val name_implementing_agency: String?=null,
+    val role_id: Int?=null,
+    val scheme_guidelines: String?=null,
+    val state_code: Int?=null,
+    val status: Int?=null,
+    val target_achievement: String?=null,
+    val type_of_agency: String?=null,
+    val type_of_land: String?=null,
+    val user_id: Int?=null,
+    val variety_of_fodder: String?=null
+)
+
+
+
 
 
 data class ArtificialInseminationAddRequest(

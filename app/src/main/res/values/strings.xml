@@ -323,7 +323,8 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="add_national_level_monitors_component_a">Add National Level Monitors(Component A)</string>
     <string name="brorahul_1171">brorahul</string>
     <string name="national_livestock_mission_entrepreneur_development_programme_edp_monitoring_of_nlm_by_national_level_monitors_format_for_nlm_edp">National Livestock Mission Entrepreneur Development Programme (EDP)\nMonitoring of NLM by National Level Monitors\nFormat for NLM-EDP</string>
-    <string name="feed_and_fodder_development_monitoring_of_nlm_by_national_level_monitors_format_for_fodder_production_from_forest_land">Feed and fodder development\nMONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for Fodder production from forest land</string>
+    <string name="feed_and_fodder_development">Feed and fodder development</string>
+    <string name="monitoring_of_nlm_by_national_level_monitors_format_for_fodder_production_from_forest_land">MONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for Fodder production from forest land</string>
     <string name="monitoring_of_nlm_by_national_level_monitors_format_for_fodder_seed_processing_plant_storage">MONITORING OF NLM BY NATIONAL LEVEL MONITORS\nFormat for fodder seed processing plant/ storage</string>
     <string name="monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_quality_fodder_seed_production"> Monitoring of Nlm By National Level Monitors</string>
     <string name="format_for_assistance_for_quality_fodder_seed_production">Format for Assistance for quality Fodder seed production</string>

@@ -5,6 +5,7 @@ import com.nlm.model.AhidfFormatForNlm
 import com.nlm.model.AhidfMonitoring
 import com.nlm.model.AssistanceForEaTrainingInstitute
 import com.nlm.model.AssistanceForQfspFinancialProgres
+import com.nlm.model.FpFromForestLandFilledByNlm
 import com.nlm.model.FspPlantStorageCommentsOfNlm
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyAdvisoryCommittee
@@ -36,8 +37,10 @@ interface CallBackItemImportExoticAchivementEdit {
     fun onClickItem(selectedItem: ImportOfExoticGoatAchievement, position:Int, isFrom:Int)
 
 }
-interface CallBackItemFormat6Delete {
+interface CallBackItemFormat6Edit {
     fun onClickItem(selectedItem: AssistanceForQfspFinancialProgres, position:Int, isFrom:Int)}
+interface CallBackItemFormat9Edit {
+    fun onClickItem(selectedItem: FpFromForestLandFilledByNlm, position:Int, isFrom:Int)}
 
 interface CallBackItemImportExoticVerifiedByNlm {
     fun onClickItem(selectedItem: ImportOfExoticGoatVerifiedNlm, position:Int, isFrom:Int)

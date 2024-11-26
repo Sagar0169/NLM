@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/clParent"
         android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="Add New Fp From Forest Land"
+                android:text="@string/feed_and_fodder_development"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -71,59 +72,59 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textAlignment="center"
                     android:id="@+id/tvMainHeading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="@string/feed_and_fodder_development_monitoring_of_nlm_by_national_level_monitors_format_for_fodder_production_from_forest_land"
-                    android:textAlignment="center"
+                    android:text="@string/monitoring_of_nlm_by_national_level_monitors_format_for_fodder_production_from_forest_land"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_15" />
 
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/orange"
+                    android:fontFamily="@font/lexend_bold"
+                    android:padding="@dimen/dp_5"
+                    android:text="To be filled by State/ Implementing Agency )"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/curve_all_corner_black"
+
                     android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/orange"
-                        android:fontFamily="@font/lexend_bold"
-                        android:padding="@dimen/dp_5"
-                        android:text="To be filled by State/ Implementing Agency )"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/sp_16" />
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/dp_10"
+
                         android:paddingVertical="@dimen/dp_5">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:id="@+id/llIA"
+                            android:layout_height="wrap_content">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_20"
+
                             android:fontFamily="@font/opensans_semibold"
                             android:text="States"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
-                            android:id="@+id/tvState"
+                            android:id="@+id/tvStateIa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
@@ -150,7 +151,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
-                            android:id="@+id/tvDistrict"
+                            android:id="@+id/tvDistrictIA"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
@@ -177,7 +178,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-                            android:id="@+id/etImplementingAgency"
+                            android:id="@+id/etImplementingAgencyIA"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
@@ -205,7 +206,7 @@
                             android:textSize="@dimen/sp_16" />
 
                         <EditText
-                            android:id="@+id/etLocation"
+                            android:id="@+id/etLocationIA"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
@@ -220,6 +221,50 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/dp_10"
+                                android:id="@+id/tvSupportingDocumentView"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Supporting Documents"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+                            <LinearLayout
+                                android:id="@+id/llSDRv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="10dp"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:orientation="vertical"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:background="@drawable/curve_all_corner_black"
+                                android:paddingVertical="@dimen/dp_10">
+                                <com.nlm.utilities.NonScrollableRecyclerView
+                                    android:id="@+id/ShowDocumentRv"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/dp_7"
+                                    android:paddingTop="8dp" /></LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/llInformationByIa"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/dp_10"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:orientation="vertical"
+                                android:layout_marginTop="@dimen/dp_20"
+                                android:background="@drawable/curve_all_corner_black"
+                                android:paddingVertical="@dimen/dp_10">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:paddingVertical="@dimen/dp_5"
+    android:background="@drawable/curve_all_corner_dark_grey"
+    android:orientation="vertical">
+
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -241,7 +286,7 @@
                             android:fontFamily="@font/opensans_regular"
                             android:hint=""
                             android:maxLength="50"
-
+                            android:inputType="number"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -410,30 +455,163 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
+</LinearLayout>
+                            </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+            </LinearLayout>
+<LinearLayout
+    android:id="@+id/llNLM"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/orange"
+                    android:fontFamily="@font/lexend_bold"
+                    android:padding="@dimen/dp_5"
+                    android:text="To be filled by NLM"
+
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16"
+                    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+
+        android:fontFamily="@font/opensans_semibold"
+        android:text="States"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
+
+    <TextView
+        android:id="@+id/tvState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginVertical="@dimen/dp_7"
+        android:background="@drawable/curve_all_corner_grey"
+        android:clickable="false"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:fontFamily="@font/opensans_regular"
+        android:maxLength="50"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:paddingVertical="@dimen/dp_5"
+        android:singleLine="true"
+        android:text="Please Select"
+        android:textColor="@color/grey" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_7"
+        android:fontFamily="@font/opensans_semibold"
+        android:text="Districts"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
+
+    <TextView
+        android:id="@+id/tvDistrict"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginVertical="@dimen/dp_7"
+        android:background="@drawable/curve_all_corner_grey"
+        android:clickable="false"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:fontFamily="@font/opensans_regular"
+        android:maxLength="50"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:paddingVertical="@dimen/dp_5"
+        android:singleLine="true"
+        android:text="Please Select"
+        android:textColor="@color/grey" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_7"
+        android:fontFamily="@font/opensans_semibold"
+        android:text="Implementing Agency / outsourced agency*"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
+
+    <EditText
+        android:id="@+id/etImplementingAgency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginVertical="@dimen/dp_7"
+        android:background="@drawable/curve_all_corner_grey"
+        android:fontFamily="@font/opensans_regular"
+        android:hint=""
+        android:maxLength="50"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:paddingVertical="@dimen/dp_5"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        android:textSize="@dimen/sp_16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginVertical="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:fontFamily="@font/opensans_semibold"
+        android:text="Location / Address*"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
+
+    <EditText
+        android:id="@+id/etLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_5"
+        android:background="@drawable/curve_all_corner_grey"
+        android:fontFamily="@font/opensans_regular"
+        android:hint=""
+        android:maxLength="50"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:paddingVertical="@dimen/dp_20"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        android:textSize="@dimen/sp_16" />
+    <TextView
+        android:id="@+id/tvAddMore"
+        android:layout_marginVertical="@dimen/dp_7"
+        android:layout_width="wrap_content"
+        android:layout_gravity="end"
+        android:layout_height="wrap_content"
+        android:background="@drawable/curve_fill_blue"
+        android:clickable="true"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingHorizontal="@dimen/dp_20"
+        android:onClick="@{ClickAction::addMore}"
+        android:paddingVertical="@dimen/dp_10"
+        android:text="Add More"
+        android:textColor="@color/white" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/dp_10"
+
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/curve_all_corner_black"
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/orange"
-                        android:fontFamily="@font/lexend_bold"
-                        android:padding="@dimen/dp_5"
-                        android:text="To be filled by NLM"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/sp_16" />
+
+
 
                     <com.nlm.utilities.NonScrollableRecyclerView
                         android:id="@+id/recyclerView1"
@@ -441,24 +619,100 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp" />
                 </LinearLayout>
-
-
+</LinearLayout>
                 <TextView
-                    android:id="@+id/tvSendOtp"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_50"
-                    android:layout_marginTop="@dimen/dp_15"
-                    android:layout_marginBottom="@dimen/dp_10"
+                    android:id="@+id/tvSupportingDocument"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Supporting Documents"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:id="@+id/tvAddDocs"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/curve_fill_blue"
                     android:clickable="true"
                     android:fontFamily="@font/poppins_medium"
                     android:paddingHorizontal="@dimen/dp_20"
+                    android:onClick="@{ClickAction::addDocDialog}"
                     android:paddingVertical="@dimen/dp_10"
-                    android:text="Submit"
-                    android:textAlignment="center"
+                    android:text="Add Documents"
                     android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:id="@+id/llDrv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:paddingVertical="@dimen/dp_10">
+                    <com.nlm.utilities.NonScrollableRecyclerView
+                        android:id="@+id/AddDocumentRv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp_7"
+                        android:paddingTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_weight="0.5"
+                        android:id="@+id/tvSaveDraft"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
+                        android:backgroundTint="@color/green"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="@string/save_as_draft"
+                        android:onClick="@{ClickAction::saveAsDraft}"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvSendOtp"
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="@string/submit"
+                        android:textSize="16sp"
+                        android:onClick="@{ClickAction::saveAndNext}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+
+
             </LinearLayout>
 
 

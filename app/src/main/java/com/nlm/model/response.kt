@@ -926,6 +926,59 @@ data class FpFromForestLandResult(
     val total_count: Int
 )
 
+data class FpFromForestLandAddEditFormat9Response(
+    val _result: ResultFormat9,
+    val _resultflag: Int?,
+    val message: String?,
+    val statuscode: Int?
+)
+
+data class ResultFormat9(
+    val area_covered: String?,
+    val created: String?,
+    val created_by: Int?,
+    val district_code: Int?,
+    val fp_from_forest_land_document: List<ImplementingAgencyDocument>?,
+    val fp_from_forest_land_filled_by_nlm: List<FpFromForestLandFilledByNlm>?,
+    val grant_received: String?,
+    val id: Int?,
+    val is_deleted: Int?,
+    val is_draft: Int?,
+    val is_draft_ia: Int?,
+    val is_draft_nlm: Int?,
+    val location_address: String?,
+    val name_implementing_agency: String?,
+    val role_id: String?,
+    val scheme_guidelines: String?,
+    val state_code: Int?,
+    val status: Int?,
+    val target_achievement: String?,
+    val type_of_agency: String?,
+    val type_of_land: String?,
+    val updated: String?,
+    val updated_at: String?,
+    val user_id: String?,
+    val variety_of_fodder: String?
+)
+
+data class FpFromForestLandDocument(
+    val description: String,
+    val fp_from_forest_land_id: Int,
+    val id: Int,
+    val nlm_document: String
+)
+
+data class FpFromForestLandFilledByNlm(
+    val agency_involved: String?,
+    val area_covered: String?,
+    val block_name: String?,
+    val consumer_fodder: String?,
+    val district_code: Int?,
+    val estimated_quantity: String?,
+    val fp_from_forest_land_id: Int?,
+    val id: Int?,
+    val village_name: String?
+)
 data class FpFromForestLandData(
     val area_covered: String,
     val created: String,
@@ -935,8 +988,8 @@ data class FpFromForestLandData(
     val id: Int,
     val is_delete: Boolean,
     val is_draft: Int,
-    val is_draft_ia: Int,
-    val is_draft_nlm: Int,
+    val is_draft_ia: String,
+    val is_draft_nlm: String,
     val is_edit: Boolean,
     val is_view: Boolean,
     val name_implementing_agency: String,

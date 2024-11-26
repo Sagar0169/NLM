@@ -1,22 +1,30 @@
 package com.nlm.ui.adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.nlm.callBack.CallBackItemFormat6Delete
+import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackItemFormat6Edit
 import com.nlm.callBack.CallBackItemImportExoticAchivementEdit
+import com.nlm.callBack.DialogCallback
 
 import com.nlm.databinding.ItemYearWiseFinancialProgressBinding
 import com.nlm.model.AssistanceForQfspFinancialProgres
 import com.nlm.model.ImportOfExoticGoatAchievement
 import com.nlm.model.ImportOfExoticGoatVerifiedNlm
+import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 
 class Format6YearWiseFinancialProgressAdapter(
+    private val context:Context,
     private val programmeList: MutableList<AssistanceForQfspFinancialProgres>,
     private var viewEdit: String?,
-    private val callBackEdit: CallBackItemFormat6Delete
+    private val callBackEdit: CallBackItemFormat6Edit,
+    private val callBackDeleteAtId: CallBackDeleteAtId,
 ) : RecyclerView.Adapter<Format6YearWiseFinancialProgressAdapter.Format6YearWiseFinancialProgressViewHolder>() {
 
 
@@ -34,15 +42,18 @@ class Format6YearWiseFinancialProgressAdapter(
 
          val items=programmeList[position]
         // Handle visibility of add/delete buttons
+        holder.binding.tvDistrictName.isEnabled=false
+        holder.binding.etAssistancedByDAHD.isEnabled=false
+        holder.binding.etAmountUtilizedByState.isEnabled=false
+        holder.binding.etAreaCovered.isEnabled=false
+        holder.binding.etFrarmersImpacted.isEnabled=false
          if (viewEdit=="view")
          {
-             holder.binding.tvDistrictName.isEnabled=false
-             holder.binding.etAssistancedByDAHD.isEnabled=false
-             holder.binding.etAmountUtilizedByState.isEnabled=false
-             holder.binding.etAreaCovered.isEnabled=false
-             holder.binding.etFrarmersImpacted.isEnabled=false
              holder.binding.btnDelete.hideView()
 
+         }
+        else if(viewEdit=="edit"){
+            holder.binding.btnEdit.showView()
          }
         holder.binding.tvDistrictName.text=items.name_of_district
         holder.binding.etAssistancedByDAHD.setText(items.assistance_provided_first)
@@ -61,11 +72,18 @@ class Format6YearWiseFinancialProgressAdapter(
 
         // Delete row
         holder.binding.btnDelete.setOnClickListener {
-
-                programmeList.removeAt(position)
-                notifyItemRemoved(position)
-
-
+            if (context != null) {
+                Utility.showConfirmationAlertDialog(
+                    context,
+                    object :
+                        DialogCallback {
+                        override fun onYes() {
+                            callBackDeleteAtId.onClickItem(items.id,position,2)
+                        }
+                    },
+                    context.getString(R.string.are_you_sure_want_to_delete_your_post)
+                )
+            }
         }
         holder.binding.btnEdit.setOnClickListener{
             callBackEdit.onClickItem(
