@@ -1,5 +1,6 @@
 package com.nlm.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -48,7 +49,7 @@ class ImportExoticAchivementAdapter(
 
         }
 
-    override fun onBindViewHolder(holder: ImportExoticAchivementViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImportExoticAchivementViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
          val items=programmeList[position]
         holder.binding.etNoOfAnimals.isEnabled=false

@@ -1,5 +1,6 @@
 package com.nlm.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -49,7 +50,7 @@ class ImportOfExoticGoatVerifiedNlmAdapter(
 
         }
 
-    override fun onBindViewHolder(holder: ImportOfExoticGoatVerifiedNlmViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImportOfExoticGoatVerifiedNlmViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
          val items=programmeList[position]
         // Handle visibility of add/delete buttons

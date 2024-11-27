@@ -1,5 +1,6 @@
 package com.nlm.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
@@ -61,7 +62,7 @@ class ForestLandNLMAdapter(
 
     }
 
-    override fun onBindViewHolder(holder: AvailabilityOfEquipmentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AvailabilityOfEquipmentViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
 
         val items=programmeList[position]
