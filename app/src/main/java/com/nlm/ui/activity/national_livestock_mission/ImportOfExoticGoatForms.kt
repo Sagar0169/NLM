@@ -111,6 +111,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         DetailOfImportList = mutableListOf()
         AchievementList = mutableListOf()
         VerifiedNlmList = mutableListOf()
+        TotalDocumentList= arrayListOf()
         ViewDocumentAdapter()
         AddDocumentAdapter()
         AddImportDetailAdapter()
@@ -141,7 +142,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             mBinding?.tvAddAcheivement?.hideView()
             mBinding?.tvStateIA?.hideView()
             mBinding?.etStateIA?.hideView()
-            ViewEditApi("view")
+//            ViewEditApi("view")
         }
         if(viewEdit=="view"){
             mBinding?.rlWelcome?.hideView()
@@ -157,6 +158,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             mBinding?.tvAddVerified?.hideView()
             mBinding?.tvAddAcheivement?.hideView()
             mBinding?.tvAddDocs?.hideView()
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
             ViewEditApi(viewEdit)
         }
         if(viewEdit=="edit"){
@@ -208,10 +211,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                         AchievementList?.clear()
                         VerifiedNlmList?.clear()
                         DetailOfImportList?.clear()
-                        userResponseModel._result.import_of_exotic_goat_achievement?.let { it1 ->
-                            AchievementList?.addAll(it1)
-                        } ?: run {
-                            // Add an item with empty fields if data is null
+                        if (userResponseModel._result.import_of_exotic_goat_achievement.isNullOrEmpty()) {
+                            // Add an item with empty fields if data is null or empty
                             AchievementList?.add(ImportOfExoticGoatAchievement(
                                 number_of_animals = null,
                                 f1_generation_produced = "",
@@ -223,13 +224,14 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                 import_of_exotic_goat_id = null,
                                 id = null,
                             ))
+                        } else {
+                            AchievementList?.addAll(userResponseModel._result.import_of_exotic_goat_achievement)
                         }
-                        userResponseModel._result.import_of_exotic_goat_verified_nlm?.let { it1 ->
-                            VerifiedNlmList?.addAll(it1)
-                        } ?: run {
-                            // Add an item with empty fields if data is null
-                            VerifiedNlmList?.add(
-                                ImportOfExoticGoatVerifiedNlm(
+
+// Add data to VerifiedNlmList if it's null or empty
+                        if (userResponseModel._result.import_of_exotic_goat_verified_nlm.isNullOrEmpty()) {
+                            // Add an item with empty fields if data is null or empty
+                            VerifiedNlmList?.add(ImportOfExoticGoatVerifiedNlm(
                                 number_of_animals = null,
                                 f1_generation_produced = "",
                                 f2_generation_produced = "",
@@ -238,14 +240,13 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                 species_breed = "",
                                 year = null,
                                 f2_generation_distributed = "",
-
-                            )
-                            )
+                            ))
+                        } else {
+                            VerifiedNlmList?.addAll(userResponseModel._result.import_of_exotic_goat_verified_nlm)
                         }
-                        userResponseModel._result.import_of_exotic_goat_detail_import?.let { it1 ->
-                            DetailOfImportList?.addAll(it1)
-                        } ?: run {
-                            // Add an item with empty fields if data is null
+
+                        if (userResponseModel._result.import_of_exotic_goat_detail_import.isNullOrEmpty()) {
+                            // Add an item with empty fields if data is null or empty
                             DetailOfImportList?.add(ImportOfExoticGoatDetailImport(
                                 import_of_exotic_goat_id = null,
                                 id = null,
@@ -255,8 +256,9 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                 place_of_procurement = "",
                                 place_of_induction = "",
                                 unit = ""
-
-                                ))
+                            ))
+                        } else {
+                            DetailOfImportList?.addAll(userResponseModel._result.import_of_exotic_goat_detail_import)
                         }
                         AchievementAdapter?.notifyDataSetChanged()
                         DetailOfImportAdapter?.notifyDataSetChanged()
@@ -349,6 +351,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 } else {
                     DocumentId=userResponseModel._result.id
                     UploadedDocumentName=userResponseModel._result.document_name
+                    DialogDocName?.text=userResponseModel._result.document_name
                     mBinding?.main?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -821,7 +824,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                             if (it.moveToFirst()) {
                                 DocumentName=
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                DialogDocName?.text=DocumentName
+//                                DialogDocName?.text=DocumentName
 
                                 val requestBody = convertToRequestBody(this, uri)
                                 body = MultipartBody.Part.createFormData(

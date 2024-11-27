@@ -113,12 +113,23 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                             mBinding?.etSubmission2?.setText(userResponseModel._result.submission_of_quarterly_2)
                             mBinding?.etStudiesConducted?.setText(userResponseModel._result.studies_surveys_conducted)
                             nlmIAFundsRecievedList.clear()
-                            userResponseModel._result.implementing_agency_funds_received?.let { it1 ->
-                                nlmIAFundsRecievedList.addAll(
-                                    it1
-                                )
+                                if (userResponseModel._result.implementing_agency_funds_received.isNullOrEmpty()) {
+                                    nlmIAFundsRecievedList.add(
+                                        ImplementingAgencyFundsReceived(
+                                            year = "",
+                                            from_dahd = null,
+                                            state_govt = null,
+                                            any_other = null,
+                                            physical_progress = null,
+                                            id = null,
+                                            implementing_agency_id = null
+                                        )
+                                    )
+                                } else {
+                                    nlmIAFundsRecievedList.addAll(userResponseModel._result.implementing_agency_funds_received)
+                                }
                                 nlmIAFundsRecievedAdapter?.notifyDataSetChanged()
-                            }
+
                         }
                         }
                         else{

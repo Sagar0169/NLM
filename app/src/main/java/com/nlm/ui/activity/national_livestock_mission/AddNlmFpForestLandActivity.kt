@@ -35,7 +35,9 @@ import com.nlm.model.Format6AssistanceForQspAddEdit
 import com.nlm.model.FpFromForestLandAddEditFormat9Request
 import com.nlm.model.FpFromForestLandFilledByNlm
 import com.nlm.model.GetDropDownRequest
+import com.nlm.model.GetNlmDropDownRequest
 import com.nlm.model.ImplementingAgencyDocument
+import com.nlm.model.ImportExoticGoatAddEditRequest
 import com.nlm.model.NlmEdp
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
@@ -83,6 +85,12 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     private var stateId: Int? = null // Store selected state
     private var districtId: Int? = null // Store selected state
     private var districtName: String? = null // Store selected state
+    private var AgencyInvolvedName: String? = null
+    private var AgencyInvolvedId: Int? = null
+    private var TypeOfLandName: String? = null
+    private var TypeOfLandId: Int? = null
+    private var TypeOfAgencyName: String? = null
+    private var TypeOfAgencyId: Int? = null
     private var districtIdIA: Int? = null // Store selected state
     private var districtNameIA: String? = null // Store selected state
     private var loading = true
@@ -154,12 +162,11 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         mBinding?.clickAction = ClickActions()
         viewModel.init()
         isFrom = intent?.getIntExtra("isFrom", 0)!!
-        mBinding!!.tvState.setOnClickListener { showBottomSheetDialog2("State",0) }
-        mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog2("District",1) }
-        mBinding!!.tvDistrictIA.setOnClickListener { showBottomSheetDialog2("District",2) }
-//        mBinding!!.tvDistrictNlm.setOnClickListener { showBottomSheetDialog("DistrictNlm") }
-//        mBinding!!.tvLand.setOnClickListener { showBottomSheetDialog("Land") }
-//        mBinding!!.tvAgency.setOnClickListener { showBottomSheetDialog("Agency") }
+        mBinding!!.tvState.setOnClickListener { showBottomSheetDialog2("State",0,null) }
+        mBinding!!.tvDistrict.setOnClickListener { showBottomSheetDialog2("District",1,null) }
+        mBinding!!.tvDistrictIA.setOnClickListener { showBottomSheetDialog2("District",2,null) }
+        mBinding!!.tvLand.setOnClickListener { showBottomSheetDialog2("type_of_land",0,null) }
+        mBinding!!.tvAgency.setOnClickListener { showBottomSheetDialog2("type_of_agency",0,null) }
         TotalDocumentList = arrayListOf()
         viewDocumentList = arrayListOf()
         ViewDocumentAdapter()
@@ -175,13 +182,58 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             mBinding?.llSDRv?.hideView()
             mBinding?.tvSupportingDocumentView?.hideView()
         }
+        else if( getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.role_id==8){
+            mBinding?.tvStateIa?.isEnabled=false
+            mBinding?.tvDistrictIA?.isEnabled=false
+            mBinding?.etImplementingAgencyIA?.isEnabled=false
+            mBinding?.etLocationIA?.isEnabled=false
+            mBinding?.etAreaCovered?.isEnabled=false
+            mBinding?.tvLand?.isEnabled=false
+            mBinding?.tvAgency?.isEnabled=false
+            mBinding?.etVariteryFodder?.isEnabled=false
+            mBinding?.etSchemeGuideline?.isEnabled=false
+            mBinding?.etGrantReceived?.isEnabled=false
+            mBinding?.etTarget?.isEnabled=false
+        }
+        viewEdit = intent.getStringExtra("View/Edit")
+        itemId = intent.getIntExtra("itemId",0)
+        Log.d("VIEWEDIT",viewEdit.toString())
+        if(viewEdit=="view")
+        {
+            mBinding?.tvStateIa?.isEnabled=false
+            mBinding?.tvDistrictIA?.isEnabled=false
+            mBinding?.etImplementingAgencyIA?.isEnabled=false
+            mBinding?.etLocationIA?.isEnabled=false
+            mBinding?.tvState?.isEnabled=false
+            mBinding?.tvDistrict?.isEnabled=false
+            mBinding?.etImplementingAgency?.isEnabled=false
+            mBinding?.etLocation?.isEnabled=false
+            mBinding?.etAreaCovered?.isEnabled=false
+            mBinding?.tvLand?.isEnabled=false
+            mBinding?.tvAgency?.isEnabled=false
+            mBinding?.etVariteryFodder?.isEnabled=false
+            mBinding?.etSchemeGuideline?.isEnabled=false
+            mBinding?.etGrantReceived?.isEnabled=false
+            mBinding?.etTarget?.isEnabled=false
+            mBinding?.tvAddMore?.hideView()
+            mBinding?.tvAddDocs?.hideView()
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
+            ViewEditApi(viewEdit)
+        }
+        else if(viewEdit=="edit"){
+            ViewEditApi(viewEdit)
+        }
+
+
+
 
         programmeList = arrayListOf()
         DocumentList = arrayListOf()
         ForestLandNLMAdapter()
         AddDocumentAdapter()
-        viewEdit = intent.getStringExtra("View/Edit")
-        itemId = intent.getIntExtra("itemId",0)
+
+
         when (isFrom) {
             1 -> {
                 mBinding!!.tvHeading.text = "Add New Fpfrom Non Forest"
@@ -189,12 +241,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                         "Format for Fodder production from Non. forest/rangeland/non. arableland"
             }
         }
-        if (viewEdit=="view")
-        {
-            mBinding?.tvSaveDraft?.hideView()
-            mBinding?.tvSendOtp?.hideView()
 
-        }
 
     }
     private fun AddDocumentAdapter(){
@@ -207,7 +254,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         mBinding?.recyclerView1?.adapter = adapter
         mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(this)
     }
-    private fun showBottomSheetDialog2(type: String,isFrom: Int) {
+    private fun showBottomSheetDialog2(type: String,isFrom: Int,TextView:TextView?) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
         view.layoutParams = ViewGroup.LayoutParams(
@@ -221,7 +268,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         }
         // Define a variable for the selected list and TextView
         val selectedList: List<ResultGetDropDown>
-        val selectedTextView: TextView
+        val selectedTextView: TextView?
         // Initialize based on type
         when (type) {
             "State" -> {
@@ -238,30 +285,34 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                 if (isFrom==2)
                 {
                 selectedTextView = mBinding?.tvDistrictIA!!}
+                else if (isFrom==3 && TextView != null){
+
+                        selectedTextView = TextView
+                }
                 else{
                     selectedTextView = mBinding?.tvDistrict!!
                 }
             }
-//            "quantity_of_fodder_seed_class" -> {
-//                Model="quantity_of_fodder_seed_class"
-//                getNlmDropDownApi(Model)
-//                selectedList = stateList
-//                selectedTextView = mBinding!!.tvQuantityOfFodder
-//            }
-//
-//            "quantity_of_seed_class" -> {
-//                Model="quantity_of_seed_class"
-//                getNlmDropDownApi(Model)
-//                selectedList = stateList
-//                selectedTextView = mBinding!!.tvQuantityClass
-//            }
-//
-//            "target_achievement_class" -> {
-//                Model="target_achievement_class"
-//                getNlmDropDownApi(Model)
-//                selectedList = stateList
-//                selectedTextView = mBinding!!.tvTargetClass
-//            }
+            "agency_involved" -> {
+                Model="agency_involved"
+                getNlmDropDownApi(Model)
+                selectedList = stateList
+               selectedTextView=TextView
+            }
+
+            "type_of_land" -> {
+                Model="type_of_land"
+                getNlmDropDownApi(Model)
+                selectedList = stateList
+                selectedTextView = mBinding!!.tvLand
+            }
+
+            "type_of_agency" -> {
+                Model="type_of_agency"
+                getNlmDropDownApi(Model)
+                selectedList = stateList
+                selectedTextView = mBinding!!.tvAgency
+            }
 
             else -> return
         }
@@ -269,7 +320,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         // Set up the adapter
         stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
             // Handle item click
-            selectedTextView.text = selectedItem
+            selectedTextView?.text = selectedItem
 
 
             if (Model=="Districts")
@@ -283,25 +334,25 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                 districtName=selectedItem
                 districtId=id}
             }
-//            else if (Model=="quantity_of_fodder_seed_class")
-//            {
-//                QuantityOfFodderSeedName  =selectedItem
-//                QuantityOfFodderSeedID=id
-//            }
-//            else if (Model=="quantity_of_seed_class")
-//            {
-//                QuantityOfSeedName  =selectedItem
-//                QuantityOfSeedID=id
-//            }
-//            else if (Model=="target_achievement_class")
-//            {
-//                TargetAcheivementName  =selectedItem
-//                TargetAcheivementID=id
-//            }
+            else if (Model=="agency_involved")
+            {
+                AgencyInvolvedName  =selectedItem
+                AgencyInvolvedId=id
+            }
+            else if (Model=="type_of_land")
+            {
+                TypeOfLandName  =selectedItem
+                TypeOfLandId=id
+            }
+            else if (Model=="type_of_agency")
+            {
+                TypeOfAgencyName  =selectedItem
+                TypeOfAgencyId=id
+            }
             else{
                 stateId = id
             }
-            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
+            selectedTextView?.setTextColor(ContextCompat.getColor(this, R.color.black))
             bottomSheetDialog.dismiss()
         }
 
@@ -314,12 +365,12 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         // Rotate drawable
         val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
         var rotatedDrawable = rotateDrawable(drawable, 180f)
-        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+        selectedTextView?.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
 
         // Set a dismiss listener to reset the view visibility
         bottomSheetDialog.setOnDismissListener {
             rotatedDrawable = rotateDrawable(drawable, 0f)
-            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+            selectedTextView?.setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 null,
                 rotatedDrawable,
@@ -499,14 +550,19 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                     {
 
                         formId=userResponseModel._result.id
-//                        mBinding?.tvDistrictIA?.setText(userResponseModel._result.name_of_organization)
+                        mBinding?.tvDistrictIA?.text = userResponseModel._result.district_name
+                        mBinding?.tvDistrict?.text = userResponseModel._result.district_name
                         mBinding?.etLocation?.setText(userResponseModel._result.location_address)
+                        mBinding?.etLocationIA?.setText(userResponseModel._result.location_address)
                         mBinding?.etTarget?.setText(userResponseModel._result.target_achievement)
                         mBinding?.etVariteryFodder?.setText(userResponseModel._result.variety_of_fodder)
                         mBinding?.etSchemeGuideline?.setText(userResponseModel._result.scheme_guidelines)
                         mBinding?.etImplementingAgency?.setText(userResponseModel._result.name_implementing_agency)
+                        mBinding?.etImplementingAgencyIA?.setText(userResponseModel._result.name_implementing_agency)
+                        mBinding?.etGrantReceived?.setText(userResponseModel._result.grant_received)
                         mBinding?.etAreaCovered?.setText(userResponseModel._result.area_covered)
-                        mBinding?.tvAgency?.setText(userResponseModel._result.type_of_agency)
+                        mBinding?.tvAgency?.text = userResponseModel._result.type_of_agency
+                        mBinding?.tvLand?.text = userResponseModel._result.type_of_land
                         programmeList.clear()
                         userResponseModel._result.fp_from_forest_land_filled_by_nlm?.let { it1 ->
                             programmeList.addAll(
@@ -542,8 +598,9 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                         AddDocumentAdapter?.notifyDataSetChanged()
                         ViewDocumentAdapter?.notifyDataSetChanged()
 
+
                     }
-                    else{
+
                         if (savedAsDraft)
                         {
                             onBackPressedDispatcher.onBackPressed()
@@ -553,9 +610,9 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                                 )
                             }
                         }
-                    }
 
                 }
+
             }
         }
         viewModel.getProfileUploadFileResult.observe(this) {
@@ -574,6 +631,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                 } else {
                     DocumentId=userResponseModel._result.id
                     UploadedDocumentName=userResponseModel._result.document_name
+                    DialogDocName?.text=userResponseModel._result.document_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -583,6 +641,38 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                 }
             }
         }
+        viewModel.getNlmDropDownResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            } else {
+                if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
+                    stateList.clear()
+                    stateList.addAll(userResponseModel._result)
+                    stateAdapter.notifyDataSetChanged()
+
+//                    mBinding?.tvNoDataFound?.hideView()
+//                    mBinding?.rvArtificialInsemination?.showView()
+                } else {
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+                }
+            }
+
+        }
+    }
+    private fun getNlmDropDownApi(Model:String?)
+    {
+        viewModel.getNlmDropDown(
+            this, true, GetNlmDropDownRequest(
+                column = Model,
+                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+            )
+        )
     }
     private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
 
@@ -601,12 +691,12 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                 )
             )
         }
-//        else if (Model=="quantity_of_fodder_seed_class")
-//        {getNlmDropDownApi(Model)}
-//        else if (Model=="quantity_of_seed_class")
-//        {getNlmDropDownApi(Model)}
-//        else if (Model=="target_achievement_class")
-//        {getNlmDropDownApi(Model)}
+        else if (Model=="agency_involved")
+        {getNlmDropDownApi(Model)}
+        else if (Model=="type_of_land")
+        {getNlmDropDownApi(Model)}
+        else if (Model=="type_of_agency")
+        {getNlmDropDownApi(Model)}
         else{
             viewModel.getDropDownApi(
                 this, loader, GetDropDownRequest(
@@ -641,6 +731,8 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.tvSubmit.showView()
         bindingDialog.btnDelete.hideView()
+        bindingDialog.tvDistrictNlm.setOnClickListener { showBottomSheetDialog2("District",3,bindingDialog.tvDistrictNlm) }
+        bindingDialog.tvAgencyInvolved.setOnClickListener { showBottomSheetDialog2("agency_involved",0,bindingDialog.tvAgencyInvolved) }
         if(selectedItem!=null )
         {
             bindingDialog.tvAgencyInvolved.text=selectedItem.agency_involved
@@ -649,10 +741,11 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             bindingDialog.etConsumerFodder.setText(selectedItem.consumer_fodder)
             bindingDialog.etFodderProduced.setText(selectedItem.estimated_quantity)
             bindingDialog.etVillageName.setText(selectedItem.village_name)
+            bindingDialog.tvDistrictNlm.text=selectedItem.district_name
         }
         bindingDialog.tvSubmit.setOnClickListener {
             if (
-                bindingDialog.tvDistrictNlm.text.toString().isNotEmpty()||bindingDialog.etBlock.text.toString().isNotEmpty()||bindingDialog.etAreaCovered.text.toString().isNotEmpty()||bindingDialog.etVariteryFodder.text.toString().isNotEmpty()||bindingDialog.etFodderProduced.text.toString().isNotEmpty()||bindingDialog.etConsumerFodder.text.toString().isNotEmpty()||bindingDialog.tvAgencyInvolved.text.toString().isNotEmpty()
+                bindingDialog.tvDistrictNlm.text.toString().isNotEmpty()||bindingDialog.etBlock.text.toString().isNotEmpty()||bindingDialog.etAreaCovered.text.toString().isNotEmpty()||bindingDialog.etFodderProduced.text.toString().isNotEmpty()||bindingDialog.etConsumerFodder.text.toString().isNotEmpty()||bindingDialog.tvAgencyInvolved.text.toString().isNotEmpty()
                 )
             {
                 if(selectedItem!=null)
@@ -667,7 +760,8 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                             estimated_quantity = bindingDialog.etFodderProduced.text.toString(),
                             fp_from_forest_land_id=selectedItem.fp_from_forest_land_id,
                             village_name = bindingDialog.etVillageName.text.toString(),
-                            district_code = null
+                            district_code = null,
+                            district_name = bindingDialog.tvDistrictNlm.text.toString()
                         )
                         adapter.notifyItemChanged(position)
                         dialog.dismiss()
@@ -683,7 +777,8 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                         estimated_quantity = bindingDialog.etFodderProduced.text.toString(),
                         fp_from_forest_land_id=null,
                         village_name = bindingDialog.etVillageName.text.toString(),
-                        district_code = null
+                        district_code = null,
+                        district_name = bindingDialog.tvDistrictNlm.text.toString(),
                     ))
 
 
@@ -872,7 +967,8 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             name_implementing_agency = mBinding?.etImplementingAgencyIA?.text.toString(),
             scheme_guidelines = mBinding?.etSchemeGuideline?.text.toString(),
             target_achievement = mBinding?.etTarget?.text.toString(),
-            type_of_land = mBinding?.tvAgency?.text.toString(),
+            type_of_land = mBinding?.tvLand?.text.toString(),
+            type_of_agency = mBinding?.tvAgency?.text.toString(),
             variety_of_fodder = mBinding?.etVariteryFodder?.text.toString(),
             district_code = districtIdIA
 
@@ -903,9 +999,11 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                 name_implementing_agency = mBinding?.etImplementingAgency?.text.toString(),
                 scheme_guidelines = mBinding?.etSchemeGuideline?.text.toString(),
                 target_achievement = mBinding?.etTarget?.text.toString(),
-                type_of_land = mBinding?.tvAgency?.text.toString(),
+                type_of_land = mBinding?.tvLand?.text.toString(),
+                type_of_agency = mBinding?.tvAgency?.text.toString(),
                 variety_of_fodder = mBinding?.etVariteryFodder?.text.toString(),
-                district_code = districtId
+                district_code = districtId,
+                grant_received = mBinding?.etGrantReceived?.text.toString()
 
 
             )
@@ -927,8 +1025,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                             if (it.moveToFirst()) {
                                 DocumentName=
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                DialogDocName?.text=DocumentName
-
+//                                DialogDocName?.text=DocumentName
                                 val requestBody = convertToRequestBody(this, uri)
                                 body = MultipartBody.Part.createFormData(
                                     "document_name",
@@ -960,5 +1057,21 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
         AddDocumentDialog(this,selectedItem,position)
+    }
+    private fun ViewEditApi(viewEdit:String?){
+        viewModel.getFpFromForestLandAddEdit(this@AddNlmFpForestLandActivity,true,
+            FpFromForestLandAddEditFormat9Request(
+                state_code = getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this@AddNlmFpForestLandActivity,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                role_id = getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.role_id,
+                is_type = viewEdit,
+                id = itemId,
+
+            )
+        )
     }
 }

@@ -1,5 +1,6 @@
 package com.nlm.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,6 +24,9 @@ import com.nlm.model.ArtificialInseminationObservationByNlm
 import com.nlm.model.ImportOfExoticGoatAchievement
 import com.nlm.model.ImportOfExoticGoatDetailImport
 import com.nlm.model.ImportOfExoticGoatVerifiedNlm
+import com.nlm.model.Result
+import com.nlm.utilities.AppConstants
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -46,19 +50,21 @@ class ImportOfExoticGoatVerifiedNlmAdapter(
 
         }
 
-    override fun onBindViewHolder(holder: ImportOfExoticGoatVerifiedNlmViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImportOfExoticGoatVerifiedNlmViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
          val items=programmeList[position]
         // Handle visibility of add/delete buttons
+        holder.binding.btnEdit.showView()
+        holder.binding.etSpeciesBreed.isEnabled=false
+        holder.binding.etYear.isEnabled=false
+        holder.binding.etF2GenerationDistributed.isEnabled=false
+        holder.binding.etF1GenerationProduced.isEnabled=false
+        holder.binding.etF1GenerationDistributed.isEnabled=false
+        holder.binding.etF2GenerationProduced.isEnabled=false
          if (viewEdit=="view")
          {
-             holder.binding.etSpeciesBreed.isEnabled=false
-             holder.binding.etYear.isEnabled=false
-             holder.binding.etF2GenerationDistributed.isEnabled=false
-             holder.binding.etF1GenerationProduced.isEnabled=false
-             holder.binding.etF1GenerationDistributed.isEnabled=false
-             holder.binding.etF2GenerationProduced.isEnabled=false
              holder.binding.btnDelete.hideView()
+             holder.binding.btnEdit.hideView()
 
          }
         else if (viewEdit=="edit"){
@@ -85,19 +91,20 @@ class ImportOfExoticGoatVerifiedNlmAdapter(
                     context.getString(R.string.are_you_sure_want_to_delete_your_post)
                 )
             }
-            holder.binding.btnEdit.setOnClickListener{
-                callBackEdit.onClickItem(
-                    ImportOfExoticGoatVerifiedNlm(
-                        number_of_animals = items.number_of_animals,
-                        f1_generation_produced = items.f1_generation_produced,
-                        f2_generation_produced = items.f2_generation_produced,
-                        f2_generation_distributed = items.f2_generation_distributed,
-                        id =items.id ,
-                        species_breed=items.species_breed,
-                        import_of_exotic_goat_id = items.import_of_exotic_goat_id,
-                        year = items.year
-                    ),position,2)
-            }
+
+        }
+        holder.binding.btnEdit.setOnClickListener{
+            callBackEdit.onClickItem(
+                ImportOfExoticGoatVerifiedNlm(
+                    number_of_animals = items.number_of_animals,
+                    f1_generation_produced = items.f1_generation_produced,
+                    f2_generation_produced = items.f2_generation_produced,
+                    f2_generation_distributed = items.f2_generation_distributed,
+                    id =items.id ,
+                    species_breed=items.species_breed,
+                    import_of_exotic_goat_id = items.import_of_exotic_goat_id,
+                    year = items.year
+                ),position,2)
         }
     }
 

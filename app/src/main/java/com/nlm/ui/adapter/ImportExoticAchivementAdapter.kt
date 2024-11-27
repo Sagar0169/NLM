@@ -1,5 +1,6 @@
 package com.nlm.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +23,9 @@ import com.nlm.model.ArtificialInseminationObservationByNlm
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImportOfExoticGoatAchievement
 import com.nlm.model.ImportOfExoticGoatDetailImport
+import com.nlm.model.Result
+import com.nlm.utilities.AppConstants
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -45,7 +49,7 @@ class ImportExoticAchivementAdapter(
 
         }
 
-    override fun onBindViewHolder(holder: ImportExoticAchivementViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImportExoticAchivementViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
          val items=programmeList[position]
         holder.binding.etNoOfAnimals.isEnabled=false
@@ -63,6 +67,11 @@ class ImportExoticAchivementAdapter(
         holder.binding.etPerformanceOfTheAnimals.isFocusable=false
         holder.binding.etBalance.isFocusable=false
         holder.binding.btnEdit.showView()
+        if (getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==8)
+        {
+            holder.binding.btnEdit.hideView()
+            holder.binding.btnDelete.hideView()
+        }
         if (viewEdit=="view")
         {  holder.binding.btnEdit.hideView()
             holder.binding.etNoOfAnimals.isEnabled=false

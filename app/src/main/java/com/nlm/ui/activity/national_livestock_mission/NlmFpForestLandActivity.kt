@@ -1,6 +1,7 @@
 package com.nlm.ui.activity.national_livestock_mission
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import com.nlm.model.FpFromForestLandRequest
 import com.nlm.model.FpFromForestLandResponse
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion.FILTER_REQUEST_CODE
 import com.nlm.ui.adapter.FpFromForestLandAdapter
 import com.nlm.ui.adapter.FpFromNonForestAdapter
 import com.nlm.utilities.AppConstants
@@ -22,6 +24,7 @@ import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import kotlin.math.log
 
 class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), CallBackDeleteAtId {
     private var mBinding: ActivityNlmFpForestLandBinding? = null
@@ -32,6 +35,12 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
     private var currentPage = 1
     private var totalPage = 1
     private var loading = true
+    var stateId: Int ?= null
+    var districtId: Int ?= null
+    var nameOfAgency: String ?= null
+    var districtName: String ?= null
+    var areaCoverd: String ?= null
+
 
     override val layoutId: Int
         get() = R.layout.activity_nlm_fp_forest_land
@@ -54,7 +63,24 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
         super.onResume()
         fpFromForestLandAPICall(paginate = false, loader = true)
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
+        if (requestCode == FILTER_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Retrieve the data passed from FilterStateActivity
+            districtId = data?.getIntExtra("districtId", 0)!!
+            stateId = data.getIntExtra("stateId", 0)
+            nameOfAgency = data.getStringExtra("nameOfAgency").toString()
+            areaCoverd = data.getStringExtra("areaCovered").toString()
+            districtName = data.getStringExtra("districtName").toString()
+
+            fpFromForestLandAPICall(paginate = false, loader = true,)
+           Log.d("FILTERDATA","districtId: $districtId")
+           Log.d("FILTERDATA","stateId: $stateId")
+           Log.d("FILTERDATA","nameOfAgency: $nameOfAgency")
+           Log.d("FILTERDATA","areaCovered: $areaCoverd")
+        }
+    }
     private fun fpFromForestLandAPICall(paginate: Boolean, loader: Boolean) {
         if (paginate) {
             currentPage++
@@ -77,7 +103,10 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
                     Result::class.java
                 )?.state_code,
                 page = currentPage,
-                limit = 10
+                limit = 10,
+                name_implementing_agency = nameOfAgency,
+                area_covered = areaCoverd,
+                district_code=districtId
             )
         )
     }
@@ -128,7 +157,7 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             } else {
-                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                if (userResponseModel?._result?.data != null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
                         fpsFromForestLandList.clear()
 
@@ -168,7 +197,13 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
                 this@NlmFpForestLandActivity,
                 FilterStateActivity::class.java
             ).putExtra("isFrom", 15)
-            startActivity(intent)
+                .putExtra("nameOfAgency", nameOfAgency)
+            .putExtra("areaCovered", areaCoverd)
+            .putExtra("stateId", stateId) // Add selected data to intent
+            .putExtra("districtId", districtId) // Add selected data to intent
+            .putExtra("districtName", districtName)
+            startActivityForResult(intent,FILTER_REQUEST_CODE)
+
         }
     }
 

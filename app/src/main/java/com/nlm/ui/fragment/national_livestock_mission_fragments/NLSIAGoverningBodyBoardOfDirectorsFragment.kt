@@ -111,18 +111,37 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                             else {
                                 nlmIACompositionOFGoverningList.clear()
                                 nlmIAProjectMonitoringCommitteeList.clear()
-                                userResponseModel._result.implementing_agency_advisory_committee?.let { it1 ->
-                                    nlmIACompositionOFGoverningList.addAll(
-                                        it1
-                                    )
-                                    userResponseModel._result.implementing_agency_project_monitoring?.let { it2 ->
-                                        nlmIAProjectMonitoringCommitteeList.addAll(
-                                            it2
+                                // Add data to nlmIACompositionOFGoverningList if it's null or empty
+                                if (userResponseModel._result.implementing_agency_advisory_committee.isNullOrEmpty()) {
+                                    nlmIACompositionOFGoverningList.add(
+                                        ImplementingAgencyAdvisoryCommittee(
+                                            name_of_the_official = "",
+                                            designation = "",
+                                            organization = "",
+                                            implementing_agency_id = null,
+                                            id = null
                                         )
-                                    }
-                                    nlmIACompositionOFGoverningAdapter?.notifyDataSetChanged()
-                                    nlmIAProjectMonitoringCommitteeAdapter?.notifyDataSetChanged()
+                                    )
+                                } else {
+                                    nlmIACompositionOFGoverningList.addAll(userResponseModel._result.implementing_agency_advisory_committee)
                                 }
+                                if (userResponseModel._result.implementing_agency_project_monitoring.isNullOrEmpty()) {
+                                    nlmIAProjectMonitoringCommitteeList.add(
+                                        ImplementingAgencyProjectMonitoring(
+                                            name_of_official = "",
+                                            designation = "",
+                                            organization = "",
+                                            id = null,
+                                            implementing_agency_id = null
+                                        )
+                                    )
+                                } else {
+                                    nlmIAProjectMonitoringCommitteeList.addAll(userResponseModel._result.implementing_agency_project_monitoring)
+                                }
+
+                                nlmIACompositionOFGoverningAdapter?.notifyDataSetChanged()
+                                    nlmIAProjectMonitoringCommitteeAdapter?.notifyDataSetChanged()
+
                             }
                         }
                         else{
