@@ -137,14 +137,23 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                                     it1
                                 )
                             }
-
                             mNlmIADistrictWiseNoList.clear()
-                            userResponseModel._result.implementing_agency_involved_district_wise?.let { it1 ->
-                                mNlmIADistrictWiseNoList.addAll(
-                                    it1
-                                )
+                                if (userResponseModel._result.implementing_agency_involved_district_wise.isNullOrEmpty()) {
+                                    mNlmIADistrictWiseNoList.add(
+                                        ImplementingAgencyInvolvedDistrictWise(
+                                            name_of_district = "",
+                                            location_of_ai_centre = "",
+                                            ai_performed = "",
+                                            id = null,
+                                            year = null,
+                                            implementing_agency_id = null
+                                        )
+                                    )
+                                } else {
+                                    mNlmIADistrictWiseNoList.addAll(userResponseModel._result.implementing_agency_involved_district_wise)
+                                }
                                 mNlmIADistrictWiseNoAdapter.notifyDataSetChanged()
-                            }
+
                         }}
                         else{
                     listener?.onNextButtonClick()

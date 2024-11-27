@@ -157,7 +157,7 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             } else {
-                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                if (userResponseModel?._result?.data != null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
                         fpsFromForestLandList.clear()
 
@@ -196,12 +196,13 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
             val intent = Intent(
                 this@NlmFpForestLandActivity,
                 FilterStateActivity::class.java
-            ).putExtra("isFrom", 15).putExtra("nameOfAgency", nameOfAgency)
+            ).putExtra("isFrom", 15)
+                .putExtra("nameOfAgency", nameOfAgency)
             .putExtra("areaCovered", areaCoverd)
             .putExtra("stateId", stateId) // Add selected data to intent
             .putExtra("districtId", districtId) // Add selected data to intent
             .putExtra("districtName", districtName)
-            startActivity(intent)
+            startActivityForResult(intent,FILTER_REQUEST_CODE)
 
         }
     }
