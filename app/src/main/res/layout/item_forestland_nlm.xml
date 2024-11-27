@@ -157,32 +157,6 @@
 
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_7"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Variety of fodder"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
-
-            <EditText
-                android:id="@+id/etVariteryFodder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_grey"
-                android:fontFamily="@font/opensans_regular"
-                android:hint=""
-                android:maxLength="50"
-                android:paddingHorizontal="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_5"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey"
-                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:layout_width="wrap_content"

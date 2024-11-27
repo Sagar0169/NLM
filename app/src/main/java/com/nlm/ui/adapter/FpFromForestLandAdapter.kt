@@ -15,6 +15,7 @@ import com.nlm.databinding.ItemFpFromForestLandBinding
 import com.nlm.model.FpFromForestLandData
 import com.nlm.ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity
 import com.nlm.ui.activity.national_livestock_mission.AddNlmFpForestLandActivity
+import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatForms
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
@@ -71,10 +72,17 @@ class FpFromForestLandAdapter(
         holder.mBinding.etNlmStatus.text = item.is_draft_nlm.toString()
         holder.mBinding.etIAStatus.text = item.is_draft_ia.toString()
         holder.mBinding.ivView.setOnClickListener {
-            context.startActivity(Intent(context, AddNlmFpForestLandActivity::class.java))
+            val intent = Intent(holder.itemView.context, AddNlmFpForestLandActivity::class.java)
+            intent.putExtra("View/Edit", "view")
+            intent.putExtra("itemId", item.id)
+            holder.itemView.context.startActivity(intent)
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            context.startActivity(Intent(context, AddNlmFpForestLandActivity::class.java))
+            val intent = Intent(holder.itemView.context, AddNlmFpForestLandActivity::class.java)
+            intent.putExtra("View/Edit", "edit")
+            intent.putExtra("itemId", item.id)
+            holder.itemView.context.startActivity(intent)
+
         }
 
         holder.mBinding.ivDelete.setOnClickListener {

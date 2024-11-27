@@ -221,32 +221,7 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_10"
-                                android:id="@+id/tvSupportingDocumentView"
-                                android:layout_marginTop="@dimen/dp_10"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Supporting Documents"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <LinearLayout
-                                android:id="@+id/llSDRv"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="10dp"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:orientation="vertical"
-                                android:layout_marginTop="@dimen/dp_10"
-                                android:background="@drawable/curve_all_corner_black"
-                                android:paddingVertical="@dimen/dp_10">
-                                <com.nlm.utilities.NonScrollableRecyclerView
-                                    android:id="@+id/ShowDocumentRv"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/dp_7"
-                                    android:paddingTop="8dp" /></LinearLayout>
+
                             <LinearLayout
                                 android:id="@+id/llInformationByIa"
                                 android:layout_width="match_parent"
@@ -457,6 +432,32 @@
                             android:textSize="@dimen/sp_16" />
 </LinearLayout>
                             </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/dp_10"
+                                android:id="@+id/tvSupportingDocumentView"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Supporting Documents"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+                            <LinearLayout
+                                android:id="@+id/llSDRv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="10dp"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:orientation="vertical"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:background="@drawable/curve_all_corner_black"
+                                android:paddingVertical="@dimen/dp_10">
+                                <com.nlm.utilities.NonScrollableRecyclerView
+                                    android:id="@+id/ShowDocumentRv"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/dp_7"
+                                    android:paddingTop="8dp" /></LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -603,7 +604,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
+                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/curve_all_corner_black"
                     android:orientation="vertical"
@@ -649,6 +650,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/dp_10"
+                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:orientation="vertical"
                     android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/curve_all_corner_black"

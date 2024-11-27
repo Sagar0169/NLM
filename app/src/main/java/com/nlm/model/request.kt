@@ -128,6 +128,7 @@ data class AssistanceForQfspDocument(
     val description: String
 )
 data class FpFromForestLandAddEditFormat9Request(
+    val is_type: String?=null,
     val area_covered: Int?=null,
     val created_by: Int?=null,
     val district_code: Int?=null,

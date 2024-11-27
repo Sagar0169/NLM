@@ -256,6 +256,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                 } else {
                     DocumentId=userResponseModel._result.id
                     UploadedDocumentName=userResponseModel._result.document_name
+                    DialogDocName?.text=userResponseModel._result.document_name
                     mBinding?.main?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -608,7 +609,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                             if (it.moveToFirst()) {
                                 DocumentName=
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                DialogDocName?.text=DocumentName
+
 
                                 val requestBody = convertToRequestBody(this, uri)
                                 body = MultipartBody.Part.createFormData(
