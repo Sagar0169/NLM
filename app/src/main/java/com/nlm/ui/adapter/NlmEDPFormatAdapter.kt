@@ -49,7 +49,11 @@ class NlmEDPFormatAdapter(
         @SuppressLint("RecyclerView") position: Int
     ) {
         val currentItem = programmeList[position]
-        if (viewEdit == "view"
+        if (viewEdit == "view" || getPreferenceOfScheme(
+                context,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 8
         ) {
             holder.binding.etCategory.isEnabled = false
             holder.binding.etNoProject.isEnabled = false
@@ -66,6 +70,7 @@ class NlmEDPFormatAdapter(
         } else if (viewEdit == "edit") {
             holder.binding.btnEdit.showView()
         }
+
         holder.binding.etCategory.isEnabled = false
         holder.binding.etNoProject.isEnabled = false
         holder.binding.etCostOfProject.isEnabled = false
@@ -75,14 +80,34 @@ class NlmEDPFormatAdapter(
         holder.binding.etBirth.isEnabled = false
         holder.binding.etAvg.isEnabled = false
 
-        holder.binding.etCategory.setText(currentItem.category_of_project)
-        holder.binding.etNoProject.setText(currentItem.no_of_project.toString())
-        holder.binding.etCostOfProject.setText(currentItem.cost_of_project.toString())
-        holder.binding.etTotalAnimal.setText(currentItem.total_animal_inducted.toString())
-        holder.binding.etTotalFarmers.setText(currentItem.total_farmers_impacted.toString())
-        holder.binding.etTotalNoEmp.setText(currentItem.total_employment_generated.toString())
-        holder.binding.etBirth.setText(currentItem.birth_percentage.toString())
-        holder.binding.etAvg.setText(currentItem.average_revenue_earned.toString())
+        if (currentItem.id == null && currentItem.category_of_project == "dummy") {
+            holder.binding.etCategory.setText("")
+            holder.binding.etNoProject.setText("")
+            holder.binding.etCostOfProject.setText("")
+            holder.binding.etTotalAnimal.setText("")
+            holder.binding.etTotalFarmers.setText("")
+            holder.binding.etTotalNoEmp.setText("")
+            holder.binding.etBirth.setText("")
+            holder.binding.etAvg.setText("")
+
+        } else {
+            holder.binding.etCategory.setText(currentItem.category_of_project)
+            holder.binding.etNoProject.setText(currentItem.no_of_project?.toString() ?: "")
+            holder.binding.etCostOfProject.setText(currentItem.cost_of_project?.toString() ?: "")
+            holder.binding.etTotalAnimal.setText(
+                currentItem.total_animal_inducted?.toString() ?: ""
+            )
+            holder.binding.etTotalFarmers.setText(
+                currentItem.total_farmers_impacted?.toString() ?: ""
+            )
+            holder.binding.etTotalNoEmp.setText(
+                currentItem.total_employment_generated?.toString() ?: ""
+            )
+            holder.binding.etBirth.setText(currentItem.birth_percentage?.toString() ?: "")
+            holder.binding.etAvg.setText(currentItem.average_revenue_earned?.toString() ?: "")
+        }
+
+
 
 
         holder.binding.btnEdit.setOnClickListener {
@@ -118,7 +143,6 @@ class NlmEDPFormatAdapter(
                 )
             }
         }
-
 
 
     }

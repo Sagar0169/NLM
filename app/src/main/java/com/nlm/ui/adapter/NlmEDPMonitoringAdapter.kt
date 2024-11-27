@@ -86,10 +86,11 @@ class NlmEDPMonitoringAdapter(
         holder.binding.etCapacity.setText(currentItem.capacity)
         holder.binding.tvFull.text = currentItem.whether_full
         holder.binding.etFinacial.setText(currentItem.financial_status)
-        holder.binding.etNoAnimals.setText(currentItem.number_of_animals_marketed.toString())
-        holder.binding.etBalance.setText(currentItem.balance_of_animal.toString())
-        holder.binding.etNoFarmers.setText(currentItem.number_of_farmers.toString())
-        holder.binding.etNoJob.setText(currentItem.number_of_job.toString())
+        holder.binding.etNoAnimals.setText(currentItem.number_of_animals_marketed?.toString() ?: "")
+        holder.binding.etBalance.setText(currentItem.balance_of_animal?.toString() ?: "")
+        holder.binding.etNoFarmers.setText(currentItem.number_of_farmers?.toString() ?: "")
+        holder.binding.etNoJob.setText(currentItem.number_of_job?.toString() ?: "")
+
 
         holder.binding.btnEdit.setOnClickListener {
             callBackEdit.onClickItem(

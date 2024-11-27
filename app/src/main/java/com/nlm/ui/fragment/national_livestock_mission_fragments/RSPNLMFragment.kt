@@ -193,32 +193,6 @@ class RSPNLMFragment(
         )
     }
 
-    private fun viewEditApii() {
-
-        viewModel.getRspLabAddApi(
-            requireContext(), true,
-            RSPAddRequest(
-                id = getPreference_int(requireContext(), AppConstants.FORM_FILLED_ID),
-                state_code = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id.toString(),
-                district_code = dId,
-                role_id = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                is_type = viewEdit
-            )
-        )
-    }
 
     private fun rspBuckAdapter() {
         addBucksList = mutableListOf()

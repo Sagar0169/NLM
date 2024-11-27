@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -36,6 +37,7 @@ import com.nlm.model.ResultGetDropDown
 import com.nlm.ui.adapter.AssistanceEAAdapter
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
+import com.nlm.ui.adapter.RSPSupportingDocumentIAAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
@@ -59,6 +61,8 @@ class AddNLMExtensionActivity(
     private lateinit var totalListDocument: ArrayList<ImplementingAgencyDocument>
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
+    private var addDocumentIAAdapter: RSPSupportingDocumentIAAdapter? = null
+
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
@@ -342,14 +346,14 @@ class AddNLMExtensionActivity(
     }
 
     private fun iaAdapter() {
-        addDocumentAdapter = RSPSupportingDocumentAdapter(
+        addDocumentIAAdapter = RSPSupportingDocumentIAAdapter(
             this,
             viewDocumentList,
             viewEdit,
             this,
             this
         )
-        mBinding?.recyclerView?.adapter = addDocumentAdapter
+        mBinding?.recyclerView?.adapter = addDocumentIAAdapter
         mBinding?.recyclerView?.layoutManager = LinearLayoutManager(this)
     }
 
@@ -524,9 +528,11 @@ class AddNLMExtensionActivity(
                     Result::class.java
                 )?.role_id == 8
             ) {
+                UploadedDocumentName = selectedItem.nlm_document
                 bindingDialog.etDoc.text = selectedItem.nlm_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             } else {
+                UploadedDocumentName = selectedItem.ia_document
                 bindingDialog.etDoc.text = selectedItem.ia_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             }
@@ -555,21 +561,23 @@ class AddNLMExtensionActivity(
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = null,
                                     nlm_document = UploadedDocumentName,
-                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+                                    assistance_for_ea_id = selectedItem.assistance_for_ea_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentAdapter?.notifyItemChanged(position)
+
                         } else {
                             viewDocumentList[position] =
                                 ImplementingAgencyDocument(
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = UploadedDocumentName,
                                     nlm_document = null,
-                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+                                    assistance_for_ea_id = selectedItem.assistance_for_ea_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentIAAdapter?.notifyItemChanged(position)
                         }
 
-                        addDocumentAdapter?.notifyItemChanged(position)
                         dialog.dismiss()
                     }
 
@@ -580,27 +588,27 @@ class AddNLMExtensionActivity(
                             Result::class.java
                         )?.role_id == 8
                     ) {
-                        toast("document")
                         DocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                nlm_document = DocumentName,
+                                nlm_document = UploadedDocumentName,
                                 id = null,
-                                fsp_plant_storage_id = null,
+                                assistance_for_ea_id = null,
                                 ia_document = null
                             )
                         )
                     } else {
-                        toast("View")
                         viewDocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                ia_document = DocumentName,
+                                ia_document = UploadedDocumentName,
                                 id = null,
-                                fsp_plant_storage_id = null,
+                                assistance_for_ea_id = null,
                                 nlm_document = null
                             )
                         )
+                        Log.d("Debug", "viewDocumentList: ${viewDocumentList.size}")
+
                     }
 
                     if (getPreferenceOfScheme(
@@ -615,10 +623,12 @@ class AddNLMExtensionActivity(
 //
                         }
                     } else {
+
                         viewDocumentList.size.minus(1).let {
-                            addDocumentAdapter?.notifyItemInserted(it)
+                            addDocumentIAAdapter?.notifyItemInserted(it)
                             dialog.dismiss()
                         }
+                        toast("else")
                     }
                 }
             } else {
@@ -630,6 +640,7 @@ class AddNLMExtensionActivity(
         }
         dialog.show()
     }
+
 
     private fun openOnlyPdfAccordingToPosition() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -988,9 +999,15 @@ class AddNLMExtensionActivity(
                                 }
                             }
 
-                            iaAdapter()
+//                            if(getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==8){
                             nlmAdapter()
+                            iaAdapter()
+//                            }
+//                            else{
+//                                iaAdapter()
+//                            }
                             addDocumentAdapter?.notifyDataSetChanged()
+                            addDocumentIAAdapter?.notifyDataSetChanged()
 
                         } else {
                             onBackPressedDispatcher.onBackPressed()
@@ -1007,7 +1024,13 @@ class AddNLMExtensionActivity(
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
-        position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+        if (isFrom == 10) {
+            position.let { it1 -> addDocumentIAAdapter?.onDeleteButtonClick(it1) }
+
+        } else {
+            position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+
+        }
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
