@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,7 @@ import com.nlm.model.RspAddAverage
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.FspPlantStorageNLMAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
+import com.nlm.ui.adapter.RSPSupportingDocumentIAAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -65,6 +67,8 @@ class AddNewFspPlantStorageActivity(
     private lateinit var totalListDocument: ArrayList<ImplementingAgencyDocument>
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
+    private var addDocumentIAAdapter: RSPSupportingDocumentIAAdapter? = null
+
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
@@ -93,8 +97,8 @@ class AddNewFspPlantStorageActivity(
 
 
     private val variety = listOf(
-        ResultGetDropDown(0, "Class Wise"),
-        ResultGetDropDown(0, "Variety Wise")
+        ResultGetDropDown(-1, "Class Wise"),
+        ResultGetDropDown(-1, "Variety Wise")
     )
 
     inner class ClickActions {
@@ -214,13 +218,6 @@ class AddNewFspPlantStorageActivity(
         mBinding?.tvStateNlm?.isEnabled = false
         mBinding?.tvStateNlm?.setTextColor(Color.parseColor("#000000"))
         mBinding?.tvState?.setTextColor(Color.parseColor("#000000"))
-        addDocumentAdapter = RSPSupportingDocumentAdapter(
-            this,
-            DocumentList,
-            viewEdit,
-            this,
-            this
-        )
         if (getPreferenceOfScheme(
                 this,
                 AppConstants.SCHEME,
@@ -377,14 +374,14 @@ class AddNewFspPlantStorageActivity(
     }
 
     private fun iaAdapter() {
-        addDocumentAdapter = RSPSupportingDocumentAdapter(
+        addDocumentIAAdapter = RSPSupportingDocumentIAAdapter(
             this,
             viewDocumentList,
             viewEdit,
             this,
             this
         )
-        mBinding?.recyclerView?.adapter = addDocumentAdapter
+        mBinding?.recyclerView?.adapter = addDocumentIAAdapter
         mBinding?.recyclerView?.layoutManager = LinearLayoutManager(this)
     }
 
@@ -425,7 +422,7 @@ class AddNewFspPlantStorageActivity(
                 technical_expertise = mBinding?.etTechnical?.text.toString(),
                 certification_recognition = chooseDocName,
                 fsp_plant_storage_comments_of_nlm = plantStorageList,
-                fsp_plant_storage_document = DocumentList
+                fsp_plant_storage_document = totalListDocument
             )
         )
     }
@@ -549,9 +546,11 @@ class AddNewFspPlantStorageActivity(
                     Result::class.java
                 )?.role_id == 8
             ) {
+                UploadedDocumentName = selectedItem.nlm_document
                 bindingDialog.etDoc.text = selectedItem.nlm_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             } else {
+                UploadedDocumentName = selectedItem.ia_document
                 bindingDialog.etDoc.text = selectedItem.ia_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             }
@@ -583,6 +582,8 @@ class AddNewFspPlantStorageActivity(
                                     fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentAdapter?.notifyItemChanged(position)
+
                         } else {
                             viewDocumentList[position] =
                                 ImplementingAgencyDocument(
@@ -592,9 +593,9 @@ class AddNewFspPlantStorageActivity(
                                     fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentIAAdapter?.notifyItemChanged(position)
                         }
 
-                        addDocumentAdapter?.notifyItemChanged(position)
                         dialog.dismiss()
                     }
 
@@ -608,7 +609,7 @@ class AddNewFspPlantStorageActivity(
                         DocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                nlm_document = DocumentName,
+                                nlm_document = UploadedDocumentName,
                                 id = null,
                                 fsp_plant_storage_id = null,
                                 ia_document = null
@@ -618,14 +619,15 @@ class AddNewFspPlantStorageActivity(
                         viewDocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                ia_document = DocumentName,
+                                ia_document = UploadedDocumentName,
                                 id = null,
                                 fsp_plant_storage_id = null,
                                 nlm_document = null
                             )
                         )
-                    }
+                        Log.d("Debug", "viewDocumentList: ${viewDocumentList.size}")
 
+                    }
 
                     if (getPreferenceOfScheme(
                             this,
@@ -639,10 +641,12 @@ class AddNewFspPlantStorageActivity(
 //
                         }
                     } else {
+
                         viewDocumentList.size.minus(1).let {
-                            addDocumentAdapter?.notifyItemInserted(it)
+                            addDocumentIAAdapter?.notifyItemInserted(it)
                             dialog.dismiss()
                         }
+                        toast("else")
                     }
                 }
             } else {
@@ -689,7 +693,6 @@ class AddNewFspPlantStorageActivity(
                                     chooseDocName = DocumentName
                                 } else {
                                     DialogDocName?.text = DocumentName
-
                                 }
 
 
@@ -739,7 +742,6 @@ class AddNewFspPlantStorageActivity(
         // Define a variable for the selected list and TextView
         val selectedList: List<ResultGetDropDown>
         val selectedTextView: TextView
-
         // Initialize based on type
         when (type) {
 //            "typeSemen" -> {
@@ -765,7 +767,6 @@ class AddNewFspPlantStorageActivity(
             }
 
             "Variety" -> {
-                img = 2
                 selectedList = variety
                 selectedTextView = mBinding!!.tvQuality
             }
@@ -787,7 +788,10 @@ class AddNewFspPlantStorageActivity(
         stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
             // Handle state item click
             selectedTextView.text = selectedItem
-            districtId = id
+            if (id != -1) {
+                districtId = id
+                toast(districtId.toString())
+            }
             selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
             bottomSheetDialog.dismiss()
         }
@@ -928,6 +932,7 @@ class AddNewFspPlantStorageActivity(
                 } else {
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
+                    chooseDocName = userResponseModel._result.document_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -1003,13 +1008,17 @@ class AddNewFspPlantStorageActivity(
                                 description = "",
                                 ia_document = "",
                                 nlm_document = "",
-                                fsp_plant_storage_id = 0 // Or null, depending on your use case
+                                assistance_for_ea_id = 0 // Or null, depending on your use case
                             )
-                            if (userResponseModel._result.fsp_plant_storage_document.isEmpty() && viewEdit == "view") {
+                            if (userResponseModel._result?.fsp_plant_storage_document?.isEmpty() == true && viewEdit == "view") {
+                                // Add dummy data with default values
+
+
                                 DocumentList.add(dummyData)
                                 viewDocumentList.add(dummyData)
+
                             } else {
-                                userResponseModel._result.fsp_plant_storage_document.forEach { document ->
+                                userResponseModel._result?.fsp_plant_storage_document?.forEach { document ->
                                     if (document.ia_document == null) {
                                         DocumentList.add(document)//nlm
                                     } else {
@@ -1025,9 +1034,16 @@ class AddNewFspPlantStorageActivity(
                                     DocumentList.add(dummyData)
                                 }
                             }
-                            iaAdapter()
+
+//                            if(getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==8){
                             nlmAdapter()
+                            iaAdapter()
+//                            }
+//                            else{
+//                                iaAdapter()
+//                            }
                             addDocumentAdapter?.notifyDataSetChanged()
+                            addDocumentIAAdapter?.notifyDataSetChanged()
 
                         } else {
                             onBackPressedDispatcher.onBackPressed()
@@ -1044,9 +1060,14 @@ class AddNewFspPlantStorageActivity(
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
-        position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
-    }
+        if (isFrom == 10) {
+            position.let { it1 -> addDocumentIAAdapter?.onDeleteButtonClick(it1) }
 
+        } else {
+            position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+
+        }
+    }
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
         addDocumentDialog(this@AddNewFspPlantStorageActivity, selectedItem, position)
     }

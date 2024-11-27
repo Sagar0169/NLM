@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,7 @@ import com.nlm.ui.adapter.NlmAnimalMonitoringAdapter
 import com.nlm.ui.adapter.NlmEDPFormatAdapter
 import com.nlm.ui.adapter.NlmEDPMonitoringAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
+import com.nlm.ui.adapter.RSPSupportingDocumentIAAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
@@ -83,6 +85,8 @@ class AddAnimalHusbandryActivity(
     private lateinit var totalListDocument: ArrayList<ImplementingAgencyDocument>
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
+    private var addDocumentIAAdapter: RSPSupportingDocumentIAAdapter? = null
+
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
@@ -392,14 +396,14 @@ class AddAnimalHusbandryActivity(
     }
 
     private fun iaAdapter() {
-        addDocumentAdapter = RSPSupportingDocumentAdapter(
+        addDocumentIAAdapter = RSPSupportingDocumentIAAdapter(
             this,
             viewDocumentList,
             viewEdit,
             this,
             this
         )
-        mBinding?.recyclerView?.adapter = addDocumentAdapter
+        mBinding?.recyclerView?.adapter = addDocumentIAAdapter
         mBinding?.recyclerView?.layoutManager = LinearLayoutManager(this)
     }
 
@@ -699,11 +703,11 @@ class AddAnimalHusbandryActivity(
                     Result::class.java
                 )?.role_id == 8
             ) {
-//                UploadedDocumentName = selectedItem.nlm_document
+                UploadedDocumentName = selectedItem.nlm_document
                 bindingDialog.etDoc.text = selectedItem.nlm_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             } else {
-//                UploadedDocumentName = selectedItem.ia_document
+                UploadedDocumentName = selectedItem.ia_document
                 bindingDialog.etDoc.text = selectedItem.ia_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             }
@@ -732,21 +736,23 @@ class AddAnimalHusbandryActivity(
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = null,
                                     nlm_document = UploadedDocumentName,
-                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+                                    ahidf_id = selectedItem.ahidf_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentAdapter?.notifyItemChanged(position)
+
                         } else {
                             viewDocumentList[position] =
                                 ImplementingAgencyDocument(
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = UploadedDocumentName,
                                     nlm_document = null,
-                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+                                    ahidf_id = selectedItem.ahidf_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentIAAdapter?.notifyItemChanged(position)
                         }
 
-                        addDocumentAdapter?.notifyItemChanged(position)
                         dialog.dismiss()
                     }
 
@@ -757,27 +763,27 @@ class AddAnimalHusbandryActivity(
                             Result::class.java
                         )?.role_id == 8
                     ) {
-                        toast("document")
                         DocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                nlm_document = DocumentName,
+                                nlm_document = UploadedDocumentName,
                                 id = null,
-                                fsp_plant_storage_id = null,
+                                ahidf_id = null,
                                 ia_document = null
                             )
                         )
                     } else {
-                        toast("View")
                         viewDocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                ia_document = DocumentName,
+                                ia_document = UploadedDocumentName,
                                 id = null,
-                                fsp_plant_storage_id = null,
+                                ahidf_id = null,
                                 nlm_document = null
                             )
                         )
+                        Log.d("Debug", "viewDocumentList: ${viewDocumentList.size}")
+
                     }
 
                     if (getPreferenceOfScheme(
@@ -792,13 +798,13 @@ class AddAnimalHusbandryActivity(
 //
                         }
                     } else {
+
                         viewDocumentList.size.minus(1).let {
-                            addDocumentAdapter?.notifyItemInserted(it)
+                            addDocumentIAAdapter?.notifyItemInserted(it)
                             dialog.dismiss()
                         }
+                        toast("else")
                     }
-
-
                 }
             } else {
                 showSnackbar(
@@ -809,6 +815,7 @@ class AddAnimalHusbandryActivity(
         }
         dialog.show()
     }
+
 
     private fun openOnlyPdfAccordingToPosition() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -1176,7 +1183,7 @@ class AddAnimalHusbandryActivity(
                                 nlm_document = "",
                                 assistance_for_ea_id = 0 // Or null, depending on your use case
                             )
-                            if (userResponseModel._result.ahidf_document?.isEmpty() == true && viewEdit == "view") {
+                            if (userResponseModel._result?.ahidf_document?.isEmpty() == true && viewEdit == "view") {
                                 // Add dummy data with default values
 
 
@@ -1201,9 +1208,15 @@ class AddAnimalHusbandryActivity(
                                 }
                             }
 
-                            iaAdapter()
+//                            if(getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==8){
                             nlmAdapter()
+                            iaAdapter()
+//                            }
+//                            else{
+//                                iaAdapter()
+//                            }
                             addDocumentAdapter?.notifyDataSetChanged()
+                            addDocumentIAAdapter?.notifyDataSetChanged()
 
                         } else {
                             onBackPressedDispatcher.onBackPressed()
@@ -1220,7 +1233,13 @@ class AddAnimalHusbandryActivity(
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
-        position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+        if (isFrom == 10) {
+            position.let { it1 -> addDocumentIAAdapter?.onDeleteButtonClick(it1) }
+
+        } else {
+            position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+
+        }
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {

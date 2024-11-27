@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="Add New FspPlantStorage"
+                android:text="Format for fodder seed processing plant/ storage"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"

@@ -58,6 +58,10 @@ class FspPlantStorageNLMAdapter(
         } else if (viewEdit == "edit") {
             holder.binding.btnEdit.showView()
         }
+        holder.binding.etNameOfAgency.isEnabled = false
+        holder.binding.etAddress.isEnabled = false
+        holder.binding.etQuantity.isEnabled = false
+        holder.binding.etInfra.isEnabled = false
         holder.binding.etNameOfAgency.setText(currentItem.name_of_agency)
         holder.binding.etAddress.setText(currentItem.address)
         holder.binding.etQuantity.setText(currentItem.quantity_of_seed_graded)

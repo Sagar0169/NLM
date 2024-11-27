@@ -1,4 +1,5 @@
 
+
 package com.nlm.ui.adapter
 
 import android.annotation.SuppressLint
@@ -20,13 +21,13 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.toast
 
-class RSPSupportingDocumentAdapter(
+class RSPSupportingDocumentIAAdapter(
     private val context: Context?,
     private val programmeList: ArrayList<ImplementingAgencyDocument>,
     private val viewEdit: String?,
     private val callBackDeleteAtId: CallBackDeleteAtId,
     private val callBackEdit: CallBackItemUploadDocEdit
-) : RecyclerView.Adapter<RSPSupportingDocumentAdapter.SupportingDocumentViewHolder>() {
+) : RecyclerView.Adapter<RSPSupportingDocumentIAAdapter.SupportingDocumentViewHolder>() {
 
 
 
@@ -54,6 +55,8 @@ class RSPSupportingDocumentAdapter(
         else if (items.nlm_document==null &&  getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==8)
         {
             holder.binding.etFile.text=items.ia_document
+            holder.binding.btnDelete.visibility=View.GONE
+            holder.binding.btnEdit.visibility=View.GONE
         }
         else if (items.ia_document==null &&  getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==24)
         {
@@ -74,7 +77,7 @@ class RSPSupportingDocumentAdapter(
                     object :
                         DialogCallback {
                         override fun onYes() {
-                            callBackDeleteAtId.onClickItem(items.id,position,0)
+                            callBackDeleteAtId.onClickItem(items.id,position,10)
                         }
                     },
                     context.getString(R.string.are_you_sure_want_to_delete_your_post)

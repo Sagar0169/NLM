@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,7 @@ import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.NlmEDPFormatAdapter
 import com.nlm.ui.adapter.NlmEDPMonitoringAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
+import com.nlm.ui.adapter.RSPSupportingDocumentIAAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
@@ -73,6 +75,7 @@ class AddNlmEdpActivity(
     private lateinit var totalListDocument: ArrayList<ImplementingAgencyDocument>
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
+    private var addDocumentIAAdapter: RSPSupportingDocumentIAAdapter? = null
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
@@ -118,7 +121,6 @@ class AddNlmEdpActivity(
 
         fun chooseFile(view: View) {
             openOnlyPdfAccordingToPosition()
-            toast("Hi")
             img = 1
         }
 
@@ -138,6 +140,7 @@ class AddNlmEdpActivity(
         fun trainingInstitute(view: View) {
             trainingInstitute(this@AddNlmEdpActivity, 1, null, null)
         }
+
         fun formatNlmEdp(view: View) {
             formatNlmEdp(this@AddNlmEdpActivity, 1, null, null)
         }
@@ -218,13 +221,6 @@ class AddNlmEdpActivity(
 
         mBinding?.tvState?.setTextColor(Color.parseColor("#000000"))
         mBinding?.tvStateNLM?.setTextColor(Color.parseColor("#000000"))
-        addDocumentAdapter = RSPSupportingDocumentAdapter(
-            this,
-            DocumentList,
-            viewEdit,
-            this,
-            this
-        )
         if (getPreferenceOfScheme(
                 this,
                 AppConstants.SCHEME,
@@ -348,6 +344,7 @@ class AddNlmEdpActivity(
         mBinding?.recyclerView1?.layoutManager =
             LinearLayoutManager(this@AddNlmEdpActivity)
     }
+
     private fun nlmEDPFormatAdapter() {
         nlmEDPFormatAdapter =
             NlmEDPFormatAdapter(
@@ -375,14 +372,14 @@ class AddNlmEdpActivity(
     }
 
     private fun iaAdapter() {
-        addDocumentAdapter = RSPSupportingDocumentAdapter(
+        addDocumentIAAdapter = RSPSupportingDocumentIAAdapter(
             this,
             viewDocumentList,
             viewEdit,
             this,
             this
         )
-        mBinding?.recyclerView?.adapter = addDocumentAdapter
+        mBinding?.recyclerView?.adapter = addDocumentIAAdapter
         mBinding?.recyclerView?.layoutManager = LinearLayoutManager(this)
     }
 
@@ -446,7 +443,7 @@ class AddNlmEdpActivity(
         bindingDialog.btnEdit.hideView()
         bindingDialog.tvSubmit.showView()
         bindingDialog.tvFull.setOnClickListener {
-            showBottomSheetDialog("whetherFull",bindingDialog.tvFull)
+            showBottomSheetDialog("whetherFull", bindingDialog.tvFull)
         }
         if (selectedItem != null && isFrom == 2) {
             bindingDialog.etNameOfBeneficiary.setText(selectedItem.name_of_beneficiary)
@@ -668,9 +665,11 @@ class AddNlmEdpActivity(
                     Result::class.java
                 )?.role_id == 8
             ) {
+                UploadedDocumentName = selectedItem.nlm_document
                 bindingDialog.etDoc.text = selectedItem.nlm_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             } else {
+                UploadedDocumentName = selectedItem.ia_document
                 bindingDialog.etDoc.text = selectedItem.ia_document
                 bindingDialog.etDescription.setText(selectedItem.description)
             }
@@ -699,21 +698,23 @@ class AddNlmEdpActivity(
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = null,
                                     nlm_document = UploadedDocumentName,
-                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+                                    nlm_edp_id = selectedItem.nlm_edp_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentAdapter?.notifyItemChanged(position)
+
                         } else {
                             viewDocumentList[position] =
                                 ImplementingAgencyDocument(
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = UploadedDocumentName,
                                     nlm_document = null,
-                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+                                    nlm_edp_id = selectedItem.nlm_edp_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentIAAdapter?.notifyItemChanged(position)
                         }
 
-                        addDocumentAdapter?.notifyItemChanged(position)
                         dialog.dismiss()
                     }
 
@@ -724,27 +725,27 @@ class AddNlmEdpActivity(
                             Result::class.java
                         )?.role_id == 8
                     ) {
-                        toast("document")
                         DocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                nlm_document = DocumentName,
+                                nlm_document = UploadedDocumentName,
                                 id = null,
-                                fsp_plant_storage_id = null,
+                                nlm_edp_id = null,
                                 ia_document = null
                             )
                         )
                     } else {
-                        toast("View")
                         viewDocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                ia_document = DocumentName,
+                                ia_document = UploadedDocumentName,
                                 id = null,
-                                fsp_plant_storage_id = null,
+                                nlm_edp_id = null,
                                 nlm_document = null
                             )
                         )
+                        Log.d("Debug", "viewDocumentList: ${viewDocumentList.size}")
+
                     }
 
                     if (getPreferenceOfScheme(
@@ -759,10 +760,12 @@ class AddNlmEdpActivity(
 //
                         }
                     } else {
+
                         viewDocumentList.size.minus(1).let {
-                            addDocumentAdapter?.notifyItemInserted(it)
+                            addDocumentIAAdapter?.notifyItemInserted(it)
                             dialog.dismiss()
                         }
+                        toast("else")
                     }
                 }
             } else {
@@ -835,7 +838,7 @@ class AddNlmEdpActivity(
     }
 
 
-    private fun showBottomSheetDialog(type: String,full:TextView) {
+    private fun showBottomSheetDialog(type: String, full: TextView) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
         view.layoutParams = ViewGroup.LayoutParams(
@@ -1069,7 +1072,6 @@ class AddNlmEdpActivity(
                                 onBackPressedDispatcher.onBackPressed()
                                 return@observe
                             }
-                            toast(viewEdit.toString())
 
                             mBinding?.etNLMComment?.setText(userResponseModel._result?.remarks_by_nlm)
                             nlmEdpTrainingList.clear()
@@ -1080,19 +1082,19 @@ class AddNlmEdpActivity(
                             if (comments.isEmpty() && viewEdit == "view") {
                                 val dummyData = NlmEdpMonitoring(
                                     id = 0,
-                                   "",
-                                   "",
-                                   "",
-                                   "",
-                                   "",
-                                   "",
-                                   "",
-                                   0,
-                                   0,
-                                   0,
-                                   0,
-                                   0,
-                                   "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    "",
                                 )
                                 nlmEdpTrainingList.add(dummyData)
                             } else {
@@ -1109,15 +1111,15 @@ class AddNlmEdpActivity(
 
                             if (commentss.isEmpty() && viewEdit == "view") {
                                 val dummyData = NlmEdpFormatForNlm(
-                                    id = 0,
-                                    "",
-                                    0,
-                                    0.0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0.0,
+                                    id = null,
+                                    "dummy",
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
                                     null
                                 )
                                 nlmEdpFormatList.add(dummyData)
@@ -1162,9 +1164,15 @@ class AddNlmEdpActivity(
                                 }
                             }
 
-                            iaAdapter()
+//                            if(getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==8){
                             nlmAdapter()
+                            iaAdapter()
+//                            }
+//                            else{
+//                                iaAdapter()
+//                            }
                             addDocumentAdapter?.notifyDataSetChanged()
+                            addDocumentIAAdapter?.notifyDataSetChanged()
 
                         } else {
                             onBackPressedDispatcher.onBackPressed()
@@ -1181,7 +1189,13 @@ class AddNlmEdpActivity(
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
-        position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+        if (isFrom == 10) {
+            position.let { it1 -> addDocumentIAAdapter?.onDeleteButtonClick(it1) }
+
+        } else {
+            position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+
+        }
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
@@ -1202,7 +1216,8 @@ class AddNlmEdpActivity(
     }
 
     override fun onClickItem(selectedItem: NlmEdpFormatForNlm, position: Int, isFrom: Int) {
-        formatNlmEdp(this@AddNlmEdpActivity, isFrom, selectedItem, position)    }
+        formatNlmEdp(this@AddNlmEdpActivity, isFrom, selectedItem, position)
+    }
 
     override fun onClickItemFormatDelete(ID: Int?, position: Int) {
         position.let { it1 -> nlmEDPFormatAdapter?.onDeleteButtonClick(it1) }

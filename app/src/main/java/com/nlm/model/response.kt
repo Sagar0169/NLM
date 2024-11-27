@@ -564,6 +564,8 @@ data class ImplementingAgencyDocument(
     val import_of_exotic_goat_id: Int?=null,
     val assistance_for_qfsp_id: Int?=null,
     val fsp_plant_storage_id: Int?=null,
+    val nlm_edp_id: Int?=null,
+    val ahidf_id: Int?=null,
     val assistance_for_ea_id: Int?=null,
     val nlm_document: String?=null,
     val fp_from_non_forest_id: Int?=null,
