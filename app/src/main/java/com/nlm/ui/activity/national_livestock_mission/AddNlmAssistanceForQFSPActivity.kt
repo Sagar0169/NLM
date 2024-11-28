@@ -70,6 +70,7 @@ class AddNlmAssistanceForQFSPActivity :
     private var savedAsDraft:Boolean=false
     private var stateId: Int? = null // Store selected state
     private var districtId: Int? = null // Store selected state
+    private var districtIdNlm: Int? = null // Store selected state
     private var QuantityOfFodderSeedID: Int? = null // Store selected state
     private var QuantityOfSeedID: Int? = null // Store selected state
     private var TargetAcheivementID: Int? = null // Store selected state
@@ -113,13 +114,27 @@ class AddNlmAssistanceForQFSPActivity :
     inner class ClickActions {
 
         fun saveAsDraft(view: View){
+
+                if(mBinding?.tvDistrict?.text.toString().isNotEmpty())
+                {
             savedAsDraft=true
             saveDataApi(1)
+                }
+                else{
+                    showSnackbar(mBinding?.clParent!!,"Please Fill the mandatory field")
+                }
+
         }
 
         fun saveAndNext(view: View){
-            savedAsDraft=true
-            saveDataApi(0)
+            if(mBinding?.tvDistrict?.text.toString().isNotEmpty()) {
+                savedAsDraft = true
+                saveDataApi(0)
+            }
+            else{
+                showSnackbar(mBinding?.clParent!!,"Please Fill the mandatory field")
+            }
+
         }
 
         fun addDocDialog(view: View){
@@ -134,11 +149,11 @@ class AddNlmAssistanceForQFSPActivity :
         }
 
         fun state(view: View) {
-            showBottomSheetDialog2("State")
+            showBottomSheetDialog2("State",null,null)
         }
 
         fun district(view: View) {
-            showBottomSheetDialog2("District")
+            showBottomSheetDialog2("District",null,null)
         }
 
         fun districtName(view: View) {
@@ -146,15 +161,15 @@ class AddNlmAssistanceForQFSPActivity :
         }
 
         fun fodderClass(view: View) {
-            showBottomSheetDialog2("quantity_of_fodder_seed_class")
+            showBottomSheetDialog2("quantity_of_fodder_seed_class",null,null)
         }
 
         fun targetClass(view: View) {
-            showBottomSheetDialog2("target_achievement_class")
+            showBottomSheetDialog2("target_achievement_class",null,null)
         }
 
         fun quantityClass(view: View) {
-            showBottomSheetDialog2("quantity_of_seed_class")
+            showBottomSheetDialog2("quantity_of_seed_class",null,null)
         }
     }
 
@@ -209,7 +224,7 @@ class AddNlmAssistanceForQFSPActivity :
         }
 
     }
-    private fun showBottomSheetDialog2(type: String) {
+    private fun showBottomSheetDialog2(type: String,isFrom: Int?,TextView:TextView?) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
         view.layoutParams = ViewGroup.LayoutParams(
@@ -236,8 +251,14 @@ class AddNlmAssistanceForQFSPActivity :
             "District" -> {
                 Model="Districts"
                 dropDownApiCall(paginate = false, loader = true)
+                selectedTextView = if (isFrom==3 && TextView != null){
+
+                    TextView
+                } else{
+                    mBinding?.tvDistrict!!
+                }
                 selectedList = stateList // Update the list to districtList for District
-                selectedTextView = mBinding?.tvDistrict!!
+
             }
             "quantity_of_fodder_seed_class" -> {
                 Model="quantity_of_fodder_seed_class"
@@ -271,8 +292,15 @@ class AddNlmAssistanceForQFSPActivity :
 
             if (Model=="Districts")
             {
-                districtName=selectedItem
-                districtId=id
+                 if (isFrom==3 && TextView != null){
+
+                districtIdNlm=id
+            }
+                else{
+                     districtName=selectedItem
+                     districtId=id
+                 }
+
             }
             else if (Model=="quantity_of_fodder_seed_class")
             {
@@ -493,13 +521,13 @@ class AddNlmAssistanceForQFSPActivity :
                             }
                             YearWiseFinancialProgressAdapter?.notifyDataSetChanged()
                         }
-                        else{
+
                             if (savedAsDraft)
                             {
                                 onBackPressedDispatcher.onBackPressed()
                                 showSnackbar(mBinding!!.clParent, userResponseModel.message)
                             }
-                        }
+
 
                     }
                 }
@@ -515,12 +543,12 @@ class AddNlmAssistanceForQFSPActivity :
                     if (currentPage == 1) {
                         stateList.clear()
 
-                        val remainingCount = userResponseModel.total_count % 10
+                        val remainingCount = userResponseModel.total_count % 100
                         totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count
                         } else {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count + 1
                         }
                     }
@@ -854,7 +882,7 @@ class AddNlmAssistanceForQFSPActivity :
         if (Model=="Districts") {
             viewModel.getDropDownApi(
                 this, loader, GetDropDownRequest(
-                    20,
+                    100,
                     Model,
                     currentPage,
                     state_code = stateId,
@@ -961,14 +989,19 @@ class AddNlmAssistanceForQFSPActivity :
             bindingDialog.etAssistancedByDAHD.setText(selectedItem.assistance_provided_first)
             bindingDialog.tvDistrictName.setText(selectedItem.name_of_district)
         }
+        bindingDialog.tvDistrictName.setOnClickListener { showBottomSheetDialog2("District",3,bindingDialog.tvDistrictName) }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etAssistancedByDAHD.text.toString().isNotEmpty()||bindingDialog.etAmountUtilizedByState.text.toString().isNotEmpty()||bindingDialog.etAreaCovered.text.toString().isNotEmpty()||bindingDialog.etFrarmersImpacted.text.toString().isNotEmpty())
             {
                 if(selectedItem!=null)
                 {
                     if (position != null) {
-                        YearWiseFinancialProgressList.set(position, AssistanceForQfspFinancialProgres(
-
+                        if (districtIdNlm==null)
+                        {
+//                            districtIdNlm=selectedItem.district_code
+                        }
+                        YearWiseFinancialProgressList[position] = AssistanceForQfspFinancialProgres(
+                            district_code = districtIdNlm,
                             assistance_for_qfsp_id=selectedItem.assistance_for_qfsp_id,
                             name_of_district = bindingDialog.tvDistrictName.text.toString(),
                             assistance_provided_first=bindingDialog.etAssistancedByDAHD.text.toString(),
@@ -976,7 +1009,7 @@ class AddNlmAssistanceForQFSPActivity :
                             area_covered_first=bindingDialog.etAreaCovered.text.toString().toIntOrNull(),
                             farmers_impacted_first=bindingDialog.etFrarmersImpacted.text.toString(),
                             id=selectedItem.id,
-                        )
+
                         )
 
                         YearWiseFinancialProgressAdapter?.notifyItemChanged(position)

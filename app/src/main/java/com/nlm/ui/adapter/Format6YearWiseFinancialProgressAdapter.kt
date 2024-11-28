@@ -55,7 +55,13 @@ class Format6YearWiseFinancialProgressAdapter(
         else if(viewEdit=="edit"){
             holder.binding.btnEdit.showView()
          }
-        holder.binding.tvDistrictName.text=items.name_of_district
+        if (items.district==null)
+        {
+            holder.binding.tvDistrictName.text = items.name_of_district
+        }
+        else{
+            holder.binding.tvDistrictName.text = items.district.name
+        }
         holder.binding.etAssistancedByDAHD.setText(items.assistance_provided_first)
         items.amount_utilized_state_first?.let {
             holder.binding.etAmountUtilizedByState.setText(it.toString())

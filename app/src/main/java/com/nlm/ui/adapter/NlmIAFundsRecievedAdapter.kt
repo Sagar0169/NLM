@@ -40,6 +40,7 @@ class NlmIAFundsRecievedAdapter(
     override fun onBindViewHolder(holder: NlmIAFundsRecieved, position: Int) {
 
         val currentItem = programmeList[position]
+        holder.binding.tvSubmit.visibility= View.GONE
         if (viewEdit=="view")
         {
             holder.binding.etYear.isEnabled=false

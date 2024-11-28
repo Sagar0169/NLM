@@ -88,7 +88,7 @@
                     android:background="@color/orange"
                     android:fontFamily="@font/lexend_bold"
                     android:padding="@dimen/dp_5"
-                    android:text="To be filled by State/ Implementing Agency )"
+                    android:text="To be filled by State/ Implementing Agency "
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
                 <LinearLayout
@@ -117,7 +117,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
-
+                            android:id="@+id/tvStateiaa"
                             android:fontFamily="@font/opensans_semibold"
                             android:text="States"
                             android:textColor="@color/black"
@@ -143,10 +143,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/tvDistrictiaa"
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Districts"
+                            android:text="@string/district"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -173,7 +174,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Implementing Agency / outsourced agency*"
+                            android:text="@string/implementing_agency_outsourced_agency"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -201,7 +202,7 @@
                             android:layout_marginVertical="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_10"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Location / Address*"
+                            android:text="@string/location_address"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -229,7 +230,7 @@
                                 android:layout_marginHorizontal="@dimen/dp_10"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:orientation="vertical"
-                                android:layout_marginTop="@dimen/dp_20"
+                                android:layout_marginTop="@dimen/dp_15"
                                 android:background="@drawable/curve_all_corner_black"
                                 android:paddingVertical="@dimen/dp_10">
 <LinearLayout
@@ -432,26 +433,28 @@
                             android:textSize="@dimen/sp_16" />
 </LinearLayout>
                             </LinearLayout>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_10"
-                                android:id="@+id/tvSupportingDocumentView"
-                                android:layout_marginTop="@dimen/dp_10"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Supporting Documents"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
+
                             <LinearLayout
                                 android:id="@+id/llSDRv"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="10dp"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:orientation="vertical"
-                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_marginTop="@dimen/dp_15"
                                 android:background="@drawable/curve_all_corner_black"
                                 android:paddingVertical="@dimen/dp_10">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    android:id="@+id/tvSupportingDocumentView"
+
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Supporting Documents"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
                                 <com.nlm.utilities.NonScrollableRecyclerView
                                     android:id="@+id/ShowDocumentRv"
                                     android:layout_width="match_parent"
@@ -483,7 +486,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_10"
-
+        android:layout_marginTop="@dimen/dp_10"
         android:fontFamily="@font/opensans_semibold"
         android:text="States"
         android:textColor="@color/black"
@@ -512,7 +515,7 @@
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_7"
         android:fontFamily="@font/opensans_semibold"
-        android:text="Districts"
+        android:text="@string/district"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
 
@@ -539,7 +542,7 @@
         android:layout_marginHorizontal="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_7"
         android:fontFamily="@font/opensans_semibold"
-        android:text="Implementing Agency / outsourced agency*"
+        android:text="@string/implementing_agency_outsourced_agency"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
 
@@ -567,7 +570,7 @@
         android:layout_marginVertical="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_10"
         android:fontFamily="@font/opensans_semibold"
-        android:text="Location / Address*"
+        android:text="@string/location_address"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16" />
 
@@ -587,31 +590,32 @@
         android:textColor="@color/black"
         android:textColorHint="@color/grey"
         android:textSize="@dimen/sp_16" />
-    <TextView
-        android:id="@+id/tvAddMore"
-        android:layout_marginVertical="@dimen/dp_7"
-        android:layout_width="wrap_content"
-        android:layout_gravity="end"
-        android:layout_height="wrap_content"
-        android:background="@drawable/curve_fill_blue"
-        android:clickable="true"
-        android:fontFamily="@font/poppins_medium"
-        android:paddingHorizontal="@dimen/dp_20"
-        android:onClick="@{ClickAction::addMore}"
-        android:paddingVertical="@dimen/dp_10"
-        android:text="Add More"
-        android:textColor="@color/white" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_15"
                     android:background="@drawable/curve_all_corner_black"
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
 
+                    <TextView
+                        android:id="@+id/tvAddMore"
 
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:onClick="@{ClickAction::addMore}"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Add More"
+                        android:textColor="@color/white" />
 
 
                     <com.nlm.utilities.NonScrollableRecyclerView
@@ -621,29 +625,7 @@
                         android:paddingTop="8dp" />
                 </LinearLayout>
 </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvSupportingDocument"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Supporting Documents"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-                <TextView
-                    android:id="@+id/tvAddDocs"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/curve_fill_blue"
-                    android:clickable="true"
-                    android:fontFamily="@font/poppins_medium"
-                    android:paddingHorizontal="@dimen/dp_20"
-                    android:onClick="@{ClickAction::addDocDialog}"
-                    android:paddingVertical="@dimen/dp_10"
-                    android:text="Add Documents"
-                    android:textColor="@color/white" />
+
 
                 <LinearLayout
                     android:id="@+id/llDrv"
@@ -652,9 +634,30 @@
                     android:paddingHorizontal="@dimen/dp_10"
                     android:layout_marginHorizontal="@dimen/dp_10"
                     android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_15"
                     android:background="@drawable/curve_all_corner_black"
                     android:paddingVertical="@dimen/dp_10">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvSupportingDocument"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Supporting Documents"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                    <TextView
+                        android:id="@+id/tvAddDocs"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:onClick="@{ClickAction::addDocDialog}"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Add Documents"
+                        android:textColor="@color/white" />
                     <com.nlm.utilities.NonScrollableRecyclerView
                         android:id="@+id/AddDocumentRv"
                         android:layout_width="match_parent"
@@ -667,6 +670,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView

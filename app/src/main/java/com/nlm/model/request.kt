@@ -681,6 +681,8 @@ data class NlmFpFromNonForestAddRequest(
 data class FpFromNonForestFilledByNlmTeam(
     val id: Int?,
     val district_code: Int?,
+    val district: District_list?,
+    val district_name: String?,
     val block_name: String?,
     val village_name: String?,
     val area_covered: String?,

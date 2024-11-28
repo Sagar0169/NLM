@@ -76,7 +76,13 @@ class ForestLandNLMAdapter(
         holder.binding.etVillageName.setText(items.village_name)
         holder.binding.etBlock.setText(items.block_name)
         holder.binding.tvAgencyInvolved.text = items.agency_involved
-        holder.binding.tvDistrictNlm.text = items.district_name
+        if (items.district==null)
+        {
+            holder.binding.tvDistrictNlm.text = items.district_name
+        }
+        else{
+            holder.binding.tvDistrictNlm.text = items.district.name
+        }
         holder.binding.etFodderProduced.setText(items.estimated_quantity)
         holder.binding.etConsumerFodder.setText(items.consumer_fodder)
         holder.binding.etAreaCovered.setText(items.area_covered)
@@ -115,7 +121,8 @@ class ForestLandNLMAdapter(
                     fp_from_forest_land_id=items.fp_from_forest_land_id,
                     village_name = items.area_covered,
                     district_code = items.district_code,
-                    district_name = items.district_name
+                    district_name = items.district_name,
+                    district = items.district
                 ),position,2)
         }
 

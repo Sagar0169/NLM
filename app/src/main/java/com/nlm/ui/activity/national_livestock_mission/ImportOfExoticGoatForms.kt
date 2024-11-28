@@ -406,7 +406,11 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             AddAchievementDialog(this@ImportOfExoticGoatForms,null,null)
         }
         fun addVerifiedNlm(view: View){
+            if (VerifiedNlmList?.size!! >= 5) {
+                mBinding?.main?.let { it1 -> showSnackbar(it1,"Only 5 items can be added") }
+            } else {
             AddVerifiedNlmDialog(this@ImportOfExoticGoatForms,null,null)
+            }
         }
     }
     private fun AddDocumentAdapter(){
@@ -483,7 +487,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             }
         }
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+            if (bindingDialog.etDescription.text.toString().isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty())
             {
                 if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24) {
                     if(selectedItem!=null)
@@ -776,23 +780,26 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                            }
                 }
                     else{
-                VerifiedNlmList?.add(ImportOfExoticGoatVerifiedNlm(
-                    number_of_animals = bindingDialog.etF2GenerationDistributed.text.toString().toIntOrNull(),
-                    f1_generation_produced = bindingDialog.etF1GenerationProduced.text.toString(),
-                    f2_generation_produced = bindingDialog.etF2GenerationProduced.text.toString(),
-                    f2_generation_distributed =bindingDialog.etF1GenerationDistributed.text.toString() ,
-                    import_of_exotic_goat_id = null,
-                    year = bindingDialog.etYear.text.toString(),
-                    id = null,
-                    species_breed = bindingDialog.etSpeciesBreed.text.toString(),
-                ))
-                VerifiedNlmList?.size?.minus(1).let {
-                    if (it != null) {
-                        VerifiedNlmAdapter?.notifyItemInserted(it)
-                    }
 
-                    dialog.dismiss()
-                }}
+                        VerifiedNlmList?.add(ImportOfExoticGoatVerifiedNlm(
+                            number_of_animals = bindingDialog.etF2GenerationDistributed.text.toString().toIntOrNull(),
+                            f1_generation_produced = bindingDialog.etF1GenerationProduced.text.toString(),
+                            f2_generation_produced = bindingDialog.etF2GenerationProduced.text.toString(),
+                            f2_generation_distributed =bindingDialog.etF1GenerationDistributed.text.toString() ,
+                            import_of_exotic_goat_id = null,
+                            year = bindingDialog.etYear.text.toString(),
+                            id = null,
+                            species_breed = bindingDialog.etSpeciesBreed.text.toString(),
+                        ))
+                        VerifiedNlmList?.size?.minus(1).let {
+                            if (it != null) {
+                                VerifiedNlmAdapter?.notifyItemInserted(it)
+                            }
+
+                            dialog.dismiss()
+
+                    }
+                }
             }
 
 
