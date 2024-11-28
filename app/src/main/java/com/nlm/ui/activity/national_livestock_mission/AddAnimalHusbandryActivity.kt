@@ -722,7 +722,9 @@ class AddAnimalHusbandryActivity(
 
 
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
+            if (bindingDialog.etDescription.text.toString()
+                    .isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty()
+            ) {
                 if (selectedItem != null) {
                     if (position != null) {
                         if (getPreferenceOfScheme(
