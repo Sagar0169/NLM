@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.currentRecomposeScope
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
@@ -69,8 +70,16 @@ class FspNonPlantStorageNLMAdapter(
         holder.binding.etEstimated.isEnabled = false
         holder.binding.etConsumer.isEnabled = false
         holder.binding.tvAgency.isEnabled = false
+if (currentItem.district==null)
+{
+    holder.binding.tvDistrict.text = currentItem.district_name
 
-        holder.binding.tvDistrict.text = currentItem.district_code.toString()
+
+}
+        else{
+    holder.binding.tvDistrict.text = currentItem.district.name
+        }
+
         holder.binding.etBlock.setText(currentItem.block_name)
         holder.binding.etVillage.setText(currentItem.village_name)
         holder.binding.etArea.setText(currentItem.area_covered)
@@ -83,6 +92,8 @@ class FspNonPlantStorageNLMAdapter(
                 FpFromNonForestFilledByNlmTeam(
                     currentItem.id,
                     currentItem.district_code,
+                    currentItem.district,
+                    currentItem.district_name,
                     currentItem.block_name,
                     currentItem.village_name,
                     currentItem.area_covered,

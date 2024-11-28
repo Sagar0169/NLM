@@ -111,7 +111,8 @@
                 android:paddingVertical="@dimen/dp_5"
                 android:onClick="@{ClickAction::state}"
                 android:singleLine="true"
-                android:text="@string/select"
+                android:hint="Select"
+                android:textColorHint="@color/grey"
                 android:textColor="@color/black"
                 app:drawableEndCompat="@drawable/ic_arrow_down" />
 
@@ -136,8 +137,9 @@
                 android:paddingVertical="@dimen/dp_5"
                 android:onClick="@{ClickAction::district}"
                 android:singleLine="true"
-                android:text="@string/select"
-                android:textColor="@color/grey"
+                android:hint="@string/select"
+                android:textColorHint="@color/grey"
+                android:textColor="@color/black"
                 app:drawableEndCompat="@drawable/ic_arrow_down" />
             <TextView
                 android:layout_width="wrap_content"
@@ -279,15 +281,7 @@
 
 
             </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvSupportingDocumentView"
-                android:layout_marginTop="@dimen/dp_10"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Supporting Documents"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+
 
             <LinearLayout
                 android:id="@+id/llSDRv"
@@ -298,11 +292,21 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/curve_all_corner_black"
                 android:paddingVertical="@dimen/dp_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvSupportingDocumentView"
+
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Supporting Documents"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
                 <com.nlm.utilities.NonScrollableRecyclerView
                     android:id="@+id/ShowDocumentRv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_7"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:paddingTop="8dp" /></LinearLayout>
             <LinearLayout
                 android:id="@+id/llObservationByNlm"
@@ -348,7 +352,8 @@
                     android:paddingVertical="@dimen/dp_5"
                     android:onClick="@{ClickAction::state}"
                     android:singleLine="true"
-                    android:text="@string/select"
+                    android:hint="@string/select"
+                    android:textColorHint="@color/grey"
                     android:textColor="@color/black"
                     app:drawableEndCompat="@drawable/ic_arrow_down" />
 
@@ -373,8 +378,9 @@
                     android:paddingVertical="@dimen/dp_5"
                     android:onClick="@{ClickAction::district}"
                     android:singleLine="true"
-                    android:text="@string/select"
-                    android:textColor="@color/grey"
+                    android:hint="@string/select"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/black"
                     app:drawableEndCompat="@drawable/ic_arrow_down" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -462,15 +468,26 @@
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"
+
+
+            <LinearLayout
+                android:id="@+id/llDrv"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvSupportingDocument"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:orientation="vertical"
                 android:layout_marginTop="@dimen/dp_10"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Supporting Documents"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                android:background="@drawable/curve_all_corner_black"
+                android:paddingVertical="@dimen/dp_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvSupportingDocument"
+
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Supporting Documents"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
                 <TextView
                     android:id="@+id/tvAddDocs"
                     android:layout_marginVertical="@dimen/dp_7"
@@ -485,16 +502,6 @@
                     android:paddingVertical="@dimen/dp_10"
                     android:text="Add Documents"
                     android:textColor="@color/white" />
-
-            <LinearLayout
-                android:id="@+id/llDrv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/dp_10"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/curve_all_corner_black"
-                android:paddingVertical="@dimen/dp_10">
                 <com.nlm.utilities.NonScrollableRecyclerView
                     android:id="@+id/AddDocumentRv"
                     android:layout_width="match_parent"

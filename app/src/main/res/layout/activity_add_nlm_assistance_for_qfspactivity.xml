@@ -228,7 +228,7 @@
 
                     android:layout_marginTop="@dimen/dp_7"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Districts"
+                    android:text="@string/district"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -246,8 +246,9 @@
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
-                    android:text="Please Select"
-                    android:textColor="@color/grey" />
+                    android:hint=" Select"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/black" />
 
 
                 <TextView

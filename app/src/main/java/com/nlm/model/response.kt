@@ -341,6 +341,8 @@ data class AssistanceForQfspFinancialProgres(
     val assistance_provided_second: Any?=null,
     val assistance_provided_third: Any?=null,
     val created: String?=null,
+    val district: District_list?=null,
+    val district_code: Int?=null,
     val created_by: Any?=null,
     val farmers_impacted_first: String?=null,
     val farmers_impacted_second: Any?=null,
@@ -973,6 +975,18 @@ data class FpFromForestLandDocument(
     val nlm_document: String
 )
 
+
+data class District_list(
+    val census2001_code: String,
+    val census2011_code: String,
+    val created: Any,
+    val district_code: Int,
+    val district_name_hindi: String,
+    val flag: Boolean,
+    val id: Int,
+    val name: String,
+    val state_code: Int
+)
 data class FpFromForestLandFilledByNlm(
     val agency_involved: String?,
     val area_covered: String?,
@@ -980,6 +994,7 @@ data class FpFromForestLandFilledByNlm(
     val consumer_fodder: String?,
     val district_code: Int?,
     val district_name: String?,
+    val district: District_list?,
     val estimated_quantity: String?,
     val fp_from_forest_land_id: Int?,
     val id: Int?,

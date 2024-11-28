@@ -71,17 +71,23 @@ class AddNlmFpFromNonForestActivity(
     private lateinit var viewDocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var totalListDocument: ArrayList<ImplementingAgencyDocument>
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var stateId: Int? = null // Store selected state
     private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
+    private var districtIdIA: Int? = null // Store selected state
+    private var districtIdNlm: Int? = null // Store selected state
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
+    private var Model:String? = null // Store selected state
+    private var stateList = ArrayList<ResultGetDropDown>()
     private var districtList = ArrayList<ResultGetDropDown>()
     private var loading = true
     private var isFrom: Int = 0
     private var img: Int = 0
     private var viewModel = ViewModel()
     private var districtId: Int? = null // Store selected state
+    private var districtIdDropdown: Int? = null // Store selected state
     private var DocumentId: Int? = null
     private var UploadedDocumentName: String? = null
     private var DialogDocName: TextView? = null
@@ -149,11 +155,11 @@ class AddNlmFpFromNonForestActivity(
         }
 
         fun district(view: View) {
-            showBottomSheetDialog("District")
+            showBottomSheetDialog2("District",1,null)
         }
 
         fun districtNLM(view: View) {
-            showBottomSheetDialog("DistrictNLM")
+            showBottomSheetDialog2("District",2,null)
         }
 
         fun addDocDialog(view: View) {
@@ -495,11 +501,9 @@ class AddNlmFpFromNonForestActivity(
         bindingDialog.tvAgency.setOnClickListener {
             showBottomSheetDialogNonDis("agency", bindingDialog.tvAgency)
         }
-//        bindingDialog.tvDistrict.setOnClickListener {
-//            showBottomSheetDialogNonDis("District", bindingDialog.tvAgency)
-//        }
+        bindingDialog.tvDistrict.setOnClickListener { showBottomSheetDialog2("District",3,bindingDialog.tvDistrict) }
         if (selectedItem != null && isFrom == 2) {
-            bindingDialog.tvDistrict.text = selectedItem.district_code.toString()
+            bindingDialog.tvDistrict.text = selectedItem.district?.name
             bindingDialog.etBlock.setText(selectedItem.block_name)
             bindingDialog.etVillage.setText(selectedItem.village_name)
             bindingDialog.etArea.setText(selectedItem.area_covered)
@@ -518,10 +522,16 @@ class AddNlmFpFromNonForestActivity(
             ) {
                 if (selectedItem != null) {
                     if (position != null) {
+                        if (districtIdNlm==null)
+                        {
+                            districtIdNlm=selectedItem.district_code
+                        }
                         plantStorageList[position] =
                             FpFromNonForestFilledByNlmTeam(
                                 selectedItem.id,
-                                districtId,
+                                districtIdNlm,
+                                null,
+                                bindingDialog.tvDistrict.text.toString(),
                                 bindingDialog.etBlock.text.toString(),
                                 bindingDialog.etVillage.text.toString(),
                                 bindingDialog.etArea.text.toString(),
@@ -538,7 +548,9 @@ class AddNlmFpFromNonForestActivity(
                     plantStorageList.add(
                         FpFromNonForestFilledByNlmTeam(
                             null,
-                            districtId,
+                            districtIdNlm,
+                            null,
+                            bindingDialog.tvDistrict.text.toString(),
                             bindingDialog.etBlock.text.toString(),
                             bindingDialog.etVillage.text.toString(),
                             bindingDialog.etArea.text.toString(),
@@ -564,6 +576,136 @@ class AddNlmFpFromNonForestActivity(
             }
         }
         dialog.show()
+    }
+    private fun showBottomSheetDialog2(type: String,isFrom: Int,TextView:TextView?) {
+        bottomSheetDialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
+        view.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
+        val close = view.findViewById<TextView>(R.id.tvClose)
+        close.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+        // Define a variable for the selected list and TextView
+        val selectedList: List<ResultGetDropDown>
+        val selectedTextView: TextView?
+        // Initialize based on type
+        when (type) {
+            "State" -> {
+                Model="State"
+                dropDownApiCall(paginate = false, loader = true)
+                selectedList = stateList
+                selectedTextView = mBinding?.tvStateNlm!!
+            }
+
+            "District" -> {
+                Model="Districts"
+                dropDownApiCall(paginate = false, loader = true)
+                selectedList = stateList // Update the list to districtList for District
+                if (isFrom==2)
+                {
+                    selectedTextView = mBinding?.tvDistrictNlm!!}
+                else if (isFrom==3 && TextView != null){
+
+                    selectedTextView = TextView
+                }
+                else{
+                    selectedTextView = mBinding?.tvDistrictIa!!
+                }
+            }
+//            "agency_involved" -> {
+//                Model="agency_involved"
+//                getNlmDropDownApi(Model)
+//                selectedList = stateList
+//                selectedTextView=TextView
+//            }
+//
+//            "type_of_land" -> {
+//                Model="type_of_land"
+//                getNlmDropDownApi(Model)
+//                selectedList = stateList
+//                selectedTextView = mBinding!!.tvLand
+//            }
+//
+//            "type_of_agency" -> {
+//                Model="type_of_agency"
+//                getNlmDropDownApi(Model)
+//                selectedList = stateList
+//                selectedTextView = mBinding!!.tvAgency
+//            }
+
+            else -> return
+        }
+
+        // Set up the adapter
+        stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
+            // Handle item click
+            selectedTextView?.text = selectedItem
+
+
+            if (Model=="Districts")
+            {
+                if (isFrom==2)
+                {
+                    districtIdIA=id
+                }
+                else if (isFrom==3 && TextView != null)
+                {
+                    districtIdNlm=id
+                }
+                else{
+
+                    districtId=id}
+            }
+//            else if (Model=="agency_involved")
+//            {
+//                AgencyInvolvedName  =selectedItem
+//                AgencyInvolvedId=id
+//            }
+//            else if (Model=="type_of_land")
+//            {
+//                TypeOfLandName  =selectedItem
+//                TypeOfLandId=id
+//            }
+//            else if (Model=="type_of_agency")
+//            {
+//                TypeOfAgencyName  =selectedItem
+//                TypeOfAgencyId=id
+//            }
+            else{
+                stateId = id
+            }
+            selectedTextView?.setTextColor(ContextCompat.getColor(this, R.color.black))
+            bottomSheetDialog.dismiss()
+        }
+
+        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.layoutManager = layoutManager
+        rvBottomSheet.adapter = stateAdapter
+        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
+        bottomSheetDialog.setContentView(view)
+
+        // Rotate drawable
+        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
+        var rotatedDrawable = rotateDrawable(drawable, 180f)
+        selectedTextView?.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+
+        // Set a dismiss listener to reset the view visibility
+        bottomSheetDialog.setOnDismissListener {
+            rotatedDrawable = rotateDrawable(drawable, 0f)
+            selectedTextView?.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                rotatedDrawable,
+                null
+            )
+        }
+
+        // Show the bottom sheet
+        bottomSheetDialog.show()
     }
     private fun showBottomSheetDialogNonDis(type: String, full: TextView) {
         bottomSheetDialog = BottomSheetDialog(this)
@@ -999,23 +1141,36 @@ class AddNlmFpFromNonForestActivity(
         if (paginate) {
             currentPage++
         }
-        viewModel.getDropDownApi(
-            this, loader, GetDropDownRequest(
-                20,
-                "Districts",
-                currentPage,
-                getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id,
+        if (Model=="Districts") {
+            viewModel.getDropDownApi(
+                this, loader, GetDropDownRequest(
+                    20,
+                    "Districts",
+                    currentPage,
+                    getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code,
+                    getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.user_id,
+                )
             )
-        )
+        }
+        else{
+            viewModel.getDropDownApi(
+                this, loader, GetDropDownRequest(
+                    20,
+                    Model,
+                    currentPage,
+                    null,
+                    getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                )
+            )
+        }
     }
 
     override fun setVariables() {
@@ -1030,6 +1185,7 @@ class AddNlmFpFromNonForestActivity(
                 if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
                     if (currentPage == 1) {
                         districtList.clear()
+                        stateList.clear()
 
                         val remainingCount = userResponseModel.total_count % 10
                         totalPage = if (remainingCount == 0) {
@@ -1041,6 +1197,7 @@ class AddNlmFpFromNonForestActivity(
                         }
                     }
                     districtList.addAll(userResponseModel._result)
+                    stateList.addAll(userResponseModel._result)
                     stateAdapter.notifyDataSetChanged()
 
 
@@ -1125,6 +1282,8 @@ class AddNlmFpFromNonForestActivity(
                                 val dummyData = FpFromNonForestFilledByNlmTeam(
                                   null,
                                   null,
+                                    null,
+                                    "",
                                   "",
                                   "",
                                   "",

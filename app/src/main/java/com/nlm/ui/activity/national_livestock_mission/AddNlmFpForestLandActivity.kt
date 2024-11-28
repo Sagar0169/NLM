@@ -92,6 +92,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     private var TypeOfAgencyName: String? = null
     private var TypeOfAgencyId: Int? = null
     private var districtIdIA: Int? = null // Store selected state
+    private var districtIdNlm: Int? = null // Store selected state
     private var districtNameIA: String? = null // Store selected state
     private var loading = true
     val viewModel = ViewModel()
@@ -136,18 +137,64 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             AddDocumentDialog(this@AddNlmFpForestLandActivity,null,null)
         }
         fun saveAsDraft(view: View) {
-            TotalDocumentList.clear()
-            TotalDocumentList.addAll(DocumentList)
-            TotalDocumentList.addAll(viewDocumentList)
-            saveDataApi(1)
-            savedAsDraft=true
+            if (getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+            {
+                if(mBinding?.tvDistrictIA?.text.toString().isNotEmpty() && mBinding?.etImplementingAgencyIA?.text.toString().isNotEmpty() && mBinding?.etLocationIA?.text.toString().isNotEmpty())
+                {
+                    TotalDocumentList.clear()
+                    TotalDocumentList.addAll(DocumentList)
+                    TotalDocumentList.addAll(viewDocumentList)
+                    saveDataApi(1)
+                    savedAsDraft=true
+                }
+                else{
+                    showSnackbar(mBinding?.clParent!!,"Please Fill the mandatory field")
+                }
+            }
+            else{
+                if(mBinding?.tvDistrict?.text.toString().isNotEmpty() && mBinding?.etImplementingAgency?.text.toString().isNotEmpty() && mBinding?.etLocation?.text.toString().isNotEmpty())
+                {
+                    TotalDocumentList.clear()
+                    TotalDocumentList.addAll(DocumentList)
+                    TotalDocumentList.addAll(viewDocumentList)
+                    saveDataApi(1)
+                    savedAsDraft=true
+                }
+                else{
+                    showSnackbar(mBinding?.clParent!!,"Please Fill the mandatory field")
+                }
+            }
+
         }
         fun saveAndNext(view: View) {
-            TotalDocumentList.clear()
-            TotalDocumentList.addAll(DocumentList)
-            TotalDocumentList.addAll(viewDocumentList)
-            saveDataApi(0)
-            savedAsDraft=true
+            if (getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+            {
+                if(mBinding?.tvDistrictIA?.text.toString().isNotEmpty() && mBinding?.etImplementingAgencyIA?.text.toString().isNotEmpty() && mBinding?.etLocationIA?.text.toString().isNotEmpty())
+                {
+                    TotalDocumentList.clear()
+                    TotalDocumentList.addAll(DocumentList)
+                    TotalDocumentList.addAll(viewDocumentList)
+                    saveDataApi(0)
+                    savedAsDraft=true
+                }
+                else{
+                    showSnackbar(mBinding?.clParent!!,"Please Fill the mandatory field")
+                }
+            }
+            else{
+                if(mBinding?.tvDistrict?.text.toString().isNotEmpty() && mBinding?.etImplementingAgency?.text.toString().isNotEmpty() && mBinding?.etLocation?.text.toString().isNotEmpty())
+                {
+                    TotalDocumentList.clear()
+                    TotalDocumentList.addAll(DocumentList)
+                    TotalDocumentList.addAll(viewDocumentList)
+                    saveDataApi(0)
+                    savedAsDraft=true
+                }
+                else{
+                    showSnackbar(mBinding?.clParent!!,"Please Fill the mandatory field")
+                }
+            }
+
         }
 
     }
@@ -200,6 +247,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         Log.d("VIEWEDIT",viewEdit.toString())
         if(viewEdit=="view")
         {
+
             mBinding?.tvStateIa?.isEnabled=false
             mBinding?.tvDistrictIA?.isEnabled=false
             mBinding?.etImplementingAgencyIA?.isEnabled=false
@@ -329,6 +377,10 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                 {
                     districtNameIA=selectedItem
                     districtIdIA=id
+                }
+                else if (isFrom==3 && TextView != null){
+
+                    districtIdNlm=id
                 }
                 else{
                 districtName=selectedItem
@@ -515,12 +567,12 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                     if (currentPage == 1) {
                         stateList.clear()
 
-                        val remainingCount = userResponseModel.total_count % 10
+                        val remainingCount = userResponseModel.total_count % 100
                         totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count
                         } else {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count + 1
                         }
                     }
@@ -683,7 +735,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             Log.d("EXECUTE","yes")
             viewModel.getDropDownApi(
                 this, loader, GetDropDownRequest(
-                    20,
+                    100,
                     Model,
                     currentPage,
                     state_code = getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.state_code,
@@ -741,7 +793,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             bindingDialog.etConsumerFodder.setText(selectedItem.consumer_fodder)
             bindingDialog.etFodderProduced.setText(selectedItem.estimated_quantity)
             bindingDialog.etVillageName.setText(selectedItem.village_name)
-            bindingDialog.tvDistrictNlm.text=selectedItem.district_name
+            bindingDialog.tvDistrictNlm.text= selectedItem.district?.name ?:""
         }
         bindingDialog.tvSubmit.setOnClickListener {
             if (
@@ -751,6 +803,10 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                 if(selectedItem!=null)
                 {
                     if (position != null) {
+                        if (districtIdNlm==null)
+                        {
+                            districtIdNlm=selectedItem.district_code
+                        }
                         programmeList[position] = FpFromForestLandFilledByNlm(
                             id = selectedItem.id,
                             agency_involved = bindingDialog.tvAgencyInvolved.text.toString(),
@@ -760,8 +816,9 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                             estimated_quantity = bindingDialog.etFodderProduced.text.toString(),
                             fp_from_forest_land_id=selectedItem.fp_from_forest_land_id,
                             village_name = bindingDialog.etVillageName.text.toString(),
-                            district_code = null,
-                            district_name = bindingDialog.tvDistrictNlm.text.toString()
+                            district_code = districtIdNlm,
+                            district_name = bindingDialog.tvDistrictNlm.text.toString(),
+                            district = null
                         )
                         adapter.notifyItemChanged(position)
                         dialog.dismiss()
@@ -777,8 +834,9 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                         estimated_quantity = bindingDialog.etFodderProduced.text.toString(),
                         fp_from_forest_land_id=null,
                         village_name = bindingDialog.etVillageName.text.toString(),
-                        district_code = null,
+                        district_code = districtIdNlm,
                         district_name = bindingDialog.tvDistrictNlm.text.toString(),
+                        district = null
                     ))
 
 
