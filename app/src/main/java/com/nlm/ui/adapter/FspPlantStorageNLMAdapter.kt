@@ -66,11 +66,8 @@ class FspPlantStorageNLMAdapter(
         holder.binding.etAddress.setText(currentItem.address)
         holder.binding.etQuantity.setText(currentItem.quantity_of_seed_graded)
         holder.binding.etInfra.setText(currentItem.infrastructure_available)
-        // Delete row
-        holder.binding.btnDelete.setOnClickListener {
-            programmeList.removeAt(position)
-            notifyItemRemoved(position)
-        }
+
+
         holder.binding.btnDelete.setOnClickListener {
             if (context != null) {
                 Utility.showConfirmationAlertDialog(

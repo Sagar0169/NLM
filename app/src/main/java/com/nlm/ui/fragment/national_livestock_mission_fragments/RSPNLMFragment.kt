@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackDeleteFSPAtId
 import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.callBack.CallBackSemenDoseAvg
 import com.nlm.callBack.OnBackSaveAsDraft
@@ -70,7 +71,7 @@ class RSPNLMFragment(
 ) : BaseFragment<FragmentRSPManpowerBinding>(
 
 ), CallBackSemenDoseAvg, CallBackItemUploadDocEdit,
-    CallBackDeleteAtId {
+    CallBackDeleteAtId, CallBackDeleteFSPAtId {
     override val layoutId: Int
         get() = R.layout.fragment_r_s_p_manpower
     private var viewModel = ViewModel()
@@ -197,7 +198,7 @@ class RSPNLMFragment(
     private fun rspBuckAdapter() {
         addBucksList = mutableListOf()
         addBuckAdapter =
-            AverageSemenDoseAdapter(requireContext(), addBucksList, viewEdit, this)
+            AverageSemenDoseAdapter(requireContext(), addBucksList, viewEdit, this,this)
         mBinding?.rvBuckNlm?.adapter = addBuckAdapter
         mBinding?.rvBuckNlm?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -423,38 +424,41 @@ class RSPNLMFragment(
         val location = mBinding?.etLocation?.text.toString()
         val phoneNumber = mBinding?.etPhone?.text.toString()
         val pincode = mBinding?.etPincode?.text.toString()
+        val state = mBinding?.tvState?.text.toString()
+        val district = mBinding?.tvDistrict?.text.toString()
         val yearOfEstablishment = mBinding?.etYear?.text.toString()
 
-        // Validation checks
-        if (address.isEmpty()) {
-            showError("Address is required")
+        if (state == "Select") {
+            mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
+            return
+        }
+        if (district == "Select") {
+            mBinding?.clParent?.let { showSnackbar(it,"District Name is required") }
             return
         }
 
+
+
         if (location.isEmpty()) {
-            showError("Location is required")
+            mBinding?.clParent?.let { showSnackbar(it,"Location is required") }
+            return
+        }
+
+        if (address.isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it,"Address is required") }
             return
         }
 
         if (districtId == null) {
-            showError("District is required")
+            mBinding?.clParent?.let { showSnackbar(it,"District is required") }
             return
         }
 
         if (pincode.isEmpty()) {
-            showError("Pin code is required")
+            mBinding?.clParent?.let { showSnackbar(it,"Pin code is required") }
             return
         }
 
-        if (phoneNumber.isEmpty() || phoneNumber.length < 10) {
-            showError("Valid phone number is required")
-            return
-        }
-
-        if (yearOfEstablishment.isEmpty()) {
-            showError("Year of establishment is required")
-            return
-        }
         viewModel.getRspLabAddApi(
             requireContext(), true,
             RSPAddRequest(
@@ -540,7 +544,9 @@ class RSPNLMFragment(
         }
 
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty()&& bindingDialog.etDoc.text.toString().isNotEmpty()) {
+            if (bindingDialog.etDescription.text.toString()
+                    .isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty()
+            ) {
                 if (selectedItem != null) {
                     if (position != null) {
                         DocumentList[position] =
@@ -874,11 +880,15 @@ class RSPNLMFragment(
         addBucks(requireContext(), isFrom, selectedItem, position)
     }
 
-    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
+    override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
         addDocumentDialog(requireContext(), selectedItem, position)
+    }
+
+    override fun onClickItemDelete(ID: Int?, position: Int) {
+        position.let { it1 -> addBuckAdapter?.onDeleteButtonClick(it1) }
     }
 }

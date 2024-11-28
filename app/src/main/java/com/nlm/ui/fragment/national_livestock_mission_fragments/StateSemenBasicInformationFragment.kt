@@ -27,6 +27,7 @@ import com.nlm.databinding.ItemStateSemenManpowerBinding
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.model.RspAddAverage
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
@@ -118,7 +119,6 @@ class StateSemenBasicInformationFragment(
         }
         if (viewEdit == "edit") {
             viewEditApi()
-            showToast(itemId.toString())
 
         }
         mBinding?.tvSemenStation?.setOnClickListener {
@@ -209,17 +209,51 @@ class StateSemenBasicInformationFragment(
                             mBinding?.tvSemenStation?.text =
                                 userResponseModel._result.type_of_semen_station
                             mBinding?.tvSemenStation?.setTextColor(Color.parseColor("#000000"))
-                            mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
+                            if (userResponseModel._result.pin_code == 0) {
+                                mBinding?.etPincode?.setText("")
+
+                            } else {
+                                mBinding?.etPincode?.setText(userResponseModel._result.manpower_no_of_people.toString())
+                            }
+                            if (userResponseModel._result.phone_no.toString()=="0") {
+                                mBinding?.etPhone?.setText("")
+                            } else {
+                                mBinding?.etPhone?.setText(userResponseModel._result.phone_no.toString())
+                            }
                             mBinding?.etPhone?.setText(userResponseModel._result.phone_no.toString())
                             mBinding?.etyear?.setText(userResponseModel._result.year_of_establishment)
                             mBinding?.etQuality?.setText(userResponseModel._result.quality_status)
                             mBinding?.etAddress?.setText(userResponseModel._result.address)
                             mBinding?.etAreaForFodder?.setText(userResponseModel._result.area_fodder_cultivation)
                             mBinding?.etAreaUnderBuild?.setText(userResponseModel._result.area_under_buildings)
-                            mBinding?.etManPower?.setText(userResponseModel._result.manpower_no_of_people.toString())
+                            if (userResponseModel._result.manpower_no_of_people == 0) {
+                                mBinding?.etManPower?.setText("")
+
+                            } else {
+                                mBinding?.etManPower?.setText(userResponseModel._result.manpower_no_of_people.toString())
+
+                            }
                             mBinding?.etOfficerInCharge?.setText(userResponseModel._result.officer_in_charge_name)
                             stateSemenManPowerList.clear()
-                            stateSemenManPowerList.addAll(userResponseModel._result.state_semen_bank_other_manpower)
+                            if (userResponseModel._result.state_semen_bank_other_manpower.isEmpty() && viewEdit == "view") {
+                                // Add dummy data with default values
+                                val dummyData = StateSemenBankOtherAddManpower(
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                )
+
+                                stateSemenManPowerList.add(dummyData)
+                            } else {
+                                userResponseModel._result.state_semen_bank_other_manpower.let { it1 ->
+                                    stateSemenManPowerList.addAll(
+                                        it1
+                                    )
+                                }
+                            }
+
                             stateSemenManPowerAdapter?.notifyDataSetChanged()
 
 
@@ -230,7 +264,7 @@ class StateSemenBasicInformationFragment(
                                 AppConstants.FORM_FILLED_ID,
                                 userResponseModel._result.id
                             )
-                            mActivityMain.itemId=userResponseModel._result.id
+                            mActivityMain.itemId = userResponseModel._result.id
                             listener?.onNextButtonClick()
                             showSnackbar(mBinding!!.clParent, userResponseModel.message)
                         }
@@ -363,45 +397,48 @@ class StateSemenBasicInformationFragment(
         }
 
         private fun saveDataApi(itemId: Int?) {
-            val address = mBinding?.etAddress?.text.toString()
             val areaForFodder = mBinding?.etAreaForFodder?.text.toString()
-            val location = mBinding?.etLocation?.text.toString()
             val areaUnderBuilding = mBinding?.etAreaUnderBuild?.text.toString()
-            val phoneNumber = mBinding?.etPhone?.text.toString()
-            val pincode = mBinding?.etPincode?.text.toString()
             val qualityStatus = mBinding?.etQuality?.text.toString()
             val yearOfEstablishment = mBinding?.etyear?.text.toString()
             val manpower = mBinding!!.etManPower.text.toString()
             val officerInCharge = mBinding!!.etOfficerInCharge.text.toString()
+            val address = mBinding?.etAddress?.text.toString()
+            val location = mBinding?.etLocation?.text.toString()
+            val phoneNumber = mBinding?.etPhone?.text.toString()
+            val pincode = mBinding?.etPincode?.text.toString()
+            val state = mBinding?.tvState?.text.toString()
+            val district = mBinding?.tvDistrict?.text.toString()
 
-            // Validation checks
-            if (address.isEmpty()) {
-                showError("Address is required")
+
+            if (state == "Select") {
+                mBinding?.clParent?.let { showSnackbar(it, "State Name is required") }
+                return
+            }
+            if (district == "Select") {
+                mBinding?.clParent?.let { showSnackbar(it, "District Name is required") }
                 return
             }
 
+
+
             if (location.isEmpty()) {
-                showError("Location is required")
+                mBinding?.clParent?.let { showSnackbar(it, "Location is required") }
+                return
+            }
+
+            if (address.isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it, "Address is required") }
                 return
             }
 
             if (districtId == null) {
-                showError("District is required")
+                mBinding?.clParent?.let { showSnackbar(it, "District is required") }
                 return
             }
 
             if (pincode.isEmpty()) {
-                showError("Pincode is required")
-                return
-            }
-
-            if (phoneNumber.isEmpty() || phoneNumber.length < 10) {
-                showError("Valid phone number is required")
-                return
-            }
-
-            if (yearOfEstablishment.isEmpty()) {
-                showError("Year of establishment is required")
+                mBinding?.clParent?.let { showSnackbar(it, "Pin code is required") }
                 return
             }
             viewModel.getStateSemenAddBankApi(
@@ -439,11 +476,6 @@ class StateSemenBasicInformationFragment(
                     is_draft = 1,
                 )
             )
-        }
-
-        // Utility function to show error messages
-        private fun showError(message: String) {
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
 
 

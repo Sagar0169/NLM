@@ -84,15 +84,15 @@ class NlmAnimalMonitoringAdapter(
         holder.binding.etTypeofFarming.setText(currentItem.type_of_farming)
         holder.binding.etCapacity.setText(currentItem.capacity)
         holder.binding.tvFull.text = currentItem.whether_full
-        holder.binding.etFinacial.setText(currentItem.financial_status.toString())
+        holder.binding.etFinacial.setText(currentItem.financial_status?.toString() ?: "")
         holder.binding.etProcessingCapacity.text =
             if (currentItem.processing_capacity_nlm.toString().toInt() == 0) {
                 "No"
             } else {
                 "Yes"
             }
-        holder.binding.etNumberOfFarmer.setText(currentItem.number_of_farmers.toString())
-        holder.binding.etNoJob.setText(currentItem.number_of_job.toString())
+        holder.binding.etNumberOfFarmer.setText(currentItem.number_of_farmers?.toString() ?: "")
+        holder.binding.etNoJob.setText(currentItem.number_of_job?.toString() ?: "")
 
         holder.binding.btnEdit.setOnClickListener {
             callBackEdit.onClickItem(

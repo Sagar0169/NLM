@@ -358,7 +358,77 @@ class AddNLMExtensionActivity(
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+        val state = mBinding?.tvState?.text.toString()
+        if (getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 8
+        ) {
 
+            if (mBinding?.etEOA?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it, "No of camps is required") }
+                return
+            }
+            if (mBinding?.etParticipateNlm?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "No. of participants trained is required"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etModule?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Whether the state has developed Training Materials/ Module is required"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etTrainer?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Whether the state has master trainer is required"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etDetails?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Details of training programmes? If so, give details"
+                    )
+                }
+                return
+            }
+
+
+        } else {
+            if (state == "Please Select") {
+                mBinding?.clParent?.let { showSnackbar(it, "State Name is required") }
+                return
+            }
+            if (mBinding?.etNoa?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it, "No of camps is required") }
+                return
+            }
+            if (mBinding?.etParticipant?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "No. of participants trained is required"
+                    )
+                }
+                return
+            }
+
+
+        }
         viewModel.getAssistanceForEaADD(
             this@AddNLMExtensionActivity, true,
             AddAssistanceEARequest(
@@ -547,7 +617,9 @@ class AddNLMExtensionActivity(
 
 
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty()&& bindingDialog.etDoc.text.toString().isNotEmpty()) {
+            if (bindingDialog.etDescription.text.toString()
+                    .isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty()
+            ) {
                 if (selectedItem != null) {
                     if (position != null) {
                         if (getPreferenceOfScheme(
@@ -955,7 +1027,7 @@ class AddNLMExtensionActivity(
                                     name_of_institute = "",
                                     address_for_training = "",
                                     training_courses_run = "",
-                                    -1, -1
+                                    null, null
                                 )
                                 ea_training_institute.add(dummyData)
                             } else {

@@ -14,6 +14,7 @@ import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NlmEdpData
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion.FILTER_REQUEST_CODE
 import com.nlm.ui.adapter.AssistanceForEaAdapter
 import com.nlm.ui.adapter.NlmEdpAdapter
 import com.nlm.utilities.AppConstants
@@ -35,6 +36,7 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>(), CallBackDeleteAtId
     private var totalPage = 1
     private var loading = true
     private var itemPosition: Int? = null
+    var stateId: Int = 0
 
 
     override val layoutId: Int
@@ -184,7 +186,7 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>(), CallBackDeleteAtId
             val intent = Intent(
                 this@NlmEdpActivity,
                 FilterStateActivity::class.java
-            ).putExtra("isFrom", 17)
+            ).putExtra("isFrom", 17).putExtra("selectedStateId", stateId).putExtra("selectedStateId", stateId)
             startActivity(intent)
         }
         fun add(view: View) {
@@ -194,6 +196,23 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>(), CallBackDeleteAtId
                     AddNlmEdpActivity::class.java
                 )
             )
+        }
+    }
+
+
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == FILTER_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Retrieve the data passed from FilterStateActivity
+            if (data != null) {
+                stateId = data.getIntExtra("stateId", 0)
+            }
+
+            //Need to add year also
+            // Log the data
+            nlmEdpAPICall(paginate = false, loader = true)
         }
     }
 

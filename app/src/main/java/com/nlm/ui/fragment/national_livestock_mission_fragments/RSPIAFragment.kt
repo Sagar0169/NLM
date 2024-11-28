@@ -25,6 +25,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackAvilabilityEquipment
 import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackDeleteFSPAtId
+import com.nlm.callBack.CallBackDeleteFormatAtId
 import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.callBack.CallBackSemenDose
 import com.nlm.callBack.OnBackSaveAsDraft
@@ -47,6 +49,7 @@ import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
+import com.nlm.ui.adapter.RSPSupportingDocumentIAAdapter
 import com.nlm.ui.adapter.SemenDoseAdapter
 import com.nlm.ui.adapter.StateAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
@@ -72,8 +75,8 @@ class RSPIAFragment(
     private val itemId: Int?,
     private val dId: Int?
 ) : BaseFragment<FragmentRSPBasicInformationBinding>(), CallBackAvilabilityEquipment,
-    CallBackDeleteAtId, CallBackItemUploadDocEdit,
-    CallBackSemenDose {
+    CallBackDeleteAtId, CallBackItemUploadDocEdit, CallBackDeleteFormatAtId,
+    CallBackSemenDose, CallBackDeleteFSPAtId {
     override val layoutId: Int
         get() = R.layout.fragment_r_s_p__basic_information
     private var mBinding: FragmentRSPBasicInformationBinding? = null
@@ -85,7 +88,7 @@ class RSPIAFragment(
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
     private var viewModel = ViewModel()
-    private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
+    private var addDocumentAdapter: RSPSupportingDocumentIAAdapter? = null
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var viewDocumentList: MutableList<ImplementingAgencyDocument>
     private lateinit var totalListDocument: ArrayList<ImplementingAgencyDocument>
@@ -129,7 +132,7 @@ class RSPIAFragment(
             Result::class.java
         )?.state_name
         mBinding?.tvState?.isEnabled = false
-        addDocumentAdapter = RSPSupportingDocumentAdapter(
+        addDocumentAdapter = RSPSupportingDocumentIAAdapter(
             requireContext(),
             DocumentList,
             viewEdit,
@@ -226,7 +229,7 @@ class RSPIAFragment(
 
     private fun semenDoseAdapter() {
         semenAdapter =
-            SemenDoseAdapter(requireContext(), semenDoseList, viewEdit, this)
+            SemenDoseAdapter(requireContext(), semenDoseList, viewEdit, this, this)
         mBinding?.rvSemenDose?.adapter = semenAdapter
         mBinding?.rvSemenDose?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -235,7 +238,7 @@ class RSPIAFragment(
 
     private fun rspEquipAdapter() {
         rspEquipAdapter =
-            AvailabilityOfEquipmentAdapter(requireContext(), rspEquipList, viewEdit, this)
+            AvailabilityOfEquipmentAdapter(requireContext(), rspEquipList, viewEdit, this, this)
         mBinding?.recyclerView4?.adapter = rspEquipAdapter
         mBinding?.recyclerView4?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -329,15 +332,14 @@ class RSPIAFragment(
                                 // Add dummy data with default values
                                 val dummyData = RspAddEquipment(
                                     id = 0, // Or null, depending on your use case
-                                    list_of_equipment="",
-                                    make="",
-                                    year_of_procurement="",
+                                    list_of_equipment = "",
+                                    make = "",
+                                    year_of_procurement = "",
 
-                                )
+                                    )
 
                                 rspEquipList.add(dummyData)
-                            }
-                            else{
+                            } else {
                                 userResponseModel._result.rsp_laboratory_semen_availability_equipment?.let { it1 ->
                                     rspEquipList.addAll(
                                         it1
@@ -380,15 +382,14 @@ class RSPIAFragment(
                                 // Add dummy data with default values
                                 val dummyData = RspAddAverage(
                                     id = 0, // Or null, depending on your use case
-                                    name_of_breed="",
-                                    twentyOne_twentyTwo="",
-                                    twentyTwo_twentyThree="",
-                                    twentyThree_twentyFour="",
+                                    name_of_breed = "",
+                                    twentyOne_twentyTwo = "",
+                                    twentyTwo_twentyThree = "",
+                                    twentyThree_twentyFour = "",
                                 )
 
                                 semenDoseList.add(dummyData)
-                            }
-                            else{
+                            } else {
                                 userResponseModel._result.rsp_laboratory_semen_average.let { it1 ->
                                     semenDoseList.addAll(
                                         it1
@@ -507,45 +508,48 @@ class RSPIAFragment(
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+        val etAreaFodder = mBinding!!.etAreaFodder.text.toString()
+        val etManpower = mBinding!!.etManpower.text.toString()
         val address = mBinding?.etAddress?.text.toString()
         val location = mBinding?.etLocation?.text.toString()
         val phoneNumber = mBinding?.etPhone?.text.toString()
         val pincode = mBinding?.etPincode?.text.toString()
+        val state = mBinding?.tvState?.text.toString()
+        val district = mBinding?.tvDistrict?.text.toString()
         val yearOfEstablishment = mBinding?.etYear?.text.toString()
-        val etAreaBuildings = mBinding!!.etAreaBuildings.text.toString()
-        val etAreaFodder = mBinding!!.etAreaFodder.text.toString()
-        val etManpower = mBinding!!.etManpower.text.toString()
 
-        // Validation checks
-        if (address.isEmpty()) {
-            showError("Address is required")
+
+        if (state == "Select") {
+            mBinding?.clParent?.let { showSnackbar(it, "State Name is required") }
+            return
+        }
+        if (district == "Select") {
+            mBinding?.clParent?.let { showSnackbar(it, "District Name is required") }
             return
         }
 
+
+
         if (location.isEmpty()) {
-            showError("Location is required")
+            mBinding?.clParent?.let { showSnackbar(it, "Location is required") }
+            return
+        }
+
+        if (address.isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it, "Address is required") }
             return
         }
 
         if (districtId == null) {
-            showError("District is required")
+            mBinding?.clParent?.let { showSnackbar(it, "District is required") }
             return
         }
 
         if (pincode.isEmpty()) {
-            showError("Pincode is required")
+            mBinding?.clParent?.let { showSnackbar(it, "Pin code is required") }
             return
         }
 
-        if (phoneNumber.isEmpty() || phoneNumber.length < 10) {
-            showError("Valid phone number is required")
-            return
-        }
-
-        if (yearOfEstablishment.isEmpty()) {
-            showError("Year of establishment is required")
-            return
-        }
         viewModel.getRspLabAddApi(
             requireContext(), true,
             RSPAddRequest(
@@ -848,7 +852,9 @@ class RSPIAFragment(
 
 
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty()&& bindingDialog.etDoc.text.toString().isNotEmpty()) {
+            if (bindingDialog.etDescription.text.toString()
+                    .isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty()
+            ) {
                 if (selectedItem != null) {
                     if (position != null) {
                         DocumentList[position] =
@@ -1116,11 +1122,19 @@ class RSPIAFragment(
 
     }
 
-    override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
+    override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
         addDocumentDialog(requireContext(), selectedItem, position)
+    }
+
+    override fun onClickItemDelete(ID: Int?, position: Int) {
+        position.let { it1 -> semenAdapter?.onDeleteButtonClick(it1) }
+    }
+
+    override fun onClickItemFormatDelete(ID: Int?, position: Int) {
+        position.let { it1 -> rspEquipAdapter?.onDeleteButtonClick(it1) }
     }
 }

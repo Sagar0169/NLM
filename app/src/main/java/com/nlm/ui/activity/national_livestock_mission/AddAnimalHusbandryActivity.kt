@@ -9,6 +9,8 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -222,6 +224,11 @@ class AddAnimalHusbandryActivity(
         totalListDocument = arrayListOf()
         viewDocumentList = arrayListOf()
         nlmEdpTrainingList = arrayListOf()
+
+
+
+
+
         isFrom = intent?.getIntExtra("isFrom", 0)!!
         mBinding?.tvState?.text = getPreferenceOfScheme(
             this,

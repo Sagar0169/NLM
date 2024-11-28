@@ -13,6 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clParent"
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_marginTop="-50dp"
         android:layout_height="match_parent"
         android:background="@color/white">
 
@@ -118,7 +120,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_20"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="States"
+                            android:text="@string/states"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -146,7 +148,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Districts"
+                            android:text="@string/district"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -174,7 +176,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Name of Organization*"
+                            android:text="@string/name_of_organization"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -521,7 +523,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_20"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="States"
+                            android:text="@string/states"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -549,7 +551,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Districts"
+                            android:text="@string/district"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -576,7 +578,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Name of Organization*"
+                            android:text="@string/name_of_organization"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 

@@ -27,6 +27,7 @@ import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.RSPAddRequest
 import com.nlm.model.Result
 import com.nlm.model.StateSemenBankNLMRequest
+import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.model.StateSemenInfraGoat
 import com.nlm.ui.adapter.StateSemenInfrastructureAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
@@ -76,6 +77,8 @@ class StateSemenInfrastructureFragment(
         mBinding?.clickAction = ClickActions()
         DocumentList = arrayListOf()
         viewModel.init()
+        showToast(dId.toString())
+
         stateSemenInfraGoatAdapter()
         addDocumentAdapter = SupportingDocumentAdapterWithDialog(
             requireContext(),
@@ -220,10 +223,42 @@ class StateSemenInfrastructureFragment(
                         mBinding?.etOtherStateTwo?.setText(userResponseModel._result.major_clients_other_states_fin_year_two)
                         mBinding?.etOtherStateThree?.setText(userResponseModel._result.major_clients_other_states_fin_year_three)
                         stateSemenInfraGoatList.clear()
-                        stateSemenInfraGoatList.addAll(userResponseModel._result.state_semen_bank_infrastructure)
+                        if (userResponseModel._result.state_semen_bank_infrastructure.isEmpty() && viewEdit == "view") {
+                            // Add dummy data with default values
+                            val dummyData = StateSemenInfraGoat(
+                                "",
+                                "",
+                                null,
+                                null
+                            )
+
+                            stateSemenInfraGoatList.add(dummyData)
+                        } else {
+                            userResponseModel._result.state_semen_bank_infrastructure.let { it1 ->
+                                stateSemenInfraGoatList.addAll(
+                                    it1
+                                )
+                            }
+                        }
                         stateSemenInfraGoatAdapter?.notifyDataSetChanged()
                         DocumentList.clear()
-                        DocumentList.addAll(userResponseModel._result.state_semen_bank_document)
+                        if (userResponseModel._result.state_semen_bank_document.isEmpty() && viewEdit == "view") {
+                            // Add dummy data with default values
+                            val dummyData = ImplementingAgencyDocument(
+                                id = 0, // Or null, depending on your use case
+                                description = "",
+                                ia_document = "",
+                                nlm_document = "",
+                                fsp_plant_storage_id = 0 // Or null, depending on your use case
+                            )
+                            DocumentList.add(dummyData)
+                        } else {
+                            userResponseModel._result.state_semen_bank_document.let { it1 ->
+                                DocumentList.addAll(
+                                    it1
+                                )
+                            }
+                        }
                         addDocumentAdapter?.notifyDataSetChanged()
 
                     } else {
@@ -351,6 +386,10 @@ class StateSemenInfrastructureFragment(
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+        if(dId==0){
+            mBinding?.clParent?.let { showSnackbar(it,"Please Fill the mandatory fields of Basic Information Tab") }
+            return
+        }
 
         viewModel.getStateSemenAddBankApi2(
             requireContext(), true,

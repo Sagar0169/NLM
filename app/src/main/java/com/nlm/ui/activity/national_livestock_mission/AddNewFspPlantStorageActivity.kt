@@ -386,6 +386,82 @@ class AddNewFspPlantStorageActivity(
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+        val state = mBinding?.tvState?.text.toString()
+        val district = mBinding?.tvDistrict?.text.toString()
+        val tvStateNlm = mBinding?.tvStateNlm?.text.toString()
+        val tvDistrictNlm = mBinding?.tvDistrictNlm?.text.toString()
+        val iaName = mBinding?.etNoa?.text.toString()
+        val nLMName = mBinding?.etEOA?.text.toString()
+
+        if (getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 8
+        ) {
+            if (tvStateNlm == "Please Select") {
+                mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
+                return
+            }
+            if (tvDistrictNlm == "Please Select") {
+                mBinding?.clParent?.let { showSnackbar(it,"District Name is required") }
+                return
+            }
+            if (nLMName.isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Name is required") }
+                return
+            }
+            if (plantStorageList.isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"At least one plant storage nlm comment is required") }
+                return
+            }
+
+
+
+        }
+        else{
+            if (state == "Please Select") {
+                mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
+                return
+            }
+            if (district == "Please Select") {
+                mBinding?.clParent?.let { showSnackbar(it,"District Name is required") }
+                return
+            }
+            if (iaName.isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Name is required") }
+                return
+            }
+            if (mBinding?.etLoc?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Location is required") }
+                return
+            }
+            if (mBinding?.etPurposeOfEst?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Purpose of establishment is required") }
+                return
+            }
+            if (mBinding?.etCapacityofPlant?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Capacity of Plant is required") }
+                return
+            }
+            if (mBinding?.etMachinery?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Machinery/Equipment available is required") }
+                return
+            }
+            if (mBinding?.etTechnical?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Technical Expertise is required") }
+                return
+            }
+
+
+        }
+
+
+
+
+
+
+
 
         viewModel.getFpsPlantStorageADD(
             this@AddNewFspPlantStorageActivity, true,
@@ -464,9 +540,9 @@ class AddNewFspPlantStorageActivity(
         }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etNameOfAgency.text.toString().isNotEmpty()
-                || bindingDialog.etAddress.text.toString().isNotEmpty()
-                || bindingDialog.etQuantity.text.toString().isNotEmpty()
-                || bindingDialog.etInfra.text.toString().isNotEmpty()
+                && bindingDialog.etAddress.text.toString().isNotEmpty()
+                && bindingDialog.etQuantity.text.toString().isNotEmpty()
+                && bindingDialog.etInfra.text.toString().isNotEmpty()
             ) {
                 if (selectedItem != null) {
                     if (position != null) {

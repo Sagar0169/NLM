@@ -1,4 +1,3 @@
-
 package com.nlm.ui.adapter
 
 import android.annotation.SuppressLint
@@ -9,20 +8,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackAnimalFund
-import com.nlm.callBack.CallBackAssistanceEANlm
-import com.nlm.callBack.CallBackDeleteFSPAtId
 import com.nlm.callBack.CallBackDeleteFormatAtId
-import com.nlm.callBack.CallBackNlmEdpFormat
-import com.nlm.callBack.CallBackNlmEdpMonitor
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemNlmIaAnimalFundBinding
 import com.nlm.model.AhidfFormatForNlm
-import com.nlm.model.AssistanceForEaTrainingInstitute
-import com.nlm.model.NlmEdpFormatForNlm
-import com.nlm.model.NlmEdpMonitoring
-import com.nlm.model.Result
-import com.nlm.utilities.AppConstants
-import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -79,13 +68,15 @@ class NlmAnimalFundAdapter(
         holder.binding.etAvg.isEnabled = false
 
         holder.binding.etCategory.setText(currentItem.category_of_project)
-        holder.binding.etNoProject.setText(currentItem.no_of_project.toString())
-        holder.binding.etCostOfProject.setText(currentItem.cost_of_project.toString())
-        holder.binding.etTermLoan.setText(currentItem.term_loan.toString())
-        holder.binding.etTotalNoEmp.setText(currentItem.total_employment_generated.toString())
-        holder.binding.etProcessing.setText(currentItem.processing_capacity.toString())
-        holder.binding.etBirth.setText(currentItem.birth_percentage.toString())
-        holder.binding.etAvg.setText(currentItem.average_revenue_earned.toString())
+        holder.binding.etNoProject.setText(currentItem.no_of_project?.toString() ?: "")
+        holder.binding.etCostOfProject.setText(currentItem.cost_of_project?.toString() ?: "")
+        holder.binding.etTermLoan.setText(currentItem.term_loan?.toString() ?: "")
+        holder.binding.etTotalNoEmp.setText(
+            currentItem.total_employment_generated?.toString() ?: ""
+        )
+        holder.binding.etProcessing.setText(currentItem.processing_capacity?.toString() ?: "")
+        holder.binding.etBirth.setText(currentItem.birth_percentage?.toString() ?: "")
+        holder.binding.etAvg.setText(currentItem.average_revenue_earned?.toString() ?: "")
 
 
         holder.binding.btnEdit.setOnClickListener {
@@ -121,7 +112,6 @@ class NlmAnimalFundAdapter(
                 )
             }
         }
-
 
 
     }

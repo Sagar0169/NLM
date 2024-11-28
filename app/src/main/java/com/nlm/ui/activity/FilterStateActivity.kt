@@ -907,6 +907,13 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 setResult(RESULT_OK, resultIntent) // Send result
                 finish()
             }
+            if (isFrom == 17 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                finish()
+            }
             if (isFrom == 36 && stateId != null) {
                 // Prepare intent to send the result back
                 val resultIntent = Intent()

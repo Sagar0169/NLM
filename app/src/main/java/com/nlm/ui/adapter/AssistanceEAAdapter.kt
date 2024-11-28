@@ -65,8 +65,8 @@ class AssistanceEAAdapter(
         holder.binding.etNameInstitute.setText(currentItem.name_of_institute)
         currentItem.address_for_training.toString().let { holder.binding.etAddress.setText(it) }
         holder.binding.etTraining.setText(currentItem.training_courses_run)
-        holder.binding.etNoParticipants.setText(currentItem.no_of_participants_trained.toString())
-        holder.binding.etNoProvide.setText(currentItem.no_of_provide_information.toString())
+        holder.binding.etNoParticipants.setText(currentItem.no_of_participants_trained?.toString()?:"")
+        holder.binding.etNoProvide.setText(currentItem.no_of_provide_information?.toString()?:"")
         // Delete row
         holder.binding.btnDelete.setOnClickListener {
             if (context != null) {

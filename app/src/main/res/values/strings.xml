@@ -165,7 +165,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="group">Group</string>
     <string name="role">Role*</string>
     <string name="state">State</string>
-    <string name="district">District</string>
+    <string name="district">District<font color="#FF0000">*</font></string>
     <string name="designation">Designation</string>
     <string name="organisation">Organisation</string>
     <string name="status">Status</string>
@@ -350,7 +350,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="add_new_implementing_agency">Add New Implementing Agency</string>
     <string name="you_are_not_authorized_to_access_that_location">You are not authorized to access that location</string>
 
-    <string name="please_enter_atleast_one_field">Filling Both The Fields Are Required</string>
+    <string name="please_enter_atleast_one_field">Filling All The Fields Are Required</string>
     <string name="organization">Organization</string>
     <string name="studies_surveys_conducted">Studies / Surveys conducted:</string>
     <string name="enter_remarks">Enter Remarks</string>
@@ -392,5 +392,6 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="please_confirm_your_password">Please confirm your password</string>
     <string name="passwords_do_not_match">Passwords do not match</string>
     <string name="extension_activities_monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_extension_activitie">Extension Activities MONITORING OF NLM BY NATIONAL LEVEL MONITORS Format for Assistance for Extension Activities</string>
+    <string name="name_of_organization">Name of Organization<font color="#FF0000">*</font></string>
 </resources>
 

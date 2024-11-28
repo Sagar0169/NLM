@@ -14,7 +14,9 @@
         android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_marginTop="-50dp"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
@@ -75,11 +77,11 @@
                     android:id="@+id/tvMainHeading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/orange"
                     android:fontFamily="@font/opensans_semibold"
+                    android:padding="@dimen/dp_5"
                     android:text="@string/national_livestock_mission_entrepreneur_development_programme_edp_monitoring_of_nlm_by_national_level_monitors_format_for_nlm_edp"
                     android:textAlignment="center"
-                    android:background="@color/orange"
-                    android:padding="@dimen/dp_5"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_15" />
 
@@ -95,9 +97,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/lexend_bold"
-                        android:background="@color/orange"
                         android:layout_margin="@dimen/dp_7"
+                        android:background="@color/orange"
+                        android:fontFamily="@font/lexend_bold"
                         android:text="To be filled by the State AH Department/ Implementing Agency"
                         android:textAlignment="center"
                         android:textColor="@color/white"
@@ -106,10 +108,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_10"
                         android:layout_marginVertical="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        android:layout_marginHorizontal="@dimen/dp_10">
+                        android:orientation="vertical">
 
 
                         <TextView
@@ -130,10 +132,10 @@
                             android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:clickable="false"
-                            android:onClick="@{ClickAction::state}"
                             android:drawableEnd="@drawable/ic_arrow_down"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:onClick="@{ClickAction::state}"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -143,32 +145,34 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Format for NLM EDP (to be filled by State/ Implementing Agency )"
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Format for NLM EDP (to be filled by State/ Implementing Agency )"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginBottom="@dimen/dp_20"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            android:layout_marginBottom="@dimen/dp_20"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_10">
+
                             <TextView
                                 android:id="@+id/tvIANLMEDP"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
                                 android:layout_marginVertical="@dimen/dp_7"
-                                android:onClick="@{ClickAction::formatNlmEdp}"
                                 android:background="@drawable/curve_fill_blue"
                                 android:clickable="true"
                                 android:fontFamily="@font/poppins_medium"
+                                android:onClick="@{ClickAction::formatNlmEdp}"
                                 android:paddingHorizontal="@dimen/dp_20"
                                 android:paddingVertical="@dimen/dp_10"
                                 android:text="Add More"
@@ -184,32 +188,34 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Add Supporting Documents"
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Add Supporting Documents"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginBottom="@dimen/dp_20"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            android:layout_marginBottom="@dimen/dp_20"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_10">
+
                             <TextView
                                 android:id="@+id/tvIADoc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
                                 android:layout_marginVertical="@dimen/dp_7"
-                                android:onClick="@{ClickAction::addDocDialog}"
                                 android:background="@drawable/curve_fill_blue"
                                 android:clickable="true"
                                 android:fontFamily="@font/poppins_medium"
+                                android:onClick="@{ClickAction::addDocDialog}"
                                 android:paddingHorizontal="@dimen/dp_20"
                                 android:paddingVertical="@dimen/dp_10"
                                 android:text="Add More"
@@ -236,22 +242,22 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_7"
+                        android:background="@color/orange"
                         android:fontFamily="@font/lexend_bold"
+                        android:paddingVertical="@dimen/dp_5"
                         android:text="MONITORING OF INDIVIDUAL ENTREPRENEURS (TO BE FILLED BY THE NLM TEAM)"
                         android:textAlignment="center"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:layout_margin="@dimen/dp_7"
                         android:textColor="@color/white"
-                        android:background="@color/orange"
                         android:textSize="@dimen/sp_16" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_10"
                         android:layout_marginVertical="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        android:layout_marginHorizontal="@dimen/dp_10">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -271,10 +277,10 @@
                             android:layout_marginVertical="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:clickable="false"
-                            android:onClick="@{ClickAction::state}"
                             android:drawableEnd="@drawable/ic_arrow_down"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:onClick="@{ClickAction::state}"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -284,12 +290,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="NLM EDP Monitoring"
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginVertical="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="NLM EDP Monitoring"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -299,16 +306,17 @@
                             android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_10">
+
                             <TextView
                                 android:id="@+id/tvNLMComment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
                                 android:layout_marginVertical="@dimen/dp_7"
-                                android:onClick="@{ClickAction::trainingInstitute}"
                                 android:background="@drawable/curve_fill_blue"
                                 android:clickable="true"
                                 android:fontFamily="@font/poppins_medium"
+                                android:onClick="@{ClickAction::trainingInstitute}"
                                 android:paddingHorizontal="@dimen/dp_20"
                                 android:paddingVertical="@dimen/dp_10"
                                 android:text="Add More"
@@ -335,29 +343,31 @@
                         <EditText
                             android:id="@+id/etNLMComment"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_7"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:hint=""
+                            android:inputType="textMultiLine"
+                            android:maxLength="500"
+                            android:minLines="5"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
+                            android:textSize="@dimen/sp_16"
+                            android:gravity="top"
+                            android:scrollbars="vertical"
+                            android:overScrollMode="always" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Add Supporting Documents"
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginVertical="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Add Supporting Documents"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -368,16 +378,17 @@
                             android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_10">
+
                             <TextView
                                 android:id="@+id/tvNLMDoc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="end"
-                                android:onClick="@{ClickAction::addDocDialog}"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_fill_blue"
                                 android:clickable="true"
                                 android:fontFamily="@font/poppins_medium"
+                                android:onClick="@{ClickAction::addDocDialog}"
                                 android:paddingHorizontal="@dimen/dp_20"
                                 android:paddingVertical="@dimen/dp_10"
                                 android:text="Add More"
@@ -393,6 +404,7 @@
 
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

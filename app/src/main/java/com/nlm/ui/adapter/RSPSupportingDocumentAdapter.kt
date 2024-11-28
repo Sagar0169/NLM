@@ -62,7 +62,13 @@ class RSPSupportingDocumentAdapter(
 
 
         // Delete row
-        if(viewEdit=="view")
+        if (viewEdit == "view" ||
+            getPreferenceOfScheme(
+                context,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 24
+        )
         {
             holder.binding.btnDelete.visibility=View.GONE
             holder.binding.btnEdit.visibility=View.GONE
