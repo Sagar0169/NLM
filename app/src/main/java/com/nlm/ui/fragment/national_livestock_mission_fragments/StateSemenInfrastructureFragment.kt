@@ -434,7 +434,9 @@ class StateSemenInfrastructureFragment(
         }
 
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
+            if (bindingDialog.etDescription.text.toString()
+                    .isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty()
+            ) {
                 if (selectedItem != null) {
                     if (position != null) {
                         DocumentList[position] =
@@ -538,7 +540,7 @@ class StateSemenInfrastructureFragment(
         compositionOfGoverningNlmIaDialog(requireContext(), isFrom, selectedItem, position)
     }
 
-    override fun onClickItem(ID: Int?, position: Int,isFrom: Int) {
+    override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
     }
 
