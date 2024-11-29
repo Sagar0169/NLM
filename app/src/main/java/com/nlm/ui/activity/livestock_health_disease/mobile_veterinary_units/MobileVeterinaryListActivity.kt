@@ -113,8 +113,17 @@ class MobileVeterinaryListActivity : BaseActivity<ActivityStateMobileVeterinaryB
         }
 
         fun add(view: View){
-
-            startActivity(Intent(this@MobileVeterinaryListActivity, AddNewMobileVeterinaryUnit::class.java).putExtra("isFrom", isFrom))
+            when (isFrom) {
+                getString(R.string.state) -> {
+                    startActivity(Intent(this@MobileVeterinaryListActivity, AddNewMobileVeterinaryUnit::class.java).putExtra("isFrom", isFrom))
+                }
+                getString(R.string.district) -> {
+                }
+                getString(R.string.block_level) -> {
+                }
+                getString(R.string.farmer_level) -> {
+                }
+            }
         }
     }
 
