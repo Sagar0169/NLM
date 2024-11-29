@@ -1087,11 +1087,11 @@ class AddNewFspPlantStorageActivity(
                                 assistance_for_ea_id = 0 // Or null, depending on your use case
                             )
                             if (userResponseModel._result?.fsp_plant_storage_document?.isEmpty() == true && viewEdit == "view") {
-                                // Add dummy data with default values
-
-
-                                DocumentList.add(dummyData)
-                                viewDocumentList.add(dummyData)
+//                                // Add dummy data with default values
+//
+//
+//                                DocumentList.add(dummyData)
+//                                viewDocumentList.add(dummyData)
 
                             } else {
                                 userResponseModel._result?.fsp_plant_storage_document?.forEach { document ->
@@ -1104,10 +1104,10 @@ class AddNewFspPlantStorageActivity(
                                 }
                                 // Check if viewDocumentList is empty after the loop
                                 if (viewDocumentList.isEmpty() && viewEdit == "view") {
-                                    viewDocumentList.add(dummyData)
+//                                    viewDocumentList.add(dummyData)
                                 }
                                 if (DocumentList.isEmpty() && viewEdit == "view") {
-                                    DocumentList.add(dummyData)
+//                                    DocumentList.add(dummyData)
                                 }
                             }
 

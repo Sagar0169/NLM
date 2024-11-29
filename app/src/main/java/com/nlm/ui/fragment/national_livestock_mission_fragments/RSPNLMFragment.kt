@@ -320,16 +320,7 @@ class RSPNLMFragment(
                             totalListDocument.clear()
                             viewDocumentList.clear()
                             if (userResponseModel._result.rsp_laboratory_semen_document.isEmpty() && viewEdit == "view") {
-                                // Add dummy data with default values
-                                val dummyData = ImplementingAgencyDocument(
-                                    id = 0, // Or null, depending on your use case
-                                    description = "",
-                                    ia_document = "",
-                                    nlm_document = "",
-                                    fsp_plant_storage_id = 0 // Or null, depending on your use case
-                                )
-
-                                DocumentList.add(dummyData)
+                                
                             } else {
                                 userResponseModel._result.rsp_laboratory_semen_document.forEach { document ->
                                     if (document.ia_document == null) {

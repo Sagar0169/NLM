@@ -243,15 +243,15 @@ class StateSemenInfrastructureFragment(
                         stateSemenInfraGoatAdapter?.notifyDataSetChanged()
                         DocumentList.clear()
                         if (userResponseModel._result.state_semen_bank_document.isEmpty() && viewEdit == "view") {
-                            // Add dummy data with default values
-                            val dummyData = ImplementingAgencyDocument(
-                                id = 0, // Or null, depending on your use case
-                                description = "",
-                                ia_document = "",
-                                nlm_document = "",
-                                fsp_plant_storage_id = 0 // Or null, depending on your use case
-                            )
-                            DocumentList.add(dummyData)
+//                            // Add dummy data with default values
+//                            val dummyData = ImplementingAgencyDocument(
+//                                id = 0, // Or null, depending on your use case
+//                                description = "",
+//                                ia_document = "",
+//                                nlm_document = "",
+//                                fsp_plant_storage_id = 0 // Or null, depending on your use case
+//                            )
+//                            DocumentList.add(dummyData)
                         } else {
                             userResponseModel._result.state_semen_bank_document.let { it1 ->
                                 DocumentList.addAll(

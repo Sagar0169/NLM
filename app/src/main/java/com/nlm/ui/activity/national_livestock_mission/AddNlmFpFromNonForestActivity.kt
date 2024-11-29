@@ -1310,8 +1310,8 @@ class AddNlmFpFromNonForestActivity(
                                 fsp_plant_storage_id = 0 // Or null, depending on your use case
                             )
                             if (userResponseModel._result.fp_from_non_forest_document.isEmpty() && viewEdit == "view") {
-                                DocumentList.add(dummyData)
-                                viewDocumentList.add(dummyData)
+//                                DocumentList.add(dummyData)
+//                                viewDocumentList.add(dummyData)
                             } else {
                                 userResponseModel._result.fp_from_non_forest_document.forEach { document ->
                                     if (document.ia_document == null) {
@@ -1323,10 +1323,10 @@ class AddNlmFpFromNonForestActivity(
                                 }
                                 // Check if viewDocumentList is empty after the loop
                                 if (viewDocumentList.isEmpty() && viewEdit == "view") {
-                                    viewDocumentList.add(dummyData)
+//                                    viewDocumentList.add(dummyData)
                                 }
                                 if (DocumentList.isEmpty() && viewEdit == "view") {
-                                    DocumentList.add(dummyData)
+//                                    DocumentList.add(dummyData)
                                 }
                             }
                             iaAdapter()

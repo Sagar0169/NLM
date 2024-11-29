@@ -1047,15 +1047,7 @@
                             android:scrollbars="vertical"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:id="@+id/tvAddDoc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Add Supporting Documents"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_14" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1064,7 +1056,14 @@
                             android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_10">
-
+                            <TextView
+                                android:id="@+id/tvAddDoc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Supporting Documents"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14" />
                             <TextView
                                 android:id="@+id/tvAddMore2"
                                 android:layout_width="wrap_content"

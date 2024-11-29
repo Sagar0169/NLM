@@ -1049,9 +1049,9 @@ class AddNLMExtensionActivity(
                             if (userResponseModel._result?.assistance_for_ea_document?.isEmpty() == true && viewEdit == "view") {
                                 // Add dummy data with default values
 
-
-                                DocumentList.add(dummyData)
-                                viewDocumentList.add(dummyData)
+//
+//                                DocumentList.add(dummyData)
+//                                viewDocumentList.add(dummyData)
 
                             } else {
                                 userResponseModel._result?.assistance_for_ea_document?.forEach { document ->
@@ -1064,10 +1064,10 @@ class AddNLMExtensionActivity(
                                 }
                                 // Check if viewDocumentList is empty after the loop
                                 if (viewDocumentList.isEmpty() && viewEdit == "view") {
-                                    viewDocumentList.add(dummyData)
+//                                    viewDocumentList.add(dummyData)
                                 }
                                 if (DocumentList.isEmpty() && viewEdit == "view") {
-                                    DocumentList.add(dummyData)
+//                                    DocumentList.add(dummyData)
                                 }
                             }
 

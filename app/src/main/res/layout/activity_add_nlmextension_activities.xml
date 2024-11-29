@@ -198,15 +198,6 @@
                             android:textSize="@dimen/sp_16" />
 
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Add Supporting Documents"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -217,6 +208,13 @@
                             android:layout_marginBottom="@dimen/dp_20"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_10">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Supporting Documents"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
                             <TextView
                                 android:id="@+id/tvIADoc"
                                 android:layout_width="wrap_content"
@@ -456,16 +454,7 @@
                             android:layout_marginVertical="@dimen/dp_10"
                             android:textColor="@color/grey"
                             android:textSize="@dimen/sp_14" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Add Supporting Documents"
-                            android:layout_marginHorizontal="@dimen/dp_10"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
+>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -476,6 +465,13 @@
                             android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_10">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Supporting Documents"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
                             <TextView
                                 android:id="@+id/tvNLMDoc"
                                 android:layout_width="wrap_content"

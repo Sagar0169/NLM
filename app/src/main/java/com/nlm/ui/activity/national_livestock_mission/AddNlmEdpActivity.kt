@@ -1142,9 +1142,9 @@ class AddNlmEdpActivity(
                             if (userResponseModel._result?.nlm_edp_document?.isEmpty() == true && viewEdit == "view") {
                                 // Add dummy data with default values
 
-
-                                DocumentList.add(dummyData)
-                                viewDocumentList.add(dummyData)
+//
+//                                DocumentList.add(dummyData)
+//                                viewDocumentList.add(dummyData)
 
                             } else {
                                 userResponseModel._result?.nlm_edp_document?.forEach { document ->
@@ -1157,10 +1157,10 @@ class AddNlmEdpActivity(
                                 }
                                 // Check if viewDocumentList is empty after the loop
                                 if (viewDocumentList.isEmpty() && viewEdit == "view") {
-                                    viewDocumentList.add(dummyData)
+//                                    viewDocumentList.add(dummyData)
                                 }
                                 if (DocumentList.isEmpty() && viewEdit == "view") {
-                                    DocumentList.add(dummyData)
+//                                    DocumentList.add(dummyData)
                                 }
                             }
 
