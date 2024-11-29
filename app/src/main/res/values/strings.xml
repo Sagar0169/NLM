@@ -392,6 +392,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="please_confirm_your_password">Please confirm your password</string>
     <string name="passwords_do_not_match">Passwords do not match</string>
     <string name="extension_activities_monitoring_of_nlm_by_national_level_monitors_format_for_assistance_for_extension_activitie">Extension Activities MONITORING OF NLM BY NATIONAL LEVEL MONITORS Format for Assistance for Extension Activities</string>
+    <string name="beneficiary_farmer_level">Beneficiary/Farmer Level</string>
     <string name="name_of_organization">Name of Organization<font color="#FF0000">*</font></string>
     <string name="implementing_agency_outsourced_agency">Implementing Agency / outsourced agency<font color="#FF0000">*</font></string>
     <string name="location_address">Location / Address<font color="#FF0000">*</font></string>

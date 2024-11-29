@@ -8,6 +8,7 @@ object AppConstants {
     const val ROLE_ID = "USER_TYPE"
     const val LOCALE = "LOCALE"
     const val FORM_FILLED_ID = "ID"
+    const val IS_FROM = "IS_FROM"
 
 
 

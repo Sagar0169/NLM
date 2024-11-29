@@ -1,10 +1,10 @@
-package com.nlm.ui.activity
+package com.nlm.ui.activity.livestock_health_disease.vaccination_programme
 
 import android.content.Intent
 import android.view.View
 import com.nlm.R
 import com.nlm.databinding.ActivityVaccinationProgrammerBinding
-import com.nlm.ui.activity.livestock_health_disease.StateMobileVeterinaryActivity
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 
 class VaccinationProgrammerActivity : BaseActivity<ActivityVaccinationProgrammerBinding>() {
@@ -21,28 +21,25 @@ class VaccinationProgrammerActivity : BaseActivity<ActivityVaccinationProgrammer
 
 
         fun state(view: View) {
-            val intent = Intent(
+            startActivity(Intent(
                 this@VaccinationProgrammerActivity,
-                StateMobileVeterinaryActivity::class.java
-            ).putExtra("isFrom", 5)
-            startActivity(intent)
+                VaccinationProgrammerListActivity::class.java
+            ).putExtra(AppConstants.IS_FROM, getString(R.string.state)))
         }
 
         fun district(view: View) {
-            val intent = Intent(
+            startActivity(Intent(
                 this@VaccinationProgrammerActivity,
-                StateMobileVeterinaryActivity::class.java
-            ).putExtra("isFrom", 6)
-            startActivity(intent)
+                VaccinationProgrammerListActivity::class.java
+            ).putExtra(AppConstants.IS_FROM, getString(R.string.district)))
         }
 
 
         fun farmer(view: View) {
-            val intent = Intent(
+            startActivity(Intent(
                 this@VaccinationProgrammerActivity,
-                StateMobileVeterinaryActivity::class.java
-            ).putExtra("isFrom", 7)
-            startActivity(intent)
+                VaccinationProgrammerListActivity::class.java
+            ).putExtra(AppConstants.IS_FROM, getString(R.string.farmer_level)))
         }
     }
 
@@ -50,8 +47,6 @@ class VaccinationProgrammerActivity : BaseActivity<ActivityVaccinationProgrammer
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-
-
     }
 
     override fun setVariables() {

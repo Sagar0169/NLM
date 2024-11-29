@@ -52,8 +52,6 @@ class ObservationAIAdapter(
 
                 programmeList.removeAt(position)
                 notifyItemRemoved(position)
-
-
         }
     }
 

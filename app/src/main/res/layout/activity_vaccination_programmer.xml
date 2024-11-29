@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.VaccinationProgrammerActivity.ClickActions" />
+            type="com.nlm.ui.activity.livestock_health_disease.vaccination_programme.VaccinationProgrammerActivity.ClickActions" />
     </data>
 
     <RelativeLayout
@@ -161,7 +161,7 @@
                             android:id="@+id/tvFarmerLevel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/farmer_level"
+                            android:text="@string/beneficiary_farmer_level"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="@dimen/sp_20"

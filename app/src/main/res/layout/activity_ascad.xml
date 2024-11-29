@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.AscadActivity.ClickActions" />
+            type="com.nlm.ui.activity.livestock_health_disease.ascad.AscadActivity.ClickActions" />
     </data>
 
     <RelativeLayout

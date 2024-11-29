@@ -12,6 +12,8 @@ import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
 import com.nlm.model.ArtificialInseminationResponse
+import com.nlm.model.AscadListRequest
+import com.nlm.model.AscadListResponse
 import com.nlm.model.AssistanceForEARequest
 import com.nlm.model.AssistanceForEAResponse
 import com.nlm.model.DashboardResponse
@@ -39,6 +41,8 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.MobileVeterinaryUnitsListRequest
+import com.nlm.model.MobileVeterinaryUnitsListResponse
 import com.nlm.model.NLMAhidfRequest
 import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NLMIAResponse
@@ -57,6 +61,8 @@ import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.TempUploadDocResponse
+import com.nlm.model.VaccinationProgrammerListRequest
+import com.nlm.model.VaccinationProgrammerListResponse
 import com.nlm.services.MyService
 import com.nlm.services.ServiceGenerator
 import com.nlm.services.ServiceGeneratorLogin
@@ -204,6 +210,35 @@ object Repository {
 //            role_id
 
         )
+    }
+
+    suspend fun getStateVaccinationProgrammerList(request: VaccinationProgrammerListRequest): Response<VaccinationProgrammerListResponse> {
+        return api.getStateVaccinationProgrammerList(request)
+    }
+    suspend fun getDistrictVaccinationProgrammerList(request: VaccinationProgrammerListRequest): Response<VaccinationProgrammerListResponse> {
+        return api.getDistrictVaccinationProgrammerList(request)
+    }
+    suspend fun getFarmerVaccinationProgrammerList(request: VaccinationProgrammerListRequest): Response<VaccinationProgrammerListResponse> {
+        return api.getFarmerVaccinationProgrammerList(request)
+    }
+    suspend fun getStateMobileVeterinaryUnitsList(request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse> {
+        return api.getStateMobileVeterinaryUnitsList(request)
+    }
+    suspend fun getDistrictMobileVeterinaryUnitsList(request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse> {
+        return api.getDistrictMobileVeterinaryUnitsList(request)
+    }
+    suspend fun getBlockMobileVeterinaryUnitsList(request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse> {
+        return api.getBlockMobileVeterinaryUnitsList(request)
+    }
+    suspend fun getFarmerMobileVeterinaryUnitsList(request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse> {
+        return api.getFarmerMobileVeterinaryUnitsList(request)
+    }
+
+    suspend fun getStateAscadList(request: AscadListRequest): Response<AscadListResponse> {
+        return api.getStateAscadList(request)
+    }
+    suspend fun getDistrictAscadList(request: AscadListRequest): Response<AscadListResponse> {
+        return api.getDistrictAscadList(request)
     }
 }
 

@@ -1420,6 +1420,90 @@ data class AhidfMonitoring(
     val number_of_job: Int?,
     val ahidf_id: Int?,
     val created: String?=null,
+)
 
+data class VaccinationProgrammerListResponse(
+    val _result: VaccinationProgrammerListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
 
+data class VaccinationProgrammerListResult(
+    val data: List<VaccinationProgrammerListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class VaccinationProgrammerListData(
+    val created_at: String,
+    val created: String,
+    val created_by: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val state_code: Int,
+    val state_name: String,
+    val status: String,
+    val village_name: String
+)
+
+data class MobileVeterinaryUnitsListResponse(
+    val _result: MobileVeterinaryUnitsListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class MobileVeterinaryUnitsListResult(
+    val data: List<MobileVeterinaryUnitsListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class MobileVeterinaryUnitsListData(
+    val block_name: String,
+    val created: String,
+    val created_by: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val state_code: Int,
+    val state_name: String,
+    val status: String,
+    val village_name: String,
+    val created_at: String,
+)
+
+data class AscadListResponse(
+    val _result: AscadListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class AscadListResult(
+    val data: List<AscadListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class AscadListData(
+    val created_at: String,
+    val created_by: String,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val state_code: Int,
+    val state_name: String,
+    val status: String
 )

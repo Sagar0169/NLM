@@ -16,7 +16,9 @@ import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
 import com.nlm.model.LogoutRequest
 import com.nlm.model.Result
+import com.nlm.ui.activity.livestock_health_disease.ascad.AscadActivity
 import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryActivity
+import com.nlm.ui.activity.livestock_health_disease.vaccination_programme.VaccinationProgrammerActivity
 import com.nlm.ui.activity.national_dairy_development.DCSCenterVisitNDDActivity
 import com.nlm.ui.activity.national_dairy_development.DairyPlantVisitNDDActivity
 import com.nlm.ui.activity.national_dairy_development.MilkProcessingNDDActivity
@@ -435,17 +437,17 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                 Utility.logout(this)
             }
             if (userResponseModel != null) {
-                if (userResponseModel._resultflag == 0) {
-                    val noOfCoveredScheme = userResponseModel._result.no_of_covered_scheme
-                    mBinding?.contentNav?.tvNoOfSchemeCovered?.text = noOfCoveredScheme?.toString() ?: "0"
+                if (userResponseModel._resultflag == 1) {
+                    mBinding?.contentNav?.tvNoOfSchemeCovered?.text =
+                        userResponseModel._result.no_of_covered_scheme?.toString() ?: "0"
                     mBinding?.contentNav?.tvTotalVisits?.text =
-                        userResponseModel._result?.total_visit?.toString() ?: "0"
+                        userResponseModel._result.total_visit?.toString() ?: "0"
 
                     mBinding?.contentNav?.tvNoOfStateCovered?.text =
-                        userResponseModel._result?.no_of_state_covered?.toString() ?: "0"
+                        userResponseModel._result.no_of_state_covered?.toString() ?: "0"
 
                     mBinding?.contentNav?.tvReportSubmittedNLM?.text =
-                        userResponseModel._result?.report_submitted_by_nlm?.toString() ?: "0"
+                        userResponseModel._result.report_submitted_by_nlm?.toString() ?: "0"
                 }
             }
             viewModel.errors.observe(this) {

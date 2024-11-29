@@ -7,7 +7,7 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryListActivity.ClickActions" />
+            type="com.nlm.ui.activity.livestock_health_disease.vaccination_programme.VaccinationProgrammerListActivity.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,9 +64,8 @@
                 app:layout_constraintTop_toTopOf="@+id/tvHeading" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/srlMobileVeterinary"
+            android:id="@+id/srlVaccinationProgrammer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -82,7 +81,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/dp_10">
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvMobileVeterinary"
+                    android:id="@+id/rvVaccinationProgrammer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_10"
@@ -112,6 +111,7 @@
             android:backgroundTint="@color/black"
             android:contentDescription="Add New Agency"
             android:src="@drawable/ic_add"
+            android:onClick="@{ClickAction::add}"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

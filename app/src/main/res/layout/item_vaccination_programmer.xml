@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp"
+        android:background="@drawable/curve_back_blue"
+        android:backgroundTint="#1C6AAA"
+        app:cardCornerRadius="@dimen/dp_10"
+        android:radius="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:layout_marginEnd="@dimen/dp_50"
+            android:padding="16dp">
+
+            <!-- Permit Number and State Name -->
+            <LinearLayout
+                android:id="@+id/llState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvState"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="State"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/etState"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/inter_light"
+                    android:text="Delhi"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llDistrict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llState"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvDistrict"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="District"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/etDistrict"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/inter_light"
+                    android:text="Delhi"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llBlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llDistrict"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvBlock"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Block"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/etBlockName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/inter_light"
+                    android:text="Delhi"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llFarmer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llBlock"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvFarmer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Village"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/etFarmer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/inter_light"
+                    android:text="Delhi"
+                    android:layout_weight="1"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llNlmStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llFarmer"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNlmStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="NLM Status"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/etNlmStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Submitted"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_light"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llCreatedBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llNlmStatus"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCreatedByTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Created By"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/etCreatedBy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Super Admin"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:fontFamily="@font/inter_light"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llCreatedAt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llCreatedBy"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCreated"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Created At"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/etCreatedAt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="2024-08-28"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_light"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Icons for View, Edit, Delete -->
+            <LinearLayout
+                android:id="@+id/llActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-5dp"
+                android:layout_below="@id/llCreatedAt"
+                android:orientation="horizontal">
+
+                <!-- View Icon -->
+                <ImageView
+                    android:id="@+id/ivView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="View"
+                    android:padding="@dimen/dp_5"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/ic_view"
+                    app:tint="@color/black" />
+
+                <!-- Edit Icon -->
+                <ImageView
+                    android:id="@+id/ivEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Edit"
+                    android:padding="@dimen/dp_5"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/edit_icon"
+                    app:tint="@color/black" />
+
+                <!-- Delete Icon -->
+                <ImageView
+                    android:id="@+id/ivDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Delete"
+                    android:padding="@dimen/dp_5"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:src="@drawable/ic_deleted"
+                    app:tint="@color/black" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
+
+

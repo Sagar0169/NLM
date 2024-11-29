@@ -4,7 +4,7 @@ import android.content.Intent
 import android.view.View
 import com.nlm.R
 import com.nlm.databinding.ActivityMobileVeterinaryBinding
-import com.nlm.ui.activity.livestock_health_disease.StateMobileVeterinaryActivity
+import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 
 class MobileVeterinaryActivity : BaseActivity<ActivityMobileVeterinaryBinding>() {
@@ -20,35 +20,31 @@ class MobileVeterinaryActivity : BaseActivity<ActivityMobileVeterinaryBinding>()
         }
 
         fun state(view: View) {
-            val intent = Intent(
+            startActivity(Intent(
                 this@MobileVeterinaryActivity,
-                StateMobileVeterinaryActivity::class.java
-            ).putExtra("isFrom", 1)
-            startActivity(intent)
+                MobileVeterinaryListActivity::class.java
+            ).putExtra(AppConstants.IS_FROM, getString(R.string.state)))
         }
 
         fun district(view: View) {
-            val intent = Intent(
+            startActivity(Intent(
                 this@MobileVeterinaryActivity,
-                StateMobileVeterinaryActivity::class.java
-            ).putExtra("isFrom", 2)
-            startActivity(intent)
+                MobileVeterinaryListActivity::class.java
+            ).putExtra(AppConstants.IS_FROM, getString(R.string.district)))
         }
 
         fun block(view: View) {
-            val intent = Intent(
+            startActivity(Intent(
                 this@MobileVeterinaryActivity,
-                StateMobileVeterinaryActivity::class.java
-            ).putExtra("isFrom", 3)
-            startActivity(intent)
+                MobileVeterinaryListActivity::class.java
+            ).putExtra(AppConstants.IS_FROM, getString(R.string.block_level)))
         }
 
         fun farmer(view: View) {
-            val intent = Intent(
+            startActivity(Intent(
                 this@MobileVeterinaryActivity,
-                StateMobileVeterinaryActivity::class.java
-            ).putExtra("isFrom", 4)
-            startActivity(intent)
+                MobileVeterinaryListActivity::class.java
+            ).putExtra(AppConstants.IS_FROM, getString(R.string.farmer_level)))
         }
     }
 
@@ -56,8 +52,6 @@ class MobileVeterinaryActivity : BaseActivity<ActivityMobileVeterinaryBinding>()
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-
-
     }
 
     override fun setVariables() {

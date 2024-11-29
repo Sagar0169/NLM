@@ -796,4 +796,28 @@ data class AddAnimalRequest(
     val user_id: String?= null
 )
 
+data class VaccinationProgrammerListRequest(
+    val limit: Int,
+    val page: Int,
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+)
+
+data class MobileVeterinaryUnitsListRequest(
+    val limit: Int,
+    val page: Int,
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+)
+
+data class AscadListRequest(
+    val limit: Int,
+    val page: Int,
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+)
+
 
