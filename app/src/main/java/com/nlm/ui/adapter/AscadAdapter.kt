@@ -11,7 +11,7 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemVaccinationProgrammerBinding
 import com.nlm.model.AscadListData
-import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnit
+import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitState
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
@@ -83,13 +83,13 @@ class AscadAdapter(
 
         holder.mBinding.ivView.setOnClickListener {
             context.startActivity(
-                Intent(context, AddNewMobileVeterinaryUnit::class.java)
+                Intent(context, AddNewMobileVeterinaryUnitState::class.java)
                 .putExtra("View/Edit", "view")
                 .putExtra("itemId", item.id))
         }
         holder.mBinding.ivEdit.setOnClickListener {
             context.startActivity(
-                Intent(context, AddNewMobileVeterinaryUnit::class.java)
+                Intent(context, AddNewMobileVeterinaryUnitState::class.java)
                 .putExtra("View/Edit", "edit")
                 .putExtra("itemId", item.id))
         }

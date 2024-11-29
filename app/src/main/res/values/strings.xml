@@ -396,5 +396,18 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="name_of_organization">Name of Organization<font color="#FF0000">*</font></string>
     <string name="implementing_agency_outsourced_agency">Implementing Agency / outsourced agency<font color="#FF0000">*</font></string>
     <string name="location_address">Location / Address<font color="#FF0000">*</font></string>
+
+    <string name="what_is_the_general_monitoring_at_block_level">What is the general monitoring at Block-level?</string>
+    <string name="mechanism_for_attendance_of_staff_contingecy_plan_for_absent_staff_on_particular_day">Mechanism for attendance of Staff/ contingecy plan for absent staff on particular day?</string>
+    <string name="stock_management_of_medicines_equipment_accessories_etc">Stock management of medicines, equipment, accessories etc.</string>
+    <string name="monitoring_and_tracking_procedure_of_calls_attended">Monitoring and tracking procedure of calls attended</string>
+    <string name="any_others">Any other</string>
+    <string name="what_is_the_monitoring_mechanism_for_medicines_manpower_fuel_etc">What is the monitoring mechanism for medicines, manpower, fuel etc.?</string>
+
+    <string name="have_you_ever_made_phone_call_to_1962_if_yes_when_is_the_call_immediately_attended_by_call_centre">Have you ever made phone call to 1962? If yes, when? Is the call immediately attended by call centre?</string>
+    <string name="how_did_you_come_to_know_about_1962">How did you come to know about 1962?</string>
+    <string name="what_are_the_services_you_availed_from_the_mvus_medicinal_treatment_gynaecological_cases_surgical_minor_major">What are the services you availed from the MVUs? Medicinal Treatment/ Gynaecological cases/Surgical (Minor/Major)</string>
+    <string name="how_much_time_does_it_take_for_the_mvu_to_arrive_after_your_call">How much time does it take for the MVU to arrive after your call?</string>
+    <string name="have_you_paid_for_the_services_offered_by_mvus">Have you paid for the services offered by MVUs?</string>
 </resources>
 

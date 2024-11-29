@@ -7,14 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityVaccinationProgrammerListBinding
-import com.nlm.model.ImportExocticGoatRequest
-import com.nlm.model.OnlyCreated
 import com.nlm.model.Result
 import com.nlm.model.VaccinationProgrammerListData
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.ui.activity.FilterStateActivity
-import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnit
-import com.nlm.ui.adapter.ImportOfGoatAdapter
+import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitState
 import com.nlm.ui.adapter.VaccinationProgrammerAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -103,7 +100,7 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                     FilterStateActivity::class.java).putExtra("isFrom", isFrom))
         }
         fun add(view: View){
-            startActivity(Intent(this@VaccinationProgrammerListActivity, AddNewMobileVeterinaryUnit::class.java)
+            startActivity(Intent(this@VaccinationProgrammerListActivity, AddNewMobileVeterinaryUnitState::class.java)
                 .putExtra("isFrom", isFrom)
             )
         }
