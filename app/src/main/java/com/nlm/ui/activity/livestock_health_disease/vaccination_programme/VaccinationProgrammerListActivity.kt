@@ -103,9 +103,24 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                     FilterStateActivity::class.java).putExtra("isFrom", isFrom))
         }
         fun add(view: View){
-            startActivity(Intent(this@VaccinationProgrammerListActivity, AddNewMobileVeterinaryUnit::class.java)
-                .putExtra("isFrom", isFrom)
-            )
+            when (isFrom) {
+                getString(R.string.state) -> {
+                    startActivity(Intent(this@VaccinationProgrammerListActivity, AddVaccinationProgrammeStateLevel::class.java)
+                        .putExtra("isFrom", isFrom)
+                    )
+                }
+                getString(R.string.district) -> {
+                    startActivity(Intent(this@VaccinationProgrammerListActivity, AddVaccinationProgrammeDistrictLevel::class.java)
+                        .putExtra("isFrom", isFrom)
+                    )
+                }
+                getString(R.string.farmer_level) -> {
+                    startActivity(Intent(this@VaccinationProgrammerListActivity, AddVaccinationProgrammeFarmerLevel::class.java)
+                        .putExtra("isFrom", isFrom)
+                    )
+                }
+            }
+
         }
     }
 

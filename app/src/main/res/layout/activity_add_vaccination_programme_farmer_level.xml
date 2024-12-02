@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-    <variable
+        <variable
         name="ClickAction"
-        type="com.nlm.ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeStateLevel.ClickActions" />
-</data>
+        type="com.nlm.ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeFarmerLevel.ClickActions" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeStateLevel">
+        tools:context=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeFarmerLevel">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="State Vaccination Programme "
+                android:text="Beneficiary/farmer Vaccination Programme"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textAlignment="center"
@@ -97,20 +97,18 @@
                         android:text="Please Select"
                         android:textColor="@color/black" />
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/llDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Districts"
+                        android:text="@string/district"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -129,6 +127,34 @@
                         android:text="Please Select"
                         android:textColor="@color/black" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llVillage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/village"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/et_background"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/llBlock"
@@ -206,7 +232,7 @@
                     android:layout_marginEnd="2dp"
                     android:background="@color/orange"
                     android:paddingVertical="@dimen/dp_5"
-                    android:text="State level Indicators"
+                    android:text="Beneficiary/farmer level Indicators"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
                     android:textSize="20sp"
@@ -219,10 +245,15 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:orientation="vertical"
                     android:padding="16dp">
+
+
+
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -235,46 +266,31 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="How is scheduling and vaccination and other logistics done before commencement of following activities?"
+                            android:text="Indicators"
                             android:textColor="@android:color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_height="wrap_content"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
+                        android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
 
-                        <LinearLayout
+
+
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="2dp"
-                                android:text="a)"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_5"
-                                android:text="Whether focal points at district-level nominated or not for receipt of vaccines and related further actions"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-
-
+                            android:layout_marginTop="8dp"
+                            android:text="
+Are your animals vaccinated against diseases? And which diseases- FMD, Brucellosis, PPR and CSF ?"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -287,7 +303,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etInput1a"
+                            android:id="@+id/etInputs1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -307,7 +323,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etRemark1a"
+                            android:id="@+id/etRemarks1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -336,7 +352,7 @@
                             android:weightSum="2">
 
                             <TextView
-                                android:id="@+id/tvChooseFile1a"
+                                android:id="@+id/tvChoosefile1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
@@ -353,500 +369,7 @@
                                 android:background="#909090" />
 
                             <TextView
-                                android:id="@+id/etChooseFile1a"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.6"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14" />
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="2dp"
-                                android:text="b)"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_5"
-                                android:text="Timeline/ campaign setting"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-
-
-
-                        <!-- Input Field -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Inputs"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etInput1b"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/et_background"
-                            android:padding="8dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Remarks"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etRemark1b"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/et_background"
-                            android:hint=""
-                            android:padding="8dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Upload"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <TextView
-                                android:id="@+id/tvChooseFile1b"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".4"
-                                android:background="@drawable/back_number_gray"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:text="Choose File"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14" />
-
-                            <View
-                                android:layout_width="@dimen/dp_1"
-                                android:layout_height="match_parent"
-                                android:background="#909090" />
-
-                            <TextView
-                                android:id="@+id/etChooseFile1b"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.6"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14" />
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="2dp"
-                                android:text="c)"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_5"
-                                android:text="Arrangement of accessories"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-
-
-
-                        <!-- Input Field -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Inputs"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etInput1c"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/et_background"
-                            android:padding="8dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Remarks"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etRemark1c"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/et_background"
-                            android:hint=""
-                            android:padding="8dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Upload"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <TextView
-                                android:id="@+id/tvChooseFile1c"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".4"
-                                android:background="@drawable/back_number_gray"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:text="Choose File"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14" />
-
-                            <View
-                                android:layout_width="@dimen/dp_1"
-                                android:layout_height="match_parent"
-                                android:background="#909090" />
-
-                            <TextView
-                                android:id="@+id/etChooseFile1c"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.6"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14" />
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="2dp"
-                                android:text="d)"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_5"
-                                android:text="Cold chain availability upto ground level"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-
-
-
-                        <!-- Input Field -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Inputs"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etInput1d"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/et_background"
-                            android:padding="8dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Remarks"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etRemark1d"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/et_background"
-                            android:hint=""
-                            android:padding="8dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Upload"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <TextView
-                                android:id="@+id/tvChooseFile1d"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".4"
-                                android:background="@drawable/back_number_gray"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:text="Choose File"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14" />
-
-                            <View
-                                android:layout_width="@dimen/dp_1"
-                                android:layout_height="match_parent"
-                                android:background="#909090" />
-
-                            <TextView
-                                android:id="@+id/etChooseFile1d"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.6"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14" />
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="2dp"
-                                android:text="e)"
-                                android:textColor="@android:color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_5"
-                                android:text="Assigning areas and duties of vaccinators"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-
-
-
-                        <!-- Input Field -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Inputs"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etInput1e"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/et_background"
-                            android:padding="8dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Remarks"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/etRemark1e"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/et_background"
-                            android:hint=""
-                            android:padding="8dp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:text="Upload"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-
-                            <TextView
-                                android:id="@+id/tvChoosefile1e"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight=".4"
-                                android:background="@drawable/back_number_gray"
-                                android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:text="Choose File"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_14" />
-
-                            <View
-                                android:layout_width="@dimen/dp_1"
-                                android:layout_height="match_parent"
-                                android:background="#909090" />
-
-                            <TextView
-                                android:id="@+id/etChoosefile1e"
+                                 android:id="@+id/etChooseFile1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -860,7 +383,6 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:orientation="horizontal">
 
                         <TextView
@@ -896,7 +418,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Whether facilities for seromonitoring and serosurveillance as per PLAN provided (collection, transport of samples to designated laboratories)?"
+                            android:text="If yes, Does the vaccinator visit the livestock owner at his doorstep to carry out vaccination?"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -911,7 +433,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etInput2"
+                            android:id="@+id/etInputs2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -931,7 +453,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etRemark2"
+                            android:id="@+id/etRemarks2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -960,7 +482,7 @@
                             android:weightSum="2">
 
                             <TextView
-                                android:id="@+id/tvChooseFile2"
+                                android:id="@+id/tvChoosefile2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
@@ -1026,7 +548,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Process/Plan of monitoring is done by State for constant review of the project?"
+                            android:text="Can you recall when vaccination was last done?"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -1041,7 +563,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etInput3"
+                            android:id="@+id/etInputs3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1061,7 +583,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etRemark3"
+                            android:id="@+id/etRemarks3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1090,7 +612,266 @@
                             android:weightSum="2">
 
                             <TextView
-                                android:id="@+id/tvChooseFile3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".4"
+                                android:background="@drawable/back_number_gray"
+                               android:id="@+id/tvChooseFile3"
+                                android:gravity="center"
+                                android:padding="@dimen/dp_10"
+                                android:text="Choose File"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14" />
+
+                            <View
+                                android:layout_width="@dimen/dp_1"
+                                android:layout_height="match_parent"
+                                android:background="#909090" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.6"
+                                android:gravity="center"
+                                android:padding="@dimen/dp_10"
+                                android:id="@+id/etChooseFile3"
+                                android:text="No File Chosen"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/sp_14" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
+                            android:text="4."
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Indicators"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        android:layout_marginVertical="@dimen/dp_10"
+                        android:padding="16dp">
+
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="How do they bring the vaccine? (in vaccine carrier to ensure supply chain)"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <!-- Input Field -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Inputs"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/etInputs4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/et_background"
+                            android:padding="8dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Remarks"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/etRemarks4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/et_background"
+                            android:padding="8dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Upload"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/tvChoosefile4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".4"
+                                android:background="@drawable/back_number_gray"
+                                android:gravity="center"
+                                android:padding="@dimen/dp_10"
+                                android:text="Choose File"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14" />
+
+                            <View
+                                android:layout_width="@dimen/dp_1"
+                                android:layout_height="match_parent"
+                                android:background="#909090" />
+
+                            <TextView
+                                android:id="@+id/etChoosefile4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.6"
+                                android:gravity="center"
+                                android:padding="@dimen/dp_10"
+                                android:text="No File Chosen"
+                                android:textColor="@color/grey"
+                                android:textSize="@dimen/sp_14" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
+                            android:text="5."
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Indicators"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        android:layout_marginVertical="@dimen/dp_10"
+                        android:padding="16dp">
+
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Was there any awareness in any of the govt. program regarding importance of ear-tagging and registration in animals and vaccination?"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <!-- Input Field -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Inputs"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/etInputs5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/et_background"
+                            android:padding="8dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Remarks"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/etRemarks5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/et_background"
+                            android:hint=""
+                            android:padding="8dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Upload"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/tvChoosefile5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
@@ -1108,7 +889,7 @@
                                 android:background="#909090" />
 
                             <TextView
-                                android:id="@+id/etChooseFile3"
+                                android:id="@+id/etChoosefile5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -1119,7 +900,6 @@
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
-
 
                 </LinearLayout>
 
@@ -1163,11 +943,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_marginBottom="@dimen/dp_5"
+                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
+
                         android:id="@+id/tvSaveDraft"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

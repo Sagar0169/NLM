@@ -50,6 +50,12 @@
         android:windowSoftInputMode="adjustResize|stateHidden"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeFarmerLevel"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeDistrictLevel"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeStateLevel"
             android:exported="false" />
         <activity

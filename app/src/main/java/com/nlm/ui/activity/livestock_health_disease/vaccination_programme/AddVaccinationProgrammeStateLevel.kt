@@ -31,6 +31,16 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+        fun saveAndNext(view: View) {
+//            onBackPressedDispatcher.onBackPressed()
+        }
+        fun saveAsDraft(view: View) {
+//            onBackPressedDispatcher.onBackPressed()
+        }
+
+    }
+    private fun vaild(): Boolean {
+        return !(mBinding?.etInput1a?.text.toString().isEmpty()&&mBinding?.etInput1b?.text.toString().isEmpty()&&mBinding?.etInput1c?.text.toString().isEmpty()&&mBinding?.etInput1d?.text.toString().isEmpty()&&mBinding?.etInput1e?.text.toString().isEmpty()&&mBinding?.etRemark1a?.text.toString().isEmpty()&& mBinding?.etRemark1b?.text.toString().isEmpty() && mBinding?.etRemark1c?.text.toString().isEmpty()&&mBinding?.etRemark1d?.text.toString().isEmpty()&&mBinding?.etRemark1e?.text.toString().isEmpty()&&mBinding?.etChooseFile1a?.text.toString().isEmpty()||mBinding?.etChooseFile1b?.text.toString().isEmpty()&&mBinding?.etChooseFile1c?.text.toString().isEmpty()&&mBinding?.etChooseFile1d?.text.toString().isEmpty()&&mBinding?.etChooseFile2?.text.toString().isEmpty()&&mBinding?.etChooseFile3?.text.toString().isEmpty())
 
     }
 

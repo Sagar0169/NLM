@@ -397,5 +397,6 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="implementing_agency_outsourced_agency">Implementing Agency / outsourced agency<font color="#FF0000">*</font></string>
     <string name="location_address">Location / Address<font color="#FF0000">*</font></string>
     <string name="state_level_indicators">State level Indicators</string>
+    <string name="district_level_indicators">District  level Indicators</string>
 </resources>
 
