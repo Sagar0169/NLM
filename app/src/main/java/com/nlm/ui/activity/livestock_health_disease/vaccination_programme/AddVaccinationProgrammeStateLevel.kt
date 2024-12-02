@@ -10,6 +10,7 @@ import com.nlm.R
 import com.nlm.databinding.ActivityAddNewMobileVeterinaryUnitBinding
 import com.nlm.databinding.ActivityAddVaccinationProgrammeStateLevelBinding
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Utility.showSnackbar
 
 class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationProgrammeStateLevelBinding>() {
     override val layoutId: Int
@@ -21,26 +22,35 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
     }
 
     override fun setVariables() {
-
     }
-
     override fun setObservers() {
-
     }
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
         fun saveAndNext(view: View) {
-//            onBackPressedDispatcher.onBackPressed()
+              if(vaild())
+              {
+                  showSnackbar(mBinding!!.main, "Data Saved")
+              }
+              else{
+                  showSnackbar(mBinding!!.main, "Please fill all the fields")
+              }
         }
         fun saveAsDraft(view: View) {
-//            onBackPressedDispatcher.onBackPressed()
+            if(vaild())
+            {
+                showSnackbar(mBinding!!.main, "Data Saved")
+            }
+            else{
+                showSnackbar(mBinding!!.main, "Please fill all the fields")
+            }
         }
 
     }
     private fun vaild(): Boolean {
-        return !(mBinding?.etInput1a?.text.toString().isEmpty()&&mBinding?.etInput1b?.text.toString().isEmpty()&&mBinding?.etInput1c?.text.toString().isEmpty()&&mBinding?.etInput1d?.text.toString().isEmpty()&&mBinding?.etInput1e?.text.toString().isEmpty()&&mBinding?.etRemark1a?.text.toString().isEmpty()&& mBinding?.etRemark1b?.text.toString().isEmpty() && mBinding?.etRemark1c?.text.toString().isEmpty()&&mBinding?.etRemark1d?.text.toString().isEmpty()&&mBinding?.etRemark1e?.text.toString().isEmpty()&&mBinding?.etChooseFile1a?.text.toString().isEmpty()||mBinding?.etChooseFile1b?.text.toString().isEmpty()&&mBinding?.etChooseFile1c?.text.toString().isEmpty()&&mBinding?.etChooseFile1d?.text.toString().isEmpty()&&mBinding?.etChooseFile2?.text.toString().isEmpty()&&mBinding?.etChooseFile3?.text.toString().isEmpty())
+        return !(mBinding?.etInput3?.text.toString().isEmpty()&&mBinding?.etInput2?.text.toString().isEmpty()&&mBinding?.etInput1a?.text.toString().isEmpty()&&mBinding?.etInput1b?.text.toString().isEmpty()&&mBinding?.etInput1c?.text.toString().isEmpty()&&mBinding?.etInput1d?.text.toString().isEmpty()&&mBinding?.etInput1e?.text.toString().isEmpty()&&mBinding?.etRemark3?.text.toString().isEmpty()&&mBinding?.etRemark2?.text.toString().isEmpty()&&mBinding?.etRemark1a?.text.toString().isEmpty()&& mBinding?.etRemark1b?.text.toString().isEmpty() && mBinding?.etRemark1c?.text.toString().isEmpty()&&mBinding?.etRemark1d?.text.toString().isEmpty()&&mBinding?.etRemark1e?.text.toString().isEmpty()&&mBinding?.etChooseFile1a?.text.toString().isEmpty()||mBinding?.etChooseFile1b?.text.toString().isEmpty()&&mBinding?.etChooseFile1c?.text.toString().isEmpty()&&mBinding?.etChooseFile1d?.text.toString().isEmpty()&&mBinding?.etChooseFile2?.text.toString().isEmpty()&&mBinding?.etChooseFile3?.text.toString().isEmpty())
 
     }
 

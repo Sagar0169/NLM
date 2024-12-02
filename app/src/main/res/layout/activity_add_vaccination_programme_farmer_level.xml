@@ -375,8 +375,9 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
-                                android:textColor="@color/grey"
+                                android:hint="No File Chosen"
+                                android:textColorHint="@color/grey"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
@@ -505,8 +506,9 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
-                                android:textColor="@color/grey"
+                                android:hint="No File Chosen"
+                                android:textColorHint="@color/grey"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
@@ -635,8 +637,9 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:id="@+id/etChooseFile3"
-                                android:text="No File Chosen"
-                                android:textColor="@color/grey"
+                                android:hint="No File Chosen"
+                                android:textColorHint="@color/grey"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
@@ -764,8 +767,9 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
-                                android:textColor="@color/grey"
+                                android:hint="No File Chosen"
+                                android:textColorHint="@color/grey"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
@@ -895,8 +899,9 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
-                                android:textColor="@color/grey"
+                                android:hint="No File Chosen"
+                                android:textColorHint="@color/grey"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
