@@ -207,9 +207,6 @@
             android:name=".ui.activity.livestock_health_disease.ViewStateMobileVeterinaryUnit"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnit"
-            android:exported="false" />
-        <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryListActivity"
             android:exported="false" />
         <activity
@@ -334,5 +331,4 @@
                 android:resource="@xml/provider_paths" />
         </provider>
     </application>
-
 </manifest>
