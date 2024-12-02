@@ -7,10 +7,11 @@
 
         <variable
             name="ClickAction"
-            type="com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnit.ClickActions" />
+            type="com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitState.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -43,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="Add New Mobile Veterinary Unit"
+                android:text="Add New Mobile Veterinary Unit State"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -93,111 +94,12 @@
                         android:background="@drawable/curve_all_corner_grey"
                         android:drawableEnd="@drawable/ic_arrow_down"
                         android:maxLength="50"
+                        android:onClick="@{ClickAction::state}"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
                         android:text="Please Select"
                         android:textColor="@color/black" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llDistrict"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Districts"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvDistrict"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_10"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:text="Please Select"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llBlock"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Blocks"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/etBlock"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Enter Block Name"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llFarmer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginVertical="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Village Name"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/etFarmer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Enter Village Name"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 
                 <TextView
@@ -260,7 +162,7 @@
                             android:layout_marginTop="8dp"
                             android:text="What is the mechanism for operationalization/ functioning of MVUs in the state?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -273,6 +175,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -292,6 +195,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -312,6 +216,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -320,11 +225,12 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseOne"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
+
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -337,6 +243,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileOne"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -387,7 +294,7 @@
                             android:layout_marginTop="8dp"
                             android:text="How is engagement of Vets/ Para-vets/ Drivers for MVUs done as per guidelines?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -400,6 +307,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -419,6 +327,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -439,6 +348,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -447,11 +357,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseTwo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -464,6 +374,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileTwo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -514,7 +425,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Procurement procedure of medicines, accessories and other consumables/non-consumables at state level which is to be maintained at MVUs?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -527,6 +438,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -546,6 +458,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -566,6 +479,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -574,11 +488,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseThree"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -591,6 +505,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileThree"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -641,7 +556,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Supply procedure for medicines, accessories and others at state level which is to be maintained at MVUs?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -654,6 +569,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputFour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -673,6 +589,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkFour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -693,6 +610,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantFour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -701,11 +619,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseFour"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -718,6 +636,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileFour"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -769,7 +688,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Is there monitoring and supervision plan for medicine &amp; equipment  procurement/ distribution at State-level?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -782,6 +701,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputFive"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -801,6 +721,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkFive"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -821,6 +742,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantFive"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -829,11 +751,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseFive"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -846,6 +768,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileFive"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -897,7 +820,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Is there monitoring and supervision plan at state level for fuel arrangement for MVUs?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -910,6 +833,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputSix"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -929,6 +853,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkSix"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -949,6 +874,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantSix"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -957,11 +883,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseSix"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -974,6 +900,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileSix"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -1025,7 +952,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Call Centre"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -1038,6 +965,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputSeven"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1057,6 +985,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkSeven"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1077,6 +1006,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantSeven"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1085,11 +1015,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseSeven"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -1102,6 +1032,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileSeven"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -1153,7 +1084,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Is a service provider engaged?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -1166,6 +1097,8 @@
                             android:textStyle="bold" />
 
                         <EditText
+
+                            android:id="@+id/etInputA"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1185,6 +1118,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkA"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1205,6 +1139,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantA"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1213,11 +1148,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseA"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -1230,6 +1165,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileA"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -1281,7 +1217,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Is a building provided for operation with requisite seats"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -1294,6 +1230,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputB"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1313,6 +1250,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkB"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1333,6 +1271,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantB"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1341,11 +1280,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseB"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -1358,6 +1297,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileB"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -1409,7 +1349,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Are Operators engaged?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -1422,6 +1362,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputC"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1441,6 +1382,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkC"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1461,6 +1403,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantC"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1469,11 +1412,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseC"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -1486,6 +1429,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileC"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -1537,7 +1481,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Is an App/ CRM system in place?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -1550,6 +1494,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputD"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1569,6 +1514,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkD"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1589,6 +1535,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantD"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1597,11 +1544,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseD"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -1614,6 +1561,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileD"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -1665,7 +1613,7 @@
                             android:layout_marginTop="8dp"
                             android:text="Are adequate staff including Veterinarians engaged?"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -1678,6 +1626,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputE"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1697,6 +1646,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkE"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1717,6 +1667,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantE"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1725,11 +1676,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseE"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -1742,6 +1693,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileE"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -1793,7 +1745,7 @@
                             android:layout_marginTop="8dp"
                             android:text="How and by whom data compilation and analysis done for reporting"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <!-- Input Field -->
                         <TextView
@@ -1806,6 +1758,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etInputF"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1825,6 +1778,7 @@
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/etRemarkF"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -1845,6 +1799,7 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/llApplicantF"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -1853,11 +1808,11 @@
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/etChooseF"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                                android:enabled="false"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
@@ -1870,6 +1825,7 @@
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/tvNoFileF"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
@@ -1919,22 +1875,53 @@
                         android:background="@color/black" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvSendOtp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_50"
-                    android:layout_marginTop="@dimen/dp_15"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    android:background="@drawable/curve_fill_blue"
-                    android:clickable="true"
-                    android:fontFamily="@font/poppins_medium"
-                    android:paddingHorizontal="@dimen/dp_20"
-                    android:paddingVertical="@dimen/dp_10"
-                    android:text="Submit"
-                    android:textAlignment="center"
-                    android:textColor="@color/white" />
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvSaveDraft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/curve_fill_blue"
+                        android:backgroundTint="@color/green"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:onClick="@{ClickAction::saveAsDraft}"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Save As Draft"
+                        android:textAlignment="center"
+
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tvSendOtp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:onClick="@{ClickAction::save}"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="@string/submit"
+
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

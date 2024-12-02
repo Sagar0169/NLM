@@ -9,13 +9,10 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityAscadListBinding
 import com.nlm.model.AscadListData
 import com.nlm.model.AscadListRequest
-import com.nlm.model.MobileVeterinaryUnitsListData
-import com.nlm.model.MobileVeterinaryUnitsListRequest
 import com.nlm.model.Result
 import com.nlm.ui.activity.FilterStateActivity
-import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnit
+import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitState
 import com.nlm.ui.adapter.AscadAdapter
-import com.nlm.ui.adapter.MobileVeterinaryAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
@@ -102,7 +99,7 @@ class AscadListActivity : BaseActivity<ActivityAscadListBinding>(), CallBackDele
             startActivity(
                 Intent(
                     this@AscadListActivity,
-                    AddNewMobileVeterinaryUnit::class.java
+                    AddNewMobileVeterinaryUnitState::class.java
                 ).putExtra("isFrom", isFrom)
             )
         }

@@ -10,11 +10,8 @@ import com.nlm.databinding.ActivityStateMobileVeterinaryBinding
 import com.nlm.model.MobileVeterinaryUnitsListData
 import com.nlm.model.MobileVeterinaryUnitsListRequest
 import com.nlm.model.Result
-import com.nlm.model.VaccinationProgrammerListData
-import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.adapter.MobileVeterinaryAdapter
-import com.nlm.ui.adapter.VaccinationProgrammerAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
@@ -115,13 +112,18 @@ class MobileVeterinaryListActivity : BaseActivity<ActivityStateMobileVeterinaryB
         fun add(view: View){
             when (isFrom) {
                 getString(R.string.state) -> {
-                    startActivity(Intent(this@MobileVeterinaryListActivity, AddNewMobileVeterinaryUnit::class.java).putExtra("isFrom", isFrom))
+                    startActivity(Intent(this@MobileVeterinaryListActivity, AddNewMobileVeterinaryUnitState::class.java).putExtra("isFrom", isFrom))
                 }
                 getString(R.string.district) -> {
+                    startActivity(Intent(this@MobileVeterinaryListActivity, AddNewMobileVeterinaryUnitDistrict::class.java).putExtra("isFrom", isFrom))
                 }
                 getString(R.string.block_level) -> {
+                    startActivity(Intent(this@MobileVeterinaryListActivity, AddNewMobileVeterinaryUnitBlock::class.java).putExtra("isFrom", isFrom))
+
                 }
                 getString(R.string.farmer_level) -> {
+                    startActivity(Intent(this@MobileVeterinaryListActivity, AddNewMobileVeterinaryUnitVillage::class.java).putExtra("isFrom", isFrom))
+
                 }
             }
         }

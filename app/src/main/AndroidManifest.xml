@@ -50,6 +50,15 @@
         android:windowSoftInputMode="adjustResize|stateHidden"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitVillage"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitBlock"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitDistrict"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeFarmerLevel"
             android:exported="false" />
         <activity
