@@ -20,7 +20,19 @@ import com.nlm.model.AscadListRequest
 import com.nlm.model.AscadListResponse
 import com.nlm.model.AssistanceForEARequest
 import com.nlm.model.AssistanceForEAResponse
+import com.nlm.model.BlockMobileVeterinaryUnitAddRequest
+import com.nlm.model.BlockMobileVeterinaryUnitAddResponse
 import com.nlm.model.DashboardResponse
+import com.nlm.model.DistrictAscadAddRequest
+import com.nlm.model.DistrictAscadAddResponse
+import com.nlm.model.DistrictMobileVeterinaryUnitAddRequest
+import com.nlm.model.DistrictMobileVeterinaryUnitAddResponse
+import com.nlm.model.DistrictVaccinationProgrammeAddRequest
+import com.nlm.model.DistrictVaccinationProgrammeAddResponse
+import com.nlm.model.FarmerMobileVeterinaryUnitAddResponse
+import com.nlm.model.FarmerMobileVeterinaryUnitsAddRequest
+import com.nlm.model.FarmerVaccinationProgrammeAddRequest
+import com.nlm.model.FarmerVaccinationProgrammeAddResponse
 import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FodderProductionFromNonForestResponse
 import com.nlm.model.Format6AssistanceForQspAddEdit
@@ -60,10 +72,16 @@ import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
 import com.nlm.model.RspLabListRequest
+import com.nlm.model.StateAscadAddRequest
+import com.nlm.model.StateAscadAddResponse
+import com.nlm.model.StateMobileVeterinaryUnitAddRequest
+import com.nlm.model.StateMobileVeterinaryUnitAddResponse
 import com.nlm.model.StateSemenAddResponse
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.StateVaccinationProgrammeAddRequest
+import com.nlm.model.StateVaccinationProgrammeAddResponse
 import com.nlm.model.TempUploadDocResponse
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.model.VaccinationProgrammerListResponse
@@ -116,14 +134,23 @@ class ViewModel : ViewModel() {
     var getProfileUploadFileResult = MutableLiveData<TempUploadDocResponse>()
     //LHD
     var stateVaccinationProgrammerListResult = MutableLiveData<VaccinationProgrammerListResponse>()
+    var stateVaccinationProgrammerAddResult = MutableLiveData<StateVaccinationProgrammeAddResponse>()
     var districtVaccinationProgrammerListResult = MutableLiveData<VaccinationProgrammerListResponse>()
+    var districtVaccinationProgrammerAddResult = MutableLiveData<DistrictVaccinationProgrammeAddResponse>()
     var farmerVaccinationProgrammerListResult = MutableLiveData<VaccinationProgrammerListResponse>()
+    var farmerVaccinationProgrammerAddResult = MutableLiveData<FarmerVaccinationProgrammeAddResponse>()
     var stateMobileVeterinaryUnitsListResult = MutableLiveData<MobileVeterinaryUnitsListResponse>()
+    var stateMobileVeterinaryUnitsAddResult = MutableLiveData<StateMobileVeterinaryUnitAddResponse>()
     var districtMobileVeterinaryUnitsListResult = MutableLiveData<MobileVeterinaryUnitsListResponse>()
+    var districtMobileVeterinaryUnitsAddResult = MutableLiveData<DistrictMobileVeterinaryUnitAddResponse>()
     var blockMobileVeterinaryUnitsListResult = MutableLiveData<MobileVeterinaryUnitsListResponse>()
+    var blockMobileVeterinaryUnitsAddResult = MutableLiveData<BlockMobileVeterinaryUnitAddResponse>()
     var farmerMobileVeterinaryUnitsListResult = MutableLiveData<MobileVeterinaryUnitsListResponse>()
+    var farmerMobileVeterinaryUnitsAddResult = MutableLiveData<FarmerMobileVeterinaryUnitAddResponse>()
     var stateAscadListResult = MutableLiveData<AscadListResponse>()
+    var stateAscadAddResult = MutableLiveData<StateAscadAddResponse>()
     var districtAscadListResult = MutableLiveData<AscadListResponse>()
+    var districtAscadAddResult = MutableLiveData<DistrictAscadAddResponse>()
 
     val errors = MutableLiveData<String>()
 
@@ -235,7 +262,7 @@ class ViewModel : ViewModel() {
                                 errors.postValue(errorBody.getString("message") ?: "Bad Request")
                                 Utility.logout(context)
                                 dismissLoader()
-                            }
+                             }
 
                             500 -> {//Internal Server error
                                 errors.postValue("Internal Server error")
@@ -1909,6 +1936,62 @@ class ViewModel : ViewModel() {
         }
     }
 
+    fun getStateVaccinationProgrammeAdd(context: Context, loader: Boolean, request: StateVaccinationProgrammeAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getStateVaccinationProgrammerAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                stateVaccinationProgrammerAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
     fun getDistrictVaccinationProgrammerList(context: Context, loader: Boolean, request: VaccinationProgrammerListRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
@@ -1923,6 +2006,62 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 districtVaccinationProgrammerListResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getDistrictVaccinationProgrammeAdd(context: Context, loader: Boolean, request: DistrictVaccinationProgrammeAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getDistrictVaccinationProgrammerAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                districtVaccinationProgrammerAddResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }
@@ -2021,6 +2160,62 @@ class ViewModel : ViewModel() {
         }
     }
 
+    fun getFarmerVaccinationProgrammeAdd(context: Context, loader: Boolean, request: FarmerVaccinationProgrammeAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getFarmerVaccinationProgrammerAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                farmerVaccinationProgrammerAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
     fun getStateMobileVeterinaryUnitsList(context: Context, loader: Boolean, request: MobileVeterinaryUnitsListRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
@@ -2035,6 +2230,62 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 stateMobileVeterinaryUnitsListResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getStateMobileVeterinaryUnitsAdd(context: Context, loader: Boolean, request: StateMobileVeterinaryUnitAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getStateMobileVeterinaryUnitsAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                stateMobileVeterinaryUnitsAddResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }
@@ -2133,6 +2384,62 @@ class ViewModel : ViewModel() {
         }
     }
 
+    fun getDistrictMobileVeterinaryUnitsAdd(context: Context, loader: Boolean, request: DistrictMobileVeterinaryUnitAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getDistrictMobileVeterinaryUnitsAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                districtMobileVeterinaryUnitsAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
     fun getBlockMobileVeterinaryUnitsList(context: Context, loader: Boolean, request: MobileVeterinaryUnitsListRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
@@ -2147,6 +2454,62 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 blockMobileVeterinaryUnitsListResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getBlockMobileVeterinaryUnitsAdd(context: Context, loader: Boolean, request: BlockMobileVeterinaryUnitAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getBlockMobileVeterinaryUnitsAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                blockMobileVeterinaryUnitsAddResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }
@@ -2245,6 +2608,62 @@ class ViewModel : ViewModel() {
         }
     }
 
+    fun getFarmerMobileVeterinaryUnitsAdd(context: Context, loader: Boolean, request: FarmerMobileVeterinaryUnitsAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getFarmerMobileVeterinaryUnitsAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                farmerMobileVeterinaryUnitsAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
     fun getStateAscadList(context: Context, loader: Boolean, request: AscadListRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
@@ -2301,6 +2720,62 @@ class ViewModel : ViewModel() {
         }
     }
 
+    fun getStateAscadAdd(context: Context, loader: Boolean, request: StateAscadAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getStateAscadAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                stateAscadAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
     fun getDistrictAscadList(context: Context, loader: Boolean, request: AscadListRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
@@ -2315,6 +2790,62 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 districtAscadListResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+    fun getDistrictAscadAdd(context: Context, loader: Boolean, request: DistrictAscadAddRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getDistrictAscadAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                districtAscadAddResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

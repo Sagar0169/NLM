@@ -16,7 +16,19 @@ import com.nlm.model.AscadListRequest
 import com.nlm.model.AscadListResponse
 import com.nlm.model.AssistanceForEARequest
 import com.nlm.model.AssistanceForEAResponse
+import com.nlm.model.BlockMobileVeterinaryUnitAddRequest
+import com.nlm.model.BlockMobileVeterinaryUnitAddResponse
 import com.nlm.model.DashboardResponse
+import com.nlm.model.DistrictAscadAddRequest
+import com.nlm.model.DistrictAscadAddResponse
+import com.nlm.model.DistrictMobileVeterinaryUnitAddRequest
+import com.nlm.model.DistrictMobileVeterinaryUnitAddResponse
+import com.nlm.model.DistrictVaccinationProgrammeAddRequest
+import com.nlm.model.DistrictVaccinationProgrammeAddResponse
+import com.nlm.model.FarmerMobileVeterinaryUnitAddResponse
+import com.nlm.model.FarmerMobileVeterinaryUnitsAddRequest
+import com.nlm.model.FarmerVaccinationProgrammeAddRequest
+import com.nlm.model.FarmerVaccinationProgrammeAddResponse
 import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FodderProductionFromNonForestResponse
 import com.nlm.model.Format6AssistanceForQspAddEdit
@@ -56,10 +68,16 @@ import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
 import com.nlm.model.RspLabListRequest
+import com.nlm.model.StateAscadAddRequest
+import com.nlm.model.StateAscadAddResponse
+import com.nlm.model.StateMobileVeterinaryUnitAddRequest
+import com.nlm.model.StateMobileVeterinaryUnitAddResponse
 import com.nlm.model.StateSemenAddResponse
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.StateVaccinationProgrammeAddRequest
+import com.nlm.model.StateVaccinationProgrammeAddResponse
 import com.nlm.model.TempUploadDocResponse
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.model.VaccinationProgrammerListResponse
@@ -215,30 +233,56 @@ object Repository {
     suspend fun getStateVaccinationProgrammerList(request: VaccinationProgrammerListRequest): Response<VaccinationProgrammerListResponse> {
         return api.getStateVaccinationProgrammerList(request)
     }
+    suspend fun getStateVaccinationProgrammerAdd(request: StateVaccinationProgrammeAddRequest): Response<StateVaccinationProgrammeAddResponse> {
+        return api.getStateVaccinationProgrammerAdd(request)
+    }
     suspend fun getDistrictVaccinationProgrammerList(request: VaccinationProgrammerListRequest): Response<VaccinationProgrammerListResponse> {
         return api.getDistrictVaccinationProgrammerList(request)
+    }
+    suspend fun getDistrictVaccinationProgrammerAdd(request: DistrictVaccinationProgrammeAddRequest): Response<DistrictVaccinationProgrammeAddResponse> {
+        return api.getDistrictVaccinationProgrammerAdd(request)
     }
     suspend fun getFarmerVaccinationProgrammerList(request: VaccinationProgrammerListRequest): Response<VaccinationProgrammerListResponse> {
         return api.getFarmerVaccinationProgrammerList(request)
     }
+    suspend fun getFarmerVaccinationProgrammerAdd(request: FarmerVaccinationProgrammeAddRequest): Response<FarmerVaccinationProgrammeAddResponse> {
+        return api.getFarmerVaccinationProgrammerAdd(request)
+    }
     suspend fun getStateMobileVeterinaryUnitsList(request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse> {
         return api.getStateMobileVeterinaryUnitsList(request)
+    }
+    suspend fun getStateMobileVeterinaryUnitsAdd(request: StateMobileVeterinaryUnitAddRequest): Response<StateMobileVeterinaryUnitAddResponse> {
+        return api.getStateMobileVeterinaryUnitsAdd(request)
     }
     suspend fun getDistrictMobileVeterinaryUnitsList(request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse> {
         return api.getDistrictMobileVeterinaryUnitsList(request)
     }
+    suspend fun getDistrictMobileVeterinaryUnitsAdd(request: DistrictMobileVeterinaryUnitAddRequest): Response<DistrictMobileVeterinaryUnitAddResponse> {
+        return api.getDistrictMobileVeterinaryUnitsAdd(request)
+    }
     suspend fun getBlockMobileVeterinaryUnitsList(request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse> {
         return api.getBlockMobileVeterinaryUnitsList(request)
+    }
+    suspend fun getBlockMobileVeterinaryUnitsAdd(request: BlockMobileVeterinaryUnitAddRequest): Response<BlockMobileVeterinaryUnitAddResponse> {
+        return api.getBlockMobileVeterinaryUnitsAdd(request)
     }
     suspend fun getFarmerMobileVeterinaryUnitsList(request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse> {
         return api.getFarmerMobileVeterinaryUnitsList(request)
     }
-
+    suspend fun getFarmerMobileVeterinaryUnitsAdd(request: FarmerMobileVeterinaryUnitsAddRequest): Response<FarmerMobileVeterinaryUnitAddResponse> {
+        return api.getFarmerMobileVeterinaryUnitsAdd(request)
+    }
     suspend fun getStateAscadList(request: AscadListRequest): Response<AscadListResponse> {
         return api.getStateAscadList(request)
     }
+    suspend fun getStateAscadAdd(request: StateAscadAddRequest): Response<StateAscadAddResponse> {
+        return api.getStateAscadAdd(request)
+    }
     suspend fun getDistrictAscadList(request: AscadListRequest): Response<AscadListResponse> {
         return api.getDistrictAscadList(request)
+    }
+    suspend fun getDistrictAscadAdd(request: DistrictAscadAddRequest): Response<DistrictAscadAddResponse> {
+        return api.getDistrictAscadAdd(request)
     }
 }
 

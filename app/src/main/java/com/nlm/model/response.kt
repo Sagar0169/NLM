@@ -1507,3 +1507,352 @@ data class AscadListData(
     val state_name: String,
     val status: String
 )
+
+data class StateVaccinationProgrammeAddResponse(
+    val _result: StateVaccinationProgrammeAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class StateVaccinationProgrammeAddResult(
+    val created_at: String,
+    val created_by: Int,
+    val id: Int,
+    val is_deleted: String,
+    val process_plan_monitoring: Any,
+    val process_plan_monitoring_inputs: String,
+    val process_plan_monitoring_remarks: String,
+    val process_plan_monitoring_upload: String,
+    val schedule_vaccination_arrangement_inputs: String,
+    val schedule_vaccination_arrangement_remarks: String,
+    val schedule_vaccination_arrangement_upload: String,
+    val schedule_vaccination_assign_areas_inputs: String,
+    val schedule_vaccination_assign_areas_remarks: String,
+    val schedule_vaccination_assign_areas_upload: String,
+    val schedule_vaccination_cold_chain_avail_inputs: String,
+    val schedule_vaccination_cold_chain_avail_remarks: String,
+    val schedule_vaccination_cold_chain_avail_upload: String,
+    val schedule_vaccination_focal_point: Any,
+    val schedule_vaccination_focal_point_input: String,
+    val schedule_vaccination_focal_point_remark: String,
+    val schedule_vaccination_focal_point_upload: String,
+    val schedule_vaccination_timeline_inputs: String,
+    val schedule_vaccination_timeline_remarks: String,
+    val schedule_vaccination_timeline_upload: String,
+    val seromonitoring_facilitie_remarks: String,
+    val seromonitoring_facilities_input: String,
+    val seromonitoring_facilities_upload: String,
+    val state_code: Int,
+    val state_name: String,
+    val status: String,
+    val updated_at: Any,
+    val visit: Any
+)
+
+data class DistrictVaccinationProgrammeAddResponse(
+    val _result: DistrictVaccinationProgrammeAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class DistrictVaccinationProgrammeAddResult(
+    val are_functionaries_aware_inputs: String,
+    val are_functionaries_aware_remarks: String,
+    val are_functionaries_aware_uploads: String,
+    val created_at: String,
+    val created_by: Int,
+    val district_code: Int,
+    val id: Int,
+    val investigate_suspected_outbreak_inputs: String,
+    val investigate_suspected_outbreak_remarks: String,
+    val investigate_suspected_outbreak_uploads: String,
+    val is_deleted: Int,
+    val mass_education_campaign_inputs: String,
+    val mass_education_campaign_remarks: String,
+    val mass_education_campaign_uploads: String,
+    val mechanisim_followed_inputs: String,
+    val mechanisim_followed_remarks: String,
+    val mechanisim_followed_uploads: String,
+    val role_id: Int,
+    val state_code: Int,
+    val status: Int,
+    val trained_staff_engaged_inputs: String,
+    val trained_staff_engaged_remarks: String,
+    val trained_staff_engaged_uploads: String,
+    val user_id: Int
+)
+
+data class FarmerVaccinationProgrammeAddResponse(
+    val _result: FarmerVaccinationProgrammeAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class FarmerVaccinationProgrammeAddResult(
+    val animal_vaccinated: Any,
+    val animal_vaccinated_inputs: String,
+    val animal_vaccinated_remarks: String,
+    val animal_vaccinated_uploads: String,
+    val awarness_of_the_govt: Any,
+    val awarness_of_the_govt_inputs: String,
+    val awarness_of_the_govt_remarks: String,
+    val awarness_of_the_govt_uploads: String,
+    val awarness_reg_ear_tagging: Any,
+    val created_at: String,
+    val created_by: Int,
+    val district_code: Int,
+    val id: Int,
+    val is_deleted: Int,
+    val paid_for_vaccination: Any,
+    val recall_vaccination_inputs: String,
+    val recall_vaccination_remarks: String,
+    val recall_vaccination_uploads: String,
+    val role_id: String,
+    val state_code: Int,
+    val status: Int,
+    val updated_at: String,
+    val user_id: String,
+    val vaccination_carrier_inputs: String,
+    val vaccination_carrier_remarks: String,
+    val vaccination_carrier_uploads: String,
+    val vaccinator_visit: Any,
+    val vaccinator_visit_inputs: String,
+    val vaccinator_visit_remarks: String,
+    val vaccinator_visit_uploads: String,
+    val village_name: String
+)
+
+data class StateMobileVeterinaryUnitAddResponse(
+    val _result: StateMobileVeterinaryUnitAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class StateMobileVeterinaryUnitAddResult(
+    val are_adequate_staff_inputs: String,
+    val are_adequate_staff_remarks: String,
+    val are_operators_engaged_inputs: String,
+    val are_operators_engaged_remarks: String,
+    val call_center_inputs: String,
+    val call_center_remarks: String,
+    val created: String,
+    val created_by: String,
+    val data_compilation_analysis_done_inputs: String,
+    val data_compilation_analysis_done_remarks: String,
+    val engagement_indicators_inputs: String,
+    val engagement_indicators_remarks: String,
+    val id: Int,
+    val input_are_adequate_staff: String,
+    val input_are_operators_engaged: String,
+    val input_call_center: String,
+    val input_data_compilation_analysis_done: String,
+    val input_engagement_indicators: String,
+    val input_is_app_crm_place: String,
+    val input_is_building_provided_operation_seats: String,
+    val input_is_monitoring_supervision_fuel: String,
+    val input_is_monitoring_supervision_medic_equip: String,
+    val input_is_service_provider_engaged: String,
+    val input_mechanism_operation: String,
+    val input_procurement_procedure: String,
+    val input_supply_procedure: String,
+    val is_app_crm_place_inputs: String,
+    val is_app_crm_place_remarks: String,
+    val is_building_provided_operation_seats_inputs: String,
+    val is_building_provided_operation_seats_remarks: String,
+    val is_deleted: Int,
+    val is_monitoring_supervision_fuel_inputs: String,
+    val is_monitoring_supervision_fuel_remarks: String,
+    val is_monitoring_supervision_medic_equip_inputs: String,
+    val is_monitoring_supervision_medic_equip_remarks: String,
+    val is_service_provider_engaged_inputs: String,
+    val is_service_provider_engaged_remaks: String,
+    val mechanism_operation_inputs: String,
+    val mechanism_operation_remarks: String,
+    val procurement_procedure_inputs: String,
+    val procurement_procedure_remarks: String,
+    val role_id: Int,
+    val state_code: Int,
+    val status: Int,
+    val supply_procedure_inputs: String,
+    val supply_procedure_remarks: String,
+    val user_id: Int
+)
+
+data class DistrictMobileVeterinaryUnitAddResponse(
+    val _result: DistrictMobileVeterinaryUnitAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class DistrictMobileVeterinaryUnitAddResult(
+    val created: String,
+    val created_by: Int,
+    val distribution_fuel_role_inputs: String,
+    val distribution_fuel_role_inputs_remarks: String,
+    val distribution_medicines_role_inputs: String,
+    val distribution_medicines_role_remaks: String,
+    val district_code: Int,
+    val id: Int,
+    val input_distribution_fuel_role: String,
+    val input_distribution_medicines_role: String,
+    val input_mechanism_medicines: String,
+    val input_medicine_requirement: String,
+    val input_organize_awareness_camp: String,
+    val is_deleted: Int,
+    val mechanism_medicines_inputs: String,
+    val mechanism_medicines_remaks: String,
+    val medicine_requirement_inputs: String,
+    val medicine_requirement_remarks: String,
+    val organize_awareness_camp_inputs: String,
+    val organize_awareness_camp_remarks: String,
+    val role_id: Int,
+    val state_code: Int,
+    val status: Int,
+    val user_id: Int
+)
+
+data class BlockMobileVeterinaryUnitAddResponse(
+    val _result: BlockMobileVeterinaryUnitAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class BlockMobileVeterinaryUnitAddResult(
+    val any_other_block_inputs: String,
+    val any_other_block_remarks: String,
+    val block_name: String,
+    val created: String,
+    val created_by: Int,
+    val district_code: Int,
+    val general_monitoring_block_inputs: String,
+    val general_monitoring_block_remarks: String,
+    val id: Int,
+    val input_any_other_block: String,
+    val input_general_monitoring_block: String,
+    val input_machanism_attendance_staff: String,
+    val input_monitoring_tracking_call: String,
+    val input_stock_management: String,
+    val is_deleted: Int,
+    val machanism_attendance_staff_inputs: String,
+    val machanism_attendance_staff_remarks: String,
+    val monitoring_tracking_call_inputs: String,
+    val monitoring_tracking_call_remarks: String,
+    val role_id: String,
+    val state_code: Int,
+    val status: Int,
+    val stock_management_inputs: String,
+    val stock_management_remarks: String,
+    val user_id: String
+)
+
+data class FarmerMobileVeterinaryUnitAddResponse(
+    val _result: FarmerMobileVeterinaryUnitAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class FarmerMobileVeterinaryUnitAddResult(
+    val attended_call: Int,
+    val attended_call_inputs: String,
+    val attended_call_remarks: String,
+    val block_name: String,
+    val come_know_about_inputs: String,
+    val come_know_about_remarks: String,
+    val created: String,
+    val created_by: Int,
+    val district_code: Int,
+    val district_name: String,
+    val id: Int,
+    val input_come_know_about: String,
+    val input_mvu_arrive_call: String,
+    val input_services_mvu: String,
+    val input_services_offered_by_mvu: String,
+    val is_deleted: Int,
+    val mvu_arrive_call_inputs: String,
+    val mvu_arrive_call_remarks: String,
+    val services_mvu: Any,
+    val services_mvu_inputs: String,
+    val services_mvu_remarks: String,
+    val services_offered_by_mvu_inputs: String,
+    val services_offered_by_mvu_remarks: String,
+    val state_code: Int,
+    val state_name: String,
+    val status: String,
+    val updated_at: String,
+    val village_name: String,
+    val visit: Int
+)
+
+data class StateAscadAddResponse(
+    val _result: StateAscadAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class StateAscadAddResult(
+    val annual_action_plan_input: String,
+    val annual_action_plan_remarks: String,
+    val created: String,
+    val created_by: Int,
+    val financial_planning_for_state_share_input: String,
+    val financial_planning_for_state_share_remarks: String,
+    val id: Int,
+    val input_annual_action_plan: String,
+    val input_financial_planning_for_state_share: String,
+    val input_purchase_of_vaccines_accessories: String,
+    val input_scheduling_of_vaccination: String,
+    val input_state_prioritizes_critical_disease: String,
+    val is_deleted: Int,
+    val purchase_of_vaccines_accessories_input: String,
+    val purchase_of_vaccines_accessories_remarks: String,
+    val role_id: String,
+    val scheduling_of_vaccination_input: String,
+    val scheduling_of_vaccination_remarks: String,
+    val state_code: Int,
+    val state_prioritizes_critical_disease_input: String,
+    val state_prioritizes_critical_disease_remarks: String,
+    val status: Int,
+    val user_id: Int
+)
+
+data class DistrictAscadAddResponse(
+    val _result: DistrictAscadAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class DistrictAscadAddResult(
+    val compensation_farmer_against_culling_of_animals_input: String,
+    val compensation_farmer_against_culling_of_animals_remarks: String,
+    val created: String,
+    val created_by: Int,
+    val disease_diagnostic_labs_input: String,
+    val disease_diagnostic_labs_remarks: String,
+    val district_code: Int,
+    val id: Int,
+    val input_compensation_farmer_against_culling_of_animals: String,
+    val input_disease_diagnostic_labs: String,
+    val input_status_of_vaccination_against_economically: String,
+    val input_status_of_vaccination_against_zoonotic: String,
+    val input_training_of_veterinarians_and_para_vets_last_year: String,
+    val is_deleted: Int,
+    val role_id: String,
+    val state_code: Int,
+    val status: Int,
+    val status_of_vaccination_against_economically_input: String,
+    val status_of_vaccination_against_economically_remarks: String,
+    val status_of_vaccination_against_zoonotic_input: String,
+    val status_of_vaccination_against_zoonotic_remarks: String,
+    val training_of_veterinarians_and_para_vets_last_year_input: String,
+    val training_of_veterinarians_and_para_vets_last_year_remarks: String,
+    val user_id: String
+)

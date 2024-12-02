@@ -16,7 +16,19 @@ import com.nlm.model.AscadListRequest
 import com.nlm.model.AscadListResponse
 import com.nlm.model.AssistanceForEARequest
 import com.nlm.model.AssistanceForEAResponse
+import com.nlm.model.BlockMobileVeterinaryUnitAddRequest
+import com.nlm.model.BlockMobileVeterinaryUnitAddResponse
 import com.nlm.model.DashboardResponse
+import com.nlm.model.DistrictAscadAddRequest
+import com.nlm.model.DistrictAscadAddResponse
+import com.nlm.model.DistrictMobileVeterinaryUnitAddRequest
+import com.nlm.model.DistrictMobileVeterinaryUnitAddResponse
+import com.nlm.model.DistrictVaccinationProgrammeAddRequest
+import com.nlm.model.DistrictVaccinationProgrammeAddResponse
+import com.nlm.model.FarmerMobileVeterinaryUnitAddResponse
+import com.nlm.model.FarmerMobileVeterinaryUnitsAddRequest
+import com.nlm.model.FarmerVaccinationProgrammeAddRequest
+import com.nlm.model.FarmerVaccinationProgrammeAddResponse
 import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FodderProductionFromNonForestResponse
 import com.nlm.model.Format6AssistanceForQspAddEdit
@@ -27,7 +39,6 @@ import com.nlm.model.FpFromForestLandRequest
 import com.nlm.model.FpFromForestLandResponse
 import com.nlm.model.FpsPlantStorageRequest
 import com.nlm.model.FspPlantStorageResponse
-
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.GetDropDownResponse
 import com.nlm.model.GetNlmDropDownRequest
@@ -58,10 +69,16 @@ import com.nlm.model.RSPAddRequest
 import com.nlm.model.RSPLabListResponse
 import com.nlm.model.RspAddResponse
 import com.nlm.model.RspLabListRequest
+import com.nlm.model.StateAscadAddRequest
+import com.nlm.model.StateAscadAddResponse
+import com.nlm.model.StateMobileVeterinaryUnitAddRequest
+import com.nlm.model.StateMobileVeterinaryUnitAddResponse
 import com.nlm.model.StateSemenAddResponse
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
+import com.nlm.model.StateVaccinationProgrammeAddRequest
+import com.nlm.model.StateVaccinationProgrammeAddResponse
 import com.nlm.model.TempUploadDocResponse
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.model.VaccinationProgrammerListResponse
@@ -107,14 +124,23 @@ const val NLM_FP_FROM_NON_FOREST = "nationalLivestockMission/fpFromNonForestAddE
 const val ADD_FPS_PLANT_STORAGE = "nationalLivestockMission/fspPlantStorageAddEdit"
 //LHD
 const val STATE_VACCINATION_PROGRAMMER_LIST = "livestockHealthDisease/stateVaccinationProgrammeList"
+const val STATE_VACCINATION_PROGRAMMER_ADD = "livestockHealthDisease/stateVaccinationProgrammeAddEdit"
 const val DISTRICT_VACCINATION_PROGRAMMER_LIST = "livestockHealthDisease/districtVaccinationProgrammeList"
+const val DISTRICT_VACCINATION_PROGRAMMER_ADD = "livestockHealthDisease/stateVaccinationProgrammeAddEdit"
 const val FARMER_VACCINATION_PROGRAMMER_LIST = "livestockHealthDisease/farmerVaccinationProgrammeList"
+const val FARMER_VACCINATION_PROGRAMMER_ADD = "livestockHealthDisease/farmerVaccinationProgrammeAddEdit"
 const val STATE_MOBILE_VETERINARY_UNITS_LIST = "livestockHealthDisease/mobileVeterinaryUnitStateList"
+const val STATE_MOBILE_VETERINARY_UNITS_ADD = "livestockHealthDisease/mobileVeterinaryUnitStateAddEdit"
 const val DISTRICT_MOBILE_VETERINARY_UNITS_LIST = "livestockHealthDisease/mobileVeterinaryUnitDistrictList"
+const val DISTRICT_MOBILE_VETERINARY_UNITS_ADD = "livestockHealthDisease/mobileVeterinaryUnitDistrictAddEdit"
 const val BLOCK_MOBILE_VETERINARY_UNITS_LIST = "livestockHealthDisease/mobileVeterinaryUnitBlockList"
+const val BLOCK_MOBILE_VETERINARY_UNITS_ADD = "livestockHealthDisease/mobileVeterinaryUnitBlockAddEdit"
 const val FARMER_MOBILE_VETERINARY_UNITS_LIST = "livestockHealthDisease/mobileVeterinaryUnitFarmerList"
+const val FARMER_MOBILE_VETERINARY_UNITS_ADD = "livestockHealthDisease/mobileVeterinaryUnitFarmerAddEdit"
 const val STATE_ASCAD_LIST = "livestockHealthDisease/ascadStateList"
+const val STATE_ASCAD_ADD = "livestockHealthDisease/ascadStateAddEdit"
 const val DISTRICT_ASCAD_LIST = "livestockHealthDisease/ascadDistrictList"
+const val DISTRICT_ASCAD_ADD = "livestockHealthDisease/ascadDistrictAddEdit"
 
 
 interface MyService {
@@ -225,28 +251,55 @@ interface MyService {
     @POST(STATE_VACCINATION_PROGRAMMER_LIST)
     suspend fun getStateVaccinationProgrammerList(@Body request: VaccinationProgrammerListRequest): Response<VaccinationProgrammerListResponse>
 
+    @POST(STATE_VACCINATION_PROGRAMMER_ADD)
+    suspend fun getStateVaccinationProgrammerAdd(@Body request: StateVaccinationProgrammeAddRequest): Response<StateVaccinationProgrammeAddResponse>
+
     @POST(DISTRICT_VACCINATION_PROGRAMMER_LIST)
     suspend fun getDistrictVaccinationProgrammerList(@Body request: VaccinationProgrammerListRequest): Response<VaccinationProgrammerListResponse>
+
+    @POST(DISTRICT_VACCINATION_PROGRAMMER_ADD)
+    suspend fun getDistrictVaccinationProgrammerAdd(@Body request: DistrictVaccinationProgrammeAddRequest): Response<DistrictVaccinationProgrammeAddResponse>
 
     @POST(FARMER_VACCINATION_PROGRAMMER_LIST)
     suspend fun getFarmerVaccinationProgrammerList(@Body request: VaccinationProgrammerListRequest): Response<VaccinationProgrammerListResponse>
 
+    @POST(FARMER_VACCINATION_PROGRAMMER_ADD)
+    suspend fun getFarmerVaccinationProgrammerAdd(@Body request: FarmerVaccinationProgrammeAddRequest): Response<FarmerVaccinationProgrammeAddResponse>
+
     @POST(STATE_MOBILE_VETERINARY_UNITS_LIST)
     suspend fun getStateMobileVeterinaryUnitsList(@Body request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse>
+
+    @POST(STATE_MOBILE_VETERINARY_UNITS_ADD)
+    suspend fun getStateMobileVeterinaryUnitsAdd(@Body request: StateMobileVeterinaryUnitAddRequest): Response<StateMobileVeterinaryUnitAddResponse>
 
     @POST(DISTRICT_MOBILE_VETERINARY_UNITS_LIST)
     suspend fun getDistrictMobileVeterinaryUnitsList(@Body request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse>
 
+    @POST(DISTRICT_MOBILE_VETERINARY_UNITS_ADD)
+    suspend fun getDistrictMobileVeterinaryUnitsAdd(@Body request: DistrictMobileVeterinaryUnitAddRequest): Response<DistrictMobileVeterinaryUnitAddResponse>
+
     @POST(BLOCK_MOBILE_VETERINARY_UNITS_LIST)
     suspend fun getBlockMobileVeterinaryUnitsList(@Body request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse>
+
+    @POST(BLOCK_MOBILE_VETERINARY_UNITS_ADD)
+    suspend fun getBlockMobileVeterinaryUnitsAdd(@Body request: BlockMobileVeterinaryUnitAddRequest): Response<BlockMobileVeterinaryUnitAddResponse>
 
     @POST(FARMER_MOBILE_VETERINARY_UNITS_LIST)
     suspend fun getFarmerMobileVeterinaryUnitsList(@Body request: MobileVeterinaryUnitsListRequest): Response<MobileVeterinaryUnitsListResponse>
 
+    @POST(FARMER_MOBILE_VETERINARY_UNITS_ADD)
+    suspend fun getFarmerMobileVeterinaryUnitsAdd(@Body request: FarmerMobileVeterinaryUnitsAddRequest): Response<FarmerMobileVeterinaryUnitAddResponse>
+
     @POST(STATE_ASCAD_LIST)
     suspend fun getStateAscadList(@Body request: AscadListRequest): Response<AscadListResponse>
 
+    @POST(STATE_ASCAD_ADD)
+    suspend fun getStateAscadAdd(@Body request: StateAscadAddRequest): Response<StateAscadAddResponse>
+
     @POST(DISTRICT_ASCAD_LIST)
     suspend fun getDistrictAscadList(@Body request: AscadListRequest): Response<AscadListResponse>
-}
 
+    @POST(DISTRICT_ASCAD_ADD)
+    suspend fun getDistrictAscadAdd(@Body request: DistrictAscadAddRequest): Response<DistrictAscadAddResponse>
+
+}
