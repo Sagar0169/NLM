@@ -1,7 +1,10 @@
 package com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -23,9 +26,13 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.viewModel.ViewModel
+import okhttp3.MultipartBody
 
-class AddNewMobileVeterinaryUnitVillage : BaseActivity<ActivityAddNewMobileVeterinaryUnitVillageBinding>() {
+class AddNewMobileVeterinaryUnitVillage :
+    BaseActivity<ActivityAddNewMobileVeterinaryUnitVillageBinding>() {
     private var mBinding: ActivityAddNewMobileVeterinaryUnitVillageBinding? = null
     private lateinit var addNewMobileUnit: AddNewMobileVeterinaryUnitAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -38,8 +45,12 @@ class AddNewMobileVeterinaryUnitVillage : BaseActivity<ActivityAddNewMobileVeter
     private var totalPage = 1
     private var loading = true
     private var districtId: Int? = null // Store selected state
-
-
+    var isFromApplication = 0
+    private var UploadedDocumentName: String? = null
+    private var DialogDocName: TextView? = null
+    private var DocumentName: String? = null
+    private var chooseDocName: String? = null
+    var body: MultipartBody.Part? = null
 
 
     override val layoutId: Int
@@ -50,18 +61,201 @@ class AddNewMobileVeterinaryUnitVillage : BaseActivity<ActivityAddNewMobileVeter
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
+
         fun state(view: View) {
             showBottomSheetDialog("State")
         }
+
         fun district(view: View) {
             showBottomSheetDialog("District")
         }
 
         fun save(view: View) {
+//            if (mBinding?.etInputOne?.text.toString().isEmpty()) {
+//                mBinding?.clParent?.let {
+//                    showSnackbar(it, "Please Fill All The Input and Remark Fields")
+//
+//                }
+//                return
+//            }
+            if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etInputThree?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etInputFour?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etInputFive?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+
+
+            if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
         }
 
         fun saveAsDraft(view: View) {
+//            if (mBinding?.etInputOne?.text.toString().isEmpty()) {
+//                mBinding?.clParent?.let {
+//                    showSnackbar(it, "Please Fill All The Input and Remark Fields")
+//
+//                }
+//                return
+//            }
+            if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etInputThree?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etInputFour?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etInputFive?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+
+
+            if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
+            if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let {
+                    showSnackbar(
+                        it,
+                        "Please Fill All The Input and Remark Fields"
+                    )
+                }
+                return
+            }
         }
+
     }
 
 
@@ -76,8 +270,113 @@ class AddNewMobileVeterinaryUnitVillage : BaseActivity<ActivityAddNewMobileVeter
             Result::class.java
         )?.state_name
         mBinding?.tvState?.isEnabled = false
+
+        mBinding?.etChooseOne?.setOnClickListener {
+            isFromApplication = 1
+            openOnlyPdfAccordingToPosition()
+        }
+        mBinding?.etChooseTwo?.setOnClickListener {
+            isFromApplication = 2
+            openOnlyPdfAccordingToPosition()
+        }
+        mBinding?.etChooseThree?.setOnClickListener {
+            isFromApplication = 3
+            openOnlyPdfAccordingToPosition()
+        }
+        mBinding?.etChooseFour?.setOnClickListener {
+            isFromApplication = 4
+            openOnlyPdfAccordingToPosition()
+        }
+        mBinding?.etChooseFive?.setOnClickListener {
+            isFromApplication = 5
+            openOnlyPdfAccordingToPosition()
+        }
     }
 
+    private fun openOnlyPdfAccordingToPosition() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/pdf"
+        }
+        startActivityForResult(intent, REQUEST_iMAGE_PDF)
+    }
+
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_iMAGE_PDF -> {
+                    data?.data?.let { uri ->
+                        val projection = arrayOf(
+                            MediaStore.MediaColumns.DISPLAY_NAME,
+                            MediaStore.MediaColumns.SIZE
+                        )
+                        val cursor = this.contentResolver.query(
+                            uri,
+                            projection,
+                            null,
+                            null,
+                            null
+                        )
+                        cursor?.use {
+                            if (it.moveToFirst()) {
+                                DocumentName =
+                                    it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
+                                when (isFromApplication) {
+                                    1 -> {
+                                        mBinding?.tvNoFileOne?.text = DocumentName
+                                    }
+
+                                    2 -> {
+                                        mBinding?.tvNoFileTwo?.text = DocumentName
+                                    }
+
+                                    3 -> {
+                                        mBinding?.tvNoFileThree?.text = DocumentName
+                                    }
+
+                                    4 -> {
+                                        mBinding?.tvNoFileFour?.text = DocumentName
+                                    }
+
+                                    5 -> {
+                                        mBinding?.tvNoFileFive?.text = DocumentName
+                                    }
+
+                                    else -> {
+                                        DialogDocName?.text = DocumentName
+                                    }
+
+                                }
+
+
+                                val requestBody = convertToRequestBody(this, uri)
+                                body = MultipartBody.Part.createFormData(
+                                    "document_name",
+                                    DocumentName,
+                                    requestBody
+                                )
+//                                use this code to add new view with image name and uri
+                            }
+//                            viewModel.getProfileUploadFile(
+//                                context = this,
+//                                table_name = getString(R.string.fsp_plant_storage_document).toRequestBody(
+//                                    MultipartBody.FORM
+//                                ),
+//                                document_name = body,
+//                                user_id = getPreferenceOfScheme(
+//                                    this,
+//                                    AppConstants.SCHEME,
+//                                    Result::class.java
+//                                )?.user_id,
+//                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     override fun setVariables() {
     }
@@ -114,6 +413,7 @@ class AddNewMobileVeterinaryUnitVillage : BaseActivity<ActivityAddNewMobileVeter
             }
         }
     }
+
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
