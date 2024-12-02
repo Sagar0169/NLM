@@ -16,7 +16,6 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -162,7 +161,6 @@ class RSPNLMFragment(
         }
         if (viewEdit == "edit") {
             viewEditApi()
-            showToast(itemId.toString())
         }
         rspBuckAdapter()
     }
@@ -490,9 +488,7 @@ class RSPNLMFragment(
         )
     }
 
-    private fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
+
 
     private fun addDocumentDialog(
         context: Context,

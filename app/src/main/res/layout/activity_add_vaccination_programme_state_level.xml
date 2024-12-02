@@ -89,13 +89,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_grey"
-                        android:drawableEnd="@drawable/ic_arrow_down"
                         android:maxLength="50"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
                         android:text="Please Select"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        app:drawableEndCompat="@drawable/ic_arrow_down" />
                 </LinearLayout>
 
                 <LinearLayout

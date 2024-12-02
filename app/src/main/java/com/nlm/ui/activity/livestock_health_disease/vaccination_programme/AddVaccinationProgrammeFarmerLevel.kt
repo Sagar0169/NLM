@@ -11,6 +11,7 @@ import com.nlm.databinding.ActivityAddVaccinationProgrammeDistrictLevelBinding
 import com.nlm.databinding.ActivityAddVaccinationProgrammeFarmerLevelBinding
 import com.nlm.databinding.ActivityAddVaccinationProgrammeStateLevelBinding
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Utility.showSnackbar
 
 class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationProgrammeFarmerLevelBinding>()  {
     override val layoutId: Int
@@ -33,11 +34,27 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
             onBackPressedDispatcher.onBackPressed()
         }
         fun saveAndNext(view: View) {
-//            onBackPressedDispatcher.onBackPressed()
+            if (vaild())
+            {
+                showSnackbar(mBinding!!.main, "Data Saved")
+            }
+            else{
+                showSnackbar(mBinding!!.main, "Please fill all the fields")
+            }
         }
         fun saveAsDraft(view: View) {
-//            onBackPressedDispatcher.onBackPressed()
+            if (vaild())
+            {
+                showSnackbar(mBinding!!.main, "Data Saved")
+            }
+            else{
+                showSnackbar(mBinding!!.main, "Please fill all the fields")
+            }
         }
+    }
+    private fun vaild(): Boolean {
+        return !(mBinding?.etInputs1?.text.toString().isEmpty()&&mBinding?.etInputs4?.text.toString().isEmpty()&&mBinding?.etInputs3?.text.toString().isEmpty()&&mBinding?.etInputs2?.text.toString().isEmpty()&&mBinding?.etInputs1?.text.toString().isEmpty()&&mBinding?.etRemarks1?.text.toString().isEmpty()&&mBinding?.etRemarks5?.text.toString().isEmpty()&&mBinding?.etRemarks4?.text.toString().isEmpty()&&mBinding?.etRemarks3?.text.toString().isEmpty()&&mBinding?.etRemarks2?.text.toString().isEmpty()&&mBinding?.etChooseFile2?.text.toString().isEmpty()&&mBinding?.etChooseFile3?.text.toString().isEmpty()&&mBinding?.etChoosefile4?.text.toString().isEmpty()&&mBinding?.etChoosefile5?.text.toString().isEmpty()&&mBinding?.etChooseFile1?.text.toString().isEmpty())
+
     }
 
 }
