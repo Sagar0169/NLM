@@ -380,6 +380,10 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="nlm_edp_document">nlm_edp_document</string>
     <string name="ahidf_document">ahidf_document</string>
     <string name="state_semen_bank_document">state_semen_bank_document</string>
+    <string name="mobile_veterinary_unit_state">mobile_veterinary_unit_state</string>
+    <string name="mobile_veterinary_unit_district">mobile_veterinary_unit_district</string>
+    <string name="mobile_veterinary_unit_block">mobile_veterinary_unit_block</string>
+    <string name="mobile_veterinary_unit_farmer">mobile_veterinary_unit_farmer</string>
     <string name="rsp_lab">RSP Lab</string>
     <string name="artificial_insemination_document">artificial_insemination_document</string>
     <string name="assistance_for_qfsp_document">assistance_for_qfsp_document</string>

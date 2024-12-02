@@ -14,9 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityAddNewMobileVeterinaryUnitBinding
+import com.nlm.model.AddAnimalRequest
+import com.nlm.model.AhidfFormatForNlm
+import com.nlm.model.AhidfMonitoring
 import com.nlm.model.GetDropDownRequest
+import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.model.StateMobileVeterinaryUnitAddRequest
 import com.nlm.ui.adapter.AddNewMobileVeterinaryUnitAdapter
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.StateAdapter
@@ -51,6 +56,13 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
     private var chooseDocName: String? = null
     var body: MultipartBody.Part? = null
     var isFromApplication = 0
+    private var viewEdit: String? = null
+    var itemId: Int? = null
+    private var dId: Int? = null
+    private var isSubmitted: Boolean = false
+    private var savedAsEdit: Boolean = false
+    private var savedAsDraft: Boolean = false
+
     override val layoutId: Int
         get() = R.layout.activity_add_new_mobile_veterinary_unit
 
@@ -69,478 +81,37 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
         }
 
         fun save(view: View) {
-            if (mBinding?.etInputOne?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(it, "Please Fill All The Input and Remark Fields")
-
-                }
-                return
-            }
-            if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputThree?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputFour?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputFive?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputSix?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputSeven?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputA?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputB?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputC?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputD?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputE?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputF?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
+            //1->Approved 2->Submitted 3->Draft
+            if (viewEdit == "view") {
+//                listener?.onNextButtonClick()
             }
 
+            if (viewEdit == "edit") {
+                savedAsEdit = true
+            }
+            if (itemId != 0) {
+                saveDataApi(itemId, 2)
+            } else {
+                saveDataApi(null, 2)
+            }
 
-            if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkSix?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkSeven?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkA?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkB?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkC?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkD?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkE?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkF?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
         }
+
         fun saveAsDraft(view: View) {
-            if (mBinding?.etInputOne?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(it, "Please Fill All The Input and Remark Fields")
-
-                }
-                return
-            }
-            if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputThree?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputFour?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputFive?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputSix?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputSeven?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputA?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputB?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputC?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputD?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputE?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputF?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
+            if (viewEdit == "view") {
+//                listener?.onNextButtonClick()
             }
 
+            if (viewEdit == "edit") {
+                savedAsEdit = true
+            }
+            if (itemId != 0) {
+                saveDataApi(itemId, 3)
+            } else {
+                saveDataApi(null, 3)
+            }
 
-            if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkSix?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkSeven?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkA?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkB?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkC?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkD?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkE?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkF?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
         }
-
     }
 
     private fun openOnlyPdfAccordingToPosition() {
@@ -641,18 +212,18 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                                 )
 //                                use this code to add new view with image name and uri
                             }
-//                            viewModel.getProfileUploadFile(
-//                                context = this,
-//                                table_name = getString(R.string.fsp_plant_storage_document).toRequestBody(
-//                                    MultipartBody.FORM
-//                                ),
-//                                document_name = body,
-//                                user_id = getPreferenceOfScheme(
-//                                    this,
-//                                    AppConstants.SCHEME,
-//                                    Result::class.java
-//                                )?.user_id,
-//                            )
+                            viewModel.getProfileUploadFile(
+                                context = this,
+                                table_name = getString(R.string.mobile_veterinary_unit_state).toRequestBody(
+                                    MultipartBody.FORM
+                                ),
+                                document_name = body,
+                                user_id = getPreferenceOfScheme(
+                                    this,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id,
+                            )
                         }
                     }
                 }
@@ -660,17 +231,357 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
         }
     }
 
+    private fun saveDataApi(itemId: Int?, draft: Int?) {
+        if (mBinding?.etInputOne?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(it, "Please Fill All The Input and Remark Fields")
+
+            }
+            return
+        }
+        if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputSix?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputSeven?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputA?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputB?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputC?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputD?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputE?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etInputF?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkSix?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkSeven?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkA?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkB?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkC?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkD?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkE?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkF?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+
+        viewModel.getStateMobileVeterinaryUnitsAdd(
+            this@AddNewMobileVeterinaryUnitState, true,
+            StateMobileVeterinaryUnitAddRequest(
+                id = itemId,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                status = draft,
+                input_mechanism_operation = mBinding?.etInputOne?.text.toString(),
+                mechanism_operation_remarks = mBinding?.etRemarkOne?.text.toString(),
+                input_engagement_indicators = mBinding?.etInputTwo?.text.toString(),
+                engagement_indicators_remarks = mBinding?.etRemarkTwo?.text.toString(),
+                input_procurement_procedure = mBinding?.etInputThree?.text.toString(),
+                procurement_procedure_remarks = mBinding?.etRemarkThree?.text.toString(),
+                input_supply_procedure = mBinding?.etInputFour?.text.toString(),
+                supply_procedure_remarks = mBinding?.etRemarkFour?.text.toString(),
+                input_is_monitoring_supervision_medic_equip = mBinding?.etInputFive?.text.toString(),
+                is_monitoring_supervision_medic_equip_remarks = mBinding?.etRemarkFive?.text.toString(),
+                input_is_monitoring_supervision_fuel = mBinding?.etInputSix?.text.toString(),
+                is_monitoring_supervision_fuel_remarks = mBinding?.etRemarkSix?.text.toString(),
+                input_call_center = mBinding?.etInputSeven?.text.toString(),
+                call_center_remarks = mBinding?.etRemarkSeven?.text.toString(),
+                input_is_service_provider_engaged = mBinding?.etInputA?.text.toString(),
+                is_service_provider_engaged_remaks = mBinding?.etRemarkA?.text.toString(),
+                input_is_building_provided_operation_seats = mBinding?.etInputB?.text.toString(),
+                is_building_provided_operation_seats_remarks = mBinding?.etRemarkB?.text.toString(),
+                input_are_operators_engaged = mBinding?.etInputC?.text.toString(),
+                are_operators_engaged_remarks = mBinding?.etRemarkC?.text.toString(),
+                input_is_app_crm_place = mBinding?.etInputD?.text.toString(),
+                is_app_crm_place_remarks = mBinding?.etRemarkD?.text.toString(),
+                input_are_adequate_staff = mBinding?.etInputE?.text.toString(),
+                are_adequate_staff_remarks = mBinding?.etRemarkE?.text.toString(),
+                input_data_compilation_analysis_done = mBinding?.etInputF?.text.toString(),
+                data_compilation_analysis_done_remarks = mBinding?.etRemarkF?.text.toString(),
+            )
+        )
+    }
+
 
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        viewEdit = intent.getStringExtra("View/Edit")
+        itemId = intent.getIntExtra("itemId", 0)
+        dId = intent.getIntExtra("dId", 0)
         mBinding?.tvState?.text = getPreferenceOfScheme(
             this,
             AppConstants.SCHEME,
             Result::class.java
         )?.state_name
         mBinding?.tvState?.isEnabled = false
+        if (viewEdit == "view") {
+            mBinding?.tvState?.isEnabled = false
+            mBinding?.etInputOne?.isEnabled = false
+            mBinding?.etRemarkOne?.isEnabled = false
+            mBinding?.etInputTwo?.isEnabled = false
+            mBinding?.etRemarkTwo?.isEnabled = false
+            mBinding?.etInputThree?.isEnabled = false
+            mBinding?.etRemarkThree?.isEnabled = false
+            mBinding?.etInputFour?.isEnabled = false
+            mBinding?.etRemarkFour?.isEnabled = false
+            mBinding?.etInputFive?.isEnabled = false
+            mBinding?.etRemarkFive?.isEnabled = false
+            mBinding?.etInputSix?.isEnabled = false
+            mBinding?.etRemarkSix?.isEnabled = false
+            mBinding?.etInputSeven?.isEnabled = false
+            mBinding?.etRemarkSeven?.isEnabled = false
+            mBinding?.etInputA?.isEnabled = false
+            mBinding?.etRemarkA?.isEnabled = false
+            mBinding?.etInputB?.isEnabled = false
+            mBinding?.etRemarkB?.isEnabled = false
+            mBinding?.etInputC?.isEnabled = false
+            mBinding?.etRemarkC?.isEnabled = false
+            mBinding?.etInputD?.isEnabled = false
+            mBinding?.etRemarkD?.isEnabled = false
+            mBinding?.etInputE?.isEnabled = false
+            mBinding?.etRemarkE?.isEnabled = false
+            mBinding?.etInputF?.isEnabled = false
+            mBinding?.etRemarkF?.isEnabled = false
+
+            mBinding?.etChooseOne?.isEnabled = false
+            mBinding?.etChooseTwo?.isEnabled = false
+            mBinding?.etChooseThree?.isEnabled = false
+            mBinding?.etChooseFour?.isEnabled = false
+            mBinding?.etChooseFive?.isEnabled = false
+            mBinding?.etChooseSix?.isEnabled = false
+            mBinding?.etChooseSeven?.isEnabled = false
+            mBinding?.etChooseA?.isEnabled = false
+            mBinding?.etChooseB?.isEnabled = false
+            mBinding?.etChooseC?.isEnabled = false
+            mBinding?.etChooseD?.isEnabled = false
+            mBinding?.etChooseE?.isEnabled = false
+            mBinding?.etChooseF?.isEnabled = false
+            mBinding?.tvSaveDraft?.isEnabled = false
+            mBinding?.tvSendOtp?.isEnabled = false
+
+
+
+            viewEditApi()
+        }
+        if (viewEdit == "edit") {
+            viewEditApi()
+        }
+        viewEdit?.let { toast(it) }
         mBinding?.etChooseOne?.setOnClickListener {
             isFromApplication = 1
             openOnlyPdfAccordingToPosition()
@@ -727,6 +638,31 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
 
     }
 
+    private fun viewEditApi() {
+
+        viewModel.getStateMobileVeterinaryUnitsAdd(
+            this@AddNewMobileVeterinaryUnitState, true,
+            StateMobileVeterinaryUnitAddRequest(
+                id = itemId,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                is_type = viewEdit
+            )
+        )
+    }
 
     override fun setVariables() {
     }
@@ -762,133 +698,224 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                 }
             }
         }
+        viewModel.getDropDownResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            } else {
+                if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
+                    if (currentPage == 1) {
+                        districtList.clear()
 
-    }
-
-    private fun showBottomSheetDialog(type: String) {
-        bottomSheetDialog = BottomSheetDialog(this)
-        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
-        view.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-
-        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
-        val close = view.findViewById<TextView>(R.id.tvClose)
-
-        close.setOnClickListener {
-            bottomSheetDialog.dismiss()
-        }
-
-        // Define a variable for the selected list and TextView
-        val selectedList: List<ResultGetDropDown>
-        val selectedTextView: TextView
-
-        // Initialize based on type
-        when (type) {
-
-            "State" -> {
-                dropDownApiCall(paginate = false, loader = true)
-                selectedList = districtList
-                selectedTextView = mBinding!!.tvState
-            }
-
-
-            else -> return
-        }
-
-        // Set up the adapter
-        stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
-            // Handle state item click
-            selectedTextView.text = selectedItem
-            districtId = id
-            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
-            bottomSheetDialog.dismiss()
-        }
-
-
-
-        layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvBottomSheet.layoutManager = layoutManager
-        rvBottomSheet.adapter = stateAdapter
-        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
-        bottomSheetDialog.setContentView(view)
-
-
-        // Rotate drawable
-        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
-        var rotatedDrawable = rotateDrawable(drawable, 180f)
-        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
-
-        // Set a dismiss listener to reset the view visibility
-        bottomSheetDialog.setOnDismissListener {
-            rotatedDrawable = rotateDrawable(drawable, 0f)
-            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
-                null,
-                null,
-                rotatedDrawable,
-                null
-            )
-        }
-
-        // Show the bottom sheet
-        bottomSheetDialog.show()
-    }
-
-    private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
-        drawable?.mutate() // Mutate the drawable to avoid affecting other instances
-
-        val rotateDrawable = RotateDrawable()
-        rotateDrawable.drawable = drawable
-        rotateDrawable.fromDegrees = 0f
-        rotateDrawable.toDegrees = angle
-        rotateDrawable.level = 10000 // Needed to apply the rotation
-
-        return rotateDrawable
-    }
-
-    private var recyclerScrollListener: RecyclerView.OnScrollListener =
-        object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0) {
-                    val visibleItemCount: Int? = layoutManager?.childCount
-                    val totalItemCount: Int? = layoutManager?.itemCount
-                    val pastVisiblesItems: Int? = layoutManager?.findFirstVisibleItemPosition()
-                    if (loading) {
-                        if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
-                            loading = false
-                            if (currentPage < totalPage) {
-                                //Call API here
-                                dropDownApiCall(paginate = true, loader = true)
-                            }
+                        val remainingCount = userResponseModel.total_count % 10
+                        totalPage = if (remainingCount == 0) {
+                            val count = userResponseModel.total_count / 10
+                            count
+                        } else {
+                            val count = userResponseModel.total_count / 10
+                            count + 1
                         }
                     }
+                    districtList.addAll(userResponseModel._result)
+                    stateAdapter.notifyDataSetChanged()
+
+
+//                    mBinding?.tvNoDataFound?.hideView()
+//                    mBinding?.rvArtificialInsemination?.showView()
+                } else {
+//                    mBinding?.tvNoDataFound?.showView()
+//                    mBinding?.rvArtificialInsemination?.hideView()
                 }
             }
         }
 
-    private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
-        if (paginate) {
-            currentPage++
+        viewModel.stateMobileVeterinaryUnitsAddResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                } else {
+                    if (savedAsDraft) {
+                        onBackPressedDispatcher.onBackPressed()
+                    } else {
+                        if (viewEdit == "view" || viewEdit == "edit") {
+                            if (savedAsEdit) {
+                                onBackPressedDispatcher.onBackPressed()
+                                return@observe
+                            }
+                            toast(viewEdit.toString())
+                            mBinding?.etInputOne?.setText(userResponseModel._result.input_mechanism_operation)
+                            mBinding?.etRemarkOne?.setText(userResponseModel._result.mechanism_operation_remarks)
+                            mBinding?.etInputTwo?.setText(userResponseModel._result.input_engagement_indicators)
+                            mBinding?.etRemarkTwo?.setText(userResponseModel._result.engagement_indicators_remarks)
+                            mBinding?.etInputThree?.setText(userResponseModel._result.input_procurement_procedure)
+                            mBinding?.etRemarkThree?.setText(userResponseModel._result.procurement_procedure_remarks)
+                            mBinding?.etInputFour?.setText(userResponseModel._result.input_supply_procedure)
+                            mBinding?.etRemarkFour?.setText(userResponseModel._result.supply_procedure_remarks)
+                            mBinding?.etInputFive?.setText(userResponseModel._result.input_is_monitoring_supervision_medic_equip)
+                            mBinding?.etRemarkFive?.setText(userResponseModel._result.is_monitoring_supervision_medic_equip_remarks)
+                            mBinding?.etInputSix?.setText(userResponseModel._result.input_is_monitoring_supervision_fuel)
+                            mBinding?.etRemarkSix?.setText(userResponseModel._result.is_monitoring_supervision_fuel_remarks)
+                            mBinding?.etInputSeven?.setText(userResponseModel._result.input_call_center)
+                            mBinding?.etRemarkSeven?.setText(userResponseModel._result.call_center_remarks)
+                            mBinding?.etInputA?.setText(userResponseModel._result.input_is_service_provider_engaged)
+                            mBinding?.etRemarkA?.setText(userResponseModel._result.is_service_provider_engaged_remaks)
+                            mBinding?.etInputB?.setText(userResponseModel._result.input_is_building_provided_operation_seats)
+                            mBinding?.etRemarkB?.setText(userResponseModel._result.is_building_provided_operation_seats_remarks)
+                            mBinding?.etInputC?.setText(userResponseModel._result.input_are_operators_engaged)
+                            mBinding?.etRemarkC?.setText(userResponseModel._result.are_operators_engaged_remarks)
+                            mBinding?.etInputD?.setText(userResponseModel._result.input_is_app_crm_place)
+                            mBinding?.etRemarkD?.setText(userResponseModel._result.is_app_crm_place_remarks)
+                            mBinding?.etInputE?.setText(userResponseModel._result.input_are_adequate_staff)
+                            mBinding?.etRemarkE?.setText(userResponseModel._result.are_adequate_staff_remarks)
+                            mBinding?.etInputF?.setText(userResponseModel._result.input_data_compilation_analysis_done)
+                            mBinding?.etRemarkF?.setText(userResponseModel._result.data_compilation_analysis_done_remarks)
+
+
+                        }
+                        else{
+                            onBackPressedDispatcher.onBackPressed()
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        }
+                    }
+                }
+
+            }
         }
-        viewModel.getDropDownApi(
-            this, loader, GetDropDownRequest(
-                20,
-                "Districts",
-                currentPage,
-                getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id,
-            )
-        )
     }
-}
+            private fun showBottomSheetDialog(type: String) {
+                bottomSheetDialog = BottomSheetDialog(this)
+                val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
+                view.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+
+                val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
+                val close = view.findViewById<TextView>(R.id.tvClose)
+
+                close.setOnClickListener {
+                    bottomSheetDialog.dismiss()
+                }
+
+                // Define a variable for the selected list and TextView
+                val selectedList: List<ResultGetDropDown>
+                val selectedTextView: TextView
+
+                // Initialize based on type
+                when (type) {
+
+                    "State" -> {
+                        dropDownApiCall(paginate = false, loader = true)
+                        selectedList = districtList
+                        selectedTextView = mBinding!!.tvState
+                    }
+
+
+                    else -> return
+                }
+
+                // Set up the adapter
+                stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
+                    // Handle state item click
+                    selectedTextView.text = selectedItem
+                    districtId = id
+                    selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
+                    bottomSheetDialog.dismiss()
+                }
+
+
+
+                layoutManager =
+                    LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                rvBottomSheet.layoutManager = layoutManager
+                rvBottomSheet.adapter = stateAdapter
+                rvBottomSheet.addOnScrollListener(recyclerScrollListener)
+                bottomSheetDialog.setContentView(view)
+
+
+                // Rotate drawable
+                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
+                var rotatedDrawable = rotateDrawable(drawable, 180f)
+                selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    null,
+                    rotatedDrawable,
+                    null
+                )
+
+                // Set a dismiss listener to reset the view visibility
+                bottomSheetDialog.setOnDismissListener {
+                    rotatedDrawable = rotateDrawable(drawable, 0f)
+                    selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+                        null,
+                        null,
+                        rotatedDrawable,
+                        null
+                    )
+                }
+
+                // Show the bottom sheet
+                bottomSheetDialog.show()
+            }
+
+            private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
+                drawable?.mutate() // Mutate the drawable to avoid affecting other instances
+
+                val rotateDrawable = RotateDrawable()
+                rotateDrawable.drawable = drawable
+                rotateDrawable.fromDegrees = 0f
+                rotateDrawable.toDegrees = angle
+                rotateDrawable.level = 10000 // Needed to apply the rotation
+
+                return rotateDrawable
+            }
+
+            private var recyclerScrollListener: RecyclerView.OnScrollListener =
+                object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+                        if (dy > 0) {
+                            val visibleItemCount: Int? = layoutManager?.childCount
+                            val totalItemCount: Int? = layoutManager?.itemCount
+                            val pastVisiblesItems: Int? =
+                                layoutManager?.findFirstVisibleItemPosition()
+                            if (loading) {
+                                if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
+                                    loading = false
+                                    if (currentPage < totalPage) {
+                                        //Call API here
+                                        dropDownApiCall(paginate = true, loader = true)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
+                if (paginate) {
+                    currentPage++
+                }
+                viewModel.getDropDownApi(
+                    this, loader, GetDropDownRequest(
+                        20,
+                        "Districts",
+                        currentPage,
+                        getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.state_code,
+                        getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.user_id,
+                    )
+                )
+            }
+        }

@@ -247,6 +247,7 @@ data class ArtificialInseminationResponse(
     val message: String,
     val statuscode: Int
 )
+
 data class ImportExocticGoatListResponse(
     val _result: ResultIE,
     val _resultflag: Int,
@@ -273,11 +274,13 @@ data class DataIE(
     val state_name: String?,
     val updated_at: String?
 )
+
 data class ResultArtificialInsemination(
     val `data`: List<DataArtificialInsemination>,
     val is_add: Boolean,
     val total_count: Int
 )
+
 data class Format6AssistanceForQspAddResponse(
     val _result: ResultFormat6,
     val _resultflag: Int,
@@ -287,73 +290,74 @@ data class Format6AssistanceForQspAddResponse(
 )
 
 data class ResultFormat6(
-    val area_under_production: Int?=null,
-    val assistance_for_qfsp_cost_assistance: List<AssistanceForQfspCostAssistance>?=null,
-    val assistance_for_qfsp_document: ArrayList<ImplementingAgencyDocument>?=null,
-    val assistance_for_qfsp_financial_progress: List<AssistanceForQfspFinancialProgres>?=null,
-    val created: String?=null,
-    val created_by: Int?=null,
-    val district_code: Int?=null,
-    val effective_seed: Any?=null,
-    val effective_seed_inputs: String?=null,
-    val id: Int?=null,
-    val is_deleted: Int?=null,
-    val is_draft: Int?=null,
-    val location_address: String?=null,
-    val name_of_organization: String?=null,
-    val organogram: String?=null,
-    val quantity_of_fodder_seed_class: String?=null,
-    val quantity_of_fodder_seed_variety: String?=null,
-    val quantity_of_seed_class: String?=null,
-    val quantity_of_seed_variety: String?=null,
-    val source_of_seed: String?=null,
-    val state_code: Int?=null,
-    val status: Int?=null,
-    val target_achievement_class: String?=null,
-    val target_achievement_variety: String?=null,
-    val technical_competance: String?=null,
-    val updated: String?=null
+    val area_under_production: Int? = null,
+    val assistance_for_qfsp_cost_assistance: List<AssistanceForQfspCostAssistance>? = null,
+    val assistance_for_qfsp_document: ArrayList<ImplementingAgencyDocument>? = null,
+    val assistance_for_qfsp_financial_progress: List<AssistanceForQfspFinancialProgres>? = null,
+    val created: String? = null,
+    val created_by: Int? = null,
+    val district_code: Int? = null,
+    val effective_seed: Any? = null,
+    val effective_seed_inputs: String? = null,
+    val id: Int? = null,
+    val is_deleted: Int? = null,
+    val is_draft: Int? = null,
+    val location_address: String? = null,
+    val name_of_organization: String? = null,
+    val organogram: String? = null,
+    val quantity_of_fodder_seed_class: String? = null,
+    val quantity_of_fodder_seed_variety: String? = null,
+    val quantity_of_seed_class: String? = null,
+    val quantity_of_seed_variety: String? = null,
+    val source_of_seed: String? = null,
+    val state_code: Int? = null,
+    val status: Int? = null,
+    val target_achievement_class: String? = null,
+    val target_achievement_variety: String? = null,
+    val technical_competance: String? = null,
+    val updated: String? = null
 )
 
 data class AssistanceForQfspCostAssistance(
-    val assistance_for_qfsp_id: Int?=null,
-    val cost_assistance_first_year: String?=null,
-    val cost_assistance_second_year: Any?=null,
-    val cost_assistance_third_year: Any?=null,
-    val created: String?=null,
-    val created_by: Any?=null,
-    val id: Int?=null,
-    val name_of_fodder_seed: String?=null,
-    val seed_produced_first_year: String?=null,
-    val seed_produced_second_year: Any?=null,
-    val seed_produced_third_year: Any?=null,
-    val status: Any?=null,
-    val updated: Any?=null
+    val assistance_for_qfsp_id: Int? = null,
+    val cost_assistance_first_year: String? = null,
+    val cost_assistance_second_year: Any? = null,
+    val cost_assistance_third_year: Any? = null,
+    val created: String? = null,
+    val created_by: Any? = null,
+    val id: Int? = null,
+    val name_of_fodder_seed: String? = null,
+    val seed_produced_first_year: String? = null,
+    val seed_produced_second_year: Any? = null,
+    val seed_produced_third_year: Any? = null,
+    val status: Any? = null,
+    val updated: Any? = null
 )
 
 data class AssistanceForQfspFinancialProgres(
-    val amount_utilized_second: Any?=null,
-    val amount_utilized_state_first: Int?=null,
-    val area_covered_first: Int?=null,
-    val area_covered_second: Any?=null,
-    val assistance_for_qfsp_id: Int?=null,
-    val assistance_provided_first: String?=null,
-    val assistance_provided_second: Any?=null,
-    val assistance_provided_third: Any?=null,
-    val created: String?=null,
-    val district: District_list?=null,
-    val district_code: Int?=null,
-    val created_by: Any?=null,
-    val farmers_impacted_first: String?=null,
-    val farmers_impacted_second: Any?=null,
-    val financial_year_first: Any?=null,
-    val financial_year_second: Any?=null,
-    val financial_year_third: Any?=null,
-    val id: Int?=null,
-    val name_of_district: String?=null,
-    val status: Any?=null,
-    val updated: String?=null
+    val amount_utilized_second: Any? = null,
+    val amount_utilized_state_first: Int? = null,
+    val area_covered_first: Int? = null,
+    val area_covered_second: Any? = null,
+    val assistance_for_qfsp_id: Int? = null,
+    val assistance_provided_first: String? = null,
+    val assistance_provided_second: Any? = null,
+    val assistance_provided_third: Any? = null,
+    val created: String? = null,
+    val district: District_list? = null,
+    val district_code: Int? = null,
+    val created_by: Any? = null,
+    val farmers_impacted_first: String? = null,
+    val farmers_impacted_second: Any? = null,
+    val financial_year_first: Any? = null,
+    val financial_year_second: Any? = null,
+    val financial_year_third: Any? = null,
+    val id: Int? = null,
+    val name_of_district: String? = null,
+    val status: Any? = null,
+    val updated: String? = null
 )
+
 data class DataArtificialInsemination(
     val state_code: Int,
     val state_name: String,
@@ -371,6 +375,7 @@ data class DataArtificialInsemination(
     val is_edit: Boolean,
     val is_view: Boolean,
 )
+
 data class DataImplementingAgency(
     val id: Int,
     val is_delete: Boolean,
@@ -410,7 +415,7 @@ data class StateSemenAddResult(
     val area_under_buildings: String,
     val created: String,
     val created_by: Int,
-    val district_code: Int?=null,
+    val district_code: Int? = null,
     val district_name: String,
     val id: Int,
     val is_deleted: Int,
@@ -556,23 +561,23 @@ data class ResultIA(
 //)
 //
 data class ImplementingAgencyDocument(
-    val description: String?=null,
-    val ia_document: String?=null,
-    val id: Int?=null,
-    val implementing_agency_id: Int?=null,
-    val rsp_laboratory_semen_id: Int?=null,
-    val state_semen_bank_id: Int?=null,
-    val artificial_insemination_id: Int?=null,
-    val import_of_exotic_goat_id: Int?=null,
-    val assistance_for_qfsp_id: Int?=null,
-    val fsp_plant_storage_id: Int?=null,
-    val nlm_edp_id: Int?=null,
-    val ahidf_id: Int?=null,
-    val assistance_for_ea_id: Int?=null,
-    val nlm_document: String?=null,
-    val fp_from_non_forest_id: Int?=null,
+    val description: String? = null,
+    val ia_document: String? = null,
+    val id: Int? = null,
+    val implementing_agency_id: Int? = null,
+    val rsp_laboratory_semen_id: Int? = null,
+    val state_semen_bank_id: Int? = null,
+    val artificial_insemination_id: Int? = null,
+    val import_of_exotic_goat_id: Int? = null,
+    val assistance_for_qfsp_id: Int? = null,
+    val fsp_plant_storage_id: Int? = null,
+    val nlm_edp_id: Int? = null,
+    val ahidf_id: Int? = null,
+    val assistance_for_ea_id: Int? = null,
+    val nlm_document: String? = null,
+    val fp_from_non_forest_id: Int? = null,
 
-)
+    )
 //
 //data class ImplementingAgencyFundsReceived(
 //    val any_other: Int,
@@ -607,12 +612,14 @@ data class ImplementingAgencyResponseNlm(
     val message: String,
     val statuscode: Int
 )
+
 data class UploadDocument_Response(
     val _result: Result_Doc,
     val _resultflag: Int,
     val message: String,
     val statuscode: Int
 )
+
 data class ArtificialInsemenationAddResponse(
     val _result: ResultArtificialInsemenation,
     val _resultflag: Int,
@@ -647,6 +654,7 @@ data class ResultArtificialInsemenation(
     val state_name: String,
     val district_name: String
 )
+
 data class ImportExoticGoatAddEditResponse(
     val _result: ResultIEG,
     val _resultflag: Int,
@@ -665,11 +673,13 @@ data class ResultIEG(
     val import_of_exotic_goat_verified_nlm: List<ImportOfExoticGoatVerifiedNlm>?,
     val import_of_exotic_goat_document: List<ImplementingAgencyDocument>?
 )
+
 data class ImportOfExoticgoatDocumnet(
     val artificial_insemination_id: Int,
     val description: String,
     val id: Int
 )
+
 data class ArtificialInseminationDocumentResponse(
     val artificial_insemination_id: Int,
     val description: String,
@@ -682,6 +692,7 @@ data class ArtificialInseminationObservationByNlmResponse(
     val power_trained_ai: String,
     val quipment_available: String
 )
+
 data class TempUploadDocResponse(
     val _result: ResultDoc,
     val _resultflag: Int,
@@ -696,6 +707,7 @@ data class ResultDoc(
     val table_name: String?,
     val user_id: String?
 )
+
 data class Result_Doc(
     val created_at: String?,
     val description: String?,
@@ -704,6 +716,7 @@ data class Result_Doc(
     val implementing_agency_id: Int?,
     val nlm_document: String?
 )
+
 data class ResultNLMIA(
     val actual_production_location: String?,
     val actual_production_number: Int?,
@@ -902,21 +915,21 @@ data class FodderProductionFromNonForestResult(
 )
 
 data class FodderProductionFromNonForestData(
-    val area_covered: Double?= null,
+    val area_covered: Double? = null,
     val created: String,
-    val created_by: String?= null,
-    val district_code: Int?= null,
-    val district_name: String?= null,
-    val id: Int?= null,
+    val created_by: String? = null,
+    val district_code: Int? = null,
+    val district_name: String? = null,
+    val id: Int? = null,
     val is_delete: Boolean,
-    val is_draft: Int?= null,
-    val is_draft_ia: String?= null,
-    val is_draft_nlm: String?= null,
+    val is_draft: Int? = null,
+    val is_draft_ia: String? = null,
+    val is_draft_nlm: String? = null,
     val is_edit: Boolean,
     val is_view: Boolean,
-    val name_implementing_agency: String?= null,
-    val state_code: Int?= null,
-    val state_name: String?= null
+    val name_implementing_agency: String? = null,
+    val state_code: Int? = null,
+    val state_name: String? = null
 )
 
 data class FpFromForestLandResponse(
@@ -987,6 +1000,7 @@ data class District_list(
     val name: String,
     val state_code: Int
 )
+
 data class FpFromForestLandFilledByNlm(
     val agency_involved: String?,
     val area_covered: String?,
@@ -1000,6 +1014,7 @@ data class FpFromForestLandFilledByNlm(
     val id: Int?,
     val village_name: String?
 )
+
 data class FpFromForestLandData(
     val area_covered: String,
     val created: String,
@@ -1028,25 +1043,28 @@ data class RspAddResponse(
 
 
 data class RspAddEquipment(
-    val id: Int?=null,
-    val list_of_equipment: String?=null,
-    val make: String?=null,
-    val year_of_procurement: String?=null,
-    val rsp_laboratory_semen_id: Int?=null,
+    val id: Int? = null,
+    val list_of_equipment: String? = null,
+    val make: String? = null,
+    val year_of_procurement: String? = null,
+    val rsp_laboratory_semen_id: Int? = null,
 )
+
 data class RspAddAverage(
-    val id: Int?=null,
+    val id: Int? = null,
     val name_of_breed: String,
     val twentyOne_twentyTwo: String,
     val twentyTwo_twentyThree: String,
     val twentyThree_twentyFour: String,
-    val rsp_laboratory_semen_id: Int?=null,
+    val rsp_laboratory_semen_id: Int? = null,
 )
+
 data class RspAddDocument(
     val description: String,
     val id: Int,
     val rsp_laboratory_semen_id: Int
 )
+
 data class RspAddResult(
     val Infrastructure_faced_Institute: String,
     val address: String,
@@ -1090,7 +1108,7 @@ data class RspAddResult(
     val phone_no: Long,
     val pin_code: Int,
     val role_id: Int,
-    val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>?=null,
+    val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>? = null,
     val rsp_laboratory_semen_average: List<RspAddAverage>,
     val rsp_laboratory_semen_document: List<ImplementingAgencyDocument>,
     val rsp_laboratory_semen_station_quality_buck: List<RspAddBucksList>? = null,
@@ -1098,12 +1116,13 @@ data class RspAddResult(
     val user_id: String,
     val year_of_establishment: String
 )
+
 data class RspAddBucksList(
     val breed_maintained: String?,
-    val no_of_animals: Int?=null,
-    val average_age: String?=null,
+    val no_of_animals: Int? = null,
+    val average_age: String? = null,
     val id: Int?,
-    val rsp_laboratory_semen_id: Int?=null,
+    val rsp_laboratory_semen_id: Int? = null,
 )
 
 data class NlmEdpResponse(
@@ -1132,6 +1151,7 @@ data class NlmEdpData(
     val state_code: Int,
     val state_name: String
 )
+
 data class AssistanceForEAResponse(
     val _result: AssistanceForEAResult,
     val _resultflag: Int,
@@ -1193,6 +1213,7 @@ data class NlmFpFromNonForestAddResult(
     val type_of_land: String,
     val variety_of_fodder: String
 )
+
 data class NlmAhidfResponse(
     val _result: NlmAhidfResult,
     val _resultflag: Int,
@@ -1228,41 +1249,40 @@ data class AddFspPlantStorageResponse(
 )
 
 data class AddFspPlantStorageResult(
-    val assistance_for_qfsp_document: List<ImplementingAgencyDocument>?=null,
-    val capacity_of_plant: String?=null,
-    val certification_recognition: String?=null,
-    val created_at: String?=null,
-    val created_by: Int?=null,
-    val district_code: Int?=null,
+    val assistance_for_qfsp_document: List<ImplementingAgencyDocument>? = null,
+    val capacity_of_plant: String? = null,
+    val certification_recognition: String? = null,
+    val created_at: String? = null,
+    val created_by: Int? = null,
+    val district_code: Int? = null,
     val fsp_plant_storage_comments_of_nlm: ArrayList<FspPlantStorageCommentsOfNlm>,
     val fsp_plant_storage_document: List<ImplementingAgencyDocument>,
-    val id: Int?=null,
-    val is_deleted: Int?=null,
-    val is_draft: Int?=null,
-    val is_draft_ia: Int?=null,
-    val location_address: String?=null,
-    val district_name: String?=null,
-    val machinery_equipment_available: String?=null,
-    val name_of_organization: String?=null,
-    val purpose_of_establishment: String?=null,
-    val quantity_fodder_seed_class: String?=null,
-    val quantity_fodder_seed_variety: String?=null,
-    val role_id: String?=null,
-    val state_code: Int?=null,
-    val status: Int?=null,
-    val technical_expertise: String?=null,
-    val user_id: String?=null
+    val id: Int? = null,
+    val is_deleted: Int? = null,
+    val is_draft: Int? = null,
+    val is_draft_ia: Int? = null,
+    val location_address: String? = null,
+    val district_name: String? = null,
+    val machinery_equipment_available: String? = null,
+    val name_of_organization: String? = null,
+    val purpose_of_establishment: String? = null,
+    val quantity_fodder_seed_class: String? = null,
+    val quantity_fodder_seed_variety: String? = null,
+    val role_id: String? = null,
+    val state_code: Int? = null,
+    val status: Int? = null,
+    val technical_expertise: String? = null,
+    val user_id: String? = null
 )
 
 
-
 data class FspPlantStorageCommentsOfNlm(
-    val id: Int?=null,
-    val name_of_agency: String?=null,
-    val address: String?=null,
-    val quantity_of_seed_graded: String?=null,
-    val infrastructure_available: String?=null,
-    val fsp_plant_storage_id: Int?=null,
+    val id: Int? = null,
+    val name_of_agency: String? = null,
+    val address: String? = null,
+    val quantity_of_seed_graded: String? = null,
+    val infrastructure_available: String? = null,
+    val fsp_plant_storage_id: Int? = null,
 )
 
 data class AddAssistanceEAResponse(
@@ -1273,38 +1293,38 @@ data class AddAssistanceEAResponse(
 )
 
 data class AddAssistanceEAResult(
-    val assistance_for_ea_document: List<ImplementingAgencyDocument>?=null,
-    val assistance_for_ea_training_institute: List<AssistanceForEaTrainingInstitute>?=null,
-    val created: String?=null,
-    val created_at: String?=null,
-    val created_by: Int?=null,
-    val details_of_training_programmes: String?=null,
-    val district_code: Int?=null,
-    val id: Int?=null,
-    val is_deleted: Int?=null,
-    val is_draft: Int?=null,
-    val is_draft_ia: Int?=null,
-    val no_of_camps: Int?=null,
-    val no_of_participants: Int?=null,
-    val role_id: String?=null,
-    val state_code: Int?=null,
-    val status: Int?=null,
-    val user_id: String?=null,
-    val whether_the_state_developed: String?=null,
-    val whether_the_state_trainers: String?=null
+    val assistance_for_ea_document: List<ImplementingAgencyDocument>? = null,
+    val assistance_for_ea_training_institute: List<AssistanceForEaTrainingInstitute>? = null,
+    val created: String? = null,
+    val created_at: String? = null,
+    val created_by: Int? = null,
+    val details_of_training_programmes: String? = null,
+    val district_code: Int? = null,
+    val id: Int? = null,
+    val is_deleted: Int? = null,
+    val is_draft: Int? = null,
+    val is_draft_ia: Int? = null,
+    val no_of_camps: Int? = null,
+    val no_of_participants: Int? = null,
+    val role_id: String? = null,
+    val state_code: Int? = null,
+    val status: Int? = null,
+    val user_id: String? = null,
+    val whether_the_state_developed: String? = null,
+    val whether_the_state_trainers: String? = null
 )
 
 
 data class AssistanceForEaTrainingInstitute(
-    val id: Int?=null,
-    val name_of_institute: String?=null,
-    val address_for_training: String?=null,
-    val training_courses_run: String?=null,
+    val id: Int? = null,
+    val name_of_institute: String? = null,
+    val address_for_training: String? = null,
+    val training_courses_run: String? = null,
     val no_of_participants_trained: Int?,
     val no_of_provide_information: Int?,
-    val assistance_for_ea_id: Int?=null,
+    val assistance_for_ea_id: Int? = null,
 
-)
+    )
 
 
 data class AddNlmEdpResponse(
@@ -1343,9 +1363,9 @@ data class NlmEdpFormatForNlm(
     val birth_percentage: Int?,
     val average_revenue_earned: Double?,
     val nlm_edp_id: Int?,
-    val created: String?=null,
+    val created: String? = null,
 
-)
+    )
 
 data class NlmEdpMonitoring(
     val id: Int?,
@@ -1361,9 +1381,9 @@ data class NlmEdpMonitoring(
     val number_of_farmers: Int?,
     val number_of_job: Int?,
     val nlm_edp_id: Int?,
-    val created: String?=null,
+    val created: String? = null,
 
-)
+    )
 
 
 data class AddAnimalResponse(
@@ -1403,7 +1423,7 @@ data class AhidfFormatForNlm(
     val birth_percentage: Int?,
     val average_revenue_earned: Double?,
     val ahidf_id: Int?,
-    val created: String?=null,
+    val created: String? = null,
 )
 
 data class AhidfMonitoring(
@@ -1419,7 +1439,7 @@ data class AhidfMonitoring(
     val number_of_farmers: Int?,
     val number_of_job: Int?,
     val ahidf_id: Int?,
-    val created: String?=null,
+    val created: String? = null,
 )
 
 data class VaccinationProgrammerListResponse(
@@ -1676,7 +1696,7 @@ data class StateMobileVeterinaryUnitAddResult(
     val procurement_procedure_remarks: String,
     val role_id: Int,
     val state_code: Int,
-    val status: Int,
+    val status: String,
     val supply_procedure_inputs: String,
     val supply_procedure_remarks: String,
     val user_id: Int
@@ -1708,11 +1728,12 @@ data class DistrictMobileVeterinaryUnitAddResult(
     val mechanism_medicines_remaks: String,
     val medicine_requirement_inputs: String,
     val medicine_requirement_remarks: String,
+    val district_name: String,
     val organize_awareness_camp_inputs: String,
     val organize_awareness_camp_remarks: String,
     val role_id: Int,
     val state_code: Int,
-    val status: Int,
+    val status: String,
     val user_id: Int
 )
 
@@ -1727,7 +1748,9 @@ data class BlockMobileVeterinaryUnitAddResult(
     val any_other_block_inputs: String,
     val any_other_block_remarks: String,
     val block_name: String,
-    val created: String,
+    val created: String, val district_name: String,
+
+
     val created_by: Int,
     val district_code: Int,
     val general_monitoring_block_inputs: String,
@@ -1745,7 +1768,7 @@ data class BlockMobileVeterinaryUnitAddResult(
     val monitoring_tracking_call_remarks: String,
     val role_id: String,
     val state_code: Int,
-    val status: Int,
+    val status: String,
     val stock_management_inputs: String,
     val stock_management_remarks: String,
     val user_id: String
