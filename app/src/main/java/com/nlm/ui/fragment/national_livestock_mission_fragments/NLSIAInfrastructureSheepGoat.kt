@@ -58,6 +58,18 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
             mBinding?.etNoOfDosesOfSemenNeighbouringnLocation?.isEnabled=false
             mBinding?.etAvailabilityOfLiquidNitrogenNumber?.isEnabled=false
             mBinding?.etAvailabilityOfLiquidNitrogenLocation?.isEnabled=false
+            mBinding?.etBreedingFramsNumber?.isEnabled=false
+            mBinding?.etBreedingFramsLocation?.isEnabled=false
+            mBinding?.etGoatBreedingFramsNumber?.isEnabled=false
+            mBinding?.etGoatBreedingFramsLocation?.isEnabled=false
+            mBinding?.etTrainingCentersNumber?.isEnabled=false
+            mBinding?.etTrainingCentersLocation?.isEnabled=false
+            mBinding?.etCatelAiNumber?.isEnabled=false
+            mBinding?.etCatelAiLocation?.isEnabled=false
+            mBinding?.etTotalAiNumber?.isEnabled=false
+            mBinding?.etTotalAiLocation?.isEnabled=false
+            mBinding?.etTotalNoOfReginalSemenBank?.isEnabled=false
+
             ViewEditApi()
         }
         if(viewEdit=="edit"){

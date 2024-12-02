@@ -193,7 +193,7 @@ class RSPIAFragment(
         }
         if (viewEdit == "edit") {
             viewEditApi()
-            showToast(itemId.toString())
+
 
         }
         rspEquipAdapter()
@@ -355,7 +355,6 @@ class RSPIAFragment(
                                 userResponseModel._result.rsp_laboratory_semen_document.forEach { document ->
                                     if (document.nlm_document == null) {
                                         DocumentList.add(document)
-                                        showToast("1")
                                     } else {
                                         viewDocumentList.add(document)
 
@@ -493,9 +492,9 @@ class RSPIAFragment(
     }
 
 
-    private fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
+//    private fun showError(message: String) {
+//        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+//    }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
         val etAreaFodder = mBinding!!.etAreaFodder.text.toString()

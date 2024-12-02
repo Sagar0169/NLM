@@ -382,6 +382,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="state_semen_bank_document">state_semen_bank_document</string>
     <string name="rsp_lab">RSP Lab</string>
     <string name="artificial_insemination_document">artificial_insemination_document</string>
+    <string name="state_vaccination_programme">state_vaccination_programme</string>
     <string name="assistance_for_qfsp_document">assistance_for_qfsp_document</string>
     <string name="animal_husbandry_infrastructure_development_fund_format_12"><ul><li>Animal Husbandry Infrastructure Development Fund(Format 12)</li></ul></string>
     <string name="import_of_exotic_goat_document">import_of_exotic_goat_document</string>
