@@ -1,7 +1,10 @@
 package com.nlm.utilities
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -11,11 +14,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.nlm.R
+import com.nlm.services.LocationService
 import java.util.Locale
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -27,6 +32,10 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     @get:LayoutRes
     abstract val layoutId: Int
     val REQUEST_iMAGE_PDF = 20
+    private val NOTIFICATION_PERMISSION_REQUEST_CODE = 100
+    private val PERMISSION_REQUEST_LOCATION = 1
+    private val CHANNEL_ID = "location_updates_channel"
+    private val NOTIFICATION_ID = 1001
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,7 +63,33 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
             }
         }.show()
     }
+     fun hasLocationPermissions(): Boolean {
+        return ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
 
+     fun requestLocationPermissions() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_REQUEST_LOCATION
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST_LOCATION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(requireContext(), LocationService::class.java)
+                requireContext().startService(intent)
+            } else {
+                Toast.makeText(requireContext(), "Location permissions are required to use this feature", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
     open fun hideKeyboard(activity: Activity) {
         try {
             val inputManager: InputMethodManager = activity

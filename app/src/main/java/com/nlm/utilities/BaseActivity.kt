@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -32,7 +33,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     )
 
     private val CAPTURE_IMAGE_REQUEST = 1
-
+    private val PERMISSION_REQUEST_LOCATION = 1
     private var STORAGE_STORAGE_REQUEST_CODE = 61
     val REQUEST_iMAGE_PDF = 20
     private val REQUEST_iMAGE_GALLERY = 3
@@ -90,7 +91,17 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
             }
         }.show()
     }
+    fun hasLocationPermissions(): Boolean {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
 
+    fun requestLocationPermissions() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_REQUEST_LOCATION
+        )
+    }
     protected open fun getLanguageLocalize(lang: String?, context: Context) {
         val config = context.resources.configuration
         val locale = Locale(lang)

@@ -1,13 +1,21 @@
 package com.nlm.ui.activity
 
+import android.Manifest
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
@@ -72,6 +80,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     val matchingSchemeIds = mutableListOf<Int>()
     val matchingFormIds = mutableListOf<Int>()
 
+
 //NOTE: UPDATE THE LOCAL SCHEME DATA WHEN NEW ID OR FORM IS ADDED
     override val layoutId: Int
         get() = R.layout.activity_dashboard
@@ -84,7 +93,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
-
+        if (!hasLocationPermissions())
+        {
+        requestLocationPermissions()
+        }
         viewModel.getDashboardApi(
             this@DashboardActivity,
             LogoutRequest(
@@ -766,5 +778,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         } else {
             Log.d("Scheme", "Nothing found")
         }
+    }
+    private fun showLocationNotification(latitude: Double, longitude: Double) {
+
     }
 }

@@ -1,13 +1,15 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -15,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
@@ -28,6 +31,7 @@ import com.nlm.model.ImplementingAgencyAddRequest
 import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.ImplementingAgencyProjectMonitoring
 import com.nlm.model.Result
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
@@ -38,6 +42,8 @@ import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -60,7 +66,17 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
     private var listener: OnNextButtonClickListener? = null
     private var DialogDocName:TextView?=null
     private var DocumentId:Int?=null
+    private var latitude:Double?=null
+    private var longitude:Double?=null
     private var itemPosition : Int ?= null
+
+
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+             latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+             longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
 
 
     override fun init() {
@@ -416,26 +432,63 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
             )
         )
     }
-    private fun saveDataApi(isDraft:Int?){
-        viewModel.getImplementingAgencyAddApi(requireContext(),true,
-            ImplementingAgencyAddRequest(
-                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
-                part = "part7",
-                assessments_of_green = mBinding?.etAssessmentOfGreen?.text.toString(),
-                    availability_of_green_area = mBinding?.etAvailabilityOfGreen?.text.toString(),
-                availability_of_dry = mBinding?.etAvailibilityOfDry?.text.toString(),
-                availability_of_concentrate = mBinding?.AvailabilityOfConcentrate?.text.toString(),
-                    availability_of_common = mBinding?.etAvailabilityCommon?.text.toString(),
-                efforts_of_state = mBinding?.etEffortsOfState?.text.toString(),
-                name_of_the_agency = mBinding?.etNameOfAgency?.text.toString(),
-                quantity_of_fodder = mBinding?.etQuantityOfFodder?.text.toString(),
-                distribution_channel =mBinding?.etDistributionChannel?.text.toString() ,
-                number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
-                implementing_agency_document = DocumentList,
-                id = itemId,
-                is_draft = isDraft,
-            )
+    override fun onResume() {
+        super.onResume()
+        requireContext().registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
         )
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        requireContext().unregisterReceiver(locationReceiver)
+    }
+
+    private fun saveDataApi(isDraft:Int?){
+        if (hasLocationPermissions()) {
+            val intent = Intent(requireContext(), LocationService::class.java)
+            requireContext().startService(intent)
+            lifecycleScope.launch {
+                delay(1000) // Delay for 2 seconds
+                if(latitude!=null&&longitude!=null)
+                {
+
+                    viewModel.getImplementingAgencyAddApi(requireContext(),true,
+                        ImplementingAgencyAddRequest(
+                            user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString(),
+                            part = "part7",
+                            assessments_of_green = mBinding?.etAssessmentOfGreen?.text.toString(),
+                            availability_of_green_area = mBinding?.etAvailabilityOfGreen?.text.toString(),
+                            availability_of_dry = mBinding?.etAvailibilityOfDry?.text.toString(),
+                            availability_of_concentrate = mBinding?.AvailabilityOfConcentrate?.text.toString(),
+                            availability_of_common = mBinding?.etAvailabilityCommon?.text.toString(),
+                            efforts_of_state = mBinding?.etEffortsOfState?.text.toString(),
+                            name_of_the_agency = mBinding?.etNameOfAgency?.text.toString(),
+                            quantity_of_fodder = mBinding?.etQuantityOfFodder?.text.toString(),
+                            distribution_channel =mBinding?.etDistributionChannel?.text.toString() ,
+                            number_of_fodder = mBinding?.etNumberOfFodder?.text.toString(),
+                            implementing_agency_document = DocumentList,
+                            id = itemId,
+                            is_draft = isDraft,
+                            lat=latitude,
+                            long = longitude
+                        )
+                    )
+                }
+                else{
+                    showSnackbar(mBinding!!.clParent,"No Location fetched")
+                }
+                 }
+
+        }
+        else {
+            showLocationAlertDialog()
+        }
+        // Start the LocationService
+
+
     }
 
     override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
@@ -445,4 +498,14 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
         AddDocumentDialog(requireContext(),selectedItem,position)
     }
+    private fun showLocationAlertDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Location Not Found")
+            .setMessage("Unable to fetch your location. Please enable location from settings.")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
 }
