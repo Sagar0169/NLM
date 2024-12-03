@@ -948,12 +948,17 @@ data class StateMobileVeterinaryUnitAddRequest(
     val procurement_procedure_inputs: String?= null,
     val procurement_procedure_remarks: String?= null,
     val role_id: Int?= null,
+    val id: Int?= null,
     val state_code: Int?= null,
     val status: Int?= null,
     val supply_procedure_inputs: String?= null,
     val supply_procedure_remarks: String?= null,
-    val user_id: Int?= null
-)
+    val user_id: Int?= null,
+    val is_draft: Int?= null,
+    val is_type: String? = null,
+
+
+    )
 
 data class DistrictMobileVeterinaryUnitAddRequest(
     val created_by: Int?= null,
@@ -978,6 +983,9 @@ data class DistrictMobileVeterinaryUnitAddRequest(
     val state_code: Int?= null,
     val status: Int?= null,
     val user_id: Int?= null,
+    val id: Int?= null,
+    val is_draft: Int?= null,
+    val is_type: String? = null,
 )
 
 data class BlockMobileVeterinaryUnitAddRequest(
@@ -1000,10 +1008,13 @@ data class BlockMobileVeterinaryUnitAddRequest(
     val monitoring_tracking_call_remarks: String?= null,
     val role_id: Int?= null,
     val state_code: Int?= null,
-    val status: Int?= null,
+    val status: String?= null,
     val stock_management_inputs: String?= null,
     val stock_management_remarks: String?= null,
     val user_id: Int?= null,
+    val id: Int?= null,
+    val is_draft: Int?= null,
+    val is_type: String? = null,
 )
 
 data class FarmerMobileVeterinaryUnitsAddRequest(
@@ -1032,7 +1043,8 @@ data class FarmerMobileVeterinaryUnitsAddRequest(
     val state_code: Int?= null,
     val status: Int?= null,
     val user_id: Int?= null,
-    val village_name: String?= null
+    val village_name: String?= null,
+    val is_draft: Int?= null,
 )
 
 data class StateAscadAddRequest(

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.net.Uri
 import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,8 @@ import com.nlm.R
 import com.nlm.databinding.ActivityAddNewMobileVeterinaryUnitBinding
 import com.nlm.databinding.ActivityAddNewMobileVeterinaryUnitBlockBinding
 import com.nlm.databinding.ActivityAddNewMobileVeterinaryUnitVillageBinding
+import com.nlm.model.BlockMobileVeterinaryUnitAddRequest
+import com.nlm.model.FarmerMobileVeterinaryUnitsAddRequest
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
@@ -28,8 +31,10 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class AddNewMobileVeterinaryUnitVillage :
     BaseActivity<ActivityAddNewMobileVeterinaryUnitVillageBinding>() {
@@ -51,7 +56,13 @@ class AddNewMobileVeterinaryUnitVillage :
     private var DocumentName: String? = null
     private var chooseDocName: String? = null
     var body: MultipartBody.Part? = null
-
+    private var viewEdit: String? = null
+    var itemId: Int? = null
+    private var dId: Int? = null
+    private var isSubmitted: Boolean = false
+    private var savedAsEdit: Boolean = false
+    private var savedAsDraft: Boolean = false
+    private var DocumentId: Int? = null
 
     override val layoutId: Int
         get() = R.layout.activity_add_new_mobile_veterinary_unit_village
@@ -71,191 +82,171 @@ class AddNewMobileVeterinaryUnitVillage :
         }
 
         fun save(view: View) {
-//            if (mBinding?.etInputOne?.text.toString().isEmpty()) {
-//                mBinding?.clParent?.let {
-//                    showSnackbar(it, "Please Fill All The Input and Remark Fields")
-//
-//                }
-//                return
-//            }
-            if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputThree?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputFour?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputFive?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
+            if (viewEdit == "view") {
+//                listener?.onNextButtonClick()
             }
 
+            if (viewEdit == "edit") {
+                savedAsEdit = true
+            }
+            if (itemId != 0) {
+                saveDataApi(itemId, 2)
+            } else {
+                saveDataApi(null, 2)
+            }
 
-            if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
         }
 
         fun saveAsDraft(view: View) {
-//            if (mBinding?.etInputOne?.text.toString().isEmpty()) {
-//                mBinding?.clParent?.let {
-//                    showSnackbar(it, "Please Fill All The Input and Remark Fields")
-//
-//                }
-//                return
-//            }
-            if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputThree?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputFour?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
-            if (mBinding?.etInputFive?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
+            if (viewEdit == "view") {
+//                listener?.onNextButtonClick()
             }
 
+            if (viewEdit == "edit") {
+                savedAsEdit = true
+            }
+            if (itemId != 0) {
+                saveDataApi(itemId, 3)
+            } else {
+                saveDataApi(null, 3)
+            }
+            savedAsDraft = true
 
-            if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
+        }
+    }
+
+
+    private fun saveDataApi(itemId: Int?, draft: Int?) {
+        if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
             }
-            if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
+            return
+        }
+        if (mBinding?.etInputThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
             }
-            if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
+            return
+        }
+        if (mBinding?.etInputFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
             }
-            if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
+            return
+        }
+        if (mBinding?.etInputFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
             }
-            if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let {
-                    showSnackbar(
-                        it,
-                        "Please Fill All The Input and Remark Fields"
-                    )
-                }
-                return
-            }
+            return
         }
 
+
+        if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+        if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    "Please Fill All The Input and Remark Fields"
+                )
+            }
+            return
+        }
+
+        viewModel.getFarmerMobileVeterinaryUnitsAdd(
+            this@AddNewMobileVeterinaryUnitVillage, true,
+            FarmerMobileVeterinaryUnitsAddRequest(
+                id = itemId,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                status = draft,
+                attended_call = when {
+                    mBinding?.rbYes?.isChecked == true -> 1
+                    mBinding?.rbNo?.isChecked == true -> 0
+                    else -> -1 // Optional: Add a default value for cases where neither is selected
+                },
+                attended_call_remarks = mBinding?.etRemarkOne?.text.toString(),
+                input_come_know_about = mBinding?.etInputTwo?.text.toString(),
+                come_know_about_remarks = mBinding?.etRemarkTwo?.text.toString(),
+                input_services_mvu = mBinding?.etInputThree?.text.toString(),
+                services_mvu_remarks = mBinding?.etRemarkThree?.text.toString(),
+                input_mvu_arrive_call = mBinding?.etInputFour?.text.toString(),
+                mvu_arrive_call_remarks = mBinding?.etRemarkFour?.text.toString(),
+                input_services_offered_by_mvu = mBinding?.etInputFive?.text.toString(),
+                services_offered_by_mvu_remarks = mBinding?.etRemarkFive?.text.toString(),
+                district_code = districtId,
+                block_name = mBinding?.etBlock?.text.toString(),
+                village_name = mBinding?.etFarmer?.text.toString(),
+
+                attended_call_inputs = mBinding?.tvNoFileOne?.text.toString(),
+                come_know_about_inputs = mBinding?.tvNoFileTwo?.text.toString(),
+                services_mvu_inputs = mBinding?.tvNoFileThree?.text.toString(),
+                mvu_arrive_call_inputs = mBinding?.tvNoFileFour?.text.toString(),
+                services_offered_by_mvu_inputs = mBinding?.tvNoFileFive?.text.toString(),
+
+                )
+        )
     }
 
 
@@ -263,7 +254,41 @@ class AddNewMobileVeterinaryUnitVillage :
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
         viewModel.init()
+        viewEdit = intent.getStringExtra("View/Edit")
+        itemId = intent.getIntExtra("itemId", 0)
+        dId = intent.getIntExtra("dId", 0)
 
+        if (viewEdit == "view") {
+            mBinding?.tvState?.isEnabled = false
+            mBinding?.tvDistrict?.isEnabled = false
+            mBinding?.etBlock?.isEnabled = false
+            mBinding?.etFarmer?.isEnabled = false
+            mBinding?.rbYes?.isEnabled = false
+            mBinding?.rbNo?.isEnabled = false
+            mBinding?.etRemarkOne?.isEnabled = false
+            mBinding?.etInputTwo?.isEnabled = false
+            mBinding?.etRemarkTwo?.isEnabled = false
+            mBinding?.etInputThree?.isEnabled = false
+            mBinding?.etRemarkThree?.isEnabled = false
+            mBinding?.etInputFour?.isEnabled = false
+            mBinding?.etRemarkFour?.isEnabled = false
+            mBinding?.etInputFive?.isEnabled = false
+            mBinding?.etRemarkFive?.isEnabled = false
+
+
+            mBinding?.etChooseOne?.isEnabled = false
+            mBinding?.etChooseTwo?.isEnabled = false
+            mBinding?.etChooseThree?.isEnabled = false
+            mBinding?.etChooseFour?.isEnabled = false
+            mBinding?.etChooseFive?.isEnabled = false
+
+            mBinding?.tvSaveDraft?.isEnabled = false
+            mBinding?.tvSendOtp?.isEnabled = false
+            viewEditApi()
+        }
+        if (viewEdit == "edit") {
+            viewEditApi()
+        }
         mBinding?.tvState?.text = getPreferenceOfScheme(
             this,
             AppConstants.SCHEME,
@@ -292,6 +317,33 @@ class AddNewMobileVeterinaryUnitVillage :
             openOnlyPdfAccordingToPosition()
         }
     }
+
+    private fun viewEditApi() {
+
+        viewModel.getFarmerMobileVeterinaryUnitsAdd(
+            this@AddNewMobileVeterinaryUnitVillage, true,
+            FarmerMobileVeterinaryUnitsAddRequest(
+                id = itemId,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                is_type = viewEdit
+            )
+        )
+    }
+
 
     private fun openOnlyPdfAccordingToPosition() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -325,59 +377,61 @@ class AddNewMobileVeterinaryUnitVillage :
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
                                 when (isFromApplication) {
                                     1 -> {
-                                        mBinding?.tvNoFileOne?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     2 -> {
-                                        mBinding?.tvNoFileTwo?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     3 -> {
-                                        mBinding?.tvNoFileThree?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     4 -> {
-                                        mBinding?.tvNoFileFour?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     5 -> {
-                                        mBinding?.tvNoFileFive?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     else -> {
-                                        DialogDocName?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
-
                                 }
 
 
-                                val requestBody = convertToRequestBody(this, uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
+
 //                                use this code to add new view with image name and uri
                             }
-//                            viewModel.getProfileUploadFile(
-//                                context = this,
-//                                table_name = getString(R.string.fsp_plant_storage_document).toRequestBody(
-//                                    MultipartBody.FORM
-//                                ),
-//                                document_name = body,
-//                                user_id = getPreferenceOfScheme(
-//                                    this,
-//                                    AppConstants.SCHEME,
-//                                    Result::class.java
-//                                )?.user_id,
-//                            )
+
                         }
                     }
                 }
             }
         }
     }
-
+    private fun uploadDocument(DocumentName: String?, uri: Uri) {
+        val requestBody = convertToRequestBody(this, uri)
+        body = MultipartBody.Part.createFormData(
+            "document_name",
+            DocumentName,
+            requestBody
+        )
+        viewModel.getProfileUploadFile(
+            context = this,
+            table_name = getString(R.string.mobile_veterinary_unit_farmer).toRequestBody(
+                MultipartBody.FORM
+            ),
+            document_name = body,
+            user_id = getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.user_id,
+        )
+    }
     override fun setVariables() {
     }
 
@@ -411,6 +465,112 @@ class AddNewMobileVeterinaryUnitVillage :
 //                    mBinding?.rvArtificialInsemination?.hideView()
                 }
             }
+        }
+        viewModel.getProfileUploadFileResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel != null) {
+                if (userResponseModel.statuscode == 401) {
+                    Utility.logout(this)
+                } else if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+
+                } else {
+                    DocumentId = userResponseModel._result.id
+                    UploadedDocumentName = userResponseModel._result.document_name
+                    DialogDocName?.text = userResponseModel._result.document_name
+
+                    when (isFromApplication) {
+                        1 -> {
+                            mBinding?.tvNoFileOne?.text = UploadedDocumentName
+                        }
+
+                        2 -> {
+                            mBinding?.tvNoFileTwo?.text = UploadedDocumentName
+                        }
+
+                        3 -> {
+                            mBinding?.tvNoFileThree?.text = UploadedDocumentName
+                        }
+
+                        4 -> {
+                            mBinding?.tvNoFileFour?.text = UploadedDocumentName
+                        }
+
+                        5 -> {
+                            mBinding?.tvNoFileFive?.text = UploadedDocumentName
+                        }
+
+                        else -> {
+                            DialogDocName?.text = DocumentName
+                        }
+
+                    }
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+                }
+            }
+        }
+
+        viewModel.farmerMobileVeterinaryUnitsAddResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                } else {
+                    if (savedAsDraft) {
+                        onBackPressedDispatcher.onBackPressed()
+                    } else {
+                        if (viewEdit == "view" || viewEdit == "edit") {
+                            if (savedAsEdit) {
+                                onBackPressedDispatcher.onBackPressed()
+                                return@observe
+                            }
+                            toast(viewEdit.toString())
+
+                            if (userResponseModel._result.attended_call == 1) {
+                                mBinding?.rbYes?.isChecked = true
+                            } else if (userResponseModel._result.attended_call == 0) {
+                                mBinding?.rbNo?.isChecked = true
+                            }
+                            mBinding?.etRemarkOne?.setText(userResponseModel._result.attended_call_remarks)
+                            mBinding?.etInputTwo?.setText(userResponseModel._result.input_come_know_about)
+                            mBinding?.etRemarkTwo?.setText(userResponseModel._result.come_know_about_remarks)
+                            mBinding?.etInputThree?.setText(userResponseModel._result.input_services_mvu)
+                            mBinding?.etRemarkThree?.setText(userResponseModel._result.services_mvu_remarks)
+                            mBinding?.etInputFour?.setText(userResponseModel._result.input_mvu_arrive_call)
+                            mBinding?.etRemarkFour?.setText(userResponseModel._result.mvu_arrive_call_remarks)
+                            mBinding?.etInputFive?.setText(userResponseModel._result.input_services_offered_by_mvu)
+                            mBinding?.etRemarkFive?.setText(userResponseModel._result.services_offered_by_mvu_remarks)
+                            mBinding?.etBlock?.setText(userResponseModel._result.block_name)
+                            mBinding?.etFarmer?.setText(userResponseModel._result.village_name)
+                            mBinding?.tvDistrict?.text = userResponseModel._result.district_name
+
+                            mBinding?.tvNoFileOne?.text = userResponseModel._result.attended_call_inputs
+                            mBinding?.tvNoFileTwo?.text = userResponseModel._result.come_know_about_inputs
+                            mBinding?.tvNoFileThree?.text = userResponseModel._result.services_mvu_inputs
+                            mBinding?.tvNoFileFour?.text = userResponseModel._result.mvu_arrive_call_inputs
+                            mBinding?.tvNoFileFive?.text = userResponseModel._result.services_offered_by_mvu_inputs
+                        } else {
+                            onBackPressedDispatcher.onBackPressed()
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        }
+                    }
+                }
+
+            }
+
         }
     }
 
