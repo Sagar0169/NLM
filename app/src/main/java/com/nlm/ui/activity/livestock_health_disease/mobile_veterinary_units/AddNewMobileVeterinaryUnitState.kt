@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.net.Uri
 import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
@@ -146,89 +147,92 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
                                 when (isFromApplication) {
                                     1 -> {
-                                        mBinding?.tvNoFileOne?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     2 -> {
-                                        mBinding?.tvNoFileTwo?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     3 -> {
-                                        mBinding?.tvNoFileThree?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     4 -> {
-                                        mBinding?.tvNoFileFour?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     5 -> {
-                                        mBinding?.tvNoFileFive?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     6 -> {
-                                        mBinding?.tvNoFileSix?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     7 -> {
-                                        mBinding?.tvNoFileSeven?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     8 -> {
-                                        mBinding?.tvNoFileA?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     9 -> {
-                                        mBinding?.tvNoFileB?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     10 -> {
-                                        mBinding?.tvNoFileC?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     11 -> {
-                                        mBinding?.tvNoFileD?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     12 -> {
-                                        mBinding?.tvNoFileE?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     13 -> {
-                                        mBinding?.tvNoFileF?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     else -> {
-                                        DialogDocName?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                 }
 
 
-                                val requestBody = convertToRequestBody(this, uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
-//                                use this code to add new view with image name and uri
                             }
-                            viewModel.getProfileUploadFile(
-                                context = this,
-                                table_name = getString(R.string.mobile_veterinary_unit_state).toRequestBody(
-                                    MultipartBody.FORM
-                                ),
-                                document_name = body,
-                                user_id = getPreferenceOfScheme(
-                                    this,
-                                    AppConstants.SCHEME,
-                                    Result::class.java
-                                )?.user_id,
-                            )
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun uploadDocument(DocumentName: String?, uri: Uri) {
+        val requestBody = convertToRequestBody(this, uri)
+        body = MultipartBody.Part.createFormData(
+            "document_name",
+            DocumentName,
+            requestBody
+        )
+
+        viewModel.getProfileUploadFile(
+            context = this,
+            table_name = getString(R.string.mobile_veterinary_unit_state).toRequestBody(
+                MultipartBody.FORM
+            ),
+            document_name = body,
+            user_id = getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.user_id,
+        )
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
@@ -511,6 +515,20 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                 are_adequate_staff_remarks = mBinding?.etRemarkE?.text.toString(),
                 input_data_compilation_analysis_done = mBinding?.etInputF?.text.toString(),
                 data_compilation_analysis_done_remarks = mBinding?.etRemarkF?.text.toString(),
+
+                mechanism_operation_inputs = mBinding?.tvNoFileOne?.text.toString(),
+                engagement_indicators_inputs = mBinding?.tvNoFileTwo?.text.toString(),
+                procurement_procedure_inputs = mBinding?.tvNoFileThree?.text.toString(),
+                supply_procedure_inputs = mBinding?.tvNoFileFour?.text.toString(),
+                is_monitoring_supervision_medic_equip_inputs = mBinding?.tvNoFileFive?.text.toString(),
+                is_monitoring_supervision_fuel_inputs = mBinding?.tvNoFileSix?.text.toString(),
+                call_center_inputs = mBinding?.tvNoFileSeven?.text.toString(),
+                is_service_provider_engaged_inputs = mBinding?.tvNoFileA?.text.toString(),
+                is_building_provided_operation_seats_inputs = mBinding?.tvNoFileB?.text.toString(),
+                are_operators_engaged_inputs = mBinding?.tvNoFileC?.text.toString(),
+                is_app_crm_place_inputs = mBinding?.tvNoFileD?.text.toString(),
+                are_adequate_staff_inputs = mBinding?.tvNoFileE?.text.toString(),
+                data_compilation_analysis_done_inputs = mBinding?.tvNoFileF?.text.toString(),
             )
         )
     }
@@ -668,6 +686,7 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
     }
 
     override fun setObservers() {
+
         viewModel.getDropDownResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
@@ -698,33 +717,89 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                 }
             }
         }
-        viewModel.getDropDownResult.observe(this) {
+
+        viewModel.getProfileUploadFileResult.observe(this) {
             val userResponseModel = it
-            if (userResponseModel.statuscode == 401) {
-                Utility.logout(this)
-            } else {
-                if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
-                    if (currentPage == 1) {
-                        districtList.clear()
-
-                        val remainingCount = userResponseModel.total_count % 10
-                        totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 10
-                            count
-                        } else {
-                            val count = userResponseModel.total_count / 10
-                            count + 1
-                        }
+            if (userResponseModel != null) {
+                if (userResponseModel.statuscode == 401) {
+                    Utility.logout(this)
+                } else if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
                     }
-                    districtList.addAll(userResponseModel._result)
-                    stateAdapter.notifyDataSetChanged()
 
-
-//                    mBinding?.tvNoDataFound?.hideView()
-//                    mBinding?.rvArtificialInsemination?.showView()
                 } else {
-//                    mBinding?.tvNoDataFound?.showView()
-//                    mBinding?.rvArtificialInsemination?.hideView()
+                    DocumentId = userResponseModel._result.id
+                    UploadedDocumentName = userResponseModel._result.document_name
+                    DialogDocName?.text = userResponseModel._result.document_name
+
+                    when (isFromApplication) {
+                        1 -> {
+                            mBinding?.tvNoFileOne?.text = UploadedDocumentName
+                        }
+
+                        2 -> {
+                            mBinding?.tvNoFileTwo?.text = UploadedDocumentName
+                        }
+
+                        3 -> {
+                            mBinding?.tvNoFileThree?.text = UploadedDocumentName
+                        }
+
+                        4 -> {
+                            mBinding?.tvNoFileFour?.text = UploadedDocumentName
+                        }
+
+                        5 -> {
+                            mBinding?.tvNoFileFive?.text = UploadedDocumentName
+                        }
+
+                        6 -> {
+                            mBinding?.tvNoFileSix?.text = UploadedDocumentName
+                        }
+
+                        7 -> {
+                            mBinding?.tvNoFileSeven?.text = UploadedDocumentName
+                        }
+
+                        8 -> {
+                            mBinding?.tvNoFileA?.text = UploadedDocumentName
+                        }
+
+                        9 -> {
+                            mBinding?.tvNoFileB?.text = UploadedDocumentName
+                        }
+
+                        10 -> {
+                            mBinding?.tvNoFileC?.text = UploadedDocumentName
+                        }
+
+                        11 -> {
+                            mBinding?.tvNoFileD?.text = UploadedDocumentName
+                        }
+
+                        12 -> {
+                            mBinding?.tvNoFileE?.text = UploadedDocumentName
+                        }
+
+                        13 -> {
+                            mBinding?.tvNoFileF?.text = UploadedDocumentName
+                        }
+
+                        else -> {
+                            DialogDocName?.text = DocumentName
+                        }
+
+                    }
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
                 }
             }
         }
@@ -747,6 +822,7 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                                 return@observe
                             }
                             toast(viewEdit.toString())
+                            mBinding?.tvState?.text = userResponseModel._result.input_mechanism_operation
                             mBinding?.etInputOne?.setText(userResponseModel._result.input_mechanism_operation)
                             mBinding?.etRemarkOne?.setText(userResponseModel._result.mechanism_operation_remarks)
                             mBinding?.etInputTwo?.setText(userResponseModel._result.input_engagement_indicators)
@@ -774,9 +850,22 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                             mBinding?.etInputF?.setText(userResponseModel._result.input_data_compilation_analysis_done)
                             mBinding?.etRemarkF?.setText(userResponseModel._result.data_compilation_analysis_done_remarks)
 
+                            mBinding?.tvNoFileOne?.text = userResponseModel._result.mechanism_operation_inputs
+                            mBinding?.tvNoFileTwo?.text = userResponseModel._result.engagement_indicators_inputs
+                            mBinding?.tvNoFileThree?.text = userResponseModel._result.procurement_procedure_inputs
+                            mBinding?.tvNoFileFour?.text = userResponseModel._result.supply_procedure_inputs
+                            mBinding?.tvNoFileFive?.text = userResponseModel._result.is_monitoring_supervision_medic_equip_inputs
+                            mBinding?.tvNoFileSix?.text = userResponseModel._result.is_monitoring_supervision_fuel_inputs
+                            mBinding?.tvNoFileSeven?.text = userResponseModel._result.call_center_inputs
+                            mBinding?.tvNoFileA?.text = userResponseModel._result.is_service_provider_engaged_inputs
+                            mBinding?.tvNoFileB?.text = userResponseModel._result.is_building_provided_operation_seats_inputs
+                            mBinding?.tvNoFileC?.text = userResponseModel._result.are_operators_engaged_inputs
+                            mBinding?.tvNoFileD?.text = userResponseModel._result.is_app_crm_place_inputs
+                            mBinding?.tvNoFileE?.text = userResponseModel._result.are_adequate_staff_inputs
+                            mBinding?.tvNoFileF?.text = userResponseModel._result.data_compilation_analysis_done_inputs
 
-                        }
-                        else{
+
+                        } else {
                             onBackPressedDispatcher.onBackPressed()
                             showSnackbar(mBinding!!.clParent, userResponseModel.message)
                         }
@@ -786,136 +875,137 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
             }
         }
     }
-            private fun showBottomSheetDialog(type: String) {
-                bottomSheetDialog = BottomSheetDialog(this)
-                val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
-                view.layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
 
-                val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
-                val close = view.findViewById<TextView>(R.id.tvClose)
+    private fun showBottomSheetDialog(type: String) {
+        bottomSheetDialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
+        view.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
-                close.setOnClickListener {
-                    bottomSheetDialog.dismiss()
-                }
+        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
+        val close = view.findViewById<TextView>(R.id.tvClose)
 
-                // Define a variable for the selected list and TextView
-                val selectedList: List<ResultGetDropDown>
-                val selectedTextView: TextView
+        close.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
 
-                // Initialize based on type
-                when (type) {
+        // Define a variable for the selected list and TextView
+        val selectedList: List<ResultGetDropDown>
+        val selectedTextView: TextView
 
-                    "State" -> {
-                        dropDownApiCall(paginate = false, loader = true)
-                        selectedList = districtList
-                        selectedTextView = mBinding!!.tvState
-                    }
+        // Initialize based on type
+        when (type) {
 
-
-                    else -> return
-                }
-
-                // Set up the adapter
-                stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
-                    // Handle state item click
-                    selectedTextView.text = selectedItem
-                    districtId = id
-                    selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
-                    bottomSheetDialog.dismiss()
-                }
-
-
-
-                layoutManager =
-                    LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-                rvBottomSheet.layoutManager = layoutManager
-                rvBottomSheet.adapter = stateAdapter
-                rvBottomSheet.addOnScrollListener(recyclerScrollListener)
-                bottomSheetDialog.setContentView(view)
-
-
-                // Rotate drawable
-                val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
-                var rotatedDrawable = rotateDrawable(drawable, 180f)
-                selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
-                    null,
-                    null,
-                    rotatedDrawable,
-                    null
-                )
-
-                // Set a dismiss listener to reset the view visibility
-                bottomSheetDialog.setOnDismissListener {
-                    rotatedDrawable = rotateDrawable(drawable, 0f)
-                    selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
-                        null,
-                        null,
-                        rotatedDrawable,
-                        null
-                    )
-                }
-
-                // Show the bottom sheet
-                bottomSheetDialog.show()
+            "State" -> {
+                dropDownApiCall(paginate = false, loader = true)
+                selectedList = districtList
+                selectedTextView = mBinding!!.tvState
             }
 
-            private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
-                drawable?.mutate() // Mutate the drawable to avoid affecting other instances
 
-                val rotateDrawable = RotateDrawable()
-                rotateDrawable.drawable = drawable
-                rotateDrawable.fromDegrees = 0f
-                rotateDrawable.toDegrees = angle
-                rotateDrawable.level = 10000 // Needed to apply the rotation
+            else -> return
+        }
 
-                return rotateDrawable
-            }
+        // Set up the adapter
+        stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
+            // Handle state item click
+            selectedTextView.text = selectedItem
+            districtId = id
+            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
+            bottomSheetDialog.dismiss()
+        }
 
-            private var recyclerScrollListener: RecyclerView.OnScrollListener =
-                object : RecyclerView.OnScrollListener() {
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        super.onScrolled(recyclerView, dx, dy)
-                        if (dy > 0) {
-                            val visibleItemCount: Int? = layoutManager?.childCount
-                            val totalItemCount: Int? = layoutManager?.itemCount
-                            val pastVisiblesItems: Int? =
-                                layoutManager?.findFirstVisibleItemPosition()
-                            if (loading) {
-                                if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
-                                    loading = false
-                                    if (currentPage < totalPage) {
-                                        //Call API here
-                                        dropDownApiCall(paginate = true, loader = true)
-                                    }
-                                }
+
+
+        layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.layoutManager = layoutManager
+        rvBottomSheet.adapter = stateAdapter
+        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
+        bottomSheetDialog.setContentView(view)
+
+
+        // Rotate drawable
+        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
+        var rotatedDrawable = rotateDrawable(drawable, 180f)
+        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+            null,
+            null,
+            rotatedDrawable,
+            null
+        )
+
+        // Set a dismiss listener to reset the view visibility
+        bottomSheetDialog.setOnDismissListener {
+            rotatedDrawable = rotateDrawable(drawable, 0f)
+            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                rotatedDrawable,
+                null
+            )
+        }
+
+        // Show the bottom sheet
+        bottomSheetDialog.show()
+    }
+
+    private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
+        drawable?.mutate() // Mutate the drawable to avoid affecting other instances
+
+        val rotateDrawable = RotateDrawable()
+        rotateDrawable.drawable = drawable
+        rotateDrawable.fromDegrees = 0f
+        rotateDrawable.toDegrees = angle
+        rotateDrawable.level = 10000 // Needed to apply the rotation
+
+        return rotateDrawable
+    }
+
+    private var recyclerScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val visibleItemCount: Int? = layoutManager?.childCount
+                    val totalItemCount: Int? = layoutManager?.itemCount
+                    val pastVisiblesItems: Int? =
+                        layoutManager?.findFirstVisibleItemPosition()
+                    if (loading) {
+                        if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
+                            loading = false
+                            if (currentPage < totalPage) {
+                                //Call API here
+                                dropDownApiCall(paginate = true, loader = true)
                             }
                         }
                     }
                 }
-
-            private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
-                if (paginate) {
-                    currentPage++
-                }
-                viewModel.getDropDownApi(
-                    this, loader, GetDropDownRequest(
-                        20,
-                        "Districts",
-                        currentPage,
-                        getPreferenceOfScheme(
-                            this,
-                            AppConstants.SCHEME,
-                            Result::class.java
-                        )?.state_code,
-                        getPreferenceOfScheme(
-                            this,
-                            AppConstants.SCHEME,
-                            Result::class.java
-                        )?.user_id,
-                    )
-                )
             }
         }
+
+    private fun dropDownApiCall(paginate: Boolean, loader: Boolean) {
+        if (paginate) {
+            currentPage++
+        }
+        viewModel.getDropDownApi(
+            this, loader, GetDropDownRequest(
+                20,
+                "Districts",
+                currentPage,
+                getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+            )
+        )
+    }
+}

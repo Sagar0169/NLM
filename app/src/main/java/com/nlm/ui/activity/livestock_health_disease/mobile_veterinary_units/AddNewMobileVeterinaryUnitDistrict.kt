@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.net.Uri
 import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,7 @@ class AddNewMobileVeterinaryUnitDistrict : BaseActivity<ActivityAddNewMobileVete
     private var isSubmitted: Boolean = false
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
+    private var DocumentId: Int? = null
 
     override val layoutId: Int
         get() = R.layout.activity_add_new_mobile_veterinary_unit_district
@@ -233,6 +235,12 @@ class AddNewMobileVeterinaryUnitDistrict : BaseActivity<ActivityAddNewMobileVete
                 input_medicine_requirement = mBinding?.etInputFive?.text.toString(),
                 medicine_requirement_remarks = mBinding?.etRemarkFive?.text.toString(),
 
+                mechanism_medicines_inputs = mBinding?.tvNoFileOne?.text.toString(),
+                organize_awareness_camp_inputs = mBinding?.tvNoFileTwo?.text.toString(),
+                distribution_medicines_role_inputs = mBinding?.tvNoFileThree?.text.toString(),
+                distribution_fuel_role_inputs = mBinding?.tvNoFileFour?.text.toString(),
+                medicine_requirement_inputs = mBinding?.tvNoFileFive?.text.toString(),
+
             )
         )
     }
@@ -358,59 +366,58 @@ class AddNewMobileVeterinaryUnitDistrict : BaseActivity<ActivityAddNewMobileVete
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
                                 when (isFromApplication) {
                                     1 -> {
-                                        mBinding?.tvNoFileOne?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     2 -> {
-                                        mBinding?.tvNoFileTwo?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     3 -> {
-                                        mBinding?.tvNoFileThree?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     4 -> {
-                                        mBinding?.tvNoFileFour?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     5 -> {
-                                        mBinding?.tvNoFileFive?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                     else -> {
-                                        DialogDocName?.text = DocumentName
+                                        uploadDocument(DocumentName, uri)
                                     }
 
                                 }
-
-
-                                val requestBody = convertToRequestBody(this, uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
-//                                use this code to add new view with image name and uri
                             }
-                            viewModel.getProfileUploadFile(
-                                context = this,
-                                table_name = getString(R.string.mobile_veterinary_unit_district).toRequestBody(
-                                    MultipartBody.FORM
-                                ),
-                                document_name = body,
-                                user_id = getPreferenceOfScheme(
-                                    this,
-                                    AppConstants.SCHEME,
-                                    Result::class.java
-                                )?.user_id,
-                            )
+
                         }
                     }
                 }
             }
         }
     }
-
+    private fun uploadDocument(DocumentName: String?, uri: Uri) {
+        val requestBody = convertToRequestBody(this, uri)
+        body = MultipartBody.Part.createFormData(
+            "document_name",
+            DocumentName,
+            requestBody
+        )
+        viewModel.getProfileUploadFile(
+            context = this,
+            table_name = getString(R.string.mobile_veterinary_unit_district).toRequestBody(
+                MultipartBody.FORM
+            ),
+            document_name = body,
+            user_id = getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.user_id,
+        )
+    }
     override fun setVariables() {
     }
 
@@ -445,6 +452,59 @@ class AddNewMobileVeterinaryUnitDistrict : BaseActivity<ActivityAddNewMobileVete
                 }
             }
         }
+        viewModel.getProfileUploadFileResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel != null) {
+                if (userResponseModel.statuscode == 401) {
+                    Utility.logout(this)
+                } else if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+
+                } else {
+                    DocumentId = userResponseModel._result.id
+                    UploadedDocumentName = userResponseModel._result.document_name
+                    DialogDocName?.text = userResponseModel._result.document_name
+
+                    when (isFromApplication) {
+                        1 -> {
+                            mBinding?.tvNoFileOne?.text = UploadedDocumentName
+                        }
+
+                        2 -> {
+                            mBinding?.tvNoFileTwo?.text = UploadedDocumentName
+                        }
+
+                        3 -> {
+                            mBinding?.tvNoFileThree?.text = UploadedDocumentName
+                        }
+
+                        4 -> {
+                            mBinding?.tvNoFileFour?.text = UploadedDocumentName
+                        }
+
+                        5 -> {
+                            mBinding?.tvNoFileFive?.text = UploadedDocumentName
+                        }
+
+                        else -> {
+                            DialogDocName?.text = DocumentName
+                        }
+
+                    }
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+                }
+            }
+        }
 
         viewModel.districtMobileVeterinaryUnitsAddResult.observe(this) {
             val userResponseModel = it
@@ -476,6 +536,12 @@ class AddNewMobileVeterinaryUnitDistrict : BaseActivity<ActivityAddNewMobileVete
                             mBinding?.etRemarkFive?.setText(userResponseModel._result.medicine_requirement_remarks)
                             mBinding?.tvDistrict?.text = userResponseModel._result.district_name
 
+                            mBinding?.tvNoFileOne?.text = userResponseModel._result.mechanism_medicines_inputs
+                            mBinding?.tvNoFileTwo?.text = userResponseModel._result.organize_awareness_camp_inputs
+                            mBinding?.tvNoFileThree?.text = userResponseModel._result.distribution_medicines_role_inputs
+                            mBinding?.tvNoFileFour?.text = userResponseModel._result.distribution_fuel_role_inputs
+                            mBinding?.tvNoFileFive?.text = userResponseModel._result.medicine_requirement_inputs
+
                         }
                         else{
                             onBackPressedDispatcher.onBackPressed()
@@ -486,7 +552,9 @@ class AddNewMobileVeterinaryUnitDistrict : BaseActivity<ActivityAddNewMobileVete
 
             }
         }
+
     }
+
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
