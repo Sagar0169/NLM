@@ -12,6 +12,10 @@ import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemVaccinationProgrammerBinding
 import com.nlm.model.VaccinationProgrammerListData
 import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitState
+import com.nlm.ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeDistrictLevel
+import com.nlm.ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeFarmerLevel
+import com.nlm.ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeStateLevel
+import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatForms
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.hideView
@@ -49,16 +53,52 @@ class VaccinationProgrammerAdapter(
                 holder.mBinding.llDistrict.hideView()
                 holder.mBinding.llFarmer.hideView()
                 holder.mBinding.llBlock.hideView()
+                holder.mBinding.ivView.setOnClickListener{
+                    val intent = Intent(holder.itemView.context, AddVaccinationProgrammeStateLevel::class.java)
+                    intent.putExtra("View/Edit", "view")
+                    intent.putExtra("itemId", item.id)
+                    holder.itemView.context.startActivity(intent)
+                }
+                holder.mBinding.ivEdit.setOnClickListener{
+                    val intent = Intent(holder.itemView.context, AddVaccinationProgrammeStateLevel::class.java)
+                    intent.putExtra("View/Edit", "edit")
+                    intent.putExtra("itemId", item.id)
+                    holder.itemView.context.startActivity(intent)
+                }
             }
             context.getString(R.string.district) -> {
                 holder.mBinding.llFarmer.hideView()
                 holder.mBinding.llBlock.hideView()
                 holder.mBinding.llDistrict.showView()
+                holder.mBinding.ivView.setOnClickListener{
+                    val intent = Intent(holder.itemView.context, AddVaccinationProgrammeDistrictLevel::class.java)
+                    intent.putExtra("View/Edit", "view")
+                    intent.putExtra("itemId", item.id)
+                    holder.itemView.context.startActivity(intent)
+                }
+                holder.mBinding.ivEdit.setOnClickListener{
+                    val intent = Intent(holder.itemView.context, AddVaccinationProgrammeDistrictLevel::class.java)
+                    intent.putExtra("View/Edit", "edit")
+                    intent.putExtra("itemId", item.id)
+                    holder.itemView.context.startActivity(intent)
+                }
             }
             context.getString(R.string.farmer_level) -> {
                 holder.mBinding.llBlock.hideView()
                 holder.mBinding.llDistrict.showView()
                 holder.mBinding.llFarmer.showView()
+                holder.mBinding.ivView.setOnClickListener{
+                    val intent = Intent(holder.itemView.context, AddVaccinationProgrammeFarmerLevel::class.java)
+                    intent.putExtra("View/Edit", "view")
+                    intent.putExtra("itemId", item.id)
+                    holder.itemView.context.startActivity(intent)
+                }
+                holder.mBinding.ivEdit.setOnClickListener{
+                    val intent = Intent(holder.itemView.context, AddVaccinationProgrammeFarmerLevel::class.java)
+                    intent.putExtra("View/Edit", "edit")
+                    intent.putExtra("itemId", item.id)
+                    holder.itemView.context.startActivity(intent)
+                }
             }
         }
         holder.mBinding.etCreatedAt.text = convertDate(item.created_at)
@@ -87,18 +127,7 @@ class VaccinationProgrammerAdapter(
             holder.mBinding.ivEdit.hideView()
         }
 
-        holder.mBinding.ivView.setOnClickListener {
-            context.startActivity(
-                Intent(context, AddNewMobileVeterinaryUnitState::class.java)
-                .putExtra("View/Edit", "view")
-                .putExtra("itemId", item.id))
-        }
-        holder.mBinding.ivEdit.setOnClickListener {
-            context.startActivity(
-                Intent(context, AddNewMobileVeterinaryUnitState::class.java)
-                .putExtra("View/Edit", "edit")
-                .putExtra("itemId", item.id))
-        }
+//    
 
         holder.mBinding.ivDelete.setOnClickListener {
             Utility.showConfirmationAlertDialog(

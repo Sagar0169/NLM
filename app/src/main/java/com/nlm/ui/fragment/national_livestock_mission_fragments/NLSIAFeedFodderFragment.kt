@@ -472,8 +472,8 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
                             implementing_agency_document = DocumentList,
                             id = itemId,
                             is_draft = isDraft,
-                            lat=latitude,
-                            long = longitude
+                            lattitude=latitude,
+                            longitude = longitude
                         )
                     )
                 }
@@ -486,7 +486,6 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?,private val itemId:I
         else {
             showLocationAlertDialog()
         }
-        // Start the LocationService
 
 
     }

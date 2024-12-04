@@ -1,21 +1,17 @@
 package com.nlm.ui.activity
 
-import android.Manifest
-import android.app.PendingIntent
-import android.content.BroadcastReceiver
+
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
@@ -80,7 +76,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     val matchingSchemeIds = mutableListOf<Int>()
     val matchingFormIds = mutableListOf<Int>()
 
-
+    private lateinit var themeSwitch: SwitchCompat
+    private lateinit var sharedPreferences: SharedPreferences
 //NOTE: UPDATE THE LOCAL SCHEME DATA WHEN NEW ID OR FORM IS ADDED
     override val layoutId: Int
         get() = R.layout.activity_dashboard
@@ -204,6 +201,33 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             AppConstants.SCHEME,
             Result::class.java
         )?.state_name
+
+        sharedPreferences = android.preference.PreferenceManager.getDefaultSharedPreferences(this)
+
+        // Load the theme preference on activity creation
+        // Handle theme switch toggling
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val isDarkMode = sharedPreferences.getBoolean("isDarkMode", false)
+
+        // Update the theme to match the saved preference
+        updateTheme(isDarkMode)
+          Log.d("THEME",isDarkMode.toString())
+        // Synchronize the Switch state
+        mBinding?.leftDrawerMenu?.themeSwitch?.isChecked = isDarkMode
+    }
+
+    private fun updateTheme(isDarkMode: Boolean) {
+        if (isDarkMode) {
+            // Enable dark mode
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            // Enable light mode
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     // Method to set default arrow drawables
