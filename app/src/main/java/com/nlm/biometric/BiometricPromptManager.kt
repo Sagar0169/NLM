@@ -1,4 +1,4 @@
-package com.warroom.biometric
+package com.nlm.biometric
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -10,7 +10,6 @@ import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.PromptInfo
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
-import java.lang.Error
 
 class BiometricPromptManager(private val activity: AppCompatActivity) {
 
@@ -81,7 +80,5 @@ class BiometricPromptManager(private val activity: AppCompatActivity) {
         data object AuthenticationFailed : BiometricResult
         data object AuthenticationSuccess : BiometricResult
         data object AuthenticationNotSet : BiometricResult
-
-
     }
 }

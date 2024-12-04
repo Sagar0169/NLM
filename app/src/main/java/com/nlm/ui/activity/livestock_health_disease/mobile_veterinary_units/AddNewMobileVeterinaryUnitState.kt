@@ -517,7 +517,6 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                 are_adequate_staff_remarks = mBinding?.etRemarkE?.text.toString(),
                 input_data_compilation_analysis_done = mBinding?.etInputF?.text.toString(),
                 data_compilation_analysis_done_remarks = mBinding?.etRemarkF?.text.toString(),
-
                 mechanism_operation_inputs = mBinding?.tvNoFileOne?.text.toString(),
                 engagement_indicators_inputs = mBinding?.tvNoFileTwo?.text.toString(),
                 procurement_procedure_inputs = mBinding?.tvNoFileThree?.text.toString(),

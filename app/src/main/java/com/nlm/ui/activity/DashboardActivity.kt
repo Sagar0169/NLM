@@ -94,16 +94,16 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         {
         requestLocationPermissions()
         }
-        viewModel.getDashboardApi(
-            this@DashboardActivity,
-            LogoutRequest(
-                Preferences.getPreferenceOfScheme(
-                    this@DashboardActivity,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                ).user_id
-            )
-        )
+//        viewModel.getDashboardApi(
+//            this@DashboardActivity,
+//            LogoutRequest(
+//                getPreferenceOfScheme(
+//                    this@DashboardActivity,
+//                    AppConstants.SCHEME,
+//                    Result::class.java
+//                ).user_id
+//            )
+//        )
         setDefaultDrawables()
 
         mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
@@ -131,16 +131,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
             }
         })
-//        Set click listeners for menu items
-//        mBinding?.leftDrawerMenu?.tvUsers?.setOnClickListener {
-//            toggleMenuItem(
-//                isUserOpen,
-//                R.drawable.ic_user,
-//                mBinding?.leftDrawerMenu?.llUsers,
-//                mBinding?.leftDrawerMenu?.tvUsers
-//            )
-//            isUserOpen = !isUserOpen
-//        }
 
         mBinding?.leftDrawerMenu?.tvLivestockHealthDisease?.setOnClickListener {
             toggleMenuItem(
@@ -211,13 +201,23 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     override fun onResume() {
         super.onResume()
-        val isDarkMode = sharedPreferences.getBoolean("isDarkMode", false)
-
-        // Update the theme to match the saved preference
-        updateTheme(isDarkMode)
-          Log.d("THEME",isDarkMode.toString())
-        // Synchronize the Switch state
-        mBinding?.leftDrawerMenu?.themeSwitch?.isChecked = isDarkMode
+        viewModel.getDashboardApi(
+            this@DashboardActivity,
+            LogoutRequest(
+                getPreferenceOfScheme(
+                    this@DashboardActivity,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                ).user_id
+            )
+        )
+//        val isDarkMode = sharedPreferences.getBoolean("isDarkMode", false)
+//
+//        // Update the theme to match the saved preference
+//        updateTheme(isDarkMode)
+//          Log.d("THEME",isDarkMode.toString())
+//        // Synchronize the Switch state
+//        mBinding?.leftDrawerMenu?.themeSwitch?.isChecked = isDarkMode
     }
 
     private fun updateTheme(isDarkMode: Boolean) {

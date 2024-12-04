@@ -5,26 +5,17 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.net.Uri
-import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
-import com.nlm.databinding.ActivityAddNewMobileVeterinaryUnitBinding
 import com.nlm.databinding.ActivityAddVaccinationProgrammeStateLevelBinding
 import com.nlm.model.GetDropDownRequest
-import com.nlm.model.ImportOfExoticGoatAchievement
-import com.nlm.model.ImportOfExoticGoatDetailImport
-import com.nlm.model.ImportOfExoticGoatVerifiedNlm
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.StateVaccinationProgrammeAddRequest
@@ -51,12 +42,10 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
     private var loading = true
     private var itemId: Int? = null
     private var stateId: Int? = null // Store selected state
-    private var DocumentId: Int? = null
     private var viewEdit: String? = null
-    private var UploadedDocumentName: String? = null
-    private var DialogDocName: TextView? = null
-    private var DocumentName: String? = null
-    private var chooseDocName: String? = null
+    private var uploadedDocumentName: String? = null
+    private var dialogDocName: TextView? = null
+    private var documentName: String? = null
     private var formId:Int?=null
     var body: MultipartBody.Part? = null
     var isFromApplication = 0
@@ -180,12 +169,12 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
                     if (currentPage == 1) {
                         stateList.clear()
 
-                        val remainingCount = userResponseModel.total_count % 10
+                        val remainingCount = userResponseModel.total_count % 100
                         totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count
                         } else {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count + 1
                         }
                     }
@@ -209,46 +198,45 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
                     }
 
                 } else {
-                    DocumentId=userResponseModel._result.id
-                    UploadedDocumentName=userResponseModel._result.document_name
-                    DialogDocName?.text=userResponseModel._result.document_name
+                    uploadedDocumentName=userResponseModel._result.document_name
+                    dialogDocName?.text=userResponseModel._result.document_name
                     when (isFromApplication) {
                         1 -> {
-                            mBinding?.etChooseFile1a?.text = UploadedDocumentName
+                            mBinding?.etChooseFile1a?.text = uploadedDocumentName
 
                         }
 
                         2 -> {
-                            mBinding?.etChooseFile1b?.text = UploadedDocumentName
+                            mBinding?.etChooseFile1b?.text = uploadedDocumentName
 
                         }
 
                         3 -> {
-                            mBinding?.etChooseFile1c?.text = UploadedDocumentName
+                            mBinding?.etChooseFile1c?.text = uploadedDocumentName
 
                         }
 
                         4 -> {
-                            mBinding?.etChooseFile1d?.text = UploadedDocumentName
+                            mBinding?.etChooseFile1d?.text = uploadedDocumentName
 
                         }
 
                         5 -> {
-                            mBinding?.etChoosefile1e?.text = UploadedDocumentName
+                            mBinding?.etChoosefile1e?.text = uploadedDocumentName
 
                         }
 
                         6 -> {
-                            mBinding?.etChooseFile2?.text = UploadedDocumentName
+                            mBinding?.etChooseFile2?.text = uploadedDocumentName
 
                         }
                         7 -> {
-                            mBinding?.etChooseFile3?.text = UploadedDocumentName
+                            mBinding?.etChooseFile3?.text = uploadedDocumentName
 
                         }
 
                         else -> {
-                            DialogDocName?.text = UploadedDocumentName
+                            dialogDocName?.text = uploadedDocumentName
 
                         }
                     }
@@ -273,22 +261,21 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
 
               if(vaild())
               {
-
                   saveDataApi(2)
-                  showSnackbar(mBinding!!.main, "Data Saved")
+                  mBinding?.main?.let { showSnackbar(it, "Data Saved") }
               }
               else{
-                  showSnackbar(mBinding!!.main, "Please fill all the fields")
+                  mBinding?.main?.let { showSnackbar(it, "Please fill all the fields") }
               }
         }
         fun saveAsDraft(view: View) {
             if(vaild())
             {
                 saveDataApi(3)
-                showSnackbar(mBinding!!.main, "Data Saved")
+                mBinding?.main?.let { showSnackbar(it, "Data Saved") }
             }
             else{
-                showSnackbar(mBinding!!.main, "Please fill all the fields")
+                mBinding?.main?.let { showSnackbar(it, "Please fill all the fields") }
             }
         }
         fun ChooseFile1a(view: View) {
@@ -489,37 +476,37 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
                         )
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName =
+                                documentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
                                 when (isFromApplication) {
                                     1 -> {
-                                        uploadDocument(DocumentName,uri)
+                                        uploadDocument(documentName,uri)
                                     }
 
                                     2 -> {
-                                        uploadDocument(DocumentName,uri)
+                                        uploadDocument(documentName,uri)
                                     }
 
                                     3 -> {
-                                        uploadDocument(DocumentName,uri)
+                                        uploadDocument(documentName,uri)
                                     }
 
                                     4 -> {
-                                        uploadDocument(DocumentName,uri)
+                                        uploadDocument(documentName,uri)
                                     }
 
                                     5 -> {
-                                        uploadDocument(DocumentName,uri)
+                                        uploadDocument(documentName,uri)
                                     }
 
                                     6 -> {
-                                        uploadDocument(DocumentName,uri)
+                                        uploadDocument(documentName,uri)
                                     }
                                     7 -> {
-                                        uploadDocument(DocumentName,uri)
+                                        uploadDocument(documentName,uri)
                                     }
                                     else -> {
-                                        uploadDocument(DocumentName,uri)
+                                        uploadDocument(documentName,uri)
                                     }
                                 }
                         }
@@ -551,7 +538,7 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
         }
         viewModel.getDropDownApi(
             this, loader, GetDropDownRequest(
-                20,
+                100,
                 "States",
                 currentPage,
                 null,
