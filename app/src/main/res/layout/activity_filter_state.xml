@@ -670,7 +670,6 @@
                 android:background="@drawable/curve_all_corner_grey"
                 android:fontFamily="@font/opensans_regular"
                 android:hint="Village Name"
-                android:inputType="phone"
                 android:maxLength="10"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5"

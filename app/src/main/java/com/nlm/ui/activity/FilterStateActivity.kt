@@ -75,6 +75,8 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         val selectedDistrictId = intent.getIntExtra("districtId", 0)
         val selectedLocation = intent.getStringExtra("selectedLocation")
         val phoneNo = intent.getStringExtra("phoneNo")
+        val block = intent.getStringExtra("block")
+        val village = intent.getStringExtra("village")
         val nameOfAgency = intent.getStringExtra("nameOfAgency")
         val areaCovered = intent.getStringExtra("areaCovered")
         year = intent.getStringExtra("year")
@@ -545,6 +547,139 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.etNoOfFarmer.showView()
                 binding!!.etNoOfFarmer.setText(NoOfFarmer)
             }
+            41 -> {
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+            }
+            42 -> {
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+                if (districtName != null) {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
+            }
+            43 -> {
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvTitleBlock.showView()
+                binding!!.etBlock.showView()
+
+
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+                if (block != null) {
+                    binding?.etBlock?.setText(block)
+                }
+                if (districtName != null) {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
+            }
+            44 -> {
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvTitleBlock.showView()
+                binding!!.etBlock.showView()
+                binding!!.tvTitleVillageName.showView()
+                binding!!.etVillageName.showView()
+
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+                if (block != null) {
+                    binding?.etBlock?.setText(block)
+                }
+                if (village != null) {
+                    binding?.etVillageName?.setText(village)
+                }
+                if (districtName != null) {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
+            }
 
             40 -> {
                 binding!!.tvState.showView()
@@ -588,6 +723,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                         Result::class.java
                     )?.state_code
                 }
+
 
 
             }
@@ -872,6 +1008,28 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvDistrict.text = "Please Select"
                 districtId = null
             }
+            if (isFrom == 41 && stateId != null) {
+
+            }
+            if (isFrom == 42 && stateId != null) {
+                // Prepare intent to send the result back
+                binding!!.tvDistrict.text = "Please Select"
+                districtId = null
+            }
+            if (isFrom == 43 && stateId != null) {
+                // Prepare intent to send the result back
+                binding!!.etBlock.setText("")
+                binding!!.tvDistrict.text = "Please Select"
+                districtId = null
+            }
+            if (isFrom == 44 && stateId != null) {
+                // Prepare intent to send the result back
+                // Prepare intent to send the result back
+                binding!!.etBlock.setText("")
+                binding!!.etVillageName.setText("")
+                binding!!.tvDistrict.text = "Please Select"
+                districtId = null
+            }
             if (isFrom == 15 && stateId != null) {
                 // Prepare intent to send the result back
 
@@ -971,6 +1129,18 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("districtId", districtId) // Add selected data to intent
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 resultIntent.putExtra("year", binding!!.etYear.text.toString()) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                toast(stateId.toString())
+                finish()
+            }
+            if (isFrom == 41||isFrom==42||isFrom==43||isFrom==44 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("block", binding!!.etBlock.text.toString())
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                resultIntent.putExtra("districtId", districtId) // Add selected data to intent
+                resultIntent.putExtra("districtName", districtName) // Add selected data to intent
+                resultIntent.putExtra("village", binding!!.etVillageName.text.toString()) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
                 toast(stateId.toString())
                 finish()

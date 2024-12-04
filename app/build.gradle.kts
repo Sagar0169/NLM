@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
     id("kotlin-android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
@@ -50,6 +51,10 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1" // Match your Compose version
     }
 }
 
@@ -61,12 +66,14 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.runtime.saved.instance.state)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.ui.tooling.preview.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
+    implementation(platform(libs.androidx.compose.bom))
     //gson
     implementation(libs.gson)
 
@@ -105,5 +112,13 @@ dependencies {
 
     //swipe for refresh
     implementation(libs.androidx.swiperefreshlayout)
+
+
+    //biometric
+    implementation(libs.androidx.biometric)
+
+    implementation (libs.androidx.activity.compose )// Use the latest version
+    implementation (libs.androidx.ui   )         // Latest Compose version
+
 
 }

@@ -107,6 +107,9 @@ interface DialogCallback {
 interface CallBackDeleteAtId {
     fun onClickItem(ID: Int?,position:Int,isFrom: Int)
 }
+interface CallBackDeleteAtIdString {
+    fun onClickItem(ID: Int?,position:Int,isFrom: String)
+}
 interface CallBackDeleteFSPAtId {
     fun onClickItemDelete(ID: Int?,position:Int)
 }

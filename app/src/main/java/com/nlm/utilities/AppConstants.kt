@@ -5,6 +5,9 @@ object AppConstants {
 
     const val ROLE_NAME = "role_name"
     const val USER_ID = "USER_ID"
+    const val USERNAME = "USERNAME"
+    const val REMEMBER_MEE = "REMEMBER_MEE"
+    const val PASSWORD = "PASSWORD"
     const val ROLE_ID = "USER_TYPE"
     const val LOCALE = "LOCALE"
     const val FORM_FILLED_ID = "ID"

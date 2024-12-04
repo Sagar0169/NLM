@@ -56,6 +56,9 @@
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitBlock"
             android:exported="false" />
         <activity
+            android:name=".biometric.ComposeActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitDistrict"
             android:exported="false" />
         <activity
