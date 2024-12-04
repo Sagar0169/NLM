@@ -810,6 +810,9 @@ data class MobileVeterinaryUnitsListRequest(
     val limit: Int,
     val page: Int,
     val role_id: Int?,
+    val district_code: Int?=null,
+    val block_name: String?=null,
+    val village_name: String?=null,
     val state_code: Int?,
     val user_id: Int?,
 )
