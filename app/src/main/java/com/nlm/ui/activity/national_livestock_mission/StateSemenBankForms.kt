@@ -1,5 +1,9 @@
 package com.nlm.ui.activity.national_livestock_mission
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Handler
 import android.os.Looper
 import android.view.View
@@ -27,6 +31,7 @@ class StateSemenBankForms : BaseActivity<ActivityStateSemenBankBinding>(),
     private var viewEdit: String? = null
     var itemId: Int? = null
     private var dId: Int? = null
+
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()

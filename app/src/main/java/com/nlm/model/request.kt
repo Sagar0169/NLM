@@ -171,7 +171,9 @@ data class ArtificialInseminationAddRequest(
     val total_sheep_goat_labs: Int?=null,
     val user_id: Int?=null,
     val is_type: String?=null,
-    val id: Int?=null
+    val id: Int?=null,
+    val lattitude: Double? = null,
+    val longitude: Double? = null,
 )
 
 data class ArtificialInseminationDocument(
@@ -199,7 +201,9 @@ data class ImportExoticGoatAddEditRequest(
     val is_type: String?,
     val id: Int?,
     val is_deleted: Int?,
-    val is_draft: Int?
+    val is_draft: Int?,
+    val lattitude: Double? = null,
+    val longitude: Double? = null,
 )
 
 data class ImportOfExoticGoatAchievement(
@@ -399,6 +403,7 @@ data class StateSemenBankNLMRequest(
     val is_deleted: Int? = null,
     val id: Int? = null,
     val is_draft: Int? = null,
+
     val location: String? = null,
     val major_clients_coop_fin_year_one: String? = null,
     val major_clients_coop_fin_year_three: String? = null,
@@ -555,8 +560,10 @@ data class RSPAddRequest(
     val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>? = null,
     val rsp_laboratory_semen_average: List<RspAddAverage>? = null,
     val rsp_laboratory_semen_document: List<ImplementingAgencyDocument>? = null,
-    val lattitude: Double? = null,
-    val longitude: Double? = null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia : Double? = null,
+    val lattitude_nlm : Double? = null,
+    val longitude_nlm  : Double? = null,
     val rsp_laboratory_semen_station_quality_buck: List<RspAddBucksList>? = null,
     val state_code: Int? = null,
     val user_id: String? = null,

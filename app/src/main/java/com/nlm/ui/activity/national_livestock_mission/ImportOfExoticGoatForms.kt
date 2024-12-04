@@ -2,8 +2,10 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -18,6 +20,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -41,6 +44,7 @@ import com.nlm.model.ImportOfExoticGoatDetailImport
 import com.nlm.model.ImportOfExoticGoatVerifiedNlm
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.ImportExoticAchivementAdapter
 import com.nlm.ui.adapter.ImportExoticAdapterDetailOfImport
@@ -57,6 +61,8 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -99,7 +105,14 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     private var districtName: String? = null // Store selected state
     private var Model:String? = null // Store selected state
     private var loading = true
-
+    private var latitude:Double?=null
+    private var longitude:Double?=null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
@@ -876,27 +889,40 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         )
     }
     private fun saveDataApi(isDraft:Int?){
-        viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
-            ImportExoticGoatAddEditRequest(
-                comment_by_nlm_whether = selectedValue,
-                import_of_exotic_goat_detail_import = DetailOfImportList,
-                import_of_exotic_goat_achievement = AchievementList,
-                import_of_exotic_goat_verified_nlm = VerifiedNlmList,
-                state_code = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.state_code,
-                user_id = getPreferenceOfScheme(
-                    this@ImportOfExoticGoatForms,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id.toString(),
-                role_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id,
-                is_type = null,
-                id = formId,
-                is_draft=isDraft,
-                import_of_exotic_goat_document = DocumentList,
-                is_deleted = null,
-                number_of_farmers_benefited=mBinding?.etNoOfFarmer?.text.toString().toIntOrNull()
-            )
-        )
+        if (hasLocationPermissions()) {
+            val intent = Intent(this@ImportOfExoticGoatForms, LocationService::class.java)
+            startService(intent)
+            lifecycleScope.launch {
+                delay(1000) // Delay for 2 seconds
+                if(latitude!=null&&longitude!=null)
+                {
+                    viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
+                        ImportExoticGoatAddEditRequest(
+                            comment_by_nlm_whether = selectedValue,
+                            import_of_exotic_goat_detail_import = DetailOfImportList,
+                            import_of_exotic_goat_achievement = AchievementList,
+                            import_of_exotic_goat_verified_nlm = VerifiedNlmList,
+                            state_code = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.state_code,
+                            user_id = getPreferenceOfScheme(
+                                this@ImportOfExoticGoatForms,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.user_id.toString(),
+                            role_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                            is_type = null,
+                            id = formId,
+                            is_draft=isDraft,
+                            import_of_exotic_goat_document = DocumentList,
+                            is_deleted = null,
+                            number_of_farmers_benefited=mBinding?.etNoOfFarmer?.text.toString().toIntOrNull(),
+                            lattitude=latitude,
+                            longitude = longitude
+                        )
+                    )
+                }
+            }
+        }
+
     }
 
     override fun onClickItem(
@@ -1117,5 +1143,18 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         isFrom: Int
     ) {
         AddVerifiedNlmDialog(this,selectedItem,position)
+    }
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(locationReceiver)
     }
 }

@@ -2,8 +2,10 @@ package com.nlm.ui.fragment.national_livestock_mission_fragments
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -19,6 +21,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -47,6 +50,7 @@ import com.nlm.model.RspBasicInfoEquipment
 import com.nlm.model.RspLaboratorySemenAverage
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankOtherAddManpower
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentIAAdapter
@@ -65,6 +69,8 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import kotlin.concurrent.thread
@@ -110,6 +116,14 @@ class RSPIAFragment(
     private var listener: OnNextButtonClickListener? = null
     private var DocumentId: Int? = null
     private var UploadedDocumentName: String? = null
+    private var latitude:Double?=null
+    private var longitude:Double?=null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
 
     private val state = listOf(
         "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
@@ -248,7 +262,18 @@ class RSPIAFragment(
     override fun setVariables() {
 
     }
+    override fun onResume() {
+        super.onResume()
+        requireContext().registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
 
+    override fun onPause() {
+        super.onPause()
+        requireContext().unregisterReceiver(locationReceiver)
+    }
     override fun setObservers() {
         viewModel.getDropDownResult.observe(this) {
             val userResponseModel = it
@@ -497,6 +522,7 @@ class RSPIAFragment(
 //    }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+
         val etAreaFodder = mBinding!!.etAreaFodder.text.toString()
         val etManpower = mBinding!!.etManpower.text.toString()
         val address = mBinding?.etAddress?.text.toString()
@@ -538,60 +564,69 @@ class RSPIAFragment(
             mBinding?.clParent?.let { showSnackbar(it, "Pin code is required") }
             return
         }
+        if (hasLocationPermissions()) {
+            val intent = Intent(requireContext(), LocationService::class.java)
+            requireContext().startService(intent)
+            lifecycleScope.launch {
+                delay(1000) // Delay for 2 seconds
+                if (latitude != null && longitude != null) {
+                    viewModel.getRspLabAddApi(
+                        requireContext(), true,
+                        RSPAddRequest(
+                            id = itemId,
+                            address = address,
+                            location = location,
+                            district_code = districtId,
+                            phone_no = phoneNumber.toLongOrNull(),
+                            pin_code = pincode.toIntOrNull(),
+                            role_id = getPreferenceOfScheme(
+                                requireContext(),
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.role_id,
+                            state_code = getPreferenceOfScheme(
+                                requireContext(),
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.state_code,
+                            user_id = getPreferenceOfScheme(
+                                requireContext(),
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.user_id.toString(),
+                            year_of_establishment = yearOfEstablishment.toIntOrNull(),
+                            area_under_buildings = mBinding?.etAreaBuildings?.text.toString().toDoubleOrNull(),
+                            area_for_fodder_cultivation = etAreaFodder,
+                            manpower = etManpower,
+                            availability_no_of_computers = mBinding?.etNofcomp?.text.toString()
+                                .toIntOrNull(),
+                            availability_type_of_records = mBinding?.etTypeOfRecords?.text.toString(),
+                            major_clients_sia_one_year = mBinding?.etSIA1?.text.toString(),
+                            major_clients_sia_two_year = mBinding?.etSIA2?.text.toString(),
+                            major_clients_sia_three_year = mBinding?.etSIA3?.text.toString(),
+                            major_clients_coop_one_year = mBinding?.etCOOP1?.text.toString(),
+                            major_clients_coop_two_year = mBinding?.etCOOP2?.text.toString(),
+                            major_clients_coop_three_year = mBinding?.etCOOP3?.text.toString(),
+                            major_clients_ngo_one_year = mBinding?.etNGO1?.text.toString(),
+                            major_clients_ngo_two_year = mBinding?.etNGO2?.text.toString(),
+                            major_clients_ngo_three_year = mBinding?.etNGO3?.text.toString(),
+                            major_clients_private_one_year = mBinding?.etPrivate1?.text.toString(),
+                            major_clients_private_two_year = mBinding?.etPrivate2?.text.toString(),
+                            major_clients_private_three_year = mBinding?.etPrivate3?.text.toString(),
+                            major_clients_other_states_one_year = mBinding?.etOtherState1?.text.toString(),
+                            major_clients_other_states_two_year = mBinding?.etOtherState2?.text.toString(),
+                            major_clients_other_states_three_year = mBinding?.etOtherState3?.text.toString(),
+                            Infrastructure_faced_Institute = mBinding?.etInfra?.text.toString(),
+                            rsp_laboratory_semen_availability_equipment = rspEquipList,
+                            rsp_laboratory_semen_average = semenDoseList,
+                            is_draft = draft,
+                            rsp_laboratory_semen_document = totalListDocument,
+                            lattitude_ia =latitude,
+                            longitude_ia = longitude
+                        )
+                    )
+                }}}
 
-        viewModel.getRspLabAddApi(
-            requireContext(), true,
-            RSPAddRequest(
-                id = itemId,
-                address = address,
-                location = location,
-                district_code = districtId,
-                phone_no = phoneNumber.toLongOrNull(),
-                pin_code = pincode.toIntOrNull(),
-                role_id = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                state_code = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id.toString(),
-                year_of_establishment = yearOfEstablishment.toIntOrNull(),
-                area_under_buildings = mBinding?.etAreaBuildings?.text.toString().toDoubleOrNull(),
-                area_for_fodder_cultivation = etAreaFodder,
-                manpower = etManpower,
-                availability_no_of_computers = mBinding?.etNofcomp?.text.toString()
-                    .toIntOrNull(),
-                availability_type_of_records = mBinding?.etTypeOfRecords?.text.toString(),
-                major_clients_sia_one_year = mBinding?.etSIA1?.text.toString(),
-                major_clients_sia_two_year = mBinding?.etSIA2?.text.toString(),
-                major_clients_sia_three_year = mBinding?.etSIA3?.text.toString(),
-                major_clients_coop_one_year = mBinding?.etCOOP1?.text.toString(),
-                major_clients_coop_two_year = mBinding?.etCOOP2?.text.toString(),
-                major_clients_coop_three_year = mBinding?.etCOOP3?.text.toString(),
-                major_clients_ngo_one_year = mBinding?.etNGO1?.text.toString(),
-                major_clients_ngo_two_year = mBinding?.etNGO2?.text.toString(),
-                major_clients_ngo_three_year = mBinding?.etNGO3?.text.toString(),
-                major_clients_private_one_year = mBinding?.etPrivate1?.text.toString(),
-                major_clients_private_two_year = mBinding?.etPrivate2?.text.toString(),
-                major_clients_private_three_year = mBinding?.etPrivate3?.text.toString(),
-                major_clients_other_states_one_year = mBinding?.etOtherState1?.text.toString(),
-                major_clients_other_states_two_year = mBinding?.etOtherState2?.text.toString(),
-                major_clients_other_states_three_year = mBinding?.etOtherState3?.text.toString(),
-                Infrastructure_faced_Institute = mBinding?.etInfra?.text.toString(),
-                rsp_laboratory_semen_availability_equipment = rspEquipList,
-                rsp_laboratory_semen_average = semenDoseList,
-                is_draft = draft,
-                rsp_laboratory_semen_document = totalListDocument
-            )
-        )
     }
 
     private fun compositionOfGoverningNlmIaDialog(
