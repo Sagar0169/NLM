@@ -416,5 +416,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="what_are_the_services_you_availed_from_the_mvus_medicinal_treatment_gynaecological_cases_surgical_minor_major">What are the services you availed from the MVUs? Medicinal Treatment/ Gynaecological cases/Surgical (Minor/Major)</string>
     <string name="how_much_time_does_it_take_for_the_mvu_to_arrive_after_your_call">How much time does it take for the MVU to arrive after your call?</string>
     <string name="have_you_paid_for_the_services_offered_by_mvus">Have you paid for the services offered by MVUs?</string>
+    <string name="ascad_state">ascad_state</string>
+    <string name="ascad_district">ascad_district</string>
 </resources>
 

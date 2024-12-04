@@ -1677,6 +1677,7 @@ data class StateMobileVeterinaryUnitAddResult(
     val input_is_monitoring_supervision_medic_equip: String,
     val input_is_service_provider_engaged: String,
     val input_mechanism_operation: String,
+    val state_name: String,
     val input_procurement_procedure: String,
     val input_supply_procedure: String,
     val is_app_crm_place_inputs: String,
@@ -1821,29 +1822,30 @@ data class StateAscadAddResponse(
 )
 
 data class StateAscadAddResult(
-    val annual_action_plan_input: String,
-    val annual_action_plan_remarks: String,
     val created: String,
     val created_by: Int,
+    val id: Int,
+    val status: String,
+    val user_id: Int,
+    val is_deleted: Int,
+    val role_id: String,
+    val state_code: Int,
+    val state_name:String,
+    val annual_action_plan_input: String,
+    val annual_action_plan_remarks: String,
     val financial_planning_for_state_share_input: String,
     val financial_planning_for_state_share_remarks: String,
-    val id: Int,
     val input_annual_action_plan: String,
     val input_financial_planning_for_state_share: String,
     val input_purchase_of_vaccines_accessories: String,
     val input_scheduling_of_vaccination: String,
     val input_state_prioritizes_critical_disease: String,
-    val is_deleted: Int,
     val purchase_of_vaccines_accessories_input: String,
     val purchase_of_vaccines_accessories_remarks: String,
-    val role_id: String,
     val scheduling_of_vaccination_input: String,
     val scheduling_of_vaccination_remarks: String,
-    val state_code: Int,
     val state_prioritizes_critical_disease_input: String,
     val state_prioritizes_critical_disease_remarks: String,
-    val status: Int,
-    val user_id: Int
 )
 
 data class DistrictAscadAddResponse(
@@ -1854,6 +1856,8 @@ data class DistrictAscadAddResponse(
 )
 
 data class DistrictAscadAddResult(
+    val state_name: String,
+    val district_name: String,
     val compensation_farmer_against_culling_of_animals_input: String,
     val compensation_farmer_against_culling_of_animals_remarks: String,
     val created: String,
@@ -1870,12 +1874,12 @@ data class DistrictAscadAddResult(
     val is_deleted: Int,
     val role_id: String,
     val state_code: Int,
-    val status: Int,
+    val status: String,
     val status_of_vaccination_against_economically_input: String,
     val status_of_vaccination_against_economically_remarks: String,
     val status_of_vaccination_against_zoonotic_input: String,
     val status_of_vaccination_against_zoonotic_remarks: String,
     val training_of_veterinarians_and_para_vets_last_year_input: String,
     val training_of_veterinarians_and_para_vets_last_year_remarks: String,
-    val user_id: String
+    val user_id: Int
 )

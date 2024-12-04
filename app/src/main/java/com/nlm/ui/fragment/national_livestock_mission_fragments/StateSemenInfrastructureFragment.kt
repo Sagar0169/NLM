@@ -457,12 +457,13 @@ class StateSemenInfrastructureFragment(
                             major_clients_other_states_fin_year_three = mBinding?.etOtherStateThree?.text.toString(),
                             state_semen_bank_document = DocumentList,
                             is_draft = draft,
-                            lattitude=latitude,
-                            longitude = longitude
+//                            lattitude=latitude,
+//                            longitude = longitude
                         )
                     )
-                }}}
-
+                }
+            }
+        }
     }
 
 

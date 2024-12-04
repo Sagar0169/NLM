@@ -507,8 +507,8 @@ class RSPNLMFragment(
                             rsp_laboratory_semen_station_quality_buck = addBucksList,
                             is_draft = draft,
                             rsp_laboratory_semen_document = totalListDocument,
-                            lattitude=latitude,
-                            longitude = longitude
+//                            lattitude=latitude,
+//                            longitude = longitude
                         )
                     )
                 }

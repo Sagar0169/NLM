@@ -13,6 +13,7 @@ class AscadActivity : BaseActivity<ActivityAscadBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_ascad
 
+
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
@@ -33,6 +34,7 @@ class AscadActivity : BaseActivity<ActivityAscadBinding>() {
                 ).putExtra(AppConstants.IS_FROM, getString(R.string.district))
             )
         }
+
     }
 
 
