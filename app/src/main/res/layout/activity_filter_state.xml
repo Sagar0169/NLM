@@ -57,6 +57,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/employee_home_bg"

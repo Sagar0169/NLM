@@ -2,8 +2,10 @@ package com.nlm.ui.fragment.national_livestock_mission_fragments
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -18,6 +20,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -37,6 +40,7 @@ import com.nlm.model.RSPAddRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.RspAddBucksList
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
 import com.nlm.ui.adapter.StateAdapter
@@ -50,6 +54,8 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -88,11 +94,19 @@ class RSPNLMFragment(
     private var DocumentId: Int? = null
     private var UploadedDocumentName: String? = null
     private var isSubmitted: Boolean = false
+    private var latitude:Double?=null
+    private var longitude:Double?=null
 
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var viewDocumentList: MutableList<ImplementingAgencyDocument>
     private lateinit var totalListDocument: ArrayList<ImplementingAgencyDocument>
     var body: MultipartBody.Part? = null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
     override fun init() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
@@ -398,8 +412,21 @@ class RSPNLMFragment(
             addDocumentDialog(requireContext(), null, null)
         }
     }
+    override fun onResume() {
+        super.onResume()
+        requireContext().registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
 
+    override fun onPause() {
+        super.onPause()
+        requireContext().unregisterReceiver(locationReceiver)
+    }
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+
+
         val address = mBinding?.etAddress?.text.toString()
         val location = mBinding?.etLocation?.text.toString()
         val phoneNumber = mBinding?.etPhone?.text.toString()
@@ -409,76 +436,88 @@ class RSPNLMFragment(
         val yearOfEstablishment = mBinding?.etYear?.text.toString()
 
         if (state == "Select") {
-            mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
+            mBinding?.clParent?.let { showSnackbar(it, "State Name is required") }
             return
         }
         if (district == "Select") {
-            mBinding?.clParent?.let { showSnackbar(it,"District Name is required") }
+            mBinding?.clParent?.let { showSnackbar(it, "District Name is required") }
             return
         }
 
 
 
         if (location.isEmpty()) {
-            mBinding?.clParent?.let { showSnackbar(it,"Location is required") }
+            mBinding?.clParent?.let { showSnackbar(it, "Location is required") }
             return
         }
 
         if (address.isEmpty()) {
-            mBinding?.clParent?.let { showSnackbar(it,"Address is required") }
+            mBinding?.clParent?.let { showSnackbar(it, "Address is required") }
             return
         }
 
         if (districtId == null) {
-            mBinding?.clParent?.let { showSnackbar(it,"District is required") }
+            mBinding?.clParent?.let { showSnackbar(it, "District is required") }
             return
         }
 
         if (pincode.isEmpty()) {
-            mBinding?.clParent?.let { showSnackbar(it,"Pin code is required") }
+            mBinding?.clParent?.let { showSnackbar(it, "Pin code is required") }
             return
         }
-
-        viewModel.getRspLabAddApi(
-            requireContext(), true,
-            RSPAddRequest(
-                id = itemId,
-                address = address,
-                location = location,
-                district_code = districtId,
-                phone_no = phoneNumber.toLongOrNull(),
-                pin_code = pincode.toIntOrNull(),
-                role_id = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                state_code = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id.toString(),
-                year_of_establishment = yearOfEstablishment.toIntOrNull(),
-                comments_infrastructure = mBinding?.etCommentsNlm?.text.toString(),
-                fund_properly_utilized = mBinding?.etFund?.text.toString(),
-                semen_straws_produced = mBinding?.etSemen?.text.toString(),
-                equipments_per_msp = mBinding?.etUnit?.text.toString(),
-                processing_semen = mBinding?.etMsp?.text.toString(),
-                suggestions_financial = mBinding?.etFinancial?.text.toString(),
-                suggestions_physical = mBinding?.etPhysical?.text.toString(),
-                suggestions_any_other = mBinding?.etAnyOther?.text.toString(),
-                rsp_laboratory_semen_station_quality_buck = addBucksList,
-                is_draft = draft,
-                rsp_laboratory_semen_document = totalListDocument
-            )
-        )
+        if (hasLocationPermissions()) {
+            val intent = Intent(requireContext(), LocationService::class.java)
+            requireContext().startService(intent)
+            lifecycleScope.launch {
+                delay(1000) // Delay for 2 seconds
+                if (latitude != null && longitude != null) {
+                    viewModel.getRspLabAddApi(
+                        requireContext(), true,
+                        RSPAddRequest(
+                            id = itemId,
+                            address = address,
+                            location = location,
+                            district_code = districtId,
+                            phone_no = phoneNumber.toLongOrNull(),
+                            pin_code = pincode.toIntOrNull(),
+                            role_id = getPreferenceOfScheme(
+                                requireContext(),
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.role_id,
+                            state_code = getPreferenceOfScheme(
+                                requireContext(),
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.state_code,
+                            user_id = getPreferenceOfScheme(
+                                requireContext(),
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.user_id.toString(),
+                            year_of_establishment = yearOfEstablishment.toIntOrNull(),
+                            comments_infrastructure = mBinding?.etCommentsNlm?.text.toString(),
+                            fund_properly_utilized = mBinding?.etFund?.text.toString(),
+                            semen_straws_produced = mBinding?.etSemen?.text.toString(),
+                            equipments_per_msp = mBinding?.etUnit?.text.toString(),
+                            processing_semen = mBinding?.etMsp?.text.toString(),
+                            suggestions_financial = mBinding?.etFinancial?.text.toString(),
+                            suggestions_physical = mBinding?.etPhysical?.text.toString(),
+                            suggestions_any_other = mBinding?.etAnyOther?.text.toString(),
+                            rsp_laboratory_semen_station_quality_buck = addBucksList,
+                            is_draft = draft,
+                            rsp_laboratory_semen_document = totalListDocument,
+                            lattitude=latitude,
+                            longitude = longitude
+                        )
+                    )
+                }
+                else{
+                    showSnackbar(mBinding!!.clParent,"No Location fetched")
+                }
+            }
+        }
     }
-
 
 
     private fun addDocumentDialog(

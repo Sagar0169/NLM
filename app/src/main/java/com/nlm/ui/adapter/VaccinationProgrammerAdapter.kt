@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackDeleteAtIdString
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemVaccinationProgrammerBinding
 import com.nlm.model.VaccinationProgrammerListData
@@ -26,7 +27,7 @@ class VaccinationProgrammerAdapter(
     val context: Context,
     private val list: ArrayList<VaccinationProgrammerListData>,
     private val isFrom: String?,
-    private val callBackDeleteAtId: CallBackDeleteAtId
+    private val callBackDeleteAtId: CallBackDeleteAtIdString
 ) :
     RecyclerView.Adapter<VaccinationProgrammerAdapter.VaccinationProgrammerAdapterViewHolder>() {
 
@@ -99,6 +100,7 @@ class VaccinationProgrammerAdapter(
                     intent.putExtra("itemId", item.id)
                     holder.itemView.context.startActivity(intent)
                 }
+
             }
         }
         holder.mBinding.etCreatedAt.text = convertDate(item.created_at)
@@ -127,22 +129,22 @@ class VaccinationProgrammerAdapter(
             holder.mBinding.ivEdit.hideView()
         }
 
-//    
-
-        holder.mBinding.ivDelete.setOnClickListener {
+     holder.mBinding.ivDelete.setOnClickListener {
             Utility.showConfirmationAlertDialog(
                 context,
                 object :
                     DialogCallback {
                     override fun onYes() {
-                        if (item != null) {
-                            callBackDeleteAtId.onClickItem(item.id,position,0)
+                        if (isFrom != null) {
+                            callBackDeleteAtId.onClickItem(item.id,position,isFrom)
                         }
                     }
                 },
                 context.getString(R.string.are_you_sure_want_to_delete_your_post)
             )
         }
+
+
     }
 
     fun onDeleteButtonClick(position: Int) {

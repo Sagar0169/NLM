@@ -6,8 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackDeleteAtIdString
 import com.nlm.databinding.ActivityVaccinationProgrammerListBinding
+import com.nlm.model.BlockMobileVeterinaryUnitAddRequest
+import com.nlm.model.DistrictMobileVeterinaryUnitAddRequest
+import com.nlm.model.FarmerMobileVeterinaryUnitsAddRequest
 import com.nlm.model.Result
+import com.nlm.model.StateMobileVeterinaryUnitAddRequest
+import com.nlm.model.StateVaccinationProgrammeAddRequest
 import com.nlm.model.VaccinationProgrammerListData
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.ui.activity.FilterStateActivity
@@ -17,11 +23,13 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 
-class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgrammerListBinding>(),CallBackDeleteAtId {
+class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgrammerListBinding>(),
+    CallBackDeleteAtIdString {
     private var mBinding: ActivityVaccinationProgrammerListBinding? = null
     private var vaccinationProgrammerAdapter: VaccinationProgrammerAdapter ?= null
     private var stateVaccinationProgrammerList= ArrayList<VaccinationProgrammerListData>()
@@ -31,6 +39,7 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
     private var isFrom: String ?= null
     private val viewModel= ViewModel()
     private var currentPage = 1
+    private var itemPosition: Int? = null
     private var totalPage = 1
     private var loading = true
 
@@ -324,9 +333,131 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                 }
             }
         }
+        viewModel.stateVaccinationProgrammerAddResult.observe(this){
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel!=null)
+            {
+                if(userResponseModel._resultflag==0){
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                }
+
+                else{
+                    itemPosition?.let { it1 -> vaccinationProgrammerAdapter?.onDeleteButtonClick(it1) }
+//                    rSPLABListAdapter?.notifyDataSetChanged()
+//                    implementingAgencyAPICall(paginate = true, loader = true)
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                }}}
     }
 
-    override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
 
+    override fun onClickItem(ID: Int?, position: Int, isFrom: String) {
+        when (isFrom) {
+            getString(R.string.state) -> {
+                viewModel.getStateVaccinationProgrammeAdd(
+                    this@VaccinationProgrammerListActivity, true,
+                    StateVaccinationProgrammeAddRequest(
+                        id = ID,
+                        role_id = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.role_id,
+                        state_code = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.state_code,
+                        user_id = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.user_id,
+                        is_deleted = 1
+                    )
+                )
+                itemPosition = position
+            }
+
+            getString(R.string.district) -> {
+                viewModel.getStateVaccinationProgrammeAdd(
+                    this@VaccinationProgrammerListActivity, true,
+                    StateVaccinationProgrammeAddRequest(
+                        id = ID,
+                        role_id = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.role_id,
+                        state_code = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.state_code,
+                        user_id = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.user_id,
+                        is_deleted = 1
+                    )
+                )
+                itemPosition = position
+            }
+
+            getString(R.string.block_level) -> {
+                viewModel.getStateVaccinationProgrammeAdd(
+                    this@VaccinationProgrammerListActivity, true,
+                    StateVaccinationProgrammeAddRequest(
+                        id = ID,
+                        role_id = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.role_id,
+                        state_code = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.state_code,
+                        user_id = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.user_id,
+                        is_deleted = 1
+                    )
+                )
+                itemPosition = position
+            }
+
+            getString(R.string.farmer_level) -> {
+                viewModel.getStateVaccinationProgrammeAdd(
+                    this@VaccinationProgrammerListActivity, true,
+                    StateVaccinationProgrammeAddRequest(
+                        id = ID,
+                        role_id = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.role_id,
+                        state_code = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.state_code,
+                        user_id = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.user_id,
+                        is_deleted = 1
+                    )
+                )
+                itemPosition = position
+            }
+        }
     }
 }

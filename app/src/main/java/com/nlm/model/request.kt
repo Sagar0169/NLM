@@ -426,7 +426,9 @@ data class StateSemenBankNLMRequest(
     val storage_capacity: String? = null,
     val type_of_semen_station: String? = null,
     val user_id: String? = null,
-    val year_of_establishment: String? = null
+    val year_of_establishment: String? = null,
+    val lattitude: Double? = null,
+    val longitude: Double? = null,
 )
 
 data class StateSemenBankDocument(
@@ -553,6 +555,8 @@ data class RSPAddRequest(
     val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>? = null,
     val rsp_laboratory_semen_average: List<RspAddAverage>? = null,
     val rsp_laboratory_semen_document: List<ImplementingAgencyDocument>? = null,
+    val lattitude: Double? = null,
+    val longitude: Double? = null,
     val rsp_laboratory_semen_station_quality_buck: List<RspAddBucksList>? = null,
     val state_code: Int? = null,
     val user_id: String? = null,

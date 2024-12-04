@@ -2,8 +2,10 @@ package com.nlm.ui.fragment.national_livestock_mission_fragments
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.provider.MediaStore
@@ -13,6 +15,7 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
@@ -29,6 +32,7 @@ import com.nlm.model.Result
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.model.StateSemenInfraGoat
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.StateSemenInfrastructureAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
@@ -41,6 +45,8 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -70,8 +76,15 @@ class StateSemenInfrastructureFragment(
     private var DocumentId: Int? = null
     private var UploadedDocumentName: String? = null
     private var savedAsEdit: Boolean = false
+    private var latitude:Double?=null
+    private var longitude:Double?=null
 
-
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
     override fun init() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
@@ -271,7 +284,19 @@ class StateSemenInfrastructureFragment(
             }
         }
     }
+    override fun onResume() {
+        super.onResume()
+        requireContext().registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
 
+
+    override fun onPause() {
+        super.onPause()
+        requireContext().unregisterReceiver(locationReceiver)
+    }
     private fun compositionOfGoverningNlmIaDialog(
         context: Context,
         isFrom: Int,
@@ -390,45 +415,54 @@ class StateSemenInfrastructureFragment(
             mBinding?.clParent?.let { showSnackbar(it,"Please Fill the mandatory fields of Basic Information Tab") }
             return
         }
+        if (hasLocationPermissions()) {
+            val intent = Intent(requireContext(), LocationService::class.java)
+            requireContext().startService(intent)
+            lifecycleScope.launch {
+                delay(1000) // Delay for 2 seconds
+                if(latitude!=null&&longitude!=null) {
+                    viewModel.getStateSemenAddBankApi2(
+                        requireContext(), true,
+                        StateSemenBankNLMRequest(
+                            id = itemId,
+                            role_id = getPreferenceOfScheme(
+                                requireContext(),
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.role_id,
 
-        viewModel.getStateSemenAddBankApi2(
-            requireContext(), true,
-            StateSemenBankNLMRequest(
-                id = itemId,
-                role_id = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
+                            state_code = getPreferenceOfScheme(
+                                requireContext(),
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.state_code,
+                            user_id = getPreferenceOfScheme(
+                                requireContext(),
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.user_id.toString(),
+                            storage_capacity = mBinding?.etStorageCapacity?.text.toString(),
+                            state_semen_bank_infrastructure = stateSemenInfraGoatList,
+                            major_clients_coop_fin_year_one = mBinding?.etCoopOne?.text.toString(),
+                            major_clients_coop_fin_year_two = mBinding?.etCoopTwo?.text.toString(),
+                            major_clients_coop_fin_year_three = mBinding?.etCoopThree?.text.toString(),
+                            major_clients_ngo_fin_year_one = mBinding?.etNgoOne?.text.toString(),
+                            major_clients_ngo_fin_year_two = mBinding?.etNgoTwo?.text.toString(),
+                            major_clients_ngo_fin_year_three = mBinding?.etNgoThree?.text.toString(),
+                            major_clients_private_fin_year_one = mBinding?.etPrivateOne?.text.toString(),
+                            major_clients_private_fin_year_two = mBinding?.etPrivateTwo?.text.toString(),
+                            major_clients_private_fin_year_three = mBinding?.etPrivateThree?.text.toString(),
+                            major_clients_other_states_fin_year_one = mBinding?.etOtherStateOne?.text.toString(),
+                            major_clients_other_states_fin_year_two = mBinding?.etOtherStateTwo?.text.toString(),
+                            major_clients_other_states_fin_year_three = mBinding?.etOtherStateThree?.text.toString(),
+                            state_semen_bank_document = DocumentList,
+                            is_draft = draft,
+                            lattitude=latitude,
+                            longitude = longitude
+                        )
+                    )
+                }}}
 
-                state_code = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    requireContext(),
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id.toString(),
-                storage_capacity = mBinding?.etStorageCapacity?.text.toString(),
-                state_semen_bank_infrastructure = stateSemenInfraGoatList,
-                major_clients_coop_fin_year_one = mBinding?.etCoopOne?.text.toString(),
-                major_clients_coop_fin_year_two = mBinding?.etCoopTwo?.text.toString(),
-                major_clients_coop_fin_year_three = mBinding?.etCoopThree?.text.toString(),
-                major_clients_ngo_fin_year_one = mBinding?.etNgoOne?.text.toString(),
-                major_clients_ngo_fin_year_two = mBinding?.etNgoTwo?.text.toString(),
-                major_clients_ngo_fin_year_three = mBinding?.etNgoThree?.text.toString(),
-                major_clients_private_fin_year_one = mBinding?.etPrivateOne?.text.toString(),
-                major_clients_private_fin_year_two = mBinding?.etPrivateTwo?.text.toString(),
-                major_clients_private_fin_year_three = mBinding?.etPrivateThree?.text.toString(),
-                major_clients_other_states_fin_year_one = mBinding?.etOtherStateOne?.text.toString(),
-                major_clients_other_states_fin_year_two = mBinding?.etOtherStateTwo?.text.toString(),
-                major_clients_other_states_fin_year_three = mBinding?.etOtherStateThree?.text.toString(),
-                state_semen_bank_document = DocumentList,
-                is_draft = draft,
-            )
-        )
     }
 
 
