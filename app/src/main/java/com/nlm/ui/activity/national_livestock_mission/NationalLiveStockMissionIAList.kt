@@ -148,6 +148,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                     this@NationalLiveStockMissionIAList,
                     NLMIAForm::class.java
                 ).putExtra("isFrom", 1)
+                .putExtra("View/Edit", "add")
             )
         }
 

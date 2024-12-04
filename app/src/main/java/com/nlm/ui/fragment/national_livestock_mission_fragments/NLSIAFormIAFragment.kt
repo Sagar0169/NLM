@@ -66,11 +66,17 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
             mBinding?.etOtherStaffEmployeeDepute?.isEnabled=false
             mBinding?.etOtherStaffManpowerDepute?.isEnabled=false
             mBinding?.etOrganisationalChart?.isEnabled=false
-            ViewEditApi()
+            ViewEditApi(viewEdit)
         }
-        if(viewEdit=="edit"){
-            ViewEditApi()
+        else if(viewEdit=="edit"){
+            ViewEditApi(viewEdit)
         }
+        else if(viewEdit!="add")
+        {
+
+        }
+        Log.d("IsType",viewEdit.toString())
+        ViewEditApi("edit")
     }
 
     override fun setVariables() {
@@ -85,9 +91,6 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
           if (userResponseModel.statuscode == 401) {
               Utility.logout(requireContext())
           } else {
-          if (userResponseModel.statuscode == 401) {
-              Utility.logout(requireContext())
-          }
           if (userResponseModel!=null)
           {
 
@@ -119,6 +122,15 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                               mBinding?.etOrganisationalChart?.setText(userResponseModel._result.organizational_chart ?: "")
                           }}
                       else{
+                          mBinding?.etNameAndLocationOfIa?.setText(userResponseModel._result.name_location_of_ai ?: "")
+                          mBinding?.etDirectorDGCeoName?.setText(userResponseModel._result.director_dg_ceo_name ?: "")
+                          mBinding?.etTechnicalStaffRegularDepute?.setText(userResponseModel._result.technical_staff_regular_employee?.toString() ?: "")
+                          mBinding?.etTechnicalStaffManpowerDepute?.setText(userResponseModel._result.technical_staff_manpower_deputed?.toString() ?: "")
+                          mBinding?.etAdminStaffEmployeeDepute?.setText(userResponseModel._result.admn_staff_regular_employee?.toString() ?: "")
+                          mBinding?.etAdminStaffManpowerDepute?.setText(userResponseModel._result.admn_staff_manpower_deputed?.toString() ?: "")
+                          mBinding?.etOtherStaffEmployeeDepute?.setText(userResponseModel._result.other_staff_regular_employee?.toString() ?: "")
+                          mBinding?.etOtherStaffManpowerDepute?.setText(userResponseModel._result.other_staff_manpower_deputed?.toString() ?: "")
+                          mBinding?.etOrganisationalChart?.setText(userResponseModel._result.organizational_chart ?: "")
                           userResponseModel._result.id?.let { it1 ->
                               Preferences.setPreference_int(requireContext(),AppConstants.FORM_FILLED_ID,
                                   it1
@@ -126,7 +138,11 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                           }
                           Log.d("ID_response",userResponseModel._result.id.toString())
                           mActivityMain.itemId=userResponseModel._result.id
-                          listener?.onNextButtonClick()
+                          if (savedAsEdit)
+                          {
+                              listener?.onNextButtonClick()
+                          }
+
                           showSnackbar(mBinding!!.clParent, userResponseModel.message)
                       }
 
@@ -179,9 +195,11 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                     savedAsEdit=true
                 }
                   if(itemId!=0) {
+                      savedAsEdit=true
                       saveDataApi(itemId)
                   }
                 else{
+                      savedAsEdit=true
                       saveDataApi(null)
                   }
             }
@@ -205,7 +223,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
             savedAsDraft=true
         }}
     }
-    private fun ViewEditApi(){
+    private fun ViewEditApi(viewEdit: String?){
 
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(

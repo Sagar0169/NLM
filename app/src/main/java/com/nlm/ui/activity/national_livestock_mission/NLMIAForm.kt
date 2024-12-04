@@ -90,8 +90,6 @@ import com.nlm.utilities.Utility
             addTab(newTab().setText("District wise no. of AI centres for Goat and Sheep in the State "))
             addTab(newTab().setText("Constraints faced by IA in implementation of the project (elaborate)"))
             addTab(newTab().setText("Feed Fodder Situation in the State"))
-
-
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {

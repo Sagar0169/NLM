@@ -46,6 +46,7 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
     private var viewModel = ViewModel()
     private var stateList = ArrayList<ResultGetDropDown>()
     private var currentPage = 1
+    private var savedAndNext:Boolean=false
     private var totalPage = 1
     private var loading = true
     private var itemId: Int? = null
@@ -132,8 +133,15 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
                 if(userResponseModel._resultflag==0){
                     showSnackbar(mBinding!!.main, userResponseModel.message)
                 }
+
                     else{
-                    if(viewEdit=="view"||viewEdit=="edit")
+                    formId=userResponseModel._result.id
+                    if(savedAndNext)
+                    {
+                        onBackPressedDispatcher.onBackPressed()
+                        showSnackbar(mBinding!!.main, userResponseModel.message)
+                    }
+                    else if(viewEdit=="view"||viewEdit=="edit")
                     {
                         mBinding?.etInput1a?.setText(userResponseModel._result.schedule_vaccination_focal_point_input)
                         mBinding?.etInput1b?.setText(userResponseModel._result.schedule_vaccination_timeline_inputs)
@@ -156,7 +164,9 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
                         mBinding?.etChoosefile1e?.text=userResponseModel._result.schedule_vaccination_assign_areas_upload
                         mBinding?.etChooseFile2?.text=userResponseModel._result.seromonitoring_facilities_upload
                         mBinding?.etChooseFile3?.text=userResponseModel._result.process_plan_monitoring_upload
+
                     }
+
                     showSnackbar(mBinding!!.main, userResponseModel.message)
                     }
             }
@@ -262,7 +272,9 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
         fun saveAndNext(view: View) {
 
               if(vaild())
-              {saveDataApi(0)
+              {
+
+                  saveDataApi(2)
                   showSnackbar(mBinding!!.main, "Data Saved")
               }
               else{
@@ -272,7 +284,7 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
         fun saveAsDraft(view: View) {
             if(vaild())
             {
-                saveDataApi(1)
+                saveDataApi(3)
                 showSnackbar(mBinding!!.main, "Data Saved")
             }
             else{
@@ -324,9 +336,10 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
             ))
     }
     private fun saveDataApi(isDraft:Int?){
+        savedAndNext=true
         viewModel.getStateVaccinationProgrammeAdd(this@AddVaccinationProgrammeStateLevel,true,
             StateVaccinationProgrammeAddRequest(
-                is_draft = isDraft,
+                status = isDraft,
                 state_code = stateId,
                 user_id = getPreferenceOfScheme(
                     this@AddVaccinationProgrammeStateLevel,
@@ -338,27 +351,27 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.role_id,
-                schedule_vaccination_focal_point_input=mBinding?.etInput1a.toString(),
-                schedule_vaccination_focal_point_remark=mBinding?.etRemark1a.toString(),
-                schedule_vaccination_focal_point_upload =mBinding?.etChooseFile1a.toString(),
-                schedule_vaccination_timeline_inputs=mBinding?.etInput1b.toString(),
-                schedule_vaccination_timeline_remarks=mBinding?.etRemark1b.toString(),
-                schedule_vaccination_timeline_upload =mBinding?.etChooseFile1b.toString(),
-                schedule_vaccination_arrangement_inputs=mBinding?.etInput1c.toString(),
-                schedule_vaccination_arrangement_remarks =mBinding?.etRemark1c.toString(),
-                schedule_vaccination_arrangement_upload =mBinding?.etChooseFile1c.toString(),
-                schedule_vaccination_cold_chain_avail_inputs=mBinding?.etInput1d.toString(),
-                schedule_vaccination_cold_chain_avail_remarks =mBinding?.etRemark1d.toString(),
-                schedule_vaccination_cold_chain_avail_upload =mBinding?.etChooseFile1d.toString(),
-                schedule_vaccination_assign_areas_inputs=mBinding?.etInput1e.toString(),
-                schedule_vaccination_assign_areas_remarks=mBinding?.etRemark1e.toString(),
-                schedule_vaccination_assign_areas_upload =mBinding?.etChoosefile1e.toString(),
-                seromonitoring_facilities_input=mBinding?.etInput2.toString(),
-                seromonitoring_facilitie_remarks=mBinding?.etRemark2.toString(),
-                seromonitoring_facilities_upload =mBinding?.etChooseFile2.toString(),
-                process_plan_monitoring_inputs=mBinding?.etInput3.toString(),
-                process_plan_monitoring_remarks =mBinding?.etRemark3.toString(),
-                process_plan_monitoring_upload =mBinding?.etChooseFile3.toString(),
+                schedule_vaccination_focal_point_input=mBinding?.etInput1a?.text.toString(),
+                schedule_vaccination_focal_point_remark=mBinding?.etRemark1a?.text.toString(),
+                schedule_vaccination_focal_point_upload =mBinding?.etChooseFile1a?.text.toString(),
+                schedule_vaccination_timeline_inputs=mBinding?.etInput1b?.text.toString(),
+                schedule_vaccination_timeline_remarks=mBinding?.etRemark1b?.text.toString(),
+                schedule_vaccination_timeline_upload =mBinding?.etChooseFile1b?.text.toString(),
+                schedule_vaccination_arrangement_inputs=mBinding?.etInput1c?.text.toString(),
+                schedule_vaccination_arrangement_remarks =mBinding?.etRemark1c?.text.toString(),
+                schedule_vaccination_arrangement_upload =mBinding?.etChooseFile1c?.text.toString(),
+                schedule_vaccination_cold_chain_avail_inputs=mBinding?.etInput1d?.text.toString(),
+                schedule_vaccination_cold_chain_avail_remarks =mBinding?.etRemark1d?.text.toString(),
+                schedule_vaccination_cold_chain_avail_upload =mBinding?.etChooseFile1d?.text.toString(),
+                schedule_vaccination_assign_areas_inputs=mBinding?.etInput1e?.text.toString(),
+                schedule_vaccination_assign_areas_remarks=mBinding?.etRemark1e?.text.toString(),
+                schedule_vaccination_assign_areas_upload =mBinding?.etChoosefile1e?.text.toString(),
+                seromonitoring_facilities_input=mBinding?.etInput2?.text.toString(),
+                seromonitoring_facilitie_remarks=mBinding?.etRemark2?.text.toString(),
+                seromonitoring_facilities_upload =mBinding?.etChooseFile2?.text.toString(),
+                process_plan_monitoring_inputs=mBinding?.etInput3?.text.toString(),
+                process_plan_monitoring_remarks =mBinding?.etRemark3?.text.toString(),
+                process_plan_monitoring_upload =mBinding?.etChooseFile3?.text.toString(),
                 id = formId
 
 
