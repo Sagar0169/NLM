@@ -823,7 +823,7 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                                 return@observe
                             }
                             toast(viewEdit.toString())
-                            mBinding?.tvState?.text = userResponseModel._result.input_mechanism_operation
+                            mBinding?.tvState?.text = userResponseModel._result.state_name
                             mBinding?.etInputOne?.setText(userResponseModel._result.input_mechanism_operation)
                             mBinding?.etRemarkOne?.setText(userResponseModel._result.mechanism_operation_remarks)
                             mBinding?.etInputTwo?.setText(userResponseModel._result.input_engagement_indicators)
@@ -851,19 +851,25 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                             mBinding?.etInputF?.setText(userResponseModel._result.input_data_compilation_analysis_done)
                             mBinding?.etRemarkF?.setText(userResponseModel._result.data_compilation_analysis_done_remarks)
 
-                            mBinding?.tvNoFileOne?.text = userResponseModel._result.mechanism_operation_inputs
-                            mBinding?.tvNoFileTwo?.text = userResponseModel._result.engagement_indicators_inputs
-                            mBinding?.tvNoFileThree?.text = userResponseModel._result.procurement_procedure_inputs
-                            mBinding?.tvNoFileFour?.text = userResponseModel._result.supply_procedure_inputs
-                            mBinding?.tvNoFileFive?.text = userResponseModel._result.is_monitoring_supervision_medic_equip_inputs
-                            mBinding?.tvNoFileSix?.text = userResponseModel._result.is_monitoring_supervision_fuel_inputs
-                            mBinding?.tvNoFileSeven?.text = userResponseModel._result.call_center_inputs
-                            mBinding?.tvNoFileA?.text = userResponseModel._result.is_service_provider_engaged_inputs
-                            mBinding?.tvNoFileB?.text = userResponseModel._result.is_building_provided_operation_seats_inputs
-                            mBinding?.tvNoFileC?.text = userResponseModel._result.are_operators_engaged_inputs
-                            mBinding?.tvNoFileD?.text = userResponseModel._result.is_app_crm_place_inputs
-                            mBinding?.tvNoFileE?.text = userResponseModel._result.are_adequate_staff_inputs
-                            mBinding?.tvNoFileF?.text = userResponseModel._result.data_compilation_analysis_done_inputs
+                            mBinding?.tvNoFileOne?.text = if (userResponseModel._result.mechanism_operation_inputs.isNullOrEmpty()) {
+                                "No file chosen"
+                            } else {
+                                userResponseModel._result.mechanism_operation_inputs
+                            }
+
+                            mBinding?.tvNoFileTwo?.text = if (userResponseModel._result.engagement_indicators_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.engagement_indicators_inputs
+                            mBinding?.tvNoFileThree?.text = if (userResponseModel._result.procurement_procedure_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.procurement_procedure_inputs
+                            mBinding?.tvNoFileFour?.text = if (userResponseModel._result.supply_procedure_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.supply_procedure_inputs
+                            mBinding?.tvNoFileFive?.text = if (userResponseModel._result.is_monitoring_supervision_medic_equip_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_monitoring_supervision_medic_equip_inputs
+                            mBinding?.tvNoFileSix?.text = if (userResponseModel._result.is_monitoring_supervision_fuel_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_monitoring_supervision_fuel_inputs
+                            mBinding?.tvNoFileSeven?.text = if (userResponseModel._result.call_center_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.call_center_inputs
+                            mBinding?.tvNoFileA?.text = if (userResponseModel._result.is_service_provider_engaged_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_service_provider_engaged_inputs
+                            mBinding?.tvNoFileB?.text = if (userResponseModel._result.is_building_provided_operation_seats_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_building_provided_operation_seats_inputs
+                            mBinding?.tvNoFileC?.text = if (userResponseModel._result.are_operators_engaged_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.are_operators_engaged_inputs
+                            mBinding?.tvNoFileD?.text = if (userResponseModel._result.is_app_crm_place_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_app_crm_place_inputs
+                            mBinding?.tvNoFileE?.text = if (userResponseModel._result.are_adequate_staff_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.are_adequate_staff_inputs
+                            mBinding?.tvNoFileF?.text = if (userResponseModel._result.data_compilation_analysis_done_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.data_compilation_analysis_done_inputs
+
 
 
                         } else {

@@ -1,5 +1,6 @@
 package com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -342,6 +343,7 @@ class AddNewMobileVeterinaryUnitDistrict : BaseActivity<ActivityAddNewMobileVete
         startActivityForResult(intent, REQUEST_iMAGE_PDF)
     }
 
+    @SuppressLint("Range")
     @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -536,11 +538,12 @@ class AddNewMobileVeterinaryUnitDistrict : BaseActivity<ActivityAddNewMobileVete
                             mBinding?.etRemarkFive?.setText(userResponseModel._result.medicine_requirement_remarks)
                             mBinding?.tvDistrict?.text = userResponseModel._result.district_name
 
-                            mBinding?.tvNoFileOne?.text = userResponseModel._result.mechanism_medicines_inputs
-                            mBinding?.tvNoFileTwo?.text = userResponseModel._result.organize_awareness_camp_inputs
-                            mBinding?.tvNoFileThree?.text = userResponseModel._result.distribution_medicines_role_inputs
-                            mBinding?.tvNoFileFour?.text = userResponseModel._result.distribution_fuel_role_inputs
-                            mBinding?.tvNoFileFive?.text = userResponseModel._result.medicine_requirement_inputs
+                            mBinding?.tvNoFileOne?.text = if (userResponseModel._result.mechanism_medicines_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.mechanism_medicines_inputs
+                            mBinding?.tvNoFileTwo?.text = if (userResponseModel._result.organize_awareness_camp_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.organize_awareness_camp_inputs
+                            mBinding?.tvNoFileThree?.text = if (userResponseModel._result.distribution_medicines_role_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.distribution_medicines_role_inputs
+                            mBinding?.tvNoFileFour?.text = if (userResponseModel._result.distribution_fuel_role_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.distribution_fuel_role_inputs
+                            mBinding?.tvNoFileFive?.text = if (userResponseModel._result.medicine_requirement_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.medicine_requirement_inputs
+
 
                         }
                         else{

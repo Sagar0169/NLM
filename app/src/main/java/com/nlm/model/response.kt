@@ -1698,6 +1698,7 @@ data class StateMobileVeterinaryUnitAddResult(
     val role_id: Int,
     val state_code: Int,
     val status: String,
+    val state_name: String,
     val supply_procedure_inputs: String,
     val supply_procedure_remarks: String,
     val user_id: Int

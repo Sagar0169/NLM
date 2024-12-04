@@ -548,11 +548,12 @@ class AddNewMobileVeterinaryUnitBlock :
                                 mBinding?.etBlock?.setText(userResponseModel._result.block_name)
                                 mBinding?.tvDistrict?.text = userResponseModel._result.district_name
 
-                                mBinding?.tvNoFileOne?.text = userResponseModel._result.general_monitoring_block_inputs
-                                mBinding?.tvNoFileTwo?.text = userResponseModel._result.machanism_attendance_staff_inputs
-                                mBinding?.tvNoFileThree?.text = userResponseModel._result.stock_management_inputs
-                                mBinding?.tvNoFileFour?.text = userResponseModel._result.monitoring_tracking_call_inputs
-                                mBinding?.tvNoFileFive?.text = userResponseModel._result.any_other_block_inputs
+                                mBinding?.tvNoFileOne?.text = if (userResponseModel._result.general_monitoring_block_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.general_monitoring_block_inputs
+                                mBinding?.tvNoFileTwo?.text = if (userResponseModel._result.machanism_attendance_staff_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.machanism_attendance_staff_inputs
+                                mBinding?.tvNoFileThree?.text = if (userResponseModel._result.stock_management_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.stock_management_inputs
+                                mBinding?.tvNoFileFour?.text = if (userResponseModel._result.monitoring_tracking_call_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.monitoring_tracking_call_inputs
+                                mBinding?.tvNoFileFive?.text = if (userResponseModel._result.any_other_block_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.any_other_block_inputs
+
 
                             } else {
                                 onBackPressedDispatcher.onBackPressed()

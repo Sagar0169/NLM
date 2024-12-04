@@ -73,7 +73,7 @@ class MobileVeterinaryAdapter(
             }
 
             context.getString(R.string.farmer_level) -> {
-                holder.mBinding.llBlock.hideView()
+                holder.mBinding.llBlock.showView()
                 holder.mBinding.llDistrict.showView()
                 holder.mBinding.llFarmer.showView()
             }
@@ -81,6 +81,7 @@ class MobileVeterinaryAdapter(
         holder.mBinding.etState.text = item.state_name
         holder.mBinding.etDistrict.text = item.district_name
         holder.mBinding.etFarmer.text = item.village_name
+        holder.mBinding.etBlockName.text = item.block_name
         holder.mBinding.etNlmStatus.text = item.status
         holder.mBinding.etCreatedAt.text = convertDate(item.created)
         holder.mBinding.etCreatedBy.text = item.created_by
