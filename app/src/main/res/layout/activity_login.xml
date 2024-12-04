@@ -42,6 +42,7 @@
 
 
             <LinearLayout
+                android:backgroundTint="@color/white"
                 android:id="@+id/llParent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -49,7 +50,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dp_20"
                 android:background="@drawable/employee_home_bg"
-                android:backgroundTint="@color/white"
                 android:elevation="@dimen/dp_5"
                 android:orientation="vertical"
                 android:padding="@dimen/dp_10">
@@ -61,7 +61,7 @@
                     android:layout_marginStart="@dimen/dp_14"
                     android:layout_marginTop="@dimen/dp_5"
                     android:text="Welcome Back!"
-                    android:textColor="#2C2C2C"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="@dimen/sp_20"
                     app:fontFamily="@font/inter_regular" />
@@ -73,7 +73,7 @@
                     android:layout_marginStart="@dimen/dp_14"
                     android:layout_marginTop="@dimen/dp_10"
                     android:text="To Keep connected with us please login with your personal info"
-                    android:textColor="#2C2C2C"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/inter_regular"
                     android:textSize="@dimen/sp_15" />
 
@@ -168,6 +168,7 @@
 
                     <!-- Forgot Password text on the right -->
                     <TextView
+                        android:textColor="@color/black"
                         android:id="@+id/tvForgotPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -176,7 +177,6 @@
                         android:textStyle="bold"
                         android:fontFamily="@font/inter_regular"
                         android:text="Forgot Password?"
-                        android:textColor="#174978"
                         android:textSize="15sp" />
                 </LinearLayout>
 

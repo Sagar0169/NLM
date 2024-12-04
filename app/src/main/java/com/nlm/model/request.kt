@@ -328,6 +328,8 @@ data class ImplementingAgencyAddRequest(
     val sheep_breeding_farms_number: Int? = null,
     val status: Int? = null,
     val user_id: String? = null,
+    val lattitude: Double? = null,
+    val longitude: Double? = null,
     val is_type: String? = null,
     val implementing_agency_document: List<ImplementingAgencyDocument>? = null,
     val is_deleted: Int? = null,
@@ -824,6 +826,7 @@ data class AscadListRequest(
 )
 
 data class StateVaccinationProgrammeAddRequest(
+    val is_draft: Int?=null,
     val created_by: Int?= null,
     val id: Int?= null,
     val is_deleted: Int?= null,

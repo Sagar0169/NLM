@@ -344,6 +344,7 @@
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
+                                android:onClick="@{ClickAction::ChooseFile1a}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -467,6 +468,7 @@
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
+                                android:onClick="@{ClickAction::ChooseFile1b}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -590,6 +592,7 @@
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
+                                android:onClick="@{ClickAction::ChooseFile1c}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -712,6 +715,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
+                                android:onClick="@{ClickAction::ChooseFile1d}"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -836,6 +840,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
+                                android:onClick="@{ClickAction::ChooseFile1e}"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -967,6 +972,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
+                                android:onClick="@{ClickAction::ChooseFile2}"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -1097,6 +1103,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:enabled="false"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::ChooseFile3}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"

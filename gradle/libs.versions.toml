@@ -33,6 +33,8 @@ runtimeSavedInstanceState = "1.0.0-alpha11"
 material3Android = "1.3.1"
 uiToolingPreviewAndroid = "1.6.0"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
+preferenceKtx = "1.2.1"
+
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
@@ -69,6 +71,7 @@ retrofit2-adapter-rxjava2 = { module = "com.squareup.retrofit2:adapter-rxjava2",
 rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid" }
 rxkotlin = { module = "io.reactivex.rxjava2:rxkotlin", version.ref = "rxkotlin" }
 androidx-runtime-saved-instance-state = { group = "androidx.compose.runtime", name = "runtime-saved-instance-state", version.ref = "runtimeSavedInstanceState" }
+androidx-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preferenceKtx" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 androidx-ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
 
