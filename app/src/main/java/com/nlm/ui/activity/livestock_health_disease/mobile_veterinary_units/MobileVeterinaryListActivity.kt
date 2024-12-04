@@ -61,16 +61,19 @@ class MobileVeterinaryListActivity : BaseActivity<ActivityStateMobileVeterinaryB
         isFrom = intent?.extras?.getString(AppConstants.IS_FROM)
         when (isFrom) {
             getString(R.string.state) -> {
+                mBinding?.tvHeading?.text= "State Mobile Veterinary Unit"
                 mobileVeterinaryAdapter(stateMobileVeterinaryList)
                 isFromList = 41
             }
 
             getString(R.string.district) -> {
+                mBinding?.tvHeading?.text= "District Mobile Veterinary Unit"
                 mobileVeterinaryAdapter(districtMobileVeterinaryList)
                 isFromList = 42
             }
 
             getString(R.string.block_level) -> {
+                mBinding?.tvHeading?.text= "Block Mobile Veterinary Unit"
                 mobileVeterinaryAdapter(blockMobileVeterinaryList)
                 isFromList = 43
             }
