@@ -24,7 +24,6 @@ import com.nlm.ui.activity.DashboardActivity
 import com.nlm.ui.activity.LoginActivity
 import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility
-import com.warroom.biometric.BiometricPromptManager
 import com.warroom.ui.theme.NLMTheme
 
 class ComposeActivity : AppCompatActivity() {

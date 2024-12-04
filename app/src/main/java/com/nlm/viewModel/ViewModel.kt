@@ -285,7 +285,7 @@ class ViewModel : ViewModel() {
 
     fun getDashboardApi(context: Context, request: LogoutRequest) {
         // can be launched in a separate asynchronous job
-        networkCheck(context, true)
+        networkCheck(context, false)
 
         job = scope.launch {
             try {

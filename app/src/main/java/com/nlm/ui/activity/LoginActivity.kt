@@ -18,12 +18,10 @@ import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.getPreferenceString
-import com.nlm.utilities.Utility.getPreferencesBoolean
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.crypt.EncryptionHelper
-import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
-import com.warroom.biometric.BiometricPromptManager
+import com.nlm.biometric.BiometricPromptManager
 import kotlinx.coroutines.launch
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
@@ -45,7 +43,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 //        mBinding?.checkBoxRememberMe?.isChecked = isRemembered
 
         if (isRemembered) {
-            Log.d("Boolean",isRemembered.toString())
             mBinding?.etUsername?.setText(
                 getPreferenceString(
                     this,
@@ -61,8 +58,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         }
 
 
-//        toast(getPreferenceString(this,PrefEntities.TOKEN ))
-        Log.d("Scheme", getPreferenceString(this, AppConstants.SCHEME))
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
@@ -70,7 +65,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         mBinding?.checkBoxRememberMe?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 Utility.savePreferencesString(this@LoginActivity, AppConstants.REMEMBER_MEE, "isChecked")
-                toast("Remember Me enabled")
             } else {
                 Utility.savePreferencesString(this@LoginActivity, AppConstants.REMEMBER_MEE, "unchecked")
             }
