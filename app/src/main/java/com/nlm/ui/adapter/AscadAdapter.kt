@@ -11,6 +11,8 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemVaccinationProgrammerBinding
 import com.nlm.model.AscadListData
+import com.nlm.ui.activity.livestock_health_disease.ascad.AddAscadDistrictActivity
+import com.nlm.ui.activity.livestock_health_disease.ascad.AddAscadStateActivity
 import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitState
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
@@ -82,16 +84,36 @@ class AscadAdapter(
         }
 
         holder.mBinding.ivView.setOnClickListener {
-            context.startActivity(
-                Intent(context, AddNewMobileVeterinaryUnitState::class.java)
-                .putExtra("View/Edit", "view")
-                .putExtra("itemId", item.id))
+            if(isFrom == context.getString(R.string.state)) {
+                context.startActivity(
+                    Intent(context, AddAscadStateActivity::class.java)
+                        .putExtra("View/Edit", "view")
+                        .putExtra("itemId", item.id)
+                )
+            }
+            else if(isFrom == context.getString(R.string.district)){
+                context.startActivity(
+                    Intent(context, AddAscadDistrictActivity::class.java)
+                        .putExtra("View/Edit", "view")
+                        .putExtra("itemId", item.id)
+                )
+            }
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            context.startActivity(
-                Intent(context, AddNewMobileVeterinaryUnitState::class.java)
-                .putExtra("View/Edit", "edit")
-                .putExtra("itemId", item.id))
+            if(isFrom == context.getString(R.string.state)) {
+                context.startActivity(
+                    Intent(context, AddAscadStateActivity::class.java)
+                        .putExtra("View/Edit", "edit")
+                        .putExtra("itemId", item.id)
+                )
+            }
+            else if(isFrom == context.getString(R.string.district)){
+                context.startActivity(
+                    Intent(context, AddAscadDistrictActivity::class.java)
+                        .putExtra("View/Edit", "edit")
+                        .putExtra("itemId", item.id)
+                )
+            }
         }
 
         holder.mBinding.ivDelete.setOnClickListener {
