@@ -5,6 +5,7 @@ import android.view.View
 import com.nlm.R
 import com.nlm.databinding.ActivityAscadBinding
 import com.nlm.utilities.AppConstants
+
 import com.nlm.utilities.BaseActivity
 
 class AscadActivity : BaseActivity<ActivityAscadBinding>() {

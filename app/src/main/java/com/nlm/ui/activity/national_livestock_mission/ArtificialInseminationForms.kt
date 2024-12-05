@@ -2,8 +2,10 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.provider.MediaStore
@@ -16,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -31,6 +34,7 @@ import com.nlm.model.GetDropDownRequest
 import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.ObservationAIAdapter
 import com.nlm.ui.adapter.StateAdapter
@@ -45,6 +49,8 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -77,6 +83,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     private var DocumentId:Int?=null
     private var UploadedDocumentName:String?=null
     private lateinit var viewDocumentList: MutableList<ImplementingAgencyDocument>
+    private var latitude:Double?=null
+    private var longitude:Double?=null
     private val state = listOf(
         "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
     )
@@ -84,6 +92,13 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     private val district = listOf(
         "Black", "Brown", "Blue", "Reddish", "Green", "Other"
     )
+
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
@@ -147,7 +162,19 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     override fun setVariables() {
 
     }
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
 
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(locationReceiver)
+    }
     override fun setObservers() {
         viewModel.getDropDownResult.observe(this) {
             val userResponseModel = it
@@ -293,134 +320,160 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         }
 
         fun saveAsDraft(view: View){
-            if (getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
-            {
-                if(mBinding?.etDistrictIa?.text.toString().isNotEmpty())
-                {
-                    TotalDocumentList.clear()
-                    TotalDocumentList.addAll(DocumentList)
-                    TotalDocumentList.addAll(viewDocumentList)
-                    isSubmitted=true
-                    viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
-                        ArtificialInseminationAddRequest(
-                            state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
-                            district_code = districtId,
-                            user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
-                            artificial_insemination_observation_by_nlm = ObservationBynlmList,
-                            artificial_insemination_document = TotalDocumentList,
-                            is_deleted = 0,
-                            is_draft = 1,
-                            total_sheep_goat_labs =mBinding?.etTotalNoOfSheepIa?.text.toString().toIntOrNull(),
-                            liquid_nitrogen = mBinding?.etLiquidNitrogen?.text.toString(),
-                            frozen_semen_straws = mBinding?.etFrozenSemenStraws?.text.toString(),
-                            cryocans = mBinding?.etCryocans?.text.toString(),
-                            exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
-                            role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
-                            is_type = null,
-                            id = formId,
-                        )
-                    )
-                }
-                else{
-                    showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
-                }
-            }
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@ArtificialInseminationForms, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if(latitude!=null&&longitude!=null)
+                    {
+                        if (getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+                        {
+                            if(mBinding?.etDistrictIa?.text.toString().isNotEmpty())
+                            {
+                                TotalDocumentList.clear()
+                                TotalDocumentList.addAll(DocumentList)
+                                TotalDocumentList.addAll(viewDocumentList)
+                                isSubmitted=true
+                                viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
+                                    ArtificialInseminationAddRequest(
+                                        state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
+                                        district_code = districtId,
+                                        user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
+                                        artificial_insemination_observation_by_nlm = ObservationBynlmList,
+                                        artificial_insemination_document = TotalDocumentList,
+                                        is_deleted = 0,
+                                        is_draft = 1,
+                                        total_sheep_goat_labs =mBinding?.etTotalNoOfSheepIa?.text.toString().toIntOrNull(),
+                                        liquid_nitrogen = mBinding?.etLiquidNitrogen?.text.toString(),
+                                        frozen_semen_straws = mBinding?.etFrozenSemenStraws?.text.toString(),
+                                        cryocans = mBinding?.etCryocans?.text.toString(),
+                                        exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
+                                        role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                                        is_type = null,
+                                        id = formId,
+                                        lattitude_ia=latitude,
+                                        longitude_ia = longitude
+                                    )
+                                )
+                            }
+                            else{
+                                showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
+                            }
+                        }
 
-            else{
-                if(mBinding?.etDistrict?.text.toString().isNotEmpty())
-                {
-                    TotalDocumentList.clear()
-                    TotalDocumentList.addAll(DocumentList)
-                    TotalDocumentList.addAll(viewDocumentList)
-                    isSubmitted=true
-                    viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
-                    ArtificialInseminationAddRequest(
-                        state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
-                        district_code = districtId,
-                        user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
-                        artificial_insemination_observation_by_nlm = ObservationBynlmList,
-                        artificial_insemination_document = TotalDocumentList,
-                        is_deleted = 0,
-                        is_draft = 1,
-                        total_sheep_goat_labs =mBinding?.etTotalNoOfSheep?.text.toString().toIntOrNull(),
-                        liquid_nitrogen = null,
-                        frozen_semen_straws = null,
-                        cryocans = null,
-                        exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
-                        role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
-                        is_type = null,
-                        id = formId,
-                    )
-                )}
-                else{
-                    showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
-                }
-            }
+                        else{
+                            if(mBinding?.etDistrict?.text.toString().isNotEmpty())
+                            {
+                                TotalDocumentList.clear()
+                                TotalDocumentList.addAll(DocumentList)
+                                TotalDocumentList.addAll(viewDocumentList)
+                                isSubmitted=true
+                                viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
+                                    ArtificialInseminationAddRequest(
+                                        state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
+                                        district_code = districtId,
+                                        user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
+                                        artificial_insemination_observation_by_nlm = ObservationBynlmList,
+                                        artificial_insemination_document = TotalDocumentList,
+                                        is_deleted = 0,
+                                        is_draft = 1,
+                                        total_sheep_goat_labs =mBinding?.etTotalNoOfSheep?.text.toString().toIntOrNull(),
+                                        liquid_nitrogen = null,
+                                        frozen_semen_straws = null,
+                                        cryocans = null,
+                                        exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
+                                        role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                                        is_type = null,
+                                        id = formId,
+                                        lattitude_nlm=latitude,
+                                        longitude_nlm = longitude
+                                    )
+                                )}
+                            else{
+                                showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
+                            }
+                        }
+                    }}}
+
         }
         fun saveAndNext(view: View){
-            if (getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
-            {
-                if(mBinding?.etDistrictIa?.text.toString().isNotEmpty())
-                {
-                    TotalDocumentList.clear()
-                    TotalDocumentList.addAll(DocumentList)
-                    TotalDocumentList.addAll(viewDocumentList)
-                    isSubmitted=true
-                    viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
-                        ArtificialInseminationAddRequest(
-                            state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
-                            district_code = districtId,
-                            user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
-                            artificial_insemination_observation_by_nlm = ObservationBynlmList,
-                            artificial_insemination_document = TotalDocumentList,
-                            is_deleted = 0,
-                            is_draft = 0,
-                            total_sheep_goat_labs =mBinding?.etTotalNoOfSheepIa?.text.toString().toIntOrNull(),
-                            liquid_nitrogen = mBinding?.etLiquidNitrogen?.text.toString(),
-                            frozen_semen_straws = mBinding?.etFrozenSemenStraws?.text.toString(),
-                            cryocans = mBinding?.etCryocans?.text.toString(),
-                            exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
-                            role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
-                            is_type = null,
-                            id = formId,
-                        )
-                    )
-                }
-                else{
-                    showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
-                }
-            }
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@ArtificialInseminationForms, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if(latitude!=null&&longitude!=null)
+                    {
+                        if (getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+                        {
+                            if(mBinding?.etDistrictIa?.text.toString().isNotEmpty())
+                            {
+                                TotalDocumentList.clear()
+                                TotalDocumentList.addAll(DocumentList)
+                                TotalDocumentList.addAll(viewDocumentList)
+                                isSubmitted=true
+                                viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
+                                    ArtificialInseminationAddRequest(
+                                        state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
+                                        district_code = districtId,
+                                        user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
+                                        artificial_insemination_observation_by_nlm = ObservationBynlmList,
+                                        artificial_insemination_document = TotalDocumentList,
+                                        is_deleted = 0,
+                                        is_draft = 0,
+                                        total_sheep_goat_labs =mBinding?.etTotalNoOfSheepIa?.text.toString().toIntOrNull(),
+                                        liquid_nitrogen = mBinding?.etLiquidNitrogen?.text.toString(),
+                                        frozen_semen_straws = mBinding?.etFrozenSemenStraws?.text.toString(),
+                                        cryocans = mBinding?.etCryocans?.text.toString(),
+                                        exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
+                                        role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                                        is_type = null,
+                                        id = formId,
+                                        lattitude_ia=latitude,
+                                        longitude_ia = longitude
+                                    )
+                                )
+                            }
+                            else{
+                                showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
+                            }
+                        }
 
-            else{
-                if(mBinding?.etDistrict?.text.toString().isNotEmpty())
-                {
-                    TotalDocumentList.clear()
-                    TotalDocumentList.addAll(DocumentList)
-                    TotalDocumentList.addAll(viewDocumentList)
-                    isSubmitted=true
-                    viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
-                        ArtificialInseminationAddRequest(
-                            state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
-                            district_code = districtId,
-                            user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
-                            artificial_insemination_observation_by_nlm = ObservationBynlmList,
-                            artificial_insemination_document = TotalDocumentList,
-                            is_deleted = 0,
-                            is_draft = 0,
-                            total_sheep_goat_labs =mBinding?.etTotalNoOfSheep?.text.toString().toIntOrNull(),
-                            liquid_nitrogen = null,
-                            frozen_semen_straws = null,
-                            cryocans = null,
-                            exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
-                            role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
-                            is_type = null,
-                            id = formId,
-                        )
-                    )}
-                else{
-                    showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
-                }
-            }
+                        else{
+                            if(mBinding?.etDistrict?.text.toString().isNotEmpty())
+                            {
+                                TotalDocumentList.clear()
+                                TotalDocumentList.addAll(DocumentList)
+                                TotalDocumentList.addAll(viewDocumentList)
+                                isSubmitted=true
+                                viewModel.getArtificialInseminationAdd(this@ArtificialInseminationForms,true,
+                                    ArtificialInseminationAddRequest(
+                                        state_code = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.state_code,
+                                        district_code = districtId,
+                                        user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
+                                        artificial_insemination_observation_by_nlm = ObservationBynlmList,
+                                        artificial_insemination_document = TotalDocumentList,
+                                        is_deleted = 0,
+                                        is_draft = 0,
+                                        total_sheep_goat_labs =mBinding?.etTotalNoOfSheep?.text.toString().toIntOrNull(),
+                                        liquid_nitrogen = null,
+                                        frozen_semen_straws = null,
+                                        cryocans = null,
+                                        exotic_sheep_goat = mBinding?.etImportExotics?.text.toString(),
+                                        role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                                        is_type = null,
+                                        id = formId,
+                                        lattitude_nlm=latitude,
+                                        longitude_nlm = longitude
+                                    )
+                                )}
+                            else{
+                                showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
+                            }
+                        }
+                    }}}
+
 
 
         }

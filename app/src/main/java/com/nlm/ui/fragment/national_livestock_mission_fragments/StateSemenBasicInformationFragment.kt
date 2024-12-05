@@ -1,7 +1,10 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -14,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -30,6 +34,7 @@ import com.nlm.model.ResultGetDropDown
 import com.nlm.model.RspAddAverage
 import com.nlm.model.StateSemenBankNLMRequest
 import com.nlm.model.StateSemenBankOtherAddManpower
+import com.nlm.services.LocationService
 import com.nlm.ui.activity.national_livestock_mission.NLMIAForm
 import com.nlm.ui.activity.national_livestock_mission.StateSemenBankForms
 import com.nlm.ui.adapter.BottomSheetAdapter
@@ -44,6 +49,8 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class StateSemenBasicInformationFragment(
@@ -74,6 +81,26 @@ class StateSemenBasicInformationFragment(
     private lateinit var stateSemenManPowerList: MutableList<StateSemenBankOtherAddManpower>
     private var stateSemenManPowerAdapter: RspManPowerAdapter? = null
     private var savedAsEdit: Boolean = false
+    private var latitude:Double?=null
+    private var longitude:Double?=null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        requireContext().registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        requireContext().unregisterReceiver(locationReceiver)
+    }
 
 
     private val typeSemen = listOf(
@@ -441,41 +468,57 @@ class StateSemenBasicInformationFragment(
                 mBinding?.clParent?.let { showSnackbar(it, "Pin code is required") }
                 return
             }
-            viewModel.getStateSemenAddBankApi(
-                requireContext(), true,
-                StateSemenBankNLMRequest(
-                    id = itemId,
-                    address = address,
-                    area_fodder_cultivation = areaForFodder,
-                    location = location,
-                    area_under_buildings = areaUnderBuilding,
-                    district_code = districtId,
-                    phone_no = phoneNumber.toLongOrNull(),
-                    pin_code = pincode.toIntOrNull(),
-                    quality_status = qualityStatus,
-                    type_of_semen_station = typeOfSemen,
-                    role_id = getPreferenceOfScheme(
-                        requireContext(),
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.role_id,
-                    state_code = getPreferenceOfScheme(
-                        requireContext(),
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.state_code,
-                    user_id = getPreferenceOfScheme(
-                        requireContext(),
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.user_id.toString(),
-                    year_of_establishment = yearOfEstablishment,
-                    manpower_no_of_people = manpower.toIntOrNull(),
-                    officer_in_charge_name = officerInCharge,
-                    state_semen_bank_other_manpower = stateSemenManPowerList,
-                    is_draft = 1,
-                )
-            )
+            if (hasLocationPermissions()) {
+                val intent = Intent(requireContext(), LocationService::class.java)
+                requireContext().startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if (latitude != null && longitude != null) {
+
+                        viewModel.getStateSemenAddBankApi(
+                            requireContext(), true,
+                            StateSemenBankNLMRequest(
+                                id = itemId,
+                                address = address,
+                                area_fodder_cultivation = areaForFodder,
+                                location = location,
+                                area_under_buildings = areaUnderBuilding,
+                                district_code = districtId,
+                                phone_no = phoneNumber.toLongOrNull(),
+                                pin_code = pincode.toIntOrNull(),
+                                quality_status = qualityStatus,
+                                type_of_semen_station = typeOfSemen,
+                                role_id = getPreferenceOfScheme(
+                                    requireContext(),
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    requireContext(),
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    requireContext(),
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                year_of_establishment = yearOfEstablishment,
+                                manpower_no_of_people = manpower.toIntOrNull(),
+                                officer_in_charge_name = officerInCharge,
+                                state_semen_bank_other_manpower = stateSemenManPowerList,
+                                is_draft = 1,
+                                lattitude = latitude,
+                                longitude = longitude
+                            )
+                        )
+                    }
+                    else{
+                        showSnackbar(mBinding!!.clParent,"No Location fetched")
+                    }
+                }
+            }
+
         }
 
 

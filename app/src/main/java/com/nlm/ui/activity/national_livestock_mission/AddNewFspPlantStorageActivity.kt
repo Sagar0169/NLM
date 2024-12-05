@@ -2,8 +2,10 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -18,6 +20,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -39,6 +42,7 @@ import com.nlm.model.RSPAddRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.RspAddAverage
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.FspPlantStorageNLMAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
@@ -54,6 +58,8 @@ import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -94,7 +100,14 @@ class AddNewFspPlantStorageActivity(
     private var isSubmitted: Boolean = false
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
-
+    private var latitude:Double?=null
+    private var longitude:Double?=null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
 
     private val variety = listOf(
         ResultGetDropDown(-1, "Class Wise"),
@@ -415,11 +428,110 @@ class AddNewFspPlantStorageActivity(
                 mBinding?.clParent?.let { showSnackbar(it,"At least one plant storage nlm comment is required") }
                 return
             }
-
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@AddNewFspPlantStorageActivity, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if(latitude!=null&&longitude!=null)
+                    {
+                        viewModel.getFpsPlantStorageADD(
+                            this@AddNewFspPlantStorageActivity, true,
+                            AddFspPlantStorageRequest(
+                                id = itemId,
+                                district_code = districtId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddNewFspPlantStorageActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddNewFspPlantStorageActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddNewFspPlantStorageActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                is_draft = draft,
+                                name_of_organization = if (mBinding?.etNoa?.text.isNullOrEmpty()) {
+                                    mBinding?.etEOA?.text.toString()
+                                } else {
+                                    mBinding?.etNoa?.text.toString()
+                                },
+                                location_address = mBinding?.etLoc?.text.toString(),
+                                purpose_of_establishment = mBinding?.etPurposeOfEst?.text.toString(),
+                                capacity_of_plant = mBinding?.etCapacityofPlant?.text.toString(),
+                                machinery_equipment_available = mBinding?.etMachinery?.text.toString(),
+                                quantity_fodder_seed_class = mBinding?.etQuality?.text.toString(),
+                                quantity_fodder_seed_variety = mBinding?.tvQuality?.text.toString(),
+                                technical_expertise = mBinding?.etTechnical?.text.toString(),
+                                certification_recognition = chooseDocName,
+                                fsp_plant_storage_comments_of_nlm = plantStorageList,
+                                fsp_plant_storage_document = totalListDocument,
+                                lattitude_nlm=latitude,
+                                longitude_nlm= longitude
+                            )
+                        )
+                    }}}
 
 
         }
         else{
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@AddNewFspPlantStorageActivity, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if(latitude!=null&&longitude!=null)
+                    {
+                        viewModel.getFpsPlantStorageADD(
+                            this@AddNewFspPlantStorageActivity, true,
+                            AddFspPlantStorageRequest(
+                                id = itemId,
+                                district_code = districtId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddNewFspPlantStorageActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddNewFspPlantStorageActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddNewFspPlantStorageActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                is_draft = draft,
+                                name_of_organization = if (mBinding?.etNoa?.text.isNullOrEmpty()) {
+                                    mBinding?.etEOA?.text.toString()
+                                } else {
+                                    mBinding?.etNoa?.text.toString()
+                                },
+                                location_address = mBinding?.etLoc?.text.toString(),
+                                purpose_of_establishment = mBinding?.etPurposeOfEst?.text.toString(),
+                                capacity_of_plant = mBinding?.etCapacityofPlant?.text.toString(),
+                                machinery_equipment_available = mBinding?.etMachinery?.text.toString(),
+                                quantity_fodder_seed_class = mBinding?.etQuality?.text.toString(),
+                                quantity_fodder_seed_variety = mBinding?.tvQuality?.text.toString(),
+                                technical_expertise = mBinding?.etTechnical?.text.toString(),
+                                certification_recognition = chooseDocName,
+                                fsp_plant_storage_comments_of_nlm = plantStorageList,
+                                fsp_plant_storage_document = totalListDocument,
+                                lattitude_ia=latitude,
+                                longitude_ia= longitude
+                            )
+                        )
+                    }
+                    else{
+                        showSnackbar(mBinding?.clParent!!,"no location found")
+                    }
+                }}
             if (state == "Please Select") {
                 mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
                 return
@@ -455,52 +567,6 @@ class AddNewFspPlantStorageActivity(
 
 
         }
-
-
-
-
-
-
-
-
-        viewModel.getFpsPlantStorageADD(
-            this@AddNewFspPlantStorageActivity, true,
-            AddFspPlantStorageRequest(
-                id = itemId,
-                district_code = districtId,
-                role_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                state_code = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id.toString(),
-                is_draft = draft,
-                name_of_organization = if (mBinding?.etNoa?.text.isNullOrEmpty()) {
-                    mBinding?.etEOA?.text.toString()
-                } else {
-                    mBinding?.etNoa?.text.toString()
-                },
-                location_address = mBinding?.etLoc?.text.toString(),
-                purpose_of_establishment = mBinding?.etPurposeOfEst?.text.toString(),
-                capacity_of_plant = mBinding?.etCapacityofPlant?.text.toString(),
-                machinery_equipment_available = mBinding?.etMachinery?.text.toString(),
-                quantity_fodder_seed_class = mBinding?.etQuality?.text.toString(),
-                quantity_fodder_seed_variety = mBinding?.tvQuality?.text.toString(),
-                technical_expertise = mBinding?.etTechnical?.text.toString(),
-                certification_recognition = chooseDocName,
-                fsp_plant_storage_comments_of_nlm = plantStorageList,
-                fsp_plant_storage_document = totalListDocument
-            )
-        )
     }
 
 
@@ -1160,5 +1226,17 @@ class AddNewFspPlantStorageActivity(
     override fun onClickItemDelete(ID: Int?, position: Int) {
         position.let { it1 -> plantStorageAdapter?.onDeleteButtonClick(it1) }
     }
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
 
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(locationReceiver)
+    }
 }

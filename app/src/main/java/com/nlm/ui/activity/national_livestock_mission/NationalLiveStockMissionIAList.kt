@@ -42,6 +42,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
     var stateId: Int = 0
     var nameOfLocation: String = ""
 
+
     companion object {
         const val FILTER_REQUEST_CODE = 1001
     }

@@ -119,7 +119,9 @@ data class Format6AssistanceForQspAddEdit(
     val target_achievement_class: Int?=null,
     val target_achievement_variety: String?=null,
     val technical_competance: String?=null,
-    val user_id: Int?=null
+    val user_id: Int?=null,
+    val lattitude: Double?=null,
+    val longitude: Double?=null,
 )
 
 
@@ -171,7 +173,11 @@ data class ArtificialInseminationAddRequest(
     val total_sheep_goat_labs: Int?=null,
     val user_id: Int?=null,
     val is_type: String?=null,
-    val id: Int?=null
+    val id: Int?=null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 
 data class ArtificialInseminationDocument(
@@ -199,7 +205,11 @@ data class ImportExoticGoatAddEditRequest(
     val is_type: String?,
     val id: Int?,
     val is_deleted: Int?,
-    val is_draft: Int?
+    val is_draft: Int?,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 
 data class ImportOfExoticGoatAchievement(
@@ -399,6 +409,7 @@ data class StateSemenBankNLMRequest(
     val is_deleted: Int? = null,
     val id: Int? = null,
     val is_draft: Int? = null,
+
     val location: String? = null,
     val major_clients_coop_fin_year_one: String? = null,
     val major_clients_coop_fin_year_three: String? = null,
@@ -423,10 +434,13 @@ data class StateSemenBankNLMRequest(
     val state_semen_bank_infrastructure: List<StateSemenInfraGoat>? = null,
     val state_semen_bank_other_manpower: MutableList<StateSemenBankOtherAddManpower>? = null,
     val status: Int? = null,
+    val longitude: Double? = null,
+    val lattitude: Double? = null,
     val storage_capacity: String? = null,
     val type_of_semen_station: String? = null,
     val user_id: String? = null,
-    val year_of_establishment: String? = null
+    val year_of_establishment: String? = null,
+
 )
 
 data class StateSemenBankDocument(
@@ -553,6 +567,10 @@ data class RSPAddRequest(
     val rsp_laboratory_semen_availability_equipment: List<RspAddEquipment>? = null,
     val rsp_laboratory_semen_average: List<RspAddAverage>? = null,
     val rsp_laboratory_semen_document: List<ImplementingAgencyDocument>? = null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia : Double? = null,
+    val lattitude_nlm : Double? = null,
+    val longitude_nlm  : Double? = null,
     val rsp_laboratory_semen_station_quality_buck: List<RspAddBucksList>? = null,
     val state_code: Int? = null,
     val user_id: String? = null,
@@ -734,7 +752,11 @@ data class AddFspPlantStorageRequest(
     val state_code: Int?=null,
     val status: Int?=null,
     val technical_expertise: String?=null,
-    val user_id: String?=null
+    val user_id: String?=null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 data class FspPlantStorageCommentsByNlm(
     val address: String,
