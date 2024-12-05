@@ -2,8 +2,10 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -18,6 +20,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -39,6 +42,7 @@ import com.nlm.model.ImportExoticGoatAddEditRequest
 import com.nlm.model.ImportOfExoticGoatVerifiedNlm
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.Format6YearWiseFinancialProgressAdapter
 import com.nlm.ui.adapter.ImportExoticAdapterDetailOfImport
@@ -53,6 +57,8 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -93,6 +99,8 @@ class AddNlmAssistanceForQFSPActivity :
     private var loading = true
     private var currentPage = 1
     private var totalPage = 1
+    private var latitude:Double?=null
+    private var longitude:Double?=null
     val viewModel = ViewModel()
 //    private val stateList = listOf(
 //        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
@@ -110,7 +118,12 @@ class AddNlmAssistanceForQFSPActivity :
     override val layoutId: Int
         get() = R.layout.activity_add_nlm_assistance_for_qfspactivity
 
-
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
     inner class ClickActions {
 
         fun saveAsDraft(view: View){
@@ -804,54 +817,64 @@ class AddNlmAssistanceForQFSPActivity :
         AddDocumentDialog(this,selectedItem,position)
     }
     private fun saveDataApi(isDraft: Int?) {
-        viewModel.getAssistanceForQfspAddEdit(
-            this, true, Format6AssistanceForQspAddEdit(
-                state_code = getPreferenceOfScheme(
-                    this@AddNlmAssistanceForQFSPActivity,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    this@AddNlmAssistanceForQFSPActivity,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id,
-                role_id = getPreferenceOfScheme(
-                    this@AddNlmAssistanceForQFSPActivity,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                id = formId,
-                is_draft = isDraft,
-                assistance_for_qfsp_document = DocumentList,
-                assistance_for_qfsp_financial_progress = YearWiseFinancialProgressList,
-                name_of_organization = mBinding?.etNameOfOrganization?.text.toString(),
-                organogram = mBinding?.etOrganogram?.text.toString(),
-                technical_competance = mBinding?.etTechnicalCompetance?.text.toString(),
-                district_code = districtId,
-                location_address = mBinding?.etLocation?.text.toString(),
-                area_under_production = mBinding?.etAreaUnderProduction?.text?.toString()
-                    ?.toDoubleOrNull(),
-                quantity_of_fodder_seed_variety = mBinding?.etQuantityOfFodderSeedVariety?.text?.toString()
-                    ?.toIntOrNull(),
-                quantity_of_fodder_seed_class = QuantityOfFodderSeedID,
-                quantity_of_seed_class = QuantityOfSeedID,
-                target_achievement_class = TargetAcheivementID,
-                target_achievement_variety = mBinding?.etTargetAchievementVariety?.text.toString(),
-                quantity_of_seed_variety = mBinding?.etQuantityOfSeedVariety?.text.toString()
-                    .toIntOrNull(),
-                source_of_seed = mBinding?.etSourceOfSeed?.text.toString(),
-                assistance_for_qfsp_cost_assistance = arrayListOf(
-                    AssistanceForQfspCostAssistance(
-                        name_of_fodder_seed = mBinding?.etCategoryProject?.text.toString(),
-                        seed_produced_first_year = mBinding?.etSeedProduced?.text?.toString(),
-                        cost_assistance_first_year = mBinding?.etCostAssistance?.text.toString()
+        if (hasLocationPermissions()) {
+            val intent = Intent(this@AddNlmAssistanceForQFSPActivity, LocationService::class.java)
+            startService(intent)
+            lifecycleScope.launch {
+                delay(1000) // Delay for 2 seconds
+                if(latitude!=null&&longitude!=null)
+                {
+                    viewModel.getAssistanceForQfspAddEdit(
+                        this@AddNlmAssistanceForQFSPActivity, true, Format6AssistanceForQspAddEdit(
+                            state_code = getPreferenceOfScheme(
+                                this@AddNlmAssistanceForQFSPActivity,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.state_code,
+                            user_id = getPreferenceOfScheme(
+                                this@AddNlmAssistanceForQFSPActivity,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.user_id,
+                            role_id = getPreferenceOfScheme(
+                                this@AddNlmAssistanceForQFSPActivity,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.role_id,
+                            id = formId,
+                            is_draft = isDraft,
+                            assistance_for_qfsp_document = DocumentList,
+                            assistance_for_qfsp_financial_progress = YearWiseFinancialProgressList,
+                            name_of_organization = mBinding?.etNameOfOrganization?.text.toString(),
+                            organogram = mBinding?.etOrganogram?.text.toString(),
+                            technical_competance = mBinding?.etTechnicalCompetance?.text.toString(),
+                            district_code = districtId,
+                            location_address = mBinding?.etLocation?.text.toString(),
+                            area_under_production = mBinding?.etAreaUnderProduction?.text?.toString()
+                                ?.toDoubleOrNull(),
+                            quantity_of_fodder_seed_variety = mBinding?.etQuantityOfFodderSeedVariety?.text?.toString()
+                                ?.toIntOrNull(),
+                            quantity_of_fodder_seed_class = QuantityOfFodderSeedID,
+                            quantity_of_seed_class = QuantityOfSeedID,
+                            target_achievement_class = TargetAcheivementID,
+                            target_achievement_variety = mBinding?.etTargetAchievementVariety?.text.toString(),
+                            quantity_of_seed_variety = mBinding?.etQuantityOfSeedVariety?.text.toString()
+                                .toIntOrNull(),
+                            source_of_seed = mBinding?.etSourceOfSeed?.text.toString(),
+                            assistance_for_qfsp_cost_assistance = arrayListOf(
+                                AssistanceForQfspCostAssistance(
+                                    name_of_fodder_seed = mBinding?.etCategoryProject?.text.toString(),
+                                    seed_produced_first_year = mBinding?.etSeedProduced?.text?.toString(),
+                                    cost_assistance_first_year = mBinding?.etCostAssistance?.text.toString()
+                                )
+                            ),
+                            effective_seed = selectedValue,
+                            lattitude=latitude,
+                            longitude= longitude
+                        )
                     )
-                ),
-                effective_seed = selectedValue
 
-            )
-        )
+                }}}
 
     }
     private var recyclerScrollListener: RecyclerView.OnScrollListener =
@@ -1044,5 +1067,17 @@ class AddNlmAssistanceForQFSPActivity :
         }
         dialog.show()
     }
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
 
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(locationReceiver)
+    }
 }
