@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackDeleteAtIdString
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemVaccinationProgrammerBinding
 import com.nlm.model.AscadListData
@@ -24,7 +25,7 @@ class AscadAdapter(
     val context: Context,
     private val list: ArrayList<AscadListData>,
     private val isFrom: String?,
-    private val callBackDeleteAtId: CallBackDeleteAtId
+    private val callBackDeleteAtId: CallBackDeleteAtIdString
 ) :
     RecyclerView.Adapter<AscadAdapter.AscadAdapterViewHolder>() {
 
@@ -123,7 +124,9 @@ class AscadAdapter(
                     DialogCallback {
                     override fun onYes() {
                         if (item != null) {
-                            callBackDeleteAtId.onClickItem(item.id,position,0)
+                            if (isFrom != null) {
+                                callBackDeleteAtId.onClickItem(item.id,position,isFrom)
+                            }
                         }
                     }
                 },

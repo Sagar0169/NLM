@@ -844,6 +844,7 @@ data class AscadListRequest(
     val page: Int,
     val role_id: Int?,
     val state_code: Int?,
+    val district_code: Int?=null,
     val user_id: Int?,
 )
 
