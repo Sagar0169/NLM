@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-        name="ClickAction"
-        type="com.nlm.ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeFarmerLevel.ClickActions" />
+            name="ClickAction"
+            type="com.nlm.ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeFarmerLevel.ClickActions" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+        android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeFarmerLevel">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
@@ -44,14 +46,15 @@
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
                 android:text="Beneficiary/farmer Vaccination Programme"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textAlignment="center"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivBackPress"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -78,7 +81,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="States"
+                        android:text="@string/states"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -90,13 +93,15 @@
                         android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_grey"
                         android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
+                        android:hint="@string/please_select"
+                        android:onClick="@{ClickAction::state}"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
-                        android:text="Please Select"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/llDistrict"
                     android:layout_width="match_parent"
@@ -120,13 +125,15 @@
                         android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_grey"
                         android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
+                        android:hint="@string/please_select"
+                        android:onClick="@{ClickAction::district}"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
-                        android:text="Please Select"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/llVillage"
                     android:layout_width="match_parent"
@@ -138,89 +145,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:text="@string/village"
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
+                        android:id="@+id/etVillage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/et_background"
                         android:padding="8dp"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/llBlock"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Blocks"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/etBlock"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Enter Block Name"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llFarmer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginVertical="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Village Name"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/etFarmer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Enter Village Name"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
+                        android:textColorHint="@color/black"
                         android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 
@@ -246,9 +184,6 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-
-
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -272,23 +207,20 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
-
-
-
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="
-Are your animals vaccinated against diseases? And which diseases- FMD, Brucellosis, PPR and CSF ?"
+                            android:text="Are your animals vaccinated against diseases? And which diseases- FMD, Brucellosis, PPR and CSF ?"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -303,12 +235,15 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etInputs1"
+                            android:id="@+id/etInputOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
@@ -323,15 +258,16 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etRemarks1"
+                            android:id="@+id/etRemarkOne"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -352,12 +288,13 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:weightSum="2">
 
                             <TextView
-                                android:id="@+id/tvChoosefile1"
+                                android:id="@+id/tvChooseFileOne"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::uploadFileOne}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
@@ -369,18 +306,19 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:background="#909090" />
 
                             <TextView
-                                 android:id="@+id/etChooseFile1"
+                                android:id="@+id/etChooseFileOne"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
+                                android:padding="@dimen/dp_10"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -404,16 +342,14 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
-
-
-
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -434,14 +370,16 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etInputs2"
+                            android:id="@+id/etInputTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -454,15 +392,16 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etRemarks2"
+                            android:id="@+id/etRemarkTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -483,12 +422,13 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:weightSum="2">
 
                             <TextView
-                                android:id="@+id/tvChoosefile2"
+                                android:id="@+id/tvChooseFileTwo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::uploadFileTwo}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
@@ -500,18 +440,19 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:background="#909090" />
 
                             <TextView
-                                android:id="@+id/etChooseFile2"
+                                android:id="@+id/etChooseFileTwo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
+                                android:padding="@dimen/dp_10"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -535,16 +476,14 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
-
-
-
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -565,14 +504,16 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etInputs3"
+                            android:id="@+id/etInputThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -585,15 +526,16 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etRemarks3"
+                            android:id="@+id/etRemarkThree"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -614,12 +556,13 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:weightSum="2">
 
                             <TextView
+                                android:id="@+id/tvChooseFileThree"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
-                               android:id="@+id/tvChooseFile3"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::uploadFileThree}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
@@ -631,18 +574,19 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:background="#909090" />
 
                             <TextView
+                                android:id="@+id/etChooseFileThree"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
-                                android:id="@+id/etChooseFile3"
                                 android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
+                                android:padding="@dimen/dp_10"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -666,16 +610,14 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
-
-
-
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -696,14 +638,16 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etInputs4"
+                            android:id="@+id/etInputFour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -716,14 +660,16 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etRemarks4"
+                            android:id="@+id/etRemarkFour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -744,12 +690,13 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:weightSum="2">
 
                             <TextView
-                                android:id="@+id/tvChoosefile4"
+                                android:id="@+id/tvChooseFileFour"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::uploadFileFour}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
@@ -761,18 +708,19 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:background="#909090" />
 
                             <TextView
-                                android:id="@+id/etChoosefile4"
+                                android:id="@+id/etChooseFileFour"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
+                                android:padding="@dimen/dp_10"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -796,16 +744,14 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
-
-
-
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -826,14 +772,16 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etInputs5"
+                            android:id="@+id/etInputFive"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -846,15 +794,16 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/etRemarks5"
+                            android:id="@+id/etRemarkFive"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -875,13 +824,14 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                             android:weightSum="2">
 
                             <TextView
-                                android:id="@+id/tvChoosefile5"
+                                android:id="@+id/tvChooseFileFive"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:enabled="false"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::uploadFileFive}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
@@ -893,19 +843,18 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                                 android:background="#909090" />
 
                             <TextView
-                                android:id="@+id/etChoosefile5"
+                                android:id="@+id/etChooseFileFive"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
+                                android:padding="@dimen/dp_10"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -946,10 +895,11 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llSaveDraftAndSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_5"
                     android:layout_marginHorizontal="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_5"
                     android:orientation="horizontal">
 
                     <TextView
@@ -974,7 +924,7 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/tvSendOtp"
+                        android:id="@+id/tvSubmit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dp_3"
@@ -984,7 +934,7 @@ Are your animals vaccinated against diseases? And which diseases- FMD, Brucellos
                         android:background="@drawable/curve_fill_blue"
                         android:clickable="true"
                         android:fontFamily="@font/poppins_medium"
-                        android:onClick="@{ClickAction::saveAndNext}"
+                        android:onClick="@{ClickAction::submit}"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
                         android:text="@string/submit"

@@ -96,12 +96,21 @@ class AscadListActivity : BaseActivity<ActivityAscadListBinding>(), CallBackDele
         }
 
         fun add(view: View) {
+            if(isFrom == getString(R.string.state))
             startActivity(
                 Intent(
                     this@AscadListActivity,
-                    AddNewMobileVeterinaryUnitState::class.java
+                    AddAscadStateActivity::class.java
                 ).putExtra("isFrom", isFrom)
             )
+            else if (isFrom == getString(R.string.district)){
+                startActivity(
+                    Intent(
+                        this@AscadListActivity,
+                        AddAscadDistrictActivity::class.java
+                    ).putExtra("isFrom", isFrom)
+                )
+            }
         }
     }
 

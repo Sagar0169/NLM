@@ -34,15 +34,12 @@ class AscadActivity : BaseActivity<ActivityAscadBinding>() {
                 ).putExtra(AppConstants.IS_FROM, getString(R.string.district))
             )
         }
-
     }
 
 
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-
-
     }
 
     override fun setVariables() {

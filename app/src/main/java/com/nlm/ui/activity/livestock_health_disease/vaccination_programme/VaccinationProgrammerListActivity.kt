@@ -67,6 +67,7 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
 
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         when (isFrom) {
             getString(R.string.state) -> {
                 stateVaccinationProgrammerAPICall(paginate = false, loader = true)
@@ -82,6 +83,7 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
 
     private fun swipeForRefreshVaccinationProgrammer() {
         mBinding?.srlVaccinationProgrammer?.setOnRefreshListener {
+            currentPage = 1
             when (isFrom) {
                 getString(R.string.state) -> {
                     stateVaccinationProgrammerAPICall(paginate = false, loader = true)
@@ -126,10 +128,8 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                     )
                 }
             }
-
         }
     }
-
 
     private fun vaccinationProgrammerAdapter(list: ArrayList<VaccinationProgrammerListData>) {
         vaccinationProgrammerAdapter = VaccinationProgrammerAdapter(this,list,isFrom,this)

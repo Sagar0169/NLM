@@ -26,6 +26,7 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.hideView
 import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -81,8 +82,7 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
             mBinding?.tvChoosefile1e?.isEnabled=false
             mBinding?.tvChooseFile2?.isEnabled=false
             mBinding?.tvChooseFile3?.isEnabled=false
-            mBinding?.tvSendOtp?.visibility=View.GONE
-            mBinding?.tvSaveDraft?.visibility=View.GONE
+            mBinding?.llSaveDraftAndSubmit?.hideView()
             viewEditApi(viewEdit)
         }
         if(viewEdit=="edit"){
@@ -120,15 +120,14 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
             if (userResponseModel!=null)
             {
                 if(userResponseModel._resultflag==0){
-                    showSnackbar(mBinding!!.main, userResponseModel.message)
+                    mBinding?.main?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
                 }
-
                     else{
                     formId=userResponseModel._result.id
                     if(savedAndNext)
                     {
                         onBackPressedDispatcher.onBackPressed()
-                        showSnackbar(mBinding!!.main, userResponseModel.message)
+                        mBinding?.main?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
                     }
                     else if(viewEdit=="view"||viewEdit=="edit")
                     {
@@ -146,17 +145,17 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
                         mBinding?.etRemark1e?.setText(userResponseModel._result.schedule_vaccination_assign_areas_remarks)
                         mBinding?.etRemark2?.setText(userResponseModel._result.seromonitoring_facilitie_remarks)
                         mBinding?.etRemark3?.setText(userResponseModel._result.process_plan_monitoring_remarks)
-                        mBinding?.etChooseFile1a?.text = userResponseModel._result.schedule_vaccination_focal_point_upload
-                        mBinding?.etChooseFile1b?.text = userResponseModel._result.schedule_vaccination_timeline_upload
-                        mBinding?.etChooseFile1c?.text=userResponseModel._result.schedule_vaccination_arrangement_upload
-                        mBinding?.etChooseFile1d?.text=userResponseModel._result.schedule_vaccination_cold_chain_avail_upload
-                        mBinding?.etChoosefile1e?.text=userResponseModel._result.schedule_vaccination_assign_areas_upload
-                        mBinding?.etChooseFile2?.text=userResponseModel._result.seromonitoring_facilities_upload
-                        mBinding?.etChooseFile3?.text=userResponseModel._result.process_plan_monitoring_upload
 
+                        mBinding?.etChooseFile1a?.text = if (userResponseModel._result.schedule_vaccination_focal_point_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_focal_point_upload
+                        mBinding?.etChooseFile1b?.text = if (userResponseModel._result.schedule_vaccination_timeline_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_timeline_upload
+                        mBinding?.etChooseFile1c?.text= if (userResponseModel._result.schedule_vaccination_arrangement_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_arrangement_upload
+                        mBinding?.etChooseFile1d?.text= if (userResponseModel._result.schedule_vaccination_cold_chain_avail_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_cold_chain_avail_upload
+                        mBinding?.etChoosefile1e?.text=if (userResponseModel._result.schedule_vaccination_assign_areas_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_assign_areas_upload
+                        mBinding?.etChooseFile2?.text=if (userResponseModel._result.seromonitoring_facilities_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.seromonitoring_facilities_upload
+                        mBinding?.etChooseFile3?.text=if (userResponseModel._result.process_plan_monitoring_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.process_plan_monitoring_upload
                     }
 
-                    showSnackbar(mBinding!!.main, userResponseModel.message)
+                    mBinding?.main?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
                     }
             }
         }
@@ -382,7 +381,7 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
 
         // Define a variable for the selected list and TextView
         val selectedList: List<ResultGetDropDown>
-        val selectedTextView: TextView
+        val selectedTextView: TextView?
 
         // Initialize based on type
         when (type) {
@@ -390,7 +389,7 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
             "State" -> {
                 dropDownApiCall(paginate = false, loader = true)
                 selectedList = stateList
-                selectedTextView = mBinding!!.tvState
+                selectedTextView = mBinding?.tvState
             }
 
 
@@ -400,9 +399,9 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
         // Set up the adapter
         stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
             // Handle state item click
-            selectedTextView.text = selectedItem
+            selectedTextView?.text = selectedItem
             stateId = id
-            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
+            selectedTextView?.setTextColor(ContextCompat.getColor(this, R.color.black))
             bottomSheetDialog.dismiss()
         }
 
@@ -419,12 +418,12 @@ class AddVaccinationProgrammeStateLevel : BaseActivity<ActivityAddVaccinationPro
         // Rotate drawable
         val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
         var rotatedDrawable = rotateDrawable(drawable, 180f)
-        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+        selectedTextView?.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
 
         // Set a dismiss listener to reset the view visibility
         bottomSheetDialog.setOnDismissListener {
             rotatedDrawable = rotateDrawable(drawable, 0f)
-            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+            selectedTextView?.setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 null,
                 rotatedDrawable,

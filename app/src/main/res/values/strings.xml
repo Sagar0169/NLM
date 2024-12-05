@@ -418,5 +418,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="have_you_paid_for_the_services_offered_by_mvus">Have you paid for the services offered by MVUs?</string>
     <string name="ascad_state">ascad_state</string>
     <string name="ascad_district">ascad_district</string>
+    <string name="district_vaccination_programme">district_vaccination_programme</string>
+    <string name="please_select">Please Select</string>
 </resources>
 
