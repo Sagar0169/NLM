@@ -557,11 +557,12 @@ class AddNewMobileVeterinaryUnitVillage :
                             mBinding?.etFarmer?.setText(userResponseModel._result.village_name)
                             mBinding?.tvDistrict?.text = userResponseModel._result.district_name
 
-                            mBinding?.tvNoFileOne?.text = userResponseModel._result.attended_call_inputs
-                            mBinding?.tvNoFileTwo?.text = userResponseModel._result.come_know_about_inputs
-                            mBinding?.tvNoFileThree?.text = userResponseModel._result.services_mvu_inputs
-                            mBinding?.tvNoFileFour?.text = userResponseModel._result.mvu_arrive_call_inputs
-                            mBinding?.tvNoFileFive?.text = userResponseModel._result.services_offered_by_mvu_inputs
+                            mBinding?.tvNoFileOne?.text = if (userResponseModel._result.attended_call_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.attended_call_inputs
+                            mBinding?.tvNoFileTwo?.text = if (userResponseModel._result.come_know_about_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.come_know_about_inputs
+                            mBinding?.tvNoFileThree?.text = if (userResponseModel._result.services_mvu_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.services_mvu_inputs
+                            mBinding?.tvNoFileFour?.text = if (userResponseModel._result.mvu_arrive_call_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.mvu_arrive_call_inputs
+                            mBinding?.tvNoFileFive?.text = if (userResponseModel._result.services_offered_by_mvu_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.services_offered_by_mvu_inputs
+
                         } else {
                             onBackPressedDispatcher.onBackPressed()
                             showSnackbar(mBinding!!.clParent, userResponseModel.message)

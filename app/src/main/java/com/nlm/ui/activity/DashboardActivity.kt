@@ -211,32 +211,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                 ).user_id
             )
         )
-//        val isDarkMode = sharedPreferences.getBoolean("isDarkMode", false)
-//
-//        // Update the theme to match the saved preference
-//        updateTheme(isDarkMode)
-//          Log.d("THEME",isDarkMode.toString())
-//        // Synchronize the Switch state
-//        mBinding?.leftDrawerMenu?.themeSwitch?.isChecked = isDarkMode
-    }
-
-    private fun updateTheme(isDarkMode: Boolean) {
-        if (isDarkMode) {
-            // Enable dark mode
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            // Enable light mode
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
     }
 
     // Method to set default arrow drawables
     private fun setDefaultDrawables() {
-//        setDrawableWithArrow(
-//            mBinding?.leftDrawerMenu?.tvUsers,
-//            ContextCompat.getDrawable(this, R.drawable.ic_user),
-//            false
-//        )
         setDrawableWithArrow(
             this,
             mBinding?.leftDrawerMenu?.tvLivestockHealthDisease,
@@ -265,19 +243,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         mBinding?.contentNav?.ivDrawer?.setOnClickListener {
             toggleLeftDrawer()
         }
-
-//        mBinding?.leftDrawerMenu?.tvLogout?.setOnClickListener {
-//            Utility.clearAllPreferencesExceptDeviceToken(this)
-//            intent = Intent(this, LoginActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//            startActivity(intent)
-//            finish()
-//        }
-//        mBinding?.leftDrawerMenu?.tvMasterImplementingAgency?.setOnClickListener {
-//            val intent =
-//                Intent(this@DashboardActivity, ImplementingAgencyMasterActivity::class.java)
-//            startActivity(intent)
-//        }
         mBinding?.leftDrawerMenu?.tvMobileVeterinaryUnits?.setOnClickListener {
             val intent = Intent(this@DashboardActivity, MobileVeterinaryActivity::class.java)
             startActivity(intent)
@@ -452,13 +417,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                     ).user_id
                 )
             )
-//            startActivity(Intent(this, LoginActivity::class.java))
         }
-
-//        mBinding?.leftDrawerMenu?.llUsers?.setOnClickListener {
-//            val intent = Intent(this@DashboardActivity, UserActivity::class.java)
-//            startActivity(intent)
-//        }
     }
 
 
@@ -533,7 +492,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     // Close all other menu items and reset arrows
     private fun closeAllMenus() {
-//        mBinding?.leftDrawerMenu?.llUsers.hideView()
         mBinding?.leftDrawerMenu?.llLivestockHealthDisease?.hideView()
         mBinding?.leftDrawerMenu?.llNationalLivestockMission?.hideView()
         mBinding?.leftDrawerMenu?.llNationalDairyDevelopment?.hideView()
