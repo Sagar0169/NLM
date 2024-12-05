@@ -1,10 +1,10 @@
-package com.nlm.ui.activity.livestock_health_disease.ascad
+package com.nlm.ui.activity
 
 import android.content.Intent
 import android.view.View
 import com.nlm.R
 import com.nlm.databinding.ActivityAscadBinding
-import com.nlm.utilities.AppConstants
+import com.nlm.ui.activity.livestock_health_disease.StateMobileVeterinaryActivity
 import com.nlm.utilities.BaseActivity
 
 class AscadActivity : BaseActivity<ActivityAscadBinding>() {
@@ -13,26 +13,28 @@ class AscadActivity : BaseActivity<ActivityAscadBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_ascad
 
+
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
         }
 
         fun state(view: View) {
-            startActivity(Intent(
+            val intent = Intent(
                 this@AscadActivity,
-                AscadListActivity::class.java
-            ).putExtra(AppConstants.IS_FROM, getString(R.string.state)))
+                StateMobileVeterinaryActivity::class.java
+            ).putExtra("isFrom", 8)
+            startActivity(intent)
         }
 
         fun district(view: View) {
-            startActivity(
-                Intent(
-                    this@AscadActivity,
-                    AscadListActivity::class.java
-                ).putExtra(AppConstants.IS_FROM, getString(R.string.district))
-            )
+            val intent = Intent(
+                this@AscadActivity,
+                StateMobileVeterinaryActivity::class.java
+            ).putExtra("isFrom", 9)
+            startActivity(intent)
         }
+
     }
 
 
