@@ -119,7 +119,9 @@ data class Format6AssistanceForQspAddEdit(
     val target_achievement_class: Int?=null,
     val target_achievement_variety: String?=null,
     val technical_competance: String?=null,
-    val user_id: Int?=null
+    val user_id: Int?=null,
+    val lattitude: Double?=null,
+    val longitude: Double?=null,
 )
 
 
@@ -172,8 +174,10 @@ data class ArtificialInseminationAddRequest(
     val user_id: Int?=null,
     val is_type: String?=null,
     val id: Int?=null,
-    val lattitude: Double? = null,
-    val longitude: Double? = null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 
 data class ArtificialInseminationDocument(
@@ -202,8 +206,10 @@ data class ImportExoticGoatAddEditRequest(
     val id: Int?,
     val is_deleted: Int?,
     val is_draft: Int?,
-    val lattitude: Double? = null,
-    val longitude: Double? = null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 
 data class ImportOfExoticGoatAchievement(
@@ -428,10 +434,13 @@ data class StateSemenBankNLMRequest(
     val state_semen_bank_infrastructure: List<StateSemenInfraGoat>? = null,
     val state_semen_bank_other_manpower: MutableList<StateSemenBankOtherAddManpower>? = null,
     val status: Int? = null,
+    val longitude: Double? = null,
+    val lattitude: Double? = null,
     val storage_capacity: String? = null,
     val type_of_semen_station: String? = null,
     val user_id: String? = null,
-    val year_of_establishment: String? = null
+    val year_of_establishment: String? = null,
+
 )
 
 data class StateSemenBankDocument(
@@ -743,7 +752,11 @@ data class AddFspPlantStorageRequest(
     val state_code: Int?=null,
     val status: Int?=null,
     val technical_expertise: String?=null,
-    val user_id: String?=null
+    val user_id: String?=null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 data class FspPlantStorageCommentsByNlm(
     val address: String,

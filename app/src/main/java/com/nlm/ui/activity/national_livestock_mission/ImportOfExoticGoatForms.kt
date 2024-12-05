@@ -896,6 +896,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                 delay(1000) // Delay for 2 seconds
                 if(latitude!=null&&longitude!=null)
                 {
+                    if (getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+                    {
                     viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
                         ImportExoticGoatAddEditRequest(
                             comment_by_nlm_whether = selectedValue,
@@ -915,10 +917,39 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                             import_of_exotic_goat_document = DocumentList,
                             is_deleted = null,
                             number_of_farmers_benefited=mBinding?.etNoOfFarmer?.text.toString().toIntOrNull(),
-                            lattitude=latitude,
-                            longitude = longitude
+                            lattitude_ia=latitude,
+                            longitude_ia= longitude
                         )
                     )
+                }
+                    else{
+                        viewModel.getImportExoticGoatAdd(this@ImportOfExoticGoatForms,true,
+                            ImportExoticGoatAddEditRequest(
+                                comment_by_nlm_whether = selectedValue,
+                                import_of_exotic_goat_detail_import = DetailOfImportList,
+                                import_of_exotic_goat_achievement = AchievementList,
+                                import_of_exotic_goat_verified_nlm = VerifiedNlmList,
+                                state_code = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    this@ImportOfExoticGoatForms,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                role_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.role_id,
+                                is_type = null,
+                                id = formId,
+                                is_draft=isDraft,
+                                import_of_exotic_goat_document = DocumentList,
+                                is_deleted = null,
+                                number_of_farmers_benefited=mBinding?.etNoOfFarmer?.text.toString().toIntOrNull(),
+                                lattitude_nlm=latitude,
+                                longitude_nlm= longitude
+                            )
+                        )
+                    }
+                }
+                else{
+                    showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
                 }
             }
         }

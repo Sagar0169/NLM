@@ -352,8 +352,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                         role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
                                         is_type = null,
                                         id = formId,
-                                        lattitude=latitude,
-                                        longitude = longitude
+                                        lattitude_ia=latitude,
+                                        longitude_ia = longitude
                                     )
                                 )
                             }
@@ -386,8 +386,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                         role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
                                         is_type = null,
                                         id = formId,
-                                        lattitude=latitude,
-                                        longitude = longitude
+                                        lattitude_nlm=latitude,
+                                        longitude_nlm = longitude
                                     )
                                 )}
                             else{
@@ -430,8 +430,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                         role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
                                         is_type = null,
                                         id = formId,
-                                        lattitude=latitude,
-                                        longitude = longitude
+                                        lattitude_ia=latitude,
+                                        longitude_ia = longitude
                                     )
                                 )
                             }
@@ -464,8 +464,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                         role_id =   getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id,
                                         is_type = null,
                                         id = formId,
-                                        lattitude=latitude,
-                                        longitude = longitude
+                                        lattitude_nlm=latitude,
+                                        longitude_nlm = longitude
                                     )
                                 )}
                             else{

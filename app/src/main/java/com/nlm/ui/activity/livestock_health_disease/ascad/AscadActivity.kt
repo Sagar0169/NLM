@@ -1,10 +1,11 @@
-package com.nlm.ui.activity
+package com.nlm.ui.activity.livestock_health_disease.ascad
 
 import android.content.Intent
 import android.view.View
 import com.nlm.R
 import com.nlm.databinding.ActivityAscadBinding
-import com.nlm.ui.activity.livestock_health_disease.StateMobileVeterinaryActivity
+import com.nlm.utilities.AppConstants
+
 import com.nlm.utilities.BaseActivity
 
 class AscadActivity : BaseActivity<ActivityAscadBinding>() {
@@ -20,21 +21,20 @@ class AscadActivity : BaseActivity<ActivityAscadBinding>() {
         }
 
         fun state(view: View) {
-            val intent = Intent(
+            startActivity(Intent(
                 this@AscadActivity,
-                StateMobileVeterinaryActivity::class.java
-            ).putExtra("isFrom", 8)
-            startActivity(intent)
+                AscadListActivity::class.java
+            ).putExtra(AppConstants.IS_FROM, getString(R.string.state)))
         }
 
         fun district(view: View) {
-            val intent = Intent(
-                this@AscadActivity,
-                StateMobileVeterinaryActivity::class.java
-            ).putExtra("isFrom", 9)
-            startActivity(intent)
+            startActivity(
+                Intent(
+                    this@AscadActivity,
+                    AscadListActivity::class.java
+                ).putExtra(AppConstants.IS_FROM, getString(R.string.district))
+            )
         }
-
     }
 
 
