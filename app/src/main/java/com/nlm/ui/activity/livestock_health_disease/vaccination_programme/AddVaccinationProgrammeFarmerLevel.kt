@@ -1,7 +1,10 @@
 package com.nlm.ui.activity.livestock_health_disease.vaccination_programme
 
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.net.Uri
@@ -10,16 +13,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityAddVaccinationProgrammeFarmerLevelBinding
-import com.nlm.model.DistrictAscadAddRequest
 import com.nlm.model.FarmerVaccinationProgrammeAddRequest
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -28,12 +32,14 @@ import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
-import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 import okhttp3.MultipartBody
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationProgrammeFarmerLevelBinding>()  {
+class AddVaccinationProgrammeFarmerLevel :
+    BaseActivity<ActivityAddVaccinationProgrammeFarmerLevelBinding>() {
 
     private var mBinding: ActivityAddVaccinationProgrammeFarmerLevelBinding? = null
     private var viewModel = ViewModel()
@@ -43,7 +49,6 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
     private var loading = true
     private var stateId: Int? = null // Store selected state
     private var districtId: Int? = null // Store selected state
-    private var documentId: Int? = null
     private var uploadedDocumentName: String? = null
     private var dialogDocName: TextView? = null
     private var documentName: String? = null
@@ -54,10 +59,20 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
     private var layoutManager: LinearLayoutManager? = null
     private var viewEdit: String? = null
     var itemId: Int? = null
-    private var dId: Int? = null
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
-    private var isFrom: String ?= null
+    private var isFrom: String? = null
+
+    private var latitude: Double? = null
+    private var longitude: Double? = null
+
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
+
     override val layoutId: Int
         get() = R.layout.activity_add_vaccination_programme_farmer_level
 
@@ -67,7 +82,20 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
         viewModel.init()
         viewEdit = intent.getStringExtra("View/Edit")
         itemId = intent.getIntExtra("itemId", 0)
-        dId = intent.getIntExtra("dId", 0)
+    }
+
+    override fun onResume() {
+        super.onResume()
+//        registerReceiver(
+//            locationReceiver,
+//            IntentFilter("LOCATION_UPDATED")
+//        )
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+//        unregisterReceiver(locationReceiver)
     }
 
     override fun setVariables() {
@@ -151,7 +179,6 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
                     }
 
                 } else {
-                    documentId = userResponseModel._result.id
                     uploadedDocumentName = userResponseModel._result.document_name
                     dialogDocName?.text = userResponseModel._result.document_name
                     when (isFromApplication) {
@@ -188,8 +215,7 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
                 }
             }
         }
-        viewModel.farmerVaccinationProgrammerAddResult
-            .observe(this) {
+        viewModel.farmerVaccinationProgrammerAddResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
@@ -200,50 +226,49 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
                 } else {
                     if (savedAsDraft) {
                         onBackPressedDispatcher.onBackPressed()
-                    } else {
-                        if (viewEdit == "view" || viewEdit == "edit") {
-                            if (savedAsEdit) {
-                                onBackPressedDispatcher.onBackPressed()
-                                return@observe
-                            }
-                            toast(viewEdit.toString())
-                            mBinding?.tvState?.text = userResponseModel._result.state_name
-                            mBinding?.tvDistrict?.text = userResponseModel._result.district_name
-                            districtId = userResponseModel._result.district_code
-                            mBinding?.etInputOne?.setText(userResponseModel._result.animal_vaccinated_inputs)
-                            mBinding?.etRemarkOne?.setText(userResponseModel._result.animal_vaccinated_remarks)
-                            mBinding?.etInputTwo?.setText(userResponseModel._result.vaccinator_visit_inputs)
-                            mBinding?.etRemarkTwo?.setText(userResponseModel._result.vaccinator_visit_remarks)
-                            mBinding?.etInputThree?.setText(userResponseModel._result.recall_vaccination_inputs)
-                            mBinding?.etRemarkThree?.setText(userResponseModel._result.recall_vaccination_remarks)
-                            mBinding?.etInputFour?.setText(userResponseModel._result.vaccination_carrier_inputs)
-                            mBinding?.etRemarkFour?.setText(userResponseModel._result.vaccination_carrier_remarks)
-                            mBinding?.etInputFive?.setText(userResponseModel._result.awarness_of_the_govt_inputs)
-                            mBinding?.etRemarkFive?.setText(userResponseModel._result.awarness_of_the_govt_remarks)
-                            mBinding?.etChooseFileOne?.text =
-                                userResponseModel._result.animal_vaccinated_uploads
-                            mBinding?.etChooseFileTwo?.text =
-                                userResponseModel._result.vaccinator_visit_uploads
-                            mBinding?.etChooseFileThree?.text =
-                                userResponseModel._result.recall_vaccination_uploads
-                            mBinding?.etChooseFileFour?.text =
-                                userResponseModel._result.vaccination_carrier_uploads
-                            mBinding?.etChooseFileFive?.text =
-                                userResponseModel._result.awarness_of_the_govt_uploads
-                        } else {
-                            onBackPressedDispatcher.onBackPressed()
-                            mBinding?.clParent?.let { it1 ->
-                                showSnackbar(
-                                    it1,
-                                    userResponseModel.message
-                                )
-                            }
+                        mBinding?.clParent?.let { it1 ->
+                            showSnackbar(
+                                it1,
+                                userResponseModel.message
+                            )
                         }
+                    } else if (viewEdit == "view" || viewEdit == "edit") {
+                        if (savedAsEdit) {
+                            onBackPressedDispatcher.onBackPressed()
+                            return@observe
+                        }
+                        mBinding?.tvState?.text = userResponseModel._result.state_name
+                        mBinding?.tvDistrict?.text = userResponseModel._result.district_name
+                        districtId = userResponseModel._result.district_code
+                        mBinding?.etVillage?.setText(userResponseModel._result.village_name)
+                        mBinding?.etInputOne?.setText(userResponseModel._result.animal_vaccinated_inputs)
+                        mBinding?.etRemarkOne?.setText(userResponseModel._result.animal_vaccinated_remarks)
+                        mBinding?.etInputTwo?.setText(userResponseModel._result.vaccinator_visit_inputs)
+                        mBinding?.etRemarkTwo?.setText(userResponseModel._result.vaccinator_visit_remarks)
+                        mBinding?.etInputThree?.setText(userResponseModel._result.recall_vaccination_inputs)
+                        mBinding?.etRemarkThree?.setText(userResponseModel._result.recall_vaccination_remarks)
+                        mBinding?.etInputFour?.setText(userResponseModel._result.vaccination_carrier_inputs)
+                        mBinding?.etRemarkFour?.setText(userResponseModel._result.vaccination_carrier_remarks)
+                        mBinding?.etInputFive?.setText(userResponseModel._result.awarness_of_the_govt_inputs)
+                        mBinding?.etRemarkFive?.setText(userResponseModel._result.awarness_of_the_govt_remarks)
+                        mBinding?.etChooseFileOne?.text =
+                            userResponseModel._result.animal_vaccinated_uploads
+                        mBinding?.etChooseFileTwo?.text =
+                            userResponseModel._result.vaccinator_visit_uploads
+                        mBinding?.etChooseFileThree?.text =
+                            userResponseModel._result.recall_vaccination_uploads
+                        mBinding?.etChooseFileFour?.text =
+                            userResponseModel._result.vaccination_carrier_uploads
+                        mBinding?.etChooseFileFive?.text =
+                            userResponseModel._result.awarness_of_the_govt_uploads
                     }
+
+                    mBinding?.clParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
                 }
             }
         }
     }
+
     inner class ClickActions {
         fun state(view: View) {
             isFrom = "state"
@@ -287,6 +312,8 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
         fun submit(view: View) {
             if (viewEdit == "edit") {
                 savedAsEdit = true
+            } else {
+                savedAsDraft = true
             }
             if (itemId != 0) {
                 saveDataApi(itemId, 2)
@@ -298,6 +325,8 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
         fun saveAsDraft(view: View) {
             if (viewEdit == "edit") {
                 savedAsEdit = true
+            } else {
+                savedAsDraft = true
             }
             if (itemId != 0) {
                 saveDataApi(itemId, 3)
@@ -334,156 +363,169 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
-        if(mBinding?.tvDistrict?.text.toString().isEmpty()){
-            mBinding?.clParent?.let {
-                showSnackbar(it, "Please Select District")
-            }
-            return
-        }
-        if(mBinding?.etVillage?.text.toString().isEmpty()){
-            mBinding?.clParent?.let {
-                showSnackbar(it, "Please Enter Village")
-            }
-            return
-        }
-        if (mBinding?.etInputOne?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(it, "Please Fill All The Input and Remark Fields")
-            }
-            return
-        }
-        if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etInputThree?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etInputFour?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etInputFive?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
 
-        viewModel.getFarmerVaccinationProgrammeAdd(
-            context = this,
-            loader = true,
-            request = FarmerVaccinationProgrammeAddRequest(
-                id = itemId,
-                role_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                state_code = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                district_code = districtId,
-                user_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id,
-                status = draft,
-                village_name = mBinding?.etVillage?.text.toString().trim(),
-                animal_vaccinated_inputs = mBinding?.etInputOne?.text.toString().trim(),
-                animal_vaccinated_remarks = mBinding?.etRemarkOne?.text.toString().trim(),
-                vaccinator_visit_inputs = mBinding?.etInputTwo?.text.toString()
-                    .trim(),
-                vaccinator_visit_remarks = mBinding?.etRemarkTwo?.text.toString()
-                    .trim(),
-                recall_vaccination_inputs = mBinding?.etInputThree?.text.toString().trim(),
-                recall_vaccination_remarks = mBinding?.etRemarkThree?.text.toString().trim(),
-                vaccination_carrier_inputs = mBinding?.etInputFour?.text.toString()
-                    .trim(),
-                vaccination_carrier_remarks = mBinding?.etRemarkFour?.text.toString()
-                    .trim(),
-                awarness_of_the_govt_inputs = mBinding?.etInputFive?.text.toString()
-                    .trim(),
-                awarness_of_the_govt_remarks = mBinding?.etInputFive?.text.toString()
-                    .trim(),
-                animal_vaccinated_uploads = mBinding?.etChooseFileOne?.text.toString().trim(),
-                vaccinator_visit_uploads = mBinding?.etChooseFileTwo?.text.toString()
-                    .trim(),
-                recall_vaccination_uploads = mBinding?.etChooseFileThree?.text.toString()
-                    .trim(),
-                vaccination_carrier_uploads = mBinding?.etChooseFileFour?.text.toString()
-                    .trim(),
-                awarness_of_the_govt_uploads = mBinding?.etChooseFileFive?.text.toString()
-                    .trim()
-            )
-        )
+//        if (hasLocationPermissions()) {
+//            startService(Intent(this, LocationService::class.java))
+//            lifecycleScope.launch {
+//                delay(1000) // Delay for 2 seconds
+//                if (latitude != null && longitude != null) {
+
+                    if (valid()) {
+                        viewModel.getFarmerVaccinationProgrammeAdd(
+                            context = this@AddVaccinationProgrammeFarmerLevel,
+                            loader = true,
+                            request = FarmerVaccinationProgrammeAddRequest(
+                                id = itemId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddVaccinationProgrammeFarmerLevel,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddVaccinationProgrammeFarmerLevel,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                district_code = districtId,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddVaccinationProgrammeFarmerLevel,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id,
+                                status = draft,
+                                village_name = mBinding?.etVillage?.text.toString().trim(),
+                                animal_vaccinated_inputs = mBinding?.etInputOne?.text.toString()
+                                    .trim(),
+                                animal_vaccinated_remarks = mBinding?.etRemarkOne?.text.toString()
+                                    .trim(),
+                                vaccinator_visit_inputs = mBinding?.etInputTwo?.text.toString()
+                                    .trim(),
+                                vaccinator_visit_remarks = mBinding?.etRemarkTwo?.text.toString()
+                                    .trim(),
+                                recall_vaccination_inputs = mBinding?.etInputThree?.text.toString()
+                                    .trim(),
+                                recall_vaccination_remarks = mBinding?.etRemarkThree?.text.toString()
+                                    .trim(),
+                                vaccination_carrier_inputs = mBinding?.etInputFour?.text.toString()
+                                    .trim(),
+                                vaccination_carrier_remarks = mBinding?.etRemarkFour?.text.toString()
+                                    .trim(),
+                                awarness_of_the_govt_inputs = mBinding?.etInputFive?.text.toString()
+                                    .trim(),
+                                awarness_of_the_govt_remarks = mBinding?.etInputFive?.text.toString()
+                                    .trim(),
+                                animal_vaccinated_uploads = mBinding?.etChooseFileOne?.text.toString()
+                                    .trim(),
+                                vaccinator_visit_uploads = mBinding?.etChooseFileTwo?.text.toString()
+                                    .trim(),
+                                recall_vaccination_uploads = mBinding?.etChooseFileThree?.text.toString()
+                                    .trim(),
+                                vaccination_carrier_uploads = mBinding?.etChooseFileFour?.text.toString()
+                                    .trim(),
+                                awarness_of_the_govt_uploads = mBinding?.etChooseFileFive?.text.toString()
+                                    .trim()
+                            )
+                        )
+                    }
+//                } else {
+//                    showSnackbar(mBinding!!.clParent, "No Location fetched")
+//                }
+//            }
+//        } else {
+//            showLocationAlertDialog()
+//        }
+    }
+
+    private fun valid(): Boolean {
+        if (mBinding?.tvDistrict?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(it, getString(R.string.please_select_district))
+            }
+            return false
+        } else if (mBinding?.etVillage?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(it, getString(R.string.please_enter_village))
+            }
+            return false
+        } else if (mBinding?.etInputOne?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(it, getString(R.string.please_fill_all_the_input_and_remark_fields))
+            }
+            return false
+        } else if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInputThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInputFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInputFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else
+            return true
     }
 
     private fun showBottomSheetDialog(type: String) {
@@ -509,16 +551,19 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
         when (type) {
 
             "State" -> {
-                dropDownApiCall(paginate = false, loader = true,"States",null)
+                dropDownApiCall(paginate = false, loader = true, "States", null)
                 selectedList = stateList
                 selectedTextView = mBinding?.tvState
             }
+
             "District" -> {
-                dropDownApiCall(paginate = false, loader = true,"Districts",getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code)
+                dropDownApiCall(
+                    paginate = false, loader = true, "Districts", getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                )
                 selectedList = stateList
                 selectedTextView = mBinding?.tvDistrict
             }
@@ -529,11 +574,10 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
         // Set up the adapter
         stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
             // Handle state item click
-            if(type == "State"){
+            if (type == "State") {
                 selectedTextView?.text = selectedItem
                 stateId = id
-            }
-            else if(type == "District"){
+            } else if (type == "District") {
                 selectedTextView?.text = selectedItem
                 districtId = id
             }
@@ -658,11 +702,18 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
             context = this,
             document_name = body,
             user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-            table_name = getString(R.string.district_vaccination_programme).toRequestBody(MultipartBody.FORM),
+            table_name = getString(R.string.farmer_vaccination_programme).toRequestBody(
+                MultipartBody.FORM
+            )
         )
     }
 
-    private fun dropDownApiCall(paginate: Boolean, loader: Boolean,model:String,stateCode:Int?) {
+    private fun dropDownApiCall(
+        paginate: Boolean,
+        loader: Boolean,
+        model: String,
+        stateCode: Int?,
+    ) {
         if (paginate) {
             currentPage++
         }
@@ -694,10 +745,9 @@ class AddVaccinationProgrammeFarmerLevel : BaseActivity<ActivityAddVaccinationPr
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                if(isFrom == "State") {
+                                if (isFrom == "State") {
                                     dropDownApiCall(paginate = true, loader = true, "States", null)
-                                }
-                                else if(isFrom == "District") {
+                                } else if (isFrom == "District") {
                                     dropDownApiCall(
                                         paginate = false,
                                         loader = true,

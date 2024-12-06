@@ -243,8 +243,8 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="Choose File"
-                                android:onClick="@{ClickAction::ChooseFile1a}"
+                                android:text="@string/choose_file"
+                                android:onClick="@{ClickAction::chooseFile1a}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -260,7 +260,7 @@
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:hint="No File Chosen"
+                                android:hint="@string/no_file_chosen"
                                 android:textColorHint="@color/grey"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -368,7 +368,7 @@
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
-                                android:onClick="@{ClickAction::ChooseFile1b}"
+                                android:onClick="@{ClickAction::chooseFile1b}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -492,7 +492,7 @@
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
-                                android:onClick="@{ClickAction::ChooseFile1c}"
+                                android:onClick="@{ClickAction::chooseFile1c}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -615,7 +615,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:onClick="@{ClickAction::ChooseFile1d}"
+                                android:onClick="@{ClickAction::chooseFile1d}"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -740,7 +740,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:onClick="@{ClickAction::ChooseFile1e}"
+                                android:onClick="@{ClickAction::chooseFile1e}"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -872,7 +872,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:onClick="@{ClickAction::ChooseFile2}"
+                                android:onClick="@{ClickAction::chooseFile2}"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -1003,7 +1003,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:enabled="false"
                                 android:gravity="center"
-                                android:onClick="@{ClickAction::ChooseFile3}"
+                                android:onClick="@{ClickAction::chooseFile3}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
@@ -1090,13 +1090,13 @@
                         android:onClick="@{ClickAction::saveAsDraft}"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
-                        android:text="Save As Draft"
+                        android:text="@string/save_as_draft"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/tSubmit"
+                        android:id="@+id/tvSubmit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dp_3"
@@ -1106,7 +1106,7 @@
                         android:background="@drawable/curve_fill_blue"
                         android:clickable="true"
                         android:fontFamily="@font/poppins_medium"
-                        android:onClick="@{ClickAction::saveAndNext}"
+                        android:onClick="@{ClickAction::submit}"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
                         android:text="@string/submit"

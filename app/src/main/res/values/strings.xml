@@ -420,5 +420,18 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="ascad_district">ascad_district</string>
     <string name="district_vaccination_programme">district_vaccination_programme</string>
     <string name="please_select">Please Select</string>
+    <string name="no_file_chosen">No File Chosen</string>
+    <string name="please_fill_all_the_input_and_remark_fields">Please Fill All The Input and Remark Fields</string>
+    <string name="please_enter_village">Please Enter Village</string>
+    <string name="please_select_district">Please Select District</string>
+    <string name="no_location_fetched">No Location fetched</string>
+    <string name="list_of_state_vaccination_programme">List of State Vaccination Programme</string>
+    <string name="list_of_district_vaccination_programme">List of District Vaccination Programme</string>
+    <string name="list_of_beneficiary_farmer_vaccination_programme">List of Beneficiary/farmer Vaccination Programme</string>
+    <string name="farmer_vaccination_programme">farmer_vaccination_programme</string>
+    <string name="blocks">blocks<font color="#FF0000">*</font></string>
+    <string name="upload">Upload</string>
+    <string name="block_level_indicators">Block level Indicators</string>
+    <string name="enter_block_name">Enter Block Name</string>
 </resources>
 

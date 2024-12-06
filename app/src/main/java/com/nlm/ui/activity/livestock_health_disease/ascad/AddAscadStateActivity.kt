@@ -1,6 +1,8 @@
 package com.nlm.ui.activity.livestock_health_disease.ascad
 
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
@@ -19,7 +21,6 @@ import com.nlm.model.GetDropDownRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.StateAscadAddRequest
-import com.nlm.model.StateMobileVeterinaryUnitAddRequest
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -41,11 +42,9 @@ class AddAscadStateActivity : BaseActivity<ActivityAddAscadStateBinding>() {
     private var totalPage = 1
     private var loading = true
     private var stateId: Int? = null // Store selected state
-    private var DocumentId: Int? = null
-    private var UploadedDocumentName: String? = null
-    private var DialogDocName: TextView? = null
-    private var DocumentName: String? = null
-    private var chooseDocName: String? = null
+    private var uploadedDocumentName: String? = null
+    private var dialogDocName: TextView? = null
+    private var documentName: String? = null
     var body: MultipartBody.Part? = null
     var isFromApplication = 0
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -53,10 +52,17 @@ class AddAscadStateActivity : BaseActivity<ActivityAddAscadStateBinding>() {
     private var layoutManager: LinearLayoutManager? = null
     private var viewEdit: String? = null
     var itemId: Int? = null
-    private var dId: Int? = null
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
+    private var latitude: Double? = null
+    private var longitude: Double? = null
 
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
 
     override val layoutId: Int
         get() = R.layout.activity_add_ascad_state
@@ -67,7 +73,20 @@ class AddAscadStateActivity : BaseActivity<ActivityAddAscadStateBinding>() {
         viewModel.init()
         viewEdit = intent.getStringExtra("View/Edit")
         itemId = intent.getIntExtra("itemId", 0)
-        dId = intent.getIntExtra("dId", 0)
+    }
+
+    override fun onResume() {
+        super.onResume()
+//        registerReceiver(
+//            locationReceiver,
+//            IntentFilter("LOCATION_UPDATED")
+//        )
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+//        unregisterReceiver(locationReceiver)
     }
 
     override fun setVariables() {
@@ -98,11 +117,11 @@ class AddAscadStateActivity : BaseActivity<ActivityAddAscadStateBinding>() {
             mBinding?.etRemarkFour?.isEnabled = false
             mBinding?.etInputFive?.isEnabled = false
             mBinding?.etRemarkFive?.isEnabled = false
-            mBinding?.llUploadFileOne?.isEnabled = false
-            mBinding?.llUploadFileTwo?.isEnabled = false
-            mBinding?.llUploadFileThree?.isEnabled = false
-            mBinding?.llUploadFileFour?.isEnabled = false
-            mBinding?.llUploadFileFive?.isEnabled = false
+            mBinding?.tvChooseFileOne?.isEnabled = false
+            mBinding?.tvChooseFileTwo?.isEnabled = false
+            mBinding?.tvChooseFileThree?.isEnabled = false
+            mBinding?.tvChooseFileFour?.isEnabled = false
+            mBinding?.tvChooseFileFive?.isEnabled = false
             mBinding?.llSaveDraftAndSubmit?.hideView()
             viewEditApi()
         }
@@ -147,36 +166,34 @@ class AddAscadStateActivity : BaseActivity<ActivityAddAscadStateBinding>() {
                             userResponseModel.message
                         )
                     }
-
                 } else {
-                    DocumentId = userResponseModel._result.id
-                    UploadedDocumentName = userResponseModel._result.document_name
-                    DialogDocName?.text = userResponseModel._result.document_name
+                    uploadedDocumentName = userResponseModel._result.document_name
+                    dialogDocName?.text = userResponseModel._result.document_name
                     when (isFromApplication) {
                         1 -> {
-                            mBinding?.etChooseFileOne?.text = UploadedDocumentName
+                            mBinding?.etChooseFileOne?.text = uploadedDocumentName
 
                         }
 
                         2 -> {
-                            mBinding?.etChooseFileTwo?.text = UploadedDocumentName
+                            mBinding?.etChooseFileTwo?.text = uploadedDocumentName
 
                         }
 
                         3 -> {
-                            mBinding?.etChooseFileThree?.text = UploadedDocumentName
+                            mBinding?.etChooseFileThree?.text = uploadedDocumentName
                         }
 
                         4 -> {
-                            mBinding?.etChooseFileFour?.text = UploadedDocumentName
+                            mBinding?.etChooseFileFour?.text = uploadedDocumentName
                         }
 
                         5 -> {
-                            mBinding?.etChooseFileFive?.text = UploadedDocumentName
+                            mBinding?.etChooseFileFive?.text = uploadedDocumentName
                         }
 
                         else -> {
-                            DialogDocName?.text = UploadedDocumentName
+                            dialogDocName?.text = uploadedDocumentName
                         }
                     }
                     mBinding?.clParent?.let { it1 ->
@@ -217,12 +234,11 @@ class AddAscadStateActivity : BaseActivity<ActivityAddAscadStateBinding>() {
                             mBinding?.etRemarkFour?.setText(userResponseModel._result.financial_planning_for_state_share_remarks)
                             mBinding?.etInputFive?.setText(userResponseModel._result.input_purchase_of_vaccines_accessories)
                             mBinding?.etRemarkFive?.setText(userResponseModel._result.purchase_of_vaccines_accessories_remarks)
-                            mBinding?.etChooseFileOne?.text = userResponseModel._result.annual_action_plan_input
-                            mBinding?.etChooseFileTwo?.text = userResponseModel._result.state_prioritizes_critical_disease_input
-                            mBinding?.etChooseFileThree?.text = userResponseModel._result.scheduling_of_vaccination_input
-                            mBinding?.etChooseFileFour?.text = userResponseModel._result.financial_planning_for_state_share_input
-                            mBinding?.etChooseFileFive?.text = userResponseModel._result.purchase_of_vaccines_accessories_input
-
+                            mBinding?.etChooseFileOne?.text = if (userResponseModel._result.annual_action_plan_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.annual_action_plan_input
+                            mBinding?.etChooseFileTwo?.text = if (userResponseModel._result.state_prioritizes_critical_disease_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.state_prioritizes_critical_disease_input
+                            mBinding?.etChooseFileThree?.text = if (userResponseModel._result.scheduling_of_vaccination_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.scheduling_of_vaccination_input
+                            mBinding?.etChooseFileFour?.text = if (userResponseModel._result.financial_planning_for_state_share_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.financial_planning_for_state_share_input
+                            mBinding?.etChooseFileFive?.text = if (userResponseModel._result.purchase_of_vaccines_accessories_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.purchase_of_vaccines_accessories_input
 
                         } else {
                             onBackPressedDispatcher.onBackPressed()
@@ -309,134 +325,166 @@ class AddAscadStateActivity : BaseActivity<ActivityAddAscadStateBinding>() {
         )
     }
 
-    private fun saveDataApi(itemId: Int?, draft: Int?) {
+    private fun valid() : Boolean{
         if (mBinding?.etInputOne?.text.toString().isEmpty()) {
             mBinding?.clParent?.let {
-                showSnackbar(it, "Please Fill All The Input and Remark Fields")
+                showSnackbar(it, getString(R.string.please_fill_all_the_input_and_remark_fields))
+            }
+            return false
+        }
+        else if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etInputThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etInputFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etInputFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else
+            return true
+    }
 
-            }
-            return
-        }
-        if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etInputThree?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etInputFour?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etInputFive?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
+    private fun saveDataApi(itemId: Int?, draft: Int?) {
 
-        viewModel.getStateAscadAdd(
-            context = this,
-            loader = true,
-            request = StateAscadAddRequest(
-                id = itemId,
-                role_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                state_code = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id,
-                status = draft,
-                input_annual_action_plan = mBinding?.etInputOne?.text.toString().trim(),
-                annual_action_plan_remarks = mBinding?.etRemarkOne?.text.toString().trim(),
-                input_state_prioritizes_critical_disease =mBinding?.etInputTwo?.text.toString().trim(),
-                state_prioritizes_critical_disease_remarks =mBinding?.etRemarkTwo?.text.toString().trim(),
-                input_scheduling_of_vaccination =mBinding?.etInputThree?.text.toString().trim(),
-                scheduling_of_vaccination_remarks =mBinding?.etRemarkThree?.text.toString().trim(),
-                input_financial_planning_for_state_share = mBinding?.etInputFour?.text.toString().trim(),
-                financial_planning_for_state_share_remarks = mBinding?.etRemarkFour?.text.toString().trim(),
-                input_purchase_of_vaccines_accessories = mBinding?.etInputFive?.text.toString().trim(),
-                purchase_of_vaccines_accessories_remarks = mBinding?.etInputFive?.text.toString().trim(),
-                annual_action_plan_input = mBinding?.etChooseFileOne?.text.toString().trim(),
-                state_prioritizes_critical_disease_input = mBinding?.etChooseFileTwo?.text.toString().trim(),
-                scheduling_of_vaccination_input = mBinding?.etChooseFileThree?.text.toString().trim(),
-                financial_planning_for_state_share_input = mBinding?.etChooseFileFour?.text.toString().trim(),
-                purchase_of_vaccines_accessories_input = mBinding?.etChooseFileFive?.text.toString().trim()
+//        if (hasLocationPermissions()) {
+//            startService(Intent(this, LocationService::class.java))
+//            lifecycleScope.launch {
+//                delay(1000) // Delay for 2 seconds
+//                if (latitude != null && longitude != null) {
+
+        if(valid()) {
+            viewModel.getStateAscadAdd(
+                context = this,
+                loader = true,
+                request = StateAscadAddRequest(
+                    id = itemId,
+                    role_id = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.role_id,
+                    state_code = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code,
+                    user_id = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.user_id,
+                    status = draft,
+                    input_annual_action_plan = mBinding?.etInputOne?.text.toString().trim(),
+                    annual_action_plan_remarks = mBinding?.etRemarkOne?.text.toString().trim(),
+                    input_state_prioritizes_critical_disease = mBinding?.etInputTwo?.text.toString()
+                        .trim(),
+                    state_prioritizes_critical_disease_remarks = mBinding?.etRemarkTwo?.text.toString()
+                        .trim(),
+                    input_scheduling_of_vaccination = mBinding?.etInputThree?.text.toString()
+                        .trim(),
+                    scheduling_of_vaccination_remarks = mBinding?.etRemarkThree?.text.toString()
+                        .trim(),
+                    input_financial_planning_for_state_share = mBinding?.etInputFour?.text.toString()
+                        .trim(),
+                    financial_planning_for_state_share_remarks = mBinding?.etRemarkFour?.text.toString()
+                        .trim(),
+                    input_purchase_of_vaccines_accessories = mBinding?.etInputFive?.text.toString()
+                        .trim(),
+                    purchase_of_vaccines_accessories_remarks = mBinding?.etInputFive?.text.toString()
+                        .trim(),
+                    annual_action_plan_input = mBinding?.etChooseFileOne?.text.toString().trim(),
+                    state_prioritizes_critical_disease_input = mBinding?.etChooseFileTwo?.text.toString()
+                        .trim(),
+                    scheduling_of_vaccination_input = mBinding?.etChooseFileThree?.text.toString()
+                        .trim(),
+                    financial_planning_for_state_share_input = mBinding?.etChooseFileFour?.text.toString()
+                        .trim(),
+                    purchase_of_vaccines_accessories_input = mBinding?.etChooseFileFive?.text.toString()
+                        .trim()
+                )
             )
-        )
+        }
+
+//                } else {
+//                    showSnackbar(mBinding!!.clParent, "No Location fetched")
+//                }
+//            }
+//        } else {
+//            showLocationAlertDialog()
+//        }
     }
 
     private fun showBottomSheetDialog(type: String) {
@@ -545,35 +593,35 @@ class AddAscadStateActivity : BaseActivity<ActivityAddAscadStateBinding>() {
                         )
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName =
+                                documentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
                                 when (isFromApplication) {
                                     1 -> {
-                                        uploadDocument(DocumentName, uri)
+                                        uploadDocument(documentName, uri)
                                     }
 
                                     2 -> {
-                                        uploadDocument(DocumentName, uri)
+                                        uploadDocument(documentName, uri)
                                     }
 
                                     3 -> {
-                                        uploadDocument(DocumentName, uri)
+                                        uploadDocument(documentName, uri)
                                     }
 
                                     4 -> {
-                                        uploadDocument(DocumentName, uri)
+                                        uploadDocument(documentName, uri)
                                     }
 
                                     5 -> {
-                                        uploadDocument(DocumentName, uri)
+                                        uploadDocument(documentName, uri)
                                     }
 
                                     6 -> {
-                                        uploadDocument(DocumentName, uri)
+                                        uploadDocument(documentName, uri)
                                     }
 
                                     else -> {
-                                        uploadDocument(DocumentName, uri)
+                                        uploadDocument(documentName, uri)
                                     }
                                 }
                             }

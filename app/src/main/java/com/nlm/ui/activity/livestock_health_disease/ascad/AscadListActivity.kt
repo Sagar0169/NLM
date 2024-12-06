@@ -75,6 +75,7 @@ class AscadListActivity : BaseActivity<ActivityAscadListBinding>(), CallBackDele
 
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         when (isFrom) {
             getString(R.string.state) -> {
                 stateAscadAPICall(paginate = false, loader = true, districtId)
@@ -88,6 +89,7 @@ class AscadListActivity : BaseActivity<ActivityAscadListBinding>(), CallBackDele
 
     private fun swipeForRefreshAscad() {
         mBinding?.srlAscad?.setOnRefreshListener {
+            currentPage = 1
             when (isFrom) {
                 getString(R.string.state) -> {
                     stateAscadAPICall(paginate = false, loader = true, districtId)
