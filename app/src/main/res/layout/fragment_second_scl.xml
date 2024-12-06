@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="ClickAction"
             type="com.nlm.ui.fragment.ndd.scl.SecondSCLFragment.ClickActions" />
@@ -20,6 +21,7 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:fillViewport="true">
+
             <LinearLayout
                 android:id="@+id/llParent"
                 android:layout_width="match_parent"
@@ -28,20 +30,19 @@
                 android:paddingHorizontal="@dimen/dp_15">
 
 
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
                     android:layout_marginTop="@dimen/dp_20"
                     android:background="@drawable/curve_all_corner_black"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
+
                     <TextView
-                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
                         android:fontFamily="@font/inter_semi_bold"
                         android:text="Chemical/Microbiological Tests being performed"
                         android:textColor="@color/black"
@@ -51,18 +52,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Pesticide Residue"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -71,17 +71,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            >
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Whether tests performed (Yes/No)"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -118,9 +118,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Frequency of tests performed"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -139,28 +139,26 @@
                                 android:textSize="@dimen/sp_16" />
 
 
-
-
                         </LinearLayout>
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Antibiotic residue"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -169,17 +167,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            >
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Whether tests performed (Yes/No)"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -216,9 +214,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Frequency of tests performed"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -237,8 +235,6 @@
                                 android:textSize="@dimen/sp_16" />
 
 
-
-
                         </LinearLayout>
 
 
@@ -248,18 +244,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Heavy Metal"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -268,17 +263,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            >
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Whether tests performed (Yes/No)"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -315,9 +310,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Frequency of tests performed"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -336,8 +331,6 @@
                                 android:textSize="@dimen/sp_16" />
 
 
-
-
                         </LinearLayout>
 
 
@@ -347,18 +340,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Microbiological"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -367,17 +359,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            >
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/opensans_semibold"
                                 android:text="Whether tests performed (Yes/No)"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -414,9 +406,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/opensans_semibold"
                                 android:text="Frequency of tests performed"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -435,8 +427,6 @@
                                 android:textSize="@dimen/sp_16" />
 
 
-
-
                         </LinearLayout>
 
 
@@ -446,18 +436,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Fatty Acid Profile"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -466,17 +455,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            >
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Whether tests performed (Yes/No)"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -513,9 +502,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Frequency of tests performed"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -534,8 +523,6 @@
                                 android:textSize="@dimen/sp_16" />
 
 
-
-
                         </LinearLayout>
 
 
@@ -545,18 +532,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Protein Estimation"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -565,17 +551,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            >
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Whether tests performed (Yes/No)"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -612,9 +598,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Frequency of tests performed"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -633,8 +619,6 @@
                                 android:textSize="@dimen/sp_16" />
 
 
-
-
                         </LinearLayout>
 
 
@@ -644,18 +628,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Aflatoxins"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -664,17 +647,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            >
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Whether tests performed (Yes/No)"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -711,9 +694,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Frequency of tests performed"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -730,8 +713,6 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
-
-
 
 
                         </LinearLayout>
@@ -743,18 +724,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Others"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -763,17 +743,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
                             android:background="@drawable/curve_all_corner_black"
                             android:orientation="vertical"
-                            >
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Whether tests performed (Yes/No)"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -810,9 +790,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Frequency of tests performed"
-                                android:layout_marginTop="@dimen/dp_7"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
@@ -831,13 +811,10 @@
                                 android:textSize="@dimen/sp_16" />
 
 
-
-
                         </LinearLayout>
 
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>
@@ -846,15 +823,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
                     android:layout_marginTop="@dimen/dp_20"
                     android:background="@drawable/curve_all_corner_black"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
+
                     <TextView
-                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
                         android:fontFamily="@font/inter_medium"
                         android:text="Skilled Employee details"
                         android:textColor="@color/black"
@@ -864,20 +842,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
-
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Degree/Qualification"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -894,12 +870,71 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="No. of employee"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:layout_marginBottom="@dimen/dp_10"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/inter_regular"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="Degree/Qualification"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/inter_regular"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="No. of employee"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -922,20 +957,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
-
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Degree/Qualification"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -952,12 +985,13 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="No. of employee"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -980,20 +1014,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        >
-
-
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="Degree/Qualification"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -1010,12 +1041,13 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/inter_medium"
                             android:text="No. of employee"
-                            android:layout_marginTop="@dimen/dp_7"
 
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -1033,93 +1065,65 @@
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
-
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="Degree/Qualification"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/inter_regular"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="No. of employee"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/inter_regular"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                    </LinearLayout>
-
 
                 </LinearLayout>
 
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Loss/Profit"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/inter_regular"
-                    android:hint=""
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:orientation="vertical"
                     android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
+                    android:paddingVertical="@dimen/dp_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Loss/Profit"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
 
 
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/inter_regular"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:layout_marginBottom="@dimen/dp_10"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/inter_regular"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
 
                 <TextView
@@ -1145,7 +1149,7 @@
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/sp_16" />
 
-  <TextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
@@ -1169,40 +1173,6 @@
                     android:textSize="@dimen/sp_16" />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <TextView
                     android:id="@+id/tvSendOtp"
                     android:layout_width="match_parent"
@@ -1217,9 +1187,9 @@
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="@dimen/dp_10"
                     android:text="Submit"
-                    android:textSize="@dimen/sp_20"
                     android:textAlignment="center"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_20" />
             </LinearLayout>
         </ScrollView>
 

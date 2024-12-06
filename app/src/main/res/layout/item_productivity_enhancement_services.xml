@@ -27,15 +27,16 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:cardElevation="5dp"
-            app:cardCornerRadius="@dimen/dp_20"
             android:layout_margin="@dimen/dp_10"
+            android:background="@android:color/transparent"
             android:orientation="horizontal"
+            app:cardCornerRadius="@dimen/dp_20"
+            app:cardElevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,8 +45,8 @@
                 <LinearLayout
                     android:id="@+id/llParent"
                     android:layout_width="0dp"
-                    android:layout_weight="1.7"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
                     android:background="@drawable/curve_all_corner_bg_item_white"
                     android:orientation="vertical"
                     android:padding="@dimen/dp_10"
@@ -62,10 +63,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textColor="@color/black"
-
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="DCS/MPP"
+                            android:textColor="@color/black"
                             android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -93,44 +93,6 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
-                            android:text="Tehsil"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.1"
-                            android:fontFamily="@font/poppins_bold"
-                            android:gravity="center"
-                            android:text=":"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvTehsil"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/dp_3"
-                            android:layout_weight="1"
-                            android:drawablePadding="@dimen/dp_5"
-                            android:fontFamily="@font/inter_light"
-
-                            android:text="@string/na"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -142,7 +104,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="State"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -181,7 +143,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="District"
 
                             android:textColor="@color/black"
@@ -198,7 +160,8 @@
                             android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvDistrict"                            android:layout_width="0dp"
+                            android:id="@+id/tvDistrict"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/dp_3"
                             android:layout_weight="1"
@@ -209,6 +172,8 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
+
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -219,7 +184,47 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="Tehsil"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTehsil"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:fontFamily="@font/inter_light"
+
+                            android:text="@string/na"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Revenue Village"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -235,7 +240,8 @@
                             android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvRevenue"                            android:layout_width="0dp"
+                            android:id="@+id/tvRevenue"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/dp_3"
                             android:layout_weight="1"
@@ -257,7 +263,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_medium"
                             android:text="Created By"
 
                             android:textColor="@color/black"
@@ -298,8 +304,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/inter_regular"
-                            android:text="Created"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="Created At"
 
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -328,11 +334,43 @@
                             android:textSize="14sp" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:orientation="horizontal">
 
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="NLM Status"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:fontFamily="@font/inter_light"
 
-
+                            android:text="@string/na"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
 
                     <LinearLayout
@@ -388,13 +426,13 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.3"
                     android:background="@drawable/curve_all_corner_bg_item"
-                    android:orientation="horizontal"
-                    />
+                    android:orientation="horizontal" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

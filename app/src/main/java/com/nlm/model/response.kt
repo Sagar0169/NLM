@@ -1883,3 +1883,33 @@ data class DistrictAscadAddResult(
     val training_of_veterinarians_and_para_vets_last_year_remarks: String,
     val user_id: Int
 )
+
+
+data class NDDComponentBListResponse(
+    val _result: NDDComponentBListResult,
+    val _resultflag: Int?,
+    val message: String?,
+    val statuscode: Int?
+)
+
+data class NDDComponentBListResult(
+    val data: List<NDDComponentBListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NDDComponentBListData(
+    val created_by_id: Int,
+    val created_on: String,
+    val district_name: String,
+    val id: Int,
+    val is_delete: String,
+    val is_draft: Int,
+    val is_draft_text: String,
+    val is_edit: String,
+    val name_of_dcs_mpp: String,
+    val name_of_revenue_village: String,
+    val name_of_tehsil: String,
+    val state_id: Int,
+    val state_name: String
+)

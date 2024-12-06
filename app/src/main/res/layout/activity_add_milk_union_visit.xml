@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="ClickAction"
             type="com.nlm.ui.activity.national_dairy_development.AddMilkUnionVisit.ClickActions" />
     </data>
 
     <RelativeLayout
+        android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/white"
+        android:orientation="vertical"
         tools:context=".ui.activity.NodalOfficerDetailActivity">
 
 
@@ -60,8 +62,8 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_below="@id/rlToolbar"
+            android:layout_alignParentBottom="true"
             android:background="@color/white"
             android:fillViewport="true">
 
@@ -70,1546 +72,1574 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_15">
+                >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/name_of_milk_union"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:id="@+id/etNameOfMilkUnion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-
-
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/stateMU"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/etState"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:text="Please Select"
-                    android:textColor="@color/grey" />
-
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/name_of_districts_covered"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/etDistrict"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:text="Please Select"
-                    android:textColor="@color/grey" />
-                <LinearLayout
-                    android:id="@+id/llRelation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="-10dp"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvRelation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="5dp"
-                        android:layout_marginVertical="10dp" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Total No. of Villages"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:id="@+id/etTotalNoOfVillages"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="No. of Villages Covered"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:id="@+id/etNoOfVillagesCovered"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="No. of milk producers enrolled"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:id="@+id/etNoOfMilkProducers"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Format for Onsite Milk Union Visit report by NLMs"
+                    android:textAlignment="center"
+                    android:background="@color/orange"
+                    android:padding="@dimen/dp_10"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/curve_all_corner_black"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
+
                     <TextView
-                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="No. of Dairy Cooperatives"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/name_of_milk_union"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <LinearLayout
+                    <EditText
+                        android:id="@+id/etNameOfMilkUnion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLength="50"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/stateMU"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:id="@+id/etState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/opensans_regular"
+                        android:onClick="@{ClickAction::state}"
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:text="Please Select"
+                        android:textColor="@color/grey" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/name_of_districts_covered"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:id="@+id/etDistrict"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:fontFamily="@font/opensans_regular"
+                        android:onClick="@{ClickAction::district}"
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:text="Please Select"
+                        android:textColor="@color/grey" />
+
+                    <LinearLayout
+                        android:id="@+id/llRelation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
+                        android:background="@drawable/curve_all_corner_grey"
                         android:orientation="vertical"
-                        >
+                        android:visibility="gone">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Organised"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etOrganised"
-
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvRelation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Functional"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etFunctional"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
+                            android:layout_marginHorizontal="5dp"
+                            android:layout_marginVertical="10dp" />
                     </LinearLayout>
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
                     <TextView
-                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/milk_processing_plants_including_milk_powder_plant"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Total No. of Villages"
                         android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etTotalNoOfVillages"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="No. of Villages Covered"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etNoOfVillagesCovered"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="No. of milk producers enrolled"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etNoOfMilkProducers"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
                         android:textSize="@dimen/sp_16" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="No. of Dairy Cooperatives"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            >
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
                             <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Organised"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etOrganised"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Location"
-                                android:layout_weight="1"
                                 android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Functional"
 
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
-                            <TextView
+
+                            <EditText
+                                android:id="@+id/etFunctional"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Capacity (TLPD)"
-                                android:layout_weight="1"
-                                android:layout_marginTop="@dimen/dp_7"
-
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />
+
                         </LinearLayout>
 
+                    </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-
-                            >
-                            <EditText
-                                android:id="@+id/location1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="@dimen/dp_5"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:id="@+id/capacity1"
-
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_marginStart="@dimen/dp_5"
-
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                            <EditText
-                                android:id="@+id/location2"
-
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="@dimen/dp_5"
-
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:id="@+id/capacity2"
-
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_marginStart="@dimen/dp_5"
-
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                            <EditText
-                                android:id="@+id/location3"
-
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="@dimen/dp_5"
-
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:id="@+id/capacity3"
-
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_marginStart="@dimen/dp_5"
-
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Total"
-                            android:layout_marginTop="@dimen/dp_7"
-
+                            android:text="@string/milk_processing_plants_including_milk_powder_plant"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
-                        <EditText
-                            android:id="@+id/TotalLocationCapacity"
-
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
+                            android:paddingVertical="@dimen/dp_5">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Location"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Capacity (TLPD)"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                >
+
+                                <EditText
+                                    android:id="@+id/location1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_marginEnd="@dimen/dp_5"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <EditText
+                                    android:id="@+id/capacity1"
+
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_5"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/location2"
+
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_marginEnd="@dimen/dp_5"
+                                    android:layout_weight="1"
+
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <EditText
+                                    android:id="@+id/capacity2"
+
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_5"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/location3"
+
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_marginEnd="@dimen/dp_5"
+                                    android:layout_weight="1"
+
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <EditText
+                                    android:id="@+id/capacity3"
+
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_5"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Total"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/TotalLocationCapacity"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="Bulk Milk Chillers"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Number"
-                            android:layout_marginTop="@dimen/dp_7"
-
+                            android:text="Bulk Milk Chillers"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
-                        <EditText
-                            android:id="@+id/etBulkMilkChillersNumber"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Total Capicity (KL)"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etBulkMilkChillersTotalCapacity"
-
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
+                            android:paddingVertical="@dimen/dp_5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Number"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etBulkMilkChillersNumber"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Total Capicity (KL)"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etBulkMilkChillersTotalCapacity"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/daily_average_milk_procurement_in_tkgpd"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Average Last Year"
-                            android:layout_marginTop="@dimen/dp_7"
-
+                            android:text="@string/daily_average_milk_procurement_in_tkgpd"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
-                        <EditText
-                            android:id="@+id/etMilkProcurementAverageLastYear"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Average Current Year"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etMilkProcurementAverageCurrentYear"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Current Month"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etMilkProcurementAverageCurrentMonth"
-
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
+                            android:paddingVertical="@dimen/dp_5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Average Last Year"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etMilkProcurementAverageLastYear"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Average Current Year"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etMilkProcurementAverageCurrentYear"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Current Month"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etMilkProcurementAverageCurrentMonth"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+                        </LinearLayout>
+
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/daily_average_milk_milk_product_sale_in_tlpd"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Liquid Milk Sale"
-                            android:layout_marginTop="@dimen/dp_7"
-
+                            android:text="@string/daily_average_milk_milk_product_sale_in_tlpd"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
-                        <EditText
-                            android:id="@+id/etMilkProductSaleLiquidMilk"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Bulk Sale to Other Milk Unions/Dairies"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etMilkProductSaleBulkSale"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Value Added Product"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etMilkProductSaleValueAdded"
-
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
+                            android:paddingVertical="@dimen/dp_5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Liquid Milk Sale"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etMilkProductSaleLiquidMilk"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Bulk Sale to Other Milk Unions/Dairies"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etMilkProductSaleBulkSale"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Value Added Product"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etMilkProductSaleValueAdded"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+                        </LinearLayout>
+
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="Average Procurement Price"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Cow Milk (Rs./Kg) 3% Fat/8.0% SNF"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Last Year"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                            android:layout_width="0dp"
-                                android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Current Year"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                            <EditText
-                                android:id="@+id/etAPPCowLastYear"
-
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_weight="1"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
                         android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:paddingVertical="@dimen/dp_10">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Buffalo Milk (Rs./Kg) 6% Fat/9% SNF"
-                            android:layout_marginTop="@dimen/dp_7"
-
+                            android:text="Average Procurement Price"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Last Year"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Current Year"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                            <EditText
-                                android:id="@+id/etAPPBuffaloLastYear"
-
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_weight="1"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="Incentives Provided"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Cow Milk (Rs./Kg) 3% Fat/8.0% SNF"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Last Year"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Current Year"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                            <EditText
-                                android:id="@+id/etIPCowLastYear"
-
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_weight="1"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Buffalo Milk (Rs./Kg) 6% Fat/9% SNF"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Last Year"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="Current Year"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                            <EditText
-                                android:id="@+id/etIPBuffaloLastYear"
-
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:layout_weight="1"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_weight="1"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="Financial Position (Last FY)"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Turn Over"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etFPTurnOver"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Cumulative Profit/Loss"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etFPCumulativeProfit"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Net Profit/Loss (Last FY)"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etFPNetProfit"
-
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
+                            android:paddingVertical="@dimen/dp_5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Cow Milk (Rs./Kg) 3% Fat/8.0% SNF"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Last Year"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Current Year"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dp_10">
+
+                                <EditText
+                                    android:id="@+id/etAPPCowLastYear"
+
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:layout_marginEnd="@dimen/dp_10"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <EditText
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Buffalo Milk (Rs./Kg) 6% Fat/9% SNF"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Last Year"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Current Year"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dp_10">
+
+                                <EditText
+                                    android:id="@+id/etAPPBuffaloLastYear"
+
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:layout_marginEnd="@dimen/dp_10"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <EditText
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
-                    <TextView
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="Staff Position"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
-                        >
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Sanctioned"
-                            android:layout_marginTop="@dimen/dp_7"
-
+                            android:text="Incentives Provided"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
-                        <EditText
-                            android:id="@+id/etStaffPositionSanctioned"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Available"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <EditText
-                            android:id="@+id/etStaffPositionAvailable"
-
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
                             android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
+                            android:paddingVertical="@dimen/dp_5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Cow Milk (Rs./Kg) 3% Fat/8.0% SNF"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Last Year"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Current Year"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dp_10">
+
+                                <EditText
+                                    android:id="@+id/etIPCowLastYear"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:layout_marginEnd="@dimen/dp_10"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <EditText
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Buffalo Milk (Rs./Kg) 6% Fat/9% SNF"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Last Year"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="Current Year"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dp_10">
+
+                                <EditText
+                                    android:id="@+id/etIPBuffaloLastYear"
+
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:layout_marginEnd="@dimen/dp_10"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+                                <EditText
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_7"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Financial Position (Last FY)"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Turn Over"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etFPTurnOver"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Cumulative Profit/Loss"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etFPCumulativeProfit"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Net Profit/Loss (Last FY)"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etFPNetProfit"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Staff Position"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Sanctioned"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etStaffPositionSanctioned"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_7"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Available"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <EditText
+                                android:id="@+id/etStaffPositionAvailable"
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Future Plan for action (based on interaction with sr. officers of Milk Union)"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etFuturePlans"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Remarks by NLM (in 500 words)"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etRemarks"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLength="500"
+                        android:maxLines="3"
+                        android:minLines="3"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Photographs of site"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+
+                    <LinearLayout
+                        android:id="@+id/llApplicantPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/tvChooseFile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".4"
+                            android:background="@drawable/back_number_gray"
+                            android:enabled="false"
+                            android:gravity="center"
+                            android:padding="@dimen/dp_10"
+                            android:text="Choose File"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14" />
+
+                        <View
+                            android:layout_width="@dimen/dp_1"
+                            android:layout_height="match_parent"
+                            android:background="#909090" />
+
+                        <TextView
+                            android:id="@+id/tvDoc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.6"
+                            android:gravity="center"
+                            android:padding="@dimen/dp_10"
+                            android:text="No File Chosen"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/sp_14" />
+
+                    </LinearLayout>
                 </LinearLayout>
-
-
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Future Plan for action (based on interaction with sr. officers of Milk Union)"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:id="@+id/etFuturePlans"
-
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="50"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Remarks by NLM (in 500 words)"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:id="@+id/etRemarks"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular"
-                    android:maxLength="500"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="false"
-                    android:maxLines="3"
-                    android:minLines="3"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Photographs of site"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-
-                <LinearLayout
-                    android:id="@+id/llApplicantPhoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
+                    android:paddingVertical="@dimen/dp_10">
                     <TextView
-                        android:id="@+id/tvChooseFile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".4"
-                        android:background="@drawable/back_number_gray"
-                        android:enabled="false"
-                        android:gravity="center"
-                        android:padding="@dimen/dp_10"
-                        android:text="Choose File"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Supporting Documents"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14" />
-
-                    <View
-                        android:layout_width="@dimen/dp_1"
-                        android:layout_height="match_parent"
-                        android:background="#909090" />
-
+                        android:textSize="@dimen/sp_16" />
                     <TextView
-                        android:id="@+id/tvDoc"
+                        android:id="@+id/tvNLMDoc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.6"
-                        android:gravity="center"
-                        android:padding="@dimen/dp_10"
-                        android:text="No File Chosen"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/sp_14" />
-
-                </LinearLayout>
-
-
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:fontFamily="@font/inter_semi_bold"
-                    android:text="Supporting Documents"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
-
-                <LinearLayout
-                    android:id="@+id/llRv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                        android:layout_gravity="end"
+                        android:layout_marginVertical="@dimen/dp_7"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:onClick="@{ClickAction::addDocDialog}"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Add More"
+                        android:textColor="@color/white" />
 
                     <com.nlm.utilities.NonScrollableRecyclerView
-                        android:id="@+id/recyclerView"
+                        android:id="@+id/recyclerView2"
                         android:layout_width="match_parent"
-
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
-
+                        android:paddingTop="8dp" />
                 </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_15"
-                    android:layout_marginBottom="@dimen/dp_10"
-
-                    >
-                    <TextView
-                        android:id="@+id/tvSave"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/dp_9"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:orientation="horizontal">
 
-                        android:background="@drawable/button_bg"
-                        android:clickable="true"
-                        android:fontFamily="@font/khula_semibold"
-                        android:paddingHorizontal="@dimen/dp_20"
-                        android:paddingVertical="@dimen/dp_10"
-                        android:text="Save As Draft"
-                        android:textSize="@dimen/sp_20"
-                        android:textAlignment="center"
-                        android:textColor="@color/white" />
-                    <TextView
-                        android:id="@+id/tvSendOtp"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_9"
+                        <TextView
+                            android:id="@+id/tvSaveDraft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_3"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:layout_marginBottom="@dimen/dp_10"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/curve_fill_blue"
+                            android:backgroundTint="@color/green"
+                            android:clickable="true"
+                            android:onClick="@{ClickAction::saveAsDraft}"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingHorizontal="@dimen/dp_20"
+                            android:paddingVertical="@dimen/dp_10"
+                            android:text="Save As Draft"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
 
-                        android:background="@drawable/button_bg"
-                        android:clickable="true"
-                        android:fontFamily="@font/khula_semibold"
-                        android:paddingHorizontal="@dimen/dp_20"
-                        android:paddingVertical="@dimen/dp_10"
-                        android:text="Submit"
-                        android:textSize="@dimen/sp_20"
-                        android:textAlignment="center"
-                        android:textColor="@color/white" />
-
-
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvSendOtp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_3"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:layout_marginBottom="@dimen/dp_10"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/curve_fill_blue"
+                            android:clickable="true"
+                            android:onClick="@{ClickAction::save}"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingHorizontal="@dimen/dp_20"
+                            android:paddingVertical="@dimen/dp_10"
+                            android:text="@string/submit"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </LinearLayout>
 
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </layout>

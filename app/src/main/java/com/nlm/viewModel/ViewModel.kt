@@ -59,6 +59,8 @@ import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
 import com.nlm.model.MobileVeterinaryUnitsListRequest
 import com.nlm.model.MobileVeterinaryUnitsListResponse
+import com.nlm.model.NDDComponentBListRequest
+import com.nlm.model.NDDComponentBListResponse
 import com.nlm.model.NLMAhidfRequest
 import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NLMIAResponse
@@ -151,6 +153,9 @@ class ViewModel : ViewModel() {
     var stateAscadAddResult = MutableLiveData<StateAscadAddResponse>()
     var districtAscadListResult = MutableLiveData<AscadListResponse>()
     var districtAscadAddResult = MutableLiveData<DistrictAscadAddResponse>()
+
+    //NDD
+    var componentBListResult = MutableLiveData<NDDComponentBListResponse>()
 
     val errors = MutableLiveData<String>()
 
@@ -2887,4 +2892,62 @@ class ViewModel : ViewModel() {
             }
         }
     }
+
+
+    fun getComponentBList(context: Context, loader: Boolean, request: NDDComponentBListRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.getComponentBList(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                componentBListResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
 }

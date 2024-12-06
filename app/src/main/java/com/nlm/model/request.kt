@@ -1126,5 +1126,11 @@ data class DistrictAscadAddRequest(
     val user_id: Int?= null
 )
 
-
+data class NDDComponentBListRequest(
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+    val limit: Int,
+    val page: Int
+)
 

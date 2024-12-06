@@ -62,7 +62,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/llParent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -76,14 +76,22 @@
 
         <!-- Floating Action Button -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvArtificialInsemination"
+            android:id="@+id/rvComponent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="9dp" />
-        </LinearLayout>
+            android:layout_marginTop="@dimen/dp_10" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNoDataFound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/lexend_bold"
+                android:text="@string/no_data_found"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                android:visibility="gone" />
+        </RelativeLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddAgency"
             android:layout_width="wrap_content"

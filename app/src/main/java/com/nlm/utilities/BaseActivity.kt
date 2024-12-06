@@ -22,6 +22,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.snackbar.Snackbar
 import com.nlm.R
+import com.nlm.services.LocationService
 import java.io.File
 import java.util.Locale
 
@@ -101,6 +102,22 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
             PERMISSION_REQUEST_LOCATION
         )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST_LOCATION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(this, LocationService::class.java)
+                this.startService(intent)
+            } else {
+                Toast.makeText(this, "Location permissions are required to use this feature", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
     protected open fun getLanguageLocalize(lang: String?, context: Context) {
         val config = context.resources.configuration
