@@ -78,7 +78,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="States"
+                        android:text="@string/states"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -93,109 +93,9 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
-                        android:text="Please Select"
+                        android:text="@string/please_select"
                         android:textColor="@color/black"
                         app:drawableEndCompat="@drawable/ic_arrow_down" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llDistrict"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Districts"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvDistrict"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_10"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:text="Please Select"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llBlock"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Blocks"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/etBlock"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Enter Block Name"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llFarmer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginVertical="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Village Name"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/etFarmer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:background="@drawable/curve_all_corner_grey"
-                        android:fontFamily="@font/opensans_regular"
-                        android:hint="Enter Village Name"
-                        android:maxLength="50"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 
                 <TextView
@@ -206,7 +106,7 @@
                     android:layout_marginEnd="2dp"
                     android:background="@color/orange"
                     android:paddingVertical="@dimen/dp_5"
-                    android:text="State level Indicators"
+                    android:text="@string/state_level_indicators"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
                     android:textSize="20sp"
@@ -262,7 +162,7 @@
                                 android:text="a)"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="normal" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -272,9 +172,6 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
-
-
-
 
                         <!-- Input Field -->
                         <TextView
@@ -293,8 +190,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -312,10 +211,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -343,8 +243,8 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="Choose File"
-                                android:onClick="@{ClickAction::ChooseFile1a}"
+                                android:text="@string/choose_file"
+                                android:onClick="@{ClickAction::chooseFile1a}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -360,7 +260,7 @@
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:hint="No File Chosen"
+                                android:hint="@string/no_file_chosen"
                                 android:textColorHint="@color/grey"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -386,7 +286,7 @@
                                 android:text="b)"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="normal" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -396,9 +296,6 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
-
-
-
 
                         <!-- Input Field -->
                         <TextView
@@ -417,8 +314,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -436,10 +335,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -468,7 +368,7 @@
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
-                                android:onClick="@{ClickAction::ChooseFile1b}"
+                                android:onClick="@{ClickAction::chooseFile1b}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -510,7 +410,7 @@
                                 android:text="c)"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="normal" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -520,9 +420,6 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
-
-
-
 
                         <!-- Input Field -->
                         <TextView
@@ -541,8 +438,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -560,10 +459,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -592,7 +492,7 @@
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
-                                android:onClick="@{ClickAction::ChooseFile1c}"
+                                android:onClick="@{ClickAction::chooseFile1c}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -634,7 +534,7 @@
                                 android:text="d)"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="normal" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -644,9 +544,6 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
-
-
-
 
                         <!-- Input Field -->
                         <TextView
@@ -665,8 +562,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -684,10 +583,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -715,7 +615,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:onClick="@{ClickAction::ChooseFile1d}"
+                                android:onClick="@{ClickAction::chooseFile1d}"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -758,7 +658,7 @@
                                 android:text="e)"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="normal" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -768,9 +668,6 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>
-
-
-
 
                         <!-- Input Field -->
                         <TextView
@@ -789,8 +686,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -808,10 +707,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -840,7 +740,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:onClick="@{ClickAction::ChooseFile1e}"
+                                android:onClick="@{ClickAction::chooseFile1e}"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -894,9 +794,6 @@
                         android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
 
-
-
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -922,8 +819,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -941,10 +840,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -972,7 +872,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:onClick="@{ClickAction::ChooseFile2}"
+                                android:onClick="@{ClickAction::chooseFile2}"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -1025,9 +925,6 @@
                         android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
 
-
-
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1053,8 +950,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -1072,10 +971,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -1103,7 +1003,7 @@
                                 android:background="@drawable/back_number_gray"
                                 android:enabled="false"
                                 android:gravity="center"
-                                android:onClick="@{ClickAction::ChooseFile3}"
+                                android:onClick="@{ClickAction::chooseFile3}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
@@ -1168,6 +1068,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llSaveDraftAndSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_10"
@@ -1189,13 +1090,13 @@
                         android:onClick="@{ClickAction::saveAsDraft}"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
-                        android:text="Save As Draft"
+                        android:text="@string/save_as_draft"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/tvSendOtp"
+                        android:id="@+id/tvSubmit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dp_3"
@@ -1205,7 +1106,7 @@
                         android:background="@drawable/curve_fill_blue"
                         android:clickable="true"
                         android:fontFamily="@font/poppins_medium"
-                        android:onClick="@{ClickAction::saveAndNext}"
+                        android:onClick="@{ClickAction::submit}"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
                         android:text="@string/submit"

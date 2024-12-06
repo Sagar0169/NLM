@@ -41,8 +41,6 @@ class AscadActivity : BaseActivity<ActivityAscadBinding>() {
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-
-
     }
 
     override fun setVariables() {

@@ -83,6 +83,16 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    fun showLocationAlertDialog() {
+        android.app.AlertDialog.Builder(this)
+            .setTitle("Location Not Found")
+            .setMessage("Unable to fetch your location. Please enable location from settings.")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
     fun View.showStringSnackbar(message: String) {
         Snackbar.make(this, message, Snackbar.LENGTH_LONG).also { snackbar ->
             snackbar.view.setBackgroundColor(Color.parseColor("#F16622"))
