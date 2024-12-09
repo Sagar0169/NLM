@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemNLMDistrictWiseListEdit
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
@@ -46,7 +47,8 @@ import com.nlm.viewModel.ViewModel
 
 
 class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val itemId:Int?):
-    BaseFragment<FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding>(),CallBackItemNLMDistrictWiseListEdit {
+    BaseFragment<FragmentNLSIAAgenciesInvolvedInGeneticImprovementGoatSheepBinding>(),CallBackItemNLMDistrictWiseListEdit,
+    CallBackDeleteAtId {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__agencies_involved_in_genetic_improvement_goat_sheep
     private lateinit var stateAdapter: BottomSheetAdapter
@@ -93,7 +95,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
    private fun NlmIADistrictWiseNoAdapterFun() {
        mBinding?.recyclerViewDistrictWiseOfAi?.layoutManager = LinearLayoutManager(requireContext())
        mNlmIADistrictWiseNoList = mutableListOf()
-       mNlmIADistrictWiseNoAdapter = NlmIADistrictWiseNoAdapter  (mNlmIADistrictWiseNoList,viewEdit,this)
+       mNlmIADistrictWiseNoAdapter = NlmIADistrictWiseNoAdapter  (requireContext(),mNlmIADistrictWiseNoList,viewEdit,this,this)
        mBinding?.recyclerViewDistrictWiseOfAi?.adapter = mNlmIADistrictWiseNoAdapter
    }
    override fun setVariables() {
@@ -155,6 +157,39 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                                 mNlmIADistrictWiseNoAdapter.notifyDataSetChanged()
 
                         }}
+                       else if (viewEdit=="edit")
+                        {
+                            if (savedAsEdit)
+                            {
+                                listener?.onNextButtonClick()
+                            }
+                            else{
+                                userResponseModel._result.no_of_al_technicians?.toString().let { it1 ->
+                                    mBinding?.etNoOfAiTechnician?.setText(
+                                        it1
+                                    )
+                                }
+                                userResponseModel._result.number_of_ai?.toString().let { it1 ->
+                                    mBinding?.etNumberOfAiTechnicianTrained?.setText(
+                                        it1
+                                    )
+                                }
+                                userResponseModel._result.total_paravet_trained?.toString().let { it1 ->
+                                    mBinding?.etTotalNoOfParavetTrained?.setText(
+                                        it1
+                                    )
+                                }
+                                mNlmIADistrictWiseNoList.clear()
+
+                                userResponseModel._result.implementing_agency_involved_district_wise?.let { it1 ->
+                                    mNlmIADistrictWiseNoList.addAll(
+                                        it1
+                                    )
+                                }
+
+                                mNlmIADistrictWiseNoAdapter.notifyDataSetChanged()
+
+                            }}
                         else{
                     listener?.onNextButtonClick()
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
@@ -448,5 +483,16 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                 )?.user_id,
             )
         )
+    }
+
+    override fun onClickItem(ID: Int?, position: Int,isFrom: Int) {
+        if (isFrom==1){
+            position.let { it1 -> mNlmIADistrictWiseNoAdapter.onDeleteButtonClick(it1) }
+        }
+        else if(isFrom==2){
+            position.let { it1 -> mNlmIADistrictWiseNoAdapter.onDeleteButtonClick(it1) }
+        }
+
+
     }
 }

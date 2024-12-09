@@ -8,6 +8,7 @@ import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.location.*
 
 
@@ -30,7 +31,8 @@ class LocationService : Service() {
                     val intent = Intent("LOCATION_UPDATED")
                     intent.putExtra("latitude", latitude)
                     intent.putExtra("longitude", longitude)
-                    sendBroadcast(intent)
+                    LocalBroadcastManager.getInstance(this@LocationService).sendBroadcast(intent)
+
                 }
             }
         }

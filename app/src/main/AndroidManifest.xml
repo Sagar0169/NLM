@@ -50,6 +50,7 @@
         android:windowSoftInputMode="adjustResize|stateHidden"
         tools:targetApi="31">
         <service android:name=".services.LocationService" android:exported="false" />
+
         <activity
             android:name=".ui.activity.livestock_health_disease.ascad.AddAscadDistrictActivity"
             android:exported="false" />

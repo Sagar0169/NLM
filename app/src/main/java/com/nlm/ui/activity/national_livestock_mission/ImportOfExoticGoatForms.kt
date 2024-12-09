@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
@@ -21,6 +22,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -111,6 +113,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         override fun onReceive(context: Context?, intent: Intent?) {
             latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
             longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+            Log.d("Locationnn",latitude.toString())
         }
     }
     override fun initView() {
@@ -1177,10 +1180,14 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     }
     override fun onResume() {
         super.onResume()
-        registerReceiver(
-            locationReceiver,
-            IntentFilter("LOCATION_UPDATED")
-        )
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+            Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED)
+        } else {
+            Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
+           LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
+        }
     }
 
 

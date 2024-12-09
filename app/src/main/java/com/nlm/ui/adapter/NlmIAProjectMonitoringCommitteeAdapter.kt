@@ -1,19 +1,27 @@
 package com.nlm.ui.adapter
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemTypeIACompositionListEdit
+import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyProjectMonitoring
+import com.nlm.utilities.Utility
 import com.nlm.utilities.showView
 
 class NlmIAProjectMonitoringCommitteeAdapter(
+    private val context: Context,
     private val programmeList: MutableList<ImplementingAgencyProjectMonitoring>,
     private val viewEdit: String?,
-    private val callBackEdit: CallBackItemTypeIACompositionListEdit
+    private val callBackEdit: CallBackItemTypeIACompositionListEdit,
+    private val callBackDeleteAtId: CallBackDeleteAtId,
 ) : RecyclerView.Adapter<NlmIAProjectMonitoringCommitteeAdapter.NlmIACompositionOFGoverning>() {
 
 
@@ -43,11 +51,18 @@ class NlmIAProjectMonitoringCommitteeAdapter(
         holder.binding.nameOfOfficial.setText(currentItem.name_of_official)
         holder.binding.nameOfDesignation.setText(currentItem.designation)
         holder.binding.nameOfOrganization.setText(currentItem.organization)
-
         holder.binding.btnDelete.setOnClickListener {
-                programmeList.removeAt(position)
-                notifyItemRemoved(position)
-            }
+            Utility.showConfirmationAlertDialog(
+                context,
+                object :
+                    DialogCallback {
+                    override fun onYes() {
+                        callBackDeleteAtId.onClickItem(currentItem.id,position,1)
+                    }
+                },
+                context.getString(R.string.are_you_sure_want_to_delete_your_post)
+            )
+        }
         holder.binding.btnEdit.setOnClickListener{
             callBackEdit.onClickItem(
                 IdAndDetails(
@@ -69,6 +84,17 @@ class NlmIAProjectMonitoringCommitteeAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return position
+    }
+    fun onDeleteButtonClick(position: Int) {
+        if (position >= 0 && position < programmeList.size) {
+            programmeList.removeAt(position)
+            notifyItemRemoved(position)
+
+            // Notify about range changes to avoid index mismatches
+            notifyItemRangeChanged(position, programmeList.size)
+        } else {
+            Log.e("Error", "Invalid index: $position for programmeList of size ${programmeList.size}")
+        }
     }
 
     inner class NlmIACompositionOFGoverning(val binding: ItemCompositionOfGoverningNlmIaBinding) :

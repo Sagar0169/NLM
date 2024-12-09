@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemFundsReceivedListEdit
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
@@ -36,7 +37,7 @@ import com.nlm.viewModel.ViewModel
 
 
 class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int?): BaseFragment<FragmentNLSIAReportingSystemBinding>(),
-    CallBackItemFundsReceivedListEdit {
+    CallBackItemFundsReceivedListEdit, CallBackDeleteAtId {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a__reporting__system
 
@@ -96,7 +97,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                     }else
 
                     {
-                        if (viewEdit=="view"||viewEdit=="edit")
+                        if (viewEdit=="view")
                         {
                             if (savedAsEdit)
                             {
@@ -131,6 +132,33 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
                                 nlmIAFundsRecievedAdapter?.notifyDataSetChanged()
 
                         }
+                        }
+                       else if (viewEdit=="edit")
+                        {
+                            if (savedAsEdit)
+                            {
+                                listener?.onNextButtonClick()
+                            }
+                            else {
+                                mBinding?.etFrequencyOfMonitoring1?.setText(userResponseModel._result.frequency_of_monitoring_1)
+                                mBinding?.etFrequencyOfMonitoring2?.setText(userResponseModel._result.frequency_of_monitoring_2)
+                                mBinding?.etReportingMechanismToStateGovt1?.setText(userResponseModel._result.reporting_mechanism_1)
+                                mBinding?.etReportingMechanismToStateGovt2?.setText(userResponseModel._result.reporting_mechanism_2)
+                                mBinding?.etRegularity1?.setText(userResponseModel._result.regularity_1)
+                                mBinding?.etRegularity2?.setText(userResponseModel._result.regularity_2)
+                                mBinding?.etSubmission1?.setText(userResponseModel._result.submission_of_quarterly_1)
+                                mBinding?.etSubmission2?.setText(userResponseModel._result.submission_of_quarterly_2)
+                                mBinding?.etStudiesConducted?.setText(userResponseModel._result.studies_surveys_conducted)
+                                nlmIAFundsRecievedList.clear()
+
+                                userResponseModel._result.implementing_agency_funds_received?.let { it1 ->
+                                    nlmIAFundsRecievedList.addAll(
+                                        it1
+                                    )
+                                }
+                                nlmIAFundsRecievedAdapter?.notifyDataSetChanged()
+
+                            }
                         }
                         else{
 
@@ -187,7 +215,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
     private fun nlmIAFundsRecievedAdapter() {
         nlmIAFundsRecievedList = mutableListOf()
         nlmIAFundsRecievedAdapter =
-            NlmIAFundsRecievedAdapter(nlmIAFundsRecievedList,viewEdit,this)
+            NlmIAFundsRecievedAdapter(requireContext(),nlmIAFundsRecievedList,viewEdit,this,this)
         mBinding?.rvFundRecieved?.adapter = nlmIAFundsRecievedAdapter
         mBinding?.rvFundRecieved?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -319,6 +347,13 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
 
     override fun onClickItem(selectedItem: ImplementingAgencyFundsReceived, position: Int) {
         nlmIAFundsRecievedDialog(requireContext(),selectedItem,position)
+    }
+
+    override fun onClickItem(ID: Int?, position: Int,isFrom: Int) {
+        if (isFrom==1){
+            position.let { it1 -> nlmIAFundsRecievedAdapter?.onDeleteButtonClick(it1) }
+        }
+
     }
 
 }

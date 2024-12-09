@@ -2,8 +2,10 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -17,6 +19,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -44,6 +47,7 @@ import com.nlm.model.RSPAddRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
 import com.nlm.model.RspAddAverage
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.FspNonPlantStorageNLMAdapter
 import com.nlm.ui.adapter.FspPlantStorageNLMAdapter
@@ -59,6 +63,8 @@ import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -103,8 +109,14 @@ class AddNlmFpFromNonForestActivity(
     private var isSubmitted: Boolean = false
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
-
-
+    private var latitude:Double?=null
+    private var longitude:Double?=null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
     private val agency = listOf(
         ResultGetDropDown(0, "GOVT"),
         ResultGetDropDown(0, "Outsourced Agency")
@@ -428,45 +440,104 @@ class AddNlmFpFromNonForestActivity(
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+        if (hasLocationPermissions()) {
+            val intent = Intent(this@AddNlmFpFromNonForestActivity, LocationService::class.java)
+            startService(intent)
+            lifecycleScope.launch {
+                delay(1000) // Delay for 2 seconds
+                if(latitude!=null&&longitude!=null)
+                {
+                    if (getPreferenceOfScheme(this@AddNlmFpFromNonForestActivity, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+                    {
+                        viewModel.getNlmFpFromNonForestAddEdit(
+                            this@AddNlmFpFromNonForestActivity, true,
+                            NlmFpFromNonForestAddRequest(
+                                id = itemId,
+                                district_code = districtId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddNlmFpFromNonForestActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddNlmFpFromNonForestActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddNlmFpFromNonForestActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                is_draft = draft,
+                                name_implementing_agency = if (mBinding?.etImplementingAgencyNlm?.text.isNullOrEmpty()) {
+                                    mBinding?.etImplementingAgencyIa?.text.toString()
+                                } else {
+                                    mBinding?.etImplementingAgencyNlm?.text.toString()
+                                },
+                                location = mBinding?.etLocation?.text.toString(),
+                                area_covered = mBinding?.etAreaCovered?.text.toString().toDoubleOrNull(),
+                                type_of_land = mBinding?.tvLand?.text.toString(),
+                                type_of_agency = mBinding?.tvTypeOfAgency?.text.toString(),
+                                variety_of_fodder = mBinding?.etVarietyOfFodder?.text.toString(),
+                                scheme_guidelines = mBinding?.etSchemeGuidelines?.text.toString(),
+                                grant_received = mBinding?.etGrantReceived?.text.toString(),
+                                target_achievement = mBinding?.etTarget?.text.toString(),
+                                fp_from_non_forest_document= totalListDocument,
+                                fp_from_non_forest_filled_by_nlm_team= plantStorageList,
+                                lattitude_ia = latitude,
+                                longitude_ia = longitude
+                            )
+                        )
+                    }
+                    else{
+                        viewModel.getNlmFpFromNonForestAddEdit(
+                            this@AddNlmFpFromNonForestActivity, true,
+                            NlmFpFromNonForestAddRequest(
+                                id = itemId,
+                                district_code = districtId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddNlmFpFromNonForestActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddNlmFpFromNonForestActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddNlmFpFromNonForestActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                is_draft = draft,
+                                name_implementing_agency = if (mBinding?.etImplementingAgencyNlm?.text.isNullOrEmpty()) {
+                                    mBinding?.etImplementingAgencyIa?.text.toString()
+                                } else {
+                                    mBinding?.etImplementingAgencyNlm?.text.toString()
+                                },
+                                location = mBinding?.etLocation?.text.toString(),
+                                area_covered = mBinding?.etAreaCovered?.text.toString().toDoubleOrNull(),
+                                type_of_land = mBinding?.tvLand?.text.toString(),
+                                type_of_agency = mBinding?.tvTypeOfAgency?.text.toString(),
+                                variety_of_fodder = mBinding?.etVarietyOfFodder?.text.toString(),
+                                scheme_guidelines = mBinding?.etSchemeGuidelines?.text.toString(),
+                                grant_received = mBinding?.etGrantReceived?.text.toString(),
+                                target_achievement = mBinding?.etTarget?.text.toString(),
+                                fp_from_non_forest_document= totalListDocument,
+                                fp_from_non_forest_filled_by_nlm_team= plantStorageList,
+                                lattitude_nlm = latitude,
+                                longitude_nlm = longitude
+                            )
+                        )
+                    }
+                }
+                else{
+                    showSnackbar(mBinding?.clParent!!,"No location fetched")
+                }
+            }}
 
-        viewModel.getNlmFpFromNonForestAddEdit(
-            this@AddNlmFpFromNonForestActivity, true,
-            NlmFpFromNonForestAddRequest(
-                id = itemId,
-                district_code = districtId,
-                role_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                state_code = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id.toString(),
-                is_draft = draft,
-                name_implementing_agency = if (mBinding?.etImplementingAgencyNlm?.text.isNullOrEmpty()) {
-                    mBinding?.etImplementingAgencyIa?.text.toString()
-                } else {
-                    mBinding?.etImplementingAgencyNlm?.text.toString()
-                },
-                location = mBinding?.etLocation?.text.toString(),
-                area_covered = mBinding?.etAreaCovered?.text.toString().toDoubleOrNull(),
-                type_of_land = mBinding?.tvLand?.text.toString(),
-                type_of_agency = mBinding?.tvTypeOfAgency?.text.toString(),
-                variety_of_fodder = mBinding?.etVarietyOfFodder?.text.toString(),
-                scheme_guidelines = mBinding?.etSchemeGuidelines?.text.toString(),
-                grant_received = mBinding?.etGrantReceived?.text.toString(),
-                target_achievement = mBinding?.etTarget?.text.toString(),
-                fp_from_non_forest_document= totalListDocument,
-                fp_from_non_forest_filled_by_nlm_team= plantStorageList,
-            )
-        )
     }
 
 
@@ -616,27 +687,6 @@ class AddNlmFpFromNonForestActivity(
                     selectedTextView = mBinding?.tvDistrictIa!!
                 }
             }
-//            "agency_involved" -> {
-//                Model="agency_involved"
-//                getNlmDropDownApi(Model)
-//                selectedList = stateList
-//                selectedTextView=TextView
-//            }
-//
-//            "type_of_land" -> {
-//                Model="type_of_land"
-//                getNlmDropDownApi(Model)
-//                selectedList = stateList
-//                selectedTextView = mBinding!!.tvLand
-//            }
-//
-//            "type_of_agency" -> {
-//                Model="type_of_agency"
-//                getNlmDropDownApi(Model)
-//                selectedList = stateList
-//                selectedTextView = mBinding!!.tvAgency
-//            }
-
             else -> return
         }
 
@@ -660,21 +710,6 @@ class AddNlmFpFromNonForestActivity(
 
                     districtId=id}
             }
-//            else if (Model=="agency_involved")
-//            {
-//                AgencyInvolvedName  =selectedItem
-//                AgencyInvolvedId=id
-//            }
-//            else if (Model=="type_of_land")
-//            {
-//                TypeOfLandName  =selectedItem
-//                TypeOfLandId=id
-//            }
-//            else if (Model=="type_of_agency")
-//            {
-//                TypeOfAgencyName  =selectedItem
-//                TypeOfAgencyId=id
-//            }
             else{
                 stateId = id
             }
@@ -1367,5 +1402,17 @@ class AddNlmFpFromNonForestActivity(
     override fun onClickItemDelete(ID: Int?, position: Int) {
         position.let { it1 -> plantStorageAdapter?.onDeleteButtonClick(it1) }
     }
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
 
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(locationReceiver)
+    }
 }

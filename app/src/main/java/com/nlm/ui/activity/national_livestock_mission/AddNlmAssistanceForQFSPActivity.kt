@@ -874,7 +874,11 @@ class AddNlmAssistanceForQFSPActivity :
                         )
                     )
 
-                }}}
+                }
+                else{
+                    showSnackbar(mBinding?.clParent!!,"No location fetched")
+                }
+            }}
 
     }
     private var recyclerScrollListener: RecyclerView.OnScrollListener =

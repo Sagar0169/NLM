@@ -48,6 +48,13 @@
             android:text="District wise no. of AI centres for Goat and Sheep in the State - ……."
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/curve_all_corner_grey"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dp_10">
         <TextView
 
             android:onClick="@{ClickAction::AddDistrictWiseNoAiDialog}"
@@ -67,8 +74,9 @@
             android:id="@+id/recyclerViewDistrictWiseOfAi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_7"
-            android:paddingTop="8dp" />
+            android:paddingTop="8dp" /></LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

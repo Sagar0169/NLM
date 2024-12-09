@@ -405,8 +405,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                     delay(1000) // Delay for 2 seconds
                     if(latitude!=null&&longitude!=null)
                     {
-                        if (getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
-                        {
+                            if (getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+                            {
                             if(mBinding?.etDistrictIa?.text.toString().isNotEmpty())
                             {
                                 TotalDocumentList.clear()
@@ -436,7 +436,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                 )
                             }
                             else{
-                                showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
+                                showSnackbar(mBinding?.main!!,"No location fetched")
                             }
                         }
 
@@ -469,7 +469,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                     )
                                 )}
                             else{
-                                showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
+                                showSnackbar(mBinding?.main!!,"No location fetched")
                             }
                         }
                     }}}
