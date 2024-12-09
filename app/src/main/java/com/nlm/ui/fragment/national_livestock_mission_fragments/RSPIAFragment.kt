@@ -625,7 +625,10 @@ class RSPIAFragment(
                             longitude_ia = longitude
                         )
                     )
-                }}}
+                }
+            else{
+                    showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
+            }}}
 
     }
 

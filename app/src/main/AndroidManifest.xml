@@ -211,15 +211,11 @@
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmEdpActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.activity.livestock_health_disease.ascad.AscadActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.activity.livestock_health_disease.vaccination_programme.VaccinationProgrammerActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.activity.livestock_health_disease.ViewStateMobileVeterinaryUnit"
-            android:exported="false" />
+
         <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryListActivity"
             android:exported="false" />

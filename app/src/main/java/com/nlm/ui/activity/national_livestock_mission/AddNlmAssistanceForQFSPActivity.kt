@@ -876,7 +876,7 @@ class AddNlmAssistanceForQFSPActivity :
 
                 }
                 else{
-                    showSnackbar(mBinding?.clParent!!,"No location fetched")
+                    showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
                 }
             }}
 

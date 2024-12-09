@@ -436,7 +436,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                 )
                             }
                             else{
-                                showSnackbar(mBinding?.main!!,"No location fetched")
+                                showSnackbar(mBinding?.main!!,"Please wait for a sec and click again")
                             }
                         }
 

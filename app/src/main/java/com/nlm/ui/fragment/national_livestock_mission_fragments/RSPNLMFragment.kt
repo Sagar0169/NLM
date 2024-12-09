@@ -513,7 +513,7 @@ class RSPNLMFragment(
                     )
                 }
                 else{
-                    showSnackbar(mBinding!!.clParent,"No Location fetched")
+                    showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
                 }
             }
         }

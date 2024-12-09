@@ -952,7 +952,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     }
                 }
                 else{
-                    showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
+                    showSnackbar(mBinding?.main!!,"Please wait for a sec and click again")
                 }
             }
         }
