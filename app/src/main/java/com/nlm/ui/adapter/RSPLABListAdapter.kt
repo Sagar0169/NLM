@@ -1,5 +1,6 @@
 package com.nlm.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -44,7 +45,7 @@ class RSPLABListAdapter(
     }
 
     // Bind the data to the views in each item
-    override fun onBindViewHolder(holder: RSPLabViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RSPLabViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
     val item = implementingAgencyList[position]
 

@@ -88,6 +88,7 @@ class MobileVeterinaryListActivity : BaseActivity<ActivityStateMobileVeterinaryB
 
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         when (isFrom) {
             getString(R.string.state) -> {
                 stateMobileVeterinaryAPICall(
@@ -133,6 +134,7 @@ class MobileVeterinaryListActivity : BaseActivity<ActivityStateMobileVeterinaryB
 
     private fun swipeForRefreshMobileVeterinary() {
         mBinding?.srlMobileVeterinary?.setOnRefreshListener {
+            currentPage = 1
             when (isFrom) {
                 getString(R.string.state) -> {
                     stateMobileVeterinaryAPICall(

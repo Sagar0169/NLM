@@ -5,19 +5,15 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
-import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackDeleteAtIdString
 import com.nlm.databinding.ActivityVaccinationProgrammerListBinding
-import com.nlm.model.BlockMobileVeterinaryUnitAddRequest
-import com.nlm.model.DistrictMobileVeterinaryUnitAddRequest
-import com.nlm.model.FarmerMobileVeterinaryUnitsAddRequest
+import com.nlm.model.DistrictVaccinationProgrammeAddRequest
+import com.nlm.model.FarmerVaccinationProgrammeAddRequest
 import com.nlm.model.Result
-import com.nlm.model.StateMobileVeterinaryUnitAddRequest
 import com.nlm.model.StateVaccinationProgrammeAddRequest
 import com.nlm.model.VaccinationProgrammerListData
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.ui.activity.FilterStateActivity
-import com.nlm.ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitState
 import com.nlm.ui.adapter.VaccinationProgrammerAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -31,13 +27,13 @@ import com.nlm.viewModel.ViewModel
 class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgrammerListBinding>(),
     CallBackDeleteAtIdString {
     private var mBinding: ActivityVaccinationProgrammerListBinding? = null
-    private var vaccinationProgrammerAdapter: VaccinationProgrammerAdapter ?= null
-    private var stateVaccinationProgrammerList= ArrayList<VaccinationProgrammerListData>()
-    private var districtVaccinationProgrammerList= ArrayList<VaccinationProgrammerListData>()
-    private var farmerVaccinationProgrammerList= ArrayList<VaccinationProgrammerListData>()
+    private var vaccinationProgrammerAdapter: VaccinationProgrammerAdapter? = null
+    private var stateVaccinationProgrammerList = ArrayList<VaccinationProgrammerListData>()
+    private var districtVaccinationProgrammerList = ArrayList<VaccinationProgrammerListData>()
+    private var farmerVaccinationProgrammerList = ArrayList<VaccinationProgrammerListData>()
     private var layoutManager: LinearLayoutManager? = null
-    private var isFrom: String ?= null
-    private val viewModel= ViewModel()
+    private var isFrom: String? = null
+    private val viewModel = ViewModel()
     private var currentPage = 1
     private var itemPosition: Int? = null
     private var totalPage = 1
@@ -53,12 +49,19 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
         isFrom = intent?.extras?.getString(AppConstants.IS_FROM)
         when (isFrom) {
             getString(R.string.state) -> {
+                mBinding?.tvHeading?.text = getString(R.string.list_of_state_vaccination_programme)
                 vaccinationProgrammerAdapter(stateVaccinationProgrammerList)
             }
+
             getString(R.string.district) -> {
+                mBinding?.tvHeading?.text =
+                    getString(R.string.list_of_district_vaccination_programme)
                 vaccinationProgrammerAdapter(districtVaccinationProgrammerList)
             }
+
             getString(R.string.farmer_level) -> {
+                mBinding?.tvHeading?.text =
+                    getString(R.string.list_of_beneficiary_farmer_vaccination_programme)
                 vaccinationProgrammerAdapter(farmerVaccinationProgrammerList)
             }
         }
@@ -67,13 +70,16 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
 
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         when (isFrom) {
             getString(R.string.state) -> {
                 stateVaccinationProgrammerAPICall(paginate = false, loader = true)
             }
+
             getString(R.string.district) -> {
                 districtVaccinationProgrammerAPICall(paginate = false, loader = true)
             }
+
             getString(R.string.farmer_level) -> {
                 farmerVaccinationProgrammerAPICall(paginate = false, loader = true)
             }
@@ -82,13 +88,16 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
 
     private fun swipeForRefreshVaccinationProgrammer() {
         mBinding?.srlVaccinationProgrammer?.setOnRefreshListener {
+            currentPage = 1
             when (isFrom) {
                 getString(R.string.state) -> {
                     stateVaccinationProgrammerAPICall(paginate = false, loader = true)
                 }
+
                 getString(R.string.district) -> {
                     districtVaccinationProgrammerAPICall(paginate = false, loader = true)
                 }
+
                 getString(R.string.farmer_level) -> {
                     farmerVaccinationProgrammerAPICall(paginate = false, loader = true)
                 }
@@ -106,33 +115,48 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
             startActivity(
                 Intent(
                     this@VaccinationProgrammerListActivity,
-                    FilterStateActivity::class.java).putExtra("isFrom", isFrom))
+                    FilterStateActivity::class.java
+                ).putExtra("isFrom", isFrom)
+            )
         }
-        fun add(view: View){
+
+        fun add(view: View) {
             when (isFrom) {
                 getString(R.string.state) -> {
-                    startActivity(Intent(this@VaccinationProgrammerListActivity, AddVaccinationProgrammeStateLevel::class.java)
-                        .putExtra("isFrom", isFrom)
+                    startActivity(
+                        Intent(
+                            this@VaccinationProgrammerListActivity,
+                            AddVaccinationProgrammeStateLevel::class.java
+                        )
+                            .putExtra("isFrom", isFrom)
                     )
                 }
+
                 getString(R.string.district) -> {
-                    startActivity(Intent(this@VaccinationProgrammerListActivity, AddVaccinationProgrammeDistrictLevel::class.java)
-                        .putExtra("isFrom", isFrom)
+                    startActivity(
+                        Intent(
+                            this@VaccinationProgrammerListActivity,
+                            AddVaccinationProgrammeDistrictLevel::class.java
+                        )
+                            .putExtra("isFrom", isFrom)
                     )
                 }
+
                 getString(R.string.farmer_level) -> {
-                    startActivity(Intent(this@VaccinationProgrammerListActivity, AddVaccinationProgrammeFarmerLevel::class.java)
-                        .putExtra("isFrom", isFrom)
+                    startActivity(
+                        Intent(
+                            this@VaccinationProgrammerListActivity,
+                            AddVaccinationProgrammeFarmerLevel::class.java
+                        )
+                            .putExtra("isFrom", isFrom)
                     )
                 }
             }
-
         }
     }
 
-
     private fun vaccinationProgrammerAdapter(list: ArrayList<VaccinationProgrammerListData>) {
-        vaccinationProgrammerAdapter = VaccinationProgrammerAdapter(this,list,isFrom,this)
+        vaccinationProgrammerAdapter = VaccinationProgrammerAdapter(this, list, isFrom, this)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding?.rvVaccinationProgrammer?.layoutManager = layoutManager
         mBinding?.rvVaccinationProgrammer?.adapter = vaccinationProgrammerAdapter
@@ -145,42 +169,81 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
         }
         viewModel.getStateVaccinationProgrammerList(
             this, loader, VaccinationProgrammerListRequest(
-                role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
-                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
                 page = currentPage,
                 limit = 10,
             )
         )
     }
+
     private fun districtVaccinationProgrammerAPICall(paginate: Boolean, loader: Boolean) {
         if (paginate) {
             currentPage++
         }
         viewModel.getDistrictVaccinationProgrammerList(
             this, loader, VaccinationProgrammerListRequest(
-                role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
-                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
                 page = currentPage,
                 limit = 10,
             )
         )
     }
+
     private fun farmerVaccinationProgrammerAPICall(paginate: Boolean, loader: Boolean) {
         if (paginate) {
             currentPage++
         }
         viewModel.getFarmerVaccinationProgrammerList(
             this, loader, VaccinationProgrammerListRequest(
-                role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
-                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
                 page = currentPage,
                 limit = 10,
             )
         )
     }
+
     private var recyclerScrollListener: RecyclerView.OnScrollListener =
         object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -196,13 +259,24 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                                 //Call API here
                                 when (isFrom) {
                                     getString(R.string.state) -> {
-                                        stateVaccinationProgrammerAPICall(paginate = true, loader = true)
+                                        stateVaccinationProgrammerAPICall(
+                                            paginate = true,
+                                            loader = true
+                                        )
                                     }
+
                                     getString(R.string.district) -> {
-                                        districtVaccinationProgrammerAPICall(paginate = true, loader = true)
+                                        districtVaccinationProgrammerAPICall(
+                                            paginate = true,
+                                            loader = true
+                                        )
                                     }
+
                                     getString(R.string.farmer_level) -> {
-                                        farmerVaccinationProgrammerAPICall(paginate = true, loader = true)
+                                        farmerVaccinationProgrammerAPICall(
+                                            paginate = true,
+                                            loader = true
+                                        )
                                     }
                                 }
                             }
@@ -255,7 +329,6 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                 }
             }
         }
-
         viewModel.districtVaccinationProgrammerListResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
@@ -294,7 +367,6 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                 }
             }
         }
-
         viewModel.farmerVaccinationProgrammerListResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
@@ -333,23 +405,48 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                 }
             }
         }
-        viewModel.stateVaccinationProgrammerAddResult.observe(this){
+        viewModel.stateVaccinationProgrammerAddResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             }
-            if (userResponseModel!=null)
-            {
-                if(userResponseModel._resultflag==0){
-                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                }
-
-                else{
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
+                } else {
                     itemPosition?.let { it1 -> vaccinationProgrammerAdapter?.onDeleteButtonClick(it1) }
-//                    rSPLABListAdapter?.notifyDataSetChanged()
-//                    implementingAgencyAPICall(paginate = true, loader = true)
-                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                }}}
+                    mBinding?.clParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
+                }
+            }
+        }
+        viewModel.districtVaccinationProgrammerAddResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
+                } else {
+                    itemPosition?.let { it1 -> vaccinationProgrammerAdapter?.onDeleteButtonClick(it1) }
+                    mBinding?.clParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
+                }
+            }
+        }
+        viewModel.farmerVaccinationProgrammerAddResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
+                } else {
+                    itemPosition?.let { it1 -> vaccinationProgrammerAdapter?.onDeleteButtonClick(it1) }
+                    mBinding?.clParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
+                }
+            }
+        }
     }
 
 
@@ -382,35 +479,9 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
             }
 
             getString(R.string.district) -> {
-                viewModel.getStateVaccinationProgrammeAdd(
+                viewModel.getDistrictVaccinationProgrammeAdd(
                     this@VaccinationProgrammerListActivity, true,
-                    StateVaccinationProgrammeAddRequest(
-                        id = ID,
-                        role_id = getPreferenceOfScheme(
-                            this,
-                            AppConstants.SCHEME,
-                            Result::class.java
-                        )?.role_id,
-                        state_code = getPreferenceOfScheme(
-                            this,
-                            AppConstants.SCHEME,
-                            Result::class.java
-                        )?.state_code,
-                        user_id = getPreferenceOfScheme(
-                            this,
-                            AppConstants.SCHEME,
-                            Result::class.java
-                        )?.user_id,
-                        is_deleted = 1
-                    )
-                )
-                itemPosition = position
-            }
-
-            getString(R.string.block_level) -> {
-                viewModel.getStateVaccinationProgrammeAdd(
-                    this@VaccinationProgrammerListActivity, true,
-                    StateVaccinationProgrammeAddRequest(
+                    DistrictVaccinationProgrammeAddRequest(
                         id = ID,
                         role_id = getPreferenceOfScheme(
                             this,
@@ -434,9 +505,9 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
             }
 
             getString(R.string.farmer_level) -> {
-                viewModel.getStateVaccinationProgrammeAdd(
+                viewModel.getFarmerVaccinationProgrammeAdd(
                     this@VaccinationProgrammerListActivity, true,
-                    StateVaccinationProgrammeAddRequest(
+                    FarmerVaccinationProgrammeAddRequest(
                         id = ID,
                         role_id = getPreferenceOfScheme(
                             this,

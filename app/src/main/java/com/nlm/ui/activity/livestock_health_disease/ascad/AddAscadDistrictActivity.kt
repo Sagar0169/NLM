@@ -1,6 +1,8 @@
 package com.nlm.ui.activity.livestock_health_disease.ascad
 
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
@@ -41,7 +43,6 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
     private var loading = true
     private var stateId: Int? = null // Store selected state
     private var districtId: Int? = null // Store selected state
-    private var documentId: Int? = null
     private var uploadedDocumentName: String? = null
     private var dialogDocName: TextView? = null
     private var documentName: String? = null
@@ -52,11 +53,18 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
     private var layoutManager: LinearLayoutManager? = null
     private var viewEdit: String? = null
     var itemId: Int? = null
-    private var dId: Int? = null
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
-    private var isFrom: String ?= null
+    private var isFrom: String? = null
+    private var latitude: Double? = null
+    private var longitude: Double? = null
 
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
 
     override val layoutId: Int
         get() = R.layout.activity_add_ascad_district
@@ -67,7 +75,20 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
         viewModel.init()
         viewEdit = intent.getStringExtra("View/Edit")
         itemId = intent.getIntExtra("itemId", 0)
-        dId = intent.getIntExtra("dId", 0)
+    }
+
+    override fun onResume() {
+        super.onResume()
+//        registerReceiver(
+//            locationReceiver,
+//            IntentFilter("LOCATION_UPDATED")
+//        )
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+//        unregisterReceiver(locationReceiver)
     }
 
     override fun setVariables() {
@@ -99,11 +120,11 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
             mBinding?.etRemarkFour?.isEnabled = false
             mBinding?.etInputFive?.isEnabled = false
             mBinding?.etRemarkFive?.isEnabled = false
-            mBinding?.llUploadFileOne?.isEnabled = false
-            mBinding?.llUploadFileTwo?.isEnabled = false
-            mBinding?.llUploadFileThree?.isEnabled = false
-            mBinding?.llUploadFileFour?.isEnabled = false
-            mBinding?.llUploadFileFive?.isEnabled = false
+            mBinding?.tvChooseFileOne?.isEnabled = false
+            mBinding?.tvChooseFileTwo?.isEnabled = false
+            mBinding?.tvChooseFileThree?.isEnabled = false
+            mBinding?.tvChooseFileFour?.isEnabled = false
+            mBinding?.tvChooseFileFive?.isEnabled = false
             mBinding?.llSaveDraftAndSubmit?.hideView()
             viewEditApi()
         }
@@ -150,7 +171,6 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
                     }
 
                 } else {
-                    documentId = userResponseModel._result.id
                     uploadedDocumentName = userResponseModel._result.document_name
                     dialogDocName?.text = userResponseModel._result.document_name
                     when (isFromApplication) {
@@ -219,15 +239,15 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
                             mBinding?.etInputFive?.setText(userResponseModel._result.input_compensation_farmer_against_culling_of_animals)
                             mBinding?.etRemarkFive?.setText(userResponseModel._result.compensation_farmer_against_culling_of_animals_remarks)
                             mBinding?.etChooseFileOne?.text =
-                                userResponseModel._result.status_of_vaccination_against_economically_input
+                                if (userResponseModel._result.status_of_vaccination_against_economically_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.status_of_vaccination_against_economically_input
                             mBinding?.etChooseFileTwo?.text =
-                                userResponseModel._result.status_of_vaccination_against_zoonotic_input
+                                if (userResponseModel._result.status_of_vaccination_against_zoonotic_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.status_of_vaccination_against_zoonotic_input
                             mBinding?.etChooseFileThree?.text =
-                                userResponseModel._result.disease_diagnostic_labs_input
+                                if (userResponseModel._result.disease_diagnostic_labs_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.disease_diagnostic_labs_input
                             mBinding?.etChooseFileFour?.text =
-                                userResponseModel._result.training_of_veterinarians_and_para_vets_last_year_input
+                                if (userResponseModel._result.training_of_veterinarians_and_para_vets_last_year_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.training_of_veterinarians_and_para_vets_last_year_input
                             mBinding?.etChooseFileFive?.text =
-                                userResponseModel._result.compensation_farmer_against_culling_of_animals_input
+                                if (userResponseModel._result.compensation_farmer_against_culling_of_animals_input.isNullOrEmpty()) "No file chosen" else userResponseModel._result.compensation_farmer_against_culling_of_animals_input
                         } else {
                             onBackPressedDispatcher.onBackPressed()
                             mBinding?.clParent?.let { it1 ->
@@ -332,145 +352,162 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
         )
     }
 
+    private fun valid(): Boolean {
+        if (mBinding?.tvDistrict?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(it, getString(R.string.please_select_district))
+            }
+            return false
+        } else if (mBinding?.etInputOne?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(it, getString(R.string.please_fill_all_the_input_and_remark_fields))
+            }
+            return false
+        } else if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInputThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInputFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInputFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
+            mBinding?.clParent?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else
+            return true
+    }
+
     private fun saveDataApi(itemId: Int?, draft: Int?) {
-        if (mBinding?.etInputOne?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(it, "Please Fill All The Input and Remark Fields")
 
-            }
-            return
-        }
-        if (mBinding?.etInputTwo?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
+        //        if (hasLocationPermissions()) {
+//            startService(Intent(this, LocationService::class.java))
+//            lifecycleScope.launch {
+//                delay(1000) // Delay for 2 seconds
+//                if (latitude != null && longitude != null) {
+        if (valid()) {
+            viewModel.getDistrictAscadAdd(
+                context = this,
+                loader = true,
+                request = DistrictAscadAddRequest(
+                    id = itemId,
+                    role_id = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.role_id,
+                    state_code = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code,
+                    district_code = districtId,
+                    user_id = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.user_id,
+                    status = draft,
+                    input_status_of_vaccination_against_economically = mBinding?.etInputOne?.text.toString()
+                        .trim(),
+                    status_of_vaccination_against_economically_remarks = mBinding?.etRemarkOne?.text.toString()
+                        .trim(),
+                    input_status_of_vaccination_against_zoonotic = mBinding?.etInputTwo?.text.toString()
+                        .trim(),
+                    status_of_vaccination_against_zoonotic_remarks = mBinding?.etRemarkTwo?.text.toString()
+                        .trim(),
+                    input_disease_diagnostic_labs = mBinding?.etInputThree?.text.toString().trim(),
+                    disease_diagnostic_labs_remarks = mBinding?.etRemarkThree?.text.toString()
+                        .trim(),
+                    input_training_of_veterinarians_and_para_vets_last_year = mBinding?.etInputFour?.text.toString()
+                        .trim(),
+                    training_of_veterinarians_and_para_vets_last_year_remarks = mBinding?.etRemarkFour?.text.toString()
+                        .trim(),
+                    input_compensation_farmer_against_culling_of_animals = mBinding?.etInputFive?.text.toString()
+                        .trim(),
+                    compensation_farmer_against_culling_of_animals_remarks = mBinding?.etInputFive?.text.toString()
+                        .trim(),
+                    status_of_vaccination_against_economically_input = mBinding?.etChooseFileOne?.text.toString()
+                        .trim(),
+                    status_of_vaccination_against_zoonotic_input = mBinding?.etChooseFileTwo?.text.toString()
+                        .trim(),
+                    disease_diagnostic_labs_input = mBinding?.etChooseFileThree?.text.toString()
+                        .trim(),
+                    training_of_veterinarians_and_para_vets_last_year_input = mBinding?.etChooseFileFour?.text.toString()
+                        .trim(),
+                    compensation_farmer_against_culling_of_animals_input = mBinding?.etChooseFileFive?.text.toString()
+                        .trim()
                 )
-            }
-            return
-        }
-        if (mBinding?.etInputThree?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etInputFour?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etInputFive?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkOne?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkTwo?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkThree?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkFour?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-        if (mBinding?.etRemarkFive?.text.toString().isEmpty()) {
-            mBinding?.clParent?.let {
-                showSnackbar(
-                    it,
-                    "Please Fill All The Input and Remark Fields"
-                )
-            }
-            return
-        }
-
-        viewModel.getDistrictAscadAdd(
-            context = this,
-            loader = true,
-            request = DistrictAscadAddRequest(
-                id = itemId,
-                role_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                state_code = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                district_code = districtId,
-                user_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id,
-                status = draft,
-                input_status_of_vaccination_against_economically = mBinding?.etInputOne?.text.toString().trim(),
-                status_of_vaccination_against_economically_remarks = mBinding?.etRemarkOne?.text.toString().trim(),
-                input_status_of_vaccination_against_zoonotic = mBinding?.etInputTwo?.text.toString()
-                    .trim(),
-                status_of_vaccination_against_zoonotic_remarks = mBinding?.etRemarkTwo?.text.toString()
-                    .trim(),
-                input_disease_diagnostic_labs = mBinding?.etInputThree?.text.toString().trim(),
-                disease_diagnostic_labs_remarks = mBinding?.etRemarkThree?.text.toString().trim(),
-                input_training_of_veterinarians_and_para_vets_last_year = mBinding?.etInputFour?.text.toString()
-                    .trim(),
-                training_of_veterinarians_and_para_vets_last_year_remarks = mBinding?.etRemarkFour?.text.toString()
-                    .trim(),
-                input_compensation_farmer_against_culling_of_animals = mBinding?.etInputFive?.text.toString()
-                    .trim(),
-                compensation_farmer_against_culling_of_animals_remarks = mBinding?.etInputFive?.text.toString()
-                    .trim(),
-                status_of_vaccination_against_economically_input = mBinding?.etChooseFileOne?.text.toString().trim(),
-                status_of_vaccination_against_zoonotic_input = mBinding?.etChooseFileTwo?.text.toString()
-                    .trim(),
-                disease_diagnostic_labs_input = mBinding?.etChooseFileThree?.text.toString()
-                    .trim(),
-                training_of_veterinarians_and_para_vets_last_year_input = mBinding?.etChooseFileFour?.text.toString()
-                    .trim(),
-                compensation_farmer_against_culling_of_animals_input = mBinding?.etChooseFileFive?.text.toString()
-                    .trim()
             )
-        )
+        }
+        //                } else {
+//                    showSnackbar(mBinding!!.clParent, "No Location fetched")
+//                }
+//            }
+//        } else {
+//            showLocationAlertDialog()
+//        }
     }
 
     private fun showBottomSheetDialog(type: String) {
@@ -496,16 +533,19 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
         when (type) {
 
             "State" -> {
-                dropDownApiCall(paginate = false, loader = true,"States",null)
+                dropDownApiCall(paginate = false, loader = true, "States", null)
                 selectedList = stateList
                 selectedTextView = mBinding?.tvState
             }
+
             "District" -> {
-                dropDownApiCall(paginate = false, loader = true,"Districts",getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code)
+                dropDownApiCall(
+                    paginate = false, loader = true, "Districts", getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                )
                 selectedList = stateList
                 selectedTextView = mBinding?.tvDistrict
             }
@@ -516,11 +556,10 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
         // Set up the adapter
         stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
             // Handle state item click
-            if(type == "State"){
-            selectedTextView?.text = selectedItem
-            stateId = id
-            }
-            else if(type == "District"){
+            if (type == "State") {
+                selectedTextView?.text = selectedItem
+                stateId = id
+            } else if (type == "District") {
                 selectedTextView?.text = selectedItem
                 districtId = id
             }
@@ -649,7 +688,12 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
         )
     }
 
-    private fun dropDownApiCall(paginate: Boolean, loader: Boolean,model:String,stateCode:Int?) {
+    private fun dropDownApiCall(
+        paginate: Boolean,
+        loader: Boolean,
+        model: String,
+        stateCode: Int?,
+    ) {
         if (paginate) {
             currentPage++
         }
@@ -681,10 +725,9 @@ class AddAscadDistrictActivity : BaseActivity<ActivityAddAscadDistrictBinding>()
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                if(isFrom == "State") {
+                                if (isFrom == "State") {
                                     dropDownApiCall(paginate = true, loader = true, "States", null)
-                                }
-                                else if(isFrom == "District") {
+                                } else if (isFrom == "District") {
                                     dropDownApiCall(
                                         paginate = false,
                                         loader = true,

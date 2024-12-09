@@ -55,6 +55,8 @@ import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
 import com.nlm.model.MobileVeterinaryUnitsListRequest
 import com.nlm.model.MobileVeterinaryUnitsListResponse
+import com.nlm.model.NDDComponentBListRequest
+import com.nlm.model.NDDComponentBListResponse
 import com.nlm.model.NLMAhidfRequest
 import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NLMIAResponse
@@ -283,6 +285,10 @@ object Repository {
     }
     suspend fun getDistrictAscadAdd(request: DistrictAscadAddRequest): Response<DistrictAscadAddResponse> {
         return api.getDistrictAscadAdd(request)
+    }
+
+    suspend fun getComponentBList(request: NDDComponentBListRequest): Response<NDDComponentBListResponse> {
+        return api.getComponentBList(request)
     }
 }
 

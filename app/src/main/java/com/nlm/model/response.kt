@@ -1584,6 +1584,7 @@ data class DistrictVaccinationProgrammeAddResult(
     val created_at: String,
     val created_by: Int,
     val district_code: Int,
+    val district_name: String,
     val id: Int,
     val investigate_suspected_outbreak_inputs: String,
     val investigate_suspected_outbreak_remarks: String,
@@ -1597,7 +1598,8 @@ data class DistrictVaccinationProgrammeAddResult(
     val mechanisim_followed_uploads: String,
     val role_id: Int,
     val state_code: Int,
-    val status: Int,
+    val state_name: String,
+    val status: String,
     val trained_staff_engaged_inputs: String,
     val trained_staff_engaged_remarks: String,
     val trained_staff_engaged_uploads: String,
@@ -1624,7 +1626,10 @@ data class FarmerVaccinationProgrammeAddResult(
     val created_at: String,
     val created_by: Int,
     val district_code: Int,
+    val district_name: String?= null,
+    val state_name: String?= null,
     val id: Int,
+    val is_type: String,
     val is_deleted: Int,
     val paid_for_vaccination: Any,
     val recall_vaccination_inputs: String,
@@ -1632,7 +1637,7 @@ data class FarmerVaccinationProgrammeAddResult(
     val recall_vaccination_uploads: String,
     val role_id: String,
     val state_code: Int,
-    val status: Int,
+    val status: String,
     val updated_at: String,
     val user_id: String,
     val vaccination_carrier_inputs: String,
@@ -1882,4 +1887,34 @@ data class DistrictAscadAddResult(
     val training_of_veterinarians_and_para_vets_last_year_input: String,
     val training_of_veterinarians_and_para_vets_last_year_remarks: String,
     val user_id: Int
+)
+
+
+data class NDDComponentBListResponse(
+    val _result: NDDComponentBListResult,
+    val _resultflag: Int?,
+    val message: String?,
+    val statuscode: Int?
+)
+
+data class NDDComponentBListResult(
+    val data: List<NDDComponentBListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NDDComponentBListData(
+    val created_by_id: Int,
+    val created_on: String,
+    val district_name: String,
+    val id: Int,
+    val is_delete: String,
+    val is_draft: Int,
+    val is_draft_text: String,
+    val is_edit: String,
+    val name_of_dcs_mpp: String,
+    val name_of_revenue_village: String,
+    val name_of_tehsil: String,
+    val state_id: Int,
+    val state_name: String
 )

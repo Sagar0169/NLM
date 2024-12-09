@@ -205,8 +205,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -224,10 +226,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -244,7 +247,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:id="@+id/llUploadFileOne"
-                            android:onClick="@{ClickAction::uploadFileOne}"
                             android:background="@drawable/curve_all_corner_grey"
                             android:orientation="horizontal"
                             android:weightSum="2">
@@ -256,8 +258,9 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::uploadFileOne}"
                                 android:padding="@dimen/dp_10"
-                                android:text="Choose File"
+                                android:text="@string/choose_file"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -273,7 +276,7 @@
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
+                                android:text="@string/no_file_chosen"
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
@@ -334,8 +337,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -353,10 +358,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -372,7 +378,6 @@
                             android:id="@+id/llUploadFileTwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:onClick="@{ClickAction::uploadFileTwo}"
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:orientation="horizontal"
@@ -385,8 +390,9 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::uploadFileTwo}"
                                 android:padding="@dimen/dp_10"
-                                android:text="Choose File"
+                                android:text="@string/choose_file"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -402,7 +408,7 @@
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
+                                android:text="@string/no_file_chosen"
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
@@ -462,8 +468,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -481,10 +489,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -501,7 +510,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:id="@+id/llUploadFileThree"
-                            android:onClick="@{ClickAction::uploadFileThree}"
                             android:background="@drawable/curve_all_corner_grey"
                             android:orientation="horizontal"
                             android:weightSum="2">
@@ -514,7 +522,8 @@
                                 android:id="@+id/tvChooseFileThree"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="Choose File"
+                                android:onClick="@{ClickAction::uploadFileThree}"
+                                android:text="@string/choose_file"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -530,7 +539,7 @@
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
                                 android:id="@+id/etChooseFileThree"
-                                android:text="No File Chosen"
+                                android:text="@string/no_file_chosen"
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
@@ -591,8 +600,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -611,8 +622,10 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -629,7 +642,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:id="@+id/llUploadFileFour"
-                            android:onClick="@{ClickAction::uploadFileFour}"
                             android:background="@drawable/curve_all_corner_grey"
                             android:orientation="horizontal"
                             android:weightSum="2">
@@ -641,8 +653,9 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::uploadFileFour}"
                                 android:padding="@dimen/dp_10"
-                                android:text="Choose File"
+                                android:text="@string/choose_file"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -658,7 +671,7 @@
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
+                                android:text="@string/no_file_chosen"
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
@@ -718,6 +731,9 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
                             android:padding="8dp"
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
@@ -737,10 +753,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:hint=""
+                            android:maxLength="500"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:padding="8dp"
                             android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
                             android:textSize="@dimen/sp_16" />
 
                         <TextView
@@ -757,7 +774,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
                             android:id="@+id/llUploadFileFive"
-                            android:onClick="@{ClickAction::uploadFileFive}"
                             android:background="@drawable/curve_all_corner_grey"
                             android:orientation="horizontal"
                             android:weightSum="2">
@@ -769,9 +785,10 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:enabled="false"
+                                android:onClick="@{ClickAction::uploadFileFive}"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="Choose File"
+                                android:text="@string/choose_file"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -787,7 +804,7 @@
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
+                                android:text="@string/no_file_chosen"
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
@@ -819,7 +836,7 @@
                         android:onClick="@{ClickAction::saveAsDraft}"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
-                        android:text="Save As Draft"
+                        android:text="@string/save_as_draft"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="20sp" />

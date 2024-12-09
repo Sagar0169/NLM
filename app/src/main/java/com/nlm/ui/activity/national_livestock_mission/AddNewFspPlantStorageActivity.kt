@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
@@ -432,9 +433,15 @@ class AddNewFspPlantStorageActivity(
                 val intent = Intent(this@AddNewFspPlantStorageActivity, LocationService::class.java)
                 startService(intent)
                 lifecycleScope.launch {
+                    Log.d("Scope","out")
                     delay(1000) // Delay for 2 seconds
+                    Log.d("Scope","In")
+                    Log.d("Scope", latitude.toString())
+                    Log.d("Scope", longitude.toString())
+
                     if(latitude!=null&&longitude!=null)
                     {
+                        toast("hi")
                         viewModel.getFpsPlantStorageADD(
                             this@AddNewFspPlantStorageActivity, true,
                             AddFspPlantStorageRequest(
@@ -1228,15 +1235,18 @@ class AddNewFspPlantStorageActivity(
     }
     override fun onResume() {
         super.onResume()
-        registerReceiver(
-            locationReceiver,
-            IntentFilter("LOCATION_UPDATED")
-        )
-    }
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED)
+        } else {
+            registerReceiver(locationReceiver, intentFilter)
+        }
+    }
 
     override fun onPause() {
         super.onPause()
         unregisterReceiver(locationReceiver)
     }
+
 }

@@ -856,6 +856,7 @@ data class AscadListRequest(
     val page: Int,
     val role_id: Int?,
     val state_code: Int?,
+    val district_code: Int?=null,
     val user_id: Int?,
 )
 
@@ -889,7 +890,9 @@ data class StateVaccinationProgrammeAddRequest(
     val seromonitoring_facilities_upload: String?= null,
     val state_code: Int?= null,
     val status: Int?= null,
-    val user_id: Int?= null
+    val user_id: Int?= null,
+    val longitude: Double?= null,
+    val latitude: Double?= null
 )
 
 data class DistrictVaccinationProgrammeAddRequest(
@@ -898,6 +901,7 @@ data class DistrictVaccinationProgrammeAddRequest(
     val are_functionaries_aware_uploads: String?= null,
     val created_by: Int?= null,
     val district_code: Int?= null,
+    val district_name: String?= null,
     val investigate_suspected_outbreak_inputs: String?= null,
     val investigate_suspected_outbreak_remarks: String?= null,
     val investigate_suspected_outbreak_uploads: String?= null,
@@ -909,12 +913,17 @@ data class DistrictVaccinationProgrammeAddRequest(
     val mechanisim_followed_remarks: String?= null,
     val mechanisim_followed_uploads: String?= null,
     val role_id: Int?= null,
+    val id: Int?= null,
+    val is_type: String?= null,
     val state_code: Int?= null,
+    val state_name: String?= null,
     val status: Int?= null,
     val trained_staff_engaged_inputs: String?= null,
     val trained_staff_engaged_remarks: String?= null,
     val trained_staff_engaged_uploads: String?= null,
-    val user_id: Int?= null
+    val user_id: Int?= null,
+    val longitude: Double?= null,
+    val latitude: Double?= null
 )
 
 data class FarmerVaccinationProgrammeAddRequest(
@@ -926,7 +935,10 @@ data class FarmerVaccinationProgrammeAddRequest(
     val awarness_of_the_govt_uploads: String?= null,
     val created_by: Int?= null,
     val district_code: Int?= null,
+    val district_name: String?= null,
+    val state_name: String?= null,
     val id: Int?= null,
+    val is_type: String?= null,
     val is_deleted: Int?= null,
     val recall_vaccination_inputs: String?= null,
     val recall_vaccination_remarks: String?= null,
@@ -941,7 +953,9 @@ data class FarmerVaccinationProgrammeAddRequest(
     val vaccinator_visit_inputs: String?= null,
     val vaccinator_visit_remarks: String?= null,
     val vaccinator_visit_uploads: String?= null,
-    val village_name: String?= null
+    val village_name: String?= null,
+    val longitude: Double?= null,
+    val latitude: Double?= null
 )
 
 data class StateMobileVeterinaryUnitAddRequest(
@@ -993,8 +1007,8 @@ data class StateMobileVeterinaryUnitAddRequest(
     val user_id: Int?= null,
     val is_draft: Int?= null,
     val is_type: String? = null,
-
-
+    val longitude: Double?= null,
+    val latitude: Double?= null
     )
 
 data class DistrictMobileVeterinaryUnitAddRequest(
@@ -1023,6 +1037,8 @@ data class DistrictMobileVeterinaryUnitAddRequest(
     val id: Int?= null,
     val is_draft: Int?= null,
     val is_type: String? = null,
+    val longitude: Double?= null,
+    val latitude: Double?= null
 )
 
 data class BlockMobileVeterinaryUnitAddRequest(
@@ -1052,7 +1068,9 @@ data class BlockMobileVeterinaryUnitAddRequest(
     val id: Int?= null,
     val is_draft: Int?= null,
     val is_type: String? = null,
-)
+    val longitude: Double?= null,
+    val latitude: Double?= null
+    )
 
 data class FarmerMobileVeterinaryUnitsAddRequest(
     val attended_call: Int?= null,
@@ -1082,6 +1100,8 @@ data class FarmerMobileVeterinaryUnitsAddRequest(
     val user_id: Int?= null,
     val village_name: String?= null,
     val is_draft: Int?= null,
+    val longitude: Double?= null,
+    val latitude: Double?= null
 )
 
 data class StateAscadAddRequest(
@@ -1107,7 +1127,9 @@ data class StateAscadAddRequest(
     val id: Int?= null,
     val role_id: Int?= null,
     val created_by: Int?= null,
-    val state_code: Int?= null
+    val state_code: Int?= null,
+    val longitude: Double?= null,
+    val latitude: Double?= null
 )
 
 data class DistrictAscadAddRequest(
@@ -1134,8 +1156,16 @@ data class DistrictAscadAddRequest(
     val status_of_vaccination_against_zoonotic_remarks: String?= null,
     val training_of_veterinarians_and_para_vets_last_year_input: String?= null,
     val training_of_veterinarians_and_para_vets_last_year_remarks: String?= null,
-    val user_id: Int?= null
+    val user_id: Int?= null,
+    val longitude: Double?= null,
+    val latitude: Double?= null
 )
 
-
+data class NDDComponentBListRequest(
+    val role_id: Int?,
+    val state_code: Int?,
+    val user_id: Int?,
+    val limit: Int,
+    val page: Int
+)
 

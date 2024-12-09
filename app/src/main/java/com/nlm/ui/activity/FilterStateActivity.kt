@@ -280,7 +280,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 if (NOA != null) {
                     binding?.etNoa?.setText(NOA)
                 }
-                if (districtName != null) {
+                if (districtName!="") {
                     binding?.tvDistrict?.text = districtName
                     binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
                 }
@@ -316,7 +316,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                         Result::class.java
                     )?.state_code
                 }
-                if (districtName != null) {
+                if (districtName!="") {
                     binding?.tvDistrict?.text = districtName
                     binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
                 }
@@ -468,7 +468,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 if (year != null) {
                     binding?.etYear?.setText(year)
                 }
-                if (districtName != null) {
+                if (districtName!="") {
                     binding?.tvDistrict?.text = districtName
                     binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
                 }
@@ -597,7 +597,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                         Result::class.java
                     )?.state_code
                 }
-                if (districtName != null) {
+                if (districtName!="") {
                     binding?.tvDistrict?.text = districtName
                     binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
                 }
@@ -634,7 +634,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 if (block != null) {
                     binding?.etBlock?.setText(block)
                 }
-                if (districtName != null) {
+                if (districtName!="") {
                     binding?.tvDistrict?.text = districtName
                     binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
                 }
@@ -675,7 +675,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 if (village != null) {
                     binding?.etVillageName?.setText(village)
                 }
-                if (districtName != null) {
+                if (districtName!="") {
                     binding?.tvDistrict?.text = districtName
                     binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
                 }
@@ -697,7 +697,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 if (year != null) {
                     binding?.etYear?.setText(year)
                 }
-                if (districtName != null) {
+                if (districtName!="") {
                     binding?.tvDistrict?.text = districtName
                     binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
                 }
