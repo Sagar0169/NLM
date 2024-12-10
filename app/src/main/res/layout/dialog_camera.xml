@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:background="@drawable/curve_all_corner_white"
-        android:backgroundTint="#052160">
+        android:background="@drawable/dialog_box"
+   >
 
 
         <TextView
@@ -28,7 +28,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Choose Any One"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,12 +40,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/curve_all_corner_white"
+            android:background="@drawable/curve_fill_black"
             android:fontFamily="@font/poppins_regular"
             android:padding="5dp"
             android:text="Camera"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="19sp"
             android:layout_below="@id/tvChoose" />
 
@@ -55,13 +55,13 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/curve_all_corner_white"
+            android:background="@drawable/curve_fill_black"
             android:fontFamily="@font/poppins_regular"
             android:padding="5dp"
             android:text="Gallery"
             android:layout_below="@id/tvCamera"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="19sp"/>
 
         <TextView
@@ -70,14 +70,14 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/curve_all_corner_white"
+            android:background="@drawable/curve_fill_black"
             android:fontFamily="@font/poppins_regular"
             android:padding="5dp"
             android:text="Pdf"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="19sp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_below="@id/tvGallery"/>
 
     </RelativeLayout>

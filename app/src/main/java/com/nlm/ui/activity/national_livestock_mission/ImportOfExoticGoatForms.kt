@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -17,6 +18,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -25,6 +27,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
@@ -57,6 +60,7 @@ import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
@@ -65,8 +69,11 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(),CallBackItemImportExoticAchivementEdit,
     CallBackItemImportExoticDetailtEdit,CallBackDeleteAtId, CallBackItemUploadDocEdit,
@@ -107,13 +114,21 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     private var districtName: String? = null // Store selected state
     private var Model:String? = null // Store selected state
     private var loading = true
+    private var uploadData :ImageView?=null
     private var latitude:Double?=null
     private var longitude:Double?=null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
-            Log.d("Locationnn",latitude.toString())
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                     latitude = it.getDoubleExtra("latitude", 0.0)
+                     longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
+
+                    // You can add additional handling logic here, such as updating UI or processing data.
+                }
+            }
         }
     }
     override fun initView() {
@@ -454,6 +469,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         mBinding?.VerifiedNlmRv?.adapter = VerifiedNlmAdapter
         mBinding?.VerifiedNlmRv?.layoutManager = LinearLayoutManager(this)
     }
+
     private fun AddDocumentDialog(context: Context,selectedItem: ImplementingAgencyDocument?,position: Int?) {
         val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
             layoutInflater,
@@ -475,9 +491,11 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName=bindingDialog.etDoc
+        uploadData=bindingDialog.ivPic
         bindingDialog.btnDelete.setOnClickListener{
             dialog.dismiss()
         }
+
         if(selectedItem!=null){
             if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24)
             {
@@ -495,7 +513,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             if (bindingDialog.etDescription.text.toString().isNotEmpty())
             {
 
-                openOnlyPdfAccordingToPosition()
+                checkStoragePermission(this@ImportOfExoticGoatForms)
             }
             else{
 
@@ -825,23 +843,48 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         }
         dialog.show()
     }
-    private fun openOnlyPdfAccordingToPosition() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "application/pdf"
-        }
-        startActivityForResult(intent, REQUEST_iMAGE_PDF)
-    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
+                CAPTURE_IMAGE_REQUEST -> {
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    Log.d("DOCUMENT",imageBitmap.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageBitmap(imageBitmap)
+                    val imageFile = saveImageToFile(imageBitmap)
+                    photoFile = imageFile
+//
+//                    mBinding?.ivUserImage?.let { Glide.with(this).load(photoFile).into(it) }
+                    photoFile?.let { uploadImage(it) }
+                }
+
+                PICK_IMAGE -> {
+                    val selectedImageUri = data?.data
+                    Log.d("DOCUMENT",selectedImageUri.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageURI(selectedImageUri)
+                    if (selectedImageUri != null) {
+                        val uriPathHelper = URIPathHelper()
+                        val filePath = uriPathHelper.getPath(this, selectedImageUri)
+//                        mBinding?.ivUserImage?.let {
+//                            Glide.with(this).load(filePath).into(
+//                                it
+//                            )
+//                        }
+                        val file = filePath?.let { File(it) }
+                        file?.let { uploadImage(it) }
+                    }
+                }
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
+                        uploadData?.showView()
+                        uploadData?.setImageResource(R.drawable.ic_pdf)
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
@@ -861,7 +904,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                 context = this,
                                 document_name = body,
                                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.artificial_insemination_document).toRequestBody(MultipartBody.FORM),
+                                table_name = getString(R.string.import_of_exotic_goat_document).toRequestBody(MultipartBody.FORM),
                             )
                         }
                     }
@@ -955,6 +998,9 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     showSnackbar(mBinding?.main!!,"Please wait for a sec and click again")
                 }
             }
+        }
+        else {
+            showLocationAlertDialog()
         }
 
     }
@@ -1183,7 +1229,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         val intentFilter = IntentFilter("LOCATION_UPDATED")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
             Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
-            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED)
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
             Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
            LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
@@ -1194,5 +1240,21 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     override fun onPause() {
         super.onPause()
         unregisterReceiver(locationReceiver)
+    }
+    private fun uploadImage(file: File) {
+        lifecycleScope.launch {
+            val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            body =
+                MultipartBody.Part.createFormData(
+                    "document_name",
+                    file.name, reqFile
+                )
+            viewModel.getProfileUploadFile(
+                context = this@ImportOfExoticGoatForms,
+                document_name = body,
+                user_id = getPreferenceOfScheme(this@ImportOfExoticGoatForms, AppConstants.SCHEME, Result::class.java)?.user_id,
+                table_name = getString(R.string.import_of_exotic_goat_document).toRequestBody(MultipartBody.FORM),
+            )
+        }
     }
 }

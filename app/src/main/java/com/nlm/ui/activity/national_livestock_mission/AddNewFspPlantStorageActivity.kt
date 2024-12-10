@@ -22,6 +22,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -105,8 +106,16 @@ class AddNewFspPlantStorageActivity(
     private var longitude:Double?=null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                    latitude = it.getDoubleExtra("latitude", 0.0)
+                    longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
+
+                    // You can add additional handling logic here, such as updating UI or processing data.
+                }
+            }
         }
     }
 
@@ -429,6 +438,7 @@ class AddNewFspPlantStorageActivity(
                 mBinding?.clParent?.let { showSnackbar(it,"At least one plant storage nlm comment is required") }
                 return
             }
+
             if (hasLocationPermissions()) {
                 val intent = Intent(this@AddNewFspPlantStorageActivity, LocationService::class.java)
                 startService(intent)
@@ -486,11 +496,19 @@ class AddNewFspPlantStorageActivity(
                     else{
                         showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
                     }
-                }}
-
+                }
+            }
+            else {
+                showLocationAlertDialog()
+            }
 
         }
-        else{
+        else if(getPreferenceOfScheme(
+                this,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 24
+        ){
             if (hasLocationPermissions()) {
                 val intent = Intent(this@AddNewFspPlantStorageActivity, LocationService::class.java)
                 startService(intent)
@@ -543,6 +561,9 @@ class AddNewFspPlantStorageActivity(
                         showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
                     }
                 }}
+            else {
+                showLocationAlertDialog()
+            }
             if (state == "Please Select") {
                 mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
                 return
@@ -1240,11 +1261,12 @@ class AddNewFspPlantStorageActivity(
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
-            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED)
+
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
-            registerReceiver(locationReceiver, intentFilter)
+
+            LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
         }
     }
 

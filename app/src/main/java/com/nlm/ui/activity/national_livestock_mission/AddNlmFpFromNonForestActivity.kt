@@ -537,7 +537,9 @@ class AddNlmFpFromNonForestActivity(
                     showSnackbar(mBinding?.clParent!!,"No location fetched")
                 }
             }}
-
+        else {
+            showLocationAlertDialog()
+        }
     }
 
 

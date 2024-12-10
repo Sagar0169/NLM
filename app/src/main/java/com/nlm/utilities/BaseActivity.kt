@@ -3,16 +3,27 @@ package com.nlm.utilities
 import android.Manifest
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +35,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.nlm.R
 import com.nlm.services.LocationService
 import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
@@ -33,7 +47,9 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         Manifest.permission.CAMERA
     )
 
-    private val CAPTURE_IMAGE_REQUEST = 1
+     val CAPTURE_IMAGE_REQUEST = 1
+    val PICK_IMAGE = 2
+    var allAccepted :Boolean= false
     private val PERMISSION_REQUEST_LOCATION = 1
     private var STORAGE_STORAGE_REQUEST_CODE = 61
     val REQUEST_iMAGE_PDF = 20
@@ -41,7 +57,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     var uriTemp: Uri? = null
 
-    private var photoFile: File? = null
+     var photoFile: File? = null
     var file: File? = null
 
     lateinit var viewDataBinding: T
@@ -187,6 +203,124 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         } catch (e: Exception) {
             //e.toString();
         }
+    }
+    fun checkStoragePermission(context:Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.CAMERA
+                )
+            )
+        } else {
+            permissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA
+                )
+            )
+        }
+    }
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+         allAccepted = true
+        permissions.entries.forEach {
+            Log.e("DEBUG", "${it.key} = ${it.value}")
+            if (!it.value) {
+                allAccepted = false
+                context= context
+                showDialogOK(getString(R.string.camera_permission)) { dialog, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> context?.let { it1 ->
+                            checkStoragePermission(
+                                it1
+                            )
+                        }
+                        DialogInterface.BUTTON_NEGATIVE -> dialog.dismiss()
+                    }
+                }
+            }
+        }
+
+        if (allAccepted) context?.let { openCamera(it) } else return@registerForActivityResult
+    }
+    fun saveImageToFile(bitmap: Bitmap): File {
+        val filesDir = filesDir
+        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val imageFile = File(filesDir, "IMG_$timestamp.jpg")
+
+        val outputStream = FileOutputStream(imageFile)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+        outputStream.flush()
+        outputStream.close()
+
+        return imageFile
+    }
+     fun openCamera(context:Context) {
+        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_camera)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window!!.setGravity(Gravity.CENTER)
+
+        val cross: ImageView = dialog.findViewById(R.id.ivCross)
+        val camera: TextView = dialog.findViewById(R.id.tvCamera)
+        val gallery: TextView = dialog.findViewById(R.id.tvGallery)
+        val pdf: TextView = dialog.findViewById(R.id.tvPdf)
+
+
+        pdf.setOnClickListener {
+            openOnlyPdfAccordingToPosition()
+            dialog.dismiss()
+        }
+
+        camera.setOnClickListener {
+            dispatchTakePictureIntent()
+            dialog.dismiss()
+        }
+
+        gallery.setOnClickListener {
+            openGallery()
+            dialog.dismiss()
+        }
+
+        cross.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+
+    }
+    private fun dispatchTakePictureIntent() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, CAPTURE_IMAGE_REQUEST)
+
+    }
+    private fun openOnlyPdfAccordingToPosition() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/pdf"
+        }
+        startActivityForResult(intent, REQUEST_iMAGE_PDF)
+    }
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, PICK_IMAGE)
+    }
+    private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
+        val dialog = android.app.AlertDialog.Builder(this);
+        dialog.setCancelable(false);
+        dialog.setMessage(message)
+            .setPositiveButton(getString(R.string.ok), okListener)
+            .setNegativeButton(getString(R.string.cancel), okListener)
+            .create()
+            .show()
     }
 }
 

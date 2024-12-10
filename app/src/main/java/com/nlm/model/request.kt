@@ -808,6 +808,10 @@ data class AddNlmEdpRequest(
     val is_draft_nlm: Int?= null,
     val nlm_edp_document: List<ImplementingAgencyDocument?>?= null,
     val nlm_edp_format_for_nlm: List<NlmEdpFormatForNlm>?= null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia : Double? = null,
+    val lattitude_nlm : Double? = null,
+    val longitude_nlm  : Double? = null,
     val nlm_edp_monitoring: List<NlmEdpMonitoring>?= null,
     val role_id: Int?= null,
     val state_code: Int?= null,
@@ -829,7 +833,11 @@ data class AddAnimalRequest(
     val role_id: Int?= null,
     val state_code: Int?= null,
     val status: Int?= null,
-    val user_id: String?= null
+    val user_id: String?= null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 
 data class VaccinationProgrammerListRequest(

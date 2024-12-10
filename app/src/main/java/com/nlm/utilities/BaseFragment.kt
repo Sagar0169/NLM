@@ -2,6 +2,7 @@ package com.nlm.utilities
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -52,7 +53,15 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     abstract fun setVariables()
 
     abstract fun setObservers()
-
+     fun showLocationAlertDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Location Not Found")
+            .setMessage("Unable to fetch your location. Please enable location from settings.")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
 
     fun View.showStringSnackbar(message: String) {
         Snackbar.make(this, message, Snackbar.LENGTH_LONG).also { snackbar ->
