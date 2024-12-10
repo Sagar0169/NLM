@@ -12,7 +12,6 @@
     <string name="press_back_again">Press Back Again</string>
     <string name="text_add_video">Video</string>
     <string name="error_valid_medai_format">Please upload valid Image or Video file format.</string>
-    <string name="format_for_national_level_monitors_to_be_filled_by_nlm_dairying_through_cooperatives_component_b_of_npdd">Format for National Level Monitors(To be filled by NLM) (Dairying through Cooperatives, Component B of NPDD)</string>
     <string name="error_valid_pdf_format">Please upload valid PDF file format.</string>
     <string name="message_camera_unabletocapture">Unable to capture from camera</string>
     <string name="message_camera_unabletoopen">Unable to open camera</string>
