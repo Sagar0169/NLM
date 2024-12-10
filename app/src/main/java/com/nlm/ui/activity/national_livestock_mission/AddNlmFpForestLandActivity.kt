@@ -2,8 +2,10 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -18,6 +20,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -41,6 +44,7 @@ import com.nlm.model.ImportExoticGoatAddEditRequest
 import com.nlm.model.NlmEdp
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.EdpIAAdapter
 import com.nlm.ui.adapter.EdpNlmAdapter
@@ -58,6 +62,8 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -105,6 +111,14 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     private var DocumentName:String?=null
     private var viewEdit: String? = null
     private var itemId: Int? = null
+    private var latitude:Double?=null
+    private var longitude:Double?=null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
 //    private val stateList = listOf(
 //        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
 //        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
@@ -454,85 +468,6 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             }
         }
 
-//    private fun showBottomSheetDialog(type: String) {
-//        bottomSheetDialog = BottomSheetDialog(this)
-//        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
-//        view.layoutParams = ViewGroup.LayoutParams(
-//            ViewGroup.LayoutParams.MATCH_PARENT,
-//            ViewGroup.LayoutParams.WRAP_CONTENT
-//        )
-//
-//        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
-//        val close = view.findViewById<TextView>(R.id.tvClose)
-//
-//        close.setOnClickListener {
-//            bottomSheetDialog.dismiss()
-//        }
-//
-//        // Define a variable for the selected list and TextView
-//        val selectedList: List<ResultGetDropDown>
-//        val selectedTextView: TextView
-//
-//        // Initialize based on type
-//        when (type) {
-//            "State" -> {
-//                selectedList = stateList
-//                selectedTextView = mBinding!!.tvState
-//            }
-//
-//            "District" -> {
-//                selectedList = stateList
-//                selectedTextView = mBinding!!.tvDistrict
-//            }
-////            "DistrictNlm" -> {
-////                selectedList = stateList
-////                selectedTextView = mBinding!!.tvDistrictNlm
-////            }
-//            "Land" -> {
-//                selectedList = land
-//                selectedTextView = mBinding!!.tvLand
-//            }
-//
-//            "Agency" -> {
-//                selectedList = agency
-//                selectedTextView = mBinding!!.tvAgency
-//            }
-//
-//            else -> return
-//        }
-//
-//        // Set up the adapter
-//        stateAdapter = StateAdapter(selectedList, this) { selectedItem ->
-//            // Handle state item click
-//            selectedTextView.text = selectedItem
-//            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
-//            bottomSheetDialog.dismiss()
-//        }
-//
-//        rvBottomSheet.layoutManager =
-//            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        rvBottomSheet.adapter = stateAdapter
-//        bottomSheetDialog.setContentView(view)
-//
-//        // Rotate drawable
-//        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
-//        var rotatedDrawable = rotateDrawable(drawable, 180f)
-//        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
-//
-//        // Set a dismiss listener to reset the view visibility
-//        bottomSheetDialog.setOnDismissListener {
-//            rotatedDrawable = rotateDrawable(drawable, 0f)
-//            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
-//                null,
-//                null,
-//                rotatedDrawable,
-//                null
-//            )
-//        }
-//
-//        // Show the bottom sheet
-//        bottomSheetDialog.show()
-//    }
 
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
         drawable?.mutate() // Mutate the drawable to avoid affecting other instances
@@ -545,13 +480,6 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
 
         return rotateDrawable
     }
-
-//    private fun onlyCreatedAdapter() {
-//        onlyCreatedAdapter = NlmEdpAdapter(onlyCreated, isFrom)
-//        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        mBinding!!.rvNlmEdp.layoutManager = layoutManager
-//        mBinding!!.rvNlmEdp.adapter = onlyCreatedAdapter
-//    }
 
     override fun setVariables() {
     }
@@ -1003,69 +931,95 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     private fun saveDataApi(isDraft:Int?){
         if (getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.role_id==24)
         {
-        viewModel.getFpFromForestLandAddEdit(this,true, FpFromForestLandAddEditFormat9Request(
-            state_code = getPreferenceOfScheme(
-                this@AddNlmFpForestLandActivity,
-                AppConstants.SCHEME,
-                Result::class.java
-            )?.state_code,
-            user_id = getPreferenceOfScheme(
-                this@AddNlmFpForestLandActivity,
-                AppConstants.SCHEME,
-                Result::class.java
-            )?.user_id,
-            role_id = getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.role_id,
-            id = formId,
-            fp_from_forest_land_document = TotalDocumentList,
-            fp_from_forest_land_filled_by_nlm = programmeList,
-            area_covered = mBinding?.etAreaCovered?.text.toString().toIntOrNull(),
-            is_draft = isDraft,
-            is_deleted = null,
-            location_address = mBinding?.etLocationIA?.text.toString(),
-            name_implementing_agency = mBinding?.etImplementingAgencyIA?.text.toString(),
-            scheme_guidelines = mBinding?.etSchemeGuideline?.text.toString(),
-            target_achievement = mBinding?.etTarget?.text.toString(),
-            type_of_land = mBinding?.tvLand?.text.toString(),
-            type_of_agency = mBinding?.tvAgency?.text.toString(),
-            variety_of_fodder = mBinding?.etVariteryFodder?.text.toString(),
-            district_code = districtIdIA
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@AddNlmFpForestLandActivity, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if(latitude!=null&&longitude!=null)
+                    {
+                        viewModel.getFpFromForestLandAddEdit(this@AddNlmFpForestLandActivity,true, FpFromForestLandAddEditFormat9Request(
+                            state_code = getPreferenceOfScheme(
+                                this@AddNlmFpForestLandActivity,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.state_code,
+                            user_id = getPreferenceOfScheme(
+                                this@AddNlmFpForestLandActivity,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.user_id,
+                            role_id = getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.role_id,
+                            id = formId,
+                            fp_from_forest_land_document = TotalDocumentList,
+                            fp_from_forest_land_filled_by_nlm = programmeList,
+                            area_covered = mBinding?.etAreaCovered?.text.toString().toIntOrNull(),
+                            is_draft = isDraft,
+                            is_deleted = null,
+                            location_address = mBinding?.etLocationIA?.text.toString(),
+                            name_implementing_agency = mBinding?.etImplementingAgencyIA?.text.toString(),
+                            scheme_guidelines = mBinding?.etSchemeGuideline?.text.toString(),
+                            target_achievement = mBinding?.etTarget?.text.toString(),
+                            type_of_land = mBinding?.tvLand?.text.toString(),
+                            type_of_agency = mBinding?.tvAgency?.text.toString(),
+                            variety_of_fodder = mBinding?.etVariteryFodder?.text.toString(),
+                            district_code = districtIdIA,
+                            lattitude_ia = latitude,
+                            longitude_ia = longitude
+                        )
+                        )
+                    }
+                    else{
+                        showSnackbar(mBinding?.clParent!!,"No location fetched")
+                    }
+                }}
 
-
-        )
-        )
         }
         else{
-            viewModel.getFpFromForestLandAddEdit(this,true, FpFromForestLandAddEditFormat9Request(
-                state_code = getPreferenceOfScheme(
-                    this@AddNlmFpForestLandActivity,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    this@AddNlmFpForestLandActivity,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id,
-                role_id = getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.role_id,
-                id = formId,
-                fp_from_forest_land_document = DocumentList,
-                fp_from_forest_land_filled_by_nlm = programmeList,
-                area_covered = mBinding?.etAreaCovered?.text.toString().toIntOrNull(),
-                is_draft = isDraft,
-                is_deleted = null,
-                location_address = mBinding?.etLocation?.text.toString(),
-                name_implementing_agency = mBinding?.etImplementingAgency?.text.toString(),
-                scheme_guidelines = mBinding?.etSchemeGuideline?.text.toString(),
-                target_achievement = mBinding?.etTarget?.text.toString(),
-                type_of_land = mBinding?.tvLand?.text.toString(),
-                type_of_agency = mBinding?.tvAgency?.text.toString(),
-                variety_of_fodder = mBinding?.etVariteryFodder?.text.toString(),
-                district_code = districtId,
-                grant_received = mBinding?.etGrantReceived?.text.toString()
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@AddNlmFpForestLandActivity, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if(latitude!=null&&longitude!=null)
+                    {
+                        viewModel.getFpFromForestLandAddEdit(this@AddNlmFpForestLandActivity,true, FpFromForestLandAddEditFormat9Request(
+                            state_code = getPreferenceOfScheme(
+                                this@AddNlmFpForestLandActivity,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.state_code,
+                            user_id = getPreferenceOfScheme(
+                                this@AddNlmFpForestLandActivity,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.user_id,
+                            role_id = getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.role_id,
+                            id = formId,
+                            fp_from_forest_land_document = DocumentList,
+                            fp_from_forest_land_filled_by_nlm = programmeList,
+                            area_covered = mBinding?.etAreaCovered?.text.toString().toIntOrNull(),
+                            is_draft = isDraft,
+                            is_deleted = null,
+                            location_address = mBinding?.etLocation?.text.toString(),
+                            name_implementing_agency = mBinding?.etImplementingAgency?.text.toString(),
+                            scheme_guidelines = mBinding?.etSchemeGuideline?.text.toString(),
+                            target_achievement = mBinding?.etTarget?.text.toString(),
+                            type_of_land = mBinding?.tvLand?.text.toString(),
+                            type_of_agency = mBinding?.tvAgency?.text.toString(),
+                            variety_of_fodder = mBinding?.etVariteryFodder?.text.toString(),
+                            district_code = districtId,
+                            grant_received = mBinding?.etGrantReceived?.text.toString() ,
+                            lattitude_nlm = latitude,
+                            longitude_nlm = longitude
+                        )
+                        )
+                    }
+                    else{
+                        showSnackbar(mBinding?.clParent!!,"No location fetched")
+                    }
+                }}
 
-
-            )
-            )
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -1131,5 +1085,18 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
 
             )
         )
+    }
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(locationReceiver)
     }
 }

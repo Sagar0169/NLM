@@ -874,7 +874,11 @@ class AddNlmAssistanceForQFSPActivity :
                         )
                     )
 
-                }}}
+                }
+                else{
+                    showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
+                }
+            }}
 
     }
     private var recyclerScrollListener: RecyclerView.OnScrollListener =

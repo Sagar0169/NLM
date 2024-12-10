@@ -75,6 +75,7 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
         if(viewEdit=="edit"){
             ViewEditApi()
         }
+
     }
     override fun setVariables() {
 

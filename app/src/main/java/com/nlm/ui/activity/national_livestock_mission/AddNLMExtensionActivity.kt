@@ -2,8 +2,10 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -16,6 +18,7 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -34,6 +37,7 @@ import com.nlm.model.GetDropDownRequest
 import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.AssistanceEAAdapter
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
@@ -48,6 +52,8 @@ import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -88,6 +94,14 @@ class AddNLMExtensionActivity(
     private var isSubmitted: Boolean = false
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
+    private var latitude:Double?=null
+    private var longitude:Double?=null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
 
 
     private val variety = listOf(
@@ -406,6 +420,59 @@ class AddNLMExtensionActivity(
                 }
                 return
             }
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@AddNLMExtensionActivity, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if(latitude!=null&&longitude!=null)
+                    {
+                        viewModel.getAssistanceForEaADD(
+                            this@AddNLMExtensionActivity, true,
+                            AddAssistanceEARequest(
+                                id = itemId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddNLMExtensionActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddNLMExtensionActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddNLMExtensionActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                is_draft = draft,
+                                no_of_camps =
+                                if (mBinding?.etNoa?.text.isNullOrEmpty()) {
+                                    mBinding?.etEOA?.text.toString().toIntOrNull()
+                                } else {
+                                    mBinding?.etNoa?.text.toString().toIntOrNull()
+                                },
+                                no_of_participants =
+                                if (mBinding?.etParticipateNlm?.text.isNullOrEmpty()) {
+                                    mBinding?.etParticipant?.text.toString().toIntOrNull()
+                                } else {
+                                    mBinding?.etParticipateNlm?.text.toString().toIntOrNull()
+                                },
+                                whether_the_state_developed = mBinding?.etModule?.text.toString(),
+                                whether_the_state_trainers = mBinding?.etTrainer?.text.toString(),
+                                details_of_training_programmes = mBinding?.etDetails?.text.toString(),
+                                assistance_for_ea_document = totalListDocument,
+                                assistance_for_ea_training_institute = ea_training_institute,
+                                lattitude_nlm = latitude,
+                                longitude_nlm = longitude
+                            )
+                        )
+                    }
+                    else{
+                        showSnackbar(mBinding?.clParent!!,"No location fetched")
+                    }
+                }}
 
 
         } else {
@@ -426,48 +493,62 @@ class AddNLMExtensionActivity(
                 }
                 return
             }
-
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@AddNLMExtensionActivity, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if(latitude!=null&&longitude!=null)
+                    {
+                        viewModel.getAssistanceForEaADD(
+                            this@AddNLMExtensionActivity, true,
+                            AddAssistanceEARequest(
+                                id = itemId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddNLMExtensionActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddNLMExtensionActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddNLMExtensionActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                is_draft = draft,
+                                no_of_camps =
+                                if (mBinding?.etNoa?.text.isNullOrEmpty()) {
+                                    mBinding?.etEOA?.text.toString().toIntOrNull()
+                                } else {
+                                    mBinding?.etNoa?.text.toString().toIntOrNull()
+                                },
+                                no_of_participants =
+                                if (mBinding?.etParticipateNlm?.text.isNullOrEmpty()) {
+                                    mBinding?.etParticipant?.text.toString().toIntOrNull()
+                                } else {
+                                    mBinding?.etParticipateNlm?.text.toString().toIntOrNull()
+                                },
+                                whether_the_state_developed = mBinding?.etModule?.text.toString(),
+                                whether_the_state_trainers = mBinding?.etTrainer?.text.toString(),
+                                details_of_training_programmes = mBinding?.etDetails?.text.toString(),
+                                assistance_for_ea_document = totalListDocument,
+                                assistance_for_ea_training_institute = ea_training_institute,
+                                lattitude_ia = latitude,
+                                longitude_ia = longitude
+                            )
+                        )
+                    }
+                    else{
+                        showSnackbar(mBinding?.clParent!!,"No location fetched")
+                    }
+                }}
 
         }
-        viewModel.getAssistanceForEaADD(
-            this@AddNLMExtensionActivity, true,
-            AddAssistanceEARequest(
-                id = itemId,
-                role_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                state_code = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id.toString(),
-                is_draft = draft,
-                no_of_camps =
-                if (mBinding?.etNoa?.text.isNullOrEmpty()) {
-                    mBinding?.etEOA?.text.toString().toIntOrNull()
-                } else {
-                    mBinding?.etNoa?.text.toString().toIntOrNull()
-                },
-                no_of_participants =
-                if (mBinding?.etParticipateNlm?.text.isNullOrEmpty()) {
-                    mBinding?.etParticipant?.text.toString().toIntOrNull()
-                } else {
-                    mBinding?.etParticipateNlm?.text.toString().toIntOrNull()
-                },
-                whether_the_state_developed = mBinding?.etModule?.text.toString(),
-                whether_the_state_trainers = mBinding?.etTrainer?.text.toString(),
-                details_of_training_programmes = mBinding?.etDetails?.text.toString(),
-                assistance_for_ea_document = totalListDocument,
-                assistance_for_ea_training_institute = ea_training_institute
-            )
-        )
+
     }
 
 
@@ -774,107 +855,6 @@ class AddNLMExtensionActivity(
     }
 
 
-//    private fun showBottomSheetDialog(type: String) {
-//        bottomSheetDialog = BottomSheetDialog(this)
-//        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
-//        view.layoutParams = ViewGroup.LayoutParams(
-//            ViewGroup.LayoutParams.MATCH_PARENT,
-//            ViewGroup.LayoutParams.WRAP_CONTENT
-//        )
-//
-//        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
-//        val close = view.findViewById<TextView>(R.id.tvClose)
-//
-//        close.setOnClickListener {
-//            bottomSheetDialog.dismiss()
-//        }
-//
-//        // Define a variable for the selected list and TextView
-//        val selectedList: List<ResultGetDropDown>
-//        val selectedTextView: TextView
-//
-//        // Initialize based on type
-//        when (type) {
-////            "typeSemen" -> {
-////                selectedList = typeSemen
-////                selectedTextView = mBinding!!.tvSemenStation
-////            }
-////
-////            "StateNDD" -> {
-////                selectedList = stateList
-////                selectedTextView = binding!!.tvStateNDD
-////            }
-////
-////            "District" -> {
-////                dropDownApiCall(paginate = false, loader = true)
-////                selectedList = districtList
-////                selectedTextView = mBinding!!.tvDistrict
-////            }
-//
-////            "DistrictNLM" -> {
-////                dropDownApiCall(paginate = false, loader = true)
-////                selectedList = districtList
-////                selectedTextView = mBinding!!.tvDistrictNlm
-////            }
-//
-////            "Variety" -> {
-////                img = 2
-////                selectedList = variety
-////                selectedTextView = mBinding!!.tvQuality
-////            }
-//
-////            "Status" -> {
-////                selectedList = status
-////                selectedTextView = binding!!.tvStatus
-////            }
-////
-////            "Reading" -> {
-////                selectedList = reading
-////                selectedTextView = binding!!.tvReadingMaterial
-////            }
-//
-//            else -> return
-//        }
-//
-//        // Set up the adapter
-//        stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
-//            // Handle state item click
-//            selectedTextView.text = selectedItem
-//            districtId = id
-//            selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
-//            bottomSheetDialog.dismiss()
-//        }
-//
-//
-//
-//        layoutManager =
-//            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        rvBottomSheet.layoutManager = layoutManager
-//        rvBottomSheet.adapter = stateAdapter
-//        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
-//        bottomSheetDialog.setContentView(view)
-//
-//
-//        // Rotate drawable
-//        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_arrow_down)
-//        var rotatedDrawable = rotateDrawable(drawable, 180f)
-//        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
-//
-//        // Set a dismiss listener to reset the view visibility
-//        bottomSheetDialog.setOnDismissListener {
-//            rotatedDrawable = rotateDrawable(drawable, 0f)
-//            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
-//                null,
-//                null,
-//                rotatedDrawable,
-//                null
-//            )
-//        }
-//
-//        // Show the bottom sheet
-//        bottomSheetDialog.show()
-//    }
-
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
         drawable?.mutate() // Mutate the drawable to avoid affecting other instances
 
@@ -1121,5 +1101,17 @@ class AddNLMExtensionActivity(
     ) {
         trainingInstitute(this@AddNLMExtensionActivity, isFrom, selectedItem, position)
     }
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(
+            locationReceiver,
+            IntentFilter("LOCATION_UPDATED")
+        )
+    }
 
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(locationReceiver)
+    }
 }

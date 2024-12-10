@@ -482,7 +482,11 @@ class AddNewFspPlantStorageActivity(
                                 longitude_nlm= longitude
                             )
                         )
-                    }}}
+                    }
+                    else{
+                        showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
+                    }
+                }}
 
 
         }
@@ -536,7 +540,7 @@ class AddNewFspPlantStorageActivity(
                         )
                     }
                     else{
-                        showSnackbar(mBinding?.clParent!!,"no location found")
+                        showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
                     }
                 }}
             if (state == "Please Select") {

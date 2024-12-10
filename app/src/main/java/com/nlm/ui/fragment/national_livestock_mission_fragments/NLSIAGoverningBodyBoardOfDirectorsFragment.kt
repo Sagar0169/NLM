@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemTypeIACompositionListEdit
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
@@ -38,7 +39,7 @@ import com.nlm.viewModel.ViewModel
 
 
 class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAGoverningBodyBoardOfDirectorsBinding>(),
-    CallBackItemTypeIACompositionListEdit
+    CallBackItemTypeIACompositionListEdit, CallBackDeleteAtId
 {
     val viewModel = ViewModel()
     private var mBinding: FragmentNLSIAGoverningBodyBoardOfDirectorsBinding?=null
@@ -102,7 +103,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                     }
                     else
                     {
-                        if (viewEdit=="view"||viewEdit=="edit")
+                        if (viewEdit=="view")
                         {
                             if (savedAsEdit)
                             {
@@ -144,6 +145,35 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
 
                             }
                         }
+                       else if (viewEdit=="edit")
+                        {
+                            if (savedAsEdit)
+                            {
+                                listener?.onNextButtonClick()
+                            }
+                            else {
+                                nlmIACompositionOFGoverningList.clear()
+                                nlmIAProjectMonitoringCommitteeList.clear()
+
+                                userResponseModel._result.implementing_agency_advisory_committee?.let { it1 ->
+                                    nlmIACompositionOFGoverningList.addAll(
+                                        it1
+                                    )
+                                }
+
+
+                                userResponseModel._result.implementing_agency_project_monitoring?.let { it1 ->
+                                    nlmIAProjectMonitoringCommitteeList.addAll(
+                                        it1
+                                    )
+                                }
+
+
+                                nlmIACompositionOFGoverningAdapter?.notifyDataSetChanged()
+                                nlmIAProjectMonitoringCommitteeAdapter?.notifyDataSetChanged()
+
+                            }
+                        }
                         else{
                             listener?.onNextButtonClick()
                         }
@@ -157,7 +187,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
     private fun nlmIACompositionOFGoverningAdapter() {
         nlmIACompositionOFGoverningList = mutableListOf()
         nlmIACompositionOFGoverningAdapter =
-            NlmIACompositionOFGoverningAdapter(requireActivity(),nlmIACompositionOFGoverningList,viewEdit,this)
+            NlmIACompositionOFGoverningAdapter(requireActivity(),nlmIACompositionOFGoverningList,viewEdit,this,this)
         mBinding?.rvNlmIACompositionOFGoverning?.adapter = nlmIACompositionOFGoverningAdapter
         mBinding?.rvNlmIACompositionOFGoverning?.layoutManager =
             LinearLayoutManager(requireContext())
@@ -166,7 +196,8 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
     private fun nlmIAProjectMonitoringCommitteeAdapter() {
         nlmIAProjectMonitoringCommitteeList = mutableListOf()
         nlmIAProjectMonitoringCommitteeAdapter =
-            NlmIAProjectMonitoringCommitteeAdapter(nlmIAProjectMonitoringCommitteeList,viewEdit,this)
+            NlmIAProjectMonitoringCommitteeAdapter(requireContext(),nlmIAProjectMonitoringCommitteeList,viewEdit,this,this
+            )
         mBinding?.rvNlmIAProjectMonitoringCommittee?.adapter = nlmIAProjectMonitoringCommitteeAdapter
         mBinding?.rvNlmIAProjectMonitoringCommittee?.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -366,5 +397,16 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                 user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id.toString()
             )
         )
+    }
+
+    override fun onClickItem(ID: Int?, position: Int,isFrom: Int) {
+        if (isFrom==1){
+            position.let { it1 -> nlmIACompositionOFGoverningAdapter?.onDeleteButtonClick(it1) }
+        }
+        else if(isFrom==2){
+            position.let { it1 -> nlmIAProjectMonitoringCommitteeAdapter?.onDeleteButtonClick(it1) }
+        }
+
+
     }
 }

@@ -150,7 +150,11 @@ data class FpFromForestLandAddEditFormat9Request(
     val type_of_agency: String?=null,
     val type_of_land: String?=null,
     val user_id: Int?=null,
-    val variety_of_fodder: String?=null
+    val variety_of_fodder: String?=null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 
 
@@ -667,7 +671,11 @@ data class NlmFpFromNonForestAddRequest(
     val target_achievement: String?=null,
     val type_of_agency: String?=null,
     val type_of_land: String?=null,
-    val variety_of_fodder: String?=null
+    val variety_of_fodder: String?=null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 
 
@@ -782,7 +790,11 @@ data class AddAssistanceEARequest(
     val status: Int?=null,
     val user_id: String?=null,
     val whether_the_state_developed: String?=null,
-    val whether_the_state_trainers: String?=null
+    val whether_the_state_trainers: String?=null,
+    val lattitude_ia: Double? = null,
+    val longitude_ia: Double? = null,
+    val lattitude_nlm: Double? = null,
+    val longitude_nlm : Double? = null,
 )
 
 

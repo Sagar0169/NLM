@@ -1,14 +1,19 @@
 package com.nlm.ui.adapter
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.nlm.R
 import com.nlm.callBack.AddItemCallBackFundsRecieved
+import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemFundsReceivedListEdit
 import com.nlm.callBack.CallBackItemTypeIACompositionListEdit
+import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemAvilabilityOfEquipmentBinding
 import com.nlm.databinding.ItemCompositionOfGoverningBinding
 import com.nlm.databinding.ItemCompositionOfGoverningNlmIaBinding
@@ -18,12 +23,15 @@ import com.nlm.databinding.ItemFundsReceivedNlsiaBinding
 import com.nlm.databinding.ItemQualityBuckBinding
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyFundsReceived
+import com.nlm.utilities.Utility
 import com.nlm.utilities.showView
 
 class NlmIAFundsRecievedAdapter(
+    private val context: Context,
     private val programmeList: MutableList<ImplementingAgencyFundsReceived>,
     private val viewEdit: String?,
-    private val callBackEdit: CallBackItemFundsReceivedListEdit
+    private val callBackEdit: CallBackItemFundsReceivedListEdit,
+    private val callBackDeleteAtId: CallBackDeleteAtId,
     ) : RecyclerView.Adapter<NlmIAFundsRecievedAdapter.NlmIAFundsRecieved>() {
 
 
@@ -63,8 +71,16 @@ class NlmIAFundsRecievedAdapter(
 
         // Delete row
         holder.binding.btnDelete.setOnClickListener {
-                programmeList.removeAt(position)
-                notifyItemRemoved(position)
+            Utility.showConfirmationAlertDialog(
+                context,
+                object :
+                    DialogCallback {
+                    override fun onYes() {
+                        callBackDeleteAtId.onClickItem(currentItem.id,position,1)
+                    }
+                },
+                context.getString(R.string.are_you_sure_want_to_delete_your_post)
+            )
         }
         holder.binding.btnEdit.setOnClickListener{
             callBackEdit.onClickItem(
@@ -81,7 +97,17 @@ class NlmIAFundsRecievedAdapter(
         }
     }
 
+    fun onDeleteButtonClick(position: Int) {
+        if (position >= 0 && position < programmeList.size) {
+            programmeList.removeAt(position)
+            notifyItemRemoved(position)
 
+            // Notify about range changes to avoid index mismatches
+            notifyItemRangeChanged(position, programmeList.size)
+        } else {
+            Log.e("Error", "Invalid index: $position for programmeList of size ${programmeList.size}")
+        }
+    }
     override fun getItemCount(): Int = programmeList.size
 
     inner class NlmIAFundsRecieved(val binding: ItemFundsReceivedNlsiaBinding) :

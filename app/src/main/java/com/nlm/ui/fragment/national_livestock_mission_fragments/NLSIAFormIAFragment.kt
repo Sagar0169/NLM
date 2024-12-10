@@ -71,12 +71,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
         else if(viewEdit=="edit"){
             ViewEditApi(viewEdit)
         }
-        else if(viewEdit!="add")
-        {
 
-        }
-        Log.d("IsType",viewEdit.toString())
-        ViewEditApi("edit")
     }
 
     override fun setVariables() {
@@ -169,6 +164,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
 
         fun state(view: View){showBottomSheetDialog("state")}
         fun save(view: View){
+
             if (viewEdit=="view")
             {
                 listener?.onNextButtonClick()
@@ -205,6 +201,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
             }
         }
         fun saveAsDraft(view: View){
+
             if (mBinding?.etState?.text.isNullOrEmpty() && mBinding?.etNameAndLocationOfIa?.text.isNullOrEmpty() && mBinding?.etDirectorDGCeoName?.text.isNullOrEmpty() )
             {
                 showSnackbar(mBinding!!.clParent, "Please fill the mandatory field and save the data")
