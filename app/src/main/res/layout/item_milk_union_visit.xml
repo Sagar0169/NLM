@@ -235,6 +235,7 @@
                             android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvNlmStatus"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/dp_3"

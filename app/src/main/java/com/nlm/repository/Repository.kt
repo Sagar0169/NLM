@@ -57,6 +57,20 @@ import com.nlm.model.MobileVeterinaryUnitsListRequest
 import com.nlm.model.MobileVeterinaryUnitsListResponse
 import com.nlm.model.NDDComponentBListRequest
 import com.nlm.model.NDDComponentBListResponse
+import com.nlm.model.NDDDairyPlantListRequest
+import com.nlm.model.NDDDairyPlantListResponse
+import com.nlm.model.NDDDcsBmcListRequest
+import com.nlm.model.NDDDcsBmcListResponse
+import com.nlm.model.NDDMilkProcessingListRequest
+import com.nlm.model.NDDMilkProcessingListResponse
+import com.nlm.model.NDDMilkProductMarketingListRequest
+import com.nlm.model.NDDMilkProductMarketingListResponse
+import com.nlm.model.NDDMilkUnionListRequest
+import com.nlm.model.NDDMilkUnionListResponse
+import com.nlm.model.NDDProductivityEnhancementServicesListRequest
+import com.nlm.model.NDDProductivityEnhancementServicesListResponse
+import com.nlm.model.NDDStateCenterLabListRequest
+import com.nlm.model.NDDStateCenterLabListResponse
 import com.nlm.model.NLMAhidfRequest
 import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NLMIAResponse
@@ -289,6 +303,30 @@ object Repository {
 
     suspend fun getComponentBList(request: NDDComponentBListRequest): Response<NDDComponentBListResponse> {
         return api.getComponentBList(request)
+    }
+
+    suspend fun getMilkUnionList(request: NDDMilkUnionListRequest): Response<NDDMilkUnionListResponse> {
+        return api.getMilkUnionList(request)
+    }
+    suspend fun dairyPlantList(request: NDDDairyPlantListRequest): Response<NDDDairyPlantListResponse> {
+        return api.dairyPlantList(request)
+    }
+    suspend fun dcsBmcList(request: NDDDcsBmcListRequest): Response<NDDDcsBmcListResponse> {
+        return api.dcsBmcList(request)
+    }
+
+    suspend fun stateCenterLabList(request: NDDStateCenterLabListRequest): Response<NDDStateCenterLabListResponse> {
+        return api.stateCenterLabList(request)
+    }
+    suspend fun milkProcessingList(request: NDDMilkProcessingListRequest): Response<NDDMilkProcessingListResponse> {
+        return api.milkProcessingList(request)
+    }
+
+    suspend fun milkProductMarketingList(request: NDDMilkProductMarketingListRequest): Response<NDDMilkProductMarketingListResponse> {
+        return api.milkProductMarketingList(request)
+    }
+    suspend fun productivityEnhancementServicesList(request: NDDProductivityEnhancementServicesListRequest): Response<NDDProductivityEnhancementServicesListResponse> {
+        return api.productivityEnhancementServicesList(request)
     }
 }
 

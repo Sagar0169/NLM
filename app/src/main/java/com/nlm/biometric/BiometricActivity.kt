@@ -21,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.nlm.ui.activity.DashboardActivity
+import com.nlm.ui.activity.ImageGeoLocationActivity
 import com.nlm.ui.activity.LoginActivity
 import com.nlm.utilities.PrefEntities
 import com.nlm.utilities.Utility

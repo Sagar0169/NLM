@@ -9,33 +9,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_8"
+        android:layout_margin="@dimen/dp_8">
 
-
-        >
-
-        <!--        <View-->
-        <!--            android:id="@+id/viw"-->
-        <!--            android:layout_width="5dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_marginVertical="10dp"-->
-        <!--            android:layout_marginEnd="@dimen/dp_5"-->
-        <!--            android:background="@color/black"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@+id/tvSendMail"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:cardElevation="5dp"
-            app:cardCornerRadius="@dimen/dp_20"
             android:layout_margin="@dimen/dp_10"
+            android:background="@android:color/transparent"
             android:orientation="horizontal"
+            app:cardCornerRadius="@dimen/dp_20"
+            app:cardElevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,8 +32,8 @@
                 <LinearLayout
                     android:id="@+id/llParent"
                     android:layout_width="0dp"
-                    android:layout_weight="1.7"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
                     android:background="@drawable/curve_all_corner_bg_item_white"
                     android:orientation="vertical"
                     android:padding="@dimen/dp_10"
@@ -93,6 +81,7 @@
                             android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -159,7 +148,8 @@
                             android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvDistrict"                            android:layout_width="0dp"
+                            android:id="@+id/tvDistrict"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/dp_3"
                             android:layout_weight="1"
@@ -238,6 +228,7 @@
                             android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvNlmStatus"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/dp_3"
@@ -249,6 +240,7 @@
                             android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -288,8 +280,6 @@
                             android:textColor="@color/textGrey"
                             android:textSize="14sp" />
                     </LinearLayout>
-
-
 
 
                     <LinearLayout
@@ -345,13 +335,13 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.3"
                     android:background="@drawable/curve_all_corner_bg_item"
-                    android:orientation="horizontal"
-                    />
+                    android:orientation="horizontal" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

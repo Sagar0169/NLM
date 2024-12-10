@@ -63,7 +63,36 @@
             android:background="@drawable/employee_home_bg"
             android:orientation="vertical"
             android:padding="@dimen/dp_20">
+            <TextView
+                android:id="@+id/tvTitileNameOfDCS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="Block"
+                android:textColor="@color/black"
 
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etNameOfDCS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_7"
+
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:hint="Block"
+                android:inputType="textEmailAddress"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/tvTitleAiName"
                 android:layout_width="wrap_content"
