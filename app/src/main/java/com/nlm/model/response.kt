@@ -1908,13 +1908,219 @@ data class NDDComponentBListData(
     val created_on: String,
     val district_name: String,
     val id: Int,
-    val is_delete: String,
+    val is_delete: Boolean,
     val is_draft: Int,
+    val is_view: Boolean,
     val is_draft_text: String,
-    val is_edit: String,
+    val is_edit: Boolean,
     val name_of_dcs_mpp: String,
     val name_of_revenue_village: String,
     val name_of_tehsil: String,
     val state_id: Int,
+    val state_name: String
+)
+
+data class NDDMilkUnionListResponse(
+    val _result: NDDMilkUnionListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NDDMilkUnionListResult(
+    val `data`: List<NDDMilkUnionListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NDDMilkUnionListData(
+    val created_at: String,
+    val created_by: Int,
+    val created_by_text: String,
+    val district_names: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val name_of_milk_union: String,
+    val state_code: Int,
+    val state_name: String
+)
+
+
+data class NDDDairyPlantListResponse(
+    val _result: NDDDairyPlantListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NDDDairyPlantListResult(
+    val `data`: List<NDDDairyPlantListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NDDDairyPlantListData(
+    val created_at: String,
+    val created_by: Int,
+    val created_by_text: String,
+    val district_name: String,
+    val fssai_license_no: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val state_code: Int,
+    val state_name: String
+)
+
+
+data class NDDDcsBmcListResponse(
+    val _result: NDDDcsBmcListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NDDDcsBmcListResult(
+    val `data`: List<NDDDcsBmcListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NDDDcsBmcListData(
+    val created: String,
+    val created_by: Int,
+    val created_by_text: String,
+    val district_name: String,
+    val fssai_lic_no: Int,
+    val fssai_lic_validity_date: String,
+    val id: Int,
+    val is_draft: Boolean,
+    val name_of_dcs: String,
+    val state_code: Int,
+    val state_name: String,
+    val is_delete: Boolean,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+)
+
+
+
+data class NDDStateCenterLabListResponse(
+    val _result: NDDStateCenterLabListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NDDStateCenterLabListResult(
+    val `data`: List<NDDStateCenterLabListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NDDStateCenterLabListData(
+    val created: String,
+    val created_by: Int,
+    val created_by_text: String,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val location_state_central_lab: String,
+    val state_code: Int,
+    val state_name: String
+)
+
+data class NDDMilkProcessingListResponse(
+    val _result: NDDMilkProcessingListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NDDMilkProcessingListResult(
+    val `data`: List<NDDMilkProcessingListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NDDMilkProcessingListData(
+    val created_at: String,
+    val created_by: Int,
+    val created_by_text: String,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val name_milk_union: String,
+    val name_processing_plant: String,
+    val state_code: Int,
+    val state_name: String
+)
+
+
+data class NDDMilkProductMarketingListResponse(
+    val _result: NDDMilkProductMarketingListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NDDMilkProductMarketingListResult(
+    val `data`: List<NDDMilkProductMarketingListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NDDMilkProductMarketingListData(
+    val created_at: String,
+    val created_by: Int,
+    val created_by_text: String,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val name_milk_union: String,
+    val name_retail_shop: String,
+    val state_code: Int,
+    val state_name: String
+)
+
+data class NDDProductivityEnhancementServicesListResponse(
+    val _result: NDDProductivityEnhancementServicesListResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NDDProductivityEnhancementServicesListResult(
+    val `data`: List<NDDProductivityEnhancementServicesListData>,
+    val is_add: Boolean,
+    val total_count: Int
+)
+
+data class NDDProductivityEnhancementServicesListData(
+    val created_at: String,
+    val created_by: Int,
+    val created_by_text: String,
+    val district_name: String,
+    val id: Int,
+    val is_delete: Boolean,
+    val is_draft: Int,
+    val is_edit: Boolean,
+    val is_view: Boolean,
+    val name_dcs_mpp: String,
+    val state_code: Int,
     val state_name: String
 )

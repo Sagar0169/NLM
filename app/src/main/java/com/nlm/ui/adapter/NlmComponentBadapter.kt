@@ -66,24 +66,24 @@ class NlmComponentBadapter(
         holder.mBinding.tvNlmStatus.text = item.is_draft_text
         holder.mBinding.tvCreatedAt.text = convertDate(item.created_on)
 
-//        if(item.is_view){
-//            holder.mBinding.ivView.showView()
-//        }
-//        else{
-//            holder.mBinding.ivView.hideView()
-//        }
-//        if(item.is_delete){
-//            holder.mBinding.ivDelete.showView()
-//        }
-//        else{
-//            holder.mBinding.ivDelete.hideView()
-//        }
-//        if(item.is_edit){
-//            holder.mBinding.ivEdit.showView()
-//        }
-//        else{
-//            holder.mBinding.ivEdit.hideView()
-//        }
+        if(item.is_view){
+            holder.mBinding.ivView.showView()
+        }
+        else{
+            holder.mBinding.ivView.hideView()
+        }
+        if(item.is_delete){
+            holder.mBinding.ivDelete.showView()
+        }
+        else{
+            holder.mBinding.ivDelete.hideView()
+        }
+        if(item.is_edit){
+            holder.mBinding.ivEdit.showView()
+        }
+        else{
+            holder.mBinding.ivEdit.hideView()
+        }
 
         holder.mBinding.ivDelete.setOnClickListener {
             Utility.showConfirmationAlertDialog(

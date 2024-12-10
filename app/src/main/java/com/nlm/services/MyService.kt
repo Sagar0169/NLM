@@ -57,6 +57,20 @@ import com.nlm.model.MobileVeterinaryUnitsListRequest
 import com.nlm.model.MobileVeterinaryUnitsListResponse
 import com.nlm.model.NDDComponentBListRequest
 import com.nlm.model.NDDComponentBListResponse
+import com.nlm.model.NDDDairyPlantListRequest
+import com.nlm.model.NDDDairyPlantListResponse
+import com.nlm.model.NDDDcsBmcListRequest
+import com.nlm.model.NDDDcsBmcListResponse
+import com.nlm.model.NDDMilkProcessingListRequest
+import com.nlm.model.NDDMilkProcessingListResponse
+import com.nlm.model.NDDMilkProductMarketingListRequest
+import com.nlm.model.NDDMilkProductMarketingListResponse
+import com.nlm.model.NDDMilkUnionListRequest
+import com.nlm.model.NDDMilkUnionListResponse
+import com.nlm.model.NDDProductivityEnhancementServicesListRequest
+import com.nlm.model.NDDProductivityEnhancementServicesListResponse
+import com.nlm.model.NDDStateCenterLabListRequest
+import com.nlm.model.NDDStateCenterLabListResponse
 import com.nlm.model.NLMAhidfRequest
 import com.nlm.model.NLMEdpRequest
 import com.nlm.model.NLMIAResponse
@@ -147,6 +161,13 @@ const val DISTRICT_ASCAD_ADD = "livestockHealthDisease/ascadDistrictAddEdit"
 
 //NDD
 const val COMPONENT_B_LIST = "NationalDairyDevelopment/componentBList"
+const val MILK_UNION_LIST = "NationalDairyDevelopment/milkUnionList"
+const val DAIRY_PLANT_LIST = "NationalDairyDevelopment/dairyPlantList"
+const val DCS_BMC_LIST = "NationalDairyDevelopment/dcsBmcList"
+const val STATE_CENTER_LAB_LIST = "NationalDairyDevelopment/stateCenterLabList"
+const val MILK_PROCESSING_LIST = "NationalDairyDevelopment/milkProcessingList"
+const val MILK_PRODUCT_MARKETING_LIST = "NationalDairyDevelopment/milkProductMarketingList"
+const val PRODUCTIVITY_ENHANCEMENT_SERVICES_LIST = "NationalDairyDevelopment/productivityEnhancementServicesList"
 
 
 
@@ -311,7 +332,30 @@ interface MyService {
 
 
 
+//NDD
+
 
     @POST(COMPONENT_B_LIST)
     suspend fun getComponentBList(@Body request: NDDComponentBListRequest): Response<NDDComponentBListResponse>
+
+    @POST(MILK_UNION_LIST)
+    suspend fun getMilkUnionList(@Body request: NDDMilkUnionListRequest): Response<NDDMilkUnionListResponse>
+
+    @POST(DAIRY_PLANT_LIST)
+    suspend fun dairyPlantList(@Body request: NDDDairyPlantListRequest): Response<NDDDairyPlantListResponse>
+
+    @POST(DCS_BMC_LIST)
+    suspend fun dcsBmcList(@Body request: NDDDcsBmcListRequest): Response<NDDDcsBmcListResponse>
+
+    @POST(STATE_CENTER_LAB_LIST)
+    suspend fun stateCenterLabList(@Body request: NDDStateCenterLabListRequest): Response<NDDStateCenterLabListResponse>
+
+    @POST(MILK_PROCESSING_LIST)
+    suspend fun milkProcessingList(@Body request: NDDMilkProcessingListRequest): Response<NDDMilkProcessingListResponse>
+
+    @POST(MILK_PRODUCT_MARKETING_LIST)
+    suspend fun milkProductMarketingList(@Body request: NDDMilkProductMarketingListRequest): Response<NDDMilkProductMarketingListResponse>
+
+    @POST(PRODUCTIVITY_ENHANCEMENT_SERVICES_LIST)
+    suspend fun productivityEnhancementServicesList(@Body request: NDDProductivityEnhancementServicesListRequest): Response<NDDProductivityEnhancementServicesListResponse>
 }

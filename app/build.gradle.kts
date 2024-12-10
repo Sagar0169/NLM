@@ -123,5 +123,8 @@ dependencies {
     implementation (libs.androidx.activity.compose )// Use the latest version
     implementation (libs.androidx.ui   )         // Latest Compose version
 
+    implementation("com.vanniktech:android-image-cropper:4.6.0")
+
+
 
 }

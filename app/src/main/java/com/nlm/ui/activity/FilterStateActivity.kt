@@ -681,6 +681,54 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 }
             }
 
+            45 -> {
+
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvTitleBlock.showView()
+                binding!!.tvTitleBlock.text = "Tehsil"
+                binding!!.etBlock.showView()
+                binding!!.etBlock.setHint("Enter Tehsil")
+                binding!!.tvTitleVillageName.showView()
+                binding!!.etVillageName.showView()
+                binding!!.tvTitileNameOfDCS.showView()
+                binding!!.etNameOfDCS.showView()
+
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+                if (block != null) {
+                    binding?.etBlock?.setText(block)
+                }
+                if (village != null) {
+                    binding?.etVillageName?.setText(village)
+                }
+                if (districtName!="") {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
+            }
+
+
             40 -> {
                 binding!!.tvState.showView()
                 binding!!.tvTitleState.showView()

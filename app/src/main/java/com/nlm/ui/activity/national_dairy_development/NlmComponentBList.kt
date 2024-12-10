@@ -42,8 +42,8 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
     var districtName: String = ""
     var phoneNo: String = ""
     var year: String = ""
-    private lateinit var implementingAdapter: NlmComponentBadapter
-    private lateinit var nodalOfficerList: ArrayList<NDDComponentBListData>
+    private lateinit var nlmComponentBAdapter: NlmComponentBadapter
+    private lateinit var nlmComponentBList: ArrayList<NDDComponentBListData>
 
     override val layoutId: Int
         get() = R.layout.activity_nlm_component_blist
@@ -52,16 +52,22 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
         mBinding = viewDataBinding
         viewModel.init()
         mBinding?.clickAction=ClickActions()
-        nodalOfficerList= arrayListOf()
+        nlmComponentBList= arrayListOf()
         implementingAgency()
-        componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+        swipeForRefreshAscad()
         mBinding!!.fabAddAgency.setOnClickListener{
             val intent =
                 Intent(this@NlmComponentBList, NlmComponentBDairyDevelopment::class.java).putExtra("isFrom", 1)
             startActivity(intent)
         }
     }
-
+    private fun swipeForRefreshAscad() {
+        mBinding?.srlAscad?.setOnRefreshListener {
+            currentPage = 1
+            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            mBinding?.srlAscad?.isRefreshing = false
+        }
+    }
     override fun setVariables() {
 
     }
@@ -74,7 +80,7 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
             } else {
                 if (userResponseModel?._result?.data!= null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
-                        nodalOfficerList.clear()
+                        nlmComponentBList.clear()
 
                         val remainingCount = userResponseModel._result.total_count % 10
                         totalPage = if (remainingCount == 0) {
@@ -90,8 +96,8 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
                     } else {
                         mBinding?.fabAddAgency?.hideView()
                     }
-                    nodalOfficerList.addAll(userResponseModel._result.data)
-                    implementingAdapter?.notifyDataSetChanged()
+                    nlmComponentBList.addAll(userResponseModel._result.data)
+                    nlmComponentBAdapter?.notifyDataSetChanged()
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvComponent?.showView()
                 } else {
@@ -114,7 +120,7 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
         fun filter(view: View) {
             val intent =
                 Intent(this@NlmComponentBList, FilterStateActivity::class.java)
-            intent.putExtra("isFrom", 40)
+            intent.putExtra("isFrom", 45)
             intent.putExtra("selectedStateId", stateId) // previously selected state ID
             intent.putExtra("districtId", districtId) // previously selected state ID
             intent.putExtra("phoneNo", phoneNo)
@@ -144,10 +150,10 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
     }
 
     private fun implementingAgency() {
-        implementingAdapter = NlmComponentBadapter(this,nodalOfficerList,this)
+        nlmComponentBAdapter = NlmComponentBadapter(this,nlmComponentBList,this)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mBinding!!.rvComponent.layoutManager = layoutManager
-        mBinding!!.rvComponent.adapter = implementingAdapter
+        mBinding!!.rvComponent.adapter = nlmComponentBAdapter
         mBinding?.rvComponent?.addOnScrollListener(recyclerScrollListener)
     }
     private var recyclerScrollListener: RecyclerView.OnScrollListener =
@@ -199,6 +205,7 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
     }
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
     }
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {

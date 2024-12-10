@@ -29,8 +29,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
+import com.canhub.cropper.CropImageView
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.nlm.R
 import com.nlm.services.LocationService
@@ -64,7 +71,29 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     @get:LayoutRes
     abstract val layoutId: Int
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
 
+    // Camera image URI for saving captured images
+
+
+    private val fusedLocationClient: FusedLocationProviderClient by lazy {
+        LocationServices.getFusedLocationProviderClient(this)
+    }
+
+    // Register the camera activity for capturing an image
+
+
+    // Register for cropping image
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            val croppedImageUri = result.uriContent
+            croppedImageUri?.let { displayImageWithWatermark(it) }
+        } else {
+            result.error?.printStackTrace()
+            Toast.makeText(this, "Error cropping image: ${result.error?.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
@@ -74,10 +103,128 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         performDataBinding()
+
         initView()
         setVariables()
         setObservers()
     }
+    fun hasCameraPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+    }
+
+    fun hasLocationPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+
+     fun requestPermissions() {
+        val permissionsToRequest = mutableListOf<String>()
+
+        if (!hasCameraPermission()) {
+            permissionsToRequest.add(Manifest.permission.CAMERA)
+        }
+        if (!hasLocationPermission()) {
+            permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                permissionsToRequest.toTypedArray(),
+                REQUEST_PERMISSION_CODE
+            )
+        }
+    }
+
+
+    fun fetchLocation() {
+        if (hasLocationPermission()) {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        latitude = location.latitude
+                        longitude = location.longitude
+
+                    } else {
+                        Toast.makeText(this, "Unable to get location", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
+    }
+
+    private fun displayImageWithWatermark(imageUri: Uri) {
+        val imageBitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+
+        val finalBitmap = addWatermark(imageBitmap)
+        val imageSizeInBytes = getImageSizeInBytes(finalBitmap)
+        val imageSize = formatImageSize(imageSizeInBytes)
+
+        if (imageSizeInBytes > 5 * 1024 * 1024) {
+            Toast.makeText(this, "Upload an image size less than 5MB", Toast.LENGTH_SHORT).show()
+        } else {
+            showImage(finalBitmap)
+            Toast.makeText(this, "Image size: $imageSize", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun getImageSizeInBytes(bitmap: Bitmap): Long {
+        val stream = java.io.ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        return stream.size().toLong()
+    }
+
+    private fun formatImageSize(sizeInBytes: Long): String {
+        val sizeInKB = sizeInBytes / 1024
+        return if (sizeInKB < 1024) {
+            "$sizeInKB KB"
+        } else {
+            val sizeInMB = sizeInKB / 1024
+            "$sizeInMB MB"
+        }
+    }
+
+    private fun addWatermark(bitmap: Bitmap): Bitmap {
+        val mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+        val canvas = android.graphics.Canvas(mutableBitmap)
+
+        val paint = android.graphics.Paint().apply {
+            color = android.graphics.Color.WHITE
+            textSize = 100f
+            isAntiAlias = true
+            style = android.graphics.Paint.Style.FILL
+        }
+
+        val watermark = "Lat: $latitude, Long: $longitude"
+        val x = 10f
+        val y = mutableBitmap.height - 10f
+        canvas.drawText(watermark, x, y, paint)
+
+        return rotateImage(mutableBitmap, 0f)
+    }
+
+    private fun rotateImage(source: Bitmap, degree: Float): Bitmap {
+        val matrix = android.graphics.Matrix()
+        matrix.postRotate(degree)
+
+        return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
+    }
+
+    fun startCrop(uri: Uri) {
+        cropImage.launch(
+            CropImageContractOptions(
+                uri = uri,
+                cropImageOptions = CropImageOptions(
+                    guidelines = CropImageView.Guidelines.ON,
+                    outputCompressFormat = Bitmap.CompressFormat.PNG
+                )
+            )
+        )
+    }
+
+    open fun showImage(bitmap: Bitmap) {
+        // In your child activity, override this method to set the image view
+        // For example: binding.imgViewer.setImageBitmap(bitmap)
+    }
+
 
     private fun performDataBinding() {
         viewDataBinding = DataBindingUtil.setContentView(this, layoutId)
@@ -87,6 +234,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     companion object {
         @SuppressLint("StaticFieldLeak")
         var context: Context? = null
+        const val REQUEST_PERMISSION_CODE = 1001
+
     }
 
     abstract fun initView()

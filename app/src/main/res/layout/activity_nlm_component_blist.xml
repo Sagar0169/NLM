@@ -61,7 +61,12 @@
                 app:layout_constraintTop_toTopOf="@+id/tvHeading" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srlAscad"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlToolbar">
         <RelativeLayout
             android:id="@+id/llParent"
             android:layout_width="match_parent"
@@ -92,6 +97,7 @@
                 android:textSize="@dimen/sp_20"
                 android:visibility="gone" />
         </RelativeLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddAgency"
             android:layout_width="wrap_content"
