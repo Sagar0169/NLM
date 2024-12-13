@@ -9,15 +9,19 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat.registerReceiver
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
@@ -66,12 +70,18 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
     private var latitude: Double? = null
     private var longitude: Double? = null
     private var itemPosition: Int? = null
-
-
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                    latitude = it.getDoubleExtra("latitude", 0.0)
+                    longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
+
+                    // You can add additional handling logic here, such as updating UI or processing data.
+                }
+            }
         }
     }
 
@@ -489,10 +499,14 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
 
     override fun onResume() {
         super.onResume()
-        requireContext().registerReceiver(
-            locationReceiver,
-            IntentFilter("LOCATION_UPDATED")
-        )
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+            Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
+            requireContext().registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+        } else {
+            Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
+            LocalBroadcastManager.getInstance(requireContext()).registerReceiver(locationReceiver, intentFilter)
+        }
     }
 
 
@@ -553,14 +567,6 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
         AddDocumentDialog(requireContext(), selectedItem, position)
     }
 
-    private fun showLocationAlertDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Location Not Found")
-            .setMessage("Unable to fetch your location. Please enable location from settings.")
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
-    }
+
 
 }

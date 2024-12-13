@@ -2,12 +2,15 @@ package com.nlm.ui.activity.national_livestock_mission
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
@@ -18,6 +21,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -45,6 +50,7 @@ import com.nlm.model.NlmEdpFormatForNlm
 import com.nlm.model.NlmEdpMonitoring
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.AssistanceEAAdapter
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.NlmEDPFormatAdapter
@@ -61,6 +67,8 @@ import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -102,7 +110,22 @@ class AddNlmEdpActivity(
     private var isSubmitted: Boolean = false
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
+    private var latitude:Double?=null
+    private var longitude:Double?=null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                    latitude = it.getDoubleExtra("latitude", 0.0)
+                    longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
 
+                    // You can add additional handling logic here, such as updating UI or processing data.
+                }
+            }
+        }
+    }
 
     private val variety = listOf(
         ResultGetDropDown(0, "YES"),
@@ -384,33 +407,99 @@ class AddNlmEdpActivity(
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+        if(getPreferenceOfScheme(this@AddNlmEdpActivity, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+        {
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@AddNlmEdpActivity, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if (latitude != null && longitude != null) {
+                        viewModel.getNlmEdpADD(
+                            this@AddNlmEdpActivity, true,
+                            AddNlmEdpRequest(
+                                id = itemId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddNlmEdpActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddNlmEdpActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddNlmEdpActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                is_draft = draft,
+                                remarks_by_nlm = mBinding?.etNLMComment?.text.toString(),
+                                nlm_edp_document = totalListDocument,
+                                nlm_edp_monitoring = nlmEdpTrainingList,
+                                nlm_edp_format_for_nlm = nlmEdpFormatList,
+                                lattitude_ia = latitude,
+                                longitude_ia = longitude
+                            )
+                        )
 
-        viewModel.getNlmEdpADD(
-            this@AddNlmEdpActivity, true,
-            AddNlmEdpRequest(
-                id = itemId,
-                role_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id,
-                state_code = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
-                user_id = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.user_id.toString(),
-                is_draft = draft,
-                remarks_by_nlm = mBinding?.etNLMComment?.text.toString(),
-                nlm_edp_document = totalListDocument,
-                nlm_edp_monitoring = nlmEdpTrainingList,
-                nlm_edp_format_for_nlm = nlmEdpFormatList,
-            )
-        )
+                    }
+                    else{
+                        showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
+                    }
+                }
+            }
+            else {
+                showLocationAlertDialog()
+            }
+        }
+       else if(getPreferenceOfScheme(this@AddNlmEdpActivity, AppConstants.SCHEME, Result::class.java)?.role_id==8)
+        {
+            if (hasLocationPermissions()) {
+                val intent = Intent(this@AddNlmEdpActivity, LocationService::class.java)
+                startService(intent)
+                lifecycleScope.launch {
+                    delay(1000) // Delay for 2 seconds
+                    if (latitude != null && longitude != null) {
+                        viewModel.getNlmEdpADD(
+                            this@AddNlmEdpActivity, true,
+                            AddNlmEdpRequest(
+                                id = itemId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddNlmEdpActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddNlmEdpActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddNlmEdpActivity,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id.toString(),
+                                is_draft = draft,
+                                remarks_by_nlm = mBinding?.etNLMComment?.text.toString(),
+                                nlm_edp_document = totalListDocument,
+                                nlm_edp_monitoring = nlmEdpTrainingList,
+                                nlm_edp_format_for_nlm = nlmEdpFormatList,
+                                lattitude_nlm = latitude,
+                                longitude_nlm = longitude
+                            )
+                        )
+                    }
+                    else{
+                        showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
+                    }
+                }
+            }
+            else {
+                showLocationAlertDialog()
+            }
+        }
     }
 
 
@@ -1221,6 +1310,21 @@ class AddNlmEdpActivity(
 
     override fun onClickItemFormatDelete(ID: Int?, position: Int) {
         position.let { it1 -> nlmEDPFormatAdapter?.onDeleteButtonClick(it1) }
+    }
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+        } else {
+            LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
+        }
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(locationReceiver)
     }
 
 }

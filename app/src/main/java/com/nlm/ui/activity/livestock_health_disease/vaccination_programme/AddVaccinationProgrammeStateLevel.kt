@@ -8,12 +8,15 @@ import android.content.IntentFilter
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -66,22 +69,32 @@ class AddVaccinationProgrammeStateLevel :
 
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                    latitude = it.getDoubleExtra("latitude", 0.0)
+                    longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
+                }
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
-//        this.registerReceiver(
-//            locationReceiver,
-//            IntentFilter("LOCATION_UPDATED")
-//        )
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+            Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+        } else {
+            Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
+            LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
+        }
     }
 
     override fun onPause() {
         super.onPause()
-//        this.unregisterReceiver(locationReceiver)
+        this.unregisterReceiver(locationReceiver)
     }
 
     override fun initView() {
@@ -387,12 +400,12 @@ class AddVaccinationProgrammeStateLevel :
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
 
-//        if (hasLocationPermissions()) {
-//            val intent = Intent(this, LocationService::class.java)
-//            startService(intent)
-//            lifecycleScope.launch {
-//                delay(1000) // Delay for 2 seconds
-//                if (latitude != null && longitude != null) {
+        if (hasLocationPermissions()) {
+            val intent = Intent(this, LocationService::class.java)
+            startService(intent)
+            lifecycleScope.launch {
+                delay(1000) // Delay for 2 seconds
+                if (latitude != null && longitude != null) {
                     if (valid()) {
                         viewModel.getStateVaccinationProgrammeAdd(
                             this@AddVaccinationProgrammeStateLevel, true,
@@ -436,19 +449,19 @@ class AddVaccinationProgrammeStateLevel :
                             )
                         )
                     }
-//                }
-//                else {
-//                    mBinding?.main?.let {
-//                        showSnackbar(
-//                            it,
-//                            getString(R.string.no_location_fetched)
-//                        )
-//                    }
-//                }
-//            }
-//        } else {
-//            showLocationAlertDialog()
-//        }
+                }
+                else {
+                    mBinding?.main?.let {
+                        showSnackbar(
+                            it,
+                            "Please wait for a sec and click again"
+                        )
+                    }
+                }
+            }
+        } else {
+            showLocationAlertDialog()
+        }
     }
 
     private fun showBottomSheetDialog(type: String) {
@@ -531,31 +544,121 @@ class AddVaccinationProgrammeStateLevel :
 
         return rotateDrawable
     }
-
     private fun valid(): Boolean {
-        if (mBinding?.etInput3?.text.toString()
-                .isEmpty() && mBinding?.etInput2?.text.toString()
-                .isEmpty() && mBinding?.etInput1a?.text.toString()
-                .isEmpty() && mBinding?.etInput1b?.text.toString()
-                .isEmpty() && mBinding?.etInput1c?.text.toString()
-                .isEmpty() && mBinding?.etInput1d?.text.toString()
-                .isEmpty() && mBinding?.etInput1e?.text.toString()
-                .isEmpty() && mBinding?.etRemark3?.text.toString()
-                .isEmpty() && mBinding?.etRemark2?.text.toString()
-                .isEmpty() && mBinding?.etRemark1a?.text.toString()
-                .isEmpty() && mBinding?.etRemark1b?.text.toString()
-                .isEmpty() && mBinding?.etRemark1c?.text.toString()
-                .isEmpty() && mBinding?.etRemark1d?.text.toString()
-                .isEmpty() && mBinding?.etRemark1e?.text.toString().isEmpty()
-        ) {
+        if (mBinding?.etInput3?.text.toString().isEmpty()) {
             mBinding?.main?.let {
                 showSnackbar(it, getString(R.string.please_fill_all_the_input_and_remark_fields))
             }
             return false
+        } else if (mBinding?.etInput2?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(it, getString(R.string.please_fill_all_the_input_and_remark_fields))
+            }
+            return false
+        } else if (mBinding?.etInput1a?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInput1b?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInput1c?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInput1d?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etInput1e?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemark3?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemark2?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemark1a?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        } else if (mBinding?.etRemark1b?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
         }
-        return true
-    }
+        else if (mBinding?.etRemark1c?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etRemark1d?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
+        else if (mBinding?.etRemark1e?.text.toString().isEmpty()) {
+            mBinding?.main?.let {
+                showSnackbar(
+                    it,
+                    getString(R.string.please_fill_all_the_input_and_remark_fields)
+                )
+            }
+            return false
+        }
 
+        else
+            return true
+    }
     private fun openOnlyPdfAccordingToPosition() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)

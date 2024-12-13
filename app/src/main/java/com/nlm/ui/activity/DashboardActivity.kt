@@ -93,6 +93,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         {
         requestLocationPermissions()
         }
+
 //        viewModel.getDashboardApi(
 //            this@DashboardActivity,
 //            LogoutRequest(

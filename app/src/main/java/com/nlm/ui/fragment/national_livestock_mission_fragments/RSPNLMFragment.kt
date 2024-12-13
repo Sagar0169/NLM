@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
@@ -21,6 +22,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -103,8 +105,16 @@ class RSPNLMFragment(
     var body: MultipartBody.Part? = null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                    latitude = it.getDoubleExtra("latitude", 0.0)
+                    longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
+
+                    // You can add additional handling logic here, such as updating UI or processing data.
+                }
+            }
         }
     }
     override fun init() {
@@ -414,10 +424,14 @@ class RSPNLMFragment(
     }
     override fun onResume() {
         super.onResume()
-        requireContext().registerReceiver(
-            locationReceiver,
-            IntentFilter("LOCATION_UPDATED")
-        )
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+            Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
+            requireContext().registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+        } else {
+            Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
+            LocalBroadcastManager.getInstance(requireContext()).registerReceiver(locationReceiver, intentFilter)
+        }
     }
 
     override fun onPause() {
@@ -516,6 +530,9 @@ class RSPNLMFragment(
                     showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
                 }
             }
+        }
+        else {
+            showLocationAlertDialog()
         }
     }
 

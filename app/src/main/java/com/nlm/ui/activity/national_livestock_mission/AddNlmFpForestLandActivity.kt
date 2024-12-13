@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
@@ -21,6 +22,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -115,8 +117,16 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     private var longitude:Double?=null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                    latitude = it.getDoubleExtra("latitude", 0.0)
+                    longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
+
+                    // You can add additional handling logic here, such as updating UI or processing data.
+                }
+            }
         }
     }
 //    private val stateList = listOf(
@@ -973,7 +983,9 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                         showSnackbar(mBinding?.clParent!!,"No location fetched")
                     }
                 }}
-
+            else {
+                showLocationAlertDialog()
+            }
         }
         else{
             if (hasLocationPermissions()) {
@@ -1016,10 +1028,12 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                         )
                     }
                     else{
-                        showSnackbar(mBinding?.clParent!!,"No location fetched")
+                        showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
                     }
                 }}
-
+            else {
+                showLocationAlertDialog()
+            }
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -1088,10 +1102,12 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     }
     override fun onResume() {
         super.onResume()
-        registerReceiver(
-            locationReceiver,
-            IntentFilter("LOCATION_UPDATED")
-        )
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+        } else {
+            LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
+        }
     }
 
 

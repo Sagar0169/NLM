@@ -4,14 +4,19 @@ import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -21,6 +26,7 @@ import com.nlm.model.BlockMobileVeterinaryUnitAddRequest
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -31,6 +37,8 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -61,8 +69,14 @@ class AddNewMobileVeterinaryUnitBlock :
 
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                    latitude = it.getDoubleExtra("latitude", 0.0)
+                    longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
+                }
+            }
         }
     }
 
@@ -133,16 +147,20 @@ class AddNewMobileVeterinaryUnitBlock :
 
     override fun onResume() {
         super.onResume()
-//        registerReceiver(
-//            locationReceiver,
-//            IntentFilter("LOCATION_UPDATED")
-//        )
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+            Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+        } else {
+            Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
+            LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
+        }
     }
 
 
     override fun onPause() {
         super.onPause()
-//        unregisterReceiver(locationReceiver)
+        unregisterReceiver(locationReceiver)
     }
 
     inner class ClickActions {
@@ -298,11 +316,11 @@ class AddNewMobileVeterinaryUnitBlock :
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
-//        if (hasLocationPermissions()) {
-//            startService(Intent(this, LocationService::class.java))
-//            lifecycleScope.launch {
-//                delay(1000) // Delay for 2 seconds
-//                if (latitude != null && longitude != null) {
+        if (hasLocationPermissions()) {
+            startService(Intent(this, LocationService::class.java))
+            lifecycleScope.launch {
+                delay(1000) // Delay for 2 seconds
+                if (latitude != null && longitude != null) {
 
 
 
@@ -312,17 +330,17 @@ class AddNewMobileVeterinaryUnitBlock :
                 BlockMobileVeterinaryUnitAddRequest(
                     id = itemId,
                     role_id = getPreferenceOfScheme(
-                        this,
+                        this@AddNewMobileVeterinaryUnitBlock,
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.role_id,
                     state_code = getPreferenceOfScheme(
-                        this,
+                        this@AddNewMobileVeterinaryUnitBlock,
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.state_code,
                     user_id = getPreferenceOfScheme(
-                        this,
+                        this@AddNewMobileVeterinaryUnitBlock,
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.user_id,
@@ -345,16 +363,18 @@ class AddNewMobileVeterinaryUnitBlock :
                     stock_management_inputs = mBinding?.tvNoFileThree?.text.toString(),
                     monitoring_tracking_call_inputs = mBinding?.tvNoFileFour?.text.toString(),
                     any_other_block_inputs = mBinding?.tvNoFileFive?.text.toString(),
+                    latitude = latitude,
+                    longitude = longitude
                 )
             )
         }
-//                } else {
-//                    showSnackbar(mBinding!!.clParent, "No Location fetched")
-//                }
-//            }
-//        } else {
-//            showLocationAlertDialog()
-//        }
+                } else {
+                    showSnackbar(mBinding!!.clParent, "Please wait for a sec and click again")
+                }
+            }
+        } else {
+            showLocationAlertDialog()
+        }
 
     }
 
