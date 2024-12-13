@@ -2070,4 +2070,33 @@ object Utility {
         }
     }
 
+    fun showImageDialog(context: Context,image:String) {
+        val dialog = Dialog(context,android.R.style.Theme_Translucent_NoTitleBar)
+        dialog.setContentView(R.layout.imagedialog)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.window!!.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window!!.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.75f
+        dialog.window!!.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window!!.attributes = lp
+        val dialogImage = dialog.findViewById(R.id.ivImg) as ImageView
+        val ivClose = dialog.findViewById(R.id.ivClose) as ImageView
+
+        Log.d("image",image)
+
+        Glide.with(context).load(image)
+            .placeholder(R.color.black)
+            .into(dialogImage)
+
+        ivClose.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
 }

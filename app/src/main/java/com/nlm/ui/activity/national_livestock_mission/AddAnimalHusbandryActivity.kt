@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -17,8 +18,10 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
@@ -54,6 +57,7 @@ import com.nlm.ui.adapter.RSPSupportingDocumentIAAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
@@ -63,8 +67,11 @@ import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 class AddAnimalHusbandryActivity(
 ) : BaseActivity<ActivityAddAnimalHusbandryBinding>(), CallBackDeleteAtId,
@@ -78,7 +85,7 @@ class AddAnimalHusbandryActivity(
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
     private var addDocumentIAAdapter: RSPSupportingDocumentIAAdapter? = null
-
+    private var uploadData : ImageView?=null
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
@@ -752,7 +759,7 @@ class AddAnimalHusbandryActivity(
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName = bindingDialog.etDoc
-
+        uploadData=bindingDialog.ivPic
         if (selectedItem != null) {
             if (getPreferenceOfScheme(
                     this,
@@ -771,7 +778,15 @@ class AddAnimalHusbandryActivity(
 
         }
         bindingDialog.tvChooseFile.setOnClickListener {
-            openOnlyPdfAccordingToPosition()
+            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+            {
+
+                checkStoragePermission(this@AddAnimalHusbandryActivity)
+            }
+            else{
+
+                mBinding?.clParent?.let { showSnackbar(it,"please enter description") }
+            }
         }
         bindingDialog.btnDelete.setOnClickListener {
             dialog.dismiss()
@@ -884,57 +899,7 @@ class AddAnimalHusbandryActivity(
         startActivityForResult(intent, REQUEST_iMAGE_PDF)
     }
 
-    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                REQUEST_iMAGE_PDF -> {
-                    data?.data?.let { uri ->
-                        val projection = arrayOf(
-                            MediaStore.MediaColumns.DISPLAY_NAME,
-                            MediaStore.MediaColumns.SIZE
-                        )
-                        val cursor = this.contentResolver.query(
-                            uri,
-                            projection,
-                            null,
-                            null,
-                            null
-                        )
-                        cursor?.use {
-                            if (it.moveToFirst()) {
-                                DocumentName =
-                                    it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                DialogDocName?.text = DocumentName
 
-
-                                val requestBody = convertToRequestBody(this, uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
-//                                use this code to add new view with image name and uri
-                            }
-                            viewModel.getProfileUploadFile(
-                                context = this,
-                                table_name = getString(R.string.ahidf_document).toRequestBody(
-                                    MultipartBody.FORM
-                                ),
-                                document_name = body,
-                                user_id = getPreferenceOfScheme(
-                                    this,
-                                    AppConstants.SCHEME,
-                                    Result::class.java
-                                )?.user_id,
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
 
 
     private fun showBottomSheetDialog(type: String, full: TextView) {
@@ -1150,6 +1115,7 @@ class AddAnimalHusbandryActivity(
                 } else {
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
+                    DialogDocName?.text=userResponseModel._result.document_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -1337,5 +1303,96 @@ class AddAnimalHusbandryActivity(
         super.onPause()
         unregisterReceiver(locationReceiver)
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                CAPTURE_IMAGE_REQUEST -> {
 
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    Log.d("DOCUMENT",imageBitmap.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageBitmap(imageBitmap)
+//                    data.data?.let { startCrop(it) }
+//                    fetchLocation()
+                }
+
+                PICK_IMAGE -> {
+                    val selectedImageUri = data?.data
+                    Log.d("DOCUMENT",selectedImageUri.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageURI(selectedImageUri)
+                    if (selectedImageUri != null) {
+                        val uriPathHelper = URIPathHelper()
+                        val filePath = uriPathHelper.getPath(this, selectedImageUri)
+                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+                        // Validate file extension
+                        if (fileExtension in listOf("png", "jpg", "jpeg")) {
+                            uploadData?.showView()
+                            uploadData?.setImageURI(selectedImageUri)
+                            val file = filePath?.let { File(it) }
+                            file?.let { uploadImage(it) }
+                        } else {
+                            Toast.makeText(this, "Format not supported", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                REQUEST_iMAGE_PDF -> {
+                    data?.data?.let { uri ->
+                        val projection = arrayOf(
+                            MediaStore.MediaColumns.DISPLAY_NAME,
+                            MediaStore.MediaColumns.SIZE
+                        )
+                        uploadData?.showView()
+                        uploadData?.setImageResource(R.drawable.ic_pdf)
+                        val cursor = contentResolver.query(uri, projection, null, null, null)
+                        cursor?.use {
+                            if (it.moveToFirst()) {
+                                DocumentName=
+                                    it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
+//                                DialogDocName?.text=DocumentName
+
+                                val requestBody = convertToRequestBody(this, uri)
+                                body = MultipartBody.Part.createFormData(
+                                    "document_name",
+                                    DocumentName,
+                                    requestBody
+                                )
+//                                use this code to add new view with image name and uri
+                            }
+                            viewModel.getProfileUploadFile(
+                                context = this,
+                                document_name = body,
+                                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
+                                table_name = getString(R.string.ahidf_document).toRequestBody(MultipartBody.FORM),
+                            )
+                        }
+                    }
+                }
+            }}
+    }
+    override fun showImage(bitmap: Bitmap) {
+        // Override to display the image in this activity
+        uploadData?.showView()
+        uploadData?.setImageBitmap(bitmap)
+        val imageFile = saveImageToFile(bitmap)
+        photoFile = imageFile
+        photoFile?.let { uploadImage(it) }
+    }
+    private fun uploadImage(file: File) {
+        lifecycleScope.launch {
+            val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            body =
+                MultipartBody.Part.createFormData(
+                    "document_name",
+                    file.name, reqFile
+                )
+            viewModel.getProfileUploadFile(
+                context = this@AddAnimalHusbandryActivity,
+                document_name = body,
+                user_id = getPreferenceOfScheme(this@AddAnimalHusbandryActivity, AppConstants.SCHEME, Result::class.java)?.user_id,
+                table_name = getString(R.string.ahidf_document).toRequestBody(MultipartBody.FORM),
+            )
+        }
+    }
 }

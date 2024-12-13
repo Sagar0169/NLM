@@ -38,6 +38,7 @@ object AppConstants {
     const val NPDD_State_Level_Monitor= "NPDD State Level Monitor"
     const val NDDB= "National Dairy Development Board (NDDB)"
     var SCHEME="SCHEME"
+    const val FILE_URL = "FILE_URL"
 
 }
 object cryptConstantCodes{

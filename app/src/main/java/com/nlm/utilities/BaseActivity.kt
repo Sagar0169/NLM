@@ -76,6 +76,26 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     private var longitude: Double = 0.0
 
     // Camera image URI for saving captured images
+    val cameraImageUri: Uri by lazy {
+        val file = File(applicationContext.filesDir, "captured_image.jpg")
+        FileProvider.getUriForFile(
+            applicationContext,
+            "com.nlm.provider",
+            file
+        )
+    }
+
+    val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+        if (isSuccess) {
+            startCrop(cameraImageUri)
+            fetchLocation()
+
+        } else {
+            Toast.makeText(this, "Camera capture failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
 
 
     private val fusedLocationClient: FusedLocationProviderClient by lazy {
@@ -354,6 +374,34 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
             //e.toString();
         }
     }
+//    fun checkStoragePermission(context: Context) {
+//        val permissionsToRequest = mutableListOf<String>()
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            // Check if permissions are already granted
+//            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+//                permissionsToRequest.add(Manifest.permission.READ_MEDIA_IMAGES)
+//            }
+//            if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//                permissionsToRequest.add(Manifest.permission.CAMERA)
+//            }
+//        } else {
+//            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+//            }
+//            if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                permissionsToRequest.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//            }
+//            if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//                permissionsToRequest.add(Manifest.permission.CAMERA)
+//            }
+//        }
+//
+//        // Request only the necessary permissions
+//        if (permissionsToRequest.isNotEmpty()) {
+//            permissionLauncher.launch(permissionsToRequest.toTypedArray())
+//        }
+//    }
     fun checkStoragePermission(context:Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             permissionLauncher.launch(
@@ -393,7 +441,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                 }
             }
         }
-
+        Log.d("ALLACCEPTED",allAccepted.toString())
         if (allAccepted) context?.let { openCamera(it) } else return@registerForActivityResult
     }
     fun saveImageToFile(bitmap: Bitmap): File {
@@ -432,7 +480,12 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         }
 
         camera.setOnClickListener {
-            dispatchTakePictureIntent()
+//            dispatchTakePictureIntent()
+            if (!hasCameraPermission() || !hasLocationPermission()) {
+                requestPermissions()
+            } else {
+                takePicture.launch(cameraImageUri)
+            }
             dialog.dismiss()
         }
 
@@ -460,8 +513,18 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         startActivityForResult(intent, REQUEST_iMAGE_PDF)
     }
     private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, PICK_IMAGE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Use ACTION_OPEN_DOCUMENT for Android 13+
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "image/*"
+            }
+            startActivityForResult(intent, PICK_IMAGE)
+        } else {
+            // Use ACTION_PICK for older versions
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, PICK_IMAGE)
+        }
     }
     private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
         val dialog = android.app.AlertDialog.Builder(this);

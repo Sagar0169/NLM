@@ -133,6 +133,41 @@ class RSPSupportingDocumentAdapter(
 //                notifyItemRangeChanged(position, programmeList.size) // Notify changes in the range
 //            }
 //        }
+        holder.itemView.setOnClickListener{
+            if (items.ia_document!=null &&  getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+            {
+
+                callBackEdit.onClickItemEditDoc(
+                    ImplementingAgencyDocument(
+                        description = items.description,
+                        id = items.id,
+                        implementing_agency_id = items.implementing_agency_id,
+                        artificial_insemination_id = items.artificial_insemination_id,
+                        rsp_laboratory_semen_id = items.rsp_laboratory_semen_id,
+                        state_semen_bank_id = items.state_semen_bank_id,
+                        import_of_exotic_goat_id = items.import_of_exotic_goat_id,
+                        assistance_for_qfsp_id = items.assistance_for_qfsp_id,
+                        fsp_plant_storage_id = items.fsp_plant_storage_id,
+                        ia_document = items.ia_document,
+
+                        ),position)}
+            else{
+                callBackEdit.onClickItemEditDoc(
+                    ImplementingAgencyDocument(
+                        description = items.description,
+                        id = items.id,
+                        implementing_agency_id = items.implementing_agency_id,
+                        artificial_insemination_id = items.artificial_insemination_id,
+                        rsp_laboratory_semen_id = items.rsp_laboratory_semen_id,
+                        state_semen_bank_id = items.state_semen_bank_id,
+                        import_of_exotic_goat_id = items.import_of_exotic_goat_id,
+                        assistance_for_qfsp_id = items.assistance_for_qfsp_id,
+                        fsp_plant_storage_id = items.fsp_plant_storage_id,
+                        nlm_document = items.nlm_document,
+
+                        ),position)
+            }
+        }
     }
 
     override fun getItemCount(): Int = programmeList.size

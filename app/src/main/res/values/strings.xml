@@ -374,7 +374,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="import_of_exotic_sheep_and_goat_gernplasm">Import of exotic sheep and goat gernplasm</string>
     <string name="implementing_agency_document">implementing_agency_document</string>
     <string name="rsp_laboratory_semen_document">rsp_laboratory_semen_document</string>
-    <string name="fsp_plant_storage_document">fsp_plant_storage_document</string>
+    <string name="fsp_plant_storage_document">FspPlantStorage</string>
     <string name="fp_from_non_forest_document">fp_from_non_forest_document</string>
     <string name="assistance_for_ea_document">assistance_for_ea_document</string>
     <string name="nlm_edp_document">nlm_edp_document</string>
@@ -385,11 +385,12 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="mobile_veterinary_unit_block">mobile_veterinary_unit_block</string>
     <string name="mobile_veterinary_unit_farmer">mobile_veterinary_unit_farmer</string>
     <string name="rsp_lab">RSP Lab</string>
-    <string name="artificial_insemination_document">artificial_insemination_document</string>
+    <string name="artificial_insemination">artificial_insemination</string>
     <string name="state_vaccination_programme">state_vaccination_programme</string>
-    <string name="assistance_for_qfsp_document">assistance_for_qfsp_document</string>
+    <string name="assistance_for_qfsp_document">assistance_for_qfsp</string>
+    <string name="fp_from_forest_land_document">fp_from_forest_land_document</string>
     <string name="animal_husbandry_infrastructure_development_fund_format_12"><ul><li>Animal Husbandry Infrastructure Development Fund(Format 12)</li></ul></string>
-    <string name="import_of_exotic_goat_document">import_of_exotic_goat_document</string>
+    <string name="import_of_exotic_goat">import_of_exotic_goat</string>
     <string name="states">States<font color="#FF0000">*</font></string>
     <string name="please_enter_a_old_password">Please enter a old password</string>
     <string name="please_enter_a_new_password">Please enter a New password</string>

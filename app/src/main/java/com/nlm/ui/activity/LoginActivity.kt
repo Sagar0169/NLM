@@ -210,9 +210,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             userResponseModel._result.state_name,
                             null,
                             userResponseModel._result.user_id,
-                            userResponseModel._result.username
+                            userResponseModel._result.username,
+                            userResponseModel._result.siteurl
                         )
                     )
+
                     // Save user ID and password in preferences for testing (unencrypted for now)
                     val userName = mBinding?.etUsername?.text.toString().trim()
                     val password = mBinding?.etPassword?.text.toString().trim()

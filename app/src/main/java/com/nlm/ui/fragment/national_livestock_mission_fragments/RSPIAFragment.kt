@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -17,6 +18,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -65,6 +67,7 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
@@ -73,8 +76,11 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 import kotlin.concurrent.thread
 
 
@@ -93,6 +99,7 @@ class RSPIAFragment(
     private lateinit var programmeList: MutableList<Array<String>>
     private var DialogDocName: TextView? = null
     private var DocumentName: String? = null
+    private var uploadData : ImageView?=null
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
     private var viewModel = ViewModel()
@@ -455,6 +462,7 @@ class RSPIAFragment(
                 } else {
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
+                    DialogDocName?.text=userResponseModel._result.document_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -826,7 +834,15 @@ class RSPIAFragment(
         dialog.window!!.setGravity(Gravity.CENTER)
         DialogDocName = bindingDialog.etDoc
         bindingDialog.tvChooseFile.setOnClickListener {
-            openOnlyPdfAccordingToPosition()
+            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+            {
+
+                checkStoragePermission(requireContext())
+            }
+            else{
+
+                mBinding?.clParent?.let { showSnackbar(it,"please enter description") }
+            }
         }
 
         bindingDialog.tvSubmit.setOnClickListener {
@@ -882,6 +898,7 @@ class RSPIAFragment(
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName = bindingDialog.etDoc
+        uploadData=bindingDialog.ivPic
         if (selectedItem != null) {
             bindingDialog.etDoc.text = selectedItem.ia_document
             bindingDialog.etDescription.setText(selectedItem.description)
@@ -947,30 +964,64 @@ class RSPIAFragment(
         startActivityForResult(intent, REQUEST_iMAGE_PDF)
     }
 
+    override fun showImage(bitmap: Bitmap) {
+        // Override to display the image in this activity
+        uploadData?.showView()
+        uploadData?.setImageBitmap(bitmap)
+        val imageFile = saveImageToFile(bitmap)
+        photoFile = imageFile
+        photoFile?.let { uploadImage(it) }
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
+                CAPTURE_IMAGE_REQUEST -> {
+
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    Log.d("DOCUMENT",imageBitmap.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageBitmap(imageBitmap)
+//                    data.data?.let { startCrop(it) }
+//                    fetchLocation()
+                }
+
+                PICK_IMAGE -> {
+                    val selectedImageUri = data?.data
+                    Log.d("DOCUMENT",selectedImageUri.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageURI(selectedImageUri)
+                    if (selectedImageUri != null) {
+                        val uriPathHelper = URIPathHelper()
+                        val filePath = uriPathHelper.getPath(requireContext(), selectedImageUri)
+                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+                        // Validate file extension
+                        if (fileExtension in listOf("png", "jpg", "jpeg")) {
+                            uploadData?.showView()
+                            uploadData?.setImageURI(selectedImageUri)
+                            val file = filePath?.let { File(it) }
+                            file?.let { uploadImage(it) }
+                        } else {
+                            Toast.makeText(requireContext(), "Format not supported", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        val cursor = requireActivity().contentResolver.query(
-                            uri,
-                            projection,
-                            null,
-                            null,
-                            null
-                        )
+                        uploadData?.showView()
+                        uploadData?.setImageResource(R.drawable.ic_pdf)
+                        val cursor = requireContext().contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName =
+                                DocumentName=
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                DialogDocName?.text = DocumentName
+//                                DialogDocName?.text=DocumentName
 
-                                val requestBody = convertToRequestBody(requireActivity(), uri)
+                                val requestBody = convertToRequestBody(requireContext(), uri)
                                 body = MultipartBody.Part.createFormData(
                                     "document_name",
                                     DocumentName,
@@ -979,23 +1030,17 @@ class RSPIAFragment(
 //                                use this code to add new view with image name and uri
                             }
                             viewModel.getProfileUploadFile(
-                                context = requireActivity(),
-                                table_name = getString(R.string.rsp_laboratory_semen_document).toRequestBody(
-                                    MultipartBody.FORM
-                                ),
+                                context = requireContext(),
                                 document_name = body,
-                                user_id = getPreferenceOfScheme(
-                                    requireContext(),
-                                    AppConstants.SCHEME,
-                                    Result::class.java
-                                )?.user_id,
+                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
+                                table_name = getString(R.string.rsp_laboratory_semen_document).toRequestBody(MultipartBody.FORM),
                             )
                         }
                     }
                 }
-            }
-        }
+            }}
     }
+
 
 
     private fun showBottomSheetDialog(type: String) {
@@ -1179,5 +1224,21 @@ class RSPIAFragment(
 
     override fun onClickItemFormatDelete(ID: Int?, position: Int) {
         position.let { it1 -> rspEquipAdapter?.onDeleteButtonClick(it1) }
+    }
+    private fun uploadImage(file: File) {
+        lifecycleScope.launch {
+            val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            body =
+                MultipartBody.Part.createFormData(
+                    "document_name",
+                    file.name, reqFile
+                )
+            viewModel.getProfileUploadFile(
+                context = requireContext(),
+                document_name = body,
+                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
+                table_name = getString(R.string.rsp_laboratory_semen_document).toRequestBody(MultipartBody.FORM),
+            )
+        }
     }
 }
