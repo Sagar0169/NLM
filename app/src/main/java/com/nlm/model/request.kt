@@ -1193,6 +1193,8 @@ data class NDDComponentBAddRequest(
     val is_deleted: Int?=null,
     val latitude: Double?=null,
     val longitude: Double?=null,
+    val lat_nlm: Double?=null,
+    val long_nlm: Double?=null,
     val name_of_dcs_mpp: String?=null,
     val name_of_revenue_village: String?=null,
     val name_of_tehsil: String?=null,
