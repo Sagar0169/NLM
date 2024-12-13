@@ -123,9 +123,11 @@ data class Result(
     val state_name: String,
 //    val status: Boolean,
     val token: String?,
+
     val user_id: Int,
 
-    val username: String
+    val username: String,
+    val siteurl: String,
 )
 
 data class Scheme(
@@ -284,7 +286,7 @@ data class ResultArtificialInsemination(
 data class Format6AssistanceForQspAddResponse(
     val _result: ResultFormat6,
     val _resultflag: Int,
-    val fileurl: Any,
+    val fileurl: String?,
     val message: String,
     val statuscode: Int
 )
@@ -577,6 +579,8 @@ data class ImplementingAgencyDocument(
     val nlm_document: String? = null,
     val fp_from_non_forest_id: Int? = null,
     val nlm_b_component_id: Int?=null,
+    val is_edit: Boolean?=null,
+    val is_ia:Boolean?=null
 
     )
 //
@@ -624,7 +628,7 @@ data class UploadDocument_Response(
 data class ArtificialInsemenationAddResponse(
     val _result: ResultArtificialInsemenation,
     val _resultflag: Int,
-    val fileurl: Any,
+    val fileurl: String?,
     val message: String,
     val statuscode: Int
 )
@@ -659,7 +663,7 @@ data class ResultArtificialInsemenation(
 data class ImportExoticGoatAddEditResponse(
     val _result: ResultIEG,
     val _resultflag: Int,
-    val fileurl: Any,
+    val fileurl: String?,
     val message: String,
     val statuscode: Int
 )
@@ -1246,6 +1250,7 @@ data class AddFspPlantStorageResponse(
     val _result: AddFspPlantStorageResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 

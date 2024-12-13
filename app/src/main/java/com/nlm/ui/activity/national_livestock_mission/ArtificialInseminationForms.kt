@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -15,14 +16,17 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
@@ -45,16 +49,21 @@ import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationBinding>()
     , CallBackDeleteAtId , CallBackItemUploadDocEdit {
@@ -67,6 +76,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     private var DocumentName:String?=null
     private var currentPage = 1
     private var totalPage = 1
+    private var uploadData : ImageView?=null
     private var formId:Int?=null
     private lateinit var stateAdapter: BottomSheetAdapter
     private var districtList = ArrayList<ResultGetDropDown>()
@@ -77,6 +87,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     private  var ObservationBynlmList: MutableList<ArtificialInseminationObservationByNlm>?=null
     private var DialogDocName:TextView?=null
     private var AddDocumentAdapter: SupportingDocumentAdapterWithDialog?=null
+    private var TableName: String? = null
     private var districtId: Int? = null // Store selected state
     private var TotalNoOfGoat: String? = null // Store selected state
     private var viewEdit: String? = null
@@ -231,6 +242,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                     showSnackbar(mBinding!!.main, userResponseModel.message)
                 }
                 else{
+                    TableName=userResponseModel.fileurl
                     if (viewEdit=="view"||viewEdit=="edit")
                     {
                         if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==8) {
@@ -257,9 +269,18 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                 else{
                                     viewDocumentList.add(document)}
 
-                            } else  {
-                                DocumentList.add(document)
-                            } }
+                            }
+                            else if (getPreferenceOfScheme(
+                                this@ArtificialInseminationForms,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.role_id == 8
+                        ) {
+
+                            DocumentList.add(document)
+                        }
+
+                        }
                         AddDocumentAdapter?.notifyDataSetChanged()
                         ViewDocumentAdapter?.notifyDataSetChanged()
                     }
@@ -302,6 +323,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                     DocumentId=userResponseModel._result.id
                     UploadedDocumentName=userResponseModel._result.document_name
                     DialogDocName?.text=userResponseModel._result.document_name
+                    TableName=userResponseModel._result.table_name
                     mBinding?.main?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -313,7 +335,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         }
     }
     private fun ViewDocumentAdapter(){
-        ViewDocumentAdapter= SupportingDocumentAdapterViewOnly(viewDocumentList,"viewEdit")
+        ViewDocumentAdapter= SupportingDocumentAdapterViewOnly(this,viewDocumentList,this)
         mBinding?.ShowDocumentRv?.adapter = ViewDocumentAdapter
         mBinding?.ShowDocumentRv?.layoutManager = LinearLayoutManager(this)
     }
@@ -408,7 +430,11 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                 showSnackbar(mBinding?.main!!,"Please Fill the mandatory field")
                             }
                         }
-                    }}}
+                    }
+                    else {
+                        showSnackbar(mBinding?.main!!, "Please wait for a sec and click again")
+                    }
+                }}
             else {
                 showLocationAlertDialog()
             }
@@ -489,6 +515,9 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                             }
                         }
                     }
+                    else {
+                        showSnackbar(mBinding?.main!!, "Please wait for a sec and click again")
+                    }
                 }
             }
             else {
@@ -525,7 +554,141 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
             )
         )
     }
-    private fun AddDocumentDialog(context: Context,selectedItem: ImplementingAgencyDocument?,position: Int?) {
+//    private fun AddDocumentDialog(context: Context,selectedItem: ImplementingAgencyDocument?,position: Int?) {
+//        val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
+//            layoutInflater,
+//            R.layout.item_add_document_dialog,
+//            null,
+//            false
+//        )
+//        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+//        dialog.setCancelable(true)
+//        dialog.setCanceledOnTouchOutside(true)
+//        dialog.setContentView(bindingDialog.root)
+//        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        dialog.window!!.setLayout(
+//            LinearLayout.LayoutParams.MATCH_PARENT,
+//            LinearLayout.LayoutParams.WRAP_CONTENT
+//        )
+//        dialog.window!!.setGravity(Gravity.CENTER)
+//        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+//        lp.dimAmount = 0.5f
+//        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+//        DialogDocName=bindingDialog.etDoc
+//        uploadData=bindingDialog.ivPic
+//        bindingDialog.btnDelete.setOnClickListener{
+//            dialog.dismiss()
+//        }
+//        if(selectedItem!=null){
+//            if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+//            {
+//                UploadedDocumentName=selectedItem.ia_document
+//                bindingDialog.etDoc.text=selectedItem.ia_document
+//            }
+//            else{
+//                UploadedDocumentName=selectedItem.nlm_document
+//                bindingDialog.etDoc.text=selectedItem.nlm_document
+//            }
+//            bindingDialog.etDescription.setText(selectedItem.description)
+//
+//        }
+//        bindingDialog.tvChooseFile.setOnClickListener {
+//            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+//            {
+//
+//                checkStoragePermission(this@ArtificialInseminationForms)
+//            }
+//            else{
+//
+//                mBinding?.main?.let { showSnackbar(it,"please enter description") }
+//            }
+//        }
+//
+//        bindingDialog.tvSubmit.setOnClickListener {
+//            if (bindingDialog.etDescription.text.toString().isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty())
+//            {
+//                if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24) {
+//                    if(selectedItem!=null)
+//                    {
+//                        if (position != null) {
+//                            DocumentList[position] = ImplementingAgencyDocument(
+//                                description = bindingDialog.etDescription.text.toString(),
+//                                ia_document = UploadedDocumentName,
+//                                nlm_document = null,
+//                                artificial_insemination_id = selectedItem.artificial_insemination_id,
+//                                id = selectedItem.id,
+//                            )
+//                            AddDocumentAdapter?.notifyItemChanged(position)
+//                            dialog.dismiss()
+//                        }
+//
+//                    } else{
+//
+//                        DocumentList.add(ImplementingAgencyDocument(
+//                            description = bindingDialog.etDescription.text.toString(),
+//                            ia_document = UploadedDocumentName,
+//                            nlm_document = null,
+//
+//
+//                            ))
+//
+//                        DocumentList.size.minus(1).let {
+//                            AddDocumentAdapter?.notifyItemInserted(it)
+//                            Log.d("DOCUMENTLIST",DocumentList.toString())
+//                            dialog.dismiss()
+////
+//                        }
+//
+//                    }                    }
+//                else{
+//                    if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==8) {
+//                        if(selectedItem!=null)
+//                        {
+//                            if (position != null) {
+//                                DocumentList?.set(position, ImplementingAgencyDocument(
+//                                    description = bindingDialog.etDescription.text.toString(),
+//                                    ia_document = null,
+//                                    nlm_document = UploadedDocumentName,
+//                                    artificial_insemination_id = selectedItem.artificial_insemination_id,
+//                                    id = selectedItem.id,
+//                                )
+//                                )
+//                                AddDocumentAdapter?.notifyItemChanged(position)
+//                                dialog.dismiss()
+//                            }
+//
+//                        } else{
+//                            DocumentList?.add(
+//                                ImplementingAgencyDocument(
+//                                    description = bindingDialog.etDescription.text.toString(),
+//                                    ia_document = null,
+//                                    nlm_document = UploadedDocumentName,
+//
+//                                    )
+//                            )
+//                            DocumentList.size.minus(1).let {
+//                                AddDocumentAdapter?.notifyItemInserted(it)
+//                                dialog.dismiss()
+//                            }
+//                        }
+//                    }
+//                }
+//
+//
+//            }
+//
+//
+//            else {
+//                showSnackbar(mBinding!!.main, getString(R.string.please_enter_atleast_one_field))
+//            }
+//        }
+//        dialog.show()
+//    }
+    private fun AddDocumentDialog(
+        context: Context,
+        selectedItem: ImplementingAgencyDocument?,
+        position: Int?
+    ) {
         val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_add_document_dialog,
@@ -545,41 +708,108 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         val lp: WindowManager.LayoutParams = dialog.window!!.attributes
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        DialogDocName=bindingDialog.etDoc
-        bindingDialog.btnDelete.setOnClickListener{
+        DialogDocName = bindingDialog.etDoc
+        uploadData = bindingDialog.ivPic
+        bindingDialog.btnDelete.setOnClickListener {
             dialog.dismiss()
         }
-        if(selectedItem!=null){
-            if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+
+        if (selectedItem != null) {
+            bindingDialog.ivPic.showView()
+            if (selectedItem.is_edit==false)
             {
-                UploadedDocumentName=selectedItem.ia_document
-                bindingDialog.etDoc.text=selectedItem.ia_document
+                bindingDialog.tvSubmit.hideView()
+                bindingDialog.tvChooseFile.isEnabled=false
+                bindingDialog.etDescription.isEnabled=false
+            }
+            if (getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id == 24 ||selectedItem.is_ia == true
+            ) {
+                UploadedDocumentName = selectedItem.ia_document
+                bindingDialog.etDoc.text = selectedItem.ia_document
+
             }
             else{
-                UploadedDocumentName=selectedItem.nlm_document
-                bindingDialog.etDoc.text=selectedItem.nlm_document
+
+                UploadedDocumentName = selectedItem.nlm_document
+                bindingDialog.etDoc.text = selectedItem.nlm_document
             }
             bindingDialog.etDescription.setText(selectedItem.description)
 
+            val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+            Log.d("URLL",getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName))
+            if (isSupported) {
+                when (fileExtension) {
+                    "pdf" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "png" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "jpg" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+                }
+            }
         }
         bindingDialog.tvChooseFile.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
-            {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
 
-                openOnlyPdfAccordingToPosition()
+                checkStoragePermission(this)
+            } else {
+
+                mBinding?.main?.let { showSnackbar(it, "please enter description") }
             }
-            else{
-
-                mBinding?.main?.let { showSnackbar(it,"please enter description") }
+        }
+        val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+        if (isSupported) {
+            when (fileExtension) {
+                "pdf" -> {
+//                    bindingDialog.ivPic.let {
+//                        Glide.with(context).load(R.drawable.ic_pdf).into(
+//                            it
+//                        )
+//                    }
+                }
+                else -> {
+                    bindingDialog.ivPic.setOnClickListener {
+                        Utility.showImageDialog(
+                            this,
+                            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        )
+                    }
+                }
             }
         }
 
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty())
-            {
-                if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==24) {
-                    if(selectedItem!=null)
-                    {
+            if (bindingDialog.etDescription.text.toString()
+                    .isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty()
+            ) {
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.role_id == 24
+                ) {
+                    if (selectedItem != null) {
                         if (position != null) {
                             DocumentList[position] = ImplementingAgencyDocument(
                                 description = bindingDialog.etDescription.text.toString(),
@@ -592,43 +822,48 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                             dialog.dismiss()
                         }
 
-                    } else{
+                    } else {
 
-                        DocumentList.add(ImplementingAgencyDocument(
-                            description = bindingDialog.etDescription.text.toString(),
-                            ia_document = UploadedDocumentName,
-                            nlm_document = null,
+                        DocumentList.add(
+                            ImplementingAgencyDocument(
+                                description = bindingDialog.etDescription.text.toString(),
+                                ia_document = UploadedDocumentName,
+                                nlm_document = null,
 
 
-                            ))
+                                )
+                        )
 
                         DocumentList.size.minus(1).let {
                             AddDocumentAdapter?.notifyItemInserted(it)
-                            Log.d("DOCUMENTLIST",DocumentList.toString())
+
                             dialog.dismiss()
 //
                         }
 
-                    }                    }
-                else{
-                    if (getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id==8) {
-                        if(selectedItem!=null)
-                        {
+                    }
+                } else {
+                    if (getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.role_id == 8
+                    ) {
+                        if (selectedItem != null) {
                             if (position != null) {
-                                DocumentList?.set(position, ImplementingAgencyDocument(
+                                DocumentList[position] = ImplementingAgencyDocument(
                                     description = bindingDialog.etDescription.text.toString(),
-                                    ia_document = null,
-                                    nlm_document = UploadedDocumentName,
+                                    ia_document = UploadedDocumentName,
+                                    nlm_document = null,
                                     artificial_insemination_id = selectedItem.artificial_insemination_id,
                                     id = selectedItem.id,
-                                )
                                 )
                                 AddDocumentAdapter?.notifyItemChanged(position)
                                 dialog.dismiss()
                             }
 
-                        } else{
-                            DocumentList?.add(
+                        } else {
+                            DocumentList.add(
                                 ImplementingAgencyDocument(
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = null,
@@ -645,16 +880,13 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                 }
 
 
-            }
-
-
-            else {
+            } else {
                 showSnackbar(mBinding!!.main, getString(R.string.please_enter_atleast_one_field))
             }
         }
+
         dialog.show()
     }
-
     private fun showBottomSheetDialog(type: String, isFrom: Int) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
@@ -728,22 +960,64 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         }
         startActivityForResult(intent, REQUEST_iMAGE_PDF)
     }
+    override fun showImage(bitmap: Bitmap) {
+        // Override to display the image in this activity
+        uploadData?.showView()
+        uploadData?.setImageBitmap(bitmap)
+        val imageFile = saveImageToFile(bitmap)
+        photoFile = imageFile
+        photoFile?.let { uploadImage(it) }
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
+                CAPTURE_IMAGE_REQUEST -> {
+
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    Log.d("DOCUMENT",imageBitmap.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageBitmap(imageBitmap)
+//                    data.data?.let { startCrop(it) }
+//                    fetchLocation()
+                }
+
+                PICK_IMAGE -> {
+                    val selectedImageUri = data?.data
+                    Log.d("DOCUMENT",selectedImageUri.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageURI(selectedImageUri)
+                    if (selectedImageUri != null) {
+                        val uriPathHelper = URIPathHelper()
+                        val filePath = uriPathHelper.getPath(this, selectedImageUri)
+                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+
+                        // Validate file extension
+                        if (fileExtension in listOf("png", "jpg", "jpeg")) {
+                            uploadData?.showView()
+                            uploadData?.setImageURI(selectedImageUri)
+                            val file = filePath?.let { File(it) }
+                            file?.let { uploadImage(it) }
+                        } else {
+                            Toast.makeText(this, "Format not supported", Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+                }
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
+                        uploadData?.showView()
+                        uploadData?.setImageResource(R.drawable.ic_pdf)
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
                                 DocumentName=
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-
+//                                DialogDocName?.text=DocumentName
 
                                 val requestBody = convertToRequestBody(this, uri)
                                 body = MultipartBody.Part.createFormData(
@@ -757,14 +1031,14 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                                 context = this,
                                 document_name = body,
                                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.artificial_insemination_document).toRequestBody(MultipartBody.FORM),
+                                table_name = getString(R.string.artificial_insemination).toRequestBody(MultipartBody.FORM),
                             )
-
                         }
                     }
                 }
             }}
     }
+
     private fun ObservationAIAdapter() {
         ObservationBynlmList = mutableListOf()
         mObservationAIAdapter = ObservationAIAdapter(ObservationBynlmList!!,viewEdit)
@@ -861,5 +1135,21 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
         AddDocumentDialog(this,selectedItem,position)
+    }
+    private fun uploadImage(file: File) {
+        lifecycleScope.launch {
+            val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            body =
+                MultipartBody.Part.createFormData(
+                    "document_name",
+                    file.name, reqFile
+                )
+            viewModel.getProfileUploadFile(
+                context = this@ArtificialInseminationForms,
+                document_name = body,
+                user_id = getPreferenceOfScheme(this@ArtificialInseminationForms, AppConstants.SCHEME, Result::class.java)?.user_id,
+                table_name = getString(R.string.artificial_insemination).toRequestBody(MultipartBody.FORM),
+            )
+        }
     }
 }

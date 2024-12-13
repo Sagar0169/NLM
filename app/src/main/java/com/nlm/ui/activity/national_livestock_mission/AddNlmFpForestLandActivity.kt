@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -17,8 +18,10 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
@@ -58,6 +61,7 @@ import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
@@ -66,8 +70,11 @@ import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBinding>(),
     CallBackItemFormat9Edit, CallBackItemUploadDocEdit,
@@ -115,6 +122,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     private var itemId: Int? = null
     private var latitude:Double?=null
     private var longitude:Double?=null
+    private var uploadData : ImageView?=null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent?.let {
@@ -224,7 +232,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     }
 
     private fun ViewDocumentAdapter(){
-        ViewDocumentAdapter= SupportingDocumentAdapterViewOnly(viewDocumentList,"viewEdit")
+        ViewDocumentAdapter= SupportingDocumentAdapterViewOnly(this,viewDocumentList,this)
         mBinding?.ShowDocumentRv?.adapter = ViewDocumentAdapter
         mBinding?.ShowDocumentRv?.layoutManager = LinearLayoutManager(this)
     }
@@ -821,6 +829,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName=bindingDialog.etDoc
+        uploadData=bindingDialog.ivPic
         bindingDialog.btnDelete.setOnClickListener{
             dialog.dismiss()
         }
@@ -841,7 +850,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             if (bindingDialog.etDescription.text.toString().isNotEmpty())
             {
 
-                openOnlyPdfAccordingToPosition()
+                checkStoragePermission(this@AddNlmFpForestLandActivity)
             }
             else{
 
@@ -1036,22 +1045,64 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             }
         }
     }
+
+    override fun showImage(bitmap: Bitmap) {
+        // Override to display the image in this activity
+        uploadData?.showView()
+        uploadData?.setImageBitmap(bitmap)
+        val imageFile = saveImageToFile(bitmap)
+        photoFile = imageFile
+        photoFile?.let { uploadImage(it) }
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
+                CAPTURE_IMAGE_REQUEST -> {
+
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    Log.d("DOCUMENT",imageBitmap.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageBitmap(imageBitmap)
+//                    data.data?.let { startCrop(it) }
+//                    fetchLocation()
+                }
+
+                PICK_IMAGE -> {
+                    val selectedImageUri = data?.data
+                    Log.d("DOCUMENT",selectedImageUri.toString())
+                    uploadData?.showView()
+                    uploadData?.setImageURI(selectedImageUri)
+                    if (selectedImageUri != null) {
+                        val uriPathHelper = URIPathHelper()
+                        val filePath = uriPathHelper.getPath(this, selectedImageUri)
+                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+                        // Validate file extension
+                        if (fileExtension in listOf("png", "jpg", "jpeg")) {
+                            uploadData?.showView()
+                            uploadData?.setImageURI(selectedImageUri)
+                            val file = filePath?.let { File(it) }
+                            file?.let { uploadImage(it) }
+                        } else {
+                            Toast.makeText(this, "Format not supported", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
+                        uploadData?.showView()
+                        uploadData?.setImageResource(R.drawable.ic_pdf)
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
                                 DocumentName=
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
 //                                DialogDocName?.text=DocumentName
+
                                 val requestBody = convertToRequestBody(this, uri)
                                 body = MultipartBody.Part.createFormData(
                                     "document_name",
@@ -1064,8 +1115,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                                 context = this,
                                 document_name = body,
                                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.assistance_for_qfsp_document).toRequestBody(
-                                    MultipartBody.FORM),
+                                table_name = getString(R.string.fp_from_forest_land_document).toRequestBody(MultipartBody.FORM),
                             )
                         }
                     }
@@ -1114,5 +1164,21 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     override fun onPause() {
         super.onPause()
         unregisterReceiver(locationReceiver)
+    }
+    private fun uploadImage(file: File) {
+        lifecycleScope.launch {
+            val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            body =
+                MultipartBody.Part.createFormData(
+                    "document_name",
+                    file.name, reqFile
+                )
+            viewModel.getProfileUploadFile(
+                context = this@AddNlmFpForestLandActivity,
+                document_name = body,
+                user_id = getPreferenceOfScheme(this@AddNlmFpForestLandActivity, AppConstants.SCHEME, Result::class.java)?.user_id,
+                table_name = getString(R.string.fp_from_forest_land_document).toRequestBody(MultipartBody.FORM),
+            )
+        }
     }
 }

@@ -14,25 +14,6 @@ class ImageGeoLocationActivity : BaseActivity<ActivityImageGeoLocationBinding>()
     override val layoutId: Int
         get() = R.layout.activity_image_geo_location
     private var mBinding: ActivityImageGeoLocationBinding? = null
-    val cameraImageUri: Uri by lazy {
-        val file = File(applicationContext.filesDir, "captured_image.jpg")
-        FileProvider.getUriForFile(
-            applicationContext,
-            "com.nlm.provider",
-            file
-        )
-    }
-
-     val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
-        if (isSuccess) {
-            startCrop(cameraImageUri)
-            fetchLocation()
-
-        } else {
-            Toast.makeText(this, "Camera capture failed", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     override fun showImage(bitmap: Bitmap) {
         // Override to display the image in this activity
         mBinding?.imgViewer?.setImageBitmap(bitmap)
