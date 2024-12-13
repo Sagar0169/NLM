@@ -56,7 +56,7 @@ class MilkProcessingAdapter(
         holder.mBinding.tvState.text = item.state_name
         holder.mBinding.tvDistrict.text = item.district_name
         holder.mBinding.tvCreatedBy.text = item.created_by_text
-        holder.mBinding.tvNlmStatus.text = item.is_draft.toString()
+        holder.mBinding.tvNlmStatus.text = item.is_draft_text
         holder.mBinding.tvCreated.text = convertDate(item.created_at)
 
         if(item.is_view){

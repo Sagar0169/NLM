@@ -2,14 +2,20 @@ package com.nlm.ui.activity.national_dairy_development
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Build
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -19,6 +25,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -27,10 +34,14 @@ import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.databinding.ActivityNlmCompnentBdairyDevelopmentBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
+import com.nlm.model.AddFspPlantStorageRequest
+import com.nlm.model.FspPlantStorageCommentsOfNlm
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.ImplementingAgencyDocument
+import com.nlm.model.NDDComponentBAddRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
+import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.NlmIAFundsRecievedAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
@@ -45,8 +56,11 @@ import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.util.Calendar
 
 class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDevelopmentBinding>(),
     CallBackDeleteAtId,
@@ -54,9 +68,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
     private var mBinding: ActivityNlmCompnentBdairyDevelopmentBinding? = null
     override val layoutId: Int
         get() = R.layout.activity_nlm_compnent_bdairy_development
-    private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
-    private lateinit var adapter: SupportingDocumentAdapter
     private lateinit var stateAdapter: BottomSheetAdapter
     var body: MultipartBody.Part? = null
     private var viewModel = ViewModel()
@@ -75,12 +87,22 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
     private var UploadedDocumentName: String? = null
     private var DialogDocName: TextView? = null
     private var DocumentName: String? = null
+    private var formattedDate: String? = null
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
     private var isSubmitted: Boolean = false
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
+    private var latitude: Double? = null
+    private var longitude: Double? = null
+    private val locationReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
+            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+        }
+    }
+    private var selectedAsset: String? = null
 
 
     override fun initView() {
@@ -93,15 +115,61 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
         DocumentList = arrayListOf()
         totalListDocument = arrayListOf()
         viewDocumentList = arrayListOf()
-        mBinding?.etState?.text = getPreferenceOfScheme(
+        mBinding?.tvState?.text = getPreferenceOfScheme(
             this,
             AppConstants.SCHEME,
             Result::class.java
         )?.state_name
-        mBinding?.etState?.isEnabled = false
-        mBinding?.etState?.setTextColor(Color.parseColor("#000000"))
+        mBinding?.tvState?.isEnabled = false
+        mBinding?.tvState?.setTextColor(Color.parseColor("#000000"))
+        mBinding?.rbGoOne?.setOnCheckedChangeListener { group, checkedId ->
+            selectedAsset = when (checkedId) {
+                R.id.rbAssetYes -> "Yes"
+                R.id.rbAssetNo -> "No"
+                else -> null
+            }
+        }
+        mBinding?.rbGoTwo?.setOnCheckedChangeListener { group, checkedId ->
+            selectedAsset = when (checkedId) {
+                R.id.rbOverallYes -> "Good"
+                R.id.rbOverallNo -> "Bad"
+                else -> null
+            }
+        }
+        if (viewEdit == "view"){
+            viewEditApi()
+        }
+        if (viewEdit == "edit") {
+            viewEditApi()
+        }
         nlmAdapter()
 
+    }
+    private fun viewEditApi() {
+
+        viewModel.getComponentBAdd(
+            this, true,
+            NDDComponentBAddRequest(
+                id = itemId,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                district_id = dId,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                is_type = viewEdit
+            )
+        )
     }
     private fun nlmAdapter() {
         addDocumentAdapter = RSPSupportingDocumentAdapter(
@@ -114,6 +182,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(this)
     }
+
     override fun setVariables() {
 
     }
@@ -174,6 +243,77 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                 }
             }
         }
+
+
+        viewModel.componentBAddResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                } else {
+                    if (savedAsDraft) {
+                        onBackPressedDispatcher.onBackPressed()
+                    } else {
+                        if (viewEdit == "view" || viewEdit == "edit") {
+                            if (savedAsEdit) {
+//                                listener?.onNextButtonClick()
+                                onBackPressedDispatcher.onBackPressed()
+                                return@observe
+                            }
+                            districtId = userResponseModel._result.district_id
+                            mBinding?.tvDistrict?.text =
+                                userResponseModel._result.district_id.toString()
+                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
+                            mBinding?.etDCS?.setText(userResponseModel._result.name_of_dcs_mpp)
+                            mBinding?.etNameOfRevenueVillage?.setText(userResponseModel._result.name_of_revenue_village)
+                            mBinding?.etNameOfTehsil?.setText(userResponseModel._result.name_of_tehsil)
+                            mBinding?.etLat?.setText(userResponseModel._result.latitude)
+                            mBinding?.etLong?.setText(userResponseModel._result.longitude)
+                            mBinding?.etDate?.text = userResponseModel._result.date_of_inspection
+                            mBinding?.etAssetRemark?.setText(userResponseModel._result.asset_earmarked_remarks)
+                            mBinding?.etOverallRemark?.setText(userResponseModel._result.overall_upkeep_remarks)
+                            mBinding?.etHygieneRemark?.setText(userResponseModel._result.overall_hygiene_remarks)
+                            mBinding?.etSelectionRemark?.setText(userResponseModel._result.standard_operating_procedures)
+                            mBinding?.etMembersRemark?.setText(userResponseModel._result.overall_interventions_remarks)
+                            mBinding?.etPositiveRemark?.setText(userResponseModel._result.positive_impact_remarks)
+                            mBinding?.etBetterRemark?.setText(userResponseModel._result.better_price_realisation_remarks)
+                            mBinding?.etTransparencyRemark?.setText(userResponseModel._result.transparency_milk_pricing_remarks)
+                            mBinding?.etTimelyRemark?.setText(userResponseModel._result.timely_milk_payment_remarks)
+                            mBinding?.etAssuredRemark?.setText(userResponseModel._result.assured_marked_surplus_remarks)
+                            mBinding?.etAnyOtherRemark?.setText(userResponseModel._result.any_other)
+
+
+
+                            DocumentList.clear()
+                            totalListDocument.clear()
+                            viewDocumentList.clear()
+
+                            userResponseModel._result.nlm_b_components_document.forEach { document ->
+                                if (document.ia_document == null) {
+                                    DocumentList.add(document)//nlm
+                                } else {
+                                    viewDocumentList.add(document)//ia
+
+                                }
+                            }
+                            nlmAdapter()
+                            addDocumentAdapter?.notifyDataSetChanged()
+
+                        } else {
+                            onBackPressedDispatcher.onBackPressed()
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        }
+
+                    }
+
+
+                }
+            }
+        }
+
     }
 
     inner class ClickActions {
@@ -192,6 +332,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
         fun backPress(view: View) {
             onBackPressed()
         }
+
         fun save(view: View) {
             totalListDocument.clear()
 
@@ -210,7 +351,6 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
             } else {
                 saveDataApi(null, 0)
             }
-
 
         }
 
@@ -234,9 +374,113 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
             }
             savedAsDraft = true
         }
+
+        @SuppressLint("DefaultLocale")
+        fun openCalendar(view: View) {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(
+                this@NlmComponentBDairyDevelopment,
+                { _, selectedYear, selectedMonth, selectedDay ->
+                    val formattedDatee = String.format(
+                        "%02d/%02d/%04d",
+                        selectedDay,
+                        selectedMonth + 1,
+                        selectedYear
+                    )
+                    formattedDate=formattedDatee
+                    mBinding?.etDate?.text = formattedDatee // Assuming you have an EditText for the date
+                    mBinding?.etDate?.setTextColor(
+                        ContextCompat.getColor(
+                            this@NlmComponentBDairyDevelopment,
+                            R.color.black
+                        )
+                    )
+                },
+                year, month, day
+            )
+            datePickerDialog.show()
+        }
     }
 
-    private fun saveDataApi(itemId: Int?, draft: Int?) {}
+    private fun saveDataApi(itemId: Int?, draft: Int?) {
+//        if (hasLocationPermissions()) {
+//            val intent = Intent(this@NlmComponentBDairyDevelopment, LocationService::class.java)
+//            startService(intent)
+//            lifecycleScope.launch {
+//                Log.d("Scope", "out")
+//                delay(1000) // Delay for 2 seconds
+//                Log.d("Scope", "In")
+//                Log.d("Scope", latitude.toString())
+//                Log.d("Scope", longitude.toString())
+//
+//                if (latitude != null && longitude != null) {
+//                    toast("hi")
+                    viewModel.getComponentBAdd(
+                        this@NlmComponentBDairyDevelopment, true,
+                        NDDComponentBAddRequest(
+                            id = itemId,
+                            district_id = districtId,
+                            role_id = getPreferenceOfScheme(
+                                this@NlmComponentBDairyDevelopment,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.role_id,
+                            state_code = getPreferenceOfScheme(
+                                this@NlmComponentBDairyDevelopment,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.state_code,
+                            state_id = getPreferenceOfScheme(
+                                this@NlmComponentBDairyDevelopment,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.state_code,
+                            user_id = getPreferenceOfScheme(
+                                this@NlmComponentBDairyDevelopment,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.user_id.toString(),
+                            status = draft,
+                            latitude = mBinding?.etLat?.text.toString().toDoubleOrNull(),
+                            longitude = mBinding?.etLong?.text.toString().toDoubleOrNull(),
+                            date_of_inspection = formattedDate,
+                            name_of_dcs_mpp = mBinding?.etDCS?.text.toString(),
+                            name_of_tehsil = mBinding?.etNameOfTehsil?.text.toString(),
+                            name_of_revenue_village = mBinding?.etNameOfRevenueVillage?.text.toString(),
+                            asset_earmarked = selectedAsset,
+                            asset_earmarked_remarks = mBinding?.etAssetRemark?.text.toString(),
+                            overall_upkeep = selectedAsset,
+                            overall_upkeep_remarks = mBinding?.etOverallRemark?.text.toString(),
+                            overall_hygiene = selectedAsset,
+                            overall_hygiene_remarks = mBinding?.etHygieneRemark?.text.toString(),
+                            standard_operating_procedures = mBinding?.etSelectionRemark?.text.toString(),
+                            overall_interventions = selectedAsset,
+                            overall_interventions_remarks = mBinding?.etMembersRemark?.text.toString(),
+                            positive_impact = selectedAsset,
+                            positive_impact_remarks = mBinding?.etPositiveRemark?.text.toString(),
+                            better_price_realisation = selectedAsset,
+                            better_price_realisation_remarks = mBinding?.etBetterRemark?.text.toString(),
+                            transparency_milk_pricing = selectedAsset,
+                            transparency_milk_pricing_remarks = mBinding?.etTransparencyRemark?.text.toString(),
+                            timely_milk_payment = selectedAsset,
+                            timely_milk_payment_remarks = mBinding?.etTimelyRemark?.text.toString(),
+                            assured_marked_surplus = selectedAsset,
+                            assured_marked_surplus_remarks = mBinding?.etAssuredRemark?.text.toString(),
+                            any_other = mBinding?.etAnyOtherRemark?.text.toString(),
+                            nlm_b_components_document = totalListDocument,
+                        )
+                    )
+//                } else {
+//                    showSnackbar(mBinding?.clParent!!, "Please wait for a sec and click again")
+//                }
+//            }
+//        }
+    }
+
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
@@ -270,7 +514,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
             "District" -> {
                 dropDownApiCall(paginate = false, loader = true)
                 selectedList = districtList
-                selectedTextView = mBinding!!.etDistrict
+                selectedTextView = mBinding!!.tvDistrict
             }
 
 //            "Status" -> {
@@ -382,6 +626,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
             )
         )
     }
+
     private fun addDocumentDialog(
         context: Context,
         selectedItem: ImplementingAgencyDocument?,
@@ -450,7 +695,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = null,
                                     nlm_document = UploadedDocumentName,
-                                    ahidf_id = selectedItem.ahidf_id,
+                                    nlm_b_component_id = selectedItem.nlm_b_component_id,
                                     id = selectedItem.id,
                                 )
                             addDocumentAdapter?.notifyItemChanged(position)
@@ -461,7 +706,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                                     description = bindingDialog.etDescription.text.toString(),
                                     ia_document = UploadedDocumentName,
                                     nlm_document = null,
-                                    ahidf_id = selectedItem.ahidf_id,
+                                    nlm_b_component_id = selectedItem.nlm_b_component_id,
                                     id = selectedItem.id,
                                 )
                             addDocumentIAAdapter?.notifyItemChanged(position)
@@ -482,7 +727,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                                 bindingDialog.etDescription.text.toString(),
                                 nlm_document = UploadedDocumentName,
                                 id = null,
-                                ahidf_id = null,
+                                nlm_b_component_id = null,
                                 ia_document = null
                             )
                         )
@@ -492,7 +737,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                                 bindingDialog.etDescription.text.toString(),
                                 ia_document = UploadedDocumentName,
                                 id = null,
-                                ahidf_id = null,
+                                nlm_b_component_id = null,
                                 nlm_document = null
                             )
                         )
@@ -571,18 +816,18 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                                 )
 //                                use this code to add new view with image name and uri
                             }
-//                            viewModel.getProfileUploadFile(
-//                                context = this,
-//                                table_name = getString(R.string.ahidf_document).toRequestBody(
-//                                    MultipartBody.FORM
-//                                ),
-//                                document_name = body,
-//                                user_id = getPreferenceOfScheme(
-//                                    this,
-//                                    AppConstants.SCHEME,
-//                                    Result::class.java
-//                                )?.user_id,
-//                            )
+                            viewModel.getProfileUploadFile(
+                                context = this,
+                                table_name = getString(R.string.nlm_b_components_document).toRequestBody(
+                                    MultipartBody.FORM
+                                ),
+                                document_name = body,
+                                user_id = getPreferenceOfScheme(
+                                    this,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id,
+                            )
                         }
                     }
                 }
@@ -597,4 +842,19 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED)
+        } else {
+            registerReceiver(locationReceiver, intentFilter)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(locationReceiver)
+    }
 }

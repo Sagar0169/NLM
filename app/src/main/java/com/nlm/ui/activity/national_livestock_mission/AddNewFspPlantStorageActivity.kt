@@ -1,5 +1,6 @@
 package com.nlm.ui.activity.national_livestock_mission
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.BroadcastReceiver
@@ -820,6 +821,7 @@ class AddNewFspPlantStorageActivity(
         startActivityForResult(intent, REQUEST_iMAGE_PDF)
     }
 
+    @SuppressLint("Range")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
