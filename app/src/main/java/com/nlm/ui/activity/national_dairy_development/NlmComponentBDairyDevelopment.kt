@@ -52,15 +52,19 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
+import com.nlm.utilities.hideView
 import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDevelopmentBinding>(),
     CallBackDeleteAtId,
@@ -102,7 +106,15 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
             longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
         }
     }
-    private var selectedAsset: String? = null
+    private var goOne: String? = null
+    private var goTwo: String? = null
+    private var goThree: String? = null
+    private var goFive: String? = null
+    private var goSix: String? = null
+    private var whatOne: String? = null
+    private var whatTwo: String? = null
+    private var whatThree: String? = null
+    private var whatFour: String? = null
 
 
     override fun initView() {
@@ -123,20 +135,112 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
         mBinding?.tvState?.isEnabled = false
         mBinding?.tvState?.setTextColor(Color.parseColor("#000000"))
         mBinding?.rbGoOne?.setOnCheckedChangeListener { group, checkedId ->
-            selectedAsset = when (checkedId) {
+            goOne = when (checkedId) {
                 R.id.rbAssetYes -> "Yes"
                 R.id.rbAssetNo -> "No"
                 else -> null
             }
         }
         mBinding?.rbGoTwo?.setOnCheckedChangeListener { group, checkedId ->
-            selectedAsset = when (checkedId) {
+            goTwo = when (checkedId) {
                 R.id.rbOverallYes -> "Good"
                 R.id.rbOverallNo -> "Bad"
                 else -> null
             }
         }
+        mBinding?.rbGoThree?.setOnCheckedChangeListener { group, checkedId ->
+            goThree = when (checkedId) {
+                R.id.rbHygieneYes -> "Good"
+                R.id.rbHygieneNo -> "Bad"
+                else -> null
+            }
+        }
+        mBinding?.rbGoFive?.setOnCheckedChangeListener { group, checkedId ->
+            goFive = when (checkedId) {
+                R.id.rbMembersYes -> "Yes"
+                R.id.rbMembersNo -> "No"
+                else -> null
+            }
+        }
+        mBinding?.rbGoSix?.setOnCheckedChangeListener { group, checkedId ->
+            goSix = when (checkedId) {
+                R.id.rbPositiveYes -> "Yes"
+                R.id.rbPositiveNo -> "No"
+                else -> null
+            }
+        }
+        mBinding?.rbWhatOne?.setOnCheckedChangeListener { group, checkedId ->
+            whatOne = when (checkedId) {
+                R.id.rbBetterYes -> "Yes"
+                R.id.rbBetterNo -> "No"
+                else -> null
+            }
+        }
+        mBinding?.rbWhatTwo?.setOnCheckedChangeListener { group, checkedId ->
+            whatTwo = when (checkedId) {
+                R.id.rbTransparencyYes -> "Yes"
+                R.id.rbTransparencyNo -> "No"
+                else -> null
+            }
+        }
+        mBinding?.rbWhatThree?.setOnCheckedChangeListener { group, checkedId ->
+            whatThree = when (checkedId) {
+                R.id.rbTimelyYes -> "Yes"
+                R.id.rbTimelyNo -> "No"
+                else -> null
+            }
+        }
+        mBinding?.rbWhatFour?.setOnCheckedChangeListener { group, checkedId ->
+            whatFour = when (checkedId) {
+                R.id.rbAssuredYes -> "Yes"
+                R.id.rbAssuredNo -> "No"
+                else -> null
+            }
+        }
         if (viewEdit == "view"){
+            mBinding?.tvState?.isEnabled=false
+            mBinding?.tvDistrict?.isEnabled=false
+            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
+            mBinding?.etDCS?.isEnabled=false
+            mBinding?.etNameOfRevenueVillage?.isEnabled=false
+            mBinding?.etNameOfTehsil?.isEnabled=false
+            mBinding?.etLat?.isEnabled=false
+            mBinding?.etLong?.isEnabled=false
+            mBinding?.etDate?.isEnabled=false
+            mBinding?.etAssetRemark?.isEnabled=false
+            mBinding?.etOverallRemark?.isEnabled=false
+            mBinding?.etHygieneRemark?.isEnabled=false
+            mBinding?.etSelectionRemark?.isEnabled=false
+            mBinding?.etMembersRemark?.isEnabled=false
+            mBinding?.etPositiveRemark?.isEnabled=false
+            mBinding?.etBetterRemark?.isEnabled=false
+            mBinding?.etTransparencyRemark?.isEnabled=false
+            mBinding?.etTimelyRemark?.isEnabled=false
+            mBinding?.etAssuredRemark?.isEnabled=false
+            mBinding?.etAnyOtherRemark?.isEnabled=false
+            mBinding?.rbAssetYes?.isEnabled=false
+            mBinding?.rbAssetNo?.isEnabled=false
+            mBinding?.rbOverallYes?.isEnabled=false
+            mBinding?.rbOverallNo?.isEnabled=false
+            mBinding?.rbHygieneYes?.isEnabled=false
+            mBinding?.rbHygieneNo?.isEnabled=false
+            mBinding?.rbMembersYes?.isEnabled=false
+            mBinding?.rbMembersNo?.isEnabled=false
+            mBinding?.rbPositiveYes?.isEnabled=false
+            mBinding?.rbPositiveNo?.isEnabled=false
+            mBinding?.rbBetterYes?.isEnabled=false
+            mBinding?.rbBetterNo?.isEnabled=false
+            mBinding?.rbTransparencyYes?.isEnabled=false
+            mBinding?.rbTransparencyNo?.isEnabled=false
+            mBinding?.rbTimelyYes?.isEnabled=false
+            mBinding?.rbTimelyNo?.isEnabled=false
+            mBinding?.rbAssuredYes?.isEnabled=false
+            mBinding?.rbAssuredNo?.isEnabled=false
+            mBinding?.tvNLMDoc?.hideView()
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
+
+
             viewEditApi()
         }
         if (viewEdit == "edit") {
@@ -264,15 +368,17 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                                 return@observe
                             }
                             districtId = userResponseModel._result.district_id
+                            mBinding?.tvState?.text =
+                                userResponseModel._result.state_name
                             mBinding?.tvDistrict?.text =
-                                userResponseModel._result.district_id.toString()
+                                userResponseModel._result.district_name
                             mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
                             mBinding?.etDCS?.setText(userResponseModel._result.name_of_dcs_mpp)
                             mBinding?.etNameOfRevenueVillage?.setText(userResponseModel._result.name_of_revenue_village)
                             mBinding?.etNameOfTehsil?.setText(userResponseModel._result.name_of_tehsil)
                             mBinding?.etLat?.setText(userResponseModel._result.latitude)
                             mBinding?.etLong?.setText(userResponseModel._result.longitude)
-                            mBinding?.etDate?.text = userResponseModel._result.date_of_inspection
+                            mBinding?.etDate?.text = convertDate(userResponseModel._result.date_of_inspection)
                             mBinding?.etAssetRemark?.setText(userResponseModel._result.asset_earmarked_remarks)
                             mBinding?.etOverallRemark?.setText(userResponseModel._result.overall_upkeep_remarks)
                             mBinding?.etHygieneRemark?.setText(userResponseModel._result.overall_hygiene_remarks)
@@ -284,6 +390,60 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                             mBinding?.etTimelyRemark?.setText(userResponseModel._result.timely_milk_payment_remarks)
                             mBinding?.etAssuredRemark?.setText(userResponseModel._result.assured_marked_surplus_remarks)
                             mBinding?.etAnyOtherRemark?.setText(userResponseModel._result.any_other)
+
+                            if (userResponseModel._result.asset_earmarked == "Yes") {
+                                mBinding?.rbAssetYes?.isChecked = true
+                            } else {
+                                mBinding?.rbAssetNo?.isChecked = true
+                            }
+
+                            if (userResponseModel._result.overall_upkeep == "Good") {
+                                mBinding?.rbOverallYes?.isChecked = true
+                            }else{
+                                mBinding?.rbOverallNo?.isChecked = true
+                            }
+
+                            if (userResponseModel._result.overall_hygiene == "Good") {
+                                mBinding?.rbHygieneYes?.isChecked = true
+                            }else{
+                                mBinding?.rbHygieneNo?.isChecked = true
+                            }
+
+                            if (userResponseModel._result.overall_interventions == "Yes") {
+                                mBinding?.rbMembersYes?.isChecked = true
+                            }else{
+                                mBinding?.rbMembersNo?.isChecked = true
+                            }
+
+                            if (userResponseModel._result.positive_impact == "Yes") {
+                                mBinding?.rbPositiveYes?.isChecked = true
+                            }else{
+                                mBinding?.rbPositiveNo?.isChecked = true
+                            }
+
+                            if (userResponseModel._result.better_price_realisation == "Yes") {
+                                mBinding?.rbBetterYes?.isChecked = true
+                            }else{
+                                mBinding?.rbBetterNo?.isChecked = true
+                            }
+
+                            if (userResponseModel._result.transparency_milk_pricing == "Yes") {
+                                mBinding?.rbTransparencyYes?.isChecked = true
+                            }else{
+                                mBinding?.rbTransparencyNo?.isChecked = true
+                            }
+
+                            if (userResponseModel._result.timely_milk_payment == "Yes") {
+                                mBinding?.rbTimelyYes?.isChecked = true
+                            }else{
+                                mBinding?.rbTimelyNo?.isChecked = true
+                            }
+
+                            if (userResponseModel._result.assured_marked_surplus == "Yes") {
+                                mBinding?.rbAssuredYes?.isChecked = true
+                            }else{
+                                mBinding?.rbAssuredNo?.isChecked = true
+                            }
 
 
 
@@ -385,14 +545,14 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
             val datePickerDialog = DatePickerDialog(
                 this@NlmComponentBDairyDevelopment,
                 { _, selectedYear, selectedMonth, selectedDay ->
-                    val formattedDatee = String.format(
-                        "%02d/%02d/%04d",
-                        selectedDay,
-                        selectedMonth + 1,
-                        selectedYear
-                    )
-                    formattedDate=formattedDatee
-                    mBinding?.etDate?.text = formattedDatee // Assuming you have an EditText for the date
+                    val calendarInstance = Calendar.getInstance().apply {
+                        set(selectedYear, selectedMonth, selectedDay)
+                    }
+                    // Convert to desired format: yyyy-MM-dd'T'HH:mm:ssXXX
+                    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.getDefault())
+                    formattedDate = sdf.format(calendarInstance.time)
+
+                    mBinding?.etDate?.text = convertDate(formattedDate)  // Assuming you have an EditText for the date
                     mBinding?.etDate?.setTextColor(
                         ContextCompat.getColor(
                             this@NlmComponentBDairyDevelopment,
@@ -404,6 +564,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
             )
             datePickerDialog.show()
         }
+
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
@@ -429,11 +590,11 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                                 AppConstants.SCHEME,
                                 Result::class.java
                             )?.role_id,
-                            state_code = getPreferenceOfScheme(
-                                this@NlmComponentBDairyDevelopment,
-                                AppConstants.SCHEME,
-                                Result::class.java
-                            )?.state_code,
+//                            state_code = getPreferenceOfScheme(
+//                                this@NlmComponentBDairyDevelopment,
+//                                AppConstants.SCHEME,
+//                                Result::class.java
+//                            )?.state_code,
                             state_id = getPreferenceOfScheme(
                                 this@NlmComponentBDairyDevelopment,
                                 AppConstants.SCHEME,
@@ -444,31 +605,32 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                                 AppConstants.SCHEME,
                                 Result::class.java
                             )?.user_id.toString(),
-                            status = draft,
+                            status = 1,
+                            is_draft = draft,
                             latitude = mBinding?.etLat?.text.toString().toDoubleOrNull(),
                             longitude = mBinding?.etLong?.text.toString().toDoubleOrNull(),
                             date_of_inspection = formattedDate,
                             name_of_dcs_mpp = mBinding?.etDCS?.text.toString(),
                             name_of_tehsil = mBinding?.etNameOfTehsil?.text.toString(),
                             name_of_revenue_village = mBinding?.etNameOfRevenueVillage?.text.toString(),
-                            asset_earmarked = selectedAsset,
+                            asset_earmarked = goOne,
                             asset_earmarked_remarks = mBinding?.etAssetRemark?.text.toString(),
-                            overall_upkeep = selectedAsset,
+                            overall_upkeep = goTwo,
                             overall_upkeep_remarks = mBinding?.etOverallRemark?.text.toString(),
-                            overall_hygiene = selectedAsset,
+                            overall_hygiene = goThree,
                             overall_hygiene_remarks = mBinding?.etHygieneRemark?.text.toString(),
                             standard_operating_procedures = mBinding?.etSelectionRemark?.text.toString(),
-                            overall_interventions = selectedAsset,
+                            overall_interventions = goFive,
                             overall_interventions_remarks = mBinding?.etMembersRemark?.text.toString(),
-                            positive_impact = selectedAsset,
+                            positive_impact = goSix,
                             positive_impact_remarks = mBinding?.etPositiveRemark?.text.toString(),
-                            better_price_realisation = selectedAsset,
+                            better_price_realisation = whatOne,
                             better_price_realisation_remarks = mBinding?.etBetterRemark?.text.toString(),
-                            transparency_milk_pricing = selectedAsset,
+                            transparency_milk_pricing = whatTwo,
                             transparency_milk_pricing_remarks = mBinding?.etTransparencyRemark?.text.toString(),
-                            timely_milk_payment = selectedAsset,
+                            timely_milk_payment = whatThree,
                             timely_milk_payment_remarks = mBinding?.etTimelyRemark?.text.toString(),
-                            assured_marked_surplus = selectedAsset,
+                            assured_marked_surplus = whatFour,
                             assured_marked_surplus_remarks = mBinding?.etAssuredRemark?.text.toString(),
                             any_other = mBinding?.etAnyOtherRemark?.text.toString(),
                             nlm_b_components_document = totalListDocument,

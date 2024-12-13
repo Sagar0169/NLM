@@ -1210,6 +1210,7 @@ data class NDDComponentBAddRequest(
     val state_code: Int?=null,
     val state_id: Int?=null,
     val status: Int?=null,
+    val is_draft: Int?=null,
     val timely_milk_payment: String?=null,
     val timely_milk_payment_remarks: String?=null,
     val transparency_milk_pricing: String?=null,

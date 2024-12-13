@@ -1950,6 +1950,8 @@ data class NDDComponentBAddResult(
     val is_deleted: Int,
     val latitude: String,
     val longitude: String,
+    val district_name: String,
+    val state_name: String,
     val name_of_dcs_mpp: String,
     val name_of_revenue_village: String,
     val name_of_tehsil: String,
