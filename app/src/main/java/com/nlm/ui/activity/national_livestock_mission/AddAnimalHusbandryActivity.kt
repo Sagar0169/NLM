@@ -1137,28 +1137,6 @@ class AddAnimalHusbandryActivity(
 
         // Initialize based on type
         when (type) {
-//            "typeSemen" -> {
-//                selectedList = typeSemen
-//                selectedTextView = mBinding!!.tvSemenStation
-//            }
-//
-//            "StateNDD" -> {
-//                selectedList = stateList
-//                selectedTextView = binding!!.tvStateNDD
-//            }
-//
-//            "District" -> {
-//                dropDownApiCall(paginate = false, loader = true)
-//                selectedList = districtList
-//                selectedTextView = mBinding!!.tvDistrict
-//            }
-
-//            "DistrictNLM" -> {
-//                dropDownApiCall(paginate = false, loader = true)
-//                selectedList = districtList
-//                selectedTextView = mBinding!!.tvDistrictNlm
-//            }
-
             "whetherFull" -> {
                 img = 2
                 selectedList = variety
@@ -1170,16 +1148,6 @@ class AddAnimalHusbandryActivity(
                 selectedList = projectFinance
                 selectedTextView = full
             }
-
-//            "Status" -> {
-//                selectedList = status
-//                selectedTextView = binding!!.tvStatus
-//            }
-//
-//            "Reading" -> {
-//                selectedList = reading
-//                selectedTextView = binding!!.tvReadingMaterial
-//            }
 
             else -> return
         }
