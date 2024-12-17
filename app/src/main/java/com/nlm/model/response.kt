@@ -578,6 +578,7 @@ data class ImplementingAgencyDocument(
     val assistance_for_ea_id: Int? = null,
     val nlm_document: String? = null,
     val fp_from_non_forest_id: Int? = null,
+    val nlm_b_component_id: Int?=null,
     val is_edit: Boolean?=null,
     val is_ia:Boolean?=null
 
@@ -1930,6 +1931,64 @@ data class NDDComponentBListData(
     val state_name: String
 )
 
+data class NDDComponentBAddResponse(
+    val _result: NDDComponentBAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class NDDComponentBAddResult(
+    val any_other: String,
+    val asset_earmarked: String,
+    val asset_earmarked_remarks: String,
+    val assured_marked_surplus: String,
+    val assured_marked_surplus_remarks: String,
+    val better_price_realisation: String,
+    val better_price_realisation_remarks: String,
+    val created_by: Int,
+    val created_by_id: Int,
+    val created_on: String,
+    val date_of_inspection: String,
+    val district_id: Int,
+    val id: Int,
+    val is_deleted: Int,
+    val latitude: String,
+    val longitude: String,
+    val district_name: String,
+    val state_name: String,
+    val name_of_dcs_mpp: String,
+    val name_of_revenue_village: String,
+    val name_of_tehsil: String,
+    val nlm_b_components_document: List<ImplementingAgencyDocument>,
+    val overall_hygiene: String,
+    val overall_hygiene_remarks: String,
+    val overall_interventions: String,
+    val overall_interventions_remarks: String,
+    val overall_upkeep: String,
+    val overall_upkeep_remarks: String,
+    val positive_impact: String,
+    val positive_impact_remarks: String,
+    val role_id: String,
+    val standard_operating_procedures: String,
+    val state_code: String,
+    val state_id: Int,
+    val status: String,
+    val timely_milk_payment: String,
+    val timely_milk_payment_remarks: String,
+    val transparency_milk_pricing: String,
+    val transparency_milk_pricing_remarks: String,
+    val user_id: String
+)
+
+data class NlmBComponentsDocument(
+    val description: String,
+    val id: Int,
+    val nlm_b_component_id: Int,
+    val nlm_document: String
+)
+
+
 data class NDDMilkUnionListResponse(
     val _result: NDDMilkUnionListResult,
     val _resultflag: Int,
@@ -1948,6 +2007,7 @@ data class NDDMilkUnionListData(
     val created_by: Int,
     val created_by_text: String,
     val district_names: String,
+    val is_draft_text: String,
     val id: Int,
     val is_delete: Boolean,
     val is_draft: Int,
@@ -1977,6 +2037,7 @@ data class NDDDairyPlantListData(
     val created_by: Int,
     val created_by_text: String,
     val district_name: String,
+    val is_draft_text: String,
     val fssai_license_no: String,
     val id: Int,
     val is_delete: Boolean,
@@ -2006,6 +2067,7 @@ data class NDDDcsBmcListData(
     val created_by: Int,
     val created_by_text: String,
     val district_name: String,
+    val is_draft_text: String,
     val fssai_lic_no: Int,
     val fssai_lic_validity_date: String,
     val id: Int,
@@ -2038,6 +2100,7 @@ data class NDDStateCenterLabListData(
     val created_by: Int,
     val created_by_text: String,
     val district_name: String,
+    val is_draft_text: String,
     val id: Int,
     val is_delete: Boolean,
     val is_draft: Int,
@@ -2066,6 +2129,7 @@ data class NDDMilkProcessingListData(
     val created_by: Int,
     val created_by_text: String,
     val district_name: String,
+    val is_draft_text: String,
     val id: Int,
     val is_delete: Boolean,
     val is_draft: Int,
@@ -2095,6 +2159,7 @@ data class NDDMilkProductMarketingListData(
     val created_at: String,
     val created_by: Int,
     val created_by_text: String,
+    val is_draft_text: String,
     val district_name: String,
     val id: Int,
     val is_delete: Boolean,
@@ -2125,6 +2190,9 @@ data class NDDProductivityEnhancementServicesListData(
     val created_by: Int,
     val created_by_text: String,
     val district_name: String,
+    val name_tehsil: String,
+    val name_revenue_village: String,
+    val is_draft_text: String,
     val id: Int,
     val is_delete: Boolean,
     val is_draft: Int,

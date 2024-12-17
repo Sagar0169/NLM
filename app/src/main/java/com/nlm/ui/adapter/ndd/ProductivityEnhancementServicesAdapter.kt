@@ -55,10 +55,10 @@ class ProductivityEnhancementServicesAdapter(
         holder.mBinding.tvDcs.text = item.name_dcs_mpp
         holder.mBinding.tvState.text = item.state_name
         holder.mBinding.tvDistrict.text = item.district_name
-//        holder.mBinding.tvTehsil.text = item.
-//        holder.mBinding.tvRevenue.text = item.district_name
+        holder.mBinding.tvTehsil.text = item.name_tehsil
+        holder.mBinding.tvRevenue.text = item.name_revenue_village
         holder.mBinding.tvCreatedBy.text = item.created_by_text
-        holder.mBinding.tvNlmStatus.text = item.is_draft.toString()
+        holder.mBinding.tvNlmStatus.text = item.is_draft_text
         holder.mBinding.tvCreated.text = convertDate(item.created_at)
 
         if(item.is_view){

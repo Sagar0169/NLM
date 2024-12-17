@@ -55,6 +55,8 @@ import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
 import com.nlm.model.MobileVeterinaryUnitsListRequest
 import com.nlm.model.MobileVeterinaryUnitsListResponse
+import com.nlm.model.NDDComponentBAddRequest
+import com.nlm.model.NDDComponentBAddResponse
 import com.nlm.model.NDDComponentBListRequest
 import com.nlm.model.NDDComponentBListResponse
 import com.nlm.model.NDDDairyPlantListRequest
@@ -304,10 +306,15 @@ object Repository {
     suspend fun getComponentBList(request: NDDComponentBListRequest): Response<NDDComponentBListResponse> {
         return api.getComponentBList(request)
     }
+    suspend fun getComponentBAdd(request: NDDComponentBAddRequest): Response<NDDComponentBAddResponse> {
+        return api.getComponentBAdd(request)
+    }
+
 
     suspend fun getMilkUnionList(request: NDDMilkUnionListRequest): Response<NDDMilkUnionListResponse> {
         return api.getMilkUnionList(request)
     }
+
     suspend fun dairyPlantList(request: NDDDairyPlantListRequest): Response<NDDDairyPlantListResponse> {
         return api.dairyPlantList(request)
     }

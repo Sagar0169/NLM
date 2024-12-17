@@ -9,7 +9,7 @@
             type="com.nlm.ui.activity.national_dairy_development.NlmComponentBList.ClickActions" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+        android:id="@+id/clParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/job_details_bg1"

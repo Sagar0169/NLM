@@ -55,6 +55,8 @@ import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
 import com.nlm.model.MobileVeterinaryUnitsListRequest
 import com.nlm.model.MobileVeterinaryUnitsListResponse
+import com.nlm.model.NDDComponentBAddRequest
+import com.nlm.model.NDDComponentBAddResponse
 import com.nlm.model.NDDComponentBListRequest
 import com.nlm.model.NDDComponentBListResponse
 import com.nlm.model.NDDDairyPlantListRequest
@@ -161,6 +163,7 @@ const val DISTRICT_ASCAD_ADD = "livestockHealthDisease/ascadDistrictAddEdit"
 
 //NDD
 const val COMPONENT_B_LIST = "NationalDairyDevelopment/componentBList"
+const val COMPONENT_B_ADD = "NationalDairyDevelopment/componentBAddEdit"
 const val MILK_UNION_LIST = "NationalDairyDevelopment/milkUnionList"
 const val DAIRY_PLANT_LIST = "NationalDairyDevelopment/dairyPlantList"
 const val DCS_BMC_LIST = "NationalDairyDevelopment/dcsBmcList"
@@ -337,6 +340,9 @@ interface MyService {
 
     @POST(COMPONENT_B_LIST)
     suspend fun getComponentBList(@Body request: NDDComponentBListRequest): Response<NDDComponentBListResponse>
+
+    @POST(COMPONENT_B_ADD)
+    suspend fun getComponentBAdd(@Body request: NDDComponentBAddRequest): Response<NDDComponentBAddResponse>
 
     @POST(MILK_UNION_LIST)
     suspend fun getMilkUnionList(@Body request: NDDMilkUnionListRequest): Response<NDDMilkUnionListResponse>

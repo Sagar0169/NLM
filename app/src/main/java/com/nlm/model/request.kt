@@ -1177,6 +1177,49 @@ data class NDDComponentBListRequest(
     val page: Int
 )
 
+data class NDDComponentBAddRequest(
+    val any_other: String?=null,
+    val is_type: String?=null,
+    val asset_earmarked: String?=null,
+    val asset_earmarked_remarks: String?=null,
+    val assured_marked_surplus: String?=null,
+    val assured_marked_surplus_remarks: String?=null,
+    val better_price_realisation: String?=null,
+    val better_price_realisation_remarks: String?=null,
+    val created_by: Int?=null,
+    val date_of_inspection: String?=null,
+    val district_id: Int?=null,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val latitude: Double?=null,
+    val longitude: Double?=null,
+    val lat_nlm: Double?=null,
+    val long_nlm: Double?=null,
+    val name_of_dcs_mpp: String?=null,
+    val name_of_revenue_village: String?=null,
+    val name_of_tehsil: String?=null,
+    val nlm_b_components_document: List<ImplementingAgencyDocument>?=null,
+    val overall_hygiene: String?=null,
+    val overall_hygiene_remarks: String?=null,
+    val overall_interventions: String?=null,
+    val overall_interventions_remarks: String?=null,
+    val overall_upkeep: String?=null,
+    val overall_upkeep_remarks: String?=null,
+    val positive_impact: String?=null,
+    val positive_impact_remarks: String?=null,
+    val role_id: Int?=null,
+    val standard_operating_procedures: String?=null,
+    val state_code: Int?=null,
+    val state_id: Int?=null,
+    val status: Int?=null,
+    val is_draft: Int?=null,
+    val timely_milk_payment: String?=null,
+    val timely_milk_payment_remarks: String?=null,
+    val transparency_milk_pricing: String?=null,
+    val transparency_milk_pricing_remarks: String?=null,
+    val user_id: String?=null
+)
+
 
 data class NDDMilkUnionListRequest(
     val role_id: Int?,
