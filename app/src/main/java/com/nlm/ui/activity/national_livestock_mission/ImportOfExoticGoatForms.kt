@@ -603,7 +603,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                         }
                         bindingDialog.etDoc.setOnClickListener {
                             if (!UploadedDocumentName.isNullOrEmpty()) {
-                                downloader.downloadFile(url)
+                                downloader.downloadFile(url, UploadedDocumentName!!)
                                 mBinding?.let { it1 -> showSnackbar(it1.main,"Download started") }
                                 dialog.dismiss()
                             }

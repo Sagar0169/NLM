@@ -43,6 +43,7 @@ import com.nlm.databinding.ActivityAddAnimalHusbandryBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemNlmAnimalBinding
 import com.nlm.databinding.ItemNlmIaAnimalFundBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.AddAnimalRequest
 import com.nlm.model.AhidfFormatForNlm
 import com.nlm.model.AhidfMonitoring
@@ -801,6 +802,19 @@ class AddAnimalHusbandryActivity(
                                 it
                             )
                         }
+                        val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        val downloader = AndroidDownloader(context)
+                        bindingDialog.etDoc.setOnClickListener {
+                            if (!UploadedDocumentName.isNullOrEmpty()) {
+                                downloader.downloadFile(url, UploadedDocumentName!!)
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                                dialog.dismiss()
+                            }
+                            else{
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                                dialog.dismiss()
+                            }
+                        }
                     }
 
                     "png" -> {
@@ -808,6 +822,19 @@ class AddAnimalHusbandryActivity(
                             Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
                                 it
                             )
+                        }
+                        val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        val downloader = AndroidDownloader(context)
+                        bindingDialog.etDoc.setOnClickListener {
+                            if (!UploadedDocumentName.isNullOrEmpty()) {
+                                downloader.downloadFile(url, UploadedDocumentName!!)
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                                dialog.dismiss()
+                            }
+                            else{
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                                dialog.dismiss()
+                            }
                         }
                     }
 

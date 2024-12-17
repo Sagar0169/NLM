@@ -40,6 +40,7 @@ import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentRSPManpowerBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemRspBucksBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.RSPAddRequest
@@ -614,6 +615,19 @@ class RSPNLMFragment(
                             Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
                                 it
                             )
+                        }
+                        val url=getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        val downloader = AndroidDownloader(context)
+                        bindingDialog.etDoc.setOnClickListener {
+                            if (!UploadedDocumentName.isNullOrEmpty()) {
+                                downloader.downloadFile(url, UploadedDocumentName!!)
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                                dialog.dismiss()
+                            }
+                            else{
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                                dialog.dismiss()
+                            }
                         }
                     }
 

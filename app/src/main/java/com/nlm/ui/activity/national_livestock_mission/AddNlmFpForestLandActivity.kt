@@ -39,6 +39,7 @@ import com.nlm.databinding.ActivityAddNlmFpForestLandBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemForestlandNlmBinding
 import com.nlm.databinding.ItemYearWiseFinancialProgressBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.AssistanceForQfspCostAssistance
 import com.nlm.model.AssistanceForQfspFinancialProgres
 import com.nlm.model.Format6AssistanceForQspAddEdit
@@ -1009,6 +1010,19 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                         Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
                             it
                         )
+                    }
+                    val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                    val downloader = AndroidDownloader(context)
+                    bindingDialog.etDoc.setOnClickListener {
+                        if (!UploadedDocumentName.isNullOrEmpty()) {
+                            downloader.downloadFile(url, UploadedDocumentName!!)
+                            mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                            dialog.dismiss()
+                        }
+                        else{
+                            mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                            dialog.dismiss()
+                        }
                     }
                 }
 
