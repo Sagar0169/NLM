@@ -1,5 +1,6 @@
 package com.nlm.ui.activity.national_livestock_mission
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.BroadcastReceiver
@@ -28,6 +29,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackAnimalFund
@@ -60,6 +62,7 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -89,7 +92,7 @@ class AddAnimalHusbandryActivity(
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
-    private var savedAsDraftClick: OnBackSaveAsDraft? = null
+    private var TableName: String? = null
     private var districtList = ArrayList<ResultGetDropDown>()
     private var loading = true
     private var isFrom: Int = 0
@@ -733,7 +736,6 @@ class AddAnimalHusbandryActivity(
         dialog.show()
     }
 
-
     private fun addDocumentDialog(
         context: Context,
         selectedItem: ImplementingAgencyDocument?,
@@ -759,39 +761,95 @@ class AddAnimalHusbandryActivity(
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName = bindingDialog.etDoc
-        uploadData=bindingDialog.ivPic
-        if (selectedItem != null) {
-            if (getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id == 8
-            ) {
-                UploadedDocumentName = selectedItem.nlm_document
-                bindingDialog.etDoc.text = selectedItem.nlm_document
-                bindingDialog.etDescription.setText(selectedItem.description)
-            } else {
-                UploadedDocumentName = selectedItem.ia_document
-                bindingDialog.etDoc.text = selectedItem.ia_document
-                bindingDialog.etDescription.setText(selectedItem.description)
-            }
-
-        }
-        bindingDialog.tvChooseFile.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
-            {
-
-                checkStoragePermission(this@AddAnimalHusbandryActivity)
-            }
-            else{
-
-                mBinding?.clParent?.let { showSnackbar(it,"please enter description") }
-            }
-        }
+        uploadData = bindingDialog.ivPic
         bindingDialog.btnDelete.setOnClickListener {
             dialog.dismiss()
         }
 
+        if (selectedItem != null) {
+            bindingDialog.ivPic.showView()
+            if (selectedItem.is_edit==false)
+            {
+                bindingDialog.tvSubmit.hideView()
+                bindingDialog.tvChooseFile.isEnabled=false
+                bindingDialog.etDescription.isEnabled=false
+            }
+            if (getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id == 24 ||selectedItem.is_ia == true
+            ) {
+                UploadedDocumentName = selectedItem.ia_document
+                bindingDialog.etDoc.text = selectedItem.ia_document
+
+            }
+            else{
+
+                UploadedDocumentName = selectedItem.nlm_document
+                bindingDialog.etDoc.text = selectedItem.nlm_document
+            }
+            bindingDialog.etDescription.setText(selectedItem.description)
+
+            val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+            Log.d("URLL",fileExtension.toString())
+            if (isSupported) {
+                when (fileExtension) {
+                    "pdf" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "png" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "jpg" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        bindingDialog.tvChooseFile.setOnClickListener {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
+
+                checkStoragePermission(this)
+            } else {
+
+                mBinding?.clParent?.let { showSnackbar(it, "please enter description") }
+            }
+        }
+        val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+        if (isSupported) {
+            when (fileExtension) {
+                "pdf" -> {
+//                    bindingDialog.ivPic.let {
+//                        Glide.with(context).load(R.drawable.ic_pdf).into(
+//                            it
+//                        )
+//                    }
+                }
+                else -> {
+                    bindingDialog.ivPic.setOnClickListener {
+                        Utility.showImageDialog(
+                            this,
+                            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        )
+                    }
+                }
+            }
+        }
 
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etDescription.text.toString()
@@ -889,6 +947,162 @@ class AddAnimalHusbandryActivity(
         }
         dialog.show()
     }
+
+//    private fun addDocumentDialog(
+//        context: Context,
+//        selectedItem: ImplementingAgencyDocument?,
+//        position: Int?
+//    ) {
+//        val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
+//            layoutInflater,
+//            R.layout.item_add_document_dialog,
+//            null,
+//            false
+//        )
+//        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+//        dialog.setCancelable(true)
+//        dialog.setCanceledOnTouchOutside(true)
+//        dialog.setContentView(bindingDialog.root)
+//        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        dialog.window!!.setLayout(
+//            LinearLayout.LayoutParams.MATCH_PARENT,
+//            LinearLayout.LayoutParams.WRAP_CONTENT
+//        )
+//        dialog.window!!.setGravity(Gravity.CENTER)
+//        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+//        lp.dimAmount = 0.5f
+//        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+//        DialogDocName = bindingDialog.etDoc
+//        uploadData=bindingDialog.ivPic
+//        if (selectedItem != null) {
+//            if (getPreferenceOfScheme(
+//                    this,
+//                    AppConstants.SCHEME,
+//                    Result::class.java
+//                )?.role_id == 8
+//            ) {
+//                UploadedDocumentName = selectedItem.nlm_document
+//                bindingDialog.etDoc.text = selectedItem.nlm_document
+//                bindingDialog.etDescription.setText(selectedItem.description)
+//            } else {
+//                UploadedDocumentName = selectedItem.ia_document
+//                bindingDialog.etDoc.text = selectedItem.ia_document
+//                bindingDialog.etDescription.setText(selectedItem.description)
+//            }
+//
+//        }
+//        bindingDialog.tvChooseFile.setOnClickListener {
+//            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+//            {
+//
+//                checkStoragePermission(this@AddAnimalHusbandryActivity)
+//            }
+//            else{
+//
+//                mBinding?.clParent?.let { showSnackbar(it,"please enter description") }
+//            }
+//        }
+//        bindingDialog.btnDelete.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//
+//
+//        bindingDialog.tvSubmit.setOnClickListener {
+//            if (bindingDialog.etDescription.text.toString()
+//                    .isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty()
+//            ) {
+//                if (selectedItem != null) {
+//                    if (position != null) {
+//                        if (getPreferenceOfScheme(
+//                                this,
+//                                AppConstants.SCHEME,
+//                                Result::class.java
+//                            )?.role_id == 8
+//                        ) {
+//                            DocumentList[position] =
+//                                ImplementingAgencyDocument(
+//                                    description = bindingDialog.etDescription.text.toString(),
+//                                    ia_document = null,
+//                                    nlm_document = UploadedDocumentName,
+//                                    ahidf_id = selectedItem.ahidf_id,
+//                                    id = selectedItem.id,
+//                                )
+//                            addDocumentAdapter?.notifyItemChanged(position)
+//
+//                        } else {
+//                            viewDocumentList[position] =
+//                                ImplementingAgencyDocument(
+//                                    description = bindingDialog.etDescription.text.toString(),
+//                                    ia_document = UploadedDocumentName,
+//                                    nlm_document = null,
+//                                    ahidf_id = selectedItem.ahidf_id,
+//                                    id = selectedItem.id,
+//                                )
+//                            addDocumentIAAdapter?.notifyItemChanged(position)
+//                        }
+//
+//                        dialog.dismiss()
+//                    }
+//
+//                } else {
+//                    if (getPreferenceOfScheme(
+//                            this,
+//                            AppConstants.SCHEME,
+//                            Result::class.java
+//                        )?.role_id == 8
+//                    ) {
+//                        DocumentList.add(
+//                            ImplementingAgencyDocument(
+//                                bindingDialog.etDescription.text.toString(),
+//                                nlm_document = UploadedDocumentName,
+//                                id = null,
+//                                ahidf_id = null,
+//                                ia_document = null
+//                            )
+//                        )
+//                    } else {
+//                        viewDocumentList.add(
+//                            ImplementingAgencyDocument(
+//                                bindingDialog.etDescription.text.toString(),
+//                                ia_document = UploadedDocumentName,
+//                                id = null,
+//                                ahidf_id = null,
+//                                nlm_document = null
+//                            )
+//                        )
+//                        Log.d("Debug", "viewDocumentList: ${viewDocumentList.size}")
+//
+//                    }
+//
+//                    if (getPreferenceOfScheme(
+//                            this,
+//                            AppConstants.SCHEME,
+//                            Result::class.java
+//                        )?.role_id == 8
+//                    ) {
+//                        DocumentList.size.minus(1).let {
+//                            addDocumentAdapter?.notifyItemInserted(it)
+//                            dialog.dismiss()
+////
+//                        }
+//                    } else {
+//
+//                        viewDocumentList.size.minus(1).let {
+//                            addDocumentIAAdapter?.notifyItemInserted(it)
+//                            dialog.dismiss()
+//                        }
+//                        toast("else")
+//                    }
+//                }
+//            } else {
+//                showSnackbar(
+//                    mBinding!!.clParent,
+//                    getString(R.string.please_enter_atleast_one_field)
+//                )
+//            }
+//        }
+//        dialog.show()
+//    }
 
 
     private fun openOnlyPdfAccordingToPosition() {
@@ -1116,6 +1330,7 @@ class AddAnimalHusbandryActivity(
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
                     DialogDocName?.text=userResponseModel._result.document_name
+                    TableName=userResponseModel._result.table_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -1125,7 +1340,6 @@ class AddAnimalHusbandryActivity(
                 }
             }
         }
-
         viewModel.nlmAhidfADDResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
@@ -1135,6 +1349,7 @@ class AddAnimalHusbandryActivity(
                 if (userResponseModel._resultflag == 0) {
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 } else {
+                    TableName=userResponseModel.fileurl
                     if (savedAsDraft) {
                         onBackPressedDispatcher.onBackPressed()
                     } else {
@@ -1303,6 +1518,7 @@ class AddAnimalHusbandryActivity(
         super.onPause()
         unregisterReceiver(locationReceiver)
     }
+    @SuppressLint("Range")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -1310,7 +1526,7 @@ class AddAnimalHusbandryActivity(
                 CAPTURE_IMAGE_REQUEST -> {
 
                     val imageBitmap = data?.extras?.get("data") as Bitmap
-                    Log.d("DOCUMENT",imageBitmap.toString())
+
                     uploadData?.showView()
                     uploadData?.setImageBitmap(imageBitmap)
 //                    data.data?.let { startCrop(it) }
@@ -1319,24 +1535,36 @@ class AddAnimalHusbandryActivity(
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-                    Log.d("DOCUMENT",selectedImageUri.toString())
+
                     uploadData?.showView()
                     uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(this, selectedImageUri)
-                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+
+                        val fileExtension =
+                            filePath?.substringAfterLast('.', "").orEmpty().lowercase()
                         // Validate file extension
                         if (fileExtension in listOf("png", "jpg", "jpeg")) {
-                            uploadData?.showView()
-                            uploadData?.setImageURI(selectedImageUri)
                             val file = filePath?.let { File(it) }
-                            file?.let { uploadImage(it) }
+
+                            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+                            file?.let {
+                                val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
+                                if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageURI(selectedImageUri)
+                                    uploadImage(it) // Proceed to upload
+                                } else {
+                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                }
+                            }
                         } else {
-                            Toast.makeText(this, "Format not supported", Toast.LENGTH_SHORT).show()
+                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
                         }
                     }
                 }
+
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
@@ -1345,32 +1573,46 @@ class AddAnimalHusbandryActivity(
                         )
                         uploadData?.showView()
                         uploadData?.setImageResource(R.drawable.ic_pdf)
+
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName=
+                                val documentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-//                                DialogDocName?.text=DocumentName
+                                val fileSizeInBytes =
+                                    it.getLong(it.getColumnIndex(MediaStore.MediaColumns.SIZE))
+                                val fileSizeInMB = fileSizeInBytes / (1024 * 1024.0) // Convert to MB
 
-                                val requestBody = convertToRequestBody(this, uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
-//                                use this code to add new view with image name and uri
+                                // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
+                                if (fileSizeInMB <= 5) {
+                                    DocumentName = documentName
+                                    val requestBody = convertToRequestBody(this, uri)
+                                    body = MultipartBody.Part.createFormData(
+                                        "document_name",
+                                        documentName,
+                                        requestBody
+                                    )
+                                    viewModel.getProfileUploadFile(
+                                        context = this,
+                                        document_name = body,
+                                        user_id = getPreferenceOfScheme(
+                                            this,
+                                            AppConstants.SCHEME,
+                                            Result::class.java
+                                        )?.user_id,
+                                        table_name =getString(R.string.ahidf_document).toRequestBody(MultipartBody.FORM),
+                                    )
+                                } else {
+                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                }
                             }
-                            viewModel.getProfileUploadFile(
-                                context = this,
-                                document_name = body,
-                                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.ahidf_document).toRequestBody(MultipartBody.FORM),
-                            )
                         }
                     }
                 }
-            }}
+            }
+        }
     }
+
     override fun showImage(bitmap: Bitmap) {
         // Override to display the image in this activity
         uploadData?.showView()

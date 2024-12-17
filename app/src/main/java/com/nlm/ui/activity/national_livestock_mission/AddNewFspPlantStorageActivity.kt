@@ -906,7 +906,7 @@ class AddNewFspPlantStorageActivity(
             bindingDialog.etDescription.setText(selectedItem.description)
 
             val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
-            Log.d("URLL", getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName))
+//            Log.d("URLL", getString(R.string.fsp_plant_storage_document))
             if (isSupported) {
                 when (fileExtension) {
                     "pdf" -> {

@@ -23,6 +23,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemGoatSemen
@@ -48,6 +49,7 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -83,6 +85,7 @@ class StateSemenInfrastructureFragment(
     private var DocumentName: String? = null
     var body: MultipartBody.Part? = null
     val viewModel = ViewModel()
+    private var TableName: String? = null
     private var DocumentId: Int? = null
     private var UploadedDocumentName: String? = null
     private var savedAsEdit: Boolean = false
@@ -219,6 +222,7 @@ class StateSemenInfrastructureFragment(
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
                     DialogDocName?.text=userResponseModel._result.document_name
+                    TableName=userResponseModel._result.table_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -237,6 +241,7 @@ class StateSemenInfrastructureFragment(
                 if (userResponseModel._resultflag == 0) {
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 } else {
+                    TableName=userResponseModel.fileurl
                     if (savedAsDraft) {
                         savedAsDraftClick?.onSaveAsDraft()
                     }
@@ -492,7 +497,6 @@ class StateSemenInfrastructureFragment(
         }
     }
 
-
     private fun addDocumentDialog(
         context: Context,
         selectedItem: ImplementingAgencyDocument?,
@@ -514,24 +518,98 @@ class StateSemenInfrastructureFragment(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
-
         val lp: WindowManager.LayoutParams = dialog.window!!.attributes
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-
         DialogDocName = bindingDialog.etDoc
-        uploadData=bindingDialog.ivPic
-        if (selectedItem != null) {
-            UploadedDocumentName = selectedItem.nlm_document
-            bindingDialog.etDoc.text = selectedItem.nlm_document
-            bindingDialog.etDescription.setText(selectedItem.description)
-        }
-        bindingDialog.tvChooseFile.setOnClickListener {
-            openOnlyPdfAccordingToPosition()
-        }
-
+        uploadData = bindingDialog.ivPic
         bindingDialog.btnDelete.setOnClickListener {
             dialog.dismiss()
+        }
+
+        if (selectedItem != null) {
+            bindingDialog.ivPic.showView()
+            if (selectedItem.is_edit==false)
+            {
+                bindingDialog.tvSubmit.hideView()
+                bindingDialog.tvChooseFile.isEnabled=false
+                bindingDialog.etDescription.isEnabled=false
+            }
+            if (getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id == 24 ||selectedItem.is_ia == true
+            ) {
+                UploadedDocumentName = selectedItem.ia_document
+                bindingDialog.etDoc.text = selectedItem.ia_document
+
+            }
+            else{
+
+                UploadedDocumentName = selectedItem.nlm_document
+                bindingDialog.etDoc.text = selectedItem.nlm_document
+            }
+            bindingDialog.etDescription.setText(selectedItem.description)
+
+            val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+            Log.d("URLL",fileExtension.toString())
+            if (isSupported) {
+                when (fileExtension) {
+                    "pdf" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "png" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "jpg" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        bindingDialog.tvChooseFile.setOnClickListener {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
+
+                checkStoragePermission(requireContext())
+            } else {
+
+                mBinding?.clParent?.let { showSnackbar(it, "please enter description") }
+            }
+        }
+        val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+        if (isSupported) {
+            when (fileExtension) {
+                "pdf" -> {
+//                    bindingDialog.ivPic.let {
+//                        Glide.with(context).load(R.drawable.ic_pdf).into(
+//                            it
+//                        )
+//                    }
+                }
+                else -> {
+                    bindingDialog.ivPic.setOnClickListener {
+                        Utility.showImageDialog(
+                            requireContext(),
+                            getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        )
+                    }
+                }
+            }
         }
 
         bindingDialog.tvSubmit.setOnClickListener {
@@ -575,8 +653,93 @@ class StateSemenInfrastructureFragment(
                 )
             }
         }
+
         dialog.show()
     }
+//    private fun addDocumentDialog(
+//        context: Context,
+//        selectedItem: ImplementingAgencyDocument?,
+//        position: Int?
+//    ) {
+//        val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
+//            layoutInflater,
+//            R.layout.item_add_document_dialog,
+//            null,
+//            false
+//        )
+//        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+//        dialog.setCancelable(true)
+//        dialog.setCanceledOnTouchOutside(true)
+//        dialog.setContentView(bindingDialog.root)
+//        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        dialog.window!!.setLayout(
+//            LinearLayout.LayoutParams.MATCH_PARENT,
+//            LinearLayout.LayoutParams.WRAP_CONTENT
+//        )
+//        dialog.window!!.setGravity(Gravity.CENTER)
+//
+//        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+//        lp.dimAmount = 0.5f
+//        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+//
+//        DialogDocName = bindingDialog.etDoc
+//        uploadData=bindingDialog.ivPic
+//        if (selectedItem != null) {
+//            UploadedDocumentName = selectedItem.nlm_document
+//            bindingDialog.etDoc.text = selectedItem.nlm_document
+//            bindingDialog.etDescription.setText(selectedItem.description)
+//        }
+//        bindingDialog.tvChooseFile.setOnClickListener {
+//            openOnlyPdfAccordingToPosition()
+//        }
+//
+//        bindingDialog.btnDelete.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//
+//        bindingDialog.tvSubmit.setOnClickListener {
+//            if (bindingDialog.etDescription.text.toString()
+//                    .isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty()
+//            ) {
+//                if (selectedItem != null) {
+//                    if (position != null) {
+//                        DocumentList[position] =
+//                            ImplementingAgencyDocument(
+//                                description = bindingDialog.etDescription.text.toString(),
+//                                nlm_document = UploadedDocumentName,
+//                                state_semen_bank_id = selectedItem.rsp_laboratory_semen_id,
+//                                id = selectedItem.id,
+//                            )
+//                        addDocumentAdapter?.notifyItemChanged(position)
+//                        dialog.dismiss()
+//                    }
+//
+//                } else {
+//                    DocumentList.add(
+//                        ImplementingAgencyDocument(
+//                            bindingDialog.etDescription.text.toString(),
+//                            nlm_document = UploadedDocumentName,
+//                            id = null,
+//                            implementing_agency_id = null,
+//                            state_semen_bank_id = null
+//                        )
+//                    )
+//
+//                    DocumentList.size.minus(1).let {
+//                        addDocumentAdapter?.notifyItemInserted(it)
+//                        dialog.dismiss()
+////
+//                    }
+//                }
+//            } else {
+//                showSnackbar(
+//                    mBinding!!.clParent,
+//                    getString(R.string.please_enter_atleast_one_field)
+//                )
+//            }
+//        }
+//        dialog.show()
+//    }
 
     private fun openOnlyPdfAccordingToPosition() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -614,7 +777,7 @@ class StateSemenInfrastructureFragment(
                 CAPTURE_IMAGE_REQUEST -> {
 
                     val imageBitmap = data?.extras?.get("data") as Bitmap
-                    Log.d("DOCUMENT",imageBitmap.toString())
+
                     uploadData?.showView()
                     uploadData?.setImageBitmap(imageBitmap)
 //                    data.data?.let { startCrop(it) }
@@ -623,24 +786,37 @@ class StateSemenInfrastructureFragment(
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-                    Log.d("DOCUMENT",selectedImageUri.toString())
-                    uploadData?.showView()
-                    uploadData?.setImageURI(selectedImageUri)
+
+
                     if (selectedImageUri != null) {
+                        uploadData?.showView()
+                        uploadData?.setImageURI(selectedImageUri)
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(requireContext(), selectedImageUri)
-                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+
+                        val fileExtension =
+                            filePath?.substringAfterLast('.', "").orEmpty().lowercase()
                         // Validate file extension
                         if (fileExtension in listOf("png", "jpg", "jpeg")) {
-                            uploadData?.showView()
-                            uploadData?.setImageURI(selectedImageUri)
                             val file = filePath?.let { File(it) }
-                            file?.let { uploadImage(it) }
+
+                            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+                            file?.let {
+                                val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
+                                if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageURI(selectedImageUri)
+                                    uploadImage(it) // Proceed to upload
+                                } else {
+                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                }
+                            }
                         } else {
-                            Toast.makeText(requireContext(), "Format not supported", Toast.LENGTH_SHORT).show()
+                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
                         }
                     }
                 }
+
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
@@ -649,31 +825,46 @@ class StateSemenInfrastructureFragment(
                         )
                         uploadData?.showView()
                         uploadData?.setImageResource(R.drawable.ic_pdf)
+
                         val cursor = requireContext().contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName=
+                                val documentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-//                                DialogDocName?.text=DocumentName
+                                val fileSizeInBytes =
+                                    it.getLong(it.getColumnIndex(MediaStore.MediaColumns.SIZE))
+                                val fileSizeInMB = fileSizeInBytes / (1024 * 1024.0) // Convert to MB
 
-                                val requestBody = convertToRequestBody(requireContext(), uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
-//                                use this code to add new view with image name and uri
+                                // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
+                                if (fileSizeInMB <= 5) {
+                                    DocumentName = documentName
+                                    val requestBody = convertToRequestBody(requireContext(), uri)
+                                    body = MultipartBody.Part.createFormData(
+                                        "document_name",
+                                        documentName,
+                                        requestBody
+                                    )
+                                    viewModel.getProfileUploadFile(
+                                        context = requireContext(),
+                                        document_name = body,
+                                        user_id = getPreferenceOfScheme(
+                                            requireContext(),
+                                            AppConstants.SCHEME,
+                                            Result::class.java
+                                        )?.user_id,
+                                        table_name = getString(R.string.state_semen_bank_document).toRequestBody(
+                                            MultipartBody.FORM
+                                        ),
+                                    )
+                                } else {
+                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                }
                             }
-                            viewModel.getProfileUploadFile(
-                                context = requireContext(),
-                                document_name = body,
-                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.state_semen_bank_document).toRequestBody(MultipartBody.FORM),
-                            )
                         }
                     }
                 }
-            }}
+            }
+        }
     }
     private fun uploadImage(file: File) {
         lifecycleScope.launch {

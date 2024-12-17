@@ -406,7 +406,7 @@ data class ResultGetDropDown(
 data class StateSemenAddResponse(
     val _result: StateSemenAddResult,
     val _resultflag: Int,
-    val fileurl: Any,
+    val fileurl: String?,
     val message: String,
     val statuscode: Int
 )
@@ -469,7 +469,7 @@ data class StateSemenBankAddInfrastructure(
 data class NLMIAResponse(
     val _result: ResultIA,
     val _resultflag: Int,
-    val fileurl: Any,
+    val fileurl: String,
     val message: String,
     val statuscode: Int
 )
@@ -953,6 +953,7 @@ data class FpFromForestLandAddEditFormat9Response(
     val _result: ResultFormat9,
     val _resultflag: Int?,
     val message: String?,
+    val fileurl: String?,
     val statuscode: Int?
 )
 
@@ -1040,7 +1041,7 @@ data class FpFromForestLandData(
 data class RspAddResponse(
     val _result: RspAddResult,
     val _resultflag: Int,
-    val fileurl: Any,
+    val fileurl: String?,
     val message: String,
     val statuscode: Int
 )
@@ -1187,6 +1188,7 @@ data class NlmFpFromNonForestAddResponse(
     val _result: NlmFpFromNonForestAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String,
     val statuscode: Int
 )
 
@@ -1294,6 +1296,7 @@ data class AddAssistanceEAResponse(
     val _result: AddAssistanceEAResult?,
     val _resultflag: Int?,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int?
 )
 
@@ -1336,6 +1339,7 @@ data class AddNlmEdpResponse(
     val _result: AddNlmEdpResult?,
     val _resultflag: Int?,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int?
 )
 
@@ -1395,6 +1399,7 @@ data class AddAnimalResponse(
     val _result: AddAnimalResult,
     val _resultflag: Int?,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int?
 )
 
