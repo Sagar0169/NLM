@@ -247,6 +247,8 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                 goat_breeding_farm_number = mBinding?.etGoatBreedingFramsNumber?.text.toString()
                     .toIntOrNull(),
                 goat_breeding_farm_location = mBinding?.etGoatBreedingFramsLocation?.text.toString(),
+                sheep_breeding_farms_number = mBinding?.etSheepBreedingFramsNumber?.text.toString().toIntOrNull(),
+                sheep_breeding_farms_location = mBinding?.etSheepBreedingFramsLocation?.text.toString(),
                 training_centers_number = mBinding?.etTrainingCentersNumber?.text.toString()
                     .toIntOrNull(),
                 training_centers_location = mBinding?.etTrainingCentersLocation?.text.toString(),

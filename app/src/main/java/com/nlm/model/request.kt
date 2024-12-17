@@ -317,6 +317,7 @@ data class ImplementingAgencyAddRequest(
     val studies_surveys_conducted: String? = null,
     val implementing_agency_funds_received: List<ImplementingAgencyFundsReceived>? = null,
     val no_of_al_technicians: Int? = null,
+
     val number_of_ai: Int? = null,
     val total_paravet_trained: Int? = null,
     val implementing_agency_involved_district_wise: List<ImplementingAgencyInvolvedDistrictWise>? = null,
