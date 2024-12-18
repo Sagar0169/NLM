@@ -26,6 +26,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
@@ -40,6 +41,7 @@ import com.nlm.databinding.ActivityAddNlmFpFromNonForestBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemFspNonPlantNlmBinding
 import com.nlm.databinding.ItemFspPlantStorageBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.FodderProductionFromNonForestRequest
 import com.nlm.model.FpFromNonForestFilledByNlmTeam
@@ -63,6 +65,7 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -92,6 +95,7 @@ class AddNlmFpFromNonForestActivity(
     private var layoutManager: LinearLayoutManager? = null
     private var currentPage = 1
     private var totalPage = 1
+    private var TableName: String? = null
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private var Model:String? = null // Store selected state
     private var stateList = ArrayList<ResultGetDropDown>()
@@ -853,7 +857,6 @@ class AddNlmFpFromNonForestActivity(
         // Show the bottom sheet
         bottomSheetDialog.show()
     }
-
     private fun addDocumentDialog(
         context: Context,
         selectedItem: ImplementingAgencyDocument?,
@@ -879,39 +882,111 @@ class AddNlmFpFromNonForestActivity(
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName = bindingDialog.etDoc
-        uploadData=bindingDialog.ivPic
-        if (selectedItem != null) {
-            if (getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.role_id == 8
-            ) {
-                bindingDialog.etDoc.text = selectedItem.nlm_document
-                bindingDialog.etDescription.setText(selectedItem.description)
-            } else {
-                bindingDialog.etDoc.text = selectedItem.ia_document
-                bindingDialog.etDescription.setText(selectedItem.description)
-            }
-
-        }
-        bindingDialog.tvChooseFile.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
-            {
-
-                checkStoragePermission(this)
-            }
-            else{
-
-                mBinding?.clParent?.let { showSnackbar(it,"please enter description") }
-            }
-        }
+        uploadData = bindingDialog.ivPic
         bindingDialog.btnDelete.setOnClickListener {
             dialog.dismiss()
         }
 
+        if (selectedItem != null) {
+            bindingDialog.ivPic.showView()
+            if (selectedItem.is_edit==false)
+            {
+                bindingDialog.tvSubmit.hideView()
+                bindingDialog.tvChooseFile.isEnabled=false
+                bindingDialog.etDescription.isEnabled=false
+            }
+            if (getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id == 24 ||selectedItem.is_ia == true
+            ) {
+                UploadedDocumentName = selectedItem.ia_document
+                bindingDialog.etDoc.text = selectedItem.ia_document
+
+            }
+            else{
+
+                UploadedDocumentName = selectedItem.nlm_document
+                bindingDialog.etDoc.text = selectedItem.nlm_document
+            }
+            bindingDialog.etDescription.setText(selectedItem.description)
+
+            val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+            Log.d("URLL",fileExtension.toString())
+            if (isSupported) {
+                when (fileExtension) {
+                    "pdf" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                                it
+                            )
+                        }
+                        val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        val downloader = AndroidDownloader(context)
+                        bindingDialog.etDoc.setOnClickListener {
+                            if (!UploadedDocumentName.isNullOrEmpty()) {
+                                downloader.downloadFile(url, UploadedDocumentName!!)
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                                dialog.dismiss()
+                            }
+                            else{
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                                dialog.dismiss()
+                            }
+                        }
+                    }
+
+                    "png" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "jpg" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        bindingDialog.tvChooseFile.setOnClickListener {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
+
+                checkStoragePermission(this)
+            } else {
+
+                mBinding?.clParent?.let { showSnackbar(it, "please enter description") }
+            }
+        }
+        val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+        if (isSupported) {
+            when (fileExtension) {
+                "pdf" -> {
+//                    bindingDialog.ivPic.let {
+//                        Glide.with(context).load(R.drawable.ic_pdf).into(
+//                            it
+//                        )
+//                    }
+                }
+                else -> {
+                    bindingDialog.ivPic.setOnClickListener {
+                        Utility.showImageDialog(
+                           this,
+                            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        )
+                    }
+                }
+            }
+        }
 
         bindingDialog.tvSubmit.setOnClickListener {
+            Log.d("DOCUMENT",UploadedDocumentName.toString())
             if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
                 if (selectedItem != null) {
                     if (position != null) {
@@ -954,7 +1029,7 @@ class AddNlmFpFromNonForestActivity(
                         DocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                nlm_document = DocumentName,
+                                nlm_document = UploadedDocumentName,
                                 id = null,
                                 fsp_plant_storage_id = null,
                                 ia_document = null
@@ -964,7 +1039,7 @@ class AddNlmFpFromNonForestActivity(
                         viewDocumentList.add(
                             ImplementingAgencyDocument(
                                 bindingDialog.etDescription.text.toString(),
-                                ia_document = DocumentName,
+                                ia_document = UploadedDocumentName,
                                 id = null,
                                 fsp_plant_storage_id = null,
                                 nlm_document = null
@@ -998,8 +1073,155 @@ class AddNlmFpFromNonForestActivity(
                 )
             }
         }
+
         dialog.show()
     }
+//    private fun addDocumentDialog(
+//        context: Context,
+//        selectedItem: ImplementingAgencyDocument?,
+//        position: Int?
+//    ) {
+//        val bindingDialog: ItemAddDocumentDialogBinding = DataBindingUtil.inflate(
+//            layoutInflater,
+//            R.layout.item_add_document_dialog,
+//            null,
+//            false
+//        )
+//        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+//        dialog.setCancelable(true)
+//        dialog.setCanceledOnTouchOutside(true)
+//        dialog.setContentView(bindingDialog.root)
+//        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        dialog.window!!.setLayout(
+//            LinearLayout.LayoutParams.MATCH_PARENT,
+//            LinearLayout.LayoutParams.WRAP_CONTENT
+//        )
+//        dialog.window!!.setGravity(Gravity.CENTER)
+//        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+//        lp.dimAmount = 0.5f
+//        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+//        DialogDocName = bindingDialog.etDoc
+//        uploadData=bindingDialog.ivPic
+//        if (selectedItem != null) {
+//            if (getPreferenceOfScheme(
+//                    this,
+//                    AppConstants.SCHEME,
+//                    Result::class.java
+//                )?.role_id == 8
+//            ) {
+//                bindingDialog.etDoc.text = selectedItem.nlm_document
+//                bindingDialog.etDescription.setText(selectedItem.description)
+//            } else {
+//                bindingDialog.etDoc.text = selectedItem.ia_document
+//                bindingDialog.etDescription.setText(selectedItem.description)
+//            }
+//
+//        }
+//        bindingDialog.tvChooseFile.setOnClickListener {
+//            if (bindingDialog.etDescription.text.toString().isNotEmpty())
+//            {
+//
+//                checkStoragePermission(this)
+//            }
+//            else{
+//
+//                mBinding?.clParent?.let { showSnackbar(it,"please enter description") }
+//            }
+//        }
+//        bindingDialog.btnDelete.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//
+//
+//        bindingDialog.tvSubmit.setOnClickListener {
+//            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
+//                if (selectedItem != null) {
+//                    if (position != null) {
+//                        if (getPreferenceOfScheme(
+//                                this,
+//                                AppConstants.SCHEME,
+//                                Result::class.java
+//                            )?.role_id == 8
+//                        ) {
+//                            DocumentList[position] =
+//                                ImplementingAgencyDocument(
+//                                    description = bindingDialog.etDescription.text.toString(),
+//                                    ia_document = null,
+//                                    nlm_document = UploadedDocumentName,
+//                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+//                                    id = selectedItem.id,
+//                                )
+//                        } else {
+//                            viewDocumentList[position] =
+//                                ImplementingAgencyDocument(
+//                                    description = bindingDialog.etDescription.text.toString(),
+//                                    ia_document = UploadedDocumentName,
+//                                    nlm_document = null,
+//                                    fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
+//                                    id = selectedItem.id,
+//                                )
+//                        }
+//
+//                        addDocumentAdapter?.notifyItemChanged(position)
+//                        dialog.dismiss()
+//                    }
+//
+//                } else {
+//                    if (getPreferenceOfScheme(
+//                            this,
+//                            AppConstants.SCHEME,
+//                            Result::class.java
+//                        )?.role_id == 8
+//                    ) {
+//                        DocumentList.add(
+//                            ImplementingAgencyDocument(
+//                                bindingDialog.etDescription.text.toString(),
+//                                nlm_document = DocumentName,
+//                                id = null,
+//                                fsp_plant_storage_id = null,
+//                                ia_document = null
+//                            )
+//                        )
+//                    } else {
+//                        viewDocumentList.add(
+//                            ImplementingAgencyDocument(
+//                                bindingDialog.etDescription.text.toString(),
+//                                ia_document = DocumentName,
+//                                id = null,
+//                                fsp_plant_storage_id = null,
+//                                nlm_document = null
+//                            )
+//                        )
+//                    }
+//
+//
+//                    if (getPreferenceOfScheme(
+//                            this,
+//                            AppConstants.SCHEME,
+//                            Result::class.java
+//                        )?.role_id == 8
+//                    ) {
+//                        DocumentList.size.minus(1).let {
+//                            addDocumentAdapter?.notifyItemInserted(it)
+//                            dialog.dismiss()
+////
+//                        }
+//                    } else {
+//                        viewDocumentList.size.minus(1).let {
+//                            addDocumentAdapter?.notifyItemInserted(it)
+//                            dialog.dismiss()
+//                        }
+//                    }
+//                }
+//            } else {
+//                showSnackbar(
+//                    mBinding!!.clParent,
+//                    getString(R.string.please_enter_atleast_one_field)
+//                )
+//            }
+//        }
+//        dialog.show()
+//    }
 
     private fun openOnlyPdfAccordingToPosition() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -1023,7 +1245,7 @@ class AddNlmFpFromNonForestActivity(
                 CAPTURE_IMAGE_REQUEST -> {
 
                     val imageBitmap = data?.extras?.get("data") as Bitmap
-                    Log.d("DOCUMENT",imageBitmap.toString())
+
                     uploadData?.showView()
                     uploadData?.setImageBitmap(imageBitmap)
 //                    data.data?.let { startCrop(it) }
@@ -1032,24 +1254,36 @@ class AddNlmFpFromNonForestActivity(
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-                    Log.d("DOCUMENT",selectedImageUri.toString())
+
                     uploadData?.showView()
                     uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(this, selectedImageUri)
-                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+
+                        val fileExtension =
+                            filePath?.substringAfterLast('.', "").orEmpty().lowercase()
                         // Validate file extension
                         if (fileExtension in listOf("png", "jpg", "jpeg")) {
-                            uploadData?.showView()
-                            uploadData?.setImageURI(selectedImageUri)
                             val file = filePath?.let { File(it) }
-                            file?.let { uploadImage(it) }
+
+                            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+                            file?.let {
+                                val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
+                                if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageURI(selectedImageUri)
+                                    uploadImage(it) // Proceed to upload
+                                } else {
+                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                }
+                            }
                         } else {
-                            Toast.makeText(this, "Format not supported", Toast.LENGTH_SHORT).show()
+                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
                         }
                     }
                 }
+
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
@@ -1058,31 +1292,46 @@ class AddNlmFpFromNonForestActivity(
                         )
                         uploadData?.showView()
                         uploadData?.setImageResource(R.drawable.ic_pdf)
+
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName=
+                                val documentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-//                                DialogDocName?.text=DocumentName
+                                val fileSizeInBytes =
+                                    it.getLong(it.getColumnIndex(MediaStore.MediaColumns.SIZE))
+                                val fileSizeInMB = fileSizeInBytes / (1024 * 1024.0) // Convert to MB
 
-                                val requestBody = convertToRequestBody(this, uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
-//                                use this code to add new view with image name and uri
+                                // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
+                                if (fileSizeInMB <= 5) {
+                                    DocumentName = documentName
+                                    val requestBody = convertToRequestBody(this, uri)
+                                    body = MultipartBody.Part.createFormData(
+                                        "document_name",
+                                        documentName,
+                                        requestBody
+                                    )
+                                    viewModel.getProfileUploadFile(
+                                        context = this,
+                                        document_name = body,
+                                        user_id = getPreferenceOfScheme(
+                                            this,
+                                            AppConstants.SCHEME,
+                                            Result::class.java
+                                        )?.user_id,
+                                        table_name = getString(R.string.fp_from_non_forest_document).toRequestBody(
+                                            MultipartBody.FORM
+                                        ),
+                                    )
+                                } else {
+                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                }
                             }
-                            viewModel.getProfileUploadFile(
-                                context = this,
-                                document_name = body,
-                                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.fp_from_non_forest_document).toRequestBody(MultipartBody.FORM),
-                            )
                         }
                     }
                 }
-            }}
+            }
+        }
     }
 
 
@@ -1305,6 +1554,7 @@ class AddNlmFpFromNonForestActivity(
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
                     DialogDocName?.text=userResponseModel._result.document_name
+                    TableName=userResponseModel._result.table_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -1324,6 +1574,7 @@ class AddNlmFpFromNonForestActivity(
                 if (userResponseModel._resultflag == 0) {
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 } else {
+                    TableName=userResponseModel.fileurl
                     if (savedAsDraft) {
                         onBackPressedDispatcher.onBackPressed()
                     } else {

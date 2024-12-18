@@ -34,6 +34,7 @@ import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.databinding.ActivityArtificialInseminationBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemAiObservationBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInseminationObservationByNlm
 import com.nlm.model.GetDropDownRequest
@@ -748,6 +749,19 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                             Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
                                 it
                             )
+                        }
+                        val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        val downloader = AndroidDownloader(context)
+                        bindingDialog.etDoc.setOnClickListener {
+                            if (!UploadedDocumentName.isNullOrEmpty()) {
+                                downloader.downloadFile(url, UploadedDocumentName!!)
+                                mBinding?.let { it1 -> showSnackbar(it1.main,"Download started") }
+                                dialog.dismiss()
+                            }
+                            else{
+                                mBinding?.let { it1 -> showSnackbar(it1.main,"No document found") }
+                                dialog.dismiss()
+                            }
                         }
                     }
 

@@ -682,7 +682,6 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             }
 
             45 -> {
-
                 binding!!.tvState.showView()
                 binding!!.tvTitleState.showView()
                 binding!!.tvTitleDistrict.showView()
