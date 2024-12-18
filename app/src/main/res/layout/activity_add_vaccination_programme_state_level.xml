@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-    <variable
-        name="ClickAction"
-        type="com.nlm.ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeStateLevel.ClickActions" />
-</data>
+
+        <variable
+            name="ClickAction"
+            type="com.nlm.ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeStateLevel.ClickActions" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
@@ -15,6 +16,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeStateLevel">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
@@ -44,14 +46,15 @@
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
                 android:text="State Vaccination Programme "
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textAlignment="center"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivBackPress"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -119,10 +122,12 @@
                     android:background="@drawable/curve_all_corner_grey"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -144,8 +149,8 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
                         android:padding="16dp">
@@ -189,10 +194,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:padding="8dp"
                             android:maxLength="500"
                             android:maxLines="5"
                             android:minLines="1"
+                            android:padding="8dp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -222,7 +227,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="Upload"
+                            android:text="@string/upload"
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -242,9 +247,9 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::chooseFile1a}"
                                 android:padding="@dimen/dp_10"
                                 android:text="@string/choose_file"
-                                android:onClick="@{ClickAction::chooseFile1a}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -259,17 +264,53 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:hint="@string/no_file_chosen"
-                                android:textColorHint="@color/grey"
+                                android:padding="@dimen/dp_10"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/llUpload1a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPic1a"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                                <TextView
+                                    android:id="@+id/tvDocumentName1a"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toEndOf="@id/ivPic1a"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginHorizontal="@dimen/dp_5"
+                                    android:layout_toStartOf="@id/ivDelete1a"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_12" />
+                                <ImageView
+                                    android:id="@+id/ivDelete1a"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginStart="@dimen/dp_20"
+                                    android:onClick="@{ClickAction::deleteDocumentOneA}"
+                                    android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
                         android:padding="16dp">
@@ -313,10 +354,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:padding="8dp"
                             android:maxLength="500"
                             android:maxLines="5"
                             android:minLines="1"
+                            android:padding="8dp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -366,9 +407,9 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::chooseFile1b}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
-                                android:onClick="@{ClickAction::chooseFile1b}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -383,17 +424,54 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
+                                android:padding="@dimen/dp_10"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/llUpload1b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPic1b"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentName1b"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPic1b"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDelete1b"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDelete1b"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentOneB}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
                         android:padding="16dp">
@@ -437,10 +515,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:padding="8dp"
                             android:maxLength="500"
                             android:maxLines="5"
                             android:minLines="1"
+                            android:padding="8dp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -470,7 +548,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="Upload"
+                            android:text="@string/upload"
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -490,9 +568,9 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
+                                android:onClick="@{ClickAction::chooseFile1c}"
                                 android:padding="@dimen/dp_10"
                                 android:text="Choose File"
-                                android:onClick="@{ClickAction::chooseFile1c}"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -507,17 +585,54 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
+                                android:padding="@dimen/dp_10"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/llUpload1c"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPic1c"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentName1c"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPic1c"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDelete1c"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDelete1c"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentOneC}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
                         android:padding="16dp">
@@ -561,10 +676,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:padding="8dp"
                             android:maxLength="500"
                             android:maxLines="5"
                             android:minLines="1"
+                            android:padding="8dp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -594,7 +709,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="Upload"
+                            android:text="@string/upload"
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -614,8 +729,8 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:onClick="@{ClickAction::chooseFile1d}"
+                                android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -631,17 +746,54 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.6"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:hint="No File Chosen"
-                                android:textColorHint="@color/grey"
+                                android:padding="@dimen/dp_10"
                                 android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/llUpload1d"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPic1d"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentName1d"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPic1d"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDelete1d"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDelete1d"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentOneD}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
                         android:padding="16dp">
@@ -685,10 +837,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:padding="8dp"
                             android:maxLength="500"
                             android:maxLines="5"
                             android:minLines="1"
+                            android:padding="8dp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -718,7 +870,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="Upload"
+                            android:text="@string/upload"
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -739,8 +891,8 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:onClick="@{ClickAction::chooseFile1e}"
+                                android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -761,7 +913,44 @@
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/llUpload1e"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPic1e"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentName1e"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPic1e"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDelete1e"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDelete1e"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentOneE}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -786,12 +975,13 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
 
                         <TextView
@@ -818,10 +1008,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:padding="8dp"
                             android:maxLength="500"
                             android:maxLines="5"
                             android:minLines="1"
+                            android:padding="8dp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -871,8 +1061,8 @@
                                 android:layout_weight=".4"
                                 android:background="@drawable/back_number_gray"
                                 android:gravity="center"
-                                android:padding="@dimen/dp_10"
                                 android:onClick="@{ClickAction::chooseFile2}"
+                                android:padding="@dimen/dp_10"
                                 android:text="Choose File"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
@@ -893,7 +1083,44 @@
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/llUpload2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPic2"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentName2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPic2"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDelete2"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDelete2"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentTwo}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -917,12 +1144,13 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_10"
                         android:background="@drawable/curve_all_corner_dark_grey"
                         android:orientation="vertical"
-                        android:layout_marginVertical="@dimen/dp_10"
                         android:padding="16dp">
 
                         <TextView
@@ -949,10 +1177,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/et_background"
-                            android:padding="8dp"
                             android:maxLength="500"
                             android:maxLines="5"
                             android:minLines="1"
+                            android:padding="8dp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -982,7 +1210,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:text="Upload"
+                            android:text="@string/upload"
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -1005,7 +1233,7 @@
                                 android:gravity="center"
                                 android:onClick="@{ClickAction::chooseFile3}"
                                 android:padding="@dimen/dp_10"
-                                android:text="Choose File"
+                                android:text="@string/choose_file"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_14" />
 
@@ -1021,51 +1249,87 @@
                                 android:layout_weight="1.6"
                                 android:gravity="center"
                                 android:padding="@dimen/dp_10"
-                                android:text="No File Chosen"
+                                android:text="@string/no_file_chosen"
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/llUpload3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPic3"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentName3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPic3"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDelete3"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDelete3"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentThree}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
 
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_10">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:paddingHorizontal="@dimen/dp_10"-->
+<!--                    android:paddingVertical="@dimen/dp_10">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="Draft Guidelines for preparation of Visit Report by NLMs"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_18" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/opensans_semibold"-->
+<!--                        android:text="Draft Guidelines for preparation of Visit Report by NLMs"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/sp_18" />-->
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1.2dp"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:background="@color/black" />
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1.2dp"-->
+<!--                        android:layout_marginTop="@dimen/dp_20"-->
+<!--                        android:background="@color/black" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="@string/field_visit_report_should_be_clear_and_"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/dp_10"-->
+<!--                        android:fontFamily="@font/poppins_regular"-->
+<!--                        android:text="@string/field_visit_report_should_be_clear_and_"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/sp_16" />-->
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1.2dp"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:background="@color/black" />
-                </LinearLayout>
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1.2dp"-->
+<!--                        android:layout_marginTop="@dimen/dp_10"-->
+<!--                        android:background="@color/black" />-->
+<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:id="@+id/llSaveDraftAndSubmit"

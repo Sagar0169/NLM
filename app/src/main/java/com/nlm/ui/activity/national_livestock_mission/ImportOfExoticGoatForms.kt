@@ -745,13 +745,10 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                         }
                     }
                 }
-
-
             } else {
                 showSnackbar(mBinding!!.main, getString(R.string.please_enter_atleast_one_field))
             }
         }
-
         dialog.show()
     }
 
@@ -1262,14 +1259,14 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                             )
                         )
                     }
-                } else {
+                }
+                else {
                     showSnackbar(mBinding?.main!!, "Please wait for a sec and click again")
                 }
             }
         } else {
             showLocationAlertDialog()
         }
-
     }
 
     override fun onClickItem(

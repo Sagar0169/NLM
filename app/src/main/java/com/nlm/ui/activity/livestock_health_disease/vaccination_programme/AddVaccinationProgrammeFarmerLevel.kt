@@ -298,9 +298,23 @@ class AddVaccinationProgrammeFarmerLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentOne(view: View){
+            mBinding?.llUploadOne?.hideView()
+            mBinding?.tvDocumentNameOne?.text = null
+            mBinding?.etChooseFileOne?.text = ""
+            body = null
+        }
+
         fun uploadFileTwo(view: View) {
             isFromApplication = 2
             openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentTwo(view: View){
+            mBinding?.llUploadTwo?.hideView()
+            mBinding?.tvDocumentNameTwo?.text = null
+            mBinding?.etChooseFileTwo?.text = ""
+            body = null
         }
 
         fun uploadFileThree(view: View) {
@@ -308,14 +322,35 @@ class AddVaccinationProgrammeFarmerLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentThree(view: View){
+            mBinding?.llUploadThree?.hideView()
+            mBinding?.tvDocumentNameThree?.text = null
+            mBinding?.etChooseFileThree?.text = ""
+            body = null
+        }
+
         fun uploadFileFour(view: View) {
             isFromApplication = 4
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentFour(view: View){
+            mBinding?.llUploadFour?.hideView()
+            mBinding?.tvDocumentNameFour?.text = null
+            mBinding?.etChooseFileFour?.text = ""
+            body = null
+        }
+
         fun uploadFileFive(view: View) {
             isFromApplication = 5
             openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentFive(view: View){
+            mBinding?.llUploadFive?.hideView()
+            mBinding?.tvDocumentNameFive?.text = null
+            mBinding?.etChooseFileFive?.text = ""
+            body = null
         }
 
         fun backPress(view: View) {
