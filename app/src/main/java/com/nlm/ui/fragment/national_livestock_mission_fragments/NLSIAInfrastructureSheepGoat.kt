@@ -134,6 +134,8 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                                 mBinding?.etBreedingFramsLocation?.setText(userResponseModel._result.breeding_farms_location ?: "")
                                 mBinding?.etGoatBreedingFramsNumber?.setText(userResponseModel._result.goat_breeding_farm_number?.toString() ?: "")
                                 mBinding?.etGoatBreedingFramsLocation?.setText(userResponseModel._result.goat_breeding_farm_location ?: "")
+                                mBinding?.etSheepBreedingFramsNumber?.setText(userResponseModel._result.sheep_breeding_farms_number?.toString() ?: "")
+                                mBinding?.etSheepBreedingFramsLocation?.setText(userResponseModel._result.sheep_breeding_farms_location ?: "")
                                 mBinding?.etTrainingCentersNumber?.setText(userResponseModel._result.training_centers_number?.toString() ?: "")
                                 mBinding?.etTrainingCentersLocation?.setText(userResponseModel._result.training_centers_location ?: "")
                                 mBinding?.etCatelAiNumber?.setText(userResponseModel._result.number_of_cattle_ai_number?.toString() ?: "")
