@@ -19,6 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityAddVaccinationProgrammeStateLevelBinding
@@ -33,8 +34,10 @@ import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -247,8 +250,10 @@ class AddVaccinationProgrammeStateLevel :
                 } else {
                     uploadedDocumentName = userResponseModel._result.document_name
                     dialogDocName?.text = userResponseModel._result.document_name
+
                     when (isFromApplication) {
                         1 -> {
+                            mBinding?.llUpload1a?.showView()
                             mBinding?.etChooseFile1a?.text = uploadedDocumentName
 
                         }
@@ -341,9 +346,23 @@ class AddVaccinationProgrammeStateLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentOneA(view: View){
+            mBinding?.llUpload1a?.hideView()
+            mBinding?.tvDocumentName1a?.text = null
+            mBinding?.etChooseFile1a?.text = ""
+            body = null
+        }
+
         fun chooseFile1b(view: View) {
             isFromApplication = 2
             openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentOneB(view: View){
+            mBinding?.llUpload1a?.hideView()
+            mBinding?.tvDocumentName1a?.text = null
+            mBinding?.etChooseFile1a?.text = ""
+            body = null
         }
 
         fun chooseFile1c(view: View) {
@@ -351,9 +370,23 @@ class AddVaccinationProgrammeStateLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentOneC(view: View){
+            mBinding?.llUpload1a?.hideView()
+            mBinding?.tvDocumentName1a?.text = null
+            mBinding?.etChooseFile1a?.text = ""
+            body = null
+        }
+
         fun chooseFile1d(view: View) {
             isFromApplication = 4
             openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentOneD(view: View){
+            mBinding?.llUpload1a?.hideView()
+            mBinding?.tvDocumentName1a?.text = null
+            mBinding?.etChooseFile1a?.text = ""
+            body = null
         }
 
         fun chooseFile1e(view: View) {
@@ -361,9 +394,23 @@ class AddVaccinationProgrammeStateLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentOneE(view: View){
+            mBinding?.llUpload1a?.hideView()
+            mBinding?.tvDocumentName1a?.text = null
+            mBinding?.etChooseFile1a?.text = ""
+            body = null
+        }
+
         fun chooseFile2(view: View) {
             isFromApplication = 6
             openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentTwo(view: View){
+            mBinding?.llUpload1a?.hideView()
+            mBinding?.tvDocumentName1a?.text = null
+            mBinding?.etChooseFile1a?.text = ""
+            body = null
         }
 
         fun chooseFile3(view: View) {
@@ -371,6 +418,12 @@ class AddVaccinationProgrammeStateLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentThree(view: View){
+            mBinding?.llUpload1a?.hideView()
+            mBinding?.tvDocumentName1a?.text = null
+            mBinding?.etChooseFile1a?.text = ""
+            body = null
+        }
     }
 
     private fun viewEditApi(viewEdit: String?) {
@@ -406,6 +459,7 @@ class AddVaccinationProgrammeStateLevel :
             lifecycleScope.launch {
                 delay(1000) // Delay for 2 seconds
                 if (latitude != null && longitude != null) {
+
                     if (valid()) {
                         viewModel.getStateVaccinationProgrammeAdd(
                             this@AddVaccinationProgrammeStateLevel, true,
