@@ -372,14 +372,13 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="cryocans">Cryocans:</string>
     <string name="save_as_draft">Save as draft</string>
     <string name="import_of_exotic_sheep_and_goat_gernplasm">Import of exotic sheep and goat gernplasm</string>
-    <string name="implementing_agency_document">implementing_agency_document</string>
-    <string name="rsp_laboratory_semen_document">rsp_laboratory_semen_document</string>
+    <string name="implementing_agency_document">implementing_agency</string>
+    <string name="rsp_laboratory_semen_document">rsp-laboratory-semen</string>
     <string name="fsp_plant_storage_document">FspPlantStorage</string>
-    <string name="fp_from_non_forest_document">fp_from_non_forest_document</string>
-    <string name="assistance_for_ea_document">assistance_for_ea_document</string>
-    <string name="nlm_edp_document">nlm_edp_document</string>
-    <string name="ahidf_document">ahidf_document</string>
-<!--    //NDD DOCUMENTS-->
+    <string name="fp_from_non_forest_document">fpfrom_non_forest</string>
+    <string name="assistance_for_ea_document">assistance-for-ea</string>
+    <string name="nlm_edp_document">nlm_edp</string>
+    <string name="ahidf_document">ahidf</string>
     <string name="nlm_b_components_document">nlm_b_components</string>
     <string name="milk_union_visit_report_document">milk_union_visit_report</string>
     <string name="dairy_plant_visit_report_document">dairy_plant_visit_report</string>
@@ -387,18 +386,17 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="state_central_lab_visit_document">state_central_lab_visit</string>
     <string name="milk_processing_document">milk_processing</string>
     <string name="milk_product_marketing_document">milk_product_marketing</string>
-    <string name="productivity_enhancement_services_document">productivity_enhancement_services</string>
-<!--    //List-->
-    <string name="state_semen_bank_document">state_semen_bank_document</string>
+    <string name="productivity_enhancement_services_document">productivity_enhancement_services</string>l
+    <string name="state_semen_bank_document">state_semen_bank</string>
     <string name="mobile_veterinary_unit_state">mobile_veterinary_unit_state</string>
     <string name="mobile_veterinary_unit_district">mobile_veterinary_unit_district</string>
     <string name="mobile_veterinary_unit_block">mobile_veterinary_unit_block</string>
     <string name="mobile_veterinary_unit_farmer">mobile_veterinary_unit_farmer</string>
     <string name="rsp_lab">RSP Lab</string>
     <string name="artificial_insemination">artificial_insemination</string>
-    <string name="state_vaccination_programme">state_vaccination_programme</string>
+    <string name="state_vaccination_programme">state_level_vaccination</string>
     <string name="assistance_for_qfsp_document">assistance_for_qfsp</string>
-    <string name="fp_from_forest_land_document">fp_from_forest_land_document</string>
+    <string name="fp_from_forest_land_document">fp-from-forest-land</string>
     <string name="animal_husbandry_infrastructure_development_fund_format_12"><ul><li>Animal Husbandry Infrastructure Development Fund(Format 12)</li></ul></string>
     <string name="import_of_exotic_goat">import_of_exotic_goat</string>
     <string name="states">States<font color="#FF0000">*</font></string>
@@ -429,7 +427,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="have_you_paid_for_the_services_offered_by_mvus">Have you paid for the services offered by MVUs?</string>
     <string name="ascad_state">ascad_state</string>
     <string name="ascad_district">ascad_district</string>
-    <string name="district_vaccination_programme">district_vaccination_programme</string>
+    <string name="district_vaccination_programme">District_level_vaccination</string>
     <string name="please_select">Please Select</string>
     <string name="no_file_chosen">No File Chosen</string>
     <string name="please_fill_all_the_input_and_remark_fields">Please Fill All The Input and Remark Fields</string>
@@ -439,7 +437,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="list_of_state_vaccination_programme">List of State Vaccination Programme</string>
     <string name="list_of_district_vaccination_programme">List of District Vaccination Programme</string>
     <string name="list_of_beneficiary_farmer_vaccination_programme">List of Beneficiary/farmer Vaccination Programme</string>
-    <string name="farmer_vaccination_programme">farmer_vaccination_programme</string>
+    <string name="farmer_vaccination_programme">Farmer_level_vaccination</string>
     <string name="blocks">blocks<font color="#FF0000">*</font></string>
     <string name="upload">Upload</string>
     <string name="block_level_indicators">Block level Indicators</string>

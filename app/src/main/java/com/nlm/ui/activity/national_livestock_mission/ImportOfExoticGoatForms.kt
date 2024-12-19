@@ -42,6 +42,7 @@ import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemImportExoticGermplasmBinding
 import com.nlm.databinding.ItemImportExoticVerifiedNlmBinding
 import com.nlm.databinding.ItemImportOfExoticGoatAchievementBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.IdAndDetails
 import com.nlm.model.ImplementingAgencyDocument
@@ -591,18 +592,32 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
             Log.d("URLL",fileExtension.toString())
             if (isSupported) {
+                val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
                 when (fileExtension) {
                     "pdf" -> {
+                        val downloader = AndroidDownloader(context)
                         bindingDialog.ivPic.let {
                             Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
                                 it
                             )
                         }
+                        bindingDialog.etDoc.setOnClickListener {
+                            if (!UploadedDocumentName.isNullOrEmpty()) {
+                                downloader.downloadFile(url, UploadedDocumentName!!)
+                                mBinding?.let { it1 -> showSnackbar(it1.main,"Download started") }
+                                dialog.dismiss()
+                            }
+                            else{
+                                mBinding?.let { it1 -> showSnackbar(it1.main,"No document found") }
+                                dialog.dismiss()
+                            }
+                        }
+
                     }
 
                     "png" -> {
                         bindingDialog.ivPic.let {
-                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                            Glide.with(context).load(url).placeholder(R.drawable.ic_image_placeholder).into(
                                 it
                             )
                         }
@@ -610,7 +625,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
 
                     "jpg" -> {
                         bindingDialog.ivPic.let {
-                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                            Glide.with(context).load(url).placeholder(R.drawable.ic_image_placeholder).into(
                                 it
                             )
                         }
@@ -730,13 +745,10 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                         }
                     }
                 }
-
-
             } else {
                 showSnackbar(mBinding!!.main, getString(R.string.please_enter_atleast_one_field))
             }
         }
-
         dialog.show()
     }
 
@@ -1247,14 +1259,14 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                             )
                         )
                     }
-                } else {
+                }
+                else {
                     showSnackbar(mBinding?.main!!, "Please wait for a sec and click again")
                 }
             }
         } else {
             showLocationAlertDialog()
         }
-
     }
 
     override fun onClickItem(

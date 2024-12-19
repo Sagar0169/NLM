@@ -17,6 +17,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -178,7 +179,16 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         val finalBitmap = addWatermark(imageBitmap)
         val imageSizeInBytes = getImageSizeInBytes(finalBitmap)
         val imageSize = formatImageSize(imageSizeInBytes)
-
+//        var imageName = "Unknown"
+//        val cursor = contentResolver.query(imageUri, null, null, null, null)
+//        cursor?.use {
+//            if (it.moveToFirst()) {
+//                val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+//                if (nameIndex != -1) {
+//                    imageName = it.getString(nameIndex)
+//                }
+//            }
+//        }
         if (imageSizeInBytes > 5 * 1024 * 1024) {
             Toast.makeText(this, "Upload an image size less than 5MB", Toast.LENGTH_SHORT).show()
         } else {

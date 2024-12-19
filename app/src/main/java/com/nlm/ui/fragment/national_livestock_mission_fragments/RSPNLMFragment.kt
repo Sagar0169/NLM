@@ -28,6 +28,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
@@ -39,6 +40,7 @@ import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentRSPManpowerBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemRspBucksBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.RSPAddRequest
@@ -56,6 +58,7 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -85,6 +88,7 @@ class RSPNLMFragment(
     private var addBuckAdapter: AverageSemenDoseAdapter? = null
     private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
     private var DialogDocName: TextView? = null
+    private var TableName: String? = null
     private var DocumentName: String? = null
     private var uploadData : ImageView?=null
     private var districtId: Int? = null // Store selected state
@@ -276,6 +280,7 @@ class RSPNLMFragment(
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
                     DialogDocName?.text=userResponseModel._result.document_name
+                    TableName=userResponseModel._result.table_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -294,6 +299,7 @@ class RSPNLMFragment(
                 if (userResponseModel._resultflag == 0) {
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 } else {
+                    TableName=userResponseModel.fileurl
                     if (savedAsDraft) {
                         savedAsDraftClick?.onSaveAsDraft()
                     } else {
@@ -545,7 +551,6 @@ class RSPNLMFragment(
         }
     }
 
-
     private fun addDocumentDialog(
         context: Context,
         selectedItem: ImplementingAgencyDocument?,
@@ -567,32 +572,111 @@ class RSPNLMFragment(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
-
         val lp: WindowManager.LayoutParams = dialog.window!!.attributes
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-
         DialogDocName = bindingDialog.etDoc
-        uploadData=bindingDialog.ivPic
-        if (selectedItem != null) {
-            UploadedDocumentName = selectedItem.nlm_document
-            bindingDialog.etDoc.text = selectedItem.nlm_document
-            bindingDialog.etDescription.setText(selectedItem.description)
+        uploadData = bindingDialog.ivPic
+        bindingDialog.btnDelete.setOnClickListener {
+            dialog.dismiss()
         }
-        bindingDialog.tvChooseFile.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
-            {
 
-                checkStoragePermission(requireContext())
+        if (selectedItem != null) {
+            bindingDialog.ivPic.showView()
+            if (selectedItem.is_edit==false)
+            {
+                bindingDialog.tvSubmit.hideView()
+                bindingDialog.tvChooseFile.isEnabled=false
+                bindingDialog.etDescription.isEnabled=false
+            }
+            if (getPreferenceOfScheme(
+                    requireContext(),
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id == 24 ||selectedItem.is_ia == true
+            ) {
+                UploadedDocumentName = selectedItem.ia_document
+                bindingDialog.etDoc.text = selectedItem.ia_document
+
             }
             else{
 
-                mBinding?.clParent?.let { showSnackbar(it,"please enter description") }
+                UploadedDocumentName = selectedItem.nlm_document
+                bindingDialog.etDoc.text = selectedItem.nlm_document
+            }
+            bindingDialog.etDescription.setText(selectedItem.description)
+
+            val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+            Log.d("URLL",fileExtension.toString())
+            if (isSupported) {
+                when (fileExtension) {
+                    "pdf" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                                it
+                            )
+                        }
+                        val url=getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        val downloader = AndroidDownloader(context)
+                        bindingDialog.etDoc.setOnClickListener {
+                            if (!UploadedDocumentName.isNullOrEmpty()) {
+                                downloader.downloadFile(url, UploadedDocumentName!!)
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                                dialog.dismiss()
+                            }
+                            else{
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                                dialog.dismiss()
+                            }
+                        }
+                    }
+
+                    "png" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "jpg" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+                }
             }
         }
+        bindingDialog.tvChooseFile.setOnClickListener {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
 
-        bindingDialog.btnDelete.setOnClickListener {
-            dialog.dismiss()
+                checkStoragePermission(requireContext())
+            } else {
+
+                mBinding?.clParent?.let { showSnackbar(it, "please enter description") }
+            }
+        }
+        val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+        if (isSupported) {
+            when (fileExtension) {
+                "pdf" -> {
+//                    bindingDialog.ivPic.let {
+//                        Glide.with(context).load(R.drawable.ic_pdf).into(
+//                            it
+//                        )
+//                    }
+                }
+                else -> {
+                    bindingDialog.ivPic.setOnClickListener {
+                        Utility.showImageDialog(
+                            requireContext(),
+                            getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        )
+                    }
+                }
+            }
         }
 
         bindingDialog.tvSubmit.setOnClickListener {
@@ -636,8 +720,11 @@ class RSPNLMFragment(
                 )
             }
         }
+
+
         dialog.show()
     }
+
 
     private fun openOnlyPdfAccordingToPosition() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -723,6 +810,7 @@ class RSPNLMFragment(
                 }
             }}
     }
+
 
     private fun addBucks(
         context: Context,

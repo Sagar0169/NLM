@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.net.Uri
@@ -13,15 +14,19 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.imageview.ShapeableImageView
 import com.nlm.R
 import com.nlm.databinding.ActivityAddVaccinationProgrammeStateLevelBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
@@ -31,15 +36,21 @@ import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 class AddVaccinationProgrammeStateLevel :
     BaseActivity<ActivityAddVaccinationProgrammeStateLevelBinding>() {
@@ -58,7 +69,7 @@ class AddVaccinationProgrammeStateLevel :
     private var viewEdit: String? = null
     private var uploadedDocumentName: String? = null
     private var dialogDocName: TextView? = null
-    private var documentName: String? = null
+    private var TableName: String? = null
     var body: MultipartBody.Part? = null
     var isFromApplication = 0
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -164,6 +175,7 @@ class AddVaccinationProgrammeStateLevel :
                 if (userResponseModel._resultflag == 0) {
                     mBinding?.main?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
                 } else {
+                    TableName=userResponseModel.fileurl
                     if (savedAsDraft) {
                         onBackPressedDispatcher.onBackPressed()
                         mBinding?.main?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
@@ -188,20 +200,62 @@ class AddVaccinationProgrammeStateLevel :
                         mBinding?.etRemark2?.setText(userResponseModel._result.seromonitoring_facilitie_remarks)
                         mBinding?.etRemark3?.setText(userResponseModel._result.process_plan_monitoring_remarks)
 
-                        mBinding?.etChooseFile1a?.text =
-                            if (userResponseModel._result.schedule_vaccination_focal_point_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_focal_point_upload
-                        mBinding?.etChooseFile1b?.text =
-                            if (userResponseModel._result.schedule_vaccination_timeline_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_timeline_upload
-                        mBinding?.etChooseFile1c?.text =
-                            if (userResponseModel._result.schedule_vaccination_arrangement_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_arrangement_upload
-                        mBinding?.etChooseFile1d?.text =
-                            if (userResponseModel._result.schedule_vaccination_cold_chain_avail_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_cold_chain_avail_upload
-                        mBinding?.etChoosefile1e?.text =
-                            if (userResponseModel._result.schedule_vaccination_assign_areas_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.schedule_vaccination_assign_areas_upload
-                        mBinding?.etChooseFile2?.text =
-                            if (userResponseModel._result.seromonitoring_facilities_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.seromonitoring_facilities_upload
-                        mBinding?.etChooseFile3?.text =
-                            if (userResponseModel._result.process_plan_monitoring_upload.isNullOrEmpty()) "No file chosen" else userResponseModel._result.process_plan_monitoring_upload
+
+                            if (userResponseModel._result.schedule_vaccination_focal_point_upload.isNullOrEmpty()) {
+                                mBinding?.etChooseFile1a?.text = "No file chosen"
+                            } else {
+                                mBinding?.llUpload1a?.showView()
+                                mBinding?.tvDocumentName1a?.text = userResponseModel._result.schedule_vaccination_focal_point_upload
+                                mBinding?.ivPic1a?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_focal_point_upload) }
+                            }
+
+                            if (userResponseModel._result.schedule_vaccination_timeline_upload.isNullOrEmpty()) {
+                                mBinding?.etChooseFile1b?.text ="No file chosen"
+                            } else {
+                                mBinding?.llUpload1b?.showView()
+                                mBinding?.tvDocumentName1b?.text = userResponseModel._result.schedule_vaccination_timeline_upload
+                                mBinding?.ivPic1b?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_timeline_upload) }
+                            }
+
+                            if (userResponseModel._result.schedule_vaccination_arrangement_upload.isNullOrEmpty()) {
+                                mBinding?.etChooseFile1c?.text =   "No file chosen"
+                            }else {
+                                mBinding?.llUpload1c?.showView()
+                                mBinding?.tvDocumentName1c?.text = userResponseModel._result.schedule_vaccination_arrangement_upload
+                                mBinding?.ivPic1c?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_arrangement_upload) }
+                            }
+
+                            if (userResponseModel._result.schedule_vaccination_cold_chain_avail_upload.isNullOrEmpty()) {
+                                mBinding?.etChooseFile1d?.text =  "No file chosen"
+                            } else{
+                                mBinding?.llUpload1d?.showView()
+                                mBinding?.tvDocumentName1d?.text = userResponseModel._result.schedule_vaccination_cold_chain_avail_upload
+                                mBinding?.ivPic1d?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_cold_chain_avail_upload) }
+                            }
+
+                            if (userResponseModel._result.schedule_vaccination_assign_areas_upload.isNullOrEmpty()){
+                                mBinding?.etChoosefile1e?.text =   "No file chosen"
+                            } else {
+                                mBinding?.llUpload1e?.showView()
+                                mBinding?.tvDocumentName1e?.text =  userResponseModel._result.schedule_vaccination_assign_areas_upload
+                                mBinding?.ivPic1e?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_assign_areas_upload) }
+                            }
+
+                            if (userResponseModel._result.seromonitoring_facilities_upload.isNullOrEmpty()) {
+                                mBinding?.etChooseFile2?.text =  "No file chosen"
+                            } else{
+                                mBinding?.llUpload2?.showView()
+                                mBinding?.tvDocumentName2?.text = userResponseModel._result.seromonitoring_facilities_upload
+                                mBinding?.ivPic2?.let { it1 -> GlideImage(it1,userResponseModel._result.seromonitoring_facilities_upload) }
+                            }
+
+                            if (userResponseModel._result.process_plan_monitoring_upload.isNullOrEmpty()){
+                                mBinding?.etChooseFile3?.text =   "No file chosen"
+                            } else {
+                                mBinding?.llUpload3?.showView()
+                                mBinding?.tvDocumentName3?.text =  userResponseModel._result.process_plan_monitoring_upload
+                                mBinding?.ivPic3?.let { it1 -> GlideImage(it1, userResponseModel._result.process_plan_monitoring_upload) }
+                            }
                     }
 
                     mBinding?.main?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
@@ -246,40 +300,43 @@ class AddVaccinationProgrammeStateLevel :
 
                 } else {
                     uploadedDocumentName = userResponseModel._result.document_name
+                    TableName=userResponseModel._result.table_name
                     dialogDocName?.text = userResponseModel._result.document_name
+
                     when (isFromApplication) {
                         1 -> {
-                            mBinding?.etChooseFile1a?.text = uploadedDocumentName
+                            mBinding?.llUpload1a?.showView()
+                            mBinding?.tvDocumentName1a?.text = uploadedDocumentName
 
                         }
 
                         2 -> {
-                            mBinding?.etChooseFile1b?.text = uploadedDocumentName
+                            mBinding?.tvDocumentName1b?.text = uploadedDocumentName
 
                         }
 
                         3 -> {
-                            mBinding?.etChooseFile1c?.text = uploadedDocumentName
+                            mBinding?.tvDocumentName1c?.text = uploadedDocumentName
 
                         }
 
                         4 -> {
-                            mBinding?.etChooseFile1d?.text = uploadedDocumentName
+                            mBinding?.tvDocumentName1d?.text = uploadedDocumentName
 
                         }
 
                         5 -> {
-                            mBinding?.etChoosefile1e?.text = uploadedDocumentName
+                            mBinding?.tvDocumentName1e?.text = uploadedDocumentName
 
                         }
 
                         6 -> {
-                            mBinding?.etChooseFile2?.text = uploadedDocumentName
+                            mBinding?.tvDocumentName2?.text = uploadedDocumentName
 
                         }
 
                         7 -> {
-                            mBinding?.etChooseFile3?.text = uploadedDocumentName
+                            mBinding?.tvDocumentName3?.text = uploadedDocumentName
 
                         }
 
@@ -298,7 +355,66 @@ class AddVaccinationProgrammeStateLevel :
             }
         }
     }
+private fun GlideImage(imageView:ShapeableImageView,   uploadedDocumentName:String?){
+    val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(uploadedDocumentName)
+    val (isSupported, fileExtension) = getFileType(uploadedDocumentName.toString())
 
+    if (isSupported) {
+
+
+        when (fileExtension) {
+            "pdf" -> {
+                val downloader = AndroidDownloader(this)
+                imageView.let {
+                    Glide.with(this).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                        it
+                    )
+
+                }
+                imageView.setOnClickListener {
+                    if (!uploadedDocumentName.isNullOrEmpty()) {
+                        downloader.downloadFile(url, uploadedDocumentName!!)
+                        mBinding?.let { it1 -> showSnackbar(it1.main,"Download started") }
+
+                    }
+                    else{
+                        mBinding?.let { it1 -> showSnackbar(it1.main,"No document found") }
+                    }
+                }
+
+            }
+
+            "png" -> {
+                imageView.let {
+                    Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                        it
+                    )
+                    imageView.setOnClickListener {
+                        Utility.showImageDialog(
+                            this,
+                            url
+                        )
+                    }
+
+                }
+            }
+
+            "jpg" -> {
+                imageView.let {
+                    Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                        it
+                    )
+                    imageView.setOnClickListener {
+                        Utility.showImageDialog(
+                            this,
+                            url
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
     inner class ClickActions {
         fun backPress(view: View) {
             onBackPressedDispatcher.onBackPressed()
@@ -341,9 +457,23 @@ class AddVaccinationProgrammeStateLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentOneA(view: View){
+            mBinding?.llUpload1a?.hideView()
+            mBinding?.tvDocumentName1a?.text = null
+            mBinding?.etChooseFile1a?.text = ""
+            body = null
+        }
+
         fun chooseFile1b(view: View) {
             isFromApplication = 2
             openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentOneB(view: View){
+            mBinding?.llUpload1b?.hideView()
+            mBinding?.tvDocumentName1b?.text = null
+            mBinding?.tvDocumentName1b?.text = ""
+            body = null
         }
 
         fun chooseFile1c(view: View) {
@@ -351,9 +481,23 @@ class AddVaccinationProgrammeStateLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentOneC(view: View){
+            mBinding?.llUpload1c?.hideView()
+            mBinding?.tvDocumentName1c?.text = null
+            mBinding?.tvDocumentName1c?.text = ""
+            body = null
+        }
+
         fun chooseFile1d(view: View) {
             isFromApplication = 4
             openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentOneD(view: View){
+            mBinding?.llUpload1d?.hideView()
+            mBinding?.tvDocumentName1d?.text = null
+            mBinding?.tvDocumentName1d?.text = ""
+            body = null
         }
 
         fun chooseFile1e(view: View) {
@@ -361,9 +505,23 @@ class AddVaccinationProgrammeStateLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentOneE(view: View){
+            mBinding?.llUpload1e?.hideView()
+            mBinding?.tvDocumentName1e?.text = null
+            mBinding?.tvDocumentName1e?.text = ""
+            body = null
+        }
+
         fun chooseFile2(view: View) {
             isFromApplication = 6
             openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentTwo(view: View){
+            mBinding?.llUpload2?.hideView()
+            mBinding?.tvDocumentName2?.text = null
+            mBinding?.tvDocumentName2?.text = ""
+            body = null
         }
 
         fun chooseFile3(view: View) {
@@ -371,6 +529,12 @@ class AddVaccinationProgrammeStateLevel :
             openOnlyPdfAccordingToPosition()
         }
 
+        fun deleteDocumentThree(view: View){
+            mBinding?.llUpload3?.hideView()
+            mBinding?.tvDocumentName3?.text = null
+            mBinding?.tvDocumentName3?.text = ""
+            body = null
+        }
     }
 
     private fun viewEditApi(viewEdit: String?) {
@@ -406,6 +570,7 @@ class AddVaccinationProgrammeStateLevel :
             lifecycleScope.launch {
                 delay(1000) // Delay for 2 seconds
                 if (latitude != null && longitude != null) {
+
                     if (valid()) {
                         viewModel.getStateVaccinationProgrammeAdd(
                             this@AddVaccinationProgrammeStateLevel, true,
@@ -424,25 +589,25 @@ class AddVaccinationProgrammeStateLevel :
                                 )?.role_id,
                                 schedule_vaccination_focal_point_input = mBinding?.etInput1a?.text.toString(),
                                 schedule_vaccination_focal_point_remark = mBinding?.etRemark1a?.text.toString(),
-                                schedule_vaccination_focal_point_upload = mBinding?.etChooseFile1a?.text.toString(),
+                                schedule_vaccination_focal_point_upload = mBinding?.tvDocumentName1a?.text.toString(),
                                 schedule_vaccination_timeline_inputs = mBinding?.etInput1b?.text.toString(),
                                 schedule_vaccination_timeline_remarks = mBinding?.etRemark1b?.text.toString(),
-                                schedule_vaccination_timeline_upload = mBinding?.etChooseFile1b?.text.toString(),
+                                schedule_vaccination_timeline_upload = mBinding?.tvDocumentName1b?.text.toString(),
                                 schedule_vaccination_arrangement_inputs = mBinding?.etInput1c?.text.toString(),
                                 schedule_vaccination_arrangement_remarks = mBinding?.etRemark1c?.text.toString(),
-                                schedule_vaccination_arrangement_upload = mBinding?.etChooseFile1c?.text.toString(),
+                                schedule_vaccination_arrangement_upload = mBinding?.tvDocumentName1c?.text.toString(),
                                 schedule_vaccination_cold_chain_avail_inputs = mBinding?.etInput1d?.text.toString(),
                                 schedule_vaccination_cold_chain_avail_remarks = mBinding?.etRemark1d?.text.toString(),
-                                schedule_vaccination_cold_chain_avail_upload = mBinding?.etChooseFile1d?.text.toString(),
+                                schedule_vaccination_cold_chain_avail_upload = mBinding?.tvDocumentName1d?.text.toString(),
                                 schedule_vaccination_assign_areas_inputs = mBinding?.etInput1e?.text.toString(),
                                 schedule_vaccination_assign_areas_remarks = mBinding?.etRemark1e?.text.toString(),
-                                schedule_vaccination_assign_areas_upload = mBinding?.etChoosefile1e?.text.toString(),
+                                schedule_vaccination_assign_areas_upload = mBinding?.tvDocumentName1e?.text.toString(),
                                 seromonitoring_facilities_input = mBinding?.etInput2?.text.toString(),
                                 seromonitoring_facilitie_remarks = mBinding?.etRemark2?.text.toString(),
-                                seromonitoring_facilities_upload = mBinding?.etChooseFile2?.text.toString(),
+                                seromonitoring_facilities_upload = mBinding?.tvDocumentName2?.text.toString(),
                                 process_plan_monitoring_inputs = mBinding?.etInput3?.text.toString(),
                                 process_plan_monitoring_remarks = mBinding?.etRemark3?.text.toString(),
-                                process_plan_monitoring_upload = mBinding?.etChooseFile3?.text.toString(),
+                                process_plan_monitoring_upload = mBinding?.tvDocumentName3?.text.toString(),
                                 id = itemId,
                                 longitude = longitude,
                                 latitude = latitude
@@ -659,76 +824,349 @@ class AddVaccinationProgrammeStateLevel :
         else
             return true
     }
-    private fun openOnlyPdfAccordingToPosition() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "application/pdf"
-        }
-        startActivityForResult(intent, REQUEST_iMAGE_PDF)
-    }
+    override fun showImage(bitmap: Bitmap) {
+        // Override to display the image in this activity
+        Log.d("TAG", isFromApplication.toString())
+        when (isFromApplication) {
+            1 -> {
+                mBinding?.llUpload1a?.showView()
+                mBinding?.ivPic1a?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPic1a?.setOnClickListener {
 
+                        Utility.showImageDialogFileUrl(
+                            this,
+                            imageFile
+                        )
+
+                }
+
+                uploadImage(imageFile)
+            }
+
+            2 -> {
+                mBinding?.llUpload1b?.showView()
+                mBinding?.ivPic1b?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPic1b?.setOnClickListener {
+
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+            3 -> {
+                mBinding?.llUpload1c?.showView()
+                mBinding?.ivPic1c?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPic1c?.setOnClickListener {
+
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+            4 -> {
+                mBinding?.llUpload1d?.showView()
+                mBinding?.ivPic1d?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPic1d?.setOnClickListener {
+
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+            5 -> {
+                mBinding?.llUpload1e?.showView()
+                mBinding?.ivPic1e?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPic1e?.setOnClickListener {
+
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+            6 -> {
+                mBinding?.llUpload2?.showView()
+                mBinding?.ivPic2?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPic2?.setOnClickListener {
+
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+            7 -> {
+                mBinding?.llUpload3?.showView()
+                mBinding?.ivPic3?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPic3?.setOnClickListener {
+
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+        }
+    }
+    private fun openOnlyPdfAccordingToPosition() {
+        checkStoragePermission(this@AddVaccinationProgrammeStateLevel)
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
+                CAPTURE_IMAGE_REQUEST -> {
+                    Log.d("ISFROM", isFromApplication.toString())
+                    val bitmap = data?.extras?.get("data") as Bitmap
+                }
+
+                PICK_IMAGE -> {
+                    val selectedImageUri = data?.data
+                    if (selectedImageUri != null) {
+                        val uriPathHelper = URIPathHelper()
+                        val filePath = uriPathHelper.getPath(this, selectedImageUri)
+
+                        val fileExtension =
+                            filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+                        // Validate file extension
+                        if (fileExtension in listOf("png", "jpg", "jpeg")) {
+                            val file = filePath?.let { File(it) }
+
+                            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+                            file?.let {
+                                val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
+                                if (fileSizeInMB <= 5) {
+                                    when (isFromApplication) {
+                                        1 -> {
+                                            mBinding?.llUpload1a?.showView()
+                                            mBinding?.ivPic1a?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPic1a?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        2 -> {
+                                            mBinding?.llUpload1b?.showView()
+                                            mBinding?.ivPic1b?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPic1b?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        3 -> {
+                                            mBinding?.llUpload1c?.showView()
+                                            mBinding?.ivPic1c?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPic1c?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        4 -> {
+                                            mBinding?.llUpload1d?.showView()
+                                            mBinding?.ivPic1d?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPic1d?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        5 -> {
+                                            mBinding?.llUpload1e?.showView()
+                                            mBinding?.ivPic1e?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPic1e?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        6 -> {
+                                            mBinding?.llUpload2?.showView()
+                                            mBinding?.ivPic2?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPic2?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        7 -> {
+                                            mBinding?.llUpload3?.showView()
+                                            mBinding?.ivPic3?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPic3?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        else -> {}
+                                    }
+                                } else {
+                                    mBinding?.let { showSnackbar(it.main,"File size exceeds 5 MB") }
+                                }
+                            }
+                        } else {
+                            mBinding?.let { showSnackbar(it.main,"Format not supported") }
+                        }
+                    }
+                }
+
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        val cursor = this.contentResolver.query(
-                            uri,
-                            projection,
-                            null,
-                            null,
-                            null
-                        )
+
+
+                        val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                documentName =
+                                val documentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                when (isFromApplication) {
-                                    1 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                val fileSizeInBytes =
+                                    it.getLong(it.getColumnIndex(MediaStore.MediaColumns.SIZE))
+                                val fileSizeInMB = fileSizeInBytes / (1024 * 1024.0) // Convert to MB
 
-                                    2 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
+                                if (fileSizeInMB <= 5) {
+                                    when (isFromApplication) {
+                                        1 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUpload1a?.showView()
+                                            mBinding?.ivPic1a?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    3 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        2 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUpload1b?.showView()
+                                            mBinding?.ivPic1b?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    4 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        3 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUpload1c?.showView()
+                                            mBinding?.ivPic1c?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    5 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        4 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUpload1d?.showView()
+                                            mBinding?.ivPic1d?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    6 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        5 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUpload1e?.showView()
+                                            mBinding?.ivPic1e?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    7 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        6 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUpload2?.showView()
+                                            mBinding?.ivPic2?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    else -> {
-                                        uploadDocument(documentName, uri)
+                                        7 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUpload3?.showView()
+                                            mBinding?.ivPic3?.setImageResource(R.drawable.ic_pdf)
+                                        }
+                                        else -> {
+                                            uploadDocument(documentName, uri)
+                                        }
+
                                     }
+//                                    DocumentName = documentName
+//                                    val requestBody = convertToRequestBody(this, uri)
+//                                    body = MultipartBody.Part.createFormData(
+//                                        "document_name",
+//                                        documentName,
+//                                        requestBody
+//                                    )
+//                                    viewModel.getProfileUploadFile(
+//                                        context = this,
+//                                        document_name = body,
+//                                        user_id = getPreferenceOfScheme(
+//                                            this,
+//                                            AppConstants.SCHEME,
+//                                            Result::class.java
+//                                        )?.user_id,
+//                                        table_name = getString(R.string.import_of_exotic_goat).toRequestBody(
+//                                            MultipartBody.FORM
+//                                        ),
+//                                    )
+                                } else {
+                                    mBinding?.let { showSnackbar(it.main,"File size exceeds 5 MB") }
                                 }
                             }
-
                         }
                     }
                 }
             }
         }
-
     }
 
     private fun uploadDocument(DocumentName: String?, uri: Uri) {
@@ -785,4 +1223,26 @@ class AddVaccinationProgrammeStateLevel :
                 }
             }
         }
+
+    private fun uploadImage(file: File) {
+        lifecycleScope.launch {
+            val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            body =
+                MultipartBody.Part.createFormData(
+                    "document_name",
+                    file.name, reqFile
+                )
+            viewModel.getProfileUploadFile(
+                context = this@AddVaccinationProgrammeStateLevel,
+                document_name = body,
+                user_id = getPreferenceOfScheme(
+                    this@AddVaccinationProgrammeStateLevel,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                table_name = getString(R.string.state_vaccination_programme).toRequestBody(MultipartBody.FORM),
+            )
+        }
+    }
+
 }

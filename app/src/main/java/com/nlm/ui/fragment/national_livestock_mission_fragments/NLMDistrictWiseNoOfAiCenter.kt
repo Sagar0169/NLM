@@ -139,6 +139,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                                     it1
                                 )
                             }
+                                mBinding?.etPresentSystem?.setText(userResponseModel._result.present_system.toString())
                             mNlmIADistrictWiseNoList.clear()
                                 if (userResponseModel._result.implementing_agency_involved_district_wise.isNullOrEmpty()) {
                                     mNlmIADistrictWiseNoList.add(
@@ -446,6 +447,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
            request = ImplementingAgencyAddRequest(
                part = "part5",
                no_of_al_technicians = mBinding?.etNoOfAiTechnician?.text.toString().toIntOrNull(),
+               present_system = mBinding?.etPresentSystem?.text.toString(),
                number_of_ai = mBinding?.etNumberOfAiTechnicianTrained?.text.toString().toIntOrNull(),
                total_paravet_trained = mBinding?.etTotalNoOfParavetTrained?.text.toString().toIntOrNull(),
                implementing_agency_involved_district_wise = mNlmIADistrictWiseNoList,
