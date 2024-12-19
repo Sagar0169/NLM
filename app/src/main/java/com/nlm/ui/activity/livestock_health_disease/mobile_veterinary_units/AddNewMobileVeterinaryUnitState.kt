@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
 import android.net.Uri
@@ -32,16 +33,19 @@ import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
+import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterinaryUnitStateBinding>() {
     private var mBinding: ActivityAddNewMobileVeterinaryUnitStateBinding? = null
@@ -461,6 +465,7 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
             type = "application/pdf"
         }
         startActivityForResult(intent, REQUEST_iMAGE_PDF)
+//        checkStoragePermission(this@AddNewMobileVeterinaryUnitState)
     }
 
     @SuppressLint("Range")

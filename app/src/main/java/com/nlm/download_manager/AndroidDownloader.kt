@@ -14,7 +14,7 @@ class AndroidDownloader(
     override fun downloadFile(url: String, fileName: String): Long {
         val request = DownloadManager.Request(url.toUri())
             .setMimeType("application/pdf")
-            .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI)
+            .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setTitle(fileName)
             .addRequestHeader("Authorization", "Bearer <token>")

@@ -1543,6 +1543,7 @@ data class StateVaccinationProgrammeAddResponse(
     val _result: StateVaccinationProgrammeAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 
@@ -1585,6 +1586,7 @@ data class DistrictVaccinationProgrammeAddResponse(
     val _result: DistrictVaccinationProgrammeAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 
@@ -1621,6 +1623,7 @@ data class FarmerVaccinationProgrammeAddResponse(
     val _result: FarmerVaccinationProgrammeAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 
@@ -1834,6 +1837,7 @@ data class StateAscadAddResponse(
     val _result: StateAscadAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 
@@ -1868,6 +1872,7 @@ data class DistrictAscadAddResponse(
     val _result: DistrictAscadAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 
