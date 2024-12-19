@@ -398,6 +398,27 @@ data class GetDropDownResponse(
     val total_count: Int
 )
 
+data class SubTableDeleteResponse(
+    val `data`: SubTableDeleteData,
+    val message: String,
+    val status: Int
+)
+
+data class SubTableDeleteData(
+    val dairy_plant_visit_report_id: Int,
+    val id: Int,
+    val major_equipments_milk_products: String,
+    val npdd_scheme_available: Int,
+    val npdd_scheme_major_lab_available: Any,
+    val npdd_scheme_major_lab_no: Any,
+    val npdd_scheme_major_lab_present_status: Any,
+    val npdd_scheme_major_lab_remarks: Any,
+    val npdd_scheme_major_lab_strengthening: Any,
+    val npdd_scheme_present_status: Int,
+    val npdd_scheme_proj_no: Int,
+    val npdd_scheme_remarks: String
+)
+
 data class ResultGetDropDown(
     val id: Int,
     val name: String
@@ -578,11 +599,13 @@ data class ImplementingAgencyDocument(
     val assistance_for_ea_id: Int? = null,
     val nlm_document: String? = null,
     val fp_from_non_forest_id: Int? = null,
+    val dairy_plant_visit_report_id: Int? = null,
     val nlm_b_component_id: Int?=null,
     val is_edit: Boolean?=null,
-    val is_ia:Boolean?=null
+    val is_ia:Boolean?=null,
+    val onsite_dcs_center_visit_id: Int?=null
 
-    )
+)
 //
 //data class ImplementingAgencyFundsReceived(
 //    val any_other: Int,
@@ -2197,3 +2220,275 @@ data class NDDProductivityEnhancementServicesListData(
     val state_code: Int,
     val state_name: String
 )
+
+
+
+//data class AddDairyPlantResponse(
+//    val _result: AddDairyPlantResult,
+//    val _resultflag: Int,
+//    val message: String,
+//    val statuscode: Int
+//)
+//
+//data class AddDairyPlantResult(
+//    val capacity_of_dairy_plant: String,
+//    val chemical_frequency_tests_performed: String,
+//    val chemical_snf_frequency: String,
+//    val chemical_snf_result: String,
+//    val chemical_tests_performed: String,
+//    val created_by: Int,
+//    val created_by_id: String,
+//    val created_on: String,
+//    val daily_avg_last_year_liquid_milk: String,
+//    val daily_avg_last_year_value_added_curd: String,
+//    val daily_avg_last_year_value_added_ghee: String,
+//    val daily_avg_last_year_value_added_lassi: String,
+//    val dairy_plant_visit_report_document: List<ImplementingAgencyDocument>,
+//    val dairy_plant_visit_report_npdd_scheme: List<DairyPlantVisitReportNpddScheme>,
+//    val districts: Int,
+//    val fssai_license_no: String,
+//    val haccp_quality_management_system_complied: String,
+//    val id: Int,
+//    val is_deleted: Int,
+//    val location_of_dairy_plant: String,
+//    val district_name: String,
+//    val state_name: String,
+//    val number_of_bmc_route_milk: String,
+//    val number_of_non_bmc_route_milk: String,
+//    val number_of_total_route_milk: String,
+//    val other_details_capacity: String,
+//    val other_details_etp_functioning: String,
+//    val photographs_of_site: String,
+//    val plant_haccp_complied: String,
+//    val remark_by_nlm: String,
+//    val role_id: String,
+//    val state_code: Int,
+//    val status: Int,
+//    val total_bmc_capacity: String,
+//    val total_dcs_covered: String,
+//    val user_id: String,
+//    val year_of_establishment: String
+//)
+//
+//
+//data class DairyPlantVisitReportNpddScheme(
+//    val dairy_plant_visit_report_id: Int,
+//    val id: Int,
+//    val major_equipments_milk_products: String,
+//    val npdd_scheme_available: Int,
+//    val npdd_scheme_major_lab_available: Int,
+//    val npdd_scheme_major_lab_no: Int,
+//    val npdd_scheme_major_lab_present_status: String,
+//    val npdd_scheme_major_lab_remarks: String,
+//    val npdd_scheme_major_lab_strengthening: String,
+//    val npdd_scheme_present_status: Int,
+//    val npdd_scheme_proj_no: Int,
+//    val npdd_scheme_remarks: String
+//)
+
+
+data class AddDairyPlantResponse(
+    val _result: AddDairyPlantVisitResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class AddDairyPlantVisitResult(
+    val capacity_of_dairy_plant: String,
+    val chemical_acidity_frequency: Any,
+    val chemical_acidity_result: Any,
+    val chemical_adulterants_frequency: Any,
+    val chemical_adulterants_result: Any,
+    val chemical_antibiotic_frequency: Any,
+    val chemical_antibiotic_result: Any,
+    val chemical_bod_frequency: Any,
+    val chemical_bod_result: Any,
+    val chemical_cod_frequency: Any,
+    val chemical_cod_result: Any,
+    val chemical_coliform_frequency: Any,
+    val chemical_coliform_result: Any,
+    val chemical_frequency_tests_performed: String,
+    val chemical_heavy_metal_frequency: Any,
+    val chemical_heavy_metal_result: Any,
+    val chemical_mbrt_frequency: Any,
+    val chemical_mbrt_result: Any,
+    val chemical_pesticide_residue_frequency: Any,
+    val chemical_pesticide_residue_result: Any,
+    val chemical_protein_frequency: Any,
+    val chemical_protein_result: Any,
+    val chemical_snf_frequency: String,
+    val chemical_snf_result: String,
+    val chemical_tests_performed: String,
+    val created_at: String,
+    val created_by: Int,
+    val daily_avg_current_year_liquid_milk: Any,
+    val daily_avg_current_year_value_added_curd: Any,
+    val daily_avg_current_year_value_added_ghee: Any,
+    val daily_avg_current_year_value_added_lassi: Any,
+    val daily_avg_last_year_liquid_milk: String,
+    val daily_avg_last_year_value_added_curd: String,
+    val daily_avg_last_year_value_added_ghee: String,
+    val daily_avg_last_year_value_added_lassi: String,
+    val dairy_plant_visit_report_document: List<ImplementingAgencyDocument>,
+    val dairy_plant_visit_report_npdd_scheme: List<DairyPlantVisitReportNpddScheme>,
+    val date_of_license_validity: Any,
+    val district_name: String,
+    val districts: Int,
+    val fssai_license_no: String,
+    val haccp_quality_management_system_complied: String,
+    val id: Int,
+    val is_deleted: Int,
+    val is_draft: Int,
+    val lab_available_operational: Any,
+    val lab_major_equipments_provided: Any,
+    val lab_present_number: Any,
+    val lab_scheme_project_no: Any,
+    val lat_nlm: Any,
+    val location_of_dairy_plant: String,
+    val long_nlm: Any,
+    val major_equipments_actual_installation_status: Any,
+    val major_equipments_capacity: Any,
+    val major_equipments_present_status: Any,
+    val major_equipments_provided: Any,
+    val major_equipments_scheme_project_no: Any,
+    val number_of_bmc_route_milk: String,
+    val number_of_non_bmc_route_milk: String,
+    val number_of_total_route_milk: String,
+    val other_details_capacity: String,
+    val other_details_etp_functioning: String,
+    val photographs_of_site: String,
+    val plant_haccp_complied: String,
+    val remark_by_nlm: String,
+    val state_code: Int,
+    val state_name: String,
+    val status: String,
+    val total_bmc_capacity: String,
+    val total_bmc_no: Any,
+    val total_dcs_covered: String,
+    val updated_at: Any,
+    val verification_of_tendering_process: Any,
+    val visit: Any,
+    val year_of_establishment: String
+)
+
+data class DairyPlantVisitReportDocument(
+    val created_at: String,
+    val dairy_plant_visit_report_id: Int,
+    val description: String,
+    val ia_document: Any,
+    val id: Int,
+    val nlm_document: String
+)
+
+data class DairyPlantVisitReportNpddScheme(
+    val dairy_plant_visit_report_id: Int?=null,
+    val id: Int?=null,
+    val major_equipments_milk_products: String?=null,
+    val npdd_scheme_available: Int?=null,
+    val npdd_scheme_present_status: Int?=null,
+    val npdd_scheme_proj_no: Int?=null,
+    val npdd_scheme_remarks: String?=null,
+    val npdd_scheme_major_lab_available: Int?=null,
+    val npdd_scheme_major_lab_no: Int?=null,
+    val npdd_scheme_major_lab_present_status: String?=null,
+    val npdd_scheme_major_lab_remarks: String?=null,
+    val npdd_scheme_major_lab_strengthening: String?=null,
+)
+
+
+
+data class AddDcsBmcResponse(
+    val _result: AddDcsBmcResult,
+    val _resultflag: Int,
+    val message: String,
+    val statuscode: Int
+)
+
+data class AddDcsBmcResult(
+    val actual_pourer_members: String,
+    val additional_facilities: String,
+    val amc_equip_covered: String,
+    val amc_equip_quality: String,
+    val amc_equip_valid_years: String,
+    val amcu_npdd_date_install: String,
+    val amcu_npdd_project_no: String,
+    val avg_composition_milk_fat: Double,
+    val avg_composition_milk_snf: Double,
+    val avg_procurement_price_qmp: Double,
+    val avg_procurement_price_total_ap: Double,
+    val bmc_details_avg_chil_cost_ltr: Double,
+    val bmc_details_avg_milk_collection: Double,
+    val bmc_details_capacity: String,
+    val bmc_details_date_of_install: String,
+    val bmc_details_dg_set_av_rt: String,
+    val bmc_details_dg_set_available: String,
+    val bmc_details_maintenance_log_book: String,
+    val bmc_details_npdd_prj_no: String,
+    val bmc_details_other_reg: String,
+    val bmc_details_spare_parts: String,
+    val bmc_details_temp_control_log_book: String,
+    val bmc_details_temp_control_log_book_temp: Int,
+    val bmc_operator_secretary_date_of_training: String,
+    val bmc_operator_secretary_no_of_days: Int,
+    val bmc_operator_secretary_place_of_training: String,
+    val chemical_frequency_tests: String,
+    val chemical_tests_performed: String,
+    val condition_electricity_supply_hrs_sply: Double,
+    val cooperative_society_reg_date: String,
+    val cooperative_society_reg_num: Int,
+    val created: String,
+    val created_by: Int,
+    val created_by_id: String,
+    val created_on: String,
+    val daily_avg_procurement_milk_current_year: Double,
+    val daily_avg_procurement_milk_last_year: Double,
+    val dcs_bmc_calibration_status: String,
+    val dcs_bmc_fre_interval: String,
+    val dcs_bmc_installation: String,
+    val dcs_bmc_last_date: String,
+    val dcs_bmc_make: String,
+    val dcs_last_audit_year: String,
+    val dcs_profit_loss: String,
+    val districts: Int,
+    val dsc_any_other: String,
+    val dsc_bonus_distribution: String,
+    val dsc_general: String,
+    val dsc_status_held: String,
+    val farmer_interaction_feedback: String,
+    val fssai_lic_no: Int,
+    val fssai_lic_validity_date: String,
+    val id: Int,
+    val incentive_procurement_price_buffalo: Double,
+    val incentive_procurement_price_cow: Double,
+    val is_deleted: Int,
+    val member_bank_ac: Long,
+    val milk_payment_cycle: String,
+    val milk_payment_last_date: String,
+    val name_of_dcs: String,
+    val district_name: String,
+    val state_name: String,
+    val onsite_dcs_center_visit_document: List<ImplementingAgencyDocument>,
+    val overall_remarks: String,
+    val photographs_of_site: String,
+    val photographs_of_site_assets: String,
+    val photographs_of_site_assets_date: String,
+    val photographs_of_site_assets_location: String,
+    val procurement_price_buffalo_milk_current_year: Int,
+    val procurement_price_buffalo_milk_last_year: Int,
+    val procurement_price_cow_milk_current_year: Int,
+    val procurement_price_cow_milk_last_year: Int,
+    val role_id: String,
+    val staff_strength_at_dcs_bmc_operator: String,
+    val staff_strength_at_dcs_cleaner: String,
+    val staff_strength_at_dcs_milk_tester: String,
+    val staff_strength_at_dcs_secretary: String,
+    val state_code: Int,
+    val status: Int,
+    val total_reg_numbers: Int,
+    val user_id: String,
+    val village: String,
+    val visit: Int,
+    val year_of_estb: String
+)
+

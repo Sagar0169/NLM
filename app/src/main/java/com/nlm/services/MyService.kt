@@ -4,6 +4,10 @@ import com.nlm.model.AddAnimalRequest
 import com.nlm.model.AddAnimalResponse
 import com.nlm.model.AddAssistanceEARequest
 import com.nlm.model.AddAssistanceEAResponse
+import com.nlm.model.AddDairyPlantRequest
+import com.nlm.model.AddDairyPlantResponse
+import com.nlm.model.AddDcsBmcRequest
+import com.nlm.model.AddDcsBmcResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
 import com.nlm.model.AddNlmEdpRequest
@@ -97,6 +101,8 @@ import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.StateVaccinationProgrammeAddRequest
 import com.nlm.model.StateVaccinationProgrammeAddResponse
+import com.nlm.model.SubTableDeleteRequest
+import com.nlm.model.SubTableDeleteResponse
 import com.nlm.model.TempUploadDocResponse
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.model.VaccinationProgrammerListResponse
@@ -112,6 +118,7 @@ const val LOGIN = "rest/login"
 const val LOGOUT = "rest/logout"
 const val DASHBOARD = "rest/dashboard"
 const val GET_DROP_DOWN = "rest/getDropdown"
+const val DELETE_SUB_TABLE_DATA = "Rest/deleteSubdata"
 //NLM
 const val GET_NLM_DROP_DOWN = "nationalLivestockMission/nlmDropdown"
 const val IMPLEMENTING_AGENCY_LIST = "nationalLivestockMission/implimentingAgencyList"
@@ -166,7 +173,9 @@ const val COMPONENT_B_LIST = "NationalDairyDevelopment/componentBList"
 const val COMPONENT_B_ADD = "NationalDairyDevelopment/componentBAddEdit"
 const val MILK_UNION_LIST = "NationalDairyDevelopment/milkUnionList"
 const val DAIRY_PLANT_LIST = "NationalDairyDevelopment/dairyPlantList"
+const val DAIRY_PLANT_ADD = "NationalDairyDevelopment/dairyPlantAddEdit"
 const val DCS_BMC_LIST = "NationalDairyDevelopment/dcsBmcList"
+const val DCS_BMC_ADD = "NationalDairyDevelopment/dcsBmcAddEdit"
 const val STATE_CENTER_LAB_LIST = "NationalDairyDevelopment/stateCenterLabList"
 const val MILK_PROCESSING_LIST = "NationalDairyDevelopment/milkProcessingList"
 const val MILK_PRODUCT_MARKETING_LIST = "NationalDairyDevelopment/milkProductMarketingList"
@@ -187,6 +196,9 @@ interface MyService {
 
     @POST(GET_DROP_DOWN)
     suspend fun getDropDown(@Body request: GetDropDownRequest): Response<GetDropDownResponse>
+
+    @POST(DELETE_SUB_TABLE_DATA)
+    suspend fun getDeleteSubTable(@Body request: SubTableDeleteRequest): Response<SubTableDeleteResponse>
 
     @POST(GET_NLM_DROP_DOWN)
     suspend fun getNlmDropDown(@Body request: GetNlmDropDownRequest): Response<GetDropDownResponse>
@@ -350,8 +362,14 @@ interface MyService {
     @POST(DAIRY_PLANT_LIST)
     suspend fun dairyPlantList(@Body request: NDDDairyPlantListRequest): Response<NDDDairyPlantListResponse>
 
+    @POST(DAIRY_PLANT_ADD)
+    suspend fun dairyPlantAdd(@Body request: AddDairyPlantRequest): Response<AddDairyPlantResponse>
+
     @POST(DCS_BMC_LIST)
     suspend fun dcsBmcList(@Body request: NDDDcsBmcListRequest): Response<NDDDcsBmcListResponse>
+
+    @POST(DCS_BMC_ADD)
+    suspend fun dcsBmcAdd(@Body request: AddDcsBmcRequest): Response<AddDcsBmcResponse>
 
     @POST(STATE_CENTER_LAB_LIST)
     suspend fun stateCenterLabList(@Body request: NDDStateCenterLabListRequest): Response<NDDStateCenterLabListResponse>

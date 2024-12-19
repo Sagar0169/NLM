@@ -4,6 +4,10 @@ import com.nlm.model.AddAnimalRequest
 import com.nlm.model.AddAnimalResponse
 import com.nlm.model.AddAssistanceEARequest
 import com.nlm.model.AddAssistanceEAResponse
+import com.nlm.model.AddDairyPlantRequest
+import com.nlm.model.AddDairyPlantResponse
+import com.nlm.model.AddDcsBmcRequest
+import com.nlm.model.AddDcsBmcResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
 import com.nlm.model.AddNlmEdpRequest
@@ -96,6 +100,8 @@ import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.StateVaccinationProgrammeAddRequest
 import com.nlm.model.StateVaccinationProgrammeAddResponse
+import com.nlm.model.SubTableDeleteRequest
+import com.nlm.model.SubTableDeleteResponse
 import com.nlm.model.TempUploadDocResponse
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.model.VaccinationProgrammerListResponse
@@ -136,6 +142,10 @@ object Repository {
 
     suspend fun getDropDown(request: GetDropDownRequest): Response<GetDropDownResponse> {
         return api.getDropDown(request)
+    }
+
+    suspend fun getDeleteSubTable(request: SubTableDeleteRequest): Response<SubTableDeleteResponse> {
+        return api.getDeleteSubTable(request)
     }
     suspend fun getNlmDropDown(request: GetNlmDropDownRequest): Response<GetDropDownResponse> {
         return api.getNlmDropDown(request)
@@ -318,8 +328,17 @@ object Repository {
     suspend fun dairyPlantList(request: NDDDairyPlantListRequest): Response<NDDDairyPlantListResponse> {
         return api.dairyPlantList(request)
     }
+
+    suspend fun dairyPlantAdd(request: AddDairyPlantRequest): Response<AddDairyPlantResponse> {
+        return api.dairyPlantAdd(request)
+    }
+
     suspend fun dcsBmcList(request: NDDDcsBmcListRequest): Response<NDDDcsBmcListResponse> {
         return api.dcsBmcList(request)
+    }
+
+    suspend fun dcsBmcAdd(request: AddDcsBmcRequest): Response<AddDcsBmcResponse> {
+        return api.dcsBmcAdd(request)
     }
 
     suspend fun stateCenterLabList(request: NDDStateCenterLabListRequest): Response<NDDStateCenterLabListResponse> {

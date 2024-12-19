@@ -87,7 +87,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
     private var viewModel = ViewModel()
     private var viewEdit: String? = null
     var itemId: Int? = null
-    private var uploadData : ImageView?=null
+    private var uploadData: ImageView? = null
     private var dId: Int? = null
     private var districtId: Int? = null // Store selected state
     private var loading = true
@@ -218,45 +218,45 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
         }
 
 
-        if (viewEdit == "view"){
-            mBinding?.tvState?.isEnabled=false
-            mBinding?.tvDistrict?.isEnabled=false
+        if (viewEdit == "view") {
+            mBinding?.tvState?.isEnabled = false
+            mBinding?.tvDistrict?.isEnabled = false
             mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
-            mBinding?.etDCS?.isEnabled=false
-            mBinding?.etNameOfRevenueVillage?.isEnabled=false
-            mBinding?.etNameOfTehsil?.isEnabled=false
-            mBinding?.etLat?.isEnabled=false
-            mBinding?.etLong?.isEnabled=false
-            mBinding?.etDate?.isEnabled=false
-            mBinding?.etAssetRemark?.isEnabled=false
-            mBinding?.etOverallRemark?.isEnabled=false
-            mBinding?.etHygieneRemark?.isEnabled=false
-            mBinding?.etSelectionRemark?.isEnabled=false
-            mBinding?.etMembersRemark?.isEnabled=false
-            mBinding?.etPositiveRemark?.isEnabled=false
-            mBinding?.etBetterRemark?.isEnabled=false
-            mBinding?.etTransparencyRemark?.isEnabled=false
-            mBinding?.etTimelyRemark?.isEnabled=false
-            mBinding?.etAssuredRemark?.isEnabled=false
-            mBinding?.etAnyOtherRemark?.isEnabled=false
-            mBinding?.rbAssetYes?.isEnabled=false
-            mBinding?.rbAssetNo?.isEnabled=false
-            mBinding?.rbOverallYes?.isEnabled=false
-            mBinding?.rbOverallNo?.isEnabled=false
-            mBinding?.rbHygieneYes?.isEnabled=false
-            mBinding?.rbHygieneNo?.isEnabled=false
-            mBinding?.rbMembersYes?.isEnabled=false
-            mBinding?.rbMembersNo?.isEnabled=false
-            mBinding?.rbPositiveYes?.isEnabled=false
-            mBinding?.rbPositiveNo?.isEnabled=false
-            mBinding?.rbBetterYes?.isEnabled=false
-            mBinding?.rbBetterNo?.isEnabled=false
-            mBinding?.rbTransparencyYes?.isEnabled=false
-            mBinding?.rbTransparencyNo?.isEnabled=false
-            mBinding?.rbTimelyYes?.isEnabled=false
-            mBinding?.rbTimelyNo?.isEnabled=false
-            mBinding?.rbAssuredYes?.isEnabled=false
-            mBinding?.rbAssuredNo?.isEnabled=false
+            mBinding?.etDCS?.isEnabled = false
+            mBinding?.etNameOfRevenueVillage?.isEnabled = false
+            mBinding?.etNameOfTehsil?.isEnabled = false
+            mBinding?.etLat?.isEnabled = false
+            mBinding?.etLong?.isEnabled = false
+            mBinding?.etDate?.isEnabled = false
+            mBinding?.etAssetRemark?.isEnabled = false
+            mBinding?.etOverallRemark?.isEnabled = false
+            mBinding?.etHygieneRemark?.isEnabled = false
+            mBinding?.etSelectionRemark?.isEnabled = false
+            mBinding?.etMembersRemark?.isEnabled = false
+            mBinding?.etPositiveRemark?.isEnabled = false
+            mBinding?.etBetterRemark?.isEnabled = false
+            mBinding?.etTransparencyRemark?.isEnabled = false
+            mBinding?.etTimelyRemark?.isEnabled = false
+            mBinding?.etAssuredRemark?.isEnabled = false
+            mBinding?.etAnyOtherRemark?.isEnabled = false
+            mBinding?.rbAssetYes?.isEnabled = false
+            mBinding?.rbAssetNo?.isEnabled = false
+            mBinding?.rbOverallYes?.isEnabled = false
+            mBinding?.rbOverallNo?.isEnabled = false
+            mBinding?.rbHygieneYes?.isEnabled = false
+            mBinding?.rbHygieneNo?.isEnabled = false
+            mBinding?.rbMembersYes?.isEnabled = false
+            mBinding?.rbMembersNo?.isEnabled = false
+            mBinding?.rbPositiveYes?.isEnabled = false
+            mBinding?.rbPositiveNo?.isEnabled = false
+            mBinding?.rbBetterYes?.isEnabled = false
+            mBinding?.rbBetterNo?.isEnabled = false
+            mBinding?.rbTransparencyYes?.isEnabled = false
+            mBinding?.rbTransparencyNo?.isEnabled = false
+            mBinding?.rbTimelyYes?.isEnabled = false
+            mBinding?.rbTimelyNo?.isEnabled = false
+            mBinding?.rbAssuredYes?.isEnabled = false
+            mBinding?.rbAssuredNo?.isEnabled = false
             mBinding?.tvNLMDoc?.hideView()
             mBinding?.tvSaveDraft?.hideView()
             mBinding?.tvSendOtp?.hideView()
@@ -270,6 +270,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
         nlmAdapter()
 
     }
+
     private fun viewEditApi() {
 
         viewModel.getComponentBAdd(
@@ -296,6 +297,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
             )
         )
     }
+
     private fun nlmAdapter() {
         addDocumentAdapter = RSPSupportingDocumentAdapter(
             this,
@@ -359,7 +361,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                 } else {
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
-                    DialogDocName?.text=userResponseModel._result.document_name
+                    DialogDocName?.text = userResponseModel._result.document_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -400,7 +402,8 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                             mBinding?.etNameOfTehsil?.setText(userResponseModel._result.name_of_tehsil)
                             mBinding?.etLat?.setText(userResponseModel._result.latitude)
                             mBinding?.etLong?.setText(userResponseModel._result.longitude)
-                            mBinding?.etDate?.text = convertDate(userResponseModel._result.date_of_inspection)
+                            mBinding?.etDate?.text =
+                                convertDate(userResponseModel._result.date_of_inspection)
                             mBinding?.etAssetRemark?.setText(userResponseModel._result.asset_earmarked_remarks)
                             mBinding?.etOverallRemark?.setText(userResponseModel._result.overall_upkeep_remarks)
                             mBinding?.etHygieneRemark?.setText(userResponseModel._result.overall_hygiene_remarks)
@@ -419,56 +422,87 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
 
                             }else if (userResponseModel._result.asset_earmarked == "Yes") {
                                 mBinding?.rbAssetYes?.isChecked = true
-                            }
-                            else {
+                            } else {
                                 mBinding?.rbAssetNo?.isChecked = true
                             }
 
-                            if (userResponseModel._result.overall_upkeep == "Good") {
+                            if (userResponseModel._result.overall_upkeep.isNullOrEmpty()) {
+                                mBinding?.rbOverallYes?.isChecked = false
+                                mBinding?.rbOverallNo?.isChecked = false
+
+                            }else if (userResponseModel._result.overall_upkeep == "Good") {
                                 mBinding?.rbOverallYes?.isChecked = true
-                            }else{
+                            } else {
                                 mBinding?.rbOverallNo?.isChecked = true
                             }
 
-                            if (userResponseModel._result.overall_hygiene == "Good") {
+                            if (userResponseModel._result.overall_hygiene.isNullOrEmpty()) {
+                                mBinding?.rbHygieneYes?.isChecked = false
+                                mBinding?.rbHygieneNo?.isChecked = false
+
+                            }else if (userResponseModel._result.overall_hygiene == "Good") {
                                 mBinding?.rbHygieneYes?.isChecked = true
-                            }else{
+                            } else {
                                 mBinding?.rbHygieneNo?.isChecked = true
                             }
 
-                            if (userResponseModel._result.overall_interventions == "Yes") {
+                            if (userResponseModel._result.overall_interventions.isNullOrEmpty()) {
+                                mBinding?.rbMembersYes?.isChecked = false
+                                mBinding?.rbMembersNo?.isChecked = false
+
+                            }else if (userResponseModel._result.overall_interventions == "Yes") {
                                 mBinding?.rbMembersYes?.isChecked = true
-                            }else{
+                            } else {
                                 mBinding?.rbMembersNo?.isChecked = true
                             }
 
-                            if (userResponseModel._result.positive_impact == "Yes") {
+                            if (userResponseModel._result.positive_impact.isNullOrEmpty()) {
+                                mBinding?.rbPositiveYes?.isChecked = false
+                                mBinding?.rbPositiveNo?.isChecked = false
+
+                            }else if (userResponseModel._result.positive_impact == "Yes") {
                                 mBinding?.rbPositiveYes?.isChecked = true
-                            }else{
+                            } else {
                                 mBinding?.rbPositiveNo?.isChecked = true
                             }
 
-                            if (userResponseModel._result.better_price_realisation == "Yes") {
+                            if (userResponseModel._result.better_price_realisation.isNullOrEmpty()) {
+                                mBinding?.rbBetterYes?.isChecked = false
+                                mBinding?.rbBetterNo?.isChecked = false
+
+                            }else if (userResponseModel._result.better_price_realisation == "Yes") {
                                 mBinding?.rbBetterYes?.isChecked = true
-                            }else{
+                            } else {
                                 mBinding?.rbBetterNo?.isChecked = true
                             }
 
-                            if (userResponseModel._result.transparency_milk_pricing == "Yes") {
+                            if (userResponseModel._result.transparency_milk_pricing.isNullOrEmpty()) {
+                                mBinding?.rbTransparencyYes?.isChecked = false
+                                mBinding?.rbTransparencyNo?.isChecked = false
+
+                            }else if (userResponseModel._result.transparency_milk_pricing == "Yes") {
                                 mBinding?.rbTransparencyYes?.isChecked = true
-                            }else{
+                            } else {
                                 mBinding?.rbTransparencyNo?.isChecked = true
                             }
 
-                            if (userResponseModel._result.timely_milk_payment == "Yes") {
+                            if (userResponseModel._result.timely_milk_payment.isNullOrEmpty()) {
+                                mBinding?.rbTimelyYes?.isChecked = false
+                                mBinding?.rbTimelyNo?.isChecked = false
+
+                            }else if (userResponseModel._result.timely_milk_payment == "Yes") {
                                 mBinding?.rbTimelyYes?.isChecked = true
-                            }else{
+                            } else {
                                 mBinding?.rbTimelyNo?.isChecked = true
                             }
 
-                            if (userResponseModel._result.assured_marked_surplus == "Yes") {
+                            if (userResponseModel._result.assured_marked_surplus.isNullOrEmpty()) {
+                                mBinding?.rbAssuredYes?.isChecked = false
+                                mBinding?.rbAssuredNo?.isChecked = false
+
+                            }else if (userResponseModel._result.assured_marked_surplus == "Yes") {
                                 mBinding?.rbAssuredYes?.isChecked = true
-                            }else{
+                            } else {
                                 mBinding?.rbAssuredNo?.isChecked = true
                             }
 
@@ -579,7 +613,8 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                     val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.getDefault())
                     formattedDate = sdf.format(calendarInstance.time)
 
-                    mBinding?.etDate?.text = convertDate(formattedDate)  // Assuming you have an EditText for the date
+                    mBinding?.etDate?.text =
+                        convertDate(formattedDate)  // Assuming you have an EditText for the date
                     mBinding?.etDate?.setTextColor(
                         ContextCompat.getColor(
                             this@NlmComponentBDairyDevelopment,
@@ -595,7 +630,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
-        if(draft!=0){
+        if (draft != 0) {
             viewModel.getComponentBAdd(
                 this@NlmComponentBDairyDevelopment, true,
                 NDDComponentBAddRequest(
@@ -720,16 +755,15 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                             assured_marked_surplus_remarks = mBinding?.etAssuredRemark?.text.toString(),
                             any_other = mBinding?.etAnyOtherRemark?.text.toString(),
                             nlm_b_components_document = totalListDocument,
-                            long_nlm=longitude,
-                            lat_nlm=latitude
+                            long_nlm = longitude,
+                            lat_nlm = latitude
                         )
                     )
                 } else {
                     showSnackbar(mBinding?.clParent!!, "Please wait for a sec and click again")
                 }
             }
-        }
-        else {
+        } else {
             showLocationAlertDialog()
         }
     }
@@ -905,21 +939,19 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
         lp.dimAmount = 0.5f
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         DialogDocName = bindingDialog.etDoc
-        uploadData=bindingDialog.ivPic
+        uploadData = bindingDialog.ivPic
         if (selectedItem != null) {
             UploadedDocumentName = selectedItem.nlm_document
             bindingDialog.etDoc.text = selectedItem.nlm_document
             bindingDialog.etDescription.setText(selectedItem.description)
         }
         bindingDialog.tvChooseFile.setOnClickListener {
-            if (bindingDialog.etDescription.text.toString().isNotEmpty())
-            {
+            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
 
                 checkStoragePermission(this)
-            }
-            else{
+            } else {
 
-                mBinding?.clParent?.let { showSnackbar(it,"please enter description") }
+                mBinding?.clParent?.let { showSnackbar(it, "please enter description") }
             }
         }
         bindingDialog.btnDelete.setOnClickListener {
@@ -940,11 +972,10 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                                 nlm_document = UploadedDocumentName,
                                 nlm_b_component_id = selectedItem.nlm_b_component_id,
                                 id = selectedItem.id,
-                                )
+                            )
                         addDocumentAdapter?.notifyItemChanged(position)
                         dialog.dismiss()
                     }
-
                 } else {
                     DocumentList.add(
                         ImplementingAgencyDocument(
@@ -987,6 +1018,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
         photoFile = imageFile
         photoFile?.let { uploadImage(it) }
     }
+
     @SuppressLint("Range")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -995,7 +1027,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                 CAPTURE_IMAGE_REQUEST -> {
 
                     val imageBitmap = data?.extras?.get("data") as Bitmap
-                    Log.d("DOCUMENT",imageBitmap.toString())
+                    Log.d("DOCUMENT", imageBitmap.toString())
                     uploadData?.showView()
                     uploadData?.setImageBitmap(imageBitmap)
 //                    data.data?.let { startCrop(it) }
@@ -1004,13 +1036,14 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-                    Log.d("DOCUMENT",selectedImageUri.toString())
+                    Log.d("DOCUMENT", selectedImageUri.toString())
                     uploadData?.showView()
                     uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(this, selectedImageUri)
-                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+                        val fileExtension =
+                            filePath?.substringAfterLast('.', "").orEmpty().lowercase()
                         // Validate file extension
                         if (fileExtension in listOf("png", "jpg", "jpeg")) {
                             uploadData?.showView()
@@ -1022,6 +1055,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                         }
                     }
                 }
+
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
@@ -1033,7 +1067,7 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                         val cursor = this.contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName=
+                                DocumentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
 //                                DialogDocName?.text=DocumentName
 
@@ -1048,13 +1082,20 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
                             viewModel.getProfileUploadFile(
                                 context = this,
                                 document_name = body,
-                                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.nlm_b_components_document).toRequestBody(MultipartBody.FORM),
+                                user_id = getPreferenceOfScheme(
+                                    this,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id,
+                                table_name = getString(R.string.nlm_b_components_document).toRequestBody(
+                                    MultipartBody.FORM
+                                ),
                             )
                         }
                     }
                 }
-            }}
+            }
+        }
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
@@ -1094,8 +1135,14 @@ class NlmComponentBDairyDevelopment : BaseActivity<ActivityNlmCompnentBdairyDeve
             viewModel.getProfileUploadFile(
                 context = this@NlmComponentBDairyDevelopment,
                 document_name = body,
-                user_id = getPreferenceOfScheme(this@NlmComponentBDairyDevelopment, AppConstants.SCHEME, Result::class.java)?.user_id,
-                table_name = getString(R.string.nlm_b_components_document).toRequestBody(MultipartBody.FORM),
+                user_id = getPreferenceOfScheme(
+                    this@NlmComponentBDairyDevelopment,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                table_name = getString(R.string.nlm_b_components_document).toRequestBody(
+                    MultipartBody.FORM
+                ),
             )
         }
     }
