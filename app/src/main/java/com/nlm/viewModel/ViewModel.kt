@@ -8,6 +8,10 @@ import com.nlm.model.AddAnimalRequest
 import com.nlm.model.AddAnimalResponse
 import com.nlm.model.AddAssistanceEARequest
 import com.nlm.model.AddAssistanceEAResponse
+import com.nlm.model.AddDairyPlantRequest
+import com.nlm.model.AddDairyPlantResponse
+import com.nlm.model.AddDcsBmcRequest
+import com.nlm.model.AddDcsBmcResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
 import com.nlm.model.AddNlmEdpRequest
@@ -100,6 +104,8 @@ import com.nlm.model.StateSemenBankRequest
 import com.nlm.model.StateSemenBankResponse
 import com.nlm.model.StateVaccinationProgrammeAddRequest
 import com.nlm.model.StateVaccinationProgrammeAddResponse
+import com.nlm.model.SubTableDeleteRequest
+import com.nlm.model.SubTableDeleteResponse
 import com.nlm.model.TempUploadDocResponse
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.model.VaccinationProgrammerListResponse
@@ -124,6 +130,7 @@ class ViewModel : ViewModel() {
     var logoutResult = MutableLiveData<LogoutResponse>()
     var dashboardResult = MutableLiveData<DashboardResponse>()
     var getDropDownResult = MutableLiveData<GetDropDownResponse>()
+    var getSubTableDeleteResult = MutableLiveData<SubTableDeleteResponse>()
     var getNlmDropDownResult = MutableLiveData<GetDropDownResponse>()
     var implementingAgencyResult = MutableLiveData<ImplementingAgencyResponse>()
     var rspLabListResult = MutableLiveData<RSPLabListResponse>()
@@ -175,7 +182,9 @@ class ViewModel : ViewModel() {
     var componentBAddResult = MutableLiveData<NDDComponentBAddResponse>()
     var milkUnionListResult = MutableLiveData<NDDMilkUnionListResponse>()
     var dairyPlantListResult = MutableLiveData<NDDDairyPlantListResponse>()
+    var dairyPlantAddResult = MutableLiveData<AddDairyPlantResponse>()
     var dcsBmcListResult = MutableLiveData<NDDDcsBmcListResponse>()
+    var dcsBmcAddResult = MutableLiveData<AddDcsBmcResponse>()
     var stateCenterLabListResult = MutableLiveData<NDDStateCenterLabListResponse>()
     var milkProcessingListResult = MutableLiveData<NDDMilkProcessingListResponse>()
     var milkProductMarketingListResult = MutableLiveData<NDDMilkProductMarketingListResponse>()
@@ -378,6 +387,57 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 getDropDownResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                dismissLoader()
+            }
+        }
+    }
+    fun getDeleteSubTable(context: Context, loader: Boolean, request: SubTableDeleteRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+        job = scope.launch {
+            try {
+                val response = repository.getDeleteSubTable(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                getSubTableDeleteResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }
@@ -3139,6 +3199,61 @@ class ViewModel : ViewModel() {
             }
         }
     }
+    fun getDairyPlantAdd(context: Context, loader: Boolean, request: AddDairyPlantRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.dairyPlantAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                dairyPlantAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
     fun getDcsBmcList(context: Context, loader: Boolean, request: NDDDcsBmcListRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
@@ -3194,6 +3309,64 @@ class ViewModel : ViewModel() {
             }
         }
     }
+    fun getDcsBmcAdd(context: Context, loader: Boolean, request: AddDcsBmcRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.dcsBmcAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                dcsBmcAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+
+
+
     fun getStateCenterLabList(context: Context, loader: Boolean, request: NDDStateCenterLabListRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)

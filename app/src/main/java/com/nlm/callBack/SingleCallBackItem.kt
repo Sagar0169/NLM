@@ -5,6 +5,7 @@ import com.nlm.model.AhidfFormatForNlm
 import com.nlm.model.AhidfMonitoring
 import com.nlm.model.AssistanceForEaTrainingInstitute
 import com.nlm.model.AssistanceForQfspFinancialProgres
+import com.nlm.model.DairyPlantVisitReportNpddScheme
 import com.nlm.model.FpFromForestLandFilledByNlm
 import com.nlm.model.FpFromNonForestFilledByNlmTeam
 import com.nlm.model.FspPlantStorageCommentsOfNlm
@@ -57,6 +58,10 @@ interface CallBackAvilabilityEquipment {
 }
 interface CallBackSemenDoseAvg {
     fun onClickItem(selectedItem: RspAddBucksList, position:Int, isFrom:Int)
+}
+
+interface CallBackNddScheme {
+    fun onClickItem(selectedItem: DairyPlantVisitReportNpddScheme, position:Int, isFrom:Int)
 }
 interface CallBackSemenDose {
     fun onClickItem(selectedItem: RspAddAverage, position:Int, isFrom:Int)
