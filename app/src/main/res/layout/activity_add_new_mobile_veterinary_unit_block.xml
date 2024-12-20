@@ -319,6 +319,41 @@
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/llUploadOne"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPicOne"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentNameOne"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPicOne"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDeleteOne"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDeleteOne"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentOne}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -452,6 +487,41 @@
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/llUploadTwo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPicTwo"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentNameTwo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPicTwo"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDeleteTwo"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDeleteTwo"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentTwo}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -585,6 +655,41 @@
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/llUploadThree"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPicThree"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentNameThree"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPicThree"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDeleteThree"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDeleteThree"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentThree}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -718,6 +823,41 @@
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/llUploadFour"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPicFour"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentNameFour"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPicFour"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDeleteFour"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDeleteFour"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentFour}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -851,6 +991,41 @@
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/sp_14" />
                         </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/llUploadFive"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:visibility="gone">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivPicFive"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_50"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/place_holder_images"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+                            <TextView
+                                android:id="@+id/tvDocumentNameFive"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/ivPicFive"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="@dimen/dp_5"
+                                android:layout_toStartOf="@id/ivDeleteFive"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_12" />
+                            <ImageView
+                                android:id="@+id/ivDeleteFive"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:onClick="@{ClickAction::deleteDocumentFive}"
+                                android:src="@drawable/ic_delete" />
+                        </RelativeLayout>
                     </LinearLayout>
                 </LinearLayout>
 
