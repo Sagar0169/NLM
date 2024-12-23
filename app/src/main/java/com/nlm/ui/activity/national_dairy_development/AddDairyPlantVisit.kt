@@ -29,6 +29,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
@@ -39,6 +40,7 @@ import com.nlm.databinding.ActivityAddDairyPlantVisitBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemNddSchemeBinding
 import com.nlm.databinding.ItemRspBucksBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.AddDairyPlantRequest
 import com.nlm.model.DairyPlantVisitReportNpddScheme
 import com.nlm.model.GetDropDownRequest
@@ -60,6 +62,7 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -111,7 +114,7 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>(), Ca
     private var savedAsDraft: Boolean = false
     private var longitude: Double? = null
     private var latitude: Double? = null
-
+    private var TableName: String? = null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent?.let {
@@ -436,6 +439,7 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>(), Ca
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
                     DialogDocName?.text = userResponseModel._result.document_name
+                    TableName=userResponseModel._result.table_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -485,6 +489,7 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>(), Ca
                     if (savedAsDraft) {
                         onBackPressedDispatcher.onBackPressed()
                     } else {
+                        TableName=userResponseModel.fileurl
                         if (viewEdit == "view" || viewEdit == "edit") {
                             if (savedAsEdit) {
 //                                listener?.onNextButtonClick()
@@ -796,6 +801,8 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>(), Ca
                             photographs_of_site = photographSite,
                             dairy_plant_visit_report_document = totalListDocument,
                             dairy_plant_visit_report_npdd_scheme = addBucksList,
+                            lat_nlm=latitude,
+                            long_nlm=longitude
                         )
                     )
                 } else {
@@ -980,9 +987,59 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>(), Ca
         DialogDocName = bindingDialog.etDoc
         uploadData = bindingDialog.ivPic
         if (selectedItem != null) {
+            bindingDialog.ivPic.showView()
+            if (selectedItem.is_edit==false)
+            {
+                bindingDialog.tvSubmit.hideView()
+                bindingDialog.tvChooseFile.isEnabled=false
+                bindingDialog.etDescription.isEnabled=false
+            }
             UploadedDocumentName = selectedItem.nlm_document
             bindingDialog.etDoc.text = selectedItem.nlm_document
             bindingDialog.etDescription.setText(selectedItem.description)
+
+            val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+            if (isSupported) {
+                val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                when (fileExtension) {
+                    "pdf" -> {
+                        val downloader = AndroidDownloader(context)
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                                it
+                            )
+                        }
+                        bindingDialog.etDoc.setOnClickListener {
+                            if (!UploadedDocumentName.isNullOrEmpty()) {
+                                downloader.downloadFile(url, UploadedDocumentName!!)
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                                dialog.dismiss()
+                            }
+                            else{
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                                dialog.dismiss()
+                            }
+                        }
+
+                    }
+
+                    "png" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "jpg" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+                }
+            }
         }
         bindingDialog.tvChooseFile.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
@@ -991,6 +1048,26 @@ class AddDairyPlantVisit : BaseActivity<ActivityAddDairyPlantVisitBinding>(), Ca
             } else {
 
                 mBinding?.clParent?.let { showSnackbar(it, "please enter description") }
+            }
+        }
+        val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+        if (isSupported) {
+            when (fileExtension) {
+                "pdf" -> {
+//                    bindingDialog.ivPic.let {
+//                        Glide.with(context).load(R.drawable.ic_pdf).into(
+//                            it
+//                        )
+//                    }
+                }
+                else -> {
+                    bindingDialog.ivPic.setOnClickListener {
+                        Utility.showImageDialog(
+                            this,
+                            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        )
+                    }
+                }
             }
         }
         bindingDialog.btnDelete.setOnClickListener {

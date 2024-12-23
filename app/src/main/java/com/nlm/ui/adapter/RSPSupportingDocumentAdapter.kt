@@ -1,4 +1,3 @@
-
 package com.nlm.ui.adapter
 
 import android.annotation.SuppressLint
@@ -29,35 +28,53 @@ class RSPSupportingDocumentAdapter(
 ) : RecyclerView.Adapter<RSPSupportingDocumentAdapter.SupportingDocumentViewHolder>() {
 
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SupportingDocumentViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): SupportingDocumentViewHolder {
 
         val binding = ItemAddDocumentBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return    SupportingDocumentViewHolder(binding)
+        return SupportingDocumentViewHolder(binding)
 
     }
 
-    override fun onBindViewHolder(holder: SupportingDocumentViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        val items=programmeList[position]
+    override fun onBindViewHolder(
+        holder: SupportingDocumentViewHolder,
+        @SuppressLint("RecyclerView") position: Int
+    ) {
+        val items = programmeList[position]
         // Handle visibility of add/delete buttons
-        holder.binding.etDescription.text=items.description
-        if (items.ia_document!=null &&  getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==24)
-        {
-            holder.binding.etFile.text=items.ia_document
-        }
-        else if (items.nlm_document!=null &&  getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==8)
-        {
-            holder.binding.etFile.text=items.nlm_document
-        }
-        else if (items.nlm_document==null &&  getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==8)
-        {
-            holder.binding.etFile.text=items.ia_document
-        }
-        else if (items.ia_document==null &&  getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==24)
-        {
-            holder.binding.etFile.text=items.nlm_document
+        holder.binding.etDescription.text = items.description
+        if (items.ia_document != null && getPreferenceOfScheme(
+                context,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 24
+        ) {
+            holder.binding.etFile.text = items.ia_document
+        } else if (items.nlm_document != null && getPreferenceOfScheme(
+                context,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 8
+        ) {
+            holder.binding.etFile.text = items.nlm_document
+        } else if (items.nlm_document == null && getPreferenceOfScheme(
+                context,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 8
+        ) {
+            holder.binding.etFile.text = items.ia_document
+        } else if (items.ia_document == null && getPreferenceOfScheme(
+                context,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 24
+        ) {
+            holder.binding.etFile.text = items.nlm_document
         }
 
 
@@ -68,10 +85,9 @@ class RSPSupportingDocumentAdapter(
                 AppConstants.SCHEME,
                 Result::class.java
             )?.role_id == 24
-        )
-        {
-            holder.binding.btnDelete.visibility=View.GONE
-            holder.binding.btnEdit.visibility=View.GONE
+        ) {
+            holder.binding.btnDelete.visibility = View.GONE
+            holder.binding.btnEdit.visibility = View.GONE
         }
         holder.binding.btnDelete.setOnClickListener {
             if (context != null) {
@@ -80,16 +96,20 @@ class RSPSupportingDocumentAdapter(
                     object :
                         DialogCallback {
                         override fun onYes() {
-                            callBackDeleteAtId.onClickItem(items.id,position,0)
+                            callBackDeleteAtId.onClickItem(items.id, position, 0)
                         }
                     },
                     context.getString(R.string.are_you_sure_want_to_delete_your_post)
                 )
             }
         }
-        holder.binding.btnEdit.setOnClickListener{
-            if (items.ia_document!=null &&  getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==24)
-            {
+        holder.binding.btnEdit.setOnClickListener {
+            if (items.ia_document != null && getPreferenceOfScheme(
+                    context,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id == 24
+            ) {
 
                 callBackEdit.onClickItemEditDoc(
                     ImplementingAgencyDocument(
@@ -104,8 +124,9 @@ class RSPSupportingDocumentAdapter(
                         fsp_plant_storage_id = items.fsp_plant_storage_id,
                         ia_document = items.ia_document,
 
-                        ),position)}
-            else{
+                        ), position
+                )
+            } else {
                 callBackEdit.onClickItemEditDoc(
                     ImplementingAgencyDocument(
                         description = items.description,
@@ -119,7 +140,8 @@ class RSPSupportingDocumentAdapter(
                         fsp_plant_storage_id = items.fsp_plant_storage_id,
                         nlm_document = items.nlm_document,
 
-                        ),position)
+                        ), position
+                )
             }
 
 //            (context as NLSIAGoverningBodyBoardOfDirectorsFragment).compositionOfGoverningNlmIaDialog(context,1,
@@ -133,9 +155,13 @@ class RSPSupportingDocumentAdapter(
 //                notifyItemRangeChanged(position, programmeList.size) // Notify changes in the range
 //            }
 //        }
-        holder.itemView.setOnClickListener{
-            if (items.ia_document!=null &&  getPreferenceOfScheme(context, AppConstants.SCHEME, Result::class.java)?.role_id==24)
-            {
+        holder.itemView.setOnClickListener {
+            if (items.ia_document != null && getPreferenceOfScheme(
+                    context,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id == 24
+            ) {
 
                 callBackEdit.onClickItemEditDoc(
                     ImplementingAgencyDocument(
@@ -149,9 +175,11 @@ class RSPSupportingDocumentAdapter(
                         assistance_for_qfsp_id = items.assistance_for_qfsp_id,
                         fsp_plant_storage_id = items.fsp_plant_storage_id,
                         ia_document = items.ia_document,
+                        is_edit = false
 
-                        ),position)}
-            else{
+                    ), position
+                )
+            } else {
                 callBackEdit.onClickItemEditDoc(
                     ImplementingAgencyDocument(
                         description = items.description,
@@ -163,9 +191,11 @@ class RSPSupportingDocumentAdapter(
                         import_of_exotic_goat_id = items.import_of_exotic_goat_id,
                         assistance_for_qfsp_id = items.assistance_for_qfsp_id,
                         fsp_plant_storage_id = items.fsp_plant_storage_id,
+                        is_edit = false,
                         nlm_document = items.nlm_document,
 
-                        ),position)
+                        ), position
+                )
             }
         }
     }
@@ -184,9 +214,13 @@ class RSPSupportingDocumentAdapter(
             // Notify about range changes to avoid index mismatches
             notifyItemRangeChanged(position, programmeList.size)
         } else {
-            Log.e("Error", "Invalid index: $position for programmeList of size ${programmeList.size}")
+            Log.e(
+                "Error",
+                "Invalid index: $position for programmeList of size ${programmeList.size}"
+            )
         }
     }
+
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }

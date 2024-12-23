@@ -1962,6 +1962,7 @@ data class NDDComponentBListData(
 data class NDDComponentBAddResponse(
     val _result: NDDComponentBAddResult,
     val _resultflag: Int,
+    val fileurl: String?,
     val message: String,
     val statuscode: Int
 )
@@ -2300,6 +2301,7 @@ data class NDDProductivityEnhancementServicesListData(
 data class AddDairyPlantResponse(
     val _result: AddDairyPlantVisitResult,
     val _resultflag: Int,
+    val fileurl: String?,
     val message: String,
     val statuscode: Int
 )
@@ -2408,9 +2410,12 @@ data class DairyPlantVisitReportNpddScheme(
 
 
 
+
+
 data class AddDcsBmcResponse(
     val _result: AddDcsBmcResult,
     val _resultflag: Int,
+    val fileurl: String?,
     val message: String,
     val statuscode: Int
 )
@@ -2421,7 +2426,10 @@ data class AddDcsBmcResult(
     val amc_equip_covered: String,
     val amc_equip_quality: String,
     val amc_equip_valid_years: String,
+    val amcu_npdd_calib_frequency: Any,
+    val amcu_npdd_calib_last_date: Any,
     val amcu_npdd_date_install: String,
+    val amcu_npdd_make: Any,
     val amcu_npdd_project_no: String,
     val avg_composition_milk_fat: Double,
     val avg_composition_milk_snf: Double,
@@ -2431,9 +2439,11 @@ data class AddDcsBmcResult(
     val bmc_details_avg_milk_collection: Double,
     val bmc_details_capacity: String,
     val bmc_details_date_of_install: String,
+    val bmc_details_design: Any,
     val bmc_details_dg_set_av_rt: String,
     val bmc_details_dg_set_available: String,
     val bmc_details_maintenance_log_book: String,
+    val bmc_details_make: Any,
     val bmc_details_npdd_prj_no: String,
     val bmc_details_other_reg: String,
     val bmc_details_spare_parts: String,
@@ -2449,8 +2459,6 @@ data class AddDcsBmcResult(
     val cooperative_society_reg_num: Int,
     val created: String,
     val created_by: Int,
-    val created_by_id: String,
-    val created_on: String,
     val daily_avg_procurement_milk_current_year: Double,
     val daily_avg_procurement_milk_last_year: Double,
     val dcs_bmc_calibration_status: String,
@@ -2460,6 +2468,7 @@ data class AddDcsBmcResult(
     val dcs_bmc_make: String,
     val dcs_last_audit_year: String,
     val dcs_profit_loss: String,
+    val district_name: String,
     val districts: Int,
     val dsc_any_other: String,
     val dsc_bonus_distribution: String,
@@ -2472,12 +2481,26 @@ data class AddDcsBmcResult(
     val incentive_procurement_price_buffalo: Double,
     val incentive_procurement_price_cow: Double,
     val is_deleted: Int,
+    val is_draft: Boolean,
+    val lab_tests_performed_adulter_no_of_day: Any,
+    val lab_tests_performed_adulter_test_result: Any,
+    val lab_tests_performed_alcohol_no_of_day: Any,
+    val lab_tests_performed_alcohol_test_result: Any,
+    val lab_tests_performed_any_other_no_of_day: Any,
+    val lab_tests_performed_any_other_test_result: Any,
+    val lab_tests_performed_cob_no_of_day: Any,
+    val lab_tests_performed_cob_test_result: Any,
+    val lab_tests_performed_fat_no_of_day: Any,
+    val lab_tests_performed_fat_test_result: Any,
+    val lab_tests_performed_mbrt_no_of_day: Any,
+    val lab_tests_performed_mbrt_test_result: Any,
+    val lat_nlm: Any,
+    val long_nlm: Any,
     val member_bank_ac: Long,
     val milk_payment_cycle: String,
     val milk_payment_last_date: String,
     val name_of_dcs: String,
-    val district_name: String,
-    val state_name: String,
+    val onsite_dcs_center_visit: Any,
     val onsite_dcs_center_visit_document: List<ImplementingAgencyDocument>,
     val overall_remarks: String,
     val photographs_of_site: String,
@@ -2488,15 +2511,16 @@ data class AddDcsBmcResult(
     val procurement_price_buffalo_milk_last_year: Int,
     val procurement_price_cow_milk_current_year: Int,
     val procurement_price_cow_milk_last_year: Int,
-    val role_id: String,
     val staff_strength_at_dcs_bmc_operator: String,
     val staff_strength_at_dcs_cleaner: String,
     val staff_strength_at_dcs_milk_tester: String,
     val staff_strength_at_dcs_secretary: String,
     val state_code: Int,
-    val status: Int,
+    val state_name: String,
+    val status: String,
     val total_reg_numbers: Int,
-    val user_id: String,
+    val updated: String,
+    val updated_by: Any,
     val village: String,
     val visit: Int,
     val year_of_estb: String
