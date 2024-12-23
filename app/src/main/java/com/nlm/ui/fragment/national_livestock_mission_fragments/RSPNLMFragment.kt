@@ -486,6 +486,14 @@ class RSPNLMFragment(
             mBinding?.clParent?.let { showSnackbar(it, "Address is required") }
             return
         }
+        if (phoneNumber.isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it, "Address is required") }
+            return
+        }
+        if (yearOfEstablishment.isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it, "Address is required") }
+            return
+        }
 
         if (districtId == null) {
             mBinding?.clParent?.let { showSnackbar(it, "District is required") }
