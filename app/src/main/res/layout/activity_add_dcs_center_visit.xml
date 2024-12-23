@@ -228,6 +228,7 @@
                         android:background="@drawable/curve_all_corner_grey"
                         android:fontFamily="@font/opensans_regular"
                         android:maxLength="50"
+                        android:inputType="numberDecimal"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
@@ -276,6 +277,7 @@
                         android:background="@drawable/curve_all_corner_grey"
                         android:fontFamily="@font/opensans_regular"
                         android:maxLength="50"
+                        android:inputType="numberDecimal"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
@@ -348,6 +350,7 @@
                         android:background="@drawable/curve_all_corner_grey"
                         android:fontFamily="@font/opensans_regular"
                         android:maxLength="50"
+                        android:inputType="numberDecimal"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
@@ -989,7 +992,7 @@
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/etAvgProcurementFarmers"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -997,9 +1000,10 @@
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
+                                android:enabled="false"
+                                android:text="Total Amount Paid/Quantity of milk received"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
                                 android:textSize="@dimen/sp_16" />

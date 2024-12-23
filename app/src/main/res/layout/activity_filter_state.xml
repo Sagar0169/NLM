@@ -68,9 +68,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans_semibold"
-                android:text="Block"
+                android:text="Name of the DCS/MPP"
                 android:textColor="@color/black"
-
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
@@ -78,12 +77,10 @@
                 android:id="@+id/etNameOfDCS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_7"
-
                 android:background="@drawable/curve_all_corner_grey"
                 android:fontFamily="@font/opensans_regular"
-                android:hint="Block"
+                android:hint="Enter Name of the DCS/MPP"
                 android:inputType="textEmailAddress"
                 android:maxLength="50"
                 android:paddingHorizontal="@dimen/dp_10"

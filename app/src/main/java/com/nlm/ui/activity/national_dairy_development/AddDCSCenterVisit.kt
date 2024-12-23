@@ -30,12 +30,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.databinding.ActivityAddDcsCenterVisitBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.AddDairyPlantRequest
 import com.nlm.model.AddDcsBmcRequest
 import com.nlm.model.DairyPlantVisitReportNpddScheme
@@ -56,6 +58,7 @@ import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertDate
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -105,6 +108,7 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
     private var longitude: Double? = null
     private var latitude: Double? = null
     private var uploadData: ImageView? = null
+    private var TableName: String? = null
     private var photographSite: String? = null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -186,36 +190,84 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
             mBinding?.tvState?.isEnabled = false
             mBinding?.tvDistrict?.isEnabled = false
             mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
-//
-//            mBinding?.etLocationDairyPlant?.isEnabled = false
-//            mBinding?.etFSSAILicenseNo?.isEnabled = false
-//            mBinding?.etCapacityDairyPlant?.isEnabled = false
-//            mBinding?.etYearEstablishment?.isEnabled = false
-//            mBinding?.etTotalDcsCovered?.isEnabled = false
-//            mBinding?.etTotalBMCNoCapacity?.isEnabled = false
-//            mBinding?.etBMCNoOfMilkRoutes?.isEnabled = false
-//            mBinding?.etNonBMCNoOfMilkRoutes?.isEnabled = false
-//            mBinding?.etTotalRoutesNoOfMilkRoutes?.isEnabled = false
-//            mBinding?.etLiquidMilkDailyAverage?.isEnabled = false
-//            mBinding?.etGheeDailyAverage?.isEnabled = false
-//            mBinding?.etCurdDailyAverage?.isEnabled = false
-//            mBinding?.etLassiDailyAverage?.isEnabled = false
-//            mBinding?.etTestsPerformedChemicalMicrobiological?.isEnabled = false
-//            mBinding?.etFrequencyChemicalMicrobiological?.isEnabled = false
-//            mBinding?.etTestsPerformed2ChemicalMicrobiological?.isEnabled = false
-//            mBinding?.etFrequency2ChemicalMicrobiological?.isEnabled = false
-//            mBinding?.etETP?.isEnabled = false
-//            mBinding?.etCapacity?.isEnabled = false
-//            mBinding?.etRemarksNlM?.isEnabled = false
-//            mBinding?.rbIsTheDairyYes?.isEnabled = false
-//            mBinding?.rbIsTheDairyNo?.isEnabled = false
-//            mBinding?.rbQualityYes?.isEnabled = false
-//            mBinding?.rbQualityNo?.isEnabled = false
-//            mBinding?.tvChooseFile?.isEnabled = false
-//            mBinding?.tvNLMDoc?.hideView()
-//            mBinding?.tvScheme?.hideView()
-//            mBinding?.tvSaveDraft?.hideView()
-//            mBinding?.tvSendOtp?.hideView()
+
+            mBinding?.etNameOfDCS?.isEnabled = false
+            mBinding?.etVillage?.isEnabled = false
+            mBinding?.etCooperativeRegisterNo?.isEnabled = false
+            mBinding?.tvCooperativeRegisterDate?.isEnabled = false
+            mBinding?.etFssaiNo?.isEnabled = false
+            mBinding?.tvFssaiDate?.isEnabled = false
+            mBinding?.etYearEstablishment?.isEnabled = false
+            mBinding?.etTotalRegisterMemeber?.isEnabled = false
+            mBinding?.etActualPourer?.isEnabled = false
+            mBinding?.etMembersAC?.isEnabled = false
+            mBinding?.etDailyAVGLastYear?.isEnabled = false
+            mBinding?.etDailyAVGCurrentYear?.isEnabled = false
+            mBinding?.etCowMilkLastYear?.isEnabled = false
+            mBinding?.etCowMilkCurrentYear?.isEnabled = false
+            mBinding?.etBuffaloMilkLastYear?.isEnabled = false
+            mBinding?.etBuffaloMilkCurrentYear?.isEnabled = false
+            mBinding?.etIncentiveCowMilk?.isEnabled = false
+            mBinding?.etIncentiveBuffaloMilk?.isEnabled = false
+            mBinding?.etAvgFat?.isEnabled = false
+            mBinding?.etAvgSNF?.isEnabled = false
+            mBinding?.etQualityMilkProduced?.isEnabled = false
+            mBinding?.etTotalAmountPaid?.isEnabled = false
+            mBinding?.etHoursSupply?.isEnabled = false
+            mBinding?.BMCNpddNo?.isEnabled = false
+            mBinding?.etBMCCapacity?.isEnabled = false
+            mBinding?.tvBMCMonthOfInstallation?.isEnabled = false
+            mBinding?.etBMCAvgMilk?.isEnabled = false
+            mBinding?.BMCAvgChilling?.isEnabled = false
+            mBinding?.etTempControl?.isEnabled = false
+            mBinding?.etDgAvRunTime?.isEnabled = false
+            mBinding?.etOtherRegister?.isEnabled = false
+            mBinding?.etSpareParts?.isEnabled = false
+            mBinding?.etAMCUNPDDProjectNo?.isEnabled = false
+            mBinding?.etAMCUDate?.isEnabled = false
+            mBinding?.etDCSInstallation?.isEnabled = false
+            mBinding?.etDCSMake?.isEnabled = false
+            mBinding?.etDCSCalibrationStatus?.isEnabled = false
+            mBinding?.etLastDate?.isEnabled = false
+            mBinding?.etDCSFrequency?.isEnabled = false
+            mBinding?.etAMCEquipement?.isEnabled = false
+            mBinding?.etAMCYear?.isEnabled = false
+            mBinding?.etAMCFeedback?.isEnabled = false
+            mBinding?.etAdditionalFacilities?.isEnabled = false
+            mBinding?.etChemicalTests?.isEnabled = false
+            mBinding?.etChemicalFrequency?.isEnabled = false
+            mBinding?.etStaffSecretary?.isEnabled = false
+            mBinding?.etStaffMilkTester?.isEnabled = false
+            mBinding?.etStaffBMCOperator?.isEnabled = false
+            mBinding?.etStaffCleaner?.isEnabled = false
+            mBinding?.etDCSLastAuditYear?.isEnabled = false
+            mBinding?.etDCSProfitLoss?.isEnabled = false
+            mBinding?.etDCSBonus?.isEnabled = false
+            mBinding?.etDCSStatusElections?.isEnabled = false
+            mBinding?.etDCSGeneralBody?.isEnabled = false
+            mBinding?.etDCSAnyOther?.isEnabled = false
+            mBinding?.tvTrainingDateOfTraining?.isEnabled = false
+            mBinding?.etTrainingPlace?.isEnabled = false
+            mBinding?.etTrainingNoDays?.isEnabled = false
+            mBinding?.etMilkPayment?.isEnabled = false
+            mBinding?.tvMilkPaymentDate?.isEnabled = false
+            mBinding?.etCommentOfNlm?.isEnabled = false
+            mBinding?.etRemarkOfNlm?.isEnabled = false
+            mBinding?.etAssetSiteAssets?.isEnabled = false
+            mBinding?.tvAssetDate?.isEnabled = false
+            mBinding?.etAssetLocation?.isEnabled = false
+            mBinding?.rbMainNo?.isEnabled = false
+            mBinding?.rbMainYes?.isEnabled = false
+            mBinding?.rbTempYes?.isEnabled = false
+            mBinding?.rbTempNo?.isEnabled = false
+            mBinding?.rbAvailableYes?.isEnabled = false
+            mBinding?.rbAvailableNo?.isEnabled = false
+
+
+            mBinding?.tvChooseFile?.isEnabled = false
+            mBinding?.tvNLMDoc?.hideView()
+            mBinding?.tvSaveDraft?.hideView()
+            mBinding?.tvSendOtp?.hideView()
 
 
             viewEditApi()
@@ -383,6 +435,7 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
                     DialogDocName?.text = userResponseModel._result.document_name
+                    TableName=userResponseModel._result.table_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -405,6 +458,7 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
                     if (savedAsDraft) {
                         onBackPressedDispatcher.onBackPressed()
                     } else {
+                        TableName=userResponseModel.fileurl
                         if (viewEdit == "view" || viewEdit == "edit") {
                             if (savedAsEdit) {
 //                                listener?.onNextButtonClick()
@@ -420,24 +474,24 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
                             mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
                             mBinding?.etNameOfDCS?.setText(userResponseModel._result.name_of_dcs)
                             mBinding?.etVillage?.setText(userResponseModel._result.village)
-                            mBinding?.etCooperativeRegisterNo?.setText(userResponseModel._result.cooperative_society_reg_num)
-                            mBinding?.tvCooperativeRegisterDate?.setText(userResponseModel._result.cooperative_society_reg_date)
-                            mBinding?.etFssaiNo?.setText(userResponseModel._result.fssai_lic_no)
+                            mBinding?.etCooperativeRegisterNo?.setText(userResponseModel._result.cooperative_society_reg_num.toString())
+                            mBinding?.tvCooperativeRegisterDate?.text = convertDate(userResponseModel._result.cooperative_society_reg_date)
+                            mBinding?.etFssaiNo?.setText(userResponseModel._result.fssai_lic_no.toString())
 
-                            mBinding?.tvFssaiDate?.setText(userResponseModel._result.fssai_lic_validity_date)
+                            mBinding?.tvFssaiDate?.text = convertDate(userResponseModel._result.fssai_lic_validity_date)
                             mBinding?.etYearEstablishment?.setText(userResponseModel._result.year_of_estb)
-                            mBinding?.etTotalRegisterMemeber?.setText(userResponseModel._result.total_reg_numbers)
+                            mBinding?.etTotalRegisterMemeber?.setText(userResponseModel._result.total_reg_numbers.toString())
                             mBinding?.etActualPourer?.setText(userResponseModel._result.actual_pourer_members)
                             mBinding?.etMembersAC?.setText(userResponseModel._result.member_bank_ac.toString())
                             mBinding?.etDailyAVGLastYear?.setText(userResponseModel._result.daily_avg_procurement_milk_last_year.toString())
                             mBinding?.etDailyAVGCurrentYear?.setText(userResponseModel._result.daily_avg_procurement_milk_current_year.toString())
-                            mBinding?.etCowMilkLastYear?.setText(userResponseModel._result.procurement_price_cow_milk_last_year)
+                            mBinding?.etCowMilkLastYear?.setText(userResponseModel._result.procurement_price_cow_milk_last_year.toString())
                             mBinding?.etCowMilkCurrentYear?.setText(
-                                userResponseModel._result.procurement_price_cow_milk_current_year
+                                userResponseModel._result.procurement_price_cow_milk_current_year.toString()
                             )
-                            mBinding?.etBuffaloMilkLastYear?.setText(userResponseModel._result.procurement_price_buffalo_milk_last_year)
+                            mBinding?.etBuffaloMilkLastYear?.setText(userResponseModel._result.procurement_price_buffalo_milk_last_year.toString())
                             mBinding?.etBuffaloMilkCurrentYear?.setText(
-                                userResponseModel._result.procurement_price_buffalo_milk_current_year
+                                userResponseModel._result.procurement_price_buffalo_milk_current_year.toString()
                             )
                             mBinding?.etIncentiveCowMilk?.setText(userResponseModel._result.incentive_procurement_price_cow.toString())
                             mBinding?.etIncentiveBuffaloMilk?.setText(userResponseModel._result.incentive_procurement_price_buffalo.toString())
@@ -448,15 +502,15 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
                             mBinding?.etHoursSupply?.setText(userResponseModel._result.condition_electricity_supply_hrs_sply.toString())
                             mBinding?.BMCNpddNo?.setText(userResponseModel._result.bmc_details_npdd_prj_no)
                             mBinding?.etBMCCapacity?.setText(userResponseModel._result.bmc_details_capacity)
-                            mBinding?.tvBMCMonthOfInstallation?.setText(userResponseModel._result.bmc_details_date_of_install)
+                            mBinding?.tvBMCMonthOfInstallation?.text = convertDate(userResponseModel._result.bmc_details_date_of_install)
                             mBinding?.etBMCAvgMilk?.setText(userResponseModel._result.bmc_details_avg_milk_collection.toString())
                             mBinding?.BMCAvgChilling?.setText(userResponseModel._result.bmc_details_avg_chil_cost_ltr.toString())
-                            mBinding?.etTempControl?.setText(userResponseModel._result.bmc_details_temp_control_log_book_temp)
+                            mBinding?.etTempControl?.setText(userResponseModel._result.bmc_details_temp_control_log_book_temp.toString())
                             mBinding?.etDgAvRunTime?.setText(userResponseModel._result.bmc_details_dg_set_av_rt)
                             mBinding?.etOtherRegister?.setText(userResponseModel._result.bmc_details_other_reg)
                             mBinding?.etSpareParts?.setText(userResponseModel._result.bmc_details_spare_parts)
                             mBinding?.etAMCUNPDDProjectNo?.setText(userResponseModel._result.amcu_npdd_project_no)
-                            mBinding?.etAMCUDate?.setText(userResponseModel._result.amcu_npdd_date_install)
+                            mBinding?.etAMCUDate?.text = convertDate(userResponseModel._result.amcu_npdd_date_install)
                             mBinding?.etDCSInstallation?.setText(userResponseModel._result.dcs_bmc_installation)
                             mBinding?.etDCSMake?.setText(userResponseModel._result.dcs_bmc_make)
                             mBinding?.etDCSCalibrationStatus?.setText(userResponseModel._result.dcs_bmc_calibration_status)
@@ -478,15 +532,15 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
                             mBinding?.etDCSStatusElections?.setText(userResponseModel._result.dsc_bonus_distribution)
                             mBinding?.etDCSGeneralBody?.setText(userResponseModel._result.dsc_general)
                             mBinding?.etDCSAnyOther?.setText(userResponseModel._result.dsc_any_other)
-                            mBinding?.tvTrainingDateOfTraining?.setText(userResponseModel._result.bmc_operator_secretary_date_of_training)
+                            mBinding?.tvTrainingDateOfTraining?.text = convertDate(userResponseModel._result.bmc_operator_secretary_date_of_training)
                             mBinding?.etTrainingPlace?.setText(userResponseModel._result.bmc_operator_secretary_place_of_training)
-                            mBinding?.etTrainingNoDays?.setText(userResponseModel._result.bmc_operator_secretary_no_of_days)
+                            mBinding?.etTrainingNoDays?.setText(userResponseModel._result.bmc_operator_secretary_no_of_days.toString())
                             mBinding?.etMilkPayment?.setText(userResponseModel._result.milk_payment_cycle)
-                            mBinding?.tvMilkPaymentDate?.setText(userResponseModel._result.milk_payment_last_date)
+                            mBinding?.tvMilkPaymentDate?.text = convertDate(userResponseModel._result.milk_payment_last_date)
                             mBinding?.etCommentOfNlm?.setText(userResponseModel._result.farmer_interaction_feedback)
                             mBinding?.etRemarkOfNlm?.setText(userResponseModel._result.overall_remarks)
                             mBinding?.etAssetSiteAssets?.setText(userResponseModel._result.photographs_of_site_assets)
-                            mBinding?.tvAssetDate?.setText(userResponseModel._result.photographs_of_site_assets_date)
+                            mBinding?.tvAssetDate?.text = convertDate(userResponseModel._result.photographs_of_site_assets_date)
                             mBinding?.etAssetLocation?.setText(userResponseModel._result.photographs_of_site_assets_location)
 
                             if (userResponseModel._result.bmc_details_maintenance_log_book.isNullOrEmpty()) {
@@ -818,6 +872,8 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
                             photographs_of_site_assets_location = mBinding?.etAssetLocation?.text.toString(),
                             photographs_of_site = photographSite,
                             onsite_dcs_center_visit_document = totalListDocument,
+                            lat_nlm=latitude,
+                            long_nlm=longitude
                         )
                     )
                 } else {
@@ -1001,9 +1057,59 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
         DialogDocName = bindingDialog.etDoc
         uploadData = bindingDialog.ivPic
         if (selectedItem != null) {
+            bindingDialog.ivPic.showView()
+            if (selectedItem.is_edit==false)
+            {
+                bindingDialog.tvSubmit.hideView()
+                bindingDialog.tvChooseFile.isEnabled=false
+                bindingDialog.etDescription.isEnabled=false
+            }
             UploadedDocumentName = selectedItem.nlm_document
             bindingDialog.etDoc.text = selectedItem.nlm_document
             bindingDialog.etDescription.setText(selectedItem.description)
+
+            val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+            if (isSupported) {
+                val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                when (fileExtension) {
+                    "pdf" -> {
+                        val downloader = AndroidDownloader(context)
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                                it
+                            )
+                        }
+                        bindingDialog.etDoc.setOnClickListener {
+                            if (!UploadedDocumentName.isNullOrEmpty()) {
+                                downloader.downloadFile(url, UploadedDocumentName!!)
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                                dialog.dismiss()
+                            }
+                            else{
+                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                                dialog.dismiss()
+                            }
+                        }
+
+                    }
+
+                    "png" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+
+                    "jpg" -> {
+                        bindingDialog.ivPic.let {
+                            Glide.with(context).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                                it
+                            )
+                        }
+                    }
+                }
+            }
         }
         bindingDialog.tvChooseFile.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
@@ -1012,6 +1118,27 @@ class AddDCSCenterVisit : BaseActivity<ActivityAddDcsCenterVisitBinding>(), Call
             } else {
 
                 mBinding?.clParent?.let { showSnackbar(it, "please enter description") }
+            }
+        }
+
+        val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
+        if (isSupported) {
+            when (fileExtension) {
+                "pdf" -> {
+//                    bindingDialog.ivPic.let {
+//                        Glide.with(context).load(R.drawable.ic_pdf).into(
+//                            it
+//                        )
+//                    }
+                }
+                else -> {
+                    bindingDialog.ivPic.setOnClickListener {
+                        Utility.showImageDialog(
+                            this,
+                            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        )
+                    }
+                }
             }
         }
         bindingDialog.btnDelete.setOnClickListener {

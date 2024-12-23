@@ -95,13 +95,13 @@ class DCSCenterVisitAdapter(
         }
 
         holder.mBinding.ivView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, AddDairyPlantVisit::class.java)
+            val intent = Intent(holder.itemView.context, AddDCSCenterVisit::class.java)
             intent.putExtra("View/Edit", "view")
             intent.putExtra("itemId", item.id)
             holder.itemView.context.startActivity(intent)
         }
         holder.mBinding.ivEdit.setOnClickListener {
-            val intent = Intent(holder.itemView.context, AddDairyPlantVisit::class.java)
+            val intent = Intent(holder.itemView.context, AddDCSCenterVisit::class.java)
             intent.putExtra("View/Edit", "edit")
             intent.putExtra("itemId", item.id)
             holder.itemView.context.startActivity(intent)
