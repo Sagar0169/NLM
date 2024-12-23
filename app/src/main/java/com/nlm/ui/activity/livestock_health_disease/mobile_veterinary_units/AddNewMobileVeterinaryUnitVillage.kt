@@ -433,7 +433,6 @@ class AddNewMobileVeterinaryUnitVillage :
                     district_code = districtId,
                     block_name = mBinding?.etBlock?.text.toString(),
                     village_name = mBinding?.etFarmer?.text.toString(),
-
                     attended_call_inputs = mBinding?.tvDocumentNameOne?.text.toString(),
                     come_know_about_inputs = mBinding?.tvDocumentNameTwo?.text.toString(),
                     services_mvu_inputs = mBinding?.tvDocumentNameThree?.text.toString(),

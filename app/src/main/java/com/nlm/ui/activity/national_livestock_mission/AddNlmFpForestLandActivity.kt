@@ -141,23 +141,6 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
             }
         }
     }
-//    private val stateList = listOf(
-//        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
-//        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
-//        "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
-//        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
-//        "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-//        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
-//        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep",
-//        "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
-//    )
-    private val agency = listOf(
-        "State Government", "Gaushala", "Outsourced Agent"
-    )
-    private val land = listOf(
-        "CPR", "Gochar", "Government Farm", "Community Land", "Individual Land",
-        "Waste Land"
-    )
     override val layoutId: Int
         get() = R.layout.activity_add_nlm_fp_forest_land
 
@@ -1288,9 +1271,6 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-
-                    uploadData?.showView()
-                    uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(this, selectedImageUri)
@@ -1309,11 +1289,11 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                                     uploadData?.setImageURI(selectedImageUri)
                                     uploadImage(it) // Proceed to upload
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         } else {
-                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
+                            Toast.makeText(this, "Format not supported", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -1324,9 +1304,6 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        uploadData?.showView()
-                        uploadData?.setImageResource(R.drawable.ic_pdf)
-
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
@@ -1338,6 +1315,8 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
 
                                 // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
                                 if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageResource(R.drawable.ic_pdf)
                                     DocumentName = documentName
                                     val requestBody = convertToRequestBody(this, uri)
                                     body = MultipartBody.Part.createFormData(
@@ -1356,7 +1335,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                                         table_name = getString(R.string.fp_from_forest_land_document).toRequestBody(MultipartBody.FORM),
                                     )
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }
@@ -1396,9 +1375,11 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API level 26
+            Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
             registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
+            Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
             LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
         }
     }

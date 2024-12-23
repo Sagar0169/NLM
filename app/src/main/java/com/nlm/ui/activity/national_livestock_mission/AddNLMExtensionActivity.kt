@@ -1072,7 +1072,7 @@ class AddNLMExtensionActivity(
                 CAPTURE_IMAGE_REQUEST -> {
 
                     val imageBitmap = data?.extras?.get("data") as Bitmap
-                    Log.d("DOCUMENT",imageBitmap.toString())
+
                     uploadData?.showView()
                     uploadData?.setImageBitmap(imageBitmap)
 //                    data.data?.let { startCrop(it) }
@@ -1081,58 +1081,84 @@ class AddNLMExtensionActivity(
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-                    Log.d("DOCUMENT",selectedImageUri.toString())
-                    uploadData?.showView()
-                    uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(this, selectedImageUri)
-                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+
+                        val fileExtension =
+                            filePath?.substringAfterLast('.', "").orEmpty().lowercase()
                         // Validate file extension
                         if (fileExtension in listOf("png", "jpg", "jpeg")) {
-                            uploadData?.showView()
-                            uploadData?.setImageURI(selectedImageUri)
                             val file = filePath?.let { File(it) }
-                            file?.let { uploadImage(it) }
+
+                            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+                            file?.let {
+                                val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
+                                if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageURI(selectedImageUri)
+                                    uploadImage(it) // Proceed to upload
+                                } else {
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
+                                }
+                            }
                         } else {
-                            Toast.makeText(this, "Format not supported", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Format not supported", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
+
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        uploadData?.showView()
-                        uploadData?.setImageResource(R.drawable.ic_pdf)
+
+
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName=
+                                val documentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-//                                DialogDocName?.text=DocumentName
+                                val fileSizeInBytes =
+                                    it.getLong(it.getColumnIndex(MediaStore.MediaColumns.SIZE))
+                                val fileSizeInMB = fileSizeInBytes / (1024 * 1024.0) // Convert to MB
 
-                                val requestBody = convertToRequestBody(this, uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
-//                                use this code to add new view with image name and uri
+                                // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
+                                if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageResource(R.drawable.ic_pdf)
+                                    DocumentName = documentName
+                                    val requestBody = convertToRequestBody(this, uri)
+                                    body = MultipartBody.Part.createFormData(
+                                        "document_name",
+                                        documentName,
+                                        requestBody
+                                    )
+                                    viewModel.getProfileUploadFile(
+                                        context = this,
+                                        document_name = body,
+                                        user_id = getPreferenceOfScheme(
+                                            this,
+                                            AppConstants.SCHEME,
+                                            Result::class.java
+                                        )?.user_id,
+                                        table_name = getString(R.string.assistance_for_ea_document).toRequestBody(
+                                            MultipartBody.FORM
+                                        ),
+                                    )
+                                } else {
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
+                                }
                             }
-                            viewModel.getProfileUploadFile(
-                                context = this,
-                                document_name = body,
-                                user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.assistance_for_ea_document).toRequestBody(MultipartBody.FORM),
-                            )
                         }
                     }
                 }
-            }}
+            }
+        }
     }
+
 
     private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
         drawable?.mutate() // Mutate the drawable to avoid affecting other instances
@@ -1386,9 +1412,11 @@ class AddNLMExtensionActivity(
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API level 26
+            Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
             registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
+            Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
             LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
         }
     }

@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
@@ -24,6 +25,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -126,8 +128,16 @@ class AddNlmFpFromNonForestActivity(
     private var longitude:Double?=null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                    latitude = it.getDoubleExtra("latitude", 0.0)
+                    longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
+
+                    // You can add additional handling logic here, such as updating UI or processing data.
+                }
+            }
         }
     }
     private val agency = listOf(
@@ -1254,9 +1264,6 @@ class AddNlmFpFromNonForestActivity(
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-
-                    uploadData?.showView()
-                    uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(this, selectedImageUri)
@@ -1275,11 +1282,11 @@ class AddNlmFpFromNonForestActivity(
                                     uploadData?.setImageURI(selectedImageUri)
                                     uploadImage(it) // Proceed to upload
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         } else {
-                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
+                            Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -1290,8 +1297,6 @@ class AddNlmFpFromNonForestActivity(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        uploadData?.showView()
-                        uploadData?.setImageResource(R.drawable.ic_pdf)
 
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
@@ -1304,6 +1309,8 @@ class AddNlmFpFromNonForestActivity(
 
                                 // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
                                 if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageResource(R.drawable.ic_pdf)
                                     DocumentName = documentName
                                     val requestBody = convertToRequestBody(this, uri)
                                     body = MultipartBody.Part.createFormData(
@@ -1324,7 +1331,7 @@ class AddNlmFpFromNonForestActivity(
                                         ),
                                     )
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }
@@ -1700,10 +1707,14 @@ class AddNlmFpFromNonForestActivity(
     }
     override fun onResume() {
         super.onResume()
-        registerReceiver(
-            locationReceiver,
-            IntentFilter("LOCATION_UPDATED")
-        )
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API level 26
+            Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
+            registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+        } else {
+            Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
+            LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
+        }
     }
 
 

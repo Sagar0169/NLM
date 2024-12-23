@@ -131,6 +131,7 @@ class RSPIAFragment(
     private var UploadedDocumentName: String? = null
     private var latitude:Double?=null
     private var longitude:Double?=null
+    private var isReceiverRegistered = false
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent?.let {
@@ -285,8 +286,9 @@ class RSPIAFragment(
     }
     override fun onResume() {
         super.onResume()
+        Log.d("EXECUTION","ON RESUME EXECUTED")
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API level 26
             Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
             requireContext().registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
@@ -294,9 +296,9 @@ class RSPIAFragment(
             LocalBroadcastManager.getInstance(requireContext()).registerReceiver(locationReceiver, intentFilter)
         }
     }
-
     override fun onPause() {
         super.onPause()
+        Log.d("EXECUTION","ON PAUSE EXECUTED")
         requireContext().unregisterReceiver(locationReceiver)
     }
     override fun setObservers() {
@@ -1159,7 +1161,7 @@ class RSPIAFragment(
                 CAPTURE_IMAGE_REQUEST -> {
 
                     val imageBitmap = data?.extras?.get("data") as Bitmap
-                    Log.d("DOCUMENT",imageBitmap.toString())
+
                     uploadData?.showView()
                     uploadData?.setImageBitmap(imageBitmap)
 //                    data.data?.let { startCrop(it) }
@@ -1168,58 +1170,84 @@ class RSPIAFragment(
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-                    Log.d("DOCUMENT",selectedImageUri.toString())
-                    uploadData?.showView()
-                    uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(requireContext(), selectedImageUri)
-                        val fileExtension = filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+
+                        val fileExtension =
+                            filePath?.substringAfterLast('.', "").orEmpty().lowercase()
                         // Validate file extension
                         if (fileExtension in listOf("png", "jpg", "jpeg")) {
-                            uploadData?.showView()
-                            uploadData?.setImageURI(selectedImageUri)
                             val file = filePath?.let { File(it) }
-                            file?.let { uploadImage(it) }
+
+                            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+                            file?.let {
+                                val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
+                                if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageURI(selectedImageUri)
+                                    uploadImage(it) // Proceed to upload
+                                } else {
+                                    Toast.makeText(requireContext(), "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
+                                }
+                            }
                         } else {
-                            Toast.makeText(requireContext(), "Format not supported", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Format not supported", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
+
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        uploadData?.showView()
-                        uploadData?.setImageResource(R.drawable.ic_pdf)
+
+
                         val cursor = requireContext().contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                DocumentName=
+                                val documentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-//                                DialogDocName?.text=DocumentName
+                                val fileSizeInBytes =
+                                    it.getLong(it.getColumnIndex(MediaStore.MediaColumns.SIZE))
+                                val fileSizeInMB = fileSizeInBytes / (1024 * 1024.0) // Convert to MB
 
-                                val requestBody = convertToRequestBody(requireContext(), uri)
-                                body = MultipartBody.Part.createFormData(
-                                    "document_name",
-                                    DocumentName,
-                                    requestBody
-                                )
-//                                use this code to add new view with image name and uri
+                                // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
+                                if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageResource(R.drawable.ic_pdf)
+                                    DocumentName = documentName
+                                    val requestBody = convertToRequestBody(requireContext(), uri)
+                                    body = MultipartBody.Part.createFormData(
+                                        "document_name",
+                                        documentName,
+                                        requestBody
+                                    )
+                                    viewModel.getProfileUploadFile(
+                                        context = requireContext(),
+                                        document_name = body,
+                                        user_id = getPreferenceOfScheme(
+                                            requireContext(),
+                                            AppConstants.SCHEME,
+                                            Result::class.java
+                                        )?.user_id,
+                                        table_name = getString(R.string.rsp_laboratory_semen_document).toRequestBody(
+                                            MultipartBody.FORM
+                                        ),
+                                    )
+                                } else {
+                                    Toast.makeText(requireContext(), "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
+                                }
                             }
-                            viewModel.getProfileUploadFile(
-                                context = requireContext(),
-                                document_name = body,
-                                user_id = getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.user_id,
-                                table_name = getString(R.string.rsp_laboratory_semen_document).toRequestBody(MultipartBody.FORM),
-                            )
                         }
                     }
                 }
-            }}
+            }
+        }
     }
+
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //        if (resultCode == Activity.RESULT_OK) {

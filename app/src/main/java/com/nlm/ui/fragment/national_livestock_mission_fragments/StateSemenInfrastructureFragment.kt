@@ -112,7 +112,7 @@ class StateSemenInfrastructureFragment(
         mBinding?.clickAction = ClickActions()
         DocumentList = arrayListOf()
         viewModel.init()
-        showToast(dId.toString())
+
 
         stateSemenInfraGoatAdapter()
         addDocumentAdapter = SupportingDocumentAdapterWithDialog(
@@ -125,7 +125,7 @@ class StateSemenInfrastructureFragment(
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(requireContext())
         if (viewEdit == "view") {
-            showToast(dId.toString())
+
             mBinding?.tvAddMore1?.isEnabled = false
             mBinding?.tvAddMore1?.hideView()
             mBinding?.tvAddMore2?.isEnabled = false
@@ -149,7 +149,6 @@ class StateSemenInfrastructureFragment(
         }
         if (viewEdit == "edit") {
             viewEditApi()
-            showToast(itemId.toString())
         }
     }
 
@@ -311,8 +310,9 @@ class StateSemenInfrastructureFragment(
     }
     override fun onResume() {
         super.onResume()
+        Log.d("EXECUTION","ON RESUME EXECUTED")
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.S) { // API level 31
             Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
             requireContext().registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
@@ -324,6 +324,7 @@ class StateSemenInfrastructureFragment(
 
     override fun onPause() {
         super.onPause()
+        Log.d("EXECUTION","ON PAUSE EXECUTED")
         requireContext().unregisterReceiver(locationReceiver)
     }
     private fun compositionOfGoverningNlmIaDialog(
@@ -803,8 +804,6 @@ class StateSemenInfrastructureFragment(
 
 
                     if (selectedImageUri != null) {
-                        uploadData?.showView()
-                        uploadData?.setImageURI(selectedImageUri)
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(requireContext(), selectedImageUri)
 
@@ -822,11 +821,11 @@ class StateSemenInfrastructureFragment(
                                     uploadData?.setImageURI(selectedImageUri)
                                     uploadImage(it) // Proceed to upload
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                     Toast.makeText(requireContext(), "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         } else {
-                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
+                            Toast.makeText(requireContext(), "Format not supported", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -837,8 +836,7 @@ class StateSemenInfrastructureFragment(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        uploadData?.showView()
-                        uploadData?.setImageResource(R.drawable.ic_pdf)
+
 
                         val cursor = requireContext().contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
@@ -851,6 +849,8 @@ class StateSemenInfrastructureFragment(
 
                                 // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
                                 if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageResource(R.drawable.ic_pdf)
                                     DocumentName = documentName
                                     val requestBody = convertToRequestBody(requireContext(), uri)
                                     body = MultipartBody.Part.createFormData(
@@ -871,7 +871,7 @@ class StateSemenInfrastructureFragment(
                                         ),
                                     )
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    Toast.makeText(requireContext(), "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }

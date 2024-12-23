@@ -680,9 +680,6 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-
-                    uploadData?.showView()
-                    uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(requireContext(), selectedImageUri)
@@ -701,11 +698,11 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
                                     uploadData?.setImageURI(selectedImageUri)
                                     uploadImage(it) // Proceed to upload
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    Toast.makeText(requireContext(), "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         } else {
-                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
+                            Toast.makeText(requireContext(), "Format not supported", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -750,7 +747,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
                                         ),
                                     )
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    Toast.makeText(requireContext(), "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }
@@ -785,7 +782,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.O) { // API level 26
             Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
             requireContext().registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {

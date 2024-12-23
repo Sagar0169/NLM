@@ -597,7 +597,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     "pdf" -> {
                         val downloader = AndroidDownloader(context)
                         bindingDialog.ivPic.let {
-                            Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                            Glide.with(context).load(R.drawable.ic_pdf).into(
                                 it
                             )
                         }
@@ -1065,9 +1065,6 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
 
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
-
-                    uploadData?.showView()
-                    uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(this, selectedImageUri)
@@ -1086,11 +1083,11 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                     uploadData?.setImageURI(selectedImageUri)
                                     uploadImage(it) // Proceed to upload
                                 } else {
-                                    mBinding?.let { showSnackbar(it.main,"File size exceeds 5 MB") }
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         } else {
-                            mBinding?.let { showSnackbar(it.main,"Format not supported") }
+                            Toast.makeText(this, "Format not supported", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -1101,8 +1098,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        uploadData?.showView()
-                        uploadData?.setImageResource(R.drawable.ic_pdf)
+
 
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
@@ -1115,6 +1111,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
 
                                 // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
                                 if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageResource(R.drawable.ic_pdf)
                                     DocumentName = documentName
                                     val requestBody = convertToRequestBody(this, uri)
                                     body = MultipartBody.Part.createFormData(
@@ -1135,7 +1133,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                                         ),
                                     )
                                 } else {
-                                    mBinding?.let { showSnackbar(it.main,"File size exceeds 5 MB") }
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }
@@ -1489,7 +1487,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.O) { // API level 26
             Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
             registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
@@ -1497,6 +1495,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
             LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
         }
     }
+
 
 
     override fun onPause() {

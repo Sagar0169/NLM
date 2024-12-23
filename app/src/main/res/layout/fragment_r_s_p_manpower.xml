@@ -532,6 +532,13 @@
                                 android:text="Supporting Documents"                            android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
                             <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="@string/document_size_warning"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14" />
+                            <TextView
                                 android:id="@+id/tvAddMore4"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:layout_width="wrap_content"
