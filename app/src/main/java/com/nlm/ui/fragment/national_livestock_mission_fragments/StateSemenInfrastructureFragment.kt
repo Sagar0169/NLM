@@ -441,7 +441,7 @@ class StateSemenInfrastructureFragment(
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
-        if(dId==0){
+        if(itemId==0){
             mBinding?.clParent?.let { showSnackbar(it,"Please Fill the mandatory fields of Basic Information Tab") }
             return
         }
