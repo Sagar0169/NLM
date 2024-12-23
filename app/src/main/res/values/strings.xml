@@ -389,9 +389,9 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="productivity_enhancement_services_document">productivity_enhancement_services</string>l
     <string name="state_semen_bank_document">state_semen_bank</string>
     <string name="mobile_veterinary_unit_state">mobile_veterinary_unit_state</string>
-    <string name="mobile_veterinary_unit_district">mobile_veterinary_unit_district</string>
-    <string name="mobile_veterinary_unit_block">mobile_veterinary_unit_block</string>
-    <string name="mobile_veterinary_unit_farmer">mobile_veterinary_unit_farmer</string>
+    <string name="mobile_veterinary_unit_district">MobileVeterinaryUnitDistrict</string>
+    <string name="mobile_veterinary_unit_block">MobileVeterinaryUnitBlock</string>
+    <string name="mobile_veterinary_unit_farmer">MobileVeterinaryUnitDistrict</string>
     <string name="rsp_lab">RSP Lab</string>
     <string name="artificial_insemination">artificial_insemination</string>
     <string name="state_vaccination_programme">state_level_vaccination</string>

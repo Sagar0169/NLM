@@ -156,6 +156,11 @@ class AddVaccinationProgrammeFarmerLevel :
             mBinding?.tvChooseFileThree?.isEnabled = false
             mBinding?.tvChooseFileFour?.isEnabled = false
             mBinding?.tvChooseFileFive?.isEnabled = false
+            mBinding?.ivDeleteOne?.hideView()
+            mBinding?.ivDeleteTwo?.hideView()
+            mBinding?.ivDeleteThree?.hideView()
+            mBinding?.ivDeleteFour?.hideView()
+            mBinding?.ivDeleteFive?.hideView()
             mBinding?.llSaveDraftAndSubmit?.hideView()
             viewEditApi()
         }
@@ -208,22 +213,27 @@ class AddVaccinationProgrammeFarmerLevel :
                     when (isFromApplication) {
                         1 -> {
                             mBinding?.tvDocumentNameOne?.text = uploadedDocumentName
+                            mBinding?.etChooseFileOne?.text = "Uploaded"
                         }
 
                         2 -> {
                             mBinding?.tvDocumentNameTwo?.text = uploadedDocumentName
+                            mBinding?.etChooseFileTwo?.text = "Uploaded"
                         }
 
                         3 -> {
                             mBinding?.tvDocumentNameThree?.text = uploadedDocumentName
+                            mBinding?.etChooseFileThree?.text = "Uploaded"
                         }
 
                         4 -> {
                             mBinding?.tvDocumentNameFour?.text = uploadedDocumentName
+                            mBinding?.etChooseFileFour?.text = "Uploaded"
                         }
 
                         5 -> {
                             mBinding?.tvDocumentNameFive?.text = uploadedDocumentName
+                            mBinding?.etChooseFileFive?.text = "Uploaded"
                         }
 
                         else -> {
@@ -281,7 +291,8 @@ class AddVaccinationProgrammeFarmerLevel :
                         } else {
                             mBinding?.llUploadOne?.showView()
                             mBinding?.tvDocumentNameOne?.text = userResponseModel._result.animal_vaccinated_uploads
-                            mBinding?.ivPicOne?.let { it1 -> GlideImage(it1,userResponseModel._result.animal_vaccinated_uploads) }
+                            mBinding?.ivPicOne?.let { it1 -> GlideImage(it1,userResponseModel._result.animal_vaccinated_uploads)
+                                mBinding?.etChooseFileOne?.text = "Uploaded"}
                         }
 
                         if (userResponseModel._result.vaccinator_visit_uploads.isNullOrEmpty()) {
@@ -289,7 +300,8 @@ class AddVaccinationProgrammeFarmerLevel :
                         } else {
                             mBinding?.llUploadTwo?.showView()
                             mBinding?.tvDocumentNameTwo?.text = userResponseModel._result.vaccinator_visit_uploads
-                            mBinding?.ivPicTwo?.let { it1 -> GlideImage(it1,userResponseModel._result.vaccinator_visit_uploads) }
+                            mBinding?.ivPicTwo?.let { it1 -> GlideImage(it1,userResponseModel._result.vaccinator_visit_uploads)
+                                mBinding?.etChooseFileTwo?.text ="Uploaded"}
                         }
 
                         if (userResponseModel._result.recall_vaccination_uploads.isNullOrEmpty()) {
@@ -297,7 +309,8 @@ class AddVaccinationProgrammeFarmerLevel :
                         }else {
                             mBinding?.llUploadThree?.showView()
                             mBinding?.tvDocumentNameThree?.text = userResponseModel._result.recall_vaccination_uploads
-                            mBinding?.ivPicThree?.let { it1 -> GlideImage(it1,userResponseModel._result.recall_vaccination_uploads) }
+                            mBinding?.ivPicThree?.let { it1 -> GlideImage(it1,userResponseModel._result.recall_vaccination_uploads)
+                                mBinding?.etChooseFileThree?.text =   "Uploaded"}
                         }
 
                         if (userResponseModel._result.vaccination_carrier_uploads.isNullOrEmpty()) {
@@ -305,7 +318,8 @@ class AddVaccinationProgrammeFarmerLevel :
                         } else{
                             mBinding?.llUploadFour?.showView()
                             mBinding?.tvDocumentNameFour?.text = userResponseModel._result.vaccination_carrier_uploads
-                            mBinding?.ivPicFour?.let { it1 -> GlideImage(it1,userResponseModel._result.vaccination_carrier_uploads) }
+                            mBinding?.ivPicFour?.let { it1 -> GlideImage(it1,userResponseModel._result.vaccination_carrier_uploads)
+                                mBinding?.etChooseFileFour?.text =  "Uploaded"}
                         }
 
                         if (userResponseModel._result.awarness_of_the_govt_uploads.isNullOrEmpty()){
@@ -313,7 +327,8 @@ class AddVaccinationProgrammeFarmerLevel :
                         } else {
                             mBinding?.llUploadFive?.showView()
                             mBinding?.tvDocumentNameFive?.text =  userResponseModel._result.awarness_of_the_govt_uploads
-                            mBinding?.ivPicFive?.let { it1 -> GlideImage(it1,userResponseModel._result.awarness_of_the_govt_uploads) }
+                            mBinding?.ivPicFive?.let { it1 -> GlideImage(it1,userResponseModel._result.awarness_of_the_govt_uploads)
+                                mBinding?.etChooseFileFive?.text =   "Uploaded"}
                         }
 //                        mBinding?.etChooseFileOne?.text =
 //                            userResponseModel._result.animal_vaccinated_uploads
@@ -580,6 +595,19 @@ class AddVaccinationProgrammeFarmerLevel :
                 }
 
                 "jpg" -> {
+                    imageView.let {
+                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                            it
+                        )
+                        imageView.setOnClickListener {
+                            Utility.showImageDialog(
+                                this,
+                                url
+                            )
+                        }
+                    }
+                }
+                "jpeg" -> {
                     imageView.let {
                         Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
                             it

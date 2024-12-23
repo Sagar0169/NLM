@@ -139,6 +139,13 @@ class AddVaccinationProgrammeStateLevel :
             mBinding?.tvChoosefile1e?.isEnabled = false
             mBinding?.tvChooseFile2?.isEnabled = false
             mBinding?.tvChooseFile3?.isEnabled = false
+            mBinding?.ivDelete1a?.hideView()
+            mBinding?.ivDelete1b?.hideView()
+            mBinding?.ivDelete1c?.hideView()
+            mBinding?.ivDelete1d?.hideView()
+            mBinding?.ivDelete1e?.hideView()
+            mBinding?.ivDelete2?.hideView()
+            mBinding?.ivDelete3?.hideView()
             mBinding?.llSaveDraftAndSubmit?.hideView()
             viewEditApi(viewEdit)
         }
@@ -206,7 +213,8 @@ class AddVaccinationProgrammeStateLevel :
                             } else {
                                 mBinding?.llUpload1a?.showView()
                                 mBinding?.tvDocumentName1a?.text = userResponseModel._result.schedule_vaccination_focal_point_upload
-                                mBinding?.ivPic1a?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_focal_point_upload) }
+                                mBinding?.ivPic1a?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_focal_point_upload)
+                                    mBinding?.etChooseFile1a?.text = "Uploaded"}
                             }
 
                             if (userResponseModel._result.schedule_vaccination_timeline_upload.isNullOrEmpty()) {
@@ -214,7 +222,8 @@ class AddVaccinationProgrammeStateLevel :
                             } else {
                                 mBinding?.llUpload1b?.showView()
                                 mBinding?.tvDocumentName1b?.text = userResponseModel._result.schedule_vaccination_timeline_upload
-                                mBinding?.ivPic1b?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_timeline_upload) }
+                                mBinding?.ivPic1b?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_timeline_upload)
+                                    mBinding?.etChooseFile1b?.text ="Uploaded"}
                             }
 
                             if (userResponseModel._result.schedule_vaccination_arrangement_upload.isNullOrEmpty()) {
@@ -222,7 +231,8 @@ class AddVaccinationProgrammeStateLevel :
                             }else {
                                 mBinding?.llUpload1c?.showView()
                                 mBinding?.tvDocumentName1c?.text = userResponseModel._result.schedule_vaccination_arrangement_upload
-                                mBinding?.ivPic1c?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_arrangement_upload) }
+                                mBinding?.ivPic1c?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_arrangement_upload)
+                                    mBinding?.etChooseFile1c?.text ="Uploaded"}
                             }
 
                             if (userResponseModel._result.schedule_vaccination_cold_chain_avail_upload.isNullOrEmpty()) {
@@ -230,7 +240,8 @@ class AddVaccinationProgrammeStateLevel :
                             } else{
                                 mBinding?.llUpload1d?.showView()
                                 mBinding?.tvDocumentName1d?.text = userResponseModel._result.schedule_vaccination_cold_chain_avail_upload
-                                mBinding?.ivPic1d?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_cold_chain_avail_upload) }
+                                mBinding?.ivPic1d?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_cold_chain_avail_upload)
+                                    mBinding?.etChooseFile1d?.text =  "Uploaded"}
                             }
 
                             if (userResponseModel._result.schedule_vaccination_assign_areas_upload.isNullOrEmpty()){
@@ -238,7 +249,8 @@ class AddVaccinationProgrammeStateLevel :
                             } else {
                                 mBinding?.llUpload1e?.showView()
                                 mBinding?.tvDocumentName1e?.text =  userResponseModel._result.schedule_vaccination_assign_areas_upload
-                                mBinding?.ivPic1e?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_assign_areas_upload) }
+                                mBinding?.ivPic1e?.let { it1 -> GlideImage(it1,userResponseModel._result.schedule_vaccination_assign_areas_upload)
+                                    mBinding?.etChoosefile1e?.text =   "Uploaded"}
                             }
 
                             if (userResponseModel._result.seromonitoring_facilities_upload.isNullOrEmpty()) {
@@ -246,7 +258,8 @@ class AddVaccinationProgrammeStateLevel :
                             } else{
                                 mBinding?.llUpload2?.showView()
                                 mBinding?.tvDocumentName2?.text = userResponseModel._result.seromonitoring_facilities_upload
-                                mBinding?.ivPic2?.let { it1 -> GlideImage(it1,userResponseModel._result.seromonitoring_facilities_upload) }
+                                mBinding?.ivPic2?.let { it1 -> GlideImage(it1,userResponseModel._result.seromonitoring_facilities_upload)
+                                    mBinding?.etChooseFile2?.text =  "Uploaded"}
                             }
 
                             if (userResponseModel._result.process_plan_monitoring_upload.isNullOrEmpty()){
@@ -254,7 +267,8 @@ class AddVaccinationProgrammeStateLevel :
                             } else {
                                 mBinding?.llUpload3?.showView()
                                 mBinding?.tvDocumentName3?.text =  userResponseModel._result.process_plan_monitoring_upload
-                                mBinding?.ivPic3?.let { it1 -> GlideImage(it1, userResponseModel._result.process_plan_monitoring_upload) }
+                                mBinding?.ivPic3?.let { it1 -> GlideImage(it1, userResponseModel._result.process_plan_monitoring_upload)
+                                    mBinding?.etChooseFile3?.text =   "Uploaded"}
                             }
                     }
 
@@ -307,37 +321,43 @@ class AddVaccinationProgrammeStateLevel :
                         1 -> {
                             mBinding?.llUpload1a?.showView()
                             mBinding?.tvDocumentName1a?.text = uploadedDocumentName
+                            mBinding?.etChooseFile1a?.text = "Uploaded"
 
                         }
 
                         2 -> {
                             mBinding?.tvDocumentName1b?.text = uploadedDocumentName
+                            mBinding?.etChooseFile1b?.text = "Uploaded"
 
                         }
 
                         3 -> {
                             mBinding?.tvDocumentName1c?.text = uploadedDocumentName
+                            mBinding?.etChooseFile1c?.text = "Uploaded"
 
                         }
 
                         4 -> {
                             mBinding?.tvDocumentName1d?.text = uploadedDocumentName
+                            mBinding?.etChooseFile1d?.text = "Uploaded"
 
                         }
 
                         5 -> {
                             mBinding?.tvDocumentName1e?.text = uploadedDocumentName
+                            mBinding?.etChoosefile1e?.text = "Uploaded"
 
                         }
 
                         6 -> {
                             mBinding?.tvDocumentName2?.text = uploadedDocumentName
+                            mBinding?.etChooseFile2?.text = "Uploaded"
 
                         }
 
                         7 -> {
                             mBinding?.tvDocumentName3?.text = uploadedDocumentName
-
+                            mBinding?.etChooseFile3?.text = "Uploaded"
                         }
 
                         else -> {

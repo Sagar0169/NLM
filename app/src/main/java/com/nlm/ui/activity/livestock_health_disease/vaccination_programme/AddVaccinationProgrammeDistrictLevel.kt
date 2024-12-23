@@ -156,6 +156,11 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             mBinding?.tvChooseFileThree?.isEnabled = false
             mBinding?.tvChooseFileFour?.isEnabled = false
             mBinding?.tvChooseFileFive?.isEnabled = false
+            mBinding?.ivDeleteOne?.hideView()
+            mBinding?.ivDeleteTwo?.hideView()
+            mBinding?.ivDeleteThree?.hideView()
+            mBinding?.ivDeleteFour?.hideView()
+            mBinding?.ivDeleteFive?.hideView()
             mBinding?.llSaveDraftAndSubmit?.hideView()
             viewEditApi()
         }
@@ -209,27 +214,27 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                         1 -> {
 
                             mBinding?.tvDocumentNameOne?.text = uploadedDocumentName
-
+                            mBinding?.etChooseFileOne?.text = "Uploaded"
                         }
 
                         2 -> {
                             mBinding?.tvDocumentNameTwo?.text = uploadedDocumentName
-
+                            mBinding?.etChooseFileTwo?.text = "Uploaded"
                         }
 
                         3 -> {
                             mBinding?.tvDocumentNameThree?.text = uploadedDocumentName
-
+                            mBinding?.etChooseFileThree?.text = "Uploaded"
                         }
 
                         4 -> {
                             mBinding?.tvDocumentNameFour?.text = uploadedDocumentName
-
+                            mBinding?.etChooseFileFour?.text = "Uploaded"
                         }
 
                         5 -> {
                             mBinding?.tvDocumentNameFive?.text = uploadedDocumentName
-
+                            mBinding?.etChooseFileFive?.text = "Uploaded"
                         }
 
 
@@ -288,7 +293,8 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                         } else {
                             mBinding?.llUploadOne?.showView()
                             mBinding?.tvDocumentNameOne?.text = userResponseModel._result.mechanisim_followed_uploads
-                            mBinding?.ivPicOne?.let { it1 -> GlideImage(it1,userResponseModel._result.mechanisim_followed_uploads) }
+                            mBinding?.ivPicOne?.let { it1 -> GlideImage(it1,userResponseModel._result.mechanisim_followed_uploads)
+                                mBinding?.etChooseFileOne?.text = "Uploaded"}
                         }
 
                         if (userResponseModel._result.trained_staff_engaged_uploads.isNullOrEmpty()) {
@@ -296,7 +302,9 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                         } else {
                             mBinding?.llUploadTwo?.showView()
                             mBinding?.tvDocumentNameTwo?.text = userResponseModel._result.trained_staff_engaged_uploads
-                            mBinding?.ivPicTwo?.let { it1 -> GlideImage(it1,userResponseModel._result.trained_staff_engaged_uploads) }
+                            mBinding?.ivPicTwo?.let { it1 -> GlideImage(it1,userResponseModel._result.trained_staff_engaged_uploads)
+                                mBinding?.etChooseFileTwo?.text ="Uploaded"
+                            }
                         }
 
                         if (userResponseModel._result.mass_education_campaign_uploads.isNullOrEmpty()) {
@@ -304,7 +312,8 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                         }else {
                             mBinding?.llUploadThree?.showView()
                             mBinding?.tvDocumentNameThree?.text = userResponseModel._result.mass_education_campaign_uploads
-                            mBinding?.ivPicThree?.let { it1 -> GlideImage(it1,userResponseModel._result.mass_education_campaign_uploads) }
+                            mBinding?.ivPicThree?.let { it1 -> GlideImage(it1,userResponseModel._result.mass_education_campaign_uploads)
+                                mBinding?.etChooseFileThree?.text =   "Uploaded"}
                         }
 
                         if (userResponseModel._result.are_functionaries_aware_uploads.isNullOrEmpty()) {
@@ -312,7 +321,8 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                         } else{
                             mBinding?.llUploadFour?.showView()
                             mBinding?.tvDocumentNameFour?.text = userResponseModel._result.are_functionaries_aware_uploads
-                            mBinding?.ivPicFour?.let { it1 -> GlideImage(it1,userResponseModel._result.are_functionaries_aware_uploads) }
+                            mBinding?.ivPicFour?.let { it1 -> GlideImage(it1,userResponseModel._result.are_functionaries_aware_uploads)
+                                mBinding?.etChooseFileFour?.text =  "Uploaded"}
                         }
 
                         if (userResponseModel._result.investigate_suspected_outbreak_uploads.isNullOrEmpty()){
@@ -320,7 +330,8 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                         } else {
                             mBinding?.llUploadFive?.showView()
                             mBinding?.tvDocumentNameFive?.text =  userResponseModel._result.investigate_suspected_outbreak_uploads
-                            mBinding?.ivPicFive?.let { it1 -> GlideImage(it1,userResponseModel._result.investigate_suspected_outbreak_uploads) }
+                            mBinding?.ivPicFive?.let { it1 -> GlideImage(it1,userResponseModel._result.investigate_suspected_outbreak_uploads)
+                                mBinding?.etChooseFileFive?.text =   "Uploaded"}
                         }
 
                     }
@@ -477,6 +488,19 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                 }
 
                 "jpg" -> {
+                    imageView.let {
+                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                            it
+                        )
+                        imageView.setOnClickListener {
+                            Utility.showImageDialog(
+                                this,
+                                url
+                            )
+                        }
+                    }
+                }
+                "jpeg" -> {
                     imageView.let {
                         Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
                             it

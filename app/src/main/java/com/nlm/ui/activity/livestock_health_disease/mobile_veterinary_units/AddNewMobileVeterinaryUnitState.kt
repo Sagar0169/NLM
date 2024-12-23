@@ -21,9 +21,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.imageview.ShapeableImageView
 import com.nlm.R
 import com.nlm.databinding.ActivityAddNewMobileVeterinaryUnitStateBinding
+import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
@@ -36,6 +39,7 @@ import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
 import com.nlm.utilities.Utility.convertToRequestBody
+import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -43,7 +47,9 @@ import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
@@ -61,6 +67,7 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
     private var uploadedDocumentName: String? = null
     private var dialogDocName: TextView? = null
     private var documentName: String? = null
+    private var TableName: String? = null
     var body: MultipartBody.Part? = null
     private var isFromApplication = 0
     private var viewEdit: String? = null
@@ -271,58 +278,71 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                 } else {
                     uploadedDocumentName = userResponseModel._result.document_name
                     dialogDocName?.text = userResponseModel._result.document_name
-
+                    TableName=userResponseModel._result.table_name
                     when (isFromApplication) {
                         1 -> {
-                            mBinding?.tvNoFileOne?.text = uploadedDocumentName
+                            mBinding?.tvDocumentNameOne?.text = uploadedDocumentName
+                            mBinding?.tvNoFileOne?.text ="Uploaded"
                         }
 
                         2 -> {
-                            mBinding?.tvNoFileTwo?.text = uploadedDocumentName
+                            mBinding?.tvNoFileTwo?.text = "Uploaded"
+                            mBinding?.tvDocumentNameTwo?.text=  uploadedDocumentName
                         }
 
                         3 -> {
-                            mBinding?.tvNoFileThree?.text = uploadedDocumentName
+                            mBinding?.tvNoFileThree?.text ="Uploaded"
+                            mBinding?.tvDocumentNameThree?.text=uploadedDocumentName
                         }
 
                         4 -> {
-                            mBinding?.tvNoFileFour?.text = uploadedDocumentName
+                            mBinding?.tvNoFileFour?.text ="Uploaded"
+                            mBinding?.tvDocumentNameFour?.text = uploadedDocumentName
                         }
 
                         5 -> {
-                            mBinding?.tvNoFileFive?.text = uploadedDocumentName
+                            mBinding?.tvNoFileFive?.text ="Uploaded"
+                            mBinding?.tvDocumentNameFive?.text = uploadedDocumentName
                         }
 
                         6 -> {
-                            mBinding?.tvNoFileSix?.text = uploadedDocumentName
+                            mBinding?.tvNoFileSix?.text ="Uploaded"
+                            mBinding?.tvDocumentNameSix?.text = uploadedDocumentName
                         }
 
                         7 -> {
-                            mBinding?.tvNoFileSeven?.text = uploadedDocumentName
+                            mBinding?.tvNoFileSeven?.text ="Uploaded"
+                            mBinding?.tvDocumentNameSeven?.text = uploadedDocumentName
                         }
 
                         8 -> {
-                            mBinding?.tvNoFileA?.text = uploadedDocumentName
+                            mBinding?.tvNoFileA?.text = "Uploaded"
+                            mBinding?.tvDocumentNameA?.text =uploadedDocumentName
                         }
 
                         9 -> {
-                            mBinding?.tvNoFileB?.text = uploadedDocumentName
+                            mBinding?.tvNoFileB?.text = "Uploaded"
+                            mBinding?.tvDocumentNameB?.text =  uploadedDocumentName
                         }
 
                         10 -> {
-                            mBinding?.tvNoFileC?.text = uploadedDocumentName
+                            mBinding?.tvNoFileC?.text ="Uploaded"
+                            mBinding?.tvDocumentNameC?.text =  uploadedDocumentName
                         }
 
                         11 -> {
-                            mBinding?.tvNoFileD?.text = uploadedDocumentName
+                            mBinding?.tvNoFileD?.text ="Uploaded"
+                            mBinding?.tvDocumentNameD?.text = uploadedDocumentName
                         }
 
                         12 -> {
-                            mBinding?.tvNoFileE?.text = uploadedDocumentName
+                            mBinding?.tvNoFileE?.text ="Uploaded"
+                            mBinding?.tvDocumentNameE?.text = uploadedDocumentName
                         }
 
                         13 -> {
-                            mBinding?.tvNoFileF?.text = uploadedDocumentName
+                            mBinding?.tvNoFileF?.text ="Uploaded"
+                            mBinding?.tvDocumentNameF?.text =uploadedDocumentName
                         }
 
                         else -> {
@@ -349,6 +369,7 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                 if (userResponseModel._resultflag == 0) {
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 } else {
+                    TableName=userResponseModel.fileurl
                     if (savedAsDraft) {
                         onBackPressedDispatcher.onBackPressed()
                     } else {
@@ -386,24 +407,112 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                             mBinding?.etInputF?.setText(userResponseModel._result.input_data_compilation_analysis_done)
                             mBinding?.etRemarkF?.setText(userResponseModel._result.data_compilation_analysis_done_remarks)
 
-                            mBinding?.tvNoFileOne?.text = if (userResponseModel._result.mechanism_operation_inputs.isNullOrEmpty()) {
-                                "No file chosen"
+                           if (userResponseModel._result.mechanism_operation_inputs.isNullOrEmpty()) {
+                               mBinding?.tvNoFileOne?.text =  "No file chosen"
                             } else {
-                                userResponseModel._result.mechanism_operation_inputs
+                               mBinding?.llUploadOne?.showView()
+                               mBinding?.tvNoFileOne?.text ="Uploaded"
+                               mBinding?.tvDocumentNameOne?.text=   userResponseModel._result.mechanism_operation_inputs
+                               mBinding?.ivPicOne?.let { it1 -> GlideImage(it1,userResponseModel._result.mechanism_operation_inputs)}
                             }
 
-                            mBinding?.tvNoFileTwo?.text = if (userResponseModel._result.engagement_indicators_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.engagement_indicators_inputs
-                            mBinding?.tvNoFileThree?.text = if (userResponseModel._result.procurement_procedure_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.procurement_procedure_inputs
-                            mBinding?.tvNoFileFour?.text = if (userResponseModel._result.supply_procedure_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.supply_procedure_inputs
-                            mBinding?.tvNoFileFive?.text = if (userResponseModel._result.is_monitoring_supervision_medic_equip_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_monitoring_supervision_medic_equip_inputs
-                            mBinding?.tvNoFileSix?.text = if (userResponseModel._result.is_monitoring_supervision_fuel_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_monitoring_supervision_fuel_inputs
-                            mBinding?.tvNoFileSeven?.text = if (userResponseModel._result.call_center_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.call_center_inputs
-                            mBinding?.tvNoFileA?.text = if (userResponseModel._result.is_service_provider_engaged_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_service_provider_engaged_inputs
-                            mBinding?.tvNoFileB?.text = if (userResponseModel._result.is_building_provided_operation_seats_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_building_provided_operation_seats_inputs
-                            mBinding?.tvNoFileC?.text = if (userResponseModel._result.are_operators_engaged_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.are_operators_engaged_inputs
-                            mBinding?.tvNoFileD?.text = if (userResponseModel._result.is_app_crm_place_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.is_app_crm_place_inputs
-                            mBinding?.tvNoFileE?.text = if (userResponseModel._result.are_adequate_staff_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.are_adequate_staff_inputs
-                            mBinding?.tvNoFileF?.text = if (userResponseModel._result.data_compilation_analysis_done_inputs.isNullOrEmpty()) "No file chosen" else userResponseModel._result.data_compilation_analysis_done_inputs
+                            if (userResponseModel._result.engagement_indicators_inputs.isNullOrEmpty()) {
+                                mBinding?.tvNoFileTwo?.text = "No file chosen"
+                            } else{
+                                mBinding?.llUploadTwo?.showView()
+                                mBinding?.tvNoFileTwo?.text ="Uploaded"
+                                mBinding?.tvDocumentNameTwo?.text=  userResponseModel._result.engagement_indicators_inputs
+                                mBinding?.ivPicTwo?.let { it1 -> GlideImage(it1,userResponseModel._result.engagement_indicators_inputs)}
+                            }
+                             if (userResponseModel._result.procurement_procedure_inputs.isNullOrEmpty()){
+                                 mBinding?.tvNoFileThree?.text ="No file chosen"
+                            } else{
+                                 mBinding?.llUploadThree?.showView()
+                                 mBinding?.tvNoFileThree?.text ="Uploaded"
+                                 mBinding?.tvDocumentNameThree?.text= userResponseModel._result.procurement_procedure_inputs
+                                 mBinding?.ivPicThree?.let { it1 -> GlideImage(it1,userResponseModel._result.procurement_procedure_inputs)}
+                            }
+                            if (userResponseModel._result.supply_procedure_inputs.isNullOrEmpty()){
+                                mBinding?.tvNoFileFour?.text =  "No file chosen"
+                            } else{
+                                mBinding?.llUploadFour?.showView()
+                                mBinding?.tvNoFileFour?.text ="Uploaded"
+                                mBinding?.tvDocumentNameFour?.text= userResponseModel._result.supply_procedure_inputs
+                                mBinding?.ivPicFour?.let { it1 -> GlideImage(it1,userResponseModel._result.supply_procedure_inputs)}
+
+                            }
+                             if (userResponseModel._result.is_monitoring_supervision_medic_equip_inputs.isNullOrEmpty()) {
+                                 mBinding?.tvNoFileFive?.text = "No file chosen"
+                            } else {
+                                 mBinding?.llUploadFive?.showView()
+                                 mBinding?.tvDocumentNameFive?.text=userResponseModel._result.is_monitoring_supervision_medic_equip_inputs
+                                 mBinding?.tvNoFileFive?.text = "Upload"
+                                 mBinding?.ivPicFive?.let { it1 -> GlideImage(it1,userResponseModel._result.is_monitoring_supervision_medic_equip_inputs)}
+                            }
+                             if (userResponseModel._result.is_monitoring_supervision_fuel_inputs.isNullOrEmpty()){
+                                 mBinding?.tvNoFileSix?.text = "No file chosen"
+                            } else{
+                                 mBinding?.llUploadSix?.showView()
+                                 mBinding?.tvDocumentNameSix?.text= userResponseModel._result.is_monitoring_supervision_fuel_inputs
+                                 mBinding?.tvNoFileSix?.text = "Upload"
+                                 mBinding?.ivPicSix?.let { it1 -> GlideImage(it1,userResponseModel._result.is_monitoring_supervision_fuel_inputs)}
+                            }
+                           if (userResponseModel._result.call_center_inputs.isNullOrEmpty()){
+                               mBinding?.tvNoFileSeven?.text =  "No file chosen"
+                            } else {
+                               mBinding?.llUploadSeven?.showView()
+                               mBinding?.tvDocumentNameSeven?.text=   userResponseModel._result.call_center_inputs
+                               mBinding?.tvNoFileSeven?.text =  "Upload"
+                               mBinding?.ivPicSeven?.let { it1 -> GlideImage(it1,userResponseModel._result.call_center_inputs)}
+                            }
+                            if (userResponseModel._result.is_service_provider_engaged_inputs.isNullOrEmpty()){
+                                mBinding?.tvNoFileA?.text =  "No file chosen"
+                            } else {
+                                mBinding?.llUploadA?.showView()
+                                mBinding?.tvDocumentNameA?.text=  userResponseModel._result.is_service_provider_engaged_inputs
+                                mBinding?.tvNoFileA?.text =  "Upload"
+                                mBinding?.ivPicA?.let { it1 -> GlideImage(it1,userResponseModel._result.call_center_inputs)}
+                            }
+                            if (userResponseModel._result.is_building_provided_operation_seats_inputs.isNullOrEmpty()){
+                                mBinding?.tvNoFileB?.text ="No file chosen"
+                            } else{
+                                mBinding?.llUploadB?.showView()
+                                mBinding?.tvDocumentNameB?.text= userResponseModel._result.is_building_provided_operation_seats_inputs
+                                mBinding?.ivPicB?.let { it1 -> GlideImage(it1,userResponseModel._result.is_building_provided_operation_seats_inputs)}
+                                mBinding?.tvNoFileB?.text ="Upload"
+                            }
+                            if (userResponseModel._result.are_operators_engaged_inputs.isNullOrEmpty()) {
+                                mBinding?.tvNoFileC?.text ="No file chosen"
+                            } else{
+                                mBinding?.llUploadC?.showView()
+                                mBinding?.tvDocumentNameC?.text=  userResponseModel._result.are_operators_engaged_inputs
+                                mBinding?.ivPicC?.let { it1 -> GlideImage(it1,userResponseModel._result.are_operators_engaged_inputs)}
+                                mBinding?.tvNoFileC?.text ="Upload"
+                            }
+                             if (userResponseModel._result.is_app_crm_place_inputs.isNullOrEmpty()) {
+                                 mBinding?.tvNoFileD?.text =  "No file chosen"
+                            } else {
+                                 mBinding?.llUploadD?.showView()
+                                 mBinding?.tvDocumentNameD?.text=   userResponseModel._result.is_app_crm_place_inputs
+                                 mBinding?.ivPicD?.let { it1 -> GlideImage(it1,userResponseModel._result.is_app_crm_place_inputs)}
+                                 mBinding?.tvNoFileD?.text =  "Upload"
+                            }
+                            if (userResponseModel._result.are_adequate_staff_inputs.isNullOrEmpty()){
+                                mBinding?.tvNoFileE?.text =  "No file chosen"
+                            } else {
+                                mBinding?.llUploadE?.showView()
+                                mBinding?.tvDocumentNameE?.text=   userResponseModel._result.are_adequate_staff_inputs
+                                mBinding?.ivPicE?.let { it1 -> GlideImage(it1,userResponseModel._result.are_adequate_staff_inputs)}
+                                mBinding?.tvNoFileE?.text =  "Upload"
+                            }
+                            if (userResponseModel._result.data_compilation_analysis_done_inputs.isNullOrEmpty()){
+                                mBinding?.tvNoFileF?.text = "No file chosen"
+                            } else {
+                                mBinding?.llUploadF?.showView()
+                                mBinding?.tvNoFileF?.text = "Upload"
+                                mBinding?.ivPicF?.let { it1 -> GlideImage(it1,userResponseModel._result.data_compilation_analysis_done_inputs)}
+                                mBinding?.tvDocumentNameF?.text=    userResponseModel._result.data_compilation_analysis_done_inputs
+                            }
 
 
 
@@ -442,6 +551,153 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
             }
 
         }
+        fun uploadFileOne(view: View) {
+            isFromApplication = 1
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentOne(view: View){
+            mBinding?.llUploadOne?.hideView()
+            mBinding?.tvDocumentNameOne?.text = null
+            mBinding?.tvNoFileOne?.text = "No File Chosen"
+            body = null
+        }
+
+        fun uploadFileTwo(view: View) {
+            isFromApplication = 2
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentTwo(view: View){
+            mBinding?.llUploadTwo?.hideView()
+            mBinding?.tvDocumentNameTwo?.text = null
+            mBinding?.tvNoFileTwo?.text = "No File Chosen"
+            body = null
+        }
+
+        fun uploadFileThree(view: View) {
+                isFromApplication = 3
+                openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentThree(view: View){
+            mBinding?.llUploadThree?.hideView()
+            mBinding?.tvDocumentNameThree?.text = null
+            mBinding?.tvNoFileThree?.text = "No File Chosen"
+            body = null
+        }
+
+        fun uploadFileFour(view: View) {
+            isFromApplication = 4
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentFour(view: View){
+            mBinding?.llUploadFour?.hideView()
+            mBinding?.tvDocumentNameFour?.text = null
+            mBinding?.tvNoFileFour?.text = "No File Chosen"
+            body = null
+        }
+
+        fun uploadFileFive(view: View) {
+            isFromApplication = 5
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentFive(view: View){
+            mBinding?.llUploadFive?.hideView()
+            mBinding?.tvDocumentNameFive?.text = null
+            mBinding?.tvNoFileFive?.text = "No File Chosen"
+            body = null
+        }
+        fun uploadFileSix(view: View) {
+            isFromApplication = 6
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentSix(view: View){
+            mBinding?.llUploadSix?.hideView()
+            mBinding?.tvDocumentNameSix?.text = null
+            mBinding?.tvNoFileSix?.text = "No File Chosen"
+            body = null
+        }
+        fun uploadFileSeven(view: View) {
+            isFromApplication = 7
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentSeven(view: View){
+            mBinding?.llUploadSeven?.hideView()
+            mBinding?.tvDocumentNameSeven?.text = null
+            mBinding?.tvNoFileSeven?.text = "No File Chosen"
+            body = null
+        }
+        fun uploadFileA(view: View) {
+            isFromApplication = 8
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentA(view: View){
+            mBinding?.llUploadA?.hideView()
+            mBinding?.tvDocumentNameA?.text = null
+            mBinding?.tvNoFileA?.text = "No File Chosen"
+            body = null
+        }
+        fun uploadFileB(view: View) {
+            isFromApplication = 9
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentB(view: View){
+            mBinding?.llUploadB?.hideView()
+            mBinding?.tvDocumentNameB?.text = null
+            mBinding?.tvNoFileB?.text = "No File Chosen"
+            body = null
+        }
+        fun uploadFileC(view: View) {
+            isFromApplication = 10
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentC(view: View){
+            mBinding?.llUploadC?.hideView()
+            mBinding?.tvDocumentNameC?.text = null
+            mBinding?.tvNoFileC?.text = "No File Chosen"
+            body = null
+        }
+        fun uploadFileD(view: View) {
+            isFromApplication = 11
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentD(view: View){
+            mBinding?.llUploadD?.hideView()
+            mBinding?.tvDocumentNameD?.text = null
+            mBinding?.tvNoFileD?.text = "No File Chosen"
+            body = null
+        }
+        fun uploadFileE(view: View) {
+            isFromApplication = 12
+            openOnlyPdfAccordingToPosition()
+        }
+
+        fun deleteDocumentE(view: View){
+            mBinding?.llUploadE?.hideView()
+            mBinding?.tvDocumentNameE?.text = null
+            mBinding?.tvNoFileE?.text = "No File Chosen"
+            body = null
+        }
+        fun uploadFileF(view: View) {
+            isFromApplication = 13
+            openOnlyPdfAccordingToPosition()
+        }
+        fun deleteDocumentF(view: View){
+            mBinding?.llUploadF?.hideView()
+            mBinding?.tvDocumentNameF?.text = null
+            mBinding?.tvNoFileF?.text = "No File Chosen"
+            body = null
+        }
+
 
         fun saveAsDraft(view: View) {
             if (viewEdit == "view") {
@@ -458,98 +714,579 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
             }
         }
     }
+    private fun GlideImage(imageView: ShapeableImageView, uploadedDocumentName:String?){
+        val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(uploadedDocumentName)
+        val (isSupported, fileExtension) = getFileType(uploadedDocumentName.toString())
 
-    private fun openOnlyPdfAccordingToPosition() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "application/pdf"
+        if (isSupported) {
+
+
+            when (fileExtension) {
+                "pdf" -> {
+                    val downloader = AndroidDownloader(this)
+                    imageView.let {
+                        Glide.with(this).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                            it
+                        )
+
+                    }
+                    imageView.setOnClickListener {
+                        if (!uploadedDocumentName.isNullOrEmpty()) {
+                            downloader.downloadFile(url, uploadedDocumentName!!)
+                            mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+
+                        }
+                        else{
+                            mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                        }
+                    }
+
+                }
+
+                "png" -> {
+                    imageView.let {
+                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                            it
+                        )
+                        imageView.setOnClickListener {
+                            Utility.showImageDialog(
+                                this,
+                                url
+                            )
+                        }
+
+                    }
+                }
+
+                "jpg" -> {
+                    imageView.let {
+                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                            it
+                        )
+                        imageView.setOnClickListener {
+                            Utility.showImageDialog(
+                                this,
+                                url
+                            )
+                        }
+                    }
+                }
+                "jpeg" -> {
+                    imageView.let {
+                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
+                            it
+                        )
+                        imageView.setOnClickListener {
+                            Utility.showImageDialog(
+                                this,
+                                url
+                            )
+                        }
+                    }
+                }
+            }
         }
-        startActivityForResult(intent, REQUEST_iMAGE_PDF)
-//        checkStoragePermission(this@AddNewMobileVeterinaryUnitState)
     }
+    override fun showImage(bitmap: Bitmap) {
+        // Override to display the image in this activity
+        Log.d("TAG", isFromApplication.toString())
+        when (isFromApplication) {
+            1 -> {
+                mBinding?.llUploadOne?.showView()
+                mBinding?.ivPicOne?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicOne?.setOnClickListener {
 
-    @SuppressLint("Range")
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+            2 -> {
+                mBinding?.llUploadTwo?.showView()
+                mBinding?.ivPicTwo?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicTwo?.setOnClickListener {
+
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+            3 -> {
+                mBinding?.llUploadThree?.showView()
+                mBinding?.ivPicThree?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicThree?.setOnClickListener {
+
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+            4 -> {
+                mBinding?.llUploadFour?.showView()
+                mBinding?.ivPicFour?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicFour?.setOnClickListener {
+
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+            5 -> {
+                mBinding?.llUploadFive?.showView()
+                mBinding?.ivPicFive?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicFive?.setOnClickListener {
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+            6-> {
+                mBinding?.llUploadSix?.showView()
+                mBinding?.ivPicSix?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicSix?.setOnClickListener {
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+            7-> {
+                mBinding?.llUploadSeven?.showView()
+                mBinding?.ivPicSeven?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicSeven?.setOnClickListener {
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+            8-> {
+                mBinding?.llUploadA?.showView()
+                mBinding?.ivPicA?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicA?.setOnClickListener {
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+            9-> {
+                mBinding?.llUploadB?.showView()
+                mBinding?.ivPicB?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicB?.setOnClickListener {
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+            10-> {
+                mBinding?.llUploadC?.showView()
+                mBinding?.ivPicC?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicC?.setOnClickListener {
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+            11-> {
+                mBinding?.llUploadD?.showView()
+                mBinding?.ivPicD?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicD?.setOnClickListener {
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+            12-> {
+                mBinding?.llUploadE?.showView()
+                mBinding?.ivPicE?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicE?.setOnClickListener {
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+            13-> {
+                mBinding?.llUploadF?.showView()
+                mBinding?.ivPicF?.setImageBitmap(bitmap)
+                val imageFile = saveImageToFile(bitmap)
+                mBinding?.ivPicF?.setOnClickListener {
+                    Utility.showImageDialogFileUrl(
+                        this,
+                        imageFile
+                    )
+
+                }
+                uploadImage(imageFile)
+            }
+
+
+        }
+    }
+    private fun uploadImage(file: File) {
+        lifecycleScope.launch {
+            val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            body =
+                MultipartBody.Part.createFormData(
+                    "document_name",
+                    file.name, reqFile
+                )
+            viewModel.getProfileUploadFile(
+                context = this@AddNewMobileVeterinaryUnitState,
+                document_name = body,
+                user_id = getPreferenceOfScheme(
+                    this@AddNewMobileVeterinaryUnitState,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                table_name = getString(R.string.mobile_veterinary_unit_state).toRequestBody(
+                    MultipartBody.FORM
+                ),
+            )
+        }
+    }
+    private fun openOnlyPdfAccordingToPosition() {
+        checkStoragePermission(this)
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
+                CAPTURE_IMAGE_REQUEST -> {
+                    Log.d("ISFROM", isFromApplication.toString())
+                    val bitmap = data?.extras?.get("data") as Bitmap
+                }
+
+                PICK_IMAGE -> {
+                    val selectedImageUri = data?.data
+                    if (selectedImageUri != null) {
+                        val uriPathHelper = URIPathHelper()
+                        val filePath = uriPathHelper.getPath(this, selectedImageUri)
+
+                        val fileExtension =
+                            filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+                        // Validate file extension
+                        if (fileExtension in listOf("png", "jpg", "jpeg")) {
+                            val file = filePath?.let { File(it) }
+
+                            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+                            file?.let {
+                                val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
+                                if (fileSizeInMB <= 5) {
+                                    when (isFromApplication) {
+                                        1 -> {
+                                            mBinding?.llUploadOne?.showView()
+                                            mBinding?.ivPicOne?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicOne?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        2 -> {
+                                            mBinding?.llUploadTwo?.showView()
+                                            mBinding?.ivPicTwo?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicTwo?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        3 -> {
+                                            mBinding?.llUploadThree?.showView()
+                                            mBinding?.ivPicThree?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicThree?.setOnClickListener {
+
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        4 -> {
+                                            mBinding?.llUploadFour?.showView()
+                                            mBinding?.ivPicFour?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicFour?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+
+                                        5 -> {
+                                            mBinding?.llUploadFive?.showView()
+                                            mBinding?.ivPicFive?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicFive?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        6 -> {
+                                            mBinding?.llUploadSix?.showView()
+                                            mBinding?.ivPicSix?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicSix?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        7 -> {
+                                            mBinding?.llUploadSeven?.showView()
+                                            mBinding?.ivPicSeven?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicSeven?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        8 -> {
+                                            mBinding?.llUploadA?.showView()
+                                            mBinding?.ivPicA?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicA?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        9 -> {
+                                            mBinding?.llUploadB?.showView()
+                                            mBinding?.ivPicB?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicB?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        10-> {
+                                            mBinding?.llUploadC?.showView()
+                                            mBinding?.ivPicC?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicC?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        11 -> {
+                                            mBinding?.llUploadD?.showView()
+                                            mBinding?.ivPicD?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicD?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        12 -> {
+                                            mBinding?.llUploadE?.showView()
+                                            mBinding?.ivPicE?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicE?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        13 -> {
+                                            mBinding?.llUploadF?.showView()
+                                            mBinding?.ivPicF?.setImageURI(selectedImageUri)
+                                            mBinding?.ivPicF?.setOnClickListener {
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    filePath
+                                                )
+                                            }
+                                            uploadImage(it)
+                                        }
+                                        else -> {}
+                                    }
+                                } else {
+                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                }
+                            }
+                        } else {
+                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
+                        }
+                    }
+                }
+
                 REQUEST_iMAGE_PDF -> {
                     data?.data?.let { uri ->
                         val projection = arrayOf(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        val cursor = this.contentResolver.query(
-                            uri,
-                            projection,
-                            null,
-                            null,
-                            null
-                        )
+
+
+                        val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
-                                documentName =
+                                val documentName =
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                                when (isFromApplication) {
-                                    1 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                val fileSizeInBytes =
+                                    it.getLong(it.getColumnIndex(MediaStore.MediaColumns.SIZE))
+                                val fileSizeInMB = fileSizeInBytes / (1024 * 1024.0) // Convert to MB
 
-                                    2 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
+                                if (fileSizeInMB <= 5) {
+                                    when (isFromApplication) {
+                                        1 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadOne?.showView()
+                                            mBinding?.ivPicOne?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    3 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        2 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadTwo?.showView()
+                                            mBinding?.ivPicTwo?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    4 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        3 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadThree?.showView()
+                                            mBinding?.ivPicThree?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    5 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        4 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadFour?.showView()
+                                            mBinding?.ivPicFour?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    6 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        5 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadFive?.showView()
+                                            mBinding?.ivPicFive?.setImageResource(R.drawable.ic_pdf)
+                                        }
+                                        6 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadSix?.showView()
+                                            mBinding?.ivPicSix?.setImageResource(R.drawable.ic_pdf)
+                                        }
+                                        7 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadSeven?.showView()
+                                            mBinding?.ivPicSeven?.setImageResource(R.drawable.ic_pdf)
+                                        }
+                                        8 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadA?.showView()
+                                            mBinding?.ivPicA?.setImageResource(R.drawable.ic_pdf)
+                                        }
+                                        9 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadB?.showView()
+                                            mBinding?.ivPicB?.setImageResource(R.drawable.ic_pdf)
+                                        }
+                                        10 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadC?.showView()
+                                            mBinding?.ivPicC?.setImageResource(R.drawable.ic_pdf)
+                                        }
+                                        11 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadD?.showView()
+                                            mBinding?.ivPicD?.setImageResource(R.drawable.ic_pdf)
+                                        }
+                                        12 -> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadE?.showView()
+                                            mBinding?.ivPicE?.setImageResource(R.drawable.ic_pdf)
+                                        }
+                                        13-> {
+                                            uploadDocument(documentName, uri)
+                                            mBinding?.llUploadF?.showView()
+                                            mBinding?.ivPicF?.setImageResource(R.drawable.ic_pdf)
+                                        }
 
-                                    7 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
 
-                                    8 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
+                                        else -> {
+                                            uploadDocument(documentName, uri)
+                                        }
 
-                                    9 -> {
-                                        uploadDocument(documentName, uri)
                                     }
-
-                                    10 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
-
-                                    11 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
-
-                                    12 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
-
-                                    13 -> {
-                                        uploadDocument(documentName, uri)
-                                    }
-
-                                    else -> {
-                                        uploadDocument(documentName, uri)
-                                    }
-
+                                } else {
+                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
                                 }
-
-
                             }
                         }
                     }
@@ -557,7 +1294,6 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
             }
         }
     }
-
     private fun uploadDocument(DocumentName: String?, uri: Uri) {
         val requestBody = convertToRequestBody(this, uri)
         body = MultipartBody.Part.createFormData(

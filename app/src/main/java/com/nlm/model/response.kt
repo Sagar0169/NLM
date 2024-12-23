@@ -1691,6 +1691,7 @@ data class StateMobileVeterinaryUnitAddResponse(
     val _result: StateMobileVeterinaryUnitAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 
@@ -1749,6 +1750,7 @@ data class DistrictMobileVeterinaryUnitAddResponse(
     val _result: DistrictMobileVeterinaryUnitAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 
@@ -1784,6 +1786,7 @@ data class BlockMobileVeterinaryUnitAddResponse(
     val _result: BlockMobileVeterinaryUnitAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 
@@ -1821,6 +1824,7 @@ data class FarmerMobileVeterinaryUnitAddResponse(
     val _result: FarmerMobileVeterinaryUnitAddResult,
     val _resultflag: Int,
     val message: String,
+    val fileurl: String?,
     val statuscode: Int
 )
 
