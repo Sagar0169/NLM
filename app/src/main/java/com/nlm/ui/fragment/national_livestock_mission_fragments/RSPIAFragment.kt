@@ -298,6 +298,7 @@ class RSPIAFragment(
     }
     override fun onPause() {
         super.onPause()
+
         Log.d("EXECUTION","ON PAUSE EXECUTED")
         requireContext().unregisterReceiver(locationReceiver)
     }

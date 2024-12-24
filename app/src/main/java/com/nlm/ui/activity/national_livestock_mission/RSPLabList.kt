@@ -65,6 +65,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
 
     private fun swipeForRefreshSrlRSPLab() {
         mBinding?.SrlRSPLab?.setOnRefreshListener {
+            currentPage = 1
             implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo,year)
             mBinding?.SrlRSPLab?.isRefreshing = false
         }
@@ -254,6 +255,7 @@ class RSPLabList : BaseActivity<ActivityRsplabBinding>(), CallBackDeleteAtId {
 
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         implementingAgencyAPICall(paginate = false, loader = true,districtId,phoneNo,year)
     }
 }
