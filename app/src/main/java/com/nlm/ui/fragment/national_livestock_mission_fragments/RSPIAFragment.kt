@@ -547,14 +547,8 @@ class RSPIAFragment(
             semenDoseDialog(requireContext(), 1, null, null)
         }
     }
-
-
-//    private fun showError(message: String) {
-//        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-//    }
-
+    
     private fun saveDataApi(itemId: Int?, draft: Int?) {
-
         val etAreaFodder = mBinding!!.etAreaFodder.text.toString()
         val etManpower = mBinding!!.etManpower.text.toString()
         val address = mBinding?.etAddress?.text.toString()
