@@ -576,18 +576,22 @@ class RSPIAFragment(
             return
         }
 
-
-
+        if (phoneNumber.isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it, "Address is required") }
+            return
+        }
+        if (yearOfEstablishment.isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it, "Address is required") }
+            return
+        }
         if (location.isEmpty()) {
             mBinding?.clParent?.let { showSnackbar(it, "Location is required") }
             return
         }
-
         if (address.isEmpty()) {
             mBinding?.clParent?.let { showSnackbar(it, "Address is required") }
             return
         }
-
         if (districtId == null) {
             mBinding?.clParent?.let { showSnackbar(it, "District is required") }
             return
