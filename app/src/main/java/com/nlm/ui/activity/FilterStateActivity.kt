@@ -364,12 +364,39 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
 
             25 -> {
 
-                binding!!.tvStateTitleNDD.showView()
-                binding!!.tvStateNDD.showView()
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
                 binding!!.tvTitleDistrict.showView()
                 binding!!.tvDistrict.showView()
                 binding!!.tvNameofMilkUnion.showView()
                 binding!!.etNameofMilkUnion.showView()
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+                if (nameOfAgency != null) {
+                    binding?.etNameofMilkUnion?.setText(nameOfAgency)
+                }
+                if (districtName!="") {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
 
             }
 
@@ -717,6 +744,9 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 }
                 if (block != null) {
                     binding?.etBlock?.setText(block)
+                }
+                if (nameOfAgency != null) {
+                    binding?.etNameOfDCS?.setText(nameOfAgency)
                 }
                 if (village != null) {
                     binding?.etVillageName?.setText(village)
@@ -1077,6 +1107,20 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 binding!!.tvDistrict.text = "Please Select"
                 districtId = null
             }
+            if (isFrom == 45 && stateId != null) {
+                // Prepare intent to send the result back
+                // Prepare intent to send the result back
+                binding!!.etBlock.setHint("Enter Tehsil")
+                binding!!.etVillageName.setText("")
+                binding!!.etNameOfDCS.setText("")
+                binding!!.tvDistrict.text = "Please Select"
+                districtId = null
+            }
+            if (isFrom == 25 && stateId != null) {
+                binding!!.etNameofMilkUnion.setText("")
+                binding!!.tvDistrict.text = "Please Select"
+                districtId = null
+            }
             if (isFrom == 15 && stateId != null) {
                 // Prepare intent to send the result back
 
@@ -1168,6 +1212,18 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 finish()
             }
 
+            if (isFrom == 25 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                resultIntent.putExtra("districtId", districtId) // Add selected data to intent
+                resultIntent.putExtra("districtName", districtName) // Add selected data to intent
+                resultIntent.putExtra("nameOfAgency", binding!!.etNameofMilkUnion.text.toString()) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                toast(stateId.toString())
+                finish()
+            }
+
             if (isFrom == 40 && stateId != null) {
                 // Prepare intent to send the result back
                 val resultIntent = Intent()
@@ -1188,6 +1244,19 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("districtId", districtId) // Add selected data to intent
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 resultIntent.putExtra("village", binding!!.etVillageName.text.toString()) // Add selected data to intent
+                setResult(RESULT_OK, resultIntent) // Send result
+                toast(stateId.toString())
+                finish()
+            }
+            if (isFrom == 45 && stateId != null) {
+                // Prepare intent to send the result back
+                val resultIntent = Intent()
+                resultIntent.putExtra("block", binding!!.etBlock.text.toString())
+                resultIntent.putExtra("stateId", stateId) // Add selected data to intent
+                resultIntent.putExtra("districtId", districtId) // Add selected data to intent
+                resultIntent.putExtra("districtName", districtName) // Add selected data to intent
+                resultIntent.putExtra("village", binding!!.etVillageName.text.toString()) // Add selected data to intent
+                resultIntent.putExtra("nameOfAgency", binding!!.etNameOfDCS.text.toString()) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
                 toast(stateId.toString())
                 finish()

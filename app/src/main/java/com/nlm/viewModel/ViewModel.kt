@@ -14,8 +14,14 @@ import com.nlm.model.AddDcsBmcRequest
 import com.nlm.model.AddDcsBmcResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
+import com.nlm.model.AddMilkProcessingRequest
+import com.nlm.model.AddMilkProcessingResponse
+import com.nlm.model.AddMilkProductMarketingRequest
+import com.nlm.model.AddMilkProductMarketingResponse
 import com.nlm.model.AddNlmEdpRequest
 import com.nlm.model.AddNlmEdpResponse
+import com.nlm.model.AddStateCenterLabRequest
+import com.nlm.model.AddStateCenterLabResponse
 import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
@@ -186,8 +192,11 @@ class ViewModel : ViewModel() {
     var dcsBmcListResult = MutableLiveData<NDDDcsBmcListResponse>()
     var dcsBmcAddResult = MutableLiveData<AddDcsBmcResponse>()
     var stateCenterLabListResult = MutableLiveData<NDDStateCenterLabListResponse>()
+    var stateCenterLabAddResult = MutableLiveData<AddStateCenterLabResponse>()
     var milkProcessingListResult = MutableLiveData<NDDMilkProcessingListResponse>()
+    var milkProcessingAddResult = MutableLiveData<AddMilkProcessingResponse>()
     var milkProductMarketingListResult = MutableLiveData<NDDMilkProductMarketingListResponse>()
+    var milkProductMarketingAddResult = MutableLiveData<AddMilkProductMarketingResponse>()
     var productivityEnchancementServicesListResult = MutableLiveData<NDDProductivityEnhancementServicesListResponse>()
 
     val errors = MutableLiveData<String>()
@@ -3422,6 +3431,61 @@ class ViewModel : ViewModel() {
             }
         }
     }
+    fun getStateCenterLabAdd(context: Context, loader: Boolean, request: AddStateCenterLabRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.stateCenterLabAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                stateCenterLabAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
     fun getMilkProcessingList(context: Context, loader: Boolean, request: NDDMilkProcessingListRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
@@ -3477,6 +3541,61 @@ class ViewModel : ViewModel() {
             }
         }
     }
+    fun getMilkProcessingAdd(context: Context, loader: Boolean, request: AddMilkProcessingRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.milkProcessingAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                milkProcessingAddResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
     fun getMilkProductMarketingList(context: Context, loader: Boolean, request: NDDMilkProductMarketingListRequest) {
         // can be launched in a separate asynchronous job
         networkCheck(context, loader)
@@ -3491,6 +3610,61 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 milkProductMarketingListResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+    fun getMilkProductMarketingADD(context: Context, loader: Boolean, request: AddMilkProductMarketingRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.milkProductMarketingADD(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                milkProductMarketingAddResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }

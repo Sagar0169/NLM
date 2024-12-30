@@ -103,7 +103,7 @@
                         android:textSize="@dimen/sp_16" />
 
                     <TextView
-                        android:id="@+id/etState"
+                        android:id="@+id/tvState"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
@@ -129,7 +129,7 @@
                         android:textSize="@dimen/sp_16" />
 
                     <TextView
-                        android:id="@+id/etDistrict"
+                        android:id="@+id/tvDistrict"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
@@ -195,6 +195,7 @@
                         android:textSize="@dimen/sp_16" />
 
                     <EditText
+                        android:id="@+id/etYearEst"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
@@ -228,11 +229,13 @@
                             android:textSize="@dimen/sp_16" />
 
                         <RadioGroup
+                            android:id="@+id/rgNabl"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNablYes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -243,6 +246,7 @@
                                 app:buttonTint="@color/darkBlue" />
 
                             <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNablNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/dp_15"
@@ -256,7 +260,8 @@
 
                         </RadioGroup>
 
-                        <EditText
+                        <TextView
+                            android:id="@+id/tvNablDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_7"
@@ -328,11 +333,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgCivilWork"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbCivilWorkYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -343,6 +350,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbCivilWorkNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -366,7 +374,8 @@
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_16" />
 
-                                <EditText
+                                <TextView
+                                    android:id="@+id/tvCivilWorkDate"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -392,11 +401,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgCivilWorkStatus"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbCivilWorkOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="@dimen/dp_5"
@@ -406,6 +417,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbCivilWorkNonOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Non-operational"
@@ -448,11 +460,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgLCMS"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rgLCMSYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -463,6 +477,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rgLCMSNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -486,7 +501,8 @@
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_16" />
 
-                                <EditText
+                                <TextView
+                                    android:id="@+id/tvLCMSDate"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -512,11 +528,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgLCMSStatus"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbLCMSStatusOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="@dimen/dp_5"
@@ -526,6 +544,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbLCMSStatusNonOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Non-operational"
@@ -568,11 +587,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgGCMS"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbGCMSYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -583,6 +604,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbGCMSNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -606,7 +628,8 @@
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_16" />
 
-                                <EditText
+                                <TextView
+                                    android:id="@+id/tvGCMSDate"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -632,11 +655,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgGCMSStatus"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbGCMSStatusOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="@dimen/dp_5"
@@ -646,6 +671,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbGCMSStatusNonOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Non-operational"
@@ -686,11 +712,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgInduced"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbInducedYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -701,6 +729,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbInducedNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -724,7 +753,8 @@
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_16" />
 
-                                <EditText
+                                <TextView
+                                    android:id="@+id/tvInducedDate"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -750,11 +780,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgInducedStatus"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbInducedStatusOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="@dimen/dp_5"
@@ -764,6 +796,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbInducedStatusNonOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Non-operational"
@@ -805,11 +838,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgFTIR"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbFTIRYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -820,6 +855,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbFTIRNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -843,7 +879,8 @@
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_16" />
 
-                                <EditText
+                                <TextView
+                                    android:id="@+id/tvFTIRDate"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -869,11 +906,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgFTIRStatus"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbFTIROperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="@dimen/dp_5"
@@ -883,6 +922,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbFTIRNonOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Non-operational"
@@ -924,11 +964,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgBacterial"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbBacterialYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -939,6 +981,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbBacterialNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -962,7 +1005,8 @@
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/sp_16" />
 
-                                <EditText
+                                <TextView
+                                    android:id="@+id/tvBacterialDate"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -988,11 +1032,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgBacterialStatus"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbBacterialStatusOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="@dimen/dp_5"
@@ -1002,6 +1048,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbBacterialStatusNonOperational"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Non-operational"
@@ -1075,11 +1122,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgWhether"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -1090,6 +1139,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -1114,6 +1164,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etFrequency"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginVertical="@dimen/dp_7"
@@ -1171,11 +1222,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgWhetherAntibiotic"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherAntibioticYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -1186,6 +1239,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherAntibioticNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -1210,6 +1264,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etAntibiotic"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginVertical="@dimen/dp_7"
@@ -1267,11 +1322,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgWhetherHeavy"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherHeavyYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -1282,6 +1339,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherHeavyNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -1306,6 +1364,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etHeavy"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginVertical="@dimen/dp_7"
@@ -1363,11 +1422,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgWhetherMicro"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherMicroYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -1378,6 +1439,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherMicroNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -1402,6 +1464,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etMicro"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginVertical="@dimen/dp_7"
@@ -1459,11 +1522,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgWhetherFatty"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherFattyYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -1474,6 +1539,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherFattyNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -1498,6 +1564,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etFatty"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginVertical="@dimen/dp_7"
@@ -1555,11 +1622,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgWhetherProtein"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherProteinYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -1570,6 +1639,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherProteinNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -1594,6 +1664,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etProtein"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginVertical="@dimen/dp_7"
@@ -1651,11 +1722,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgWhetherAflat"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherAflatYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -1666,6 +1739,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherAflatNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -1690,6 +1764,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etAflat"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginVertical="@dimen/dp_7"
@@ -1747,11 +1822,13 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <RadioGroup
+                                    android:id="@+id/rgWhetherOthers"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherOthersYes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/dp_7"
@@ -1762,6 +1839,7 @@
                                         app:buttonTint="@color/darkBlue" />
 
                                     <androidx.appcompat.widget.AppCompatRadioButton
+                                        android:id="@+id/rbWhetherOthersNo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/dp_15"
@@ -1786,6 +1864,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etOthers"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginVertical="@dimen/dp_7"
@@ -1847,6 +1926,7 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDegreeOne"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -1870,6 +1950,7 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etNoEmpOne"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
@@ -1878,6 +1959,7 @@
                                 android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
+                                android:inputType="numberDecimal"
                                 android:singleLine="true"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
@@ -1905,6 +1987,7 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDegreeTwo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -1928,12 +2011,14 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etNoEmpTwo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
+                                android:inputType="numberDecimal"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"
                                 android:textColor="@color/black"
@@ -1962,6 +2047,7 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDegreeThree"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -1985,6 +2071,7 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etNoEmpThree"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
@@ -1992,6 +2079,7 @@
                                 android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
+                                android:inputType="numberDecimal"
                                 android:singleLine="true"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
@@ -2018,6 +2106,7 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etDegreeFour"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -2041,6 +2130,7 @@
                                 android:textSize="@dimen/sp_16" />
 
                             <EditText
+                                android:id="@+id/etNoEmpFour"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
@@ -2048,6 +2138,7 @@
                                 android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
+                                android:inputType="numberDecimal"
                                 android:singleLine="true"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
@@ -2089,6 +2180,7 @@
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
                             <EditText
+                                android:id="@+id/etLoss"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
@@ -2096,6 +2188,7 @@
                                 android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
+                                android:inputType="numberDecimal"
                                 android:singleLine="true"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey"
@@ -2105,16 +2198,19 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter_medium"
                                 android:text="Profit"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
                             <EditText
+                                android:id="@+id/etProfit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
+                                android:layout_marginTop="@dimen/dp_7"
                                 android:layout_marginBottom="@dimen/dp_10"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/inter_regular"
                                 android:paddingHorizontal="@dimen/dp_10"
+                                android:inputType="numberDecimal"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"
                                 android:textColor="@color/black"
@@ -2135,6 +2231,7 @@
                         android:textSize="@dimen/sp_16" />
 
                     <EditText
+                        android:id="@+id/etFuturePlans"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
@@ -2158,6 +2255,7 @@
                         android:textSize="@dimen/sp_16" />
 
                     <EditText
+                        android:id="@+id/etCommentsNlm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"

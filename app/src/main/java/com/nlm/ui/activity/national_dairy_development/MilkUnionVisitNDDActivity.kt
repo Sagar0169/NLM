@@ -38,7 +38,7 @@ class MilkUnionVisitNDDActivity : BaseActivity<ActivityMilkUnionVisitNddBinding>
     var districtId: Int = 0
     var districtName: String = ""
     var phoneNo: String = ""
-    var year: String = ""
+    var nameOfAgency: String = ""
     override val layoutId: Int
         get() = R.layout.activity_milk_union_visit_ndd
 
@@ -53,9 +53,8 @@ class MilkUnionVisitNDDActivity : BaseActivity<ActivityMilkUnionVisitNddBinding>
             intent.putExtra("isFrom", 25)
             intent.putExtra("selectedStateId", stateId) // previously selected state ID
             intent.putExtra("districtId", districtId) // previously selected state ID
-            intent.putExtra("phoneNo", phoneNo)
             intent.putExtra("districtName", districtName)
-            intent.putExtra("year", year)
+            intent.putExtra("nameOfAgency", nameOfAgency)
             startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
         }
     }
@@ -68,14 +67,13 @@ class MilkUnionVisitNDDActivity : BaseActivity<ActivityMilkUnionVisitNddBinding>
             // Retrieve the data passed from FilterStateActivity
             districtId = data?.getIntExtra("districtId", 0)!!
             stateId = data.getIntExtra("stateId", 0)
-            phoneNo = data.getStringExtra("etPhoneno").toString()
-            year = data.getStringExtra("year").toString()
             districtName = data.getStringExtra("districtName").toString()
-            //Need to add year also
+            nameOfAgency = data.getStringExtra("nameOfAgency").toString()
+            //Need to add nameOfAgency also
             // Log the data
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,nameOfAgency)
             Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $year")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $nameOfAgency")
         }
     }
 
@@ -95,7 +93,7 @@ class MilkUnionVisitNDDActivity : BaseActivity<ActivityMilkUnionVisitNddBinding>
     private fun swipeForRefreshAscad() {
         mBinding?.srlAscad?.setOnRefreshListener {
             currentPage = 1
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,nameOfAgency)
             mBinding?.srlAscad?.isRefreshing = false
         }
     }
@@ -120,7 +118,7 @@ class MilkUnionVisitNDDActivity : BaseActivity<ActivityMilkUnionVisitNddBinding>
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                componentBListApiCall(paginate = true, loader = true,districtId,phoneNo,year)
+                                componentBListApiCall(paginate = true, loader = true,districtId,phoneNo,nameOfAgency)
                             }
                         }
                     }
@@ -172,7 +170,7 @@ class MilkUnionVisitNDDActivity : BaseActivity<ActivityMilkUnionVisitNddBinding>
 
     }
 
-    private fun componentBListApiCall(paginate: Boolean, loader: Boolean,district:Int,phone:String,year:String) {
+    private fun componentBListApiCall(paginate: Boolean, loader: Boolean,district:Int,phone:String,nameOfAgency:String) {
         if (paginate) {
             currentPage++
         }
@@ -188,6 +186,8 @@ class MilkUnionVisitNDDActivity : BaseActivity<ActivityMilkUnionVisitNddBinding>
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.state_code,
+                district,
+                nameOfAgency,
                 getPreferenceOfScheme(
                     this,
                     AppConstants.SCHEME,
@@ -201,7 +201,7 @@ class MilkUnionVisitNDDActivity : BaseActivity<ActivityMilkUnionVisitNddBinding>
     override fun onResume() {
         super.onResume()
         currentPage = 1
-        componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+        componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,nameOfAgency)
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
