@@ -91,8 +91,9 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
                         else{
 
                             listener?.onNextButtonClick()
-                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                    }}}
+
+                    }
+                        showSnackbar(mBinding!!.clParent, userResponseModel.message)}}
             }
         }
     }

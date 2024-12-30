@@ -49,18 +49,17 @@ class NlmIAFundsRecievedAdapter(
 
         val currentItem = programmeList[position]
         holder.binding.tvSubmit.visibility= View.GONE
+        holder.binding.etYear.isEnabled=false
+        holder.binding.etFormDahd.isEnabled=false
+        holder.binding.etStateGovt.isEnabled=false
+        holder.binding.etAnyOther.isEnabled=false
+        holder.binding.etPhysicalProgress.isEnabled=false
         if (viewEdit=="view")
         {
-            holder.binding.etYear.isEnabled=false
-            holder.binding.etFormDahd.isEnabled=false
-            holder.binding.etStateGovt.isEnabled=false
-            holder.binding.etAnyOther.isEnabled=false
-            holder.binding.etPhysicalProgress.isEnabled=false
-
             holder.binding.btnDelete.visibility= View.GONE
             holder.binding.tvSubmit.visibility= View.GONE
         }
-        else if (viewEdit=="edit"){
+        else {
             holder.binding.btnEdit.showView()
         }
         holder.binding.etYear.setText(currentItem.year?.toString())

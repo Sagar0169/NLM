@@ -105,6 +105,7 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>(), CallBackDeleteAtId
 
     private fun swipeForRefreshNlmEdp() {
         mBinding?.srlNlmEdp?.setOnRefreshListener {
+            currentPage = 1
             nlmEdpAPICall(paginate = false, loader = true)
             mBinding?.srlNlmEdp?.isRefreshing = false
         }

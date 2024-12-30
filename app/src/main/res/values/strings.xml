@@ -393,6 +393,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="mobile_veterinary_unit_block">MobileVeterinaryUnitBlock</string>
     <string name="mobile_veterinary_unit_farmer">MobileVeterinaryUnitDistrict</string>
     <string name="rsp_lab">RSP Lab</string>
+    <string name="document_size_warning"><font color="#FF0000">(Each document size should be less than or equal to 5 MB)</font></string>
     <string name="artificial_insemination">artificial_insemination</string>
     <string name="state_vaccination_programme">state_level_vaccination</string>
     <string name="assistance_for_qfsp_document">assistance_for_qfsp</string>

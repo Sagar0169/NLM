@@ -132,6 +132,7 @@ class StateSemenBankList : BaseActivity<ActivityStateSemenBankListBinding>(), Ca
     }
     private fun swipeForRefreshImplementingAgency() {
         mBinding?.srlImplementingAgency?.setOnRefreshListener {
+            currentPage = 1
             stateSemenBankAPICall(paginate = false, loader = true,nameOfLocation,districtId,phoneNo,year)
             mBinding?.srlImplementingAgency?.isRefreshing = false
         }

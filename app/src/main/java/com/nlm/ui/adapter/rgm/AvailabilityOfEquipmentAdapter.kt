@@ -48,6 +48,9 @@ class AvailabilityOfEquipmentAdapter(
 
     override fun onBindViewHolder(holder: AvailabilityOfEquipmentViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val currentItem = programmeList[position]
+        holder.binding.etListOfEquipment.isEnabled = false
+        holder.binding.etYearOfProcurement.isEnabled = false
+        holder.binding.etMake.isEnabled = false
         if (viewEdit == "view" ||
             getPreferenceOfScheme(
                 context,
@@ -55,9 +58,6 @@ class AvailabilityOfEquipmentAdapter(
                 Result::class.java
             )?.role_id == 8
         ) {
-            holder.binding.etListOfEquipment.isEnabled = false
-            holder.binding.etYearOfProcurement.isEnabled = false
-            holder.binding.etMake.isEnabled = false
             holder.binding.btnDelete.hideView()
         } else if (viewEdit == "edit") {
             holder.binding.btnEdit.showView()

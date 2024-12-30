@@ -326,31 +326,7 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Availability of concentrate feed ingredients:"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
 
-                        <EditText
-                             android:id="@+id/AvailabilityOfConcentrate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:gravity="top"
-                            android:inputType="textMultiLine"
-                            android:maxLength="500"
-
-                            android:overScrollMode="always"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:scrollbars="vertical"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -397,6 +373,13 @@
                         android:text="Supporting Documents"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="@string/document_size_warning"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_14" />
                 <TextView
                     android:id="@+id/tvAddMore2"
                     android:layout_marginVertical="@dimen/dp_7"

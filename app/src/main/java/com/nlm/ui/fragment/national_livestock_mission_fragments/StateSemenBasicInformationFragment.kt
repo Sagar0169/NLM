@@ -9,15 +9,19 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Build
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -85,20 +89,33 @@ class StateSemenBasicInformationFragment(
     private var longitude:Double?=null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            latitude = intent?.getDoubleExtra("latitude", 0.0) ?: 0.0
-            longitude = intent?.getDoubleExtra("longitude", 0.0) ?: 0.0
+            intent?.let {
+                if (it.action == "LOCATION_UPDATED") {
+                    // Handle the location update
+                    latitude = it.getDoubleExtra("latitude", 0.0)
+                    longitude = it.getDoubleExtra("longitude", 0.0)
+                    Log.d("Receiver", "Location Updated: Lat = $latitude, Lon = $longitude")
+
+                    // You can add additional handling logic here, such as updating UI or processing data.
+                }
+            }
         }
     }
     override fun onResume() {
         super.onResume()
-        requireContext().registerReceiver(
-            locationReceiver,
-            IntentFilter("LOCATION_UPDATED")
-        )
+        Log.d("EXECUTION","ON RESUME EXECUTED")
+        val intentFilter = IntentFilter("LOCATION_UPDATED")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API level 26
+            Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
+            requireContext().registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
+        } else {
+            Log.d("Receiver", "Registering receiver without RECEIVER_NOT_EXPORTED")
+            LocalBroadcastManager.getInstance(requireContext()).registerReceiver(locationReceiver, intentFilter)
+        }
     }
-
     override fun onPause() {
         super.onPause()
+        Log.d("EXECUTION","ON PAUSE EXECUTED")
         requireContext().unregisterReceiver(locationReceiver)
     }
 
@@ -240,7 +257,7 @@ class StateSemenBasicInformationFragment(
                                 mBinding?.etPincode?.setText("")
 
                             } else {
-                                mBinding?.etPincode?.setText(userResponseModel._result.manpower_no_of_people.toString())
+                                mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
                             }
                             if (userResponseModel._result.phone_no.toString()=="0") {
                                 mBinding?.etPhone?.setText("")
@@ -326,6 +343,9 @@ class StateSemenBasicInformationFragment(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.btnDelete.hideView()
         bindingDialog.tvSubmit.showView()
         if (selectedItem != null && isFrom == 2) {

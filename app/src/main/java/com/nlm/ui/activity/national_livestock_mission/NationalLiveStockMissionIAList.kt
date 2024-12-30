@@ -172,6 +172,8 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
              stateId = data?.getIntExtra("stateId", 0)!!
              nameOfLocation = data.getStringExtra("nameLocation").toString()
             // Log the data
+            Log.d("NAMEOFLOCATION",nameOfLocation)
+            currentPage=1
             implementingAgencyAPICall(paginate = false, loader = true, nameOfLocation)
 
         }
@@ -180,6 +182,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
 
     private fun swipeForRefreshImplementingAgency() {
         mBinding?.srlImplementingAgency?.setOnRefreshListener {
+            currentPage = 1
             implementingAgencyAPICall(paginate = false, loader = true, nameOfLocation)
             mBinding?.srlImplementingAgency?.isRefreshing = false
         }
@@ -198,7 +201,8 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                implementingAgencyAPICall(paginate = true, loader = true, "")
+                                implementingAgencyAPICall(paginate = true, loader = true, nameOfLocation)
+
                             }
                         }
                     }
@@ -246,6 +250,7 @@ class NationalLiveStockMissionIAList : BaseActivity<ActivityNationalLiveStockIaB
     }
     override fun onResume() {
         super.onResume()
-        implementingAgencyAPICall(paginate = false, loader = true, "")
+        currentPage = 1
+        implementingAgencyAPICall(paginate = false, loader = true, nameOfLocation)
     }
 }

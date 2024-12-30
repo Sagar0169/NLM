@@ -49,6 +49,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
 
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         exoticGoatAPICall(paginate = false, loader = true,getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code)
     }
     override fun setVariables() {
@@ -56,6 +57,7 @@ class ImportOfExoticGoatList : BaseActivity<ActivityImportOfExoticGoatListBindin
     }
     private fun swipeForRefreshImplementingAgency() {
         mBinding?.srlImportOfExoticGoat?.setOnRefreshListener {
+            currentPage = 1
             exoticGoatAPICall(paginate = false, loader = true,getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code)
             mBinding?.srlImportOfExoticGoat?.isRefreshing = false
         }

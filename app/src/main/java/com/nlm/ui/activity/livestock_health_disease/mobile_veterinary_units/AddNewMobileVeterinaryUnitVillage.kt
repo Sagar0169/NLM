@@ -160,7 +160,7 @@ class AddNewMobileVeterinaryUnitVillage :
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API level 26
             Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
             registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
@@ -433,7 +433,6 @@ class AddNewMobileVeterinaryUnitVillage :
                     district_code = districtId,
                     block_name = mBinding?.etBlock?.text.toString(),
                     village_name = mBinding?.etFarmer?.text.toString(),
-
                     attended_call_inputs = mBinding?.tvDocumentNameOne?.text.toString(),
                     come_know_about_inputs = mBinding?.tvDocumentNameTwo?.text.toString(),
                     services_mvu_inputs = mBinding?.tvDocumentNameThree?.text.toString(),

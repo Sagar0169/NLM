@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.databinding.ActivityFilterStateBinding
-import com.nlm.model.ArtificialInseminationRequest
-import com.nlm.model.DataArtificialInsemination
 import com.nlm.model.GetDropDownRequest
 import com.nlm.model.Result
 import com.nlm.model.ResultGetDropDown
@@ -24,9 +22,7 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
-import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
-import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 
 class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
@@ -1185,7 +1181,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 resultIntent.putExtra("year", binding!!.etYear.text.toString()) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
-                toast(stateId.toString())
+//               toast(stateId.toString())
                 finish()
             }
             if (isFrom == 15 && stateId != null) {
@@ -1197,7 +1193,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("districtId", districtId) // Add selected data to intent
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
-                toast(stateId.toString())
+//            toast(stateId.toString())
                 finish()
             }
             if (isFrom == 14 && stateId != null) {
@@ -1208,7 +1204,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("districtId", districtId) // Add selected data to intent
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
-                toast(stateId.toString())
+//              toast(stateId.toString())
                 finish()
             }
 
@@ -1233,7 +1229,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 resultIntent.putExtra("year", binding!!.etYear.text.toString()) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
-                toast(stateId.toString())
+//                toast(stateId.toString())
                 finish()
             }
             if (isFrom == 41||isFrom==42||isFrom==43||isFrom==44 && stateId != null) {
@@ -1245,7 +1241,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 resultIntent.putExtra("village", binding!!.etVillageName.text.toString()) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
-                toast(stateId.toString())
+//                toast(stateId.toString())
                 finish()
             }
             if (isFrom == 45 && stateId != null) {

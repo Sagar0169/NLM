@@ -14,6 +14,8 @@ import com.nlm.databinding.ItemImportOfExoticGoatBinding
 import com.nlm.model.DataIE
 import com.nlm.ui.activity.national_livestock_mission.ImportOfExoticGoatForms
 import com.nlm.utilities.Utility
+import com.nlm.utilities.hideView
+import com.nlm.utilities.showView
 
 class ImportOfGoatAdapter(private val context: Context,
                           private val callBackDeleteAtId: CallBackDeleteAtId,
@@ -50,7 +52,24 @@ class ImportOfGoatAdapter(private val context: Context,
     holder.mBinding.etCreated.text = item.created_at
     holder.mBinding.etStatus.text = item.is_draft_ia
     holder.mBinding.etStatusNlm.text = item.is_draft_nlm
-
+        if(item.is_view == true){
+            holder.mBinding.ivView.showView()
+        }
+        else{
+            holder.mBinding.ivView.hideView()
+        }
+        if(item.is_delete == true){
+            holder.mBinding.ivDelete.showView()
+        }
+        else{
+            holder.mBinding.ivDelete.hideView()
+        }
+        if( item.is_edit == true){
+            holder.mBinding.ivEdit.showView()
+        }
+        else{
+            holder.mBinding.ivEdit.hideView()
+        }
         holder.mBinding.ivDelete.setOnClickListener {
             Utility.showConfirmationAlertDialog(
                 context,

@@ -101,6 +101,7 @@ class NlmAssistanceForEa : BaseActivity<ActivityNlmAssistanceforEaBinding>(), Ca
 
     private fun swipeForRefreshAssistanceForEa() {
         mBinding?.srlAssistanceForEa?.setOnRefreshListener {
+            currentPage = 1
             assistanceForEaAPICall(paginate = false, loader = true)
             mBinding?.srlAssistanceForEa?.isRefreshing = false
         }

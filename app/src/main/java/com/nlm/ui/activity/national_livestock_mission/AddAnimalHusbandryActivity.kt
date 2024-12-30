@@ -1501,7 +1501,7 @@ class AddAnimalHusbandryActivity(
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API level 26
             Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
             registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
@@ -1513,6 +1513,7 @@ class AddAnimalHusbandryActivity(
         super.onPause()
         unregisterReceiver(locationReceiver)
     }
+
     @SuppressLint("Range")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -1531,8 +1532,6 @@ class AddAnimalHusbandryActivity(
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
 
-                    uploadData?.showView()
-                    uploadData?.setImageURI(selectedImageUri)
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
                         val filePath = uriPathHelper.getPath(this, selectedImageUri)
@@ -1551,11 +1550,11 @@ class AddAnimalHusbandryActivity(
                                     uploadData?.setImageURI(selectedImageUri)
                                     uploadImage(it) // Proceed to upload
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         } else {
-                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
+                            Toast.makeText(this, "Format not supported", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -1566,8 +1565,6 @@ class AddAnimalHusbandryActivity(
                             MediaStore.MediaColumns.DISPLAY_NAME,
                             MediaStore.MediaColumns.SIZE
                         )
-                        uploadData?.showView()
-                        uploadData?.setImageResource(R.drawable.ic_pdf)
 
                         val cursor = contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
@@ -1580,6 +1577,8 @@ class AddAnimalHusbandryActivity(
 
                                 // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
                                 if (fileSizeInMB <= 5) {
+                                    uploadData?.showView()
+                                    uploadData?.setImageResource(R.drawable.ic_pdf)
                                     DocumentName = documentName
                                     val requestBody = convertToRequestBody(this, uri)
                                     body = MultipartBody.Part.createFormData(
@@ -1598,7 +1597,7 @@ class AddAnimalHusbandryActivity(
                                         table_name =getString(R.string.ahidf_document).toRequestBody(MultipartBody.FORM),
                                     )
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }

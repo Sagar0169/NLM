@@ -1498,6 +1498,7 @@ data class VaccinationProgrammerListData(
     val created: String,
     val created_by: String,
     val district_code: Int,
+    val visit: Int,
     val district_name: String,
     val id: Int,
     val is_delete: Boolean,

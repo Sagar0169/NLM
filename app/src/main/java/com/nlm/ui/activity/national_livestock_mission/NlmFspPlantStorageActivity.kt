@@ -54,6 +54,7 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
 
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         fpsPlantStorageAPICall(paginate = false, loader = true, districtId, NOA)
     }
 
@@ -119,6 +120,7 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
 
     private fun swipeForRefreshFpsPlantStorage() {
         mBinding?.srlFpsPlantStorage?.setOnRefreshListener {
+            currentPage = 1
             fpsPlantStorageAPICall(paginate = false, loader = true, districtId, NOA)
             mBinding?.srlFpsPlantStorage?.isRefreshing = false
         }

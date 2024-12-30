@@ -105,6 +105,7 @@ class NlmAnimalHidfActivity : BaseActivity<ActivityNlmAnimalHidfBinding>(), Call
 
     private fun swipeForRefreshNlmAhidf() {
         mBinding?.srlNlmAhidf?.setOnRefreshListener {
+            currentPage = 1
             nlmAhidfAPICall(paginate = false, loader = true)
             mBinding?.srlNlmAhidf?.isRefreshing = false
         }

@@ -164,7 +164,8 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
 
 
                     listener?.onNextButtonClick()
-                    showSnackbar(mBinding!!.clParent, userResponseModel.message)}
+                  }
+                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }}
             }
         }}
