@@ -57,6 +57,7 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
 
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         implementingAgencyAPICall(paginate = false, loader = true,LiquidNitrogen,FrozenSemen,Cryocans,DistrictCode)
     }
 
@@ -160,6 +161,7 @@ class ArtificialInseminationList : BaseActivity<ActivityArtificialInseminationLi
 
     private fun swipeForRefreshImplementingAgency() {
         mBinding?.srlImplementingAgency?.setOnRefreshListener {
+            currentPage = 1
             implementingAgencyAPICall(paginate = false, loader = true,LiquidNitrogen,FrozenSemen,Cryocans,DistrictCode)
             mBinding?.srlImplementingAgency?.isRefreshing = false
         }

@@ -30,6 +30,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackItemFormat4Edit
 import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.databinding.ActivityArtificialInseminationBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
@@ -67,7 +68,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationBinding>()
-    , CallBackDeleteAtId , CallBackItemUploadDocEdit {
+    , CallBackDeleteAtId , CallBackItemUploadDocEdit, CallBackItemFormat4Edit {
     override val layoutId: Int
         get() = R.layout.activity_artificial_insemination
     private var mBinding: ActivityArtificialInseminationBinding? = null
@@ -353,7 +354,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
             AddDocumentDialog(this@ArtificialInseminationForms,null,null)
         }
         fun addMore(view:View){
-            mObservationbynlmDialog(this@ArtificialInseminationForms,1)
+            mObservationbynlmDialog(this@ArtificialInseminationForms,1,null)
         }
 
         fun saveAsDraft(view: View){
@@ -867,8 +868,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                             if (position != null) {
                                 DocumentList[position] = ImplementingAgencyDocument(
                                     description = bindingDialog.etDescription.text.toString(),
-                                    ia_document = UploadedDocumentName,
-                                    nlm_document = null,
+                                    ia_document = null,
+                                    nlm_document = UploadedDocumentName,
                                     artificial_insemination_id = selectedItem.artificial_insemination_id,
                                     id = selectedItem.id,
                                 )
@@ -1077,7 +1078,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     }
     private fun ObservationAIAdapter() {
         ObservationBynlmList = mutableListOf()
-        mObservationAIAdapter = ObservationAIAdapter(ObservationBynlmList!!,viewEdit)
+        mObservationAIAdapter = ObservationAIAdapter(this,ObservationBynlmList!!,viewEdit,this,this)
         mBinding?.rvObservationByNlm?.adapter = mObservationAIAdapter
         mBinding?.rvObservationByNlm?.layoutManager =
             LinearLayoutManager(this)
@@ -1088,7 +1089,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         mBinding?.AddDocumentRv?.adapter = AddDocumentAdapter
         mBinding?.AddDocumentRv?.layoutManager = LinearLayoutManager(this)
     }
-    private fun mObservationbynlmDialog(context: Context,isFrom:Int) {
+    private fun mObservationbynlmDialog(context: Context,position:Int?,selectedItem: ArtificialInseminationObservationByNlm?) {
         val bindingDialog: ItemAiObservationBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.item_ai_observation,
@@ -1110,31 +1111,48 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.btnDelete.hideView()
         bindingDialog.tvSubmit.showView()
-
+        if (selectedItem != null) {
+            bindingDialog.etNameOfTheCenter.setText(selectedItem.name_of_center)
+            bindingDialog.etNumberOFAiPerformed.setText(selectedItem.number_of_ai_performed.toString())
+            bindingDialog.etWhetherManPowerTrainedForGoatAI.setText(selectedItem.power_trained_ai)
+            bindingDialog.etEquipmentAvailable.setText(selectedItem.quipment_available)
+        }
         bindingDialog.tvSubmit.setOnClickListener {
             if (bindingDialog.etNameOfTheCenter.text.toString().isNotEmpty() && bindingDialog.etNumberOFAiPerformed.text.toString().isNotEmpty() && bindingDialog.etWhetherManPowerTrainedForGoatAI.text.toString().isNotEmpty() && bindingDialog.etEquipmentAvailable.text.toString().isNotEmpty())
             {
-                bindingDialog.etNumberOFAiPerformed.text.toString().toIntOrNull()?.let { it1 ->
-                    ArtificialInseminationObservationByNlm(
-                        bindingDialog.etNameOfTheCenter.text.toString(),
-                        it1,
-                        bindingDialog.etWhetherManPowerTrainedForGoatAI.text.toString(),
-                        bindingDialog.etEquipmentAvailable.text.toString()
-                    )
-                }?.let { it2 ->
-                    ObservationBynlmList?.add(
-                        it2
-                    )
-                }
+                if (selectedItem != null) {
+                    if (position != null) {
+                        ObservationBynlmList?.set(position, ArtificialInseminationObservationByNlm(
+                           name_of_center =  bindingDialog.etNameOfTheCenter.text.toString(),
+                           number_of_ai_performed = bindingDialog.etNumberOFAiPerformed.text.toString().toIntOrNull(),
+                          power_trained_ai =  bindingDialog.etWhetherManPowerTrainedForGoatAI.text.toString(),
+                          quipment_available =   bindingDialog.etEquipmentAvailable.text.toString(),
+                          id =   selectedItem.id,))
+                        mObservationAIAdapter?.notifyItemChanged(position)
+                    }}
+                    else {
+                    bindingDialog.etNumberOFAiPerformed.text.toString().toIntOrNull()?.let { it1 ->
+                        ArtificialInseminationObservationByNlm(
+                            bindingDialog.etNameOfTheCenter.text.toString(),
+                            it1,
+                            bindingDialog.etWhetherManPowerTrainedForGoatAI.text.toString(),
+                            bindingDialog.etEquipmentAvailable.text.toString(),
+                            null
+                        )
+                    }?.let { it2 ->
+                        ObservationBynlmList?.add(
+                            it2
+                        )
+                    }
 
-                ObservationBynlmList?.size?.minus(1).let {
-                    if (it != null) {
-                        mObservationAIAdapter.notifyItemInserted(it)
+                    ObservationBynlmList?.size?.minus(1).let {
+                        if (it != null) {
+                            mObservationAIAdapter.notifyItemInserted(it)
+                        }
                     }
                 }
                 dialog.dismiss()
             }
-
             else {
                 showSnackbar(mBinding!!.main, getString(R.string.please_enter_atleast_one_field))
             }
@@ -1167,6 +1185,9 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         if (isFrom==1){
             position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }
         }
+        if (isFrom==2){
+            position.let { it1 -> mObservationAIAdapter.onDeleteButtonClick(it1) }
+        }
     }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
@@ -1187,5 +1208,13 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                 table_name = getString(R.string.artificial_insemination).toRequestBody(MultipartBody.FORM),
             )
         }
+    }
+
+    override fun onClickItem(
+        selectedItem: ArtificialInseminationObservationByNlm,
+        position: Int,
+        isFrom: Int
+    ) {
+        mObservationbynlmDialog(this,position,selectedItem)
     }
 }

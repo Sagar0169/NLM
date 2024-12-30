@@ -46,6 +46,10 @@ class SemenDoseAdapter(
 
     override fun onBindViewHolder(holder: SemenDoseViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val currentItem = programmeList[position]
+        holder.binding.etNameOfBreed.isEnabled = false
+        holder.binding.etTwentyTwo.isEnabled = false
+        holder.binding.etTwentyThree.isEnabled = false
+        holder.binding.etTwentyFour.isEnabled = false
         if (viewEdit == "view" ||
             getPreferenceOfScheme(
                 context,
@@ -53,10 +57,7 @@ class SemenDoseAdapter(
                 Result::class.java
             )?.role_id == 8
         ) {
-            holder.binding.etNameOfBreed.isEnabled = false
-            holder.binding.etTwentyTwo.isEnabled = false
-            holder.binding.etTwentyThree.isEnabled = false
-            holder.binding.etTwentyFour.isEnabled = false
+
             holder.binding.btnDelete.hideView()
         } else if (viewEdit == "edit") {
             holder.binding.btnEdit.showView()

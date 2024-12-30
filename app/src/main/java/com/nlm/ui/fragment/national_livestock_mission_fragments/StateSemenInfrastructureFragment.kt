@@ -245,6 +245,9 @@ class StateSemenInfrastructureFragment(
                     if (savedAsDraft) {
                         savedAsDraftClick?.onSaveAsDraft()
                     }
+                    if (savedAsEdit) {
+                        savedAsDraftClick?.onSaveAsDraft()
+                    }
                     if (viewEdit == "view" || viewEdit == "edit") {
                         mBinding?.etStorageCapacity?.setText(userResponseModel._result.storage_capacity)
                         mBinding?.etCoopOne?.setText(userResponseModel._result.major_clients_coop_fin_year_one)
@@ -298,11 +301,12 @@ class StateSemenInfrastructureFragment(
                         }
                         addDocumentAdapter?.notifyDataSetChanged()
 
-                    } else {
-                        savedAsDraftClick?.onSaveAsDraft()
-                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
                     }
+                    else {
+                        savedAsDraftClick?.onSaveAsDraft()
 
+                    }
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
 
                 }
             }
@@ -349,6 +353,9 @@ class StateSemenInfrastructureFragment(
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         dialog.window!!.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         bindingDialog.btnDelete.hideView()
         bindingDialog.tvSubmit.showView()
         if (selectedItem != null && isFrom == 2) {
@@ -420,10 +427,8 @@ class StateSemenInfrastructureFragment(
             if (viewEdit == "view") {
                 listener?.onNextButtonClick()
             }
+            savedAsEdit = true
 
-            if (viewEdit == "edit") {
-                savedAsEdit = true
-            }
             if (itemId != 0) {
                 saveDataApi(itemId, 0)
             } else {
@@ -491,6 +496,9 @@ class StateSemenInfrastructureFragment(
 //                            longitude = longitude
                         )
                     )
+                }
+                else {
+                    showSnackbar(mBinding?.clParent!!, "Please wait for a sec and click again")
                 }
             }
         }

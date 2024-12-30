@@ -3,6 +3,7 @@ package com.nlm.callBack
 import androidx.fragment.app.Fragment
 import com.nlm.model.AhidfFormatForNlm
 import com.nlm.model.AhidfMonitoring
+import com.nlm.model.ArtificialInseminationObservationByNlm
 import com.nlm.model.AssistanceForEaTrainingInstitute
 import com.nlm.model.AssistanceForQfspFinancialProgres
 import com.nlm.model.DairyPlantVisitReportNpddScheme
@@ -37,6 +38,10 @@ interface CallBackItemUploadDocEdit {
 }
 interface CallBackItemImportExoticAchivementEdit {
     fun onClickItem(selectedItem: ImportOfExoticGoatAchievement, position:Int, isFrom:Int)
+
+}
+interface CallBackItemFormat4Edit {
+    fun onClickItem(selectedItem: ArtificialInseminationObservationByNlm, position:Int, isFrom:Int)
 
 }
 interface CallBackItemFormat6Edit {

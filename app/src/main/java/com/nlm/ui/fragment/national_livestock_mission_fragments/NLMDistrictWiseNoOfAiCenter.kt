@@ -83,6 +83,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
             mBinding?.etNoOfAiTechnician?.isEnabled=false
             mBinding?.etNumberOfAiTechnicianTrained?.isEnabled=false
             mBinding?.etTotalNoOfParavetTrained?.isEnabled=false
+            mBinding?.etPresentSystem?.isEnabled=false
 
             ViewEditApi()
         }
@@ -117,7 +118,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                         savedAsDraftClick?.onSaveAsDraft()
                     }else
                     {
-                        if (viewEdit=="view"||viewEdit=="edit")
+                        if (viewEdit=="view")
                         {
                             if (savedAsEdit)
                             {
@@ -139,7 +140,8 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                                     it1
                                 )
                             }
-                                mBinding?.etPresentSystem?.setText(userResponseModel._result.present_system.toString())
+                                mBinding?.etPresentSystem?.setText(userResponseModel._result.present_system?.toString() ?: "")
+
                             mNlmIADistrictWiseNoList.clear()
                                 if (userResponseModel._result.implementing_agency_involved_district_wise.isNullOrEmpty()) {
                                     mNlmIADistrictWiseNoList.add(
@@ -157,7 +159,9 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                                 }
                                 mNlmIADistrictWiseNoAdapter.notifyDataSetChanged()
 
-                        }}
+                        }
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        }
                        else if (viewEdit=="edit")
                         {
                             if (savedAsEdit)
@@ -180,6 +184,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                                         it1
                                     )
                                 }
+                                mBinding?.etPresentSystem?.setText(userResponseModel._result.present_system?.toString() ?: "")
                                 mNlmIADistrictWiseNoList.clear()
 
                                 userResponseModel._result.implementing_agency_involved_district_wise?.let { it1 ->
@@ -190,11 +195,13 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
 
                                 mNlmIADistrictWiseNoAdapter.notifyDataSetChanged()
 
-                            }}
+                            }
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)}
                         else{
                     listener?.onNextButtonClick()
-                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
-                }}}
+
+                }
+                        showSnackbar(mBinding!!.clParent, userResponseModel.message)}}
             }}
         }
         viewModel.getDropDownResult.observe(viewLifecycleOwner) {

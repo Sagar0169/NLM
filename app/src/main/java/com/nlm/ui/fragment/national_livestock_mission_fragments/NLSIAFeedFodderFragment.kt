@@ -111,13 +111,13 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
             mBinding?.tvAddMore2?.hideView()
             mBinding?.etAvailabilityOfGreen?.isEnabled = false
             mBinding?.etAvailibilityOfDry?.isEnabled = false
-            mBinding?.AvailabilityOfConcentrate?.isEnabled = false
             mBinding?.etAvailabilityCommon?.isEnabled = false
             mBinding?.etEffortsOfState?.isEnabled = false
             mBinding?.etNameOfAgency?.isEnabled = false
             mBinding?.etQuantityOfFodder?.isEnabled = false
             mBinding?.etDistributionChannel?.isEnabled = false
             mBinding?.etNumberOfFodder?.isEnabled = false
+            mBinding?.etAvailibilityOfConcentrate?.isEnabled = false
 
             ViewEditApi()
         } else if (viewEdit == "edit") {
@@ -162,7 +162,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
                                 mBinding?.etAssessmentOfGreen?.setText(userResponseModel._result.assessments_of_green)
                                 mBinding?.etAvailabilityOfGreen?.setText(userResponseModel._result.availability_of_green_area)
                                 mBinding?.etAvailibilityOfDry?.setText(userResponseModel._result.availability_of_dry)
-                                mBinding?.AvailabilityOfConcentrate?.setText(userResponseModel._result.availability_of_concentrate)
+                                mBinding?.etAvailibilityOfConcentrate?.setText(userResponseModel._result.availability_of_concentrate)
                                 mBinding?.etAvailabilityCommon?.setText(userResponseModel._result.availability_of_common)
                                 mBinding?.etEffortsOfState?.setText(userResponseModel._result.efforts_of_state)
                                 mBinding?.etNameOfAgency?.setText(userResponseModel._result.name_of_the_agency)
@@ -179,8 +179,8 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
                             }
                         } else {
                             savedAsDraftClick?.onSaveAsDraft()
-                            showSnackbar(mBinding!!.clParent, userResponseModel.message)
                         }
+                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
                     }
                 }
             }

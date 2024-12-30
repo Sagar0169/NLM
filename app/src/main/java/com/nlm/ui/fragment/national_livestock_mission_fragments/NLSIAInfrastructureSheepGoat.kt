@@ -62,6 +62,8 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
             mBinding?.etBreedingFramsLocation?.isEnabled=false
             mBinding?.etGoatBreedingFramsNumber?.isEnabled=false
             mBinding?.etGoatBreedingFramsLocation?.isEnabled=false
+            mBinding?.etSheepBreedingFramsNumber?.isEnabled=false
+            mBinding?.etSheepBreedingFramsLocation?.isEnabled=false
             mBinding?.etTrainingCentersNumber?.isEnabled=false
             mBinding?.etTrainingCentersLocation?.isEnabled=false
             mBinding?.etCatelAiNumber?.isEnabled=false

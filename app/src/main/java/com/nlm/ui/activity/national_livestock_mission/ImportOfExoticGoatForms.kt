@@ -385,6 +385,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                         } else {
                             mBinding?.rbMentallyNo?.isChecked = true
                         }
+                        mBinding?.etNoOfFarmer?.setText(userResponseModel._result.number_of_farmers_benefited)
                     } else {
                         showSnackbar(mBinding!!.main, userResponseModel.message)
                     }
@@ -888,8 +889,8 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                     .isNotEmpty() || bindingDialog.etPerformanceOfTheAnimals.text.toString()
                     .isNotEmpty() || bindingDialog.etBalance.text.toString().isNotEmpty()
             ) {
-                if (selectedItem != null) {
-                    if (position != null) {
+                    if (selectedItem != null) {
+                        if (position != null) {
 
                         AchievementList?.set(
                             position, ImportOfExoticGoatAchievement(
@@ -931,8 +932,6 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
                             AchievementAdapter?.notifyItemInserted(it)
                         }
                     }
-
-
                 }
                 dialog.dismiss()
             } else {

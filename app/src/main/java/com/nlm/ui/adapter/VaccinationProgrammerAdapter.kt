@@ -109,7 +109,7 @@ class VaccinationProgrammerAdapter(
         holder.mBinding.etFarmer.text = item.village_name
         holder.mBinding.etNlmStatus.text = item.status
         holder.mBinding.etCreatedBy.text = item.created_by
-
+        holder.mBinding.etVisit.text = item.visit.toString()
         if(item.is_view){
             holder.mBinding.ivView.showView()
         }

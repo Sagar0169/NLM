@@ -190,10 +190,11 @@ data class ArtificialInseminationDocument(
 )
 
 data class ArtificialInseminationObservationByNlm(
-    val name_of_center: String,
-    val number_of_ai_performed: Int,
-    val power_trained_ai: String,
-    val quipment_available: String
+    val name_of_center: String?,
+    val number_of_ai_performed: Int?,
+    val power_trained_ai: String?,
+    val quipment_available: String?,
+    val id: Int?
 )
 
 data class ImportExoticGoatAddEditRequest(

@@ -580,7 +580,7 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
-
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -607,7 +607,7 @@
                                 android:layout_marginBottom="@dimen/dp_10"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
-
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -681,7 +681,7 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
-
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -708,7 +708,7 @@
                                 android:layout_marginBottom="@dimen/dp_10"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
-
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -782,7 +782,7 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
-
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -809,7 +809,7 @@
                                 android:layout_marginBottom="@dimen/dp_10"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
-
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -884,7 +884,7 @@
                                 android:layout_marginBottom="@dimen/dp_10"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
-
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -911,7 +911,7 @@
                                 android:layout_marginBottom="@dimen/dp_10"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
-
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -984,7 +984,7 @@
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
-
+                                android:inputType="number"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -1012,6 +1012,7 @@
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
+                                android:inputType="number"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"

@@ -31,15 +31,7 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_10">
 
-                <TextView
-                    android:id="@+id/tvState1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:fontFamily="@font/opensans_semibold"
-                    android:text="Infrastructure for goat semen bank"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -48,7 +40,14 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
-
+                    <TextView
+                        android:id="@+id/tvState1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Infrastructure for goat semen bank"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
 
                     <TextView
                         android:id="@+id/tvAddMore1"
@@ -178,7 +177,7 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -206,6 +205,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:inputType="number"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -289,7 +289,7 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -317,6 +317,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:inputType="number"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -373,7 +374,6 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
                             android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
@@ -400,7 +400,7 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -427,6 +427,7 @@
                             android:layout_marginBottom="@dimen/dp_10"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -511,7 +512,7 @@
                             android:layout_marginTop="@dimen/dp_7"
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
-
+                            android:inputType="number"
                             android:maxLength="50"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
@@ -539,6 +540,7 @@
                             android:background="@drawable/curve_all_corner_grey"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:inputType="number"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"

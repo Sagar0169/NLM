@@ -98,6 +98,7 @@ class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBi
 
     private fun swipeForRefreshFpFromNonForest() {
         mBinding?.srlFpFromNonForest?.setOnRefreshListener {
+            currentPage = 1
             fpFromNonForestAPICall(paginate = false, loader = true,districtId,nameOfAgency,areaCovered)
             mBinding?.srlFpFromNonForest?.isRefreshing = false
         }

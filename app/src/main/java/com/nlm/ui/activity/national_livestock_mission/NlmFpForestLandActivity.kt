@@ -61,6 +61,7 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
 
     override fun onResume() {
         super.onResume()
+        currentPage = 1
         fpFromForestLandAPICall(paginate = false, loader = true)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -134,6 +135,7 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
 
     private fun swipeForRefreshFpFromForestLand() {
         mBinding?.srlFpFromForestLand?.setOnRefreshListener {
+            currentPage = 1
             fpFromForestLandAPICall(paginate = false, loader = true)
             mBinding?.srlFpFromForestLand?.isRefreshing = false
         }

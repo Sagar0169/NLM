@@ -35,11 +35,12 @@ class RspManPowerAdapter(
 
     override fun onBindViewHolder(holder: RspManPowerViewHolder, position: Int) {
         val currentItem = programmeList[position]
+        holder.binding.etDesignation.isEnabled = false
+        holder.binding.etQualification.isEnabled = false
+        holder.binding.etExperience.isEnabled = false
+        holder.binding.etTrainingStatus.isEnabled = false
         if (viewEdit == "view") {
-            holder.binding.etDesignation.isEnabled = false
-            holder.binding.etQualification.isEnabled = false
-            holder.binding.etExperience.isEnabled = false
-            holder.binding.etTrainingStatus.isEnabled = false
+
             holder.binding.btnDelete.hideView()
         }
         else if (viewEdit=="edit"){

@@ -106,6 +106,7 @@ class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspac
 
     private fun swipeForRefreshNlmAssistanceForQFSP() {
         mBinding?.srlNlmAssistanceForQFSP?.setOnRefreshListener {
+            currentPage = 1
             nlmAssistanceForQFSPAPICall(paginate = false, loader = true)
             mBinding?.srlNlmAssistanceForQFSP?.isRefreshing = false
         }

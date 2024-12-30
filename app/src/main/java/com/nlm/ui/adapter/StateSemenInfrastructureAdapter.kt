@@ -37,9 +37,10 @@ class StateSemenInfrastructureAdapter(
 
     override fun onBindViewHolder(holder: StateSemenInfrastructureViewHolder, position: Int) {
         val currentItem = programmeList[position]
+        holder.binding.etListOfEquipment.isEnabled = false
+        holder.binding.etYearOfProcurement.isEnabled = false
         if (viewEdit == "view") {
-            holder.binding.etListOfEquipment.isEnabled = false
-            holder.binding.etYearOfProcurement.isEnabled = false
+
             holder.binding.btnDelete.hideView()
         }
         else if (viewEdit=="edit"){

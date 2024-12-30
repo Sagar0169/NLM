@@ -44,13 +44,13 @@ class NlmIACompositionOFGoverningAdapter(
 
     override fun onBindViewHolder(holder: NlmIACompositionOFGoverning, position: Int) {
         val currentItem = programmeList[position]
+        holder.binding.nameOfOfficial.isEnabled=false
+        holder.binding.nameOfDesignation.isEnabled=false
+        holder.binding.nameOfOrganization.isEnabled=false
         if (viewEdit=="view")
         {
-            holder.binding.nameOfOfficial.isEnabled=false
-            holder.binding.nameOfDesignation.isEnabled=false
-            holder.binding.nameOfOrganization.isEnabled=false
             holder.binding.btnDelete.visibility=View.GONE
-        }else if (viewEdit=="edit"){
+        }else {
             holder.binding.btnEdit.showView()
         }
 

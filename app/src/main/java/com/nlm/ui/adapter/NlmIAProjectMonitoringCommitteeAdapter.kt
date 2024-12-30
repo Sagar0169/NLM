@@ -38,14 +38,15 @@ class NlmIAProjectMonitoringCommitteeAdapter(
     override fun onBindViewHolder(holder: NlmIACompositionOFGoverning, position: Int) {
 
         val currentItem = programmeList[position]
+        holder.binding.nameOfOfficial.isEnabled=false
+        holder.binding.nameOfDesignation.isEnabled=false
+        holder.binding.nameOfOrganization.isEnabled=false
         if (viewEdit=="view")
         {
-            holder.binding.nameOfOfficial.isEnabled=false
-            holder.binding.nameOfDesignation.isEnabled=false
-            holder.binding.nameOfOrganization.isEnabled=false
+
             holder.binding.btnDelete.visibility= View.GONE
         }
-        else if (viewEdit=="edit"){
+        else{
             holder.binding.btnEdit.showView()
         }
         holder.binding.nameOfOfficial.setText(currentItem.name_of_official)
@@ -57,7 +58,7 @@ class NlmIAProjectMonitoringCommitteeAdapter(
                 object :
                     DialogCallback {
                     override fun onYes() {
-                        callBackDeleteAtId.onClickItem(currentItem.id,position,1)
+                        callBackDeleteAtId.onClickItem(currentItem.id,position,2)
                     }
                 },
                 context.getString(R.string.are_you_sure_want_to_delete_your_post)
@@ -89,7 +90,6 @@ class NlmIAProjectMonitoringCommitteeAdapter(
         if (position >= 0 && position < programmeList.size) {
             programmeList.removeAt(position)
             notifyItemRemoved(position)
-
             // Notify about range changes to avoid index mismatches
             notifyItemRangeChanged(position, programmeList.size)
         } else {
