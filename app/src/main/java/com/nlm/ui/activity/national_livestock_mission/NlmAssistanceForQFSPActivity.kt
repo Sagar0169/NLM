@@ -181,7 +181,8 @@ class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspac
                 state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
                 user_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.user_id,
                 role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
-                id = ID
+                id = ID,
+                is_deleted = 1,
             )
         )
         itemPosition = position

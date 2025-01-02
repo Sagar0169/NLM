@@ -426,30 +426,28 @@ class AddNewFspPlantStorageActivity(
         val tvDistrictNlm = mBinding?.tvDistrictNlm?.text.toString()
         val iaName = mBinding?.etNoa?.text.toString()
         val nLMName = mBinding?.etEOA?.text.toString()
-
+        if (tvStateNlm == "Please Select") {
+            mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
+            return
+        }
+        if (tvDistrictNlm == "Please Select") {
+            mBinding?.clParent?.let { showSnackbar(it,"District Name is required") }
+            return
+        }
+        if (nLMName.isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it,"Name is required") }
+            return
+        }
+        if (plantStorageList.isEmpty()) {
+            mBinding?.clParent?.let { showSnackbar(it,"At least one plant storage nlm comment is required") }
+            return
+        }
         if (getPreferenceOfScheme(
                 this,
                 AppConstants.SCHEME,
                 Result::class.java
             )?.role_id == 8
         ) {
-            if (tvStateNlm == "Please Select") {
-                mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
-                return
-            }
-            if (tvDistrictNlm == "Please Select") {
-                mBinding?.clParent?.let { showSnackbar(it,"District Name is required") }
-                return
-            }
-            if (nLMName.isEmpty()) {
-                mBinding?.clParent?.let { showSnackbar(it,"Name is required") }
-                return
-            }
-            if (plantStorageList.isEmpty()) {
-                mBinding?.clParent?.let { showSnackbar(it,"At least one plant storage nlm comment is required") }
-                return
-            }
-
             if (hasLocationPermissions()) {
                 val intent = Intent(this@AddNewFspPlantStorageActivity, LocationService::class.java)
                 startService(intent)

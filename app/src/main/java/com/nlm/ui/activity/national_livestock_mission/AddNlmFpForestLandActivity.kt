@@ -1038,13 +1038,26 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
     }
     val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
     if (isSupported) {
+        val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
         when (fileExtension) {
             "pdf" -> {
-//                    bindingDialog.ivPic.let {
-//                        Glide.with(context).load(R.drawable.ic_pdf).into(
-//                            it
-//                        )
-//                    }
+                val downloader = AndroidDownloader(context)
+                bindingDialog.ivPic.let {
+                    Glide.with(context).load(R.drawable.ic_pdf).into(
+                        it
+                    )
+                }
+                bindingDialog.etDoc.setOnClickListener {
+                    if (!UploadedDocumentName.isNullOrEmpty()) {
+                        downloader.downloadFile(url, UploadedDocumentName!!)
+                        mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                        dialog.dismiss()
+                    }
+                    else{
+                        mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                        dialog.dismiss()
+                    }
+                }
             }
             else -> {
                 bindingDialog.ivPic.setOnClickListener {
