@@ -10,8 +10,14 @@ import com.nlm.model.AddDcsBmcRequest
 import com.nlm.model.AddDcsBmcResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
+import com.nlm.model.AddMilkProcessingRequest
+import com.nlm.model.AddMilkProcessingResponse
+import com.nlm.model.AddMilkProductMarketingRequest
+import com.nlm.model.AddMilkProductMarketingResponse
 import com.nlm.model.AddNlmEdpRequest
 import com.nlm.model.AddNlmEdpResponse
+import com.nlm.model.AddStateCenterLabRequest
+import com.nlm.model.AddStateCenterLabResponse
 import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
@@ -177,8 +183,11 @@ const val DAIRY_PLANT_ADD = "NationalDairyDevelopment/dairyPlantAddEdit"
 const val DCS_BMC_LIST = "NationalDairyDevelopment/dcsBmcList"
 const val DCS_BMC_ADD = "NationalDairyDevelopment/dcsBmcAddEdit"
 const val STATE_CENTER_LAB_LIST = "NationalDairyDevelopment/stateCenterLabList"
+const val STATE_CENTER_LAB_ADD = "NationalDairyDevelopment/stateCenterLabAddEdit"
 const val MILK_PROCESSING_LIST = "NationalDairyDevelopment/milkProcessingList"
+const val MILK_PROCESSING_ADD = "NationalDairyDevelopment/milkProcessingAddEdit"
 const val MILK_PRODUCT_MARKETING_LIST = "NationalDairyDevelopment/milkProductMarketingList"
+const val MILK_PRODUCT_MARKETING_ADD = "NationalDairyDevelopment/milkProductMarketingAddEdit"
 const val PRODUCTIVITY_ENHANCEMENT_SERVICES_LIST = "NationalDairyDevelopment/productivityEnhancementServicesList"
 
 
@@ -374,11 +383,20 @@ interface MyService {
     @POST(STATE_CENTER_LAB_LIST)
     suspend fun stateCenterLabList(@Body request: NDDStateCenterLabListRequest): Response<NDDStateCenterLabListResponse>
 
+    @POST(STATE_CENTER_LAB_ADD)
+    suspend fun stateCenterLabAdd(@Body request: AddStateCenterLabRequest): Response<AddStateCenterLabResponse>
+
     @POST(MILK_PROCESSING_LIST)
     suspend fun milkProcessingList(@Body request: NDDMilkProcessingListRequest): Response<NDDMilkProcessingListResponse>
 
+    @POST(MILK_PROCESSING_ADD)
+    suspend fun milkProcessingAdd(@Body request: AddMilkProcessingRequest): Response<AddMilkProcessingResponse>
+
     @POST(MILK_PRODUCT_MARKETING_LIST)
     suspend fun milkProductMarketingList(@Body request: NDDMilkProductMarketingListRequest): Response<NDDMilkProductMarketingListResponse>
+
+    @POST(MILK_PRODUCT_MARKETING_ADD)
+    suspend fun milkProductMarketingADD(@Body request: AddMilkProductMarketingRequest): Response<AddMilkProductMarketingResponse>
 
     @POST(PRODUCTIVITY_ENHANCEMENT_SERVICES_LIST)
     suspend fun productivityEnhancementServicesList(@Body request: NDDProductivityEnhancementServicesListRequest): Response<NDDProductivityEnhancementServicesListResponse>

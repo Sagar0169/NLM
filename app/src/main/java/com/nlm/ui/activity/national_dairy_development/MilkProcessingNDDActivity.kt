@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityMilkProcessingNddBinding
+import com.nlm.model.AddMilkProcessingRequest
 import com.nlm.model.MilkProcessing
+import com.nlm.model.NDDComponentBAddRequest
 import com.nlm.model.NDDDairyPlantListData
 import com.nlm.model.NDDDairyPlantListRequest
 import com.nlm.model.NDDMilkProcessingListData
@@ -23,6 +25,7 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
@@ -109,6 +112,28 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
                     }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.recyclerView?.hideView()
+                }
+            }
+        }
+
+        viewModel.milkProcessingAddResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel!=null)
+            {
+                if(userResponseModel._resultflag==0){
+
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+
+                }
+                else{
+
+                    itemPosition?.let { it1 -> nlmComponentBAdapter.onDeleteButtonClick(it1) }
+//                    rSPLABListAdapter?.notifyDataSetChanged()
+//                    implementingAgencyAPICall(paginate = true, loader = true)
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 }
             }
         }
@@ -228,6 +253,29 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
-        TODO("Not yet implemented")
+        viewModel.getMilkProcessingAdd(
+            this, true,
+            AddMilkProcessingRequest(
+                id= ID,
+                role_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id,
+                state_code = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id.toString(),
+                is_deleted = 1
+            )
+        )
+        itemPosition = position
+        nlmComponentBAdapter?.notifyDataSetChanged()
     }
 }

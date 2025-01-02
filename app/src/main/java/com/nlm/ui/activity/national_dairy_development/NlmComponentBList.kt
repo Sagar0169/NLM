@@ -42,9 +42,10 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
     private var itemPosition : Int ?= null
     var stateId: Int = 0
     var districtId: Int = 0
+    var village: String = ""
+    var block: String = ""
+    var nameOfAgency: String = ""
     var districtName: String = ""
-    var phoneNo: String = ""
-    var year: String = ""
     private lateinit var nlmComponentBAdapter: NlmComponentBadapter
     private lateinit var nlmComponentBList: ArrayList<NDDComponentBListData>
 
@@ -67,7 +68,7 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
     private fun swipeForRefreshAscad() {
         mBinding?.srlAscad?.setOnRefreshListener {
             currentPage = 1
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,block,nameOfAgency,village)
             mBinding?.srlAscad?.isRefreshing = false
         }
     }
@@ -148,9 +149,10 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
             intent.putExtra("isFrom", 45)
             intent.putExtra("selectedStateId", stateId) // previously selected state ID
             intent.putExtra("districtId", districtId) // previously selected state ID
-            intent.putExtra("phoneNo", phoneNo)
+            intent.putExtra("block", block)
             intent.putExtra("districtName", districtName)
-            intent.putExtra("year", year)
+            intent.putExtra("village", village)
+            intent.putExtra("nameOfAgency", nameOfAgency)
             startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
         }
     }
@@ -163,14 +165,15 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
             // Retrieve the data passed from FilterStateActivity
             districtId = data?.getIntExtra("districtId", 0)!!
             stateId = data.getIntExtra("stateId", 0)
-            phoneNo = data.getStringExtra("etPhoneno").toString()
-            year = data.getStringExtra("year").toString()
             districtName = data.getStringExtra("districtName").toString()
-            //Need to add year also
+            block = data.getStringExtra("block").toString()
+            nameOfAgency = data.getStringExtra("nameOfAgency").toString()
+            village = data.getStringExtra("village").toString()
+            //Need to add nameOfAgency also
             // Log the data
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,block,nameOfAgency,village)
             Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $year")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $nameOfAgency")
         }
     }
 
@@ -194,7 +197,7 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                componentBListApiCall(paginate = true, loader = true,districtId,phoneNo,year)
+                                componentBListApiCall(paginate = true, loader = true,districtId,block,nameOfAgency,village)
                             }
                         }
                     }
@@ -202,7 +205,7 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
             }
         }
 
-    private fun componentBListApiCall(paginate: Boolean, loader: Boolean,district:Int,phone:String,year:String) {
+    private fun componentBListApiCall(paginate: Boolean, loader: Boolean,district:Int,block:String,nameOfAgency:String,village:String) {
         if (paginate) {
             currentPage++
         }
@@ -218,6 +221,10 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.state_code,
+                district,
+                block,
+                nameOfAgency,
+                village,
                 getPreferenceOfScheme(
                     this,
                     AppConstants.SCHEME,
@@ -231,7 +238,7 @@ class NlmComponentBList : BaseActivity<ActivityNlmComponentBlistBinding>(), Call
     override fun onResume() {
         super.onResume()
         currentPage = 1
-        componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+        componentBListApiCall(paginate = false, loader = true,districtId,block,nameOfAgency,village)
     }
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         viewModel.getComponentBAdd(

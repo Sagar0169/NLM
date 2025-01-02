@@ -164,7 +164,6 @@
                 android:id="@+id/etNameofMilkUnion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_7"
                 android:background="@drawable/curve_all_corner_grey"
 

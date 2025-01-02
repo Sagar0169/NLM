@@ -10,8 +10,14 @@ import com.nlm.model.AddDcsBmcRequest
 import com.nlm.model.AddDcsBmcResponse
 import com.nlm.model.AddFspPlantStorageRequest
 import com.nlm.model.AddFspPlantStorageResponse
+import com.nlm.model.AddMilkProcessingRequest
+import com.nlm.model.AddMilkProcessingResponse
+import com.nlm.model.AddMilkProductMarketingRequest
+import com.nlm.model.AddMilkProductMarketingResponse
 import com.nlm.model.AddNlmEdpRequest
 import com.nlm.model.AddNlmEdpResponse
+import com.nlm.model.AddStateCenterLabRequest
+import com.nlm.model.AddStateCenterLabResponse
 import com.nlm.model.ArtificialInseminationAddRequest
 import com.nlm.model.ArtificialInsemenationAddResponse
 import com.nlm.model.ArtificialInseminationRequest
@@ -344,12 +350,26 @@ object Repository {
     suspend fun stateCenterLabList(request: NDDStateCenterLabListRequest): Response<NDDStateCenterLabListResponse> {
         return api.stateCenterLabList(request)
     }
+
+    suspend fun stateCenterLabAdd(request: AddStateCenterLabRequest): Response<AddStateCenterLabResponse> {
+        return api.stateCenterLabAdd(request)
+    }
+
+
     suspend fun milkProcessingList(request: NDDMilkProcessingListRequest): Response<NDDMilkProcessingListResponse> {
         return api.milkProcessingList(request)
     }
 
+    suspend fun milkProcessingAdd(request: AddMilkProcessingRequest): Response<AddMilkProcessingResponse> {
+        return api.milkProcessingAdd(request)
+    }
+
     suspend fun milkProductMarketingList(request: NDDMilkProductMarketingListRequest): Response<NDDMilkProductMarketingListResponse> {
         return api.milkProductMarketingList(request)
+    }
+
+    suspend fun milkProductMarketingADD(request: AddMilkProductMarketingRequest): Response<AddMilkProductMarketingResponse> {
+        return api.milkProductMarketingADD(request)
     }
     suspend fun productivityEnhancementServicesList(request: NDDProductivityEnhancementServicesListRequest): Response<NDDProductivityEnhancementServicesListResponse> {
         return api.productivityEnhancementServicesList(request)
