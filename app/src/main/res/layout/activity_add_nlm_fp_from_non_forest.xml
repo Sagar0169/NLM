@@ -116,7 +116,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_20"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="States"
+                            android:text="@string/states"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -143,7 +143,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Districts"
+                            android:text="@string/districts"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -171,7 +171,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Implementing Agency / outsourced agency*"
+                            android:text="Implementing Agency / outsourced agency"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -199,7 +199,7 @@
                             android:layout_marginVertical="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_10"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Location / Address*"
+                            android:text="Location / Address"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -491,7 +491,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="States"
+                        android:text="@string/states"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -516,7 +516,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Districts"
+                        android:text="@string/districts"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -542,7 +542,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Implementing Agency / outsourced agency*"
+                        android:text="Implementing Agency / outsourced agency"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -612,6 +612,13 @@
                             android:text="Supporting Documents"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="@string/document_size_warning"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14" />
                         <TextView
                             android:id="@+id/tvAddDocumentsNlm"
                             android:layout_width="wrap_content"

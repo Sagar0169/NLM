@@ -42,8 +42,9 @@ class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketin
     var stateId: Int = 0
     var districtId: Int = 0
     var districtName: String = ""
-    var phoneNo: String = ""
-    var year: String = ""
+    var nameOfMilkUnion: String = ""
+    var dateOfInspection: String = ""
+    var processingPlant: String = ""
     private lateinit var nlmComponentBAdapter: MilkProductMarketingAdapter
     private lateinit var nlmComponentBList: ArrayList<NDDMilkProductMarketingListData>
 
@@ -66,7 +67,7 @@ class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketin
     private fun swipeForRefreshAscad() {
         mBinding?.srlAscad?.setOnRefreshListener {
             currentPage = 1
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,processingPlant,nameOfMilkUnion,dateOfInspection)
             mBinding?.srlAscad?.isRefreshing = false
         }
     }
@@ -140,12 +141,13 @@ class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketin
         fun filter(view: View) {
             val intent =
                 Intent(this@MilkProductMarketingNDDActivity, FilterStateActivity::class.java)
-            intent.putExtra("isFrom", 40)
-            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("isFrom", 52)
+            intent.putExtra("stateId", stateId) // previously selected state ID
             intent.putExtra("districtId", districtId) // previously selected state ID
-            intent.putExtra("phoneNo", phoneNo)
             intent.putExtra("districtName", districtName)
-            intent.putExtra("year", year)
+            intent.putExtra("nameOfAgency", nameOfMilkUnion)
+            intent.putExtra("dateOfInspection", dateOfInspection)
+            intent.putExtra("fssai", processingPlant)
             startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
         }
     }
@@ -158,14 +160,16 @@ class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketin
             // Retrieve the data passed from FilterStateActivity
             districtId = data?.getIntExtra("districtId", 0)!!
             stateId = data.getIntExtra("stateId", 0)
-            phoneNo = data.getStringExtra("etPhoneno").toString()
-            year = data.getStringExtra("year").toString()
+            nameOfMilkUnion = data.getStringExtra("nameOfAgency").toString()
+            dateOfInspection = data.getStringExtra("dateOfInspection").toString()
+            processingPlant = data.getStringExtra("fssai").toString()
             districtName = data.getStringExtra("districtName").toString()
             //Need to add year also
             // Log the data
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,processingPlant,nameOfMilkUnion,dateOfInspection)
             Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $year")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $dateOfInspection")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $nameOfMilkUnion")
         }
     }
 
@@ -189,7 +193,7 @@ class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketin
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                componentBListApiCall(paginate = true, loader = true,districtId,phoneNo,year)
+                                componentBListApiCall(paginate = true, loader = true,districtId,processingPlant,nameOfMilkUnion,dateOfInspection)
                             }
                         }
                     }
@@ -197,7 +201,7 @@ class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketin
             }
         }
 
-    private fun componentBListApiCall(paginate: Boolean, loader: Boolean,district:Int,phone:String,year:String) {
+    private fun componentBListApiCall(paginate: Boolean, loader: Boolean,district:Int,parlor:String,union:String,dateOfInspection:String) {
         if (paginate) {
             currentPage++
         }
@@ -218,6 +222,8 @@ class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketin
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.user_id,
+                district,
+                parlor,union,dateOfInspection,
                 10,
                 currentPage
             )
@@ -226,7 +232,7 @@ class MilkProductMarketingNDDActivity : BaseActivity<ActivityMilkProductMarketin
     override fun onResume() {
         super.onResume()
         currentPage = 1
-        componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+        componentBListApiCall(paginate = false, loader = true,districtId,processingPlant,nameOfMilkUnion,dateOfInspection)
     }
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         viewModel.getMilkProductMarketingADD(

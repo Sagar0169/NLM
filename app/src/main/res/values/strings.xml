@@ -166,6 +166,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="role">Role*</string>
     <string name="state">State</string>
     <string name="district">District<font color="#FF0000">*</font></string>
+    <string name="districts">Districts<font color="#FF0000">*</font></string>
     <string name="designation">Designation</string>
     <string name="organisation">Organisation</string>
     <string name="status">Status</string>

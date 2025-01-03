@@ -1248,6 +1248,8 @@ data class NDDDairyPlantListRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val district: Int?,
+    val fssai_license_no: String?,
     val limit: Int,
     val page: Int
 )
@@ -1256,6 +1258,9 @@ data class NDDDcsBmcListRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val district: Int?,
+    val fssai_lic_no: String?,
+    val name_of_dcs: String?,
     val limit: Int,
     val page: Int
 )
@@ -1264,6 +1269,7 @@ data class NDDStateCenterLabListRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val location_state_central_lab: String?,
     val limit: Int,
     val page: Int
 )
@@ -1273,6 +1279,9 @@ data class NDDMilkProcessingListRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val district: Int?,
+    val name_processing_plant: String?,
+    val name_milk_union: String?,
     val limit: Int,
     val page: Int
 )
@@ -1281,6 +1290,10 @@ data class NDDMilkProductMarketingListRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val district_code: Int?,
+    val name_retail_shop: String?,
+    val name_milk_union: String?,
+    val date_inspection: String?,
     val limit: Int,
     val page: Int
 )
@@ -1289,6 +1302,10 @@ data class NDDProductivityEnhancementServicesListRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val district_code: Int?,
+    val name_dcs_mpp: String?,
+    val name_tehsil: String?,
+    val name_revenue_village: String?,
     val limit: Int,
     val page: Int
 )
@@ -1562,4 +1579,53 @@ data class AddMilkProductMarketingRequest(
     val long_nlm: Double?=null,
     val user_id: String?=null
 )
+
+
+data class AddProductivityEnchancementRequest(
+    val animal_mineral_mixture: Int?=null,
+    val are_calves_born: Int?=null,
+    val are_calves_born_remarks: String?=null,
+    val assets_distributed: Int?=null,
+    val assets_distributed_remarks: String?=null,
+    val assistance_been_provided_remarks: String?=null,
+    val created_by: Int?=null,
+    val date_of_inspection: String?=null,
+    val deworming_of_female_calves: Int?=null,
+    val distribution_fodder_seeds: Int?=null,
+    val district_id: Int?=null,
+    val farmer_under_calf_rearing_program_remarks: String?=null,
+    val fodder_mineral_mixture: Int?=null,
+    val id: Int?=null,
+    val is_deleted: Int?=null,
+    val is_draft: Int?=null,
+    val is_record_keeping: Int?=null,
+    val is_record_keeping_remarks: String?=null,
+    val is_type: String?=null,
+    val lat_dcs: String?=null,
+    val long_dcs: String?=null,
+    val low_cost_silage_making: Int?=null,
+    val name_dcs_mpp: String?=null,
+    val name_revenue_village: String?=null,
+    val name_tehsil: String?=null,
+    val plantation_root_stems: Int?=null,
+    val pregnancy_feed: Int?=null,
+    val productivity_enhancement_services_document: List<ImplementingAgencyDocument>?=null,
+    val record_keeping: Int?=null,
+    val record_keeping_remarks: String?=null,
+    val role_id: Int?=null,
+    val lat_nlm: Double?=null,
+    val long_nlm: Double?=null,
+    val selection_village: Int?=null,
+    val selection_village_remarks: String?=null,
+    val state_code: Int?=null,
+    val status: Int?=null,
+    val transition_feed_early: Int?=null,
+    val under_anas_program_remarks: String?=null,
+    val under_anas_tagged: Int?=null,
+    val under_anas_tagged_remarks: String?=null,
+    val user_id: String?=null,
+    val vaccination_female_calves: Int?=null,
+    val visible_impacts: String?=null
+)
+
 

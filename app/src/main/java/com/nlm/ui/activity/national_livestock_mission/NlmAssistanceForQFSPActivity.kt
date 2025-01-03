@@ -129,7 +129,7 @@ class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspac
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             } else {
-                if (userResponseModel?._result != null && userResponseModel._result.data.isNotEmpty()) {
+                if (userResponseModel?._result?.data != null && userResponseModel._result.data.isNotEmpty()) {
                     if (currentPage == 1) {
                         nlmAssistanceForQFSPList.clear()
 

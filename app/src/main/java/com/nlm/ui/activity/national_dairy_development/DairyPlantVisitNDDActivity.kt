@@ -41,9 +41,10 @@ class DairyPlantVisitNDDActivity : BaseActivity<ActivityDairyPlantVisitNddBindin
     private var itemPosition : Int ?= null
     var stateId: Int = 0
     var districtId: Int = 0
+    var village: String = ""
+    var block: String = ""
+    var fssai: String = ""
     var districtName: String = ""
-    var phoneNo: String = ""
-    var year: String = ""
     private lateinit var nlmComponentBAdapter: DairyPlantVisitAdapter
     private lateinit var nlmComponentBList: ArrayList<NDDDairyPlantListData>
 
@@ -66,7 +67,7 @@ class DairyPlantVisitNDDActivity : BaseActivity<ActivityDairyPlantVisitNddBindin
     private fun swipeForRefreshAscad() {
         mBinding?.srlAscad?.setOnRefreshListener {
             currentPage = 1
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,fssai)
             mBinding?.srlAscad?.isRefreshing = false
         }
     }
@@ -143,12 +144,11 @@ class DairyPlantVisitNDDActivity : BaseActivity<ActivityDairyPlantVisitNddBindin
         fun filter(view: View) {
             val intent =
                 Intent(this@DairyPlantVisitNDDActivity, FilterStateActivity::class.java)
-            intent.putExtra("isFrom", 40)
-            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("isFrom", 46)
+            intent.putExtra("stateId", stateId) // previously selected state ID
             intent.putExtra("districtId", districtId) // previously selected state ID
-            intent.putExtra("phoneNo", phoneNo)
             intent.putExtra("districtName", districtName)
-            intent.putExtra("year", year)
+            intent.putExtra("nameOfAgency", fssai)
             startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
         }
     }
@@ -161,14 +161,13 @@ class DairyPlantVisitNDDActivity : BaseActivity<ActivityDairyPlantVisitNddBindin
             // Retrieve the data passed from FilterStateActivity
             districtId = data?.getIntExtra("districtId", 0)!!
             stateId = data.getIntExtra("stateId", 0)
-            phoneNo = data.getStringExtra("etPhoneno").toString()
-            year = data.getStringExtra("year").toString()
+            fssai = data.getStringExtra("nameOfAgency").toString()
             districtName = data.getStringExtra("districtName").toString()
             //Need to add year also
             // Log the data
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,fssai)
             Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $year")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $fssai")
         }
     }
 
@@ -192,7 +191,7 @@ class DairyPlantVisitNDDActivity : BaseActivity<ActivityDairyPlantVisitNddBindin
                             loading = false
                             if (currentPage < totalPage) {
                                 //Call API here
-                                componentBListApiCall(paginate = true, loader = true,districtId,phoneNo,year)
+                                componentBListApiCall(paginate = true, loader = true,districtId,fssai)
                             }
                         }
                     }
@@ -200,7 +199,7 @@ class DairyPlantVisitNDDActivity : BaseActivity<ActivityDairyPlantVisitNddBindin
             }
         }
 
-    private fun componentBListApiCall(paginate: Boolean, loader: Boolean,district:Int,phone:String,year:String) {
+    private fun componentBListApiCall(paginate: Boolean, loader: Boolean,district:Int,fssai:String) {
         if (paginate) {
             currentPage++
         }
@@ -221,6 +220,8 @@ class DairyPlantVisitNDDActivity : BaseActivity<ActivityDairyPlantVisitNddBindin
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.user_id,
+                district,
+                fssai,
                 10,
                 currentPage
             )
@@ -229,7 +230,7 @@ class DairyPlantVisitNDDActivity : BaseActivity<ActivityDairyPlantVisitNddBindin
     override fun onResume() {
         super.onResume()
         currentPage=1
-        componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+        componentBListApiCall(paginate = false, loader = true,districtId,fssai)
     }
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         viewModel.getDairyPlantAdd(

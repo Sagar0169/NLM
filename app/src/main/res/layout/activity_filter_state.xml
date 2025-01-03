@@ -63,10 +63,38 @@
             android:background="@drawable/employee_home_bg"
             android:orientation="vertical"
             android:padding="@dimen/dp_20">
+
+            <TextView
+                android:id="@+id/tvTitleFssaiNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensans_semibold"
+                android:text="FSSAI Lic.No"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/etFssaiNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/opensans_regular"
+                android:inputType="numberDecimal"
+                android:maxLength="50"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/tvTitileNameOfDCS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
                 android:fontFamily="@font/opensans_semibold"
                 android:text="Name of the DCS/MPP"
                 android:textColor="@color/black"
@@ -268,7 +296,29 @@
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
+            <TextView
+                android:id="@+id/tvTitleDateOfInspection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/inter_medium"
+                android:text="Date of Inspection"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
 
+            <TextView
+                android:id="@+id/tvDateOfInspection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                android:background="@drawable/curve_all_corner_grey"
+                android:fontFamily="@font/inter_regular"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:paddingVertical="@dimen/dp_5"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/tvTitleNDD"
@@ -276,6 +326,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/opensans_semibold"
                 android:text="Location"
+                android:layout_marginTop="@dimen/dp_7"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
@@ -360,34 +411,7 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/tvDateOfInspection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Date of Inspection"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16"
-                android:visibility="gone" />
 
-            <EditText
-                android:id="@+id/etDateOfInspection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_grey"
-                android:fontFamily="@font/opensans_regular"
-                android:hint=""
-                android:inputType="textPersonName"
-                android:maxLength="50"
-                android:paddingHorizontal="@dimen/dp_10"
-                android:paddingVertical="@dimen/dp_5"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey"
-                android:textSize="@dimen/sp_16"
-                android:visibility="gone" />
             <TextView
                 android:id="@+id/tvLiquidNitrogen"
                 android:layout_width="wrap_content"
