@@ -312,6 +312,7 @@ data class ResultFormat6(
     val quantity_of_seed_class: String? = null,
     val quantity_of_seed_variety: String? = null,
     val source_of_seed: String? = null,
+    val district_name: String? = null,
     val state_code: Int? = null,
     val status: Int? = null,
     val target_achievement_class: String? = null,

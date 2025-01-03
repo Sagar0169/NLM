@@ -1091,6 +1091,10 @@ class AddNlmFpFromNonForestActivity(
                                 ia_document = null
                             )
                         )
+                        DocumentList.size.minus(1).let {
+                            addDocumentAdapter?.notifyItemInserted(it)
+                            dialog.dismiss()
+                        }
                     } else {
                         viewDocumentList.add(
                             ImplementingAgencyDocument(
@@ -1101,21 +1105,6 @@ class AddNlmFpFromNonForestActivity(
                                 nlm_document = null
                             )
                         )
-                    }
-
-
-                    if (getPreferenceOfScheme(
-                            this,
-                            AppConstants.SCHEME,
-                            Result::class.java
-                        )?.role_id == 8
-                    ) {
-                        DocumentList.size.minus(1).let {
-                            addDocumentAdapter?.notifyItemInserted(it)
-                            dialog.dismiss()
-//
-                        }
-                    } else {
                         viewDocumentList.size.minus(1).let {
                             addDocumentIAAdapter?.notifyItemInserted(it)
                             dialog.dismiss()
@@ -1187,8 +1176,6 @@ class AddNlmFpFromNonForestActivity(
 //        bindingDialog.btnDelete.setOnClickListener {
 //            dialog.dismiss()
 //        }
-//
-//
 //        bindingDialog.tvSubmit.setOnClickListener {
 //            if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
 //                if (selectedItem != null) {
@@ -1217,7 +1204,6 @@ class AddNlmFpFromNonForestActivity(
 //                                    id = selectedItem.id,
 //                                )
 //                        }
-//
 //                        addDocumentAdapter?.notifyItemChanged(position)
 //                        dialog.dismiss()
 //                    }
@@ -1249,8 +1235,6 @@ class AddNlmFpFromNonForestActivity(
 //                            )
 //                        )
 //                    }
-//
-//
 //                    if (getPreferenceOfScheme(
 //                            this,
 //                            AppConstants.SCHEME,
@@ -1309,7 +1293,6 @@ class AddNlmFpFromNonForestActivity(
 //                    data.data?.let { startCrop(it) }
 //                    fetchLocation()
                 }
-
                 PICK_IMAGE -> {
                     val selectedImageUri = data?.data
                     if (selectedImageUri != null) {

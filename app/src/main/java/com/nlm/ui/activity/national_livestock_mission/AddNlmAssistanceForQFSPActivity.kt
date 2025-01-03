@@ -251,6 +251,11 @@ class AddNlmAssistanceForQFSPActivity :
             mBinding?.tvQuantityOfFodder?.isEnabled=false
             mBinding?.tvQuantityClass?.isEnabled=false
             mBinding?.tvTargetClass?.isEnabled=false
+            mBinding?.rbMentally?.isEnabled=false
+            mBinding?.rbMentallyYes?.isEnabled=false
+            mBinding?.rbMentallyNo?.isEnabled=false
+            mBinding?.tvAddMore?.hideView()
+            mBinding?.tvAddDocs?.hideView()
             ViewEditApi(viewEdit)
         }
         else if(viewEdit=="edit")
@@ -319,7 +324,6 @@ class AddNlmAssistanceForQFSPActivity :
             else -> return
         }
 
-        // Set up the adapter
         stateAdapter = BottomSheetAdapter(this, selectedList) { selectedItem, id ->
             // Handle item click
             selectedTextView.text = selectedItem
@@ -523,6 +527,13 @@ class AddNlmAssistanceForQFSPActivity :
                             mBinding?.etQuantityOfSeedVariety?.setText(userResponseModel._result.quantity_of_seed_variety)
                             mBinding?.etTargetAchievementVariety?.setText(userResponseModel._result.target_achievement_variety)
                             mBinding?.etSourceOfSeed?.setText(userResponseModel._result.source_of_seed)
+                            mBinding?.tvDistrict?.text=userResponseModel._result.district_name
+                             Log.d("TESTT","${userResponseModel._result.effective_seed}")
+                            when (userResponseModel._result.effective_seed) {
+                                1.0 -> mBinding?.rbMentallyYes?.isChecked = true
+                                0.0 -> mBinding?.rbMentallyNo?.isChecked = true
+                            }
+
                             val assistanceList = userResponseModel._result.assistance_for_qfsp_cost_assistance
 
                             if (!assistanceList.isNullOrEmpty() && assistanceList.size > 0) {
@@ -885,13 +896,26 @@ class AddNlmAssistanceForQFSPActivity :
         }
         val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
         if (isSupported) {
+            val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
             when (fileExtension) {
                 "pdf" -> {
-//                    bindingDialog.ivPic.let {
-//                        Glide.with(context).load(R.drawable.ic_pdf).into(
-//                            it
-//                        )
-//                    }
+                    val downloader = AndroidDownloader(context)
+                    bindingDialog.ivPic.let {
+                        Glide.with(context).load(R.drawable.ic_pdf).into(
+                            it
+                        )
+                    }
+                    bindingDialog.etDoc.setOnClickListener {
+                        if (!UploadedDocumentName.isNullOrEmpty()) {
+                            downloader.downloadFile(url, UploadedDocumentName!!)
+                            mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                            dialog.dismiss()
+                        }
+                        else{
+                            mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                            dialog.dismiss()
+                        }
+                    }
                 }
                 else -> {
                     bindingDialog.ivPic.setOnClickListener {
@@ -958,8 +982,8 @@ class AddNlmAssistanceForQFSPActivity :
                             if (position != null) {
                                 DocumentList[position] = ImplementingAgencyDocument(
                                     description = bindingDialog.etDescription.text.toString(),
-                                    ia_document = UploadedDocumentName,
-                                    nlm_document = null,
+                                    ia_document = null,
+                                    nlm_document = UploadedDocumentName,
                                     assistance_for_qfsp_id = selectedItem.assistance_for_qfsp_id,
                                     id = selectedItem.id,
                                 )
@@ -1119,6 +1143,7 @@ class AddNlmAssistanceForQFSPActivity :
         AddDocumentDialog(this,selectedItem,position)
     }
     private fun saveDataApi(isDraft: Int?) {
+        Log.d("SELECTEDVALUE",selectedValue.toString())
         if (hasLocationPermissions()) {
             val intent = Intent(this@AddNlmAssistanceForQFSPActivity, LocationService::class.java)
             startService(intent)
