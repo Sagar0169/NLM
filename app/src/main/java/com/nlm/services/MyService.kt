@@ -16,6 +16,8 @@ import com.nlm.model.AddMilkProductMarketingRequest
 import com.nlm.model.AddMilkProductMarketingResponse
 import com.nlm.model.AddNlmEdpRequest
 import com.nlm.model.AddNlmEdpResponse
+import com.nlm.model.AddProductivityEnchancementRequest
+import com.nlm.model.AddProductivityEnchancementResponse
 import com.nlm.model.AddStateCenterLabRequest
 import com.nlm.model.AddStateCenterLabResponse
 import com.nlm.model.ArtificialInseminationAddRequest
@@ -189,6 +191,7 @@ const val MILK_PROCESSING_ADD = "NationalDairyDevelopment/milkProcessingAddEdit"
 const val MILK_PRODUCT_MARKETING_LIST = "NationalDairyDevelopment/milkProductMarketingList"
 const val MILK_PRODUCT_MARKETING_ADD = "NationalDairyDevelopment/milkProductMarketingAddEdit"
 const val PRODUCTIVITY_ENHANCEMENT_SERVICES_LIST = "NationalDairyDevelopment/productivityEnhancementServicesList"
+const val PRODUCTIVITY_ENHANCEMENT_SERVICES_ADD = "NationalDairyDevelopment/productivityEnhancementServicesAddEdit"
 
 
 
@@ -400,4 +403,7 @@ interface MyService {
 
     @POST(PRODUCTIVITY_ENHANCEMENT_SERVICES_LIST)
     suspend fun productivityEnhancementServicesList(@Body request: NDDProductivityEnhancementServicesListRequest): Response<NDDProductivityEnhancementServicesListResponse>
+
+    @POST(PRODUCTIVITY_ENHANCEMENT_SERVICES_ADD)
+    suspend fun productivityEnhancementServicesAdd(@Body request: AddProductivityEnchancementRequest): Response<AddProductivityEnchancementResponse>
 }

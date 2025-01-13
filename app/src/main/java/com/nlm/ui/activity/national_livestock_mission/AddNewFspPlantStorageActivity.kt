@@ -518,6 +518,38 @@ class AddNewFspPlantStorageActivity(
                 Result::class.java
             )?.role_id == 24
         ){
+            if (state == "Please Select") {
+                mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
+                return
+            }
+            if (district == "Please Select") {
+                mBinding?.clParent?.let { showSnackbar(it,"District Name is required") }
+                return
+            }
+            if (iaName.isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Name is required") }
+                return
+            }
+            if (mBinding?.etLoc?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Location is required") }
+                return
+            }
+            if (mBinding?.etPurposeOfEst?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Purpose of establishment is required") }
+                return
+            }
+            if (mBinding?.etCapacityofPlant?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Capacity of Plant is required") }
+                return
+            }
+            if (mBinding?.etMachinery?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Machinery/Equipment available is required") }
+                return
+            }
+            if (mBinding?.etTechnical?.text.toString().isEmpty()) {
+                mBinding?.clParent?.let { showSnackbar(it,"Technical Expertise is required") }
+                return
+            }
             if (hasLocationPermissions()) {
                 val intent = Intent(this@AddNewFspPlantStorageActivity, LocationService::class.java)
                 startService(intent)
@@ -573,38 +605,7 @@ class AddNewFspPlantStorageActivity(
             else {
                 showLocationAlertDialog()
             }
-            if (state == "Please Select") {
-                mBinding?.clParent?.let { showSnackbar(it,"State Name is required") }
-                return
-            }
-            if (district == "Please Select") {
-                mBinding?.clParent?.let { showSnackbar(it,"District Name is required") }
-                return
-            }
-            if (iaName.isEmpty()) {
-                mBinding?.clParent?.let { showSnackbar(it,"Name is required") }
-                return
-            }
-            if (mBinding?.etLoc?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let { showSnackbar(it,"Location is required") }
-                return
-            }
-            if (mBinding?.etPurposeOfEst?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let { showSnackbar(it,"Purpose of establishment is required") }
-                return
-            }
-            if (mBinding?.etCapacityofPlant?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let { showSnackbar(it,"Capacity of Plant is required") }
-                return
-            }
-            if (mBinding?.etMachinery?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let { showSnackbar(it,"Machinery/Equipment available is required") }
-                return
-            }
-            if (mBinding?.etTechnical?.text.toString().isEmpty()) {
-                mBinding?.clParent?.let { showSnackbar(it,"Technical Expertise is required") }
-                return
-            }
+
 
 
         }

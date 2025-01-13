@@ -36,8 +36,7 @@ class FspNonPlantStorageNLMAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FspNonPlantStorageNLMAdapterViewHolder
-    {
+    ): FspNonPlantStorageNLMAdapterViewHolder {
 
         val binding = ItemFspNonPlantNlmBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -46,8 +45,9 @@ class FspNonPlantStorageNLMAdapter(
 
     }
 
-    override fun onBindViewHolder(holder: FspNonPlantStorageNLMAdapterViewHolder
-                                  , @SuppressLint("RecyclerView") position: Int) {
+    override fun onBindViewHolder(
+        holder: FspNonPlantStorageNLMAdapterViewHolder, @SuppressLint("RecyclerView") position: Int
+    ) {
         val currentItem = programmeList[position]
         if (viewEdit == "view"
         ) {
@@ -58,8 +58,8 @@ class FspNonPlantStorageNLMAdapter(
             holder.binding.etEstimated.isEnabled = false
             holder.binding.etConsumer.isEnabled = false
             holder.binding.tvAgency.isEnabled = false
-            holder.binding.btnDelete.visibility= View.GONE
-            holder.binding.btnEdit.visibility= View.GONE
+            holder.binding.btnDelete.visibility = View.GONE
+            holder.binding.btnEdit.visibility = View.GONE
         } else if (viewEdit == "edit") {
             holder.binding.btnEdit.showView()
         }
@@ -70,14 +70,12 @@ class FspNonPlantStorageNLMAdapter(
         holder.binding.etEstimated.isEnabled = false
         holder.binding.etConsumer.isEnabled = false
         holder.binding.tvAgency.isEnabled = false
-if (currentItem.district==null)
-{
-    holder.binding.tvDistrict.text = currentItem.district_name
-
-
-}
-        else{
-    holder.binding.tvDistrict.text = currentItem.district.name
+        if (currentItem.district == null) {
+            Log.d("Tagg","1")
+            holder.binding.tvDistrict.text = currentItem.district_name
+        } else {
+            Log.d("Tagg","2")
+            holder.binding.tvDistrict.text = currentItem.district.name
         }
 
         holder.binding.etBlock.setText(currentItem.block_name)
@@ -87,7 +85,7 @@ if (currentItem.district==null)
         holder.binding.etConsumer.setText(currentItem.consumer_fodder)
         holder.binding.tvAgency.text = currentItem.agency_involved
 
-        holder.binding.btnEdit.setOnClickListener{
+        holder.binding.btnEdit.setOnClickListener {
             callBackEdit.onClickItem(
                 FpFromNonForestFilledByNlmTeam(
                     currentItem.id,
@@ -101,7 +99,8 @@ if (currentItem.district==null)
                     currentItem.consumer_fodder,
                     currentItem.agency_involved,
                     currentItem.fp_from_non_forest_id
-                ),position,2)
+                ), position, 2
+            )
         }
         // Delete row
         holder.binding.btnDelete.setOnClickListener {
@@ -115,7 +114,7 @@ if (currentItem.district==null)
                     object :
                         DialogCallback {
                         override fun onYes() {
-                            callBackDeleteFSPAtId.onClickItemDelete(currentItem.id,position)
+                            callBackDeleteFSPAtId.onClickItemDelete(currentItem.id, position)
                         }
                     },
                     context.getString(R.string.are_you_sure_want_to_delete_your_post)
@@ -144,7 +143,10 @@ if (currentItem.district==null)
             // Notify about range changes to avoid index mismatches
             notifyItemRangeChanged(position, programmeList.size)
         } else {
-            Log.e("Error", "Invalid index: $position for programmeList of size ${programmeList.size}")
+            Log.e(
+                "Error",
+                "Invalid index: $position for programmeList of size ${programmeList.size}"
+            )
         }
     }
 

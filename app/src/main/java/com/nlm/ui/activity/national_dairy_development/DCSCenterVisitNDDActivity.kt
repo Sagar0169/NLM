@@ -42,13 +42,12 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
     var stateId: Int = 0
     var districtId: Int = 0
     var districtName: String = ""
-    var phoneNo: String = ""
-    var year: String = ""
+    var fssai: String = ""
+    var nameOfAgency: String = ""
     private lateinit var nlmComponentBAdapter: DCSCenterVisitAdapter
     private lateinit var nlmComponentBList: ArrayList<NDDDcsBmcListData>
     override val layoutId: Int
         get() = R.layout.activity_dcs_center_visit_ndd
-
 
 
     override fun initView() {
@@ -66,10 +65,11 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
             startActivity(intent)
         }
     }
+
     private fun swipeForRefreshAscad() {
         mBinding?.srlAscad?.setOnRefreshListener {
             currentPage = 1
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true, districtId,nameOfAgency,fssai)
             mBinding?.srlAscad?.isRefreshing = false
         }
     }
@@ -122,14 +122,12 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
             if (userResponseModel.statuscode == 401) {
                 Utility.logout(this)
             }
-            if (userResponseModel!=null)
-            {
-                if(userResponseModel._resultflag==0){
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
 
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
 
-                }
-                else{
+                } else {
 
                     itemPosition?.let { it1 -> nlmComponentBAdapter.onDeleteButtonClick(it1) }
 //                    rSPLABListAdapter?.notifyDataSetChanged()
@@ -149,12 +147,12 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
         fun filter(view: View) {
             val intent =
                 Intent(this@DCSCenterVisitNDDActivity, FilterStateActivity::class.java)
-            intent.putExtra("isFrom", 40)
-            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("isFrom", 47)
+            intent.putExtra("stateId", stateId) // previously selected state ID
             intent.putExtra("districtId", districtId) // previously selected state ID
-            intent.putExtra("phoneNo", phoneNo)
             intent.putExtra("districtName", districtName)
-            intent.putExtra("year", year)
+            intent.putExtra("nameOfAgency", nameOfAgency)
+            intent.putExtra("fssai", fssai)
             startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
         }
     }
@@ -167,14 +165,15 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
             // Retrieve the data passed from FilterStateActivity
             districtId = data?.getIntExtra("districtId", 0)!!
             stateId = data.getIntExtra("stateId", 0)
-            phoneNo = data.getStringExtra("etPhoneno").toString()
-            year = data.getStringExtra("year").toString()
+            nameOfAgency = data.getStringExtra("nameOfAgency").toString()
+            fssai = data.getStringExtra("fssai").toString()
             districtName = data.getStringExtra("districtName").toString()
             //Need to add year also
             // Log the data
-            componentBListApiCall(paginate = false, loader = true, districtId, phoneNo, year)
-            Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $year")
+            componentBListApiCall(paginate = false, loader = true, districtId, nameOfAgency, fssai)
+//            Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $nameOfAgency")
+//            Log.d("FilterResult", "Received data from FilterStateActivity: $fssai")
         }
     }
 
@@ -203,8 +202,8 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
                                     paginate = true,
                                     loader = true,
                                     districtId,
-                                    phoneNo,
-                                    year
+                                    nameOfAgency,
+                                    fssai
                                 )
                             }
                         }
@@ -217,8 +216,8 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
         paginate: Boolean,
         loader: Boolean,
         district: Int,
-        phone: String,
-        year: String
+        nameOfAgency: String,
+        fssai: String
     ) {
         if (paginate) {
             currentPage++
@@ -240,6 +239,9 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.user_id,
+                district,
+                fssai,
+                nameOfAgency,
                 10,
                 currentPage
             )
@@ -249,14 +251,14 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
     override fun onResume() {
         super.onResume()
         currentPage = 1
-        componentBListApiCall(paginate = false, loader = true, districtId, phoneNo, year)
+        componentBListApiCall(paginate = false, loader = true, districtId, nameOfAgency, fssai)
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         viewModel.getDcsBmcAdd(
             this, true,
             AddDcsBmcRequest(
-                id= ID,
+                id = ID,
                 role_id = getPreferenceOfScheme(
                     this,
                     AppConstants.SCHEME,
@@ -276,5 +278,6 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
             )
         )
         itemPosition = position
-        nlmComponentBAdapter?.notifyDataSetChanged()    }
+        nlmComponentBAdapter?.notifyDataSetChanged()
+    }
 }

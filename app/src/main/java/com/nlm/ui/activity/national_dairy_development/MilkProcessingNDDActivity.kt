@@ -42,8 +42,8 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
     var stateId: Int = 0
     var districtId: Int = 0
     var districtName: String = ""
-    var phoneNo: String = ""
-    var year: String = ""
+    var nameOfMilkUnion: String = ""
+    var processingPlant: String = ""
     private lateinit var nlmComponentBAdapter: MilkProcessingAdapter
     private lateinit var nlmComponentBList: ArrayList<NDDMilkProcessingListData>
 
@@ -69,7 +69,7 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
     private fun swipeForRefreshAscad() {
         mBinding?.srlAscad?.setOnRefreshListener {
             currentPage = 1
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,nameOfMilkUnion,processingPlant)
             mBinding?.srlAscad?.isRefreshing = false
         }
     }
@@ -148,12 +148,12 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
         fun filter(view: View) {
             val intent =
                 Intent(this@MilkProcessingNDDActivity, FilterStateActivity::class.java)
-            intent.putExtra("isFrom", 40)
-            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("isFrom", 49)
+            intent.putExtra("stateId", stateId) // previously selected state ID
             intent.putExtra("districtId", districtId) // previously selected state ID
-            intent.putExtra("phoneNo", phoneNo)
             intent.putExtra("districtName", districtName)
-            intent.putExtra("year", year)
+            intent.putExtra("nameOfAgency", nameOfMilkUnion)
+            intent.putExtra("fssai", processingPlant)
             startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
         }
     }
@@ -166,14 +166,15 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
             // Retrieve the data passed from FilterStateActivity
             districtId = data?.getIntExtra("districtId", 0)!!
             stateId = data.getIntExtra("stateId", 0)
-            phoneNo = data.getStringExtra("etPhoneno").toString()
-            year = data.getStringExtra("year").toString()
+            nameOfMilkUnion = data.getStringExtra("nameOfAgency").toString()
+            processingPlant = data.getStringExtra("fssai").toString()
             districtName = data.getStringExtra("districtName").toString()
-            //Need to add year also
+            //Need to add processingPlant also
             // Log the data
-            componentBListApiCall(paginate = false, loader = true, districtId, phoneNo, year)
+            componentBListApiCall(paginate = false, loader = true, districtId, nameOfMilkUnion, processingPlant)
             Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $year")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $nameOfMilkUnion")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $processingPlant")
         }
     }
 
@@ -202,8 +203,8 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
                                     paginate = true,
                                     loader = true,
                                     districtId,
-                                    phoneNo,
-                                    year
+                                    nameOfMilkUnion,
+                                    processingPlant
                                 )
                             }
                         }
@@ -216,8 +217,8 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
         paginate: Boolean,
         loader: Boolean,
         district: Int,
-        phone: String,
-        year: String
+        nameOfMilk: String,
+        processingPlant: String
     ) {
         if (paginate) {
             currentPage++
@@ -239,6 +240,9 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.user_id,
+                district,
+                nameOfMilk,
+                processingPlant,
                 10,
                 currentPage
             )
@@ -249,7 +253,7 @@ class MilkProcessingNDDActivity : BaseActivity<ActivityMilkProcessingNddBinding>
         super.onResume()
         currentPage = 1
 
-        componentBListApiCall(paginate = false, loader = true, districtId, phoneNo, year)
+        componentBListApiCall(paginate = false, loader = true, districtId, nameOfMilkUnion, processingPlant)
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {

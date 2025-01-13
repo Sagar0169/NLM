@@ -16,6 +16,8 @@ import com.nlm.model.AddMilkProductMarketingRequest
 import com.nlm.model.AddMilkProductMarketingResponse
 import com.nlm.model.AddNlmEdpRequest
 import com.nlm.model.AddNlmEdpResponse
+import com.nlm.model.AddProductivityEnchancementRequest
+import com.nlm.model.AddProductivityEnchancementResponse
 import com.nlm.model.AddStateCenterLabRequest
 import com.nlm.model.AddStateCenterLabResponse
 import com.nlm.model.ArtificialInseminationAddRequest
@@ -373,6 +375,10 @@ object Repository {
     }
     suspend fun productivityEnhancementServicesList(request: NDDProductivityEnhancementServicesListRequest): Response<NDDProductivityEnhancementServicesListResponse> {
         return api.productivityEnhancementServicesList(request)
+    }
+
+    suspend fun productivityEnhancementServicesAdd(request: AddProductivityEnchancementRequest): Response<AddProductivityEnchancementResponse> {
+        return api.productivityEnhancementServicesAdd(request)
     }
 }
 

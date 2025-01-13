@@ -42,7 +42,7 @@ class StateCenterLabVisitNDDActivity : BaseActivity<ActivityStateCenterLabVisitN
     var stateId: Int = 0
     var districtId: Int = 0
     var districtName: String = ""
-    var phoneNo: String = ""
+    var location: String = ""
     var year: String = ""
     private lateinit var nlmComponentBAdapter: StateCenterLabVisitAdapter
     private lateinit var nlmComponentBList: ArrayList<NDDStateCenterLabListData>
@@ -70,7 +70,7 @@ class StateCenterLabVisitNDDActivity : BaseActivity<ActivityStateCenterLabVisitN
     private fun swipeForRefreshAscad() {
         mBinding?.srlAscad?.setOnRefreshListener {
             currentPage = 1
-            componentBListApiCall(paginate = false, loader = true,districtId,phoneNo,year)
+            componentBListApiCall(paginate = false, loader = true,districtId,location,year)
             mBinding?.srlAscad?.isRefreshing = false
         }
     }
@@ -149,12 +149,11 @@ class StateCenterLabVisitNDDActivity : BaseActivity<ActivityStateCenterLabVisitN
         fun filter(view: View) {
             val intent =
                 Intent(this@StateCenterLabVisitNDDActivity, FilterStateActivity::class.java)
-            intent.putExtra("isFrom", 40)
-            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("isFrom", 48)
+            intent.putExtra("stateId", stateId) // previously selected state ID
             intent.putExtra("districtId", districtId) // previously selected state ID
-            intent.putExtra("phoneNo", phoneNo)
             intent.putExtra("districtName", districtName)
-            intent.putExtra("year", year)
+            intent.putExtra("nameOfAgency", location)
             startActivityForResult(intent, NationalLiveStockMissionIAList.FILTER_REQUEST_CODE)
         }
     }
@@ -167,14 +166,13 @@ class StateCenterLabVisitNDDActivity : BaseActivity<ActivityStateCenterLabVisitN
             // Retrieve the data passed from FilterStateActivity
             districtId = data?.getIntExtra("districtId", 0)!!
             stateId = data.getIntExtra("stateId", 0)
-            phoneNo = data.getStringExtra("etPhoneno").toString()
-            year = data.getStringExtra("year").toString()
+            location = data.getStringExtra("nameOfAgency").toString()
             districtName = data.getStringExtra("districtName").toString()
             //Need to add year also
             // Log the data
-            componentBListApiCall(paginate = false, loader = true, districtId, phoneNo, year)
+            componentBListApiCall(paginate = false, loader = true, districtId, location, year)
             Log.d("FilterResult", "Received data from FilterStateActivity: $districtId")
-            Log.d("FilterResult", "Received data from FilterStateActivity: $year")
+            Log.d("FilterResult", "Received data from FilterStateActivity: $location")
         }
     }
 
@@ -203,7 +201,7 @@ class StateCenterLabVisitNDDActivity : BaseActivity<ActivityStateCenterLabVisitN
                                     paginate = true,
                                     loader = true,
                                     districtId,
-                                    phoneNo,
+                                    location,
                                     year
                                 )
                             }
@@ -240,6 +238,7 @@ class StateCenterLabVisitNDDActivity : BaseActivity<ActivityStateCenterLabVisitN
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.user_id,
+                location_state_central_lab = location,
                 10,
                 currentPage
             )
@@ -250,7 +249,7 @@ class StateCenterLabVisitNDDActivity : BaseActivity<ActivityStateCenterLabVisitN
         super.onResume()
         currentPage = 1
 
-        componentBListApiCall(paginate = false, loader = true, districtId, phoneNo, year)
+        componentBListApiCall(paginate = false, loader = true, districtId, location, year)
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {

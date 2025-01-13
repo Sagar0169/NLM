@@ -60,6 +60,7 @@ import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.FspNonPlantStorageNLMAdapter
 import com.nlm.ui.adapter.FspPlantStorageNLMAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
+import com.nlm.ui.adapter.RSPSupportingDocumentIAAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -92,6 +93,7 @@ class AddNlmFpFromNonForestActivity(
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var stateId: Int? = null // Store selected state
     private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
+    private var addDocumentIAAdapter: RSPSupportingDocumentIAAdapter? = null
     private var districtIdIA: Int? = null // Store selected state
     private var districtIdNlm: Int? = null // Store selected state
     private var layoutManager: LinearLayoutManager? = null
@@ -99,7 +101,7 @@ class AddNlmFpFromNonForestActivity(
     private var totalPage = 1
     private var TableName: String? = null
     private var savedAsDraftClick: OnBackSaveAsDraft? = null
-    private var Model:String? = null // Store selected state
+    private var Model: String? = null // Store selected state
     private var stateList = ArrayList<ResultGetDropDown>()
     private var districtList = ArrayList<ResultGetDropDown>()
     private var loading = true
@@ -112,7 +114,7 @@ class AddNlmFpFromNonForestActivity(
     private var UploadedDocumentName: String? = null
     private var DialogDocName: TextView? = null
     private var DocumentName: String? = null
-    private var uploadData : ImageView?=null
+    private var uploadData: ImageView? = null
     private var chooseDocName: String? = null
     var body: MultipartBody.Part? = null
     private lateinit var plantStorageList: ArrayList<FpFromNonForestFilledByNlmTeam>
@@ -124,8 +126,8 @@ class AddNlmFpFromNonForestActivity(
     private var isSubmitted: Boolean = false
     private var savedAsEdit: Boolean = false
     private var savedAsDraft: Boolean = false
-    private var latitude:Double?=null
-    private var longitude:Double?=null
+    private var latitude: Double? = null
+    private var longitude: Double? = null
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent?.let {
@@ -190,11 +192,11 @@ class AddNlmFpFromNonForestActivity(
         }
 
         fun district(view: View) {
-            showBottomSheetDialog2("District",1,null)
+            showBottomSheetDialog2("District", 1, null)
         }
 
         fun districtNLM(view: View) {
-            showBottomSheetDialog2("District",2,null)
+            showBottomSheetDialog2("District", 2, null)
         }
 
         fun addDocDialog(view: View) {
@@ -450,28 +452,33 @@ class AddNlmFpFromNonForestActivity(
         mBinding?.rvSupportDocumentNlm?.layoutManager = LinearLayoutManager(this)
     }
 
+
     private fun iaAdapter() {
-        addDocumentAdapter = RSPSupportingDocumentAdapter(
+        addDocumentIAAdapter = RSPSupportingDocumentIAAdapter(
             this,
             viewDocumentList,
             viewEdit,
             this,
             this
         )
-        mBinding?.ShowDocumentRv?.adapter = addDocumentAdapter
+        mBinding?.ShowDocumentRv?.adapter = addDocumentIAAdapter
         mBinding?.ShowDocumentRv?.layoutManager = LinearLayoutManager(this)
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+        if(mBinding?.tvDistrictNlm?.text!="Please Select"||mBinding?.tvDistrictIa?.text!="Please Select"){
         if (hasLocationPermissions()) {
             val intent = Intent(this@AddNlmFpFromNonForestActivity, LocationService::class.java)
             startService(intent)
             lifecycleScope.launch {
                 delay(1000) // Delay for 2 seconds
-                if(latitude!=null&&longitude!=null)
-                {
-                    if (getPreferenceOfScheme(this@AddNlmFpFromNonForestActivity, AppConstants.SCHEME, Result::class.java)?.role_id==24)
-                    {
+                if (latitude != null && longitude != null) {
+                    if (getPreferenceOfScheme(
+                            this@AddNlmFpFromNonForestActivity,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.role_id == 24
+                    ) {
                         viewModel.getNlmFpFromNonForestAddEdit(
                             this@AddNlmFpFromNonForestActivity, true,
                             NlmFpFromNonForestAddRequest(
@@ -499,21 +506,21 @@ class AddNlmFpFromNonForestActivity(
                                     mBinding?.etImplementingAgencyNlm?.text.toString()
                                 },
                                 location = mBinding?.etLocation?.text.toString(),
-                                area_covered = mBinding?.etAreaCovered?.text.toString().toDoubleOrNull(),
+                                area_covered = mBinding?.etAreaCovered?.text.toString()
+                                    .toDoubleOrNull(),
                                 type_of_land = mBinding?.tvLand?.text.toString(),
                                 type_of_agency = mBinding?.tvTypeOfAgency?.text.toString(),
                                 variety_of_fodder = mBinding?.etVarietyOfFodder?.text.toString(),
                                 scheme_guidelines = mBinding?.etSchemeGuidelines?.text.toString(),
                                 grant_received = mBinding?.etGrantReceived?.text.toString(),
                                 target_achievement = mBinding?.etTarget?.text.toString(),
-                                fp_from_non_forest_document= totalListDocument,
-                                fp_from_non_forest_filled_by_nlm_team= plantStorageList,
+                                fp_from_non_forest_document = totalListDocument,
+                                fp_from_non_forest_filled_by_nlm_team = plantStorageList,
                                 lattitude_ia = latitude,
                                 longitude_ia = longitude
                             )
                         )
-                    }
-                    else{
+                    } else {
                         viewModel.getNlmFpFromNonForestAddEdit(
                             this@AddNlmFpFromNonForestActivity, true,
                             NlmFpFromNonForestAddRequest(
@@ -541,27 +548,30 @@ class AddNlmFpFromNonForestActivity(
                                     mBinding?.etImplementingAgencyNlm?.text.toString()
                                 },
                                 location = mBinding?.etLocation?.text.toString(),
-                                area_covered = mBinding?.etAreaCovered?.text.toString().toDoubleOrNull(),
+                                area_covered = mBinding?.etAreaCovered?.text.toString()
+                                    .toDoubleOrNull(),
                                 type_of_land = mBinding?.tvLand?.text.toString(),
                                 type_of_agency = mBinding?.tvTypeOfAgency?.text.toString(),
                                 variety_of_fodder = mBinding?.etVarietyOfFodder?.text.toString(),
                                 scheme_guidelines = mBinding?.etSchemeGuidelines?.text.toString(),
                                 grant_received = mBinding?.etGrantReceived?.text.toString(),
                                 target_achievement = mBinding?.etTarget?.text.toString(),
-                                fp_from_non_forest_document= totalListDocument,
-                                fp_from_non_forest_filled_by_nlm_team= plantStorageList,
+                                fp_from_non_forest_document = totalListDocument,
+                                fp_from_non_forest_filled_by_nlm_team = plantStorageList,
                                 lattitude_nlm = latitude,
                                 longitude_nlm = longitude
                             )
                         )
                     }
+                } else {
+                    showSnackbar(mBinding?.clParent!!, "No location fetched")
                 }
-                else{
-                    showSnackbar(mBinding?.clParent!!,"No location fetched")
-                }
-            }}
-        else {
+            }
+        } else {
             showLocationAlertDialog()
+        }
+        }else{
+            showSnackbar(mBinding?.clParent!!, "Please Select District")
         }
     }
 
@@ -597,9 +607,19 @@ class AddNlmFpFromNonForestActivity(
         bindingDialog.tvAgency.setOnClickListener {
             showBottomSheetDialogNonDis("agency", bindingDialog.tvAgency)
         }
-        bindingDialog.tvDistrict.setOnClickListener { showBottomSheetDialog2("District",3,bindingDialog.tvDistrict) }
+        bindingDialog.tvDistrict.setOnClickListener {
+            showBottomSheetDialog2(
+                "District",
+                3,
+                bindingDialog.tvDistrict
+            )
+        }
         if (selectedItem != null && isFrom == 2) {
-            bindingDialog.tvDistrict.text = selectedItem.district?.name
+            bindingDialog.tvDistrict.text = if (selectedItem.district_name.isNullOrEmpty()) {
+                selectedItem.district?.name
+            } else {
+                selectedItem.district_name
+            }
             bindingDialog.etBlock.setText(selectedItem.block_name)
             bindingDialog.etVillage.setText(selectedItem.village_name)
             bindingDialog.etArea.setText(selectedItem.area_covered)
@@ -618,9 +638,8 @@ class AddNlmFpFromNonForestActivity(
             ) {
                 if (selectedItem != null) {
                     if (position != null) {
-                        if (districtIdNlm==null)
-                        {
-                            districtIdNlm=selectedItem.district_code
+                        if (districtIdNlm == null) {
+                            districtIdNlm = selectedItem.district_code
                         }
                         plantStorageList[position] =
                             FpFromNonForestFilledByNlmTeam(
@@ -673,7 +692,8 @@ class AddNlmFpFromNonForestActivity(
         }
         dialog.show()
     }
-    private fun showBottomSheetDialog2(type: String,isFrom: Int,TextView:TextView?) {
+
+    private fun showBottomSheetDialog2(type: String, isFrom: Int, TextView: TextView?) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
         view.layoutParams = ViewGroup.LayoutParams(
@@ -691,27 +711,25 @@ class AddNlmFpFromNonForestActivity(
         // Initialize based on type
         when (type) {
             "State" -> {
-                Model="State"
+                Model = "State"
                 dropDownApiCall(paginate = false, loader = true)
                 selectedList = stateList
                 selectedTextView = mBinding?.tvStateNlm!!
             }
 
             "District" -> {
-                Model="Districts"
+                Model = "Districts"
                 dropDownApiCall(paginate = false, loader = true)
                 selectedList = stateList // Update the list to districtList for District
-                if (isFrom==2)
-                {
-                    selectedTextView = mBinding?.tvDistrictNlm!!}
-                else if (isFrom==3 && TextView != null){
-
+                if (isFrom == 2) {
+                    selectedTextView = mBinding?.tvDistrictNlm!!
+                } else if (isFrom == 3 && TextView != null) {
                     selectedTextView = TextView
-                }
-                else{
+                } else {
                     selectedTextView = mBinding?.tvDistrictIa!!
                 }
             }
+
             else -> return
         }
 
@@ -721,21 +739,16 @@ class AddNlmFpFromNonForestActivity(
             selectedTextView?.text = selectedItem
 
 
-            if (Model=="Districts")
-            {
-                if (isFrom==2)
-                {
-                    districtIdIA=id
+            if (Model == "Districts") {
+                Log.d("Model",isFrom.toString())
+                if (isFrom == 2) {
+                    districtId = id
+                } else if (isFrom == 3 && TextView != null) {
+                    districtIdNlm = id
+                } else {
+                    districtId = id
                 }
-                else if (isFrom==3 && TextView != null)
-                {
-                    districtIdNlm=id
-                }
-                else{
-
-                    districtId=id}
-            }
-            else{
+            } else {
                 stateId = id
             }
             selectedTextView?.setTextColor(ContextCompat.getColor(this, R.color.black))
@@ -767,6 +780,7 @@ class AddNlmFpFromNonForestActivity(
         // Show the bottom sheet
         bottomSheetDialog.show()
     }
+
     private fun showBottomSheetDialogNonDis(type: String, full: TextView) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
@@ -867,6 +881,7 @@ class AddNlmFpFromNonForestActivity(
         // Show the bottom sheet
         bottomSheetDialog.show()
     }
+
     private fun addDocumentDialog(
         context: Context,
         selectedItem: ImplementingAgencyDocument?,
@@ -899,23 +914,21 @@ class AddNlmFpFromNonForestActivity(
 
         if (selectedItem != null) {
             bindingDialog.ivPic.showView()
-            if (selectedItem.is_edit==false)
-            {
+            if (selectedItem.is_edit == false) {
                 bindingDialog.tvSubmit.hideView()
-                bindingDialog.tvChooseFile.isEnabled=false
-                bindingDialog.etDescription.isEnabled=false
+                bindingDialog.tvChooseFile.isEnabled = false
+                bindingDialog.etDescription.isEnabled = false
             }
             if (getPreferenceOfScheme(
                     this,
                     AppConstants.SCHEME,
                     Result::class.java
-                )?.role_id == 24 ||selectedItem.is_ia == true
+                )?.role_id == 24 || selectedItem.is_ia == true
             ) {
                 UploadedDocumentName = selectedItem.ia_document
                 bindingDialog.etDoc.text = selectedItem.ia_document
 
-            }
-            else{
+            } else {
 
                 UploadedDocumentName = selectedItem.nlm_document
                 bindingDialog.etDoc.text = selectedItem.nlm_document
@@ -923,25 +936,39 @@ class AddNlmFpFromNonForestActivity(
             bindingDialog.etDescription.setText(selectedItem.description)
 
             val (isSupported, fileExtension) = getFileType(UploadedDocumentName.toString())
-            Log.d("URLL",fileExtension.toString())
+            Log.d("URLL", fileExtension.toString())
             if (isSupported) {
                 when (fileExtension) {
                     "pdf" -> {
                         bindingDialog.ivPic.let {
-                            Glide.with(context).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
+                            Glide.with(context).load(R.drawable.ic_pdf)
+                                .placeholder(R.drawable.ic_pdf).into(
                                 it
                             )
                         }
-                        val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                        val url = getPreferenceOfScheme(
+                            this,
+                            AppConstants.SCHEME,
+                            Result::class.java
+                        )?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
                         val downloader = AndroidDownloader(context)
                         bindingDialog.etDoc.setOnClickListener {
                             if (!UploadedDocumentName.isNullOrEmpty()) {
                                 downloader.downloadFile(url, UploadedDocumentName!!)
-                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                                mBinding?.let { it1 ->
+                                    showSnackbar(
+                                        it1.clParent,
+                                        "Download started"
+                                    )
+                                }
                                 dialog.dismiss()
-                            }
-                            else{
-                                mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                            } else {
+                                mBinding?.let { it1 ->
+                                    showSnackbar(
+                                        it1.clParent,
+                                        "No document found"
+                                    )
+                                }
                                 dialog.dismiss()
                             }
                         }
@@ -949,7 +976,13 @@ class AddNlmFpFromNonForestActivity(
 
                     "png" -> {
                         bindingDialog.ivPic.let {
-                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                            Glide.with(context).load(
+                                getPreferenceOfScheme(
+                                    this,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                            ).placeholder(R.drawable.ic_image_placeholder).into(
                                 it
                             )
                         }
@@ -957,7 +990,13 @@ class AddNlmFpFromNonForestActivity(
 
                     "jpg" -> {
                         bindingDialog.ivPic.let {
-                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                            Glide.with(context).load(
+                                getPreferenceOfScheme(
+                                    this,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                            ).placeholder(R.drawable.ic_image_placeholder).into(
                                 it
                             )
                         }
@@ -984,11 +1023,16 @@ class AddNlmFpFromNonForestActivity(
 //                        )
 //                    }
                 }
+
                 else -> {
                     bindingDialog.ivPic.setOnClickListener {
                         Utility.showImageDialog(
-                           this,
-                            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                            this,
+                            getPreferenceOfScheme(
+                                this,
+                                AppConstants.SCHEME,
+                                Result::class.java
+                            )?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
                         )
                     }
                 }
@@ -996,7 +1040,7 @@ class AddNlmFpFromNonForestActivity(
         }
 
         bindingDialog.tvSubmit.setOnClickListener {
-            Log.d("DOCUMENT",UploadedDocumentName.toString())
+            Log.d("DOCUMENT", UploadedDocumentName.toString())
             if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
                 if (selectedItem != null) {
                     if (position != null) {
@@ -1014,6 +1058,8 @@ class AddNlmFpFromNonForestActivity(
                                     fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentAdapter?.notifyItemChanged(position)
+
                         } else {
                             viewDocumentList[position] =
                                 ImplementingAgencyDocument(
@@ -1023,9 +1069,9 @@ class AddNlmFpFromNonForestActivity(
                                     fsp_plant_storage_id = selectedItem.fsp_plant_storage_id,
                                     id = selectedItem.id,
                                 )
+                            addDocumentIAAdapter?.notifyItemChanged(position)
                         }
 
-                        addDocumentAdapter?.notifyItemChanged(position)
                         dialog.dismiss()
                     }
 
@@ -1060,7 +1106,7 @@ class AddNlmFpFromNonForestActivity(
                             )
                         )
                         viewDocumentList.size.minus(1).let {
-                            addDocumentAdapter?.notifyItemInserted(it)
+                            addDocumentIAAdapter?.notifyItemInserted(it)
                             dialog.dismiss()
                         }
                     }
@@ -1224,6 +1270,7 @@ class AddNlmFpFromNonForestActivity(
         }
         startActivityForResult(intent, REQUEST_iMAGE_PDF)
     }
+
     override fun showImage(bitmap: Bitmap) {
         // Override to display the image in this activity
         uploadData?.showView()
@@ -1232,6 +1279,7 @@ class AddNlmFpFromNonForestActivity(
         photoFile = imageFile
         photoFile?.let { uploadImage(it) }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -1265,7 +1313,11 @@ class AddNlmFpFromNonForestActivity(
                                     uploadData?.setImageURI(selectedImageUri)
                                     uploadImage(it) // Proceed to upload
                                 } else {
-                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(
+                                        this,
+                                        "File size exceeds 5 MB",
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                 }
                             }
                         } else {
@@ -1288,7 +1340,8 @@ class AddNlmFpFromNonForestActivity(
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
                                 val fileSizeInBytes =
                                     it.getLong(it.getColumnIndex(MediaStore.MediaColumns.SIZE))
-                                val fileSizeInMB = fileSizeInBytes / (1024 * 1024.0) // Convert to MB
+                                val fileSizeInMB =
+                                    fileSizeInBytes / (1024 * 1024.0) // Convert to MB
 
                                 // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
                                 if (fileSizeInMB <= 5) {
@@ -1314,7 +1367,11 @@ class AddNlmFpFromNonForestActivity(
                                         ),
                                     )
                                 } else {
-                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(
+                                        this,
+                                        "File size exceeds 5 MB",
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                 }
                             }
                         }
@@ -1323,6 +1380,8 @@ class AddNlmFpFromNonForestActivity(
             }
         }
     }
+
+
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
@@ -1456,7 +1515,7 @@ class AddNlmFpFromNonForestActivity(
         if (paginate) {
             currentPage++
         }
-        if (Model=="Districts") {
+        if (Model == "Districts") {
             viewModel.getDropDownApi(
                 this, loader, GetDropDownRequest(
                     20,
@@ -1474,8 +1533,7 @@ class AddNlmFpFromNonForestActivity(
                     )?.user_id,
                 )
             )
-        }
-        else{
+        } else {
             viewModel.getDropDownApi(
                 this, loader, GetDropDownRequest(
                     20,
@@ -1540,8 +1598,8 @@ class AddNlmFpFromNonForestActivity(
                 } else {
                     DocumentId = userResponseModel._result.id
                     UploadedDocumentName = userResponseModel._result.document_name
-                    DialogDocName?.text=userResponseModel._result.document_name
-                    TableName=userResponseModel._result.table_name
+                    DialogDocName?.text = userResponseModel._result.document_name
+                    TableName = userResponseModel._result.table_name
                     mBinding?.clParent?.let { it1 ->
                         showSnackbar(
                             it1,
@@ -1561,7 +1619,7 @@ class AddNlmFpFromNonForestActivity(
                 if (userResponseModel._resultflag == 0) {
                     showSnackbar(mBinding!!.clParent, userResponseModel.message)
                 } else {
-                    TableName=userResponseModel.fileurl
+                    TableName = userResponseModel.fileurl
                     if (savedAsDraft) {
                         onBackPressedDispatcher.onBackPressed()
                     } else {
@@ -1598,17 +1656,17 @@ class AddNlmFpFromNonForestActivity(
 
                             if (comments.isEmpty() && viewEdit == "view") {
                                 val dummyData = FpFromNonForestFilledByNlmTeam(
-                                  null,
-                                  null,
+                                    null,
+                                    null,
                                     null,
                                     "",
-                                  "",
-                                  "",
-                                  "",
-                                  "",
-                                  "",
-                                  "",
-                                  null,
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    null,
                                 )
                                 plantStorageList.add(dummyData)
                             } else {
@@ -1650,6 +1708,7 @@ class AddNlmFpFromNonForestActivity(
                             iaAdapter()
                             nlmAdapter()
                             addDocumentAdapter?.notifyDataSetChanged()
+                            addDocumentIAAdapter?.notifyDataSetChanged()
 
                         } else {
                             onBackPressedDispatcher.onBackPressed()
@@ -1666,8 +1725,13 @@ class AddNlmFpFromNonForestActivity(
     }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
-        position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
-    }
+        if (isFrom == 10) {
+            position.let { it1 -> addDocumentIAAdapter?.onDeleteButtonClick(it1) }
+
+        } else {
+            position.let { it1 -> addDocumentAdapter?.onDeleteButtonClick(it1) }
+
+        }    }
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
         addDocumentDialog(this@AddNlmFpFromNonForestActivity, selectedItem, position)
@@ -1685,6 +1749,7 @@ class AddNlmFpFromNonForestActivity(
     override fun onClickItemDelete(ID: Int?, position: Int) {
         position.let { it1 -> plantStorageAdapter?.onDeleteButtonClick(it1) }
     }
+
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("LOCATION_UPDATED")
@@ -1702,6 +1767,7 @@ class AddNlmFpFromNonForestActivity(
         super.onPause()
         unregisterReceiver(locationReceiver)
     }
+
     private fun uploadImage(file: File) {
         lifecycleScope.launch {
             val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
@@ -1713,8 +1779,14 @@ class AddNlmFpFromNonForestActivity(
             viewModel.getProfileUploadFile(
                 context = this@AddNlmFpFromNonForestActivity,
                 document_name = body,
-                user_id = getPreferenceOfScheme(this@AddNlmFpFromNonForestActivity, AppConstants.SCHEME, Result::class.java)?.user_id,
-                table_name = getString(R.string.fp_from_non_forest_document).toRequestBody(MultipartBody.FORM),
+                user_id = getPreferenceOfScheme(
+                    this@AddNlmFpFromNonForestActivity,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                table_name = getString(R.string.fp_from_non_forest_document).toRequestBody(
+                    MultipartBody.FORM
+                ),
             )
         }
     }

@@ -607,6 +607,7 @@ data class ImplementingAgencyDocument(
     val onsite_dcs_center_visit_id: Int?=null,
     val state_central_lab_visit_id: Int?=null,
     val milk_processing_id: Int?=null,
+    val productivity_enhancement_services_id: Int?=null,
     val milk_product_marketing_id: Int?=null
 
 
@@ -2716,3 +2717,66 @@ data class AddMilkProductMarketingResult(
     val updated_by: Any,
     val visit: Any
 )
+
+
+
+data class AddProductivityEnchancementResponse(
+    val _result: AddProductivityEnchancementResult,
+    val _resultflag: Int,
+    val fileurl: String,
+    val message: String,
+    val statuscode: Int
+)
+
+data class AddProductivityEnchancementResult(
+    val animal_mineral_mixture: Int?,
+    val are_calves_born: Int?,
+    val are_calves_born_remarks: String,
+    val assets_distributed: Int?,
+    val assets_distributed_remarks: String,
+    val assistance_been_provided_remarks: String,
+    val created_at: String,
+    val created_by: Int,
+    val data_from: String,
+    val date_of_inspection: String,
+    val deworming_of_female_calves: Int?,
+    val distribution_fodder_seeds: Int?,
+    val district_id: Int,
+    val farmer_under_calf_rearing_program_remarks: String,
+    val fodder_mineral_mixture: Int?,
+    val id: Int,
+    val ip_address: Any,
+    val is_deleted: Int,
+    val is_draft: Int,
+    val is_record_keeping: Int?,
+    val is_record_keeping_remarks: String,
+    val lat_dcs: String,
+    val lat_nlm: Any,
+    val long_dcs: String,
+    val long_nlm: Any,
+    val low_cost_silage_making: Int?,
+    val name_dcs_mpp: String,
+    val name_revenue_village: String,
+    val name_tehsil: String,
+    val plantation_root_stems: Int?,
+    val pregnancy_feed: Int?,
+    val productivity_enhancement_services_document: List<ImplementingAgencyDocument>,
+    val record_keeping: Int?,
+    val record_keeping_remarks: String,
+    val selection_village: Int?,
+    val selection_village_remarks: String,
+    val state_code: Int,
+    val state_name: String,
+    val district_name: String,
+    val status: String,
+    val transition_feed_early: Int?,
+    val under_anas_program_remarks: String,
+    val under_anas_tagged: Int?,
+    val under_anas_tagged_remarks: String,
+    val updated_at: Any,
+    val updated_by: Any,
+    val vaccination_female_calves: String?,
+    val visible_impacts: String,
+    val visit: Any
+)
+

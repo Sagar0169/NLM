@@ -20,6 +20,8 @@ import com.nlm.model.AddMilkProductMarketingRequest
 import com.nlm.model.AddMilkProductMarketingResponse
 import com.nlm.model.AddNlmEdpRequest
 import com.nlm.model.AddNlmEdpResponse
+import com.nlm.model.AddProductivityEnchancementRequest
+import com.nlm.model.AddProductivityEnchancementResponse
 import com.nlm.model.AddStateCenterLabRequest
 import com.nlm.model.AddStateCenterLabResponse
 import com.nlm.model.ArtificialInseminationAddRequest
@@ -198,6 +200,7 @@ class ViewModel : ViewModel() {
     var milkProductMarketingListResult = MutableLiveData<NDDMilkProductMarketingListResponse>()
     var milkProductMarketingAddResult = MutableLiveData<AddMilkProductMarketingResponse>()
     var productivityEnchancementServicesListResult = MutableLiveData<NDDProductivityEnhancementServicesListResponse>()
+    var productivityEnchancementServicesAddResult = MutableLiveData<AddProductivityEnchancementResponse>()
 
     val errors = MutableLiveData<String>()
 
@@ -3720,6 +3723,61 @@ class ViewModel : ViewModel() {
                         when (response.code()) {
                             200, 201 -> {
                                 productivityEnchancementServicesListResult.postValue(response.body())
+                                dismissLoader()
+                            }
+                        }
+                    }
+
+                    false -> {
+                        when (response.code()) {
+                            400, 403, 404 -> {//Bad Request & Invalid Credentials
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                dismissLoader()
+                            }
+
+                            401 -> {
+                                val errorBody = JSONObject(response.errorBody()!!.string())
+                                errors.postValue(errorBody.getString("message") ?: "Bad Request")
+                                Utility.logout(context)
+                                dismissLoader()
+                            }
+
+                            500 -> {//Internal Server error
+                                errors.postValue("Internal Server error")
+
+                                dismissLoader()
+                            }
+
+                            else -> dismissLoader()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is SocketTimeoutException) {
+                    errors.postValue("Time out Please try again")
+                }
+                else{
+                    errors.postValue(e.message.toString())
+                }
+                dismissLoader()
+            }
+        }
+    }
+    fun getProductivityEnhancementServicesAdd(context: Context, loader: Boolean, request: AddProductivityEnchancementRequest) {
+        // can be launched in a separate asynchronous job
+        networkCheck(context, loader)
+
+        job = scope.launch {
+            try {
+                val response = repository.productivityEnhancementServicesAdd(request)
+
+                Log.e("response", response.toString())
+                when (response.isSuccessful) {
+                    true -> {
+                        when (response.code()) {
+                            200, 201 -> {
+                                productivityEnchancementServicesAddResult.postValue(response.body())
                                 dismissLoader()
                             }
                         }
