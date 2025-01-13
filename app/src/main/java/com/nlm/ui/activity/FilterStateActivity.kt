@@ -1216,7 +1216,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("districtName", districtName) // Add selected data to intent
                 resultIntent.putExtra("nameOfAgency", binding!!.etNameofMilkUnion.text.toString()) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
-                toast(stateId.toString())
+
                 finish()
             }
 
@@ -1254,7 +1254,6 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 resultIntent.putExtra("village", binding!!.etVillageName.text.toString()) // Add selected data to intent
                 resultIntent.putExtra("nameOfAgency", binding!!.etNameOfDCS.text.toString()) // Add selected data to intent
                 setResult(RESULT_OK, resultIntent) // Send result
-                toast(stateId.toString())
                 finish()
             }
             if (isFrom == 37 ) {

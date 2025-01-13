@@ -91,13 +91,13 @@ class AddProductivityEnhancementServices : BaseActivity<ActivityAddProductivityE
         DocumentList = arrayListOf()
         totalListDocument = arrayListOf()
         viewDocumentList = arrayListOf()
-        mBinding?.etState?.text = getPreferenceOfScheme(
+        mBinding?.tvState?.text = getPreferenceOfScheme(
             this,
             AppConstants.SCHEME,
             Result::class.java
         )?.state_name
-        mBinding?.etState?.isEnabled = false
-        mBinding?.etState?.setTextColor(Color.parseColor("#000000"))
+        mBinding?.tvState?.isEnabled = false
+        mBinding?.tvState?.setTextColor(Color.parseColor("#000000"))
         nlmAdapter()
 
     }
@@ -269,7 +269,7 @@ class AddProductivityEnhancementServices : BaseActivity<ActivityAddProductivityE
             "District" -> {
                 dropDownApiCall(paginate = false, loader = true)
                 selectedList = districtList
-                selectedTextView = mBinding!!.etDistrict
+                selectedTextView = mBinding!!.tvDistrict
             }
 
 //            "Status" -> {

@@ -9,10 +9,13 @@ import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.databinding.ActivityNlmFpForestLandBinding
 import com.nlm.model.FodderProductionFromNonForestData
+import com.nlm.model.FpFromForestLandAddEditFormat9Request
 import com.nlm.model.FpFromForestLandData
 import com.nlm.model.FpFromForestLandRequest
 import com.nlm.model.FpFromForestLandResponse
+import com.nlm.model.NlmFpFromNonForestAddRequest
 import com.nlm.model.Result
+import com.nlm.repository.Repository.getNlmFpFromNonForestAddEdit
 import com.nlm.ui.activity.FilterStateActivity
 import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion.FILTER_REQUEST_CODE
 import com.nlm.ui.adapter.FpFromForestLandAdapter
@@ -21,6 +24,7 @@ import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
+import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
 import com.nlm.viewModel.ViewModel
@@ -40,6 +44,7 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
     var nameOfAgency: String ?= null
     var districtName: String ?= null
     var areaCoverd: String ?= null
+    private var itemPosition : Int ?= null
 
 
     override val layoutId: Int
@@ -153,7 +158,32 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
     }
 
     override fun setObservers() {
-
+        viewModel.fpFromForestLandAddEditResult.observe(this){
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel!=null)
+            {
+                if(userResponseModel._resultflag==0){
+                    mBinding?.rlParent?.let { it1 -> userResponseModel.message?.let { it2 ->
+                        showSnackbar(
+                            it1,
+                            it2
+                        )
+                    } }
+                }
+                else{
+                    itemPosition?.let { it1 -> fpFromForestLandAdapter?.onDeleteButtonClick(it1) }
+                    mBinding?.rlParent?.let { it1 -> userResponseModel.message?.let { it2 ->
+                        showSnackbar(
+                            it1,
+                            it2
+                        )
+                    } }
+                }
+            }
+        }
         viewModel.fpFromForestLandResult.observe(this) {
             val userResponseModel = it
             if (userResponseModel.statuscode == 401) {
@@ -210,5 +240,20 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
     }
 
     override fun onClickItem(ID: Int?, position: Int,isFrom:Int) {
+        viewModel.getFpFromForestLandAddEdit(this,true,
+            FpFromForestLandAddEditFormat9Request(
+                state_code = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
+                user_id = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.user_id,
+                role_id = getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.role_id,
+                id = ID,
+                is_draft=null,
+                is_deleted = 1
+            )
+        )
+        itemPosition = position
     }
 }

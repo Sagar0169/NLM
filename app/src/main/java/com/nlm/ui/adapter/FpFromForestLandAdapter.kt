@@ -105,4 +105,8 @@ class FpFromForestLandAdapter(
     override fun getItemCount(): Int {
         return list.size
     }
+    fun onDeleteButtonClick(position: Int) {
+        list.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }
