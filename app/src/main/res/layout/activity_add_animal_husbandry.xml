@@ -120,7 +120,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_20"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="States"
+                            android:text="@string/states"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -148,7 +148,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_7"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="Format for NLM EDP (to be filled by State/ Implementing Agency )"
+                            android:text="Format for Animal Husbandry Infrastructure Developement Fund"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 
@@ -269,7 +269,7 @@
                             android:layout_marginHorizontal="@dimen/dp_10"
                             android:layout_marginTop="@dimen/dp_20"
                             android:fontFamily="@font/opensans_semibold"
-                            android:text="States"
+                            android:text="@string/states"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
 

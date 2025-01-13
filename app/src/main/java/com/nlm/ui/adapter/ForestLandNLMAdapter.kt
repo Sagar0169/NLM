@@ -119,7 +119,7 @@ class ForestLandNLMAdapter(
                     consumer_fodder = items.consumer_fodder,
                     estimated_quantity = items.estimated_quantity,
                     fp_from_forest_land_id=items.fp_from_forest_land_id,
-                    village_name = items.area_covered,
+                    village_name = items.village_name,
                     district_code = items.district_code,
                     district_name = items.district_name,
                     district = items.district

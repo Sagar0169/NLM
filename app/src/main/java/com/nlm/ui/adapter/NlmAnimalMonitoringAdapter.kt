@@ -67,6 +67,7 @@ class NlmAnimalMonitoringAdapter(
         } else if (viewEdit == "edit") {
             holder.binding.btnEdit.showView()
         }
+        holder.binding.tvSubmit.hideView()
         holder.binding.etNameOfBeneficiary.isEnabled = false
         holder.binding.etCategory.isEnabled = false
         holder.binding.tvProjectFinancing.isEnabled = false

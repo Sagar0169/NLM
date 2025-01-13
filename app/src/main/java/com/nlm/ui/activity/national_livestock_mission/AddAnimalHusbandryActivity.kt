@@ -430,7 +430,11 @@ class AddAnimalHusbandryActivity(
             val intent = Intent(this, LocationService::class.java)
            startService(intent)
             lifecycleScope.launch {
+                Log.d("Scope", "out")
                 delay(1000) // Delay for 2 seconds
+                Log.d("Scope", "In")
+                Log.d("Scope", latitude.toString())
+                Log.d("Scope", longitude.toString())
                 if (latitude != null && longitude != null) {
                     if (getPreferenceOfScheme(this@AddAnimalHusbandryActivity, AppConstants.SCHEME, Result::class.java)?.role_id==24)
                     {
@@ -463,7 +467,7 @@ class AddAnimalHusbandryActivity(
                         )
                     )
                     }
-                    else if(getPreferenceOfScheme(this@AddAnimalHusbandryActivity, AppConstants.SCHEME, Result::class.java)?.role_id==24)
+                    else if(getPreferenceOfScheme(this@AddAnimalHusbandryActivity, AppConstants.SCHEME, Result::class.java)?.role_id==8)
                     {
                         viewModel.getNlmAhidfADD(
                             this@AddAnimalHusbandryActivity, true,
@@ -499,7 +503,8 @@ class AddAnimalHusbandryActivity(
                     showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
                 }
 
-            }}
+            }
+        }
         else {
             showLocationAlertDialog()
         }
@@ -1501,7 +1506,7 @@ class AddAnimalHusbandryActivity(
     override fun onResume() {
         super.onResume()
         val intentFilter = IntentFilter("LOCATION_UPDATED")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { // API level 26
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API level 33
             Log.d("Receiver", "Registering receiver with RECEIVER_NOT_EXPORTED")
             registerReceiver(locationReceiver, intentFilter, Context.RECEIVER_EXPORTED)
         } else {
@@ -1509,6 +1514,7 @@ class AddAnimalHusbandryActivity(
             LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter)
         }
     }
+
     override fun onPause() {
         super.onPause()
         unregisterReceiver(locationReceiver)
