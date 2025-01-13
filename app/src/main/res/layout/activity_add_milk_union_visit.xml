@@ -98,7 +98,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="@string/name_of_milk_union"
                         android:textColor="@color/black"
@@ -123,14 +123,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="@string/stateMU"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
                     <TextView
-                        android:id="@+id/etState"
+                        android:id="@+id/tvState"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
@@ -149,14 +149,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="@string/name_of_districts_covered"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
                     <TextView
-                        android:id="@+id/etDistrict"
+                        android:id="@+id/tvDistrict"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
@@ -191,7 +191,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="Total No. of Villages"
                         android:textColor="@color/black"
@@ -205,6 +205,7 @@
                         android:background="@drawable/curve_all_corner_grey"
                         android:fontFamily="@font/opensans_regular"
                         android:maxLength="50"
+                        android:inputType="numberDecimal"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
@@ -215,7 +216,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="No. of Villages Covered"
                         android:textColor="@color/black"
@@ -223,13 +224,13 @@
 
                     <EditText
                         android:id="@+id/etNoOfVillagesCovered"
-
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_grey"
                         android:fontFamily="@font/opensans_regular"
                         android:maxLength="50"
+                        android:inputType="numberDecimal"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
@@ -240,7 +241,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="No. of milk producers enrolled"
                         android:textColor="@color/black"
@@ -255,6 +256,7 @@
                         android:background="@drawable/curve_all_corner_grey"
                         android:fontFamily="@font/opensans_regular"
                         android:maxLength="50"
+                        android:inputType="numberDecimal"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5"
                         android:singleLine="true"
@@ -265,7 +267,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
@@ -301,13 +303,13 @@
 
                             <EditText
                                 android:id="@+id/etOrganised"
-
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
+                                android:inputType="numberDecimal"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"
@@ -327,13 +329,13 @@
 
                             <EditText
                                 android:id="@+id/etFunctional"
-
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
+                                android:inputType="numberDecimal"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"
@@ -348,7 +350,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
@@ -431,7 +433,7 @@
                                     android:layout_marginStart="@dimen/dp_5"
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:layout_weight="1"
-
+                                    android:inputType="numberDecimal"
                                     android:background="@drawable/curve_all_corner_grey"
                                     android:fontFamily="@font/opensans_regular"
                                     android:maxLength="50"
@@ -475,7 +477,7 @@
                                     android:layout_marginStart="@dimen/dp_5"
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:layout_weight="1"
-
+                                    android:inputType="numberDecimal"
                                     android:background="@drawable/curve_all_corner_grey"
                                     android:fontFamily="@font/opensans_regular"
                                     android:maxLength="50"
@@ -518,7 +520,7 @@
                                     android:layout_marginStart="@dimen/dp_5"
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:layout_weight="1"
-
+                                    android:inputType="numberDecimal"
                                     android:background="@drawable/curve_all_corner_grey"
                                     android:fontFamily="@font/opensans_regular"
                                     android:maxLength="50"
@@ -541,8 +543,8 @@
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16" />
 
-                            <EditText
-                                android:id="@+id/TotalLocationCapacity"
+                            <TextView
+                                android:id="@+id/tvTotalLocationCapacity"
 
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -564,7 +566,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
@@ -604,6 +606,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_7"
+                                android:inputType="numberDecimal"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -630,6 +633,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="@dimen/dp_7"
+                                android:inputType="numberDecimal"
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
@@ -647,7 +651,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
@@ -755,7 +759,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
@@ -863,7 +867,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
@@ -903,7 +907,7 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:layout_weight="1"
@@ -914,7 +918,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
                                     android:layout_weight="1"
@@ -950,6 +954,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etAPPCowCurrentYear"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -1040,6 +1045,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etAPPBuffaloCurrentYear"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -1064,7 +1070,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
@@ -1150,6 +1156,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etIPCowCurrentYear"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -1240,6 +1247,7 @@
                                     android:textSize="@dimen/sp_16" />
 
                                 <EditText
+                                    android:id="@+id/etIPBuffaloCurrentYear"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_7"
@@ -1264,7 +1272,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
@@ -1372,7 +1380,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:background="@drawable/curve_all_corner_black"
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
@@ -1456,7 +1464,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="Future Plan for action (based on interaction with sr. officers of Milk Union)"
                         android:textColor="@color/black"
@@ -1481,7 +1489,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="Remarks by NLM (in 500 words)"
                         android:textColor="@color/black"
@@ -1508,7 +1516,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="Photographs of site"
                         android:textColor="@color/black"
@@ -1581,7 +1589,7 @@
                         android:clickable="true"
                         android:onClick="@{ClickAction::addDocDialog}"
                         android:fontFamily="@font/poppins_medium"
-                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingHorizontal="@dimen/dp_7"
                         android:paddingVertical="@dimen/dp_10"
                         android:text="Add More"
                         android:textColor="@color/white" />
@@ -1612,7 +1620,7 @@
                             android:clickable="true"
                             android:onClick="@{ClickAction::saveAsDraft}"
                             android:fontFamily="@font/poppins_medium"
-                            android:paddingHorizontal="@dimen/dp_20"
+                            android:paddingHorizontal="@dimen/dp_7"
                             android:paddingVertical="@dimen/dp_10"
                             android:text="Save As Draft"
                             android:textAlignment="center"
@@ -1631,7 +1639,7 @@
                             android:clickable="true"
                             android:onClick="@{ClickAction::save}"
                             android:fontFamily="@font/poppins_medium"
-                            android:paddingHorizontal="@dimen/dp_20"
+                            android:paddingHorizontal="@dimen/dp_7"
                             android:paddingVertical="@dimen/dp_10"
                             android:text="@string/submit"
                             android:textAlignment="center"

@@ -65,6 +65,8 @@ import com.nlm.model.LoginRequest
 import com.nlm.model.LoginResponse
 import com.nlm.model.LogoutRequest
 import com.nlm.model.LogoutResponse
+import com.nlm.model.MilkUnionAddRequest
+import com.nlm.model.MilkUnionAddResponse
 import com.nlm.model.MobileVeterinaryUnitsListRequest
 import com.nlm.model.MobileVeterinaryUnitsListResponse
 import com.nlm.model.NDDComponentBAddRequest
@@ -331,6 +333,9 @@ object Repository {
 
     suspend fun getMilkUnionList(request: NDDMilkUnionListRequest): Response<NDDMilkUnionListResponse> {
         return api.getMilkUnionList(request)
+    }
+    suspend fun getMilkUnionAdd(request: MilkUnionAddRequest): Response<MilkUnionAddResponse> {
+        return api.getMilkUnionAdd(request)
     }
 
     suspend fun dairyPlantList(request: NDDDairyPlantListRequest): Response<NDDDairyPlantListResponse> {

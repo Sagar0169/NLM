@@ -396,6 +396,7 @@ class AddNLMExtensionActivity(
                 Result::class.java
             )?.role_id == 8
         ) {
+            mBinding?.clParent?.let { showSnackbar(it, "No of camps is required") }
 
             if (mBinding?.etEOA?.text.toString().isEmpty()) {
                 mBinding?.clParent?.let { showSnackbar(it, "No of camps is required") }
@@ -464,18 +465,8 @@ class AddNLMExtensionActivity(
                                     Result::class.java
                                 )?.user_id.toString(),
                                 is_draft = draft,
-                                no_of_camps =
-                                if (mBinding?.etNoa?.text.isNullOrEmpty()) {
-                                    mBinding?.etEOA?.text.toString().toIntOrNull()
-                                } else {
-                                    mBinding?.etNoa?.text.toString().toIntOrNull()
-                                },
-                                no_of_participants =
-                                if (mBinding?.etParticipateNlm?.text.isNullOrEmpty()) {
-                                    mBinding?.etParticipant?.text.toString().toIntOrNull()
-                                } else {
-                                    mBinding?.etParticipateNlm?.text.toString().toIntOrNull()
-                                },
+                                no_of_camps = mBinding?.etEOA?.text.toString().toIntOrNull(),
+                                no_of_participants = mBinding?.etParticipateNlm?.text.toString().toIntOrNull(),
                                 whether_the_state_developed = mBinding?.etModule?.text.toString(),
                                 whether_the_state_trainers = mBinding?.etTrainer?.text.toString(),
                                 details_of_training_programmes = mBinding?.etDetails?.text.toString(),
@@ -539,18 +530,8 @@ class AddNLMExtensionActivity(
                                     Result::class.java
                                 )?.user_id.toString(),
                                 is_draft = draft,
-                                no_of_camps =
-                                if (mBinding?.etNoa?.text.isNullOrEmpty()) {
-                                    mBinding?.etEOA?.text.toString().toIntOrNull()
-                                } else {
-                                    mBinding?.etNoa?.text.toString().toIntOrNull()
-                                },
-                                no_of_participants =
-                                if (mBinding?.etParticipateNlm?.text.isNullOrEmpty()) {
-                                    mBinding?.etParticipant?.text.toString().toIntOrNull()
-                                } else {
-                                    mBinding?.etParticipateNlm?.text.toString().toIntOrNull()
-                                },
+                                no_of_camps = mBinding?.etNoa?.text.toString().toIntOrNull(),
+                                no_of_participants = mBinding?.etParticipant?.text.toString().toIntOrNull(),
                                 whether_the_state_developed = mBinding?.etModule?.text.toString(),
                                 whether_the_state_trainers = mBinding?.etTrainer?.text.toString(),
                                 details_of_training_programmes = mBinding?.etDetails?.text.toString(),

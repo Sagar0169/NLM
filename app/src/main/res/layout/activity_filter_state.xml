@@ -302,6 +302,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:fontFamily="@font/inter_medium"
+                android:visibility="gone"
                 android:text="Date of Inspection"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
@@ -316,6 +317,7 @@
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5"
                 android:singleLine="true"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/sp_16" />

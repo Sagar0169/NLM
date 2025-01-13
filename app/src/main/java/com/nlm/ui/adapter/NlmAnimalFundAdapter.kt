@@ -12,6 +12,9 @@ import com.nlm.callBack.CallBackDeleteFormatAtId
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemNlmIaAnimalFundBinding
 import com.nlm.model.AhidfFormatForNlm
+import com.nlm.model.Result
+import com.nlm.utilities.AppConstants
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.Utility
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
@@ -55,8 +58,13 @@ class NlmAnimalFundAdapter(
             holder.binding.btnDelete.hideView()
             holder.binding.btnEdit.hideView()
 
-        } else if (viewEdit == "edit") {
+        } else if (viewEdit == "edit"&& getPreferenceOfScheme(
+                context,
+                AppConstants.SCHEME,
+                Result::class.java
+            )?.role_id == 24) {
             holder.binding.btnEdit.showView()
+            holder.binding.btnDelete.showView()
         }
         holder.binding.etCategory.isEnabled = false
         holder.binding.etNoProject.isEnabled = false

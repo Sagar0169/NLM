@@ -608,7 +608,8 @@ data class ImplementingAgencyDocument(
     val state_central_lab_visit_id: Int?=null,
     val milk_processing_id: Int?=null,
     val productivity_enhancement_services_id: Int?=null,
-    val milk_product_marketing_id: Int?=null
+    val milk_product_marketing_id: Int?=null,
+    val milk_union_visit_report_id: Int?=null
 
 
 )
@@ -2778,5 +2779,82 @@ data class AddProductivityEnchancementResult(
     val vaccination_female_calves: String?,
     val visible_impacts: String,
     val visit: Any
+)
+
+
+data class MilkUnionAddResponse(
+    val _result: MilkUnionAddResult,
+    val _resultflag: Int,
+    val message: String,
+    val fileurl: String,
+    val statuscode: Int
+)
+
+data class MilkUnionAddResult(
+    val avg_buffalo_milk_price: Any,
+    val avg_cow_milk_price: Any,
+    val buffalo_milk_current_year_incentives: String,
+    val buffalo_milk_last_year_incentives: String,
+    val capacity_of_milk_chillers: String,
+    val cow_milk_current_year_incentives: String,
+    val cow_milk_last_year_incentives: String,
+    val created_at: String,
+    val created_by: Int,
+    val current_month_avg_milk: String,
+    val current_year_avg_milk: String,
+    val current_year_buffalo_milk_price: String,
+    val current_year_cow_milk_price: String,
+    val daily_bulk_sale_to_other: String,
+    val daily_liquid_milk_sale: String,
+    val daily_value_added_product: String,
+    val data_from: String,
+    val districts_covered: String,
+    val future_plan_action: String,
+    val ia_draft_date: Any,
+    val ia_id: Any,
+    val ia_status: Int,
+    val ia_submitted_date: Any,
+    val id: Int,
+    val is_deleted: Int,
+    val is_draft: Int,
+    val last_fy_cumulative_profit_loss: String,
+    val last_fy_net_profit_loss: String,
+    val last_fy_turnover: String,
+    val last_year_avg_milk: String,
+    val last_year_buffalo_milk_price: String,
+    val last_year_cow_milk_price: String,
+    val lat_nlm: Any,
+    val long_nlm: Any,
+    val milk_chilling_plant_capacity: Any,
+    val milk_chilling_plant_location: Any,
+    val milk_chilling_plant_total: Any,
+    val milk_processing_plant_capacity: String,
+    val milk_processing_plant_location: String,
+    val milk_processing_plant_total: Int,
+    val milk_union_visit_report_document: List<ImplementingAgencyDocument>,
+    val name_of_milk_union: String,
+    val nlm_draft_date: Any,
+    val nlm_id: Any,
+    val nlm_status: Int,
+    val nlm_submitted_date: Any,
+    val no_of_dairy_functional: Int,
+    val no_of_dairy_organised: Int,
+    val no_of_dairy_total: Any,
+    val no_of_milk_chillers: Int,
+    val no_of_milk_producers_enr: Int,
+    val no_of_villages: Int,
+    val no_of_villages_covered: Int,
+    val photographs_of_site: String,
+    val remarks_by_nlm: String,
+    val staff_available: String,
+    val staff_sanctioned: String,
+    val state_code: Int,
+    val state_name: String,
+    val status: String,
+    val total_field_staff: Any,
+    val total_non_technical_staff: Any,
+    val total_plant_staff: Any,
+    val updated_at: Any,
+    val visit: Int
 )
 
