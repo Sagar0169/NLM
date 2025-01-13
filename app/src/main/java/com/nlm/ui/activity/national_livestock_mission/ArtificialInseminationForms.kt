@@ -78,6 +78,8 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
     private var DocumentName:String?=null
     private var currentPage = 1
     private var totalPage = 1
+    private var layoutManager: LinearLayoutManager? = null
+    private var loading = true
     private var uploadData : ImageView?=null
     private var formId:Int?=null
     private lateinit var stateAdapter: BottomSheetAdapter
@@ -212,12 +214,12 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                     if (currentPage == 1) {
                         districtList.clear()
 
-                        val remainingCount = userResponseModel.total_count % 10
+                        val remainingCount = userResponseModel.total_count % 30
                         totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 30
                             count
                         } else {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 30
                             count + 1
                         }
                     }
@@ -534,7 +536,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         }
         viewModel.getDropDownApi(
             this, loader, GetDropDownRequest(
-                20,
+                30,
                 "Districts",
                 currentPage,
                 getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,
@@ -962,9 +964,11 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
             bottomSheetDialog.dismiss()
         }
 
-        rvBottomSheet.layoutManager =
+        layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.layoutManager=layoutManager
         rvBottomSheet.adapter = stateAdapter
+        rvBottomSheet.addOnScrollListener(recyclerScrollListener)
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()
     }
@@ -983,6 +987,26 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         photoFile = imageFile
         photoFile?.let { uploadImage(it) }
     }
+    private var recyclerScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    val visibleItemCount: Int? = layoutManager?.childCount
+                    val totalItemCount: Int? = layoutManager?.itemCount
+                    val pastVisiblesItems: Int? = layoutManager?.findFirstVisibleItemPosition()
+                    if (loading) {
+                        if ((visibleItemCount!! + pastVisiblesItems!!) >= totalItemCount!!) {
+                            loading = false
+                            if (currentPage < totalPage) {
+                                //Call API here
+                                dropDownApiCall(paginate = true, loader = true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {

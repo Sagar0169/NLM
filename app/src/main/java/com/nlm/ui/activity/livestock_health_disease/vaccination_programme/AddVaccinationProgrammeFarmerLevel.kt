@@ -205,6 +205,11 @@ class AddVaccinationProgrammeFarmerLevel :
                             userResponseModel.message
                         )
                     }
+                    mBinding?.llUploadOne?.hideView()
+                    mBinding?.llUploadTwo?.hideView()
+                    mBinding?.llUploadThree?.hideView()
+                    mBinding?.llUploadFour?.hideView()
+                    mBinding?.llUploadFive?.hideView()
 
                 } else {
                     uploadedDocumentName = userResponseModel._result.document_name

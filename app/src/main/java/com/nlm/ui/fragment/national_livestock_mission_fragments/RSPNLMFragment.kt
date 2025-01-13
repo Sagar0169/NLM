@@ -1047,7 +1047,7 @@ class RSPNLMFragment(
         }
         viewModel.getDropDownApi(
             requireContext(), loader, GetDropDownRequest(
-                20,
+                10,
                 "Districts",
                 currentPage,
                 getPreferenceOfScheme(

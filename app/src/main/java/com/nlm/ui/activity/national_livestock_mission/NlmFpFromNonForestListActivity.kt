@@ -184,6 +184,11 @@ class NlmFpFromNonForestListActivity : BaseActivity<ActivityNlmFpFromNonForestBi
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvNlmFpFromNonForest?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvNlmFpFromNonForest?.hideView()
                 }

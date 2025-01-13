@@ -152,6 +152,11 @@ class NlmAssistanceForQFSPActivity : BaseActivity<ActivityNlmAssistanceForQfspac
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvNlmAssistanceForQFSP?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvNlmAssistanceForQFSP?.hideView()
                 }

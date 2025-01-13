@@ -310,6 +310,14 @@ class AddVaccinationProgrammeStateLevel :
                             it1,
                             userResponseModel.message
                         )
+                        mBinding?.llUpload1a?.hideView()
+                        mBinding?.llUpload1b?.hideView()
+                        mBinding?.llUpload1c?.hideView()
+                        mBinding?.llUpload1d?.hideView()
+                        mBinding?.llUpload1e?.hideView()
+                        mBinding?.llUpload2?.hideView()
+                        mBinding?.llUpload3?.hideView()
+
                     }
 
                 } else {

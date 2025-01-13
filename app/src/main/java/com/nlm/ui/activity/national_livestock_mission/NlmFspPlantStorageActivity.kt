@@ -212,6 +212,11 @@ class NlmFspPlantStorageActivity : BaseActivity<ActivityNlmFspPlantStorageBindin
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvFpsPlantStorage?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()//need to change to hide
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvFpsPlantStorage?.hideView()
                 }

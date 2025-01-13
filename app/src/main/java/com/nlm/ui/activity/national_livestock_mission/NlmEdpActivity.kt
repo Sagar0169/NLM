@@ -153,6 +153,11 @@ class NlmEdpActivity : BaseActivity<ActivityNlmEdpBinding>(), CallBackDeleteAtId
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvNlmEdp?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvNlmEdp?.hideView()
                 }

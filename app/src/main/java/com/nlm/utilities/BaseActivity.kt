@@ -512,7 +512,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     }
     private fun dispatchTakePictureIntent() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent, CAPTURE_IMAGE_REQUEST)
+        startActivityForResult(cameraIntent, CAPTURE_IMAGE_REQUEST)// we use this to handle result of camera in the activity itself we can use registerForActivityResult as well that way we dont need to manage the resul code manually
 
     }
     private fun openOnlyPdfAccordingToPosition() {

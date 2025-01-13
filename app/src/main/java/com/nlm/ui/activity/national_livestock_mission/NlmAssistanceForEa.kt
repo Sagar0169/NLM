@@ -148,6 +148,11 @@ class NlmAssistanceForEa : BaseActivity<ActivityNlmAssistanceforEaBinding>(), Ca
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvAssistanceForEa?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvAssistanceForEa?.hideView()
                 }

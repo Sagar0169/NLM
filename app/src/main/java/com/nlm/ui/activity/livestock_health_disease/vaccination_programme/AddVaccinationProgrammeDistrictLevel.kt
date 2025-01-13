@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,6 +66,9 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
     private var uploadedDocumentName: String? = null
     private var dialogDocName: TextView? = null
     private var documentName: String? = null
+    private var isImageSet:Boolean=false
+    var filePath:String?=null
+    private lateinit var selectedImageUri:Uri
     var body: MultipartBody.Part? = null
     var isFromApplication = 0
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -205,34 +209,47 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                             userResponseModel.message
                         )
                     }
+                    mBinding?.llUploadOne?.hideView()
+                    mBinding?.llUploadTwo?.hideView()
+                    mBinding?.llUploadThree?.hideView()
+                    mBinding?.llUploadFour?.hideView()
+                    mBinding?.llUploadFive?.hideView()
 
                 } else {
+                    isImageSet=true
                     uploadedDocumentName = userResponseModel._result.document_name
                     dialogDocName?.text = userResponseModel._result.document_name
                     TableName=userResponseModel._result.table_name
                     when (isFromApplication) {
                         1 -> {
 
+
+
+
                             mBinding?.tvDocumentNameOne?.text = uploadedDocumentName
                             mBinding?.etChooseFileOne?.text = "Uploaded"
                         }
 
                         2 -> {
+
                             mBinding?.tvDocumentNameTwo?.text = uploadedDocumentName
                             mBinding?.etChooseFileTwo?.text = "Uploaded"
                         }
 
                         3 -> {
+
                             mBinding?.tvDocumentNameThree?.text = uploadedDocumentName
                             mBinding?.etChooseFileThree?.text = "Uploaded"
                         }
 
                         4 -> {
+
                             mBinding?.tvDocumentNameFour?.text = uploadedDocumentName
                             mBinding?.etChooseFileFour?.text = "Uploaded"
                         }
 
                         5 -> {
+
                             mBinding?.tvDocumentNameFive?.text = uploadedDocumentName
                             mBinding?.etChooseFileFive?.text = "Uploaded"
                         }
@@ -803,6 +820,8 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
     override fun showImage(bitmap: Bitmap) {
         // Override to display the image in this activity
         Log.d("TAG", isFromApplication.toString())
+        val imageUri = saveBitmapAsUri(bitmap)
+        selectedImageUri=imageUri
         when (isFromApplication) {
             1 -> {
                 mBinding?.llUploadOne?.showView()
@@ -882,6 +901,59 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
 
         }
     }
+
+
+private fun setImage(uri:Uri){
+    when (isFromApplication) {
+
+        1 -> {
+
+            mBinding?.llUploadOne?.showView()
+            mBinding?.ivPicOne?.setImageURI(selectedImageUri)
+
+
+        }
+
+        2 -> {
+            mBinding?.llUploadTwo?.showView()
+            mBinding?.ivPicTwo?.setImageURI(selectedImageUri)
+
+        }
+
+        3 -> {
+            mBinding?.llUploadThree?.showView()
+            mBinding?.ivPicThree?.setImageURI(selectedImageUri)
+
+        }
+
+        4 -> {
+            mBinding?.llUploadFour?.showView()
+            mBinding?.ivPicFour?.setImageURI(selectedImageUri)
+
+        }
+
+        5 -> {
+            mBinding?.llUploadFive?.showView()
+            mBinding?.ivPicFive?.setImageURI(selectedImageUri)
+
+        }
+
+        else -> {}
+    }
+}
+    private fun saveBitmapAsUri(bitmap: Bitmap): Uri {
+        val file = File(cacheDir, "${System.currentTimeMillis()}.jpg")
+        file.outputStream().use { outStream ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+            outStream.flush()
+        }
+        return FileProvider.getUriForFile(
+            this,
+            "${applicationContext.packageName}.provider",
+            file
+        )
+    }
+
     private fun openOnlyPdfAccordingToPosition() {
         checkStoragePermission(this)
     }
@@ -890,40 +962,45 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                CAPTURE_IMAGE_REQUEST -> {
-                    Log.d("ISFROM", isFromApplication.toString())
-                    val bitmap = data?.extras?.get("data") as Bitmap
-                }
+//                CAPTURE_IMAGE_REQUEST -> {
+//                    Log.d("ISFROM", isFromApplication.toString())
+//                    val bitmap = data?.extras?.get("data") as Bitmap
+//                }
 
                 PICK_IMAGE -> {
-                    val selectedImageUri = data?.data
+                     selectedImageUri = data?.data!!
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
-                        val filePath = uriPathHelper.getPath(this, selectedImageUri)
+                         filePath = uriPathHelper.getPath(this, selectedImageUri)
 
                         val fileExtension =
                             filePath?.substringAfterLast('.', "").orEmpty().lowercase()
                         // Validate file extension
                         if (fileExtension in listOf("png", "jpg", "jpeg")) {
-                            val file = filePath?.let { File(it) }
+                          val file = filePath?.let { File(it) }
 
                             // Check file size (5 MB = 5 * 1024 * 1024 bytes)
                             file?.let {
                                 val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
-                                if (fileSizeInMB <= 5) {
+                                if (fileSizeInMB <= 5 ) {
                                     when (isFromApplication) {
+
                                         1 -> {
+
                                             mBinding?.llUploadOne?.showView()
                                             mBinding?.ivPicOne?.setImageURI(selectedImageUri)
                                             mBinding?.ivPicOne?.setOnClickListener {
 
-                                                Utility.showImageDialog(
-                                                    this,
-                                                    filePath
-                                                )
+                                                filePath?.let { it1 ->
+                                                    Utility.showImageDialog(
+                                                        this,
+                                                        it1
+                                                    )
+                                                }
 
                                             }
                                             uploadImage(it)
+
                                         }
 
                                         2 -> {
@@ -931,12 +1008,15 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                                             mBinding?.ivPicTwo?.setImageURI(selectedImageUri)
                                             mBinding?.ivPicTwo?.setOnClickListener {
 
-                                                Utility.showImageDialog(
-                                                    this,
-                                                    filePath
-                                                )
+                                                filePath?.let { it1 ->
+                                                    Utility.showImageDialog(
+                                                        this,
+                                                        it1
+                                                    )
+                                                }
 
                                             }
+
                                             uploadImage(it)
                                         }
 
@@ -945,10 +1025,12 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                                             mBinding?.ivPicThree?.setImageURI(selectedImageUri)
                                             mBinding?.ivPicThree?.setOnClickListener {
 
-                                                Utility.showImageDialog(
-                                                    this,
-                                                    filePath
-                                                )
+                                                filePath?.let { it1 ->
+                                                    Utility.showImageDialog(
+                                                        this,
+                                                        it1
+                                                    )
+                                                }
 
                                             }
                                             uploadImage(it)
@@ -958,10 +1040,12 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                                             mBinding?.llUploadFour?.showView()
                                             mBinding?.ivPicFour?.setImageURI(selectedImageUri)
                                             mBinding?.ivPicFour?.setOnClickListener {
-                                                Utility.showImageDialog(
-                                                    this,
-                                                    filePath
-                                                )
+                                                filePath?.let { it1 ->
+                                                    Utility.showImageDialog(
+                                                        this,
+                                                        it1
+                                                    )
+                                                }
                                             }
                                             uploadImage(it)
                                         }
@@ -970,10 +1054,12 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                                             mBinding?.llUploadFive?.showView()
                                             mBinding?.ivPicFive?.setImageURI(selectedImageUri)
                                             mBinding?.ivPicFive?.setOnClickListener {
-                                                Utility.showImageDialog(
-                                                    this,
-                                                    filePath
-                                                )
+                                                filePath?.let { it1 ->
+                                                    Utility.showImageDialog(
+                                                        this,
+                                                        it1
+                                                    )
+                                                }
                                             }
                                             uploadImage(it)
                                         }

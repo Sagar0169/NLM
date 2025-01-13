@@ -1,5 +1,6 @@
 package com.nlm.ui.activity.national_livestock_mission
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.util.Log
 import android.view.View
@@ -157,6 +158,7 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
     override fun setVariables() {
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun setObservers() {
         viewModel.fpFromForestLandAddEditResult.observe(this){
             val userResponseModel = it
@@ -212,6 +214,11 @@ class NlmFpForestLandActivity : BaseActivity<ActivityNlmFpForestLandBinding>(), 
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.rvFpFromForestLand?.showView()
                 } else {
+                    if (userResponseModel._result.is_add) {
+                        mBinding?.fabAddAgency?.showView()
+                    } else {
+                        mBinding?.fabAddAgency?.hideView()
+                    }
                     mBinding?.tvNoDataFound?.showView()
                     mBinding?.rvFpFromForestLand?.hideView()
                 }
