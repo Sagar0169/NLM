@@ -874,6 +874,12 @@ class AddNewMobileVeterinaryUnitBlock :
                             userResponseModel.message
                         )
                     }
+                    mBinding?.llUploadOne?.hideView()
+                    mBinding?.llUploadTwo?.showView()
+                    mBinding?.llUploadThree?.showView()
+                    mBinding?.llUploadFour?.showView()
+                    mBinding?.llUploadFive?.showView()
+
 
                 } else {
                     uploadedDocumentName = userResponseModel._result.document_name

@@ -51,6 +51,7 @@ class AvailabilityOfEquipmentAdapter(
         holder.binding.etListOfEquipment.isEnabled = false
         holder.binding.etYearOfProcurement.isEnabled = false
         holder.binding.etMake.isEnabled = false
+        holder.binding.btnEdit.showView()
         if (viewEdit == "view" ||
             getPreferenceOfScheme(
                 context,
@@ -59,8 +60,7 @@ class AvailabilityOfEquipmentAdapter(
             )?.role_id == 8
         ) {
             holder.binding.btnDelete.hideView()
-        } else if (viewEdit == "edit") {
-            holder.binding.btnEdit.showView()
+            holder.binding.btnEdit.hideView()
         }
         holder.binding.etListOfEquipment.setText(currentItem.list_of_equipment)
         holder.binding.etMake.setText(currentItem.make)

@@ -1280,7 +1280,7 @@ class ImportOfExoticGoatForms : BaseActivity<ActivityImportOfExoticGoatBinding>(
         }
         viewModel.getDropDownApi(
             this, loader, GetDropDownRequest(
-                20,
+                100,
                 "Districts",
                 currentPage,
                 getPreferenceOfScheme(

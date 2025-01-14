@@ -214,12 +214,12 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
                     if (currentPage == 1) {
                         districtList.clear()
 
-                        val remainingCount = userResponseModel.total_count % 30
+                        val remainingCount = userResponseModel.total_count % 100
                         totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 30
+                            val count = userResponseModel.total_count / 100
                             count
                         } else {
-                            val count = userResponseModel.total_count / 30
+                            val count = userResponseModel.total_count / 100
                             count + 1
                         }
                     }
@@ -536,7 +536,7 @@ class ArtificialInseminationForms : BaseActivity<ActivityArtificialInseminationB
         }
         viewModel.getDropDownApi(
             this, loader, GetDropDownRequest(
-                30,
+                100,
                 "Districts",
                 currentPage,
                 getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.state_code,

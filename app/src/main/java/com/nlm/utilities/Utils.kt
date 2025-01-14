@@ -902,10 +902,11 @@ object Utility {
         var view = view
         val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
         view = snackbar.view
+        view.setBackgroundColor(Color.parseColor("#000000"))
         val params = view.layoutParams as FrameLayout.LayoutParams
         params.gravity = Gravity.BOTTOM
         view.layoutParams = params
-        view.setBackgroundColor(Color.parseColor("#DD4552"))
+
         snackbar.show()
     }
 

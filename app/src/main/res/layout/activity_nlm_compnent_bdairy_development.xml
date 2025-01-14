@@ -290,6 +290,7 @@
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
+                            android:textColorHint="@color/grey"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
                     </LinearLayout>

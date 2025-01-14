@@ -50,6 +50,7 @@ class SemenDoseAdapter(
         holder.binding.etTwentyTwo.isEnabled = false
         holder.binding.etTwentyThree.isEnabled = false
         holder.binding.etTwentyFour.isEnabled = false
+        holder.binding.btnEdit.showView()
         if (viewEdit == "view" ||
             getPreferenceOfScheme(
                 context,
@@ -59,8 +60,7 @@ class SemenDoseAdapter(
         ) {
 
             holder.binding.btnDelete.hideView()
-        } else if (viewEdit == "edit") {
-            holder.binding.btnEdit.showView()
+            holder.binding.btnEdit.hideView()
         }
         holder.binding.etNameOfBreed.setText(currentItem.name_of_breed)
         holder.binding.etTwentyTwo.setText(currentItem.twentyOne_twentyTwo)

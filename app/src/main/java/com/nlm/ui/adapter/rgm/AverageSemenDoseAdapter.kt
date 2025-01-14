@@ -61,7 +61,7 @@ class AverageSemenDoseAdapter(
             holder.binding.btnEdit.showView()
         }
         holder.binding.etBreedMaintained.setText(currentItem.breed_maintained)
-        currentItem.no_of_animals.toString().let { holder.binding.etAnimal.setText(it) }
+        holder.binding.etAnimal.setText(currentItem.no_of_animals?.toString() ?: "")
         holder.binding.etAvgAge.setText(currentItem.average_age)
         // Delete row
         holder.binding.btnDelete.setOnClickListener {

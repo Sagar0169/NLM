@@ -68,7 +68,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
     private var documentName: String? = null
     private var isImageSet:Boolean=false
     var filePath:String?=null
-    private lateinit var selectedImageUri:Uri
+//    private lateinit var selectedImageUri:Uri
     var body: MultipartBody.Part? = null
     var isFromApplication = 0
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -820,8 +820,6 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
     override fun showImage(bitmap: Bitmap) {
         // Override to display the image in this activity
         Log.d("TAG", isFromApplication.toString())
-        val imageUri = saveBitmapAsUri(bitmap)
-        selectedImageUri=imageUri
         when (isFromApplication) {
             1 -> {
                 mBinding?.llUploadOne?.showView()
@@ -903,56 +901,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
     }
 
 
-private fun setImage(uri:Uri){
-    when (isFromApplication) {
 
-        1 -> {
-
-            mBinding?.llUploadOne?.showView()
-            mBinding?.ivPicOne?.setImageURI(selectedImageUri)
-
-
-        }
-
-        2 -> {
-            mBinding?.llUploadTwo?.showView()
-            mBinding?.ivPicTwo?.setImageURI(selectedImageUri)
-
-        }
-
-        3 -> {
-            mBinding?.llUploadThree?.showView()
-            mBinding?.ivPicThree?.setImageURI(selectedImageUri)
-
-        }
-
-        4 -> {
-            mBinding?.llUploadFour?.showView()
-            mBinding?.ivPicFour?.setImageURI(selectedImageUri)
-
-        }
-
-        5 -> {
-            mBinding?.llUploadFive?.showView()
-            mBinding?.ivPicFive?.setImageURI(selectedImageUri)
-
-        }
-
-        else -> {}
-    }
-}
-    private fun saveBitmapAsUri(bitmap: Bitmap): Uri {
-        val file = File(cacheDir, "${System.currentTimeMillis()}.jpg")
-        file.outputStream().use { outStream ->
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
-            outStream.flush()
-        }
-        return FileProvider.getUriForFile(
-            this,
-            "${applicationContext.packageName}.provider",
-            file
-        )
-    }
 
     private fun openOnlyPdfAccordingToPosition() {
         checkStoragePermission(this)
@@ -968,111 +917,109 @@ private fun setImage(uri:Uri){
 //                }
 
                 PICK_IMAGE -> {
-                     selectedImageUri = data?.data!!
-                    if (selectedImageUri != null) {
-                        val uriPathHelper = URIPathHelper()
-                         filePath = uriPathHelper.getPath(this, selectedImageUri)
+                    val selectedImageUri = data?.data!!
+                    val uriPathHelper = URIPathHelper()
+                    filePath = uriPathHelper.getPath(this, selectedImageUri)
 
-                        val fileExtension =
-                            filePath?.substringAfterLast('.', "").orEmpty().lowercase()
-                        // Validate file extension
-                        if (fileExtension in listOf("png", "jpg", "jpeg")) {
-                          val file = filePath?.let { File(it) }
+                    val fileExtension =
+                        filePath?.substringAfterLast('.', "").orEmpty().lowercase()
+                    // Validate file extension
+                    if (fileExtension in listOf("png", "jpg", "jpeg")) {
+                      val file = filePath?.let { File(it) }
 
-                            // Check file size (5 MB = 5 * 1024 * 1024 bytes)
-                            file?.let {
-                                val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
-                                if (fileSizeInMB <= 5 ) {
-                                    when (isFromApplication) {
+                        // Check file size (5 MB = 5 * 1024 * 1024 bytes)
+                        file?.let {
+                            val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
+                            if (fileSizeInMB <= 5 ) {
+                                when (isFromApplication) {
 
-                                        1 -> {
+                                    1 -> {
 
-                                            mBinding?.llUploadOne?.showView()
-                                            mBinding?.ivPicOne?.setImageURI(selectedImageUri)
-                                            mBinding?.ivPicOne?.setOnClickListener {
+                                        mBinding?.llUploadOne?.showView()
+                                        mBinding?.ivPicOne?.setImageURI(selectedImageUri)
+                                        mBinding?.ivPicOne?.setOnClickListener {
 
-                                                filePath?.let { it1 ->
-                                                    Utility.showImageDialog(
-                                                        this,
-                                                        it1
-                                                    )
-                                                }
-
-                                            }
-                                            uploadImage(it)
-
-                                        }
-
-                                        2 -> {
-                                            mBinding?.llUploadTwo?.showView()
-                                            mBinding?.ivPicTwo?.setImageURI(selectedImageUri)
-                                            mBinding?.ivPicTwo?.setOnClickListener {
-
-                                                filePath?.let { it1 ->
-                                                    Utility.showImageDialog(
-                                                        this,
-                                                        it1
-                                                    )
-                                                }
-
+                                            filePath?.let { it1 ->
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    it1
+                                                )
                                             }
 
-                                            uploadImage(it)
                                         }
+                                        uploadImage(it)
 
-                                        3 -> {
-                                            mBinding?.llUploadThree?.showView()
-                                            mBinding?.ivPicThree?.setImageURI(selectedImageUri)
-                                            mBinding?.ivPicThree?.setOnClickListener {
-
-                                                filePath?.let { it1 ->
-                                                    Utility.showImageDialog(
-                                                        this,
-                                                        it1
-                                                    )
-                                                }
-
-                                            }
-                                            uploadImage(it)
-                                        }
-
-                                        4 -> {
-                                            mBinding?.llUploadFour?.showView()
-                                            mBinding?.ivPicFour?.setImageURI(selectedImageUri)
-                                            mBinding?.ivPicFour?.setOnClickListener {
-                                                filePath?.let { it1 ->
-                                                    Utility.showImageDialog(
-                                                        this,
-                                                        it1
-                                                    )
-                                                }
-                                            }
-                                            uploadImage(it)
-                                        }
-
-                                        5 -> {
-                                            mBinding?.llUploadFive?.showView()
-                                            mBinding?.ivPicFive?.setImageURI(selectedImageUri)
-                                            mBinding?.ivPicFive?.setOnClickListener {
-                                                filePath?.let { it1 ->
-                                                    Utility.showImageDialog(
-                                                        this,
-                                                        it1
-                                                    )
-                                                }
-                                            }
-                                            uploadImage(it)
-                                        }
-
-                                        else -> {}
                                     }
-                                } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+
+                                    2 -> {
+                                        mBinding?.llUploadTwo?.showView()
+                                        mBinding?.ivPicTwo?.setImageURI(selectedImageUri)
+                                        mBinding?.ivPicTwo?.setOnClickListener {
+
+                                            filePath?.let { it1 ->
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    it1
+                                                )
+                                            }
+
+                                        }
+
+                                        uploadImage(it)
+                                    }
+
+                                    3 -> {
+                                        mBinding?.llUploadThree?.showView()
+                                        mBinding?.ivPicThree?.setImageURI(selectedImageUri)
+                                        mBinding?.ivPicThree?.setOnClickListener {
+
+                                            filePath?.let { it1 ->
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    it1
+                                                )
+                                            }
+
+                                        }
+                                        uploadImage(it)
+                                    }
+
+                                    4 -> {
+                                        mBinding?.llUploadFour?.showView()
+                                        mBinding?.ivPicFour?.setImageURI(selectedImageUri)
+                                        mBinding?.ivPicFour?.setOnClickListener {
+                                            filePath?.let { it1 ->
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    it1
+                                                )
+                                            }
+                                        }
+                                        uploadImage(it)
+                                    }
+
+                                    5 -> {
+                                        mBinding?.llUploadFive?.showView()
+                                        mBinding?.ivPicFive?.setImageURI(selectedImageUri)
+                                        mBinding?.ivPicFive?.setOnClickListener {
+                                            filePath?.let { it1 ->
+                                                Utility.showImageDialog(
+                                                    this,
+                                                    it1
+                                                )
+                                            }
+                                        }
+                                        uploadImage(it)
+                                    }
+
+                                    else -> {}
                                 }
+                            } else {
+                                mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
                             }
-                        } else {
-                            mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
                         }
+                    } else {
+                        mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
                     }
                 }
 
