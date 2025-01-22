@@ -375,6 +375,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="import_of_exotic_sheep_and_goat_gernplasm">Import of exotic sheep and goat gernplasm</string>
     <string name="implementing_agency_document">implementing_agency</string>
     <string name="rsp_laboratory_semen_document">rsp-laboratory-semen</string>
+    <string name="rgm_ai_center_document">rgm-ai-center</string>
     <string name="fsp_plant_storage_document">FspPlantStorage</string>
     <string name="fp_from_non_forest_document">fpfrom_non_forest</string>
     <string name="assistance_for_ea_document">assistance-for-ea</string>

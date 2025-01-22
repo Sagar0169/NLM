@@ -41,7 +41,7 @@ class RGMIAList : BaseActivity<ActivityListOfRgmIaBinding>() {
         )
         implementingAgency()
         mBinding!!.fabAddAgency.setOnClickListener{
-            val intent = Intent(this@RGMIAList, RGMStateImplementingAgency::class.java).putExtra("isFrom",1)
+            val intent = Intent(this@RGMIAList, AddRgmAiCenterAcitivity::class.java).putExtra("isFrom",1)
             startActivity(intent)
         }
     }
