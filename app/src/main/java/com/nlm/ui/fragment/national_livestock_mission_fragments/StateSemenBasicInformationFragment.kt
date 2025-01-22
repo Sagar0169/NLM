@@ -208,12 +208,12 @@ class StateSemenBasicInformationFragment(
                     if (currentPage == 1) {
                         districtList.clear()
 
-                        val remainingCount = userResponseModel.total_count % 10
+                        val remainingCount = userResponseModel.total_count % 100
                         totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count
                         } else {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count + 1
                         }
                     }
@@ -581,7 +581,7 @@ class StateSemenBasicInformationFragment(
         }
         viewModel.getDropDownApi(
             requireContext(), loader, GetDropDownRequest(
-                20,
+                100,
                 "Districts",
                 currentPage,
                 getPreferenceOfScheme(

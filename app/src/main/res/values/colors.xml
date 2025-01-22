@@ -11,8 +11,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="darkBlue">#1C6AAA</color>
     <color name="orange">#F68A1E</color>
-    <color name="lightRed">#dd4552</color>
-    <color name="rippleRed">#fce0e0</color>
+    <color name="lightRed">#FB0505</color>
+    <color name="rippleRed">#FB0505</color>
     <color name="lightGrey">#f3f3f3</color>
     <color name="light_gray">#E0E0E0</color> <!-- Customize the color code as per your design -->
     <color name="text_gray">#555555</color> <!-- Text color to match the design -->

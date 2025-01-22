@@ -1197,6 +1197,7 @@ class AddNlmFpForestLandActivity : BaseActivity<ActivityAddNlmFpForestLandBindin
                             variety_of_fodder = mBinding?.etVariteryFodder?.text.toString(),
                             grant_received = mBinding?.etGrantReceived?.text.toString(),
                             district_code = districtIdIA,
+
                             lattitude_ia = latitude,
                             longitude_ia = longitude
                         )

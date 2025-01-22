@@ -274,7 +274,11 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
                             userResponseModel.message
                         )
                     }
-
+                    mBinding?.llUploadOne?.hideView()
+                    mBinding?.llUploadTwo?.showView()
+                    mBinding?.llUploadThree?.showView()
+                    mBinding?.llUploadFour?.showView()
+                    mBinding?.llUploadFive?.showView()
                 } else {
                     uploadedDocumentName = userResponseModel._result.document_name
                     dialogDocName?.text = userResponseModel._result.document_name

@@ -487,6 +487,7 @@ private fun GlideImage(imageView:ShapeableImageView,   uploadedDocumentName:Stri
 
         fun deleteDocumentOneA(view: View){
             mBinding?.llUpload1a?.hideView()
+
             mBinding?.tvDocumentName1a?.text = null
             mBinding?.etChooseFile1a?.text = ""
             body = null
@@ -500,7 +501,7 @@ private fun GlideImage(imageView:ShapeableImageView,   uploadedDocumentName:Stri
         fun deleteDocumentOneB(view: View){
             mBinding?.llUpload1b?.hideView()
             mBinding?.tvDocumentName1b?.text = null
-            mBinding?.tvDocumentName1b?.text = ""
+            mBinding?.etChooseFile1b?.text = ""
             body = null
         }
 
@@ -512,7 +513,7 @@ private fun GlideImage(imageView:ShapeableImageView,   uploadedDocumentName:Stri
         fun deleteDocumentOneC(view: View){
             mBinding?.llUpload1c?.hideView()
             mBinding?.tvDocumentName1c?.text = null
-            mBinding?.tvDocumentName1c?.text = ""
+            mBinding?.etChooseFile1c?.text = ""
             body = null
         }
 
@@ -524,7 +525,7 @@ private fun GlideImage(imageView:ShapeableImageView,   uploadedDocumentName:Stri
         fun deleteDocumentOneD(view: View){
             mBinding?.llUpload1d?.hideView()
             mBinding?.tvDocumentName1d?.text = null
-            mBinding?.tvDocumentName1d?.text = ""
+            mBinding?.etChooseFile1d?.text = ""
             body = null
         }
 
@@ -536,7 +537,7 @@ private fun GlideImage(imageView:ShapeableImageView,   uploadedDocumentName:Stri
         fun deleteDocumentOneE(view: View){
             mBinding?.llUpload1e?.hideView()
             mBinding?.tvDocumentName1e?.text = null
-            mBinding?.tvDocumentName1e?.text = ""
+            mBinding?.etChoosefile1e?.text = ""
             body = null
         }
 
@@ -548,7 +549,7 @@ private fun GlideImage(imageView:ShapeableImageView,   uploadedDocumentName:Stri
         fun deleteDocumentTwo(view: View){
             mBinding?.llUpload2?.hideView()
             mBinding?.tvDocumentName2?.text = null
-            mBinding?.tvDocumentName2?.text = ""
+            mBinding?.etChooseFile2?.text = ""
             body = null
         }
 
@@ -560,7 +561,7 @@ private fun GlideImage(imageView:ShapeableImageView,   uploadedDocumentName:Stri
         fun deleteDocumentThree(view: View){
             mBinding?.llUpload3?.hideView()
             mBinding?.tvDocumentName3?.text = null
-            mBinding?.tvDocumentName3?.text = ""
+            mBinding?.etChooseFile3?.text = ""
             body = null
         }
     }
