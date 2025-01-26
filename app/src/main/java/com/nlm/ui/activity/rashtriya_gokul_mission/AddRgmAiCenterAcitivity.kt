@@ -57,6 +57,7 @@ import com.nlm.ui.adapter.TrainingInstituteAdapter
 import com.nlm.ui.adapter.rgm.AvailabilityOfEquipmentAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.CommonUtils.showToast
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
@@ -128,30 +129,35 @@ class AddRgmAiCenterAcitivity() : BaseActivity<ActivityAddRgmAiCenterAcitivityBi
             }
         }
     }
-    private val stateList = listOf(
-        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
-        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
-        "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
-        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
-        "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
-        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep",
-        "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
-    )
+    private var remarkRadio: Int? = 0
 
     private val center = listOf(
-        "Stationary", "Mobile"
+        ResultGetDropDown(-1, "Stationary"),
+        ResultGetDropDown(-1, "Mobile"),
     )
-    private val agency = listOf(
-        "Government", "COOP", "NGO", "MAITRI"
 
+    private val agency = listOf(
+        ResultGetDropDown(-1, "Government"),
+        ResultGetDropDown(-1, "COOP"),
+        ResultGetDropDown(-1, "NGO"),
+        ResultGetDropDown(-1, "MAITRI"),
     )
+
     private val categoryWorker = listOf(
-        "Veterinary", "Stock Man", "Lay Inseminator", "MAITRI"
+        ResultGetDropDown(-1, "Veterinary"),
+        ResultGetDropDown(-1, "Stock Man"),
+        ResultGetDropDown(-1, "Lay Inseminator"),
+        ResultGetDropDown(-1, "MAITRI"),
     )
+
     private val qualificationWorker = listOf(
-        "B.V.Sc", "Graduate", "12th Std", "Others"
+        ResultGetDropDown(-1, "B.V.Sc"),
+        ResultGetDropDown(-1, "Graduate"),
+        ResultGetDropDown(-1, "12th Std"),
+        ResultGetDropDown(-1, "Others"),
     )
+
+
     override val layoutId: Int
         get() = R.layout.activity_add_rgm_ai_center_acitivity
 
@@ -174,13 +180,36 @@ class AddRgmAiCenterAcitivity() : BaseActivity<ActivityAddRgmAiCenterAcitivityBi
             Result::class.java
         )?.state_name
         mBinding?.tvState?.isEnabled = false
-        if (viewEdit == "view" ||
-            getPreferenceOfScheme(
-                this,
-                AppConstants.SCHEME,
-                Result::class.java
-            )?.role_id == 8
-        ) {
+
+        mBinding?.rgRemarksOfNlm?.setOnCheckedChangeListener { group, checkedId ->
+            remarkRadio = when (checkedId) {
+                R.id.rbCooperation -> {
+                    mBinding?.llDetails?.showView()
+                    mBinding?.llSupportDocumentNlm?.showView()
+                    1
+                }
+                R.id.rbNonCoorperation -> {
+                    mBinding?.llDetails?.hideView()
+                    mBinding?.llSupportDocumentNlm?.hideView()
+                    2
+                }
+                R.id.rbPartialData -> {
+                    mBinding?.llDetails?.showView()
+                    mBinding?.llSupportDocumentNlm?.showView()
+                    3
+                }
+                R.id.rbNotProvided -> {
+                    mBinding?.llDetails?.hideView()
+                    mBinding?.llSupportDocumentNlm?.hideView()
+                    4
+                }
+                else -> null
+            }
+        }
+
+
+
+        if (viewEdit == "view"){
             mBinding?.tvState?.isEnabled = false
             mBinding?.tvDistrict?.isEnabled = false
 //            mBinding?.etLocation?.isEnabled = false
@@ -213,10 +242,10 @@ class AddRgmAiCenterAcitivity() : BaseActivity<ActivityAddRgmAiCenterAcitivityBi
 //
 //            mBinding?.tvAddMore1?.isEnabled = false
 //            mBinding?.tvAddMore1?.hideView()
-            mBinding?.tvAddMore2?.isEnabled = false
-            mBinding?.tvAddMore2?.hideView()
-            mBinding?.tvAddSemenDose?.isEnabled = false
-            mBinding?.tvAddSemenDose?.hideView()
+//            mBinding?.tvAddMore2?.isEnabled = false
+//            mBinding?.tvAddMore2?.hideView()
+//            mBinding?.tvAddSemenDose?.isEnabled = false
+//            mBinding?.tvAddSemenDose?.hideView()
 
             mBinding?.tvSaveDraft?.hideView()
             mBinding?.tvSendOtp?.hideView()
@@ -295,10 +324,22 @@ class AddRgmAiCenterAcitivity() : BaseActivity<ActivityAddRgmAiCenterAcitivityBi
 
         // Initialize based on type
         when (type) {
-//            "typeSemen" -> {
-//                selectedList = typeSemen
-//                selectedTextView = mBinding!!.tvSemenStation
-//            }
+            "center" -> {
+                selectedList = center
+                selectedTextView = mBinding!!.tvCentre
+            }
+            "agency" -> {
+                selectedList = agency
+                selectedTextView = mBinding!!.tvAgency
+            }
+            "categoryWorker" -> {
+                selectedList = categoryWorker
+                selectedTextView = mBinding!!.tvCategoryWorker
+            }
+            "qualificationWorker" -> {
+                selectedList = qualificationWorker
+                selectedTextView = mBinding!!.tvQualificationWorker
+            }
 //
 //            "StateNDD" -> {
 //                selectedList = stateList
@@ -430,6 +471,19 @@ class AddRgmAiCenterAcitivity() : BaseActivity<ActivityAddRgmAiCenterAcitivityBi
 
         fun district(view: View) {
             showBottomSheetDialog("District")
+        }
+
+        fun center(view: View) {
+            showBottomSheetDialog("center")
+        }
+        fun agency(view: View) {
+            showBottomSheetDialog("agency")
+        }
+        fun categoryWorker(view: View) {
+            showBottomSheetDialog("categoryWorker")
+        }
+        fun qualificationWorker(view: View) {
+            showBottomSheetDialog("qualificationWorker")
         }
 
         fun save(view: View) {
@@ -865,7 +919,148 @@ class AddRgmAiCenterAcitivity() : BaseActivity<ActivityAddRgmAiCenterAcitivityBi
     }
 
     override fun setObservers() {
+        viewModel.getDropDownResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            } else {
+                if (userResponseModel?._result != null && userResponseModel._result.isNotEmpty()) {
+                    if (currentPage == 1) {
+                        districtList.clear()
+
+                        val remainingCount = userResponseModel.total_count % 100
+                        totalPage = if (remainingCount == 0) {
+                            val count = userResponseModel.total_count / 100
+                            count
+                        } else {
+                            val count = userResponseModel.total_count / 100
+                            count + 1
+                        }
+                    }
+                    districtList.addAll(userResponseModel._result)
+                    stateAdapter.notifyDataSetChanged()
+
+//                    mBinding?.tvNoDataFound?.hideView()
+//                    mBinding?.rvArtificialInsemination?.showView()
+                } else {
+//                    mBinding?.tvNoDataFound?.showView()
+//                    mBinding?.rvArtificialInsemination?.hideView()
+                }
+            }
+        }
+        viewModel.getProfileUploadFileResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel != null) {
+                if (userResponseModel.statuscode == 401) {
+                    Utility.logout(this)
+                } else if (userResponseModel._resultflag == 0) {
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+
+                } else {
+                    DocumentId = userResponseModel._result.id
+                    UploadedDocumentName = userResponseModel._result.document_name
+                    DialogDocName?.text = userResponseModel._result.document_name
+                    TableName = userResponseModel._result.table_name
+                    mBinding?.clParent?.let { it1 ->
+                        showSnackbar(
+                            it1,
+                            userResponseModel.message
+                        )
+                    }
+                }
+            }
+        }
+        viewModel.rspLabAddResult.observe(this) {
+            val userResponseModel = it
+            if (userResponseModel.statuscode == 401) {
+                Utility.logout(this)
+            }
+            if (userResponseModel != null) {
+                if (userResponseModel._resultflag == 0) {
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                } else {
+                    TableName = userResponseModel.fileurl
+                    if (savedAsDraft) {
+                        savedAsDraftClick?.onSaveAsDraft()
+                    } else {
+                        if (viewEdit == "view" || viewEdit == "edit") {
+                            if (savedAsEdit) {
+                                listener?.onNextButtonClick()
+                                return@observe
+                            }
+                            districtId = userResponseModel._result.district_code
+//                            mBinding?.etLocation?.setText(userResponseModel._result.location)
+//                            mBinding?.tvDistrict?.text = userResponseModel._result.district_name
+//                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
+//                            mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
+//                            mBinding?.etPhone?.setText(userResponseModel._result.phone_no.toString())
+//                            mBinding?.etYear?.setText(userResponseModel._result.year_of_establishment)
+//                            mBinding?.etAddress?.setText(userResponseModel._result.address)
+//                            mBinding?.etCommentsNlm?.setText(userResponseModel._result.comments_infrastructure)
+//                            mBinding?.etFund?.setText(userResponseModel._result.fund_properly_utilized)
+//                            mBinding?.etSemen?.setText(userResponseModel._result.semen_straws_produced)
+//                            mBinding?.etMsp?.setText(userResponseModel._result.processing_semen)
+//                            mBinding?.etUnit?.setText(userResponseModel._result.equipments_per_msp)
+//                            mBinding?.etPhysical?.setText(userResponseModel._result.suggestions_physical)
+//                            mBinding?.etFinancial?.setText(userResponseModel._result.suggestions_financial)
+//                            mBinding?.etAnyOther?.setText(userResponseModel._result.suggestions_any_other)
+//                            addBucksList.clear()
+//                            if (userResponseModel._result.rsp_laboratory_semen_station_quality_buck?.isEmpty() == true && viewEdit == "view") {
+//                                // Add dummy data with default values
+//                                val dummyData = RspBreedList(
+//                                    id = 0, // Or null, depending on your use case
+//                                    breed_maintained = "",
+//                                    no_of_animals = null,
+//                                    average_age = "",
+//                                )
+//
+//                                addBucksList.add(dummyData)
+//                            } else {
+//                                userResponseModel._result.rsp_laboratory_semen_station_quality_buck?.let { it1 ->
+//                                    addBucksList.addAll(
+//                                        it1
+//                                    )
+//                                }
+//                            }
+
+//                            addBuckAdapter?.notifyDataSetChanged()
+                            DocumentList.clear()
+                            totalListDocument.clear()
+                            viewDocumentList.clear()
+                            if (userResponseModel._result.rsp_laboratory_semen_document.isEmpty() && viewEdit == "view") {
+
+                            } else {
+                                userResponseModel._result.rsp_laboratory_semen_document.forEach { document ->
+                                    if (document.ia_document == null) {
+                                        DocumentList.add(document)
+                                    } else {
+                                        viewDocumentList.add(document)
+
+                                    }
+                                }
+                            }
+                            addDocumentAdapter?.notifyDataSetChanged()
+
+
+                        } else {
+                            this.onBackPressedDispatcher.onBackPressed()
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        }
+
+                    }
+
+
+                }
+            }
+        }
+
     }
+
     override fun onResume() {
         super.onResume()
         Log.d("EXECUTION","ON RESUME EXECUTED")

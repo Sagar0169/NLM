@@ -7,428 +7,427 @@
     </data>
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
 
-        <RelativeLayout
-            android:layout_margin="8dp"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-      >
-            <androidx.cardview.widget.CardView
+            android:layout_margin="@dimen/dp_10"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal"
+            app:cardCornerRadius="@dimen/dp_20"
+            app:cardElevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="@dimen/dp_20"
-                android:layout_margin="@dimen/dp_10"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:weightSum="2">
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/llParent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:weightSum="2">
+                    android:layout_weight="1.7"
+                    android:background="@drawable/curve_all_corner_bg_item_white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <!--                        <LinearLayout-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:orientation="horizontal">-->
+
+                    <!--                            <androidx.appcompat.widget.AppCompatTextView-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_weight="1"-->
+                    <!--                                android:fontFamily="@font/inter_medium"-->
+                    <!--                                android:text="Id"-->
+                    <!--                                android:textColor="@color/black"-->
+
+                    <!--                                android:textSize="14sp" />-->
+
+                    <!--                            <androidx.appcompat.widget.AppCompatTextView-->
+                    <!--                                android:layout_width="0dp"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_weight="0.1"-->
+                    <!--                                android:fontFamily="@font/poppins_bold"-->
+                    <!--                                android:gravity="center"-->
+                    <!--                                android:text=":"-->
+                    <!--                                android:textColor="@color/black"-->
+                    <!--                                android:textSize="14sp" />-->
+
+                    <!--                            <androidx.appcompat.widget.AppCompatTextView-->
+                    <!--                                android:id="@+id/etID"                            android:layout_width="0dp"-->
+                    <!--                                android:layout_height="wrap_content"-->
+
+                    <!--                                android:layout_marginEnd="@dimen/dp_3"-->
+                    <!--                                android:layout_weight="1"-->
+                    <!--                                android:drawablePadding="@dimen/dp_5"-->
+                    <!--                                android:fontFamily="@font/inter_light"-->
+                    <!--                                android:maxLines="2"-->
+                    <!--                                android:singleLine="false"-->
+                    <!--                                android:text="NA"-->
+                    <!--                                android:textColor="@color/textGrey"-->
+                    <!--                                android:textSize="14sp" />-->
+                    <!--                        </LinearLayout>-->
                     <LinearLayout
-                        android:id="@+id/llParent"
-                        android:layout_width="0dp"
-                        android:layout_weight="1.7"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/curve_all_corner_bg_item_white"
-                        android:orientation="vertical"
-                        android:padding="@dimen/dp_10"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:orientation="horizontal">
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:orientation="horizontal">-->
-
-<!--                            <androidx.appcompat.widget.AppCompatTextView-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:fontFamily="@font/inter_medium"-->
-<!--                                android:text="Id"-->
-<!--                                android:textColor="@color/black"-->
-
-<!--                                android:textSize="14sp" />-->
-
-<!--                            <androidx.appcompat.widget.AppCompatTextView-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="0.1"-->
-<!--                                android:fontFamily="@font/poppins_bold"-->
-<!--                                android:gravity="center"-->
-<!--                                android:text=":"-->
-<!--                                android:textColor="@color/black"-->
-<!--                                android:textSize="14sp" />-->
-
-<!--                            <androidx.appcompat.widget.AppCompatTextView-->
-<!--                                android:id="@+id/etID"                            android:layout_width="0dp"-->
-<!--                                android:layout_height="wrap_content"-->
-
-<!--                                android:layout_marginEnd="@dimen/dp_3"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:drawablePadding="@dimen/dp_5"-->
-<!--                                android:fontFamily="@font/inter_light"-->
-<!--                                android:maxLines="2"-->
-<!--                                android:singleLine="false"-->
-<!--                                android:text="NA"-->
-<!--                                android:textColor="@color/textGrey"-->
-<!--                                android:textSize="14sp" />-->
-<!--                        </LinearLayout>-->
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:orientation="horizontal">
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="Agency Name"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/inter_medium"
-                                android:text="Agency Name"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.1"
-                                android:fontFamily="@font/poppins_bold"
-                                android:gravity="center"
-                                android:text=":"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etAgencyName"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/dp_3"
-                                android:layout_weight="1"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/inter_light"
-
-                                android:text="@string/na"
-                                android:textColor="@color/textGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/inter_medium"
-                                android:text="State"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.1"
-                                android:fontFamily="@font/poppins_bold"
-                                android:gravity="center"
-                                android:text=":"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etState"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/dp_3"
-                                android:layout_weight="1"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/inter_light"
-
-                                android:text="@string/na"
-                                android:textColor="@color/textGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/inter_medium"
-                                android:text="District"
-
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.1"
-                                android:fontFamily="@font/poppins_bold"
-                                android:gravity="center"
-                                android:text=":"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etDistrict"                            android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/dp_3"
-                                android:layout_weight="1"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/inter_light"
-
-                                android:text="@string/na"
-                                android:textColor="@color/textGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/inter_medium"
-                                android:textColor="@color/black"
-                                android:id="@+id/Ceo_name"
-                                android:text="CEO Name"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.1"
-                                android:fontFamily="@font/poppins_bold"
-                                android:gravity="center"
-                                android:text=":"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etCeo_name"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginEnd="@dimen/dp_3"
-                                android:layout_weight="1"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/inter_light"
-                                android:maxLines="2"
-                                android:singleLine="false"
-                                android:text="NA"
-                                android:textColor="@color/textGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/inter_medium"
-                                android:textColor="@color/black"
-                                android:id="@+id/status_IA"
-                                android:text="IA Status"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.1"
-                                android:fontFamily="@font/poppins_bold"
-                                android:gravity="center"
-                                android:text=":"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etStatus"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginEnd="@dimen/dp_3"
-                                android:layout_weight="1"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/inter_light"
-                                android:maxLines="2"
-                                android:singleLine="false"
-                                android:text="NA"
-                                android:textColor="@color/textGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/inter_medium"
-                                android:textColor="@color/black"
-                                android:id="@+id/status_nlm"
-                                android:text="NLM Status"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.1"
-                                android:fontFamily="@font/poppins_bold"
-                                android:gravity="center"
-                                android:text=":"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etStatus_nlm"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-
-                                android:layout_marginEnd="@dimen/dp_3"
-                                android:layout_weight="1"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/inter_light"
-                                android:maxLines="2"
-                                android:singleLine="false"
-                                android:text="NA"
-                                android:textColor="@color/textGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/inter_medium"
-                                android:text="Created"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.1"
-                                android:fontFamily="@font/poppins_bold"
-                                android:gravity="center"
-                                android:text=":"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etCreated"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/dp_3"
-                                android:layout_weight="1"
-                                android:drawablePadding="@dimen/dp_5"
-                                android:fontFamily="@font/inter_light"
-
-                                android:text="@string/na"
-                                android:textColor="@color/textGrey"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-
-
-
-
-
-
-
-
-                        <LinearLayout
-                            android:id="@+id/llActions"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:layout_marginBottom="-5dp"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/poppins_bold"
                             android:gravity="center"
-                            android:orientation="horizontal"
-                            app:layout_constraintEnd_toEndOf="@id/llParent"
-                            app:layout_constraintStart_toStartOf="@id/llParent"
-                            app:layout_constraintTop_toBottomOf="@id/llParent">
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-                            <!-- View Icon -->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/etAgencyName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:fontFamily="@font/inter_light"
 
-
-                            <ImageView
-                                android:id="@+id/ivView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_5"
-                                android:contentDescription="View"
-                                android:padding="@dimen/dp_5"
-                                android:src="@drawable/ic_view"
-                                app:tint="@color/black" />
-
-                            <!-- Edit Icon -->
-                            <ImageView
-                                android:id="@+id/ivEdit"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_5"
-                                android:contentDescription="Edit"
-
-                                android:padding="@dimen/dp_5"
-                                android:src="@drawable/edit_icon"
-                                app:tint="@color/black" />
-
-                            <!-- Delete Icon -->
-                            <ImageView
-                                android:id="@+id/ivDelete"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/dp_5"
-                                android:contentDescription="Delete"
-
-                                android:padding="@dimen/dp_5"
-                                android:src="@drawable/ic_deleted"
-                                app:tint="@color/black" />
-                        </LinearLayout>
-
-
+                            android:text="@string/na"
+                            android:textColor="@color/textGrey"
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.3"
-                        android:background="@drawable/curve_all_corner_bg_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="State"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/etState"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:fontFamily="@font/inter_light"
+
+                            android:text="@string/na"
+                            android:textColor="@color/textGrey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="District"
+
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/etDistrict"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:fontFamily="@font/inter_light"
+
+                            android:text="@string/na"
+                            android:textColor="@color/textGrey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/Ceo_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="CEO Name"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/etCeo_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:fontFamily="@font/inter_light"
+                            android:maxLines="2"
+                            android:singleLine="false"
+                            android:text="NA"
+                            android:textColor="@color/textGrey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/status_IA"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="IA Status"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/etStatus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:fontFamily="@font/inter_light"
+                            android:maxLines="2"
+                            android:singleLine="false"
+                            android:text="NA"
+                            android:textColor="@color/textGrey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/status_nlm"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="NLM Status"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/etStatus_nlm"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:fontFamily="@font/inter_light"
+                            android:maxLines="2"
+                            android:singleLine="false"
+                            android:text="NA"
+                            android:textColor="@color/textGrey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="Created"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/etCreated"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_3"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:fontFamily="@font/inter_light"
+
+                            android:text="@string/na"
+                            android:textColor="@color/textGrey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/llActions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_marginBottom="-5dp"
+                        android:gravity="center"
                         android:orientation="horizontal"
-                        />
+                        app:layout_constraintEnd_toEndOf="@id/llParent"
+                        app:layout_constraintStart_toStartOf="@id/llParent"
+                        app:layout_constraintTop_toBottomOf="@id/llParent">
+
+                        <!-- View Icon -->
+
+
+                        <ImageView
+                            android:id="@+id/ivView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_5"
+                            android:contentDescription="View"
+                            android:padding="@dimen/dp_5"
+                            android:src="@drawable/ic_view"
+                            app:tint="@color/black" />
+
+                        <!-- Edit Icon -->
+                        <ImageView
+                            android:id="@+id/ivEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_5"
+                            android:contentDescription="Edit"
+
+                            android:padding="@dimen/dp_5"
+                            android:src="@drawable/edit_icon"
+                            app:tint="@color/black" />
+
+                        <!-- Delete Icon -->
+                        <ImageView
+                            android:id="@+id/ivDelete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_5"
+                            android:contentDescription="Delete"
+
+                            android:padding="@dimen/dp_5"
+                            android:src="@drawable/ic_deleted"
+                            app:tint="@color/black" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:background="@drawable/curve_all_corner_bg_item"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 </layout>

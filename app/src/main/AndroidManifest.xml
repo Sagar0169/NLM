@@ -50,13 +50,18 @@
         android:windowSoftInputMode="adjustResize|stateHidden"
         tools:targetApi="31">
         <activity
+            android:name=".ui.fragment.TrainingCenterNLMFragment"
+            android:exported="false" />
+        <activity
+            android:name=".ui.fragment.TrainingCenterIAFragement"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ImageGeoLocationActivity"
             android:exported="false" />
 
         <service
             android:name=".services.LocationService"
-            android:exported="false" />
-        <!-- Theme is optional and only needed if default theme has no action bar. -->
+            android:exported="false" /> <!-- Theme is optional and only needed if default theme has no action bar. -->
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
@@ -132,7 +137,6 @@
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.RGMAiCenterActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.RGMStateImplementingAgency"
             android:exported="false" />
@@ -218,11 +222,9 @@
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmEdpActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.activity.livestock_health_disease.vaccination_programme.VaccinationProgrammerActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryListActivity"
             android:exported="false" />
@@ -311,8 +313,7 @@
             android:name=".ui.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.rashtriya_gokul_mission.RGMIAList"
-
+            android:name=".ui.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -321,7 +322,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.SplashActivity"
+            android:name=".ui.activity.rashtriya_gokul_mission.RGMIAList"
             android:exported="false" />
 
         <receiver

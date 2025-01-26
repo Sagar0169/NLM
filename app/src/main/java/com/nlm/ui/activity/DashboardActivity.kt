@@ -567,6 +567,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
     @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     override fun onBackPressed() {
+        super.onBackPressed()
         finishAffinity()
         // This will close the app and all the activities in the task.
     }
@@ -731,7 +732,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                                 }
 
                                 236 -> {
-                                    mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
+                                    mBinding?.leftDrawerMenu?.tvAiCenter?.showView()
                                 }
 
                                 237 -> {
@@ -748,6 +749,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
                                 240 -> {
                                     mBinding?.leftDrawerMenu?.tvBreedMultiplication?.showView()
+                                }
+                                241 -> {
+                                    mBinding?.leftDrawerMenu?.tvVitroFertilization?.showView()
                                 }
                             }
                         }

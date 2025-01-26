@@ -40,7 +40,7 @@ import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.callBack.CallBackSemenDoseAvg
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
-import com.nlm.databinding.FragmentDetailsOfSemenStationBinding
+import com.nlm.databinding.FragmentTrainingCenterNLMBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.databinding.ItemRspBreedWiseBinding
 import com.nlm.databinding.ItemStateSemenInfragoatBinding
@@ -75,6 +75,7 @@ import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
+import com.nlm.utilities.toast
 import com.nlm.viewModel.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -85,13 +86,13 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 
-class DetailsOfSemenStationFragment(
+class TrainingCenterNLMFragment(
     private val viewEdit: String?,
     private val itemId: Int?,
     private val dId: Int?
-) : BaseFragment<FragmentDetailsOfSemenStationBinding>(), CallBackDeleteFSPAtId, CallBackBreedAvg,
+) : BaseFragment<FragmentTrainingCenterNLMBinding>(), CallBackDeleteFSPAtId, CallBackBreedAvg,
     CallBackDeleteAtId, CallBackItemUploadDocEdit {
-    private var mBinding: FragmentDetailsOfSemenStationBinding? = null
+    private var mBinding: FragmentTrainingCenterNLMBinding? = null
     private lateinit var stateAdapter: BottomSheetAdapter
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var viewDocumentList: ArrayList<ImplementingAgencyDocument>
@@ -150,10 +151,19 @@ class DetailsOfSemenStationFragment(
             }
         }
     }
+    private var remarkRadio: Int? = 0
+
+
+    private val controllingAgency = listOf(
+        ResultGetDropDown(-1, "DAH"),
+        ResultGetDropDown(-1, "LDB"),
+        ResultGetDropDown(-1, "Dairy Federation"),
+        ResultGetDropDown(-1, "NGO")
+    )
 
 
     override val layoutId: Int
-        get() = R.layout.fragment_details_of__semen__station
+        get() = R.layout.fragment_training_center_n_l_m
 
     override fun init() {
         mBinding = viewDataBinding
@@ -170,36 +180,70 @@ class DetailsOfSemenStationFragment(
         )?.state_name
         mBinding?.tvState?.isEnabled = false
         nlmAdapter()
-        if (viewEdit == "view" || getPreferenceOfScheme(
-                requireContext(),
-                AppConstants.SCHEME,
-                Result::class.java
-            )?.role_id == 8
-        ) {
+        mBinding?.rgRemarksOfNlm?.setOnCheckedChangeListener { group, checkedId ->
+            remarkRadio = when (checkedId) {
+                R.id.rbCooperation -> {
+                    mBinding?.tvAnyOther?.showView()
+                    mBinding?.llConstraints?.showView()
+                    mBinding?.tvComments?.showView()
+                    mBinding?.etCommentsOfNLM?.showView()
+                    mBinding?.llSupportDocumentNlm?.showView()
+                    1
+                }
+                R.id.rbNonCoorperation -> {
+                    mBinding?.tvAnyOther?.hideView()
+                    mBinding?.llConstraints?.hideView()
+                    mBinding?.tvComments?.hideView()
+                    mBinding?.etCommentsOfNLM?.hideView()
+                    mBinding?.llSupportDocumentNlm?.hideView()
+                    2
+                }
+                R.id.rbPartialData -> {
+                    mBinding?.tvAnyOther?.showView()
+                    mBinding?.llConstraints?.showView()
+                    mBinding?.tvComments?.showView()
+                    mBinding?.etCommentsOfNLM?.showView()
+                    mBinding?.llSupportDocumentNlm?.showView()
+                    3
+                }
+                R.id.rbNotProvided -> {
+                    mBinding?.tvAnyOther?.hideView()
+                    mBinding?.llConstraints?.hideView()
+                    mBinding?.tvComments?.hideView()
+                    mBinding?.etCommentsOfNLM?.hideView()
+                    mBinding?.llSupportDocumentNlm?.hideView()
+                    4
+                }
+                else -> null
+            }
+            showToast(remarkRadio.toString())
+        }
+        if (viewEdit == "view") {
 
             mBinding?.tvState?.isEnabled = false
             mBinding?.tvDistrict?.isEnabled = false
-            mBinding?.etLocation?.isEnabled = false
-            mBinding?.etPincode?.isEnabled = false
-            mBinding?.etPhone?.isEnabled = false
-            mBinding?.etGrading?.isEnabled = false
-            mBinding?.etAddress?.isEnabled = false
-            mBinding?.rbIsoYes?.isEnabled = false
-            mBinding?.rbIsoNo?.isEnabled = false
-            mBinding?.rbA?.isEnabled = false
-            mBinding?.rbB?.isEnabled = false
-            mBinding?.etAreaunder?.isEnabled = false
-            mBinding?.etAreafodder?.isEnabled = false
-            mBinding?.etInChargeSanctioned?.isEnabled = false
-            mBinding?.etInChargeFilled?.isEnabled = false
-            mBinding?.etVeterinaySanctioned?.isEnabled = false
-            mBinding?.etVeterinaryFilled?.isEnabled = false
-            mBinding?.etQualitySanctioned?.isEnabled = false
-            mBinding?.etQualityFilled?.isEnabled = false
-            mBinding?.etBullSanctioned?.isEnabled = false
-            mBinding?.etBullFilled?.isEnabled = false
-            mBinding?.etOtherSanctioned?.isEnabled = false
-            mBinding?.etOtherFilled?.isEnabled = false
+            mBinding?.etVillage?.isEnabled = false
+            mBinding?.etTaluka?.isEnabled = false
+            mBinding?.etYearOfSetting?.isEnabled = false
+            mBinding?.tvControllingAgency?.isEnabled = false
+            mBinding?.etAccredited?.isEnabled = false
+            mBinding?.rbInfraSufficient?.isEnabled = false
+            mBinding?.rbInfraNonSufficient?.isEnabled = false
+            mBinding?.rbCooperation?.isEnabled = false
+            mBinding?.rbNonCoorperation?.isEnabled = false
+            mBinding?.rbPartialData?.isEnabled = false
+            mBinding?.rbNotProvided?.isEnabled = false
+            mBinding?.etRemarks?.isEnabled = false
+            mBinding?.etCommentsOfNLM?.isEnabled = false
+            mBinding?.etConstraints?.isEnabled = false
+            mBinding?.rbFacilitiesSufficient?.isEnabled = false
+            mBinding?.rbFacilitiesNonSufficient?.isEnabled = false
+            mBinding?.etCivilStructures?.isEnabled = false
+            mBinding?.etEquipment?.isEnabled = false
+            mBinding?.etLibrary?.isEnabled = false
+            mBinding?.etFaculty?.isEnabled = false
+            mBinding?.etTraining?.isEnabled = false
+            mBinding?.etAnyOther?.isEnabled = false
             mBinding?.tvAddMore2?.isEnabled = false
             mBinding?.tvAddMore2?.hideView()
             mBinding?.tvSaveDraft?.hideView()
@@ -248,6 +292,8 @@ class DetailsOfSemenStationFragment(
             )
         )
     }
+
+
 
 
     override fun setVariables() {
@@ -330,10 +376,10 @@ class DetailsOfSemenStationFragment(
                                 return@observe
                             }
                             districtId = userResponseModel._result.district_code
-                            mBinding?.etLocation?.setText(userResponseModel._result.location)
-                            mBinding?.tvDistrict?.text = userResponseModel._result.district_name
-                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
-                            mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
+//                            mBinding?.etLocation?.setText(userResponseModel._result.location)
+//                            mBinding?.tvDistrict?.text = userResponseModel._result.district_name
+//                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
+//                            mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
 //                            mBinding?.etPhone?.setText(userResponseModel._result.phone_no.toString())
 //                            mBinding?.etYear?.setText(userResponseModel._result.year_of_establishment)
 //                            mBinding?.etAddress?.setText(userResponseModel._result.address)
@@ -537,6 +583,10 @@ class DetailsOfSemenStationFragment(
             showBottomSheetDialog("District")
         }
 
+        fun controllingAgency(view: View) {
+            showBottomSheetDialog("ControllingAgency")
+        }
+
         fun addDocDialog(view: View) {
             addDocumentDialog(requireContext(), null, null)
         }
@@ -567,10 +617,10 @@ class DetailsOfSemenStationFragment(
 
         // Initialize based on type
         when (type) {
-//            "typeSemen" -> {
-//                selectedList = typeSemen
-//                selectedTextView = mBinding!!.tvSemenStation
-//            }
+            "ControllingAgency" -> {
+                selectedList = controllingAgency
+                selectedTextView = mBinding!!.tvControllingAgency
+            }
 //
 //            "StateNDD" -> {
 //                selectedList = stateList
@@ -600,7 +650,9 @@ class DetailsOfSemenStationFragment(
         stateAdapter = BottomSheetAdapter(requireContext(), selectedList) { selectedItem, id ->
             // Handle state item click
             selectedTextView.text = selectedItem
-            districtId = id
+            if (id != -1) {
+                districtId = id
+            }
             selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             bottomSheetDialog.dismiss()
         }

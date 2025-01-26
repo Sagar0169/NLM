@@ -1148,7 +1148,6 @@ class AddNewFspPlantStorageActivity(
             selectedTextView.text = selectedItem
             if (id != -1) {
                 districtId = id
-                toast(districtId.toString())
             }
             selectedTextView.setTextColor(ContextCompat.getColor(this, R.color.black))
             bottomSheetDialog.dismiss()

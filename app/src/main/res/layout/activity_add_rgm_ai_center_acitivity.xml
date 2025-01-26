@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_10"
                 android:layout_marginTop="20dp"
-                android:text="Add New AI Center"
+                android:text="Add New Artificial Insemination Center"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -128,6 +128,7 @@
                             android:id="@+id/rbCooperation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checked="true"
                             android:text="Cooperation"
                             android:textColor="@color/black"
                             app:buttonTint="@color/black"
@@ -325,6 +326,7 @@
                                 android:drawableEnd="@drawable/ic_arrow_down"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
+                                android:onClick="@{ClickAction::center}"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"
@@ -348,6 +350,7 @@
                                 android:background="@drawable/curve_all_corner_grey"
                                 android:drawableEnd="@drawable/ic_arrow_down"
                                 android:fontFamily="@font/opensans_regular"
+                                android:onClick="@{ClickAction::agency}"
                                 android:maxLength="50"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
@@ -571,6 +574,7 @@
                             android:drawableEnd="@drawable/ic_arrow_down"
                             android:fontFamily="@font/opensans_regular"
                             android:maxLength="50"
+                            android:onClick="@{ClickAction::categoryWorker}"
                             android:paddingHorizontal="@dimen/dp_10"
                             android:paddingVertical="@dimen/dp_5"
                             android:singleLine="true"
@@ -607,6 +611,7 @@
                                 android:drawableEnd="@drawable/ic_arrow_down"
                                 android:fontFamily="@font/opensans_regular"
                                 android:maxLength="50"
+                                android:onClick="@{ClickAction::qualificationWorker}"
                                 android:paddingHorizontal="@dimen/dp_10"
                                 android:paddingVertical="@dimen/dp_5"
                                 android:singleLine="true"
@@ -1334,6 +1339,7 @@
 
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/llSupportDocumentNlm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
@@ -1347,6 +1353,13 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/opensans_semibold"
                             android:text="Supporting Documents"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="@string/document_size_warning"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_14" />
                         <TextView
