@@ -18,7 +18,8 @@ class AddRGMVitroFertilizatonActivity : BaseActivity<ActivityAddRgmvitroFertiliz
     private lateinit var onlyCreated: List<NlmEdp>
     private var layoutManager: LinearLayoutManager? = null
     private var isFrom: Int = 0
-
+    private var viewEdit: String? = null
+    var itemId: Int? = null
 
     override val layoutId: Int
         get() = R.layout.activity_add_rgmvitro_fertilizaton
@@ -35,8 +36,10 @@ class AddRGMVitroFertilizatonActivity : BaseActivity<ActivityAddRgmvitroFertiliz
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
+        viewEdit = intent.getStringExtra("View/Edit")
+        itemId = intent.extras?.getInt("itemId")
         setupTabLayout()
-        loadFragment(VitroPartOneFragment())
+        loadFragment(VitroPartOneFragment(viewEdit,itemId))
 
     }
 
@@ -50,12 +53,12 @@ class AddRGMVitroFertilizatonActivity : BaseActivity<ActivityAddRgmvitroFertiliz
                     when (tab?.position) {
                         0 -> {
 //                            onTabClicks()
-                            loadFragment(VitroPartOneFragment())
+                            loadFragment(VitroPartOneFragment(viewEdit,itemId))
                         }
 
                         1 -> {
 //                            onTabClicks()
-                            loadFragment(VitroPartTwoFragment())
+                            loadFragment(VitroPartTwoFragment(viewEdit,itemId))
 
                         }
 

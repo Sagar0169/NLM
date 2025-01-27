@@ -37,6 +37,8 @@ class RGMIAList : BaseActivity<ActivityListOfRgmIaBinding>() {
                 "NA",
                 "NA",
                 "NA",
+                "NA",
+                "NA",
             ),
         )
         implementingAgency()

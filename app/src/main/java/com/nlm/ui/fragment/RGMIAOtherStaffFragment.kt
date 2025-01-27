@@ -1,5 +1,6 @@
 package com.nlm.ui.fragment
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nlm.R
+import com.nlm.callBack.OnBackSaveAsDraft
+import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.FragmentRGMIAOtherStaffBinding
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.StateAdapter
@@ -17,11 +20,24 @@ class RGMIAOtherStaffFragment : BaseFragment<FragmentRGMIAOtherStaffBinding>() {
     private var mBinding: FragmentRGMIAOtherStaffBinding? = null
     private lateinit var bottomSheetAdapter: StateAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var listener: OnNextButtonClickListener? = null
+    private var savedAsDraftClick: OnBackSaveAsDraft? = null
     override val layoutId: Int
         get() = R.layout.fragment_r_g_m__i_a__other__staff
     private val state = listOf(
         "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
     )
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+        savedAsDraftClick = null
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as OnNextButtonClickListener
+        savedAsDraftClick = context as OnBackSaveAsDraft
+    }
 
 
     override fun init() {
@@ -39,7 +55,13 @@ class RGMIAOtherStaffFragment : BaseFragment<FragmentRGMIAOtherStaffBinding>() {
     }
     inner class ClickActions {
         fun state(view: View){showBottomSheetDialog("state")}
+        fun SaveAndNext(view: View) {
+            listener?.onNextButtonClick()
 
+        }
+        fun SaveAsDraft(view: View) {
+            savedAsDraftClick?.onSaveAsDraft()
+        }
     }
     private fun showBottomSheetDialog(type: String) {
         bottomSheetDialog = BottomSheetDialog(requireContext())

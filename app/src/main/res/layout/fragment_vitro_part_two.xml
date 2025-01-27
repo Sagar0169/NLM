@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/clParent"
         android:background="@color/white">
 
         <androidx.core.widget.NestedScrollView
@@ -32,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -41,6 +43,84 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_10">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_15"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Remarks of NLM"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <RadioGroup
+                            android:id="@+id/rgRemarksOfNlm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbCooperation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cooperation"
+                                android:textColor="@color/black"
+                                app:buttonTint="@color/black"
+                                android:textSize="@dimen/sp_14" />
+
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNonCoorperation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Non-Cooperation"
+                                android:textColor="@color/black"
+                                app:buttonTint="@color/black"
+                                android:textSize="@dimen/sp_14" />
+
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbPartialData"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Partial Data"
+                                android:textColor="@color/black"
+                                app:buttonTint="@color/black"
+                                android:textSize="@dimen/sp_14" />
+
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotProvided"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Not Provided"
+                                android:textColor="@color/black"
+                                app:buttonTint="@color/black"
+                                android:textSize="@dimen/sp_14" />
+
+                        </RadioGroup>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint="Remarks"
+                            android:layout_marginBottom="@dimen/dp_10"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_15"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                    </LinearLayout>
+
+
+
 
 
                     <LinearLayout
@@ -52,6 +132,145 @@
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5">
 
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="@string/name_of_the_lab"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+                        <EditText
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint=""
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:id="@+id/tvTitleState"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="State Name"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:id="@+id/tvState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:clickable="false"
+                            android:drawableEnd="@drawable/ic_arrow_down"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:text="Please Select"
+                            android:textColor="@color/grey" />
+                        <TextView
+                            android:id="@+id/tvTitleDistrict"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="District Name"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:id="@+id/tvDistrict"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:clickable="false"
+                            android:drawableEnd="@drawable/ic_arrow_down"
+                            android:fontFamily="@font/opensans_regular"
+                            android:maxLength="50"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:singleLine="true"
+                            android:text="Please Select"
+                            android:textColor="@color/grey" />
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Location:"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint=""
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Pin Code:"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint=""
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Telephone No:"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <EditText
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint=""
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -454,7 +673,7 @@
                         android:layout_marginTop="@dimen/dp_7"
                         android:fontFamily="@font/opensans_semibold"
                         android:text="Supporting Documents"
-                        android:textAlignment="center"
+
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -466,7 +685,20 @@
                         android:orientation="vertical"
                         android:paddingHorizontal="@dimen/dp_10"
                         android:paddingVertical="@dimen/dp_5">
-
+                        <TextView
+                            android:id="@+id/tvAddMore3"
+                            android:onClick="@{ClickAction::addDocDialog}"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/curve_fill_blue"
+                            android:clickable="true"
+                            android:fontFamily="@font/poppins_medium"
+                            android:paddingHorizontal="@dimen/dp_20"
+                            android:paddingVertical="@dimen/dp_10"
+                            android:text="Add Documents"
+                            android:textColor="@color/white" />
                         <com.nlm.utilities.NonScrollableRecyclerView
                             android:id="@+id/recyclerView1"
                             android:layout_width="match_parent"
@@ -478,23 +710,50 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvSubmit"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/dp_50"
-                    android:layout_marginTop="@dimen/dp_15"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    android:background="@drawable/blue_gradient"
-                    android:clickable="true"
-                    android:fontFamily="@font/lexend_bold"
-                    android:paddingHorizontal="@dimen/dp_20"
-                    android:paddingVertical="@dimen/dp_10"
-                    android:text="Submit"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_16" />
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_weight="0.5"
+                        android:id="@+id/tvSaveDraft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
+                        android:backgroundTint="@color/green"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="Save As Draft"
+                        android:onClick="@{ClickAction::SaveAsDraft}"
+                        android:textSize="20sp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                    <TextView
+                        android:id="@+id/tvSendOtp"
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingHorizontal="@dimen/dp_20"
+                        android:paddingVertical="@dimen/dp_10"
+                        android:text="@string/save_next"
+                        android:textSize="20sp"
+                        android:onClick="@{ClickAction::SaveAndNext}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
+                </LinearLayout>
             </LinearLayout>
 
 

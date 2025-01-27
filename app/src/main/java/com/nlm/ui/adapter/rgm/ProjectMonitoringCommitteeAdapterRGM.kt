@@ -9,24 +9,22 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
-import com.nlm.callBack.CallBackItemTypeIACompositionListEdit
 import com.nlm.callBack.CallBackItemTypeRGMStateIACompositionList
 import com.nlm.callBack.DialogCallback
 import com.nlm.databinding.ItemCompositionOfGoverningBinding
-import com.nlm.model.IdAndDetails
-import com.nlm.model.ImplementingAgencyAdvisoryCommittee
 import com.nlm.model.RgmImplementingAgencyCompositionOfGoverningBody
+import com.nlm.model.RgmImplementingAgencyProjectMonitoring
 import com.nlm.utilities.Utility
 import com.nlm.utilities.showView
 
-class CompositionOFGoverningAdapter(
-    private val programmeList: MutableList<RgmImplementingAgencyCompositionOfGoverningBody>,
+class ProjectMonitoringCommitteeAdapterRGM(
+    private val programmeList: MutableList<RgmImplementingAgencyProjectMonitoring>,
     private val context: Context,
 //    private val programmeList: MutableList<ImplementingAgencyAdvisoryCommittee>,
     private val viewEdit: String?,
     private val callBackEdit: CallBackItemTypeRGMStateIACompositionList,
     private val callBackDeleteAtId: CallBackDeleteAtId,
-) : RecyclerView.Adapter<CompositionOFGoverningAdapter.AvailabilityOfEquipmentViewHolder>() {
+) : RecyclerView.Adapter<ProjectMonitoringCommitteeAdapterRGM.AvailabilityOfEquipmentViewHolder>() {
 
 
 
@@ -51,7 +49,7 @@ class CompositionOFGoverningAdapter(
             holder.binding.btnEdit.showView()
         }
 
-        holder.binding.etDesignation.setText(currentItem.designations)
+        holder.binding.etDesignation.setText(currentItem.designation)
         holder.binding.etOrganization.setText(currentItem.organization)
 
         holder.binding.btnDelete.setOnClickListener {
@@ -60,7 +58,7 @@ class CompositionOFGoverningAdapter(
                 object :
                     DialogCallback {
                     override fun onYes() {
-                        callBackDeleteAtId.onClickItem(currentItem.id,position,1)
+                        callBackDeleteAtId.onClickItem(currentItem.id,position,2)
                     }
                 },
                 context.getString(R.string.are_you_sure_want_to_delete_your_post)
@@ -69,11 +67,11 @@ class CompositionOFGoverningAdapter(
         holder.binding.btnEdit.setOnClickListener{
             callBackEdit.onClickItem(
                 RgmImplementingAgencyCompositionOfGoverningBody(
-                designations = currentItem.designations,
+                designations = currentItem.designation,
                 organization = currentItem.organization,
                 id = currentItem.id, //item id
                     rgm_implementing_agency_id= currentItem.rgm_implementing_agency_id// table id
-            ),position,1)
+            ),position,2)
 //            (context as NLSIAGoverningBodyBoardOfDirectorsFragment).compositionOfGoverningNlmIaDialog(context,1,
         }
     }
@@ -87,8 +85,7 @@ class CompositionOFGoverningAdapter(
 
             // Notify about range changes to avoid index mismatches
             notifyItemRangeChanged(position, programmeList.size)
-        }
-        else {
+        } else {
             Log.e("Error", "Invalid index: $position for programmeList of size ${programmeList.size}")
         }
     }

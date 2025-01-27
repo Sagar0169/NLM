@@ -356,7 +356,140 @@ data class ImplementingAgencyAddRequest(
     val is_deleted: Int? = null,
 
     )
+data class RGMStateImplementingAgencyAddEdit(
+    val any_constraints_in_getting_ln2: String,
+    val any_other: String,
+    val breeding_farms_location: String,
+    val breeding_farms_number: Int,
+    val captive_production: String,
+    val ceo_name: String,
+    val created_by: Int,
+    val district_code: Int,
+    val frequency_of_monitoring: String,
+    val frozen_bull_location: String,
+    val frozen_bull_number: Int,
+    val funds: Int,
+    val governing_body_first: String,
+    val governing_body_frequency_of_meetings: String,
+    val governing_body_no_of_meetings: String,
+    val governing_body_secound: String,
+    val governing_body_third: String,
+    val infrastructure: String,
+    val is_deleted: Int,
+    val is_draft: Int,
+    val ivf_labs_location: String,
+    val ivf_labs_number: Int,
+    val liquid_nitrogen_production_location: String,
+    val liquid_nitrogen_production_number: Int,
+    val liquid_nitrogen_storage_location: String,
+    val liquid_nitrogen_storage_number: Int,
+    val location_of_ai: String,
+    val mairis_dropped_out_number: Int,
+    val mairis_dropped_out_percentage: Int,
+    val name: String,
+    val no_of_ai_techicians_involved: String,
+    val no_of_mairis_inducted_first: Int,
+    val no_of_mairis_inducted_secound: Int,
+    val no_of_mairis_trained_first: Int,
+    val no_of_mairis_trained_secound: Int,
+    val no_of_post_filled_deputation: Int,
+    val no_of_post_filled_regular: Int,
+    val no_of_post_vacant: Int,
+    val no_of_sanctioned_posts: Int,
+    val no_of_semen_doses_procured: Int,
+    val organisational: String,
+    val others_location: String,
+    val others_number: Int,
+    val regularity: String,
+    val reporting_mechanism_to_state_govt: String,
+    val requirement_of_ln2: String,
+    val rgm_implementing_agency_agency_wise_ai_done: List<RgmImplementingAgencyAgencyWiseAiDone>,
+    val rgm_implementing_agency_agency_wise_calf_born: List<RgmImplementingAgencyAgencyWiseCalfBorn>,
+    val rgm_implementing_agency_any_of_the_asset: List<RgmImplementingAgencyAnyOfTheAsset>,
+    val rgm_implementing_agency_composition_of_governing_body: List<RgmImplementingAgencyCompositionOfGoverningBody>,
+    val rgm_implementing_agency_document: List<ImplementingAgencyDocument>,
+    val rgm_implementing_agency_funds_received: List<RgmImplementingAgencyFundsReceived>,
+    val rgm_implementing_agency_number_of_fertility: List<RgmImplementingAgencyNumberOfFertility>,
+    val rgm_implementing_agency_project_monitoring: List<RgmImplementingAgencyProjectMonitoring>,
+    val role_id: Int,
+    val semen_banks_location: String,
+    val semen_banks_number: Int,
+    val state_code: String,
+    val state_technical_first: String,
+    val state_technical_frequency_of_meetings: String,
+    val state_technical_no_of_meetings: String,
+    val state_technical_secound: String,
+    val state_technical_third: String,
+    val status: Int,
+    val submission_of_annual: String,
+    val submission_of_monthly: String,
+    val submission_of_quaterly: String,
+    val training_centers_location: String,
+    val training_centers_number: Int,
+    val updated_by: Int,
+    val user_id: String,
+    val views_of_nlm: String
+)
 
+data class RgmImplementingAgencyAgencyWiseAiDone(
+    val agency_name: String,
+    val first_year: String,
+    val rgm_implementing_agency_id: Int?,
+    val id: Int?,
+    val secound_year: String,
+    val third_year: String
+)
+
+data class RgmImplementingAgencyAgencyWiseCalfBorn(
+    val agency_name: String,
+    val first_year: String,
+    val rgm_implementing_agency_id: Int?,
+    val secound_year: String,
+    val third_year: String,
+    val id: Int?
+)
+
+data class RgmImplementingAgencyAnyOfTheAsset(
+    val assets: String,
+    val reasons: String,
+    val rgm_implementing_agency_id: Int?,
+    val id: Int?,
+)
+
+data class RgmImplementingAgencyCompositionOfGoverningBody(
+    val designations: String?,
+    val organization: String?,
+    val rgm_implementing_agency_id: Int?,
+    val id: Int?,
+)
+
+data class RgmImplementingAgencyDocument(
+    val description: String,
+    val ia_document: String
+)
+
+data class RgmImplementingAgencyFundsReceived(
+    val funds_received_from_dahd: String,
+    val funds_received_from_other_sources: String,
+    val funds_received_from_state: String,
+    val funds_received_status_of_uc: String,
+    val funds_received_year: String,
+    val rgm_implementing_agency_id: Int
+)
+
+data class RgmImplementingAgencyNumberOfFertility(
+    val no_of_animals_treated: Int?,
+    val no_of_fertility_camps: Int?,
+    val rgm_implementing_agency_id: Int?,
+    val id: Int?
+)
+
+data class RgmImplementingAgencyProjectMonitoring(
+    val designation: String?,
+    val organization: String?,
+    val rgm_implementing_agency_id: Int?,
+    val id: Int?,
+)
 data class ImplementingAgencyAdvisoryCommittee(
     val name_of_the_official: String?,
     val designation: String?,

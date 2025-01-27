@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="ClickAction"
+            type="com.nlm.ui.fragment.FundsReceivedRGMFragment.ClickActions" />
     </data>
     <RelativeLayout
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+        android:id="@+id/clParent"
     tools:context=".ui.fragment.FundsReceivedRGMFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -455,7 +458,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_dark_grey"
+                android:background="@drawable/curve_all_corner_grey"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5">
@@ -468,9 +471,23 @@
                     android:text="Agency wise AI done"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:onClick="@{ClickAction::AgencyWiseRGMDialog}"
+                    android:id="@+id/tvAddMore1"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/curve_fill_blue"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:paddingVertical="@dimen/dp_10"
+                    android:text="Add More"
+                    android:textColor="@color/white" />
 
                 <com.nlm.utilities.NonScrollableRecyclerView
-                    android:id="@+id/recyclerView1"
+                    android:id="@+id/rvRGMAgencyWiseAi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp" />
@@ -483,7 +500,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_7"
-                android:background="@drawable/curve_all_corner_dark_grey"
+                android:background="@drawable/curve_all_corner_grey"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_10"
                 android:paddingVertical="@dimen/dp_5">
@@ -498,10 +515,23 @@
                     android:textSize="@dimen/sp_16" />
 
 
-
+                <TextView
+                    android:onClick="@{ClickAction::AgencyWiseRGMDialog2}"
+                    android:id="@+id/tvAddMore2"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/curve_fill_blue"
+                    android:clickable="true"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:paddingVertical="@dimen/dp_10"
+                    android:text="Add More"
+                    android:textColor="@color/white" />
 
                 <com.nlm.utilities.NonScrollableRecyclerView
-                    android:id="@+id/recyclerView2"
+                    android:id="@+id/rvRGMAgencyWiseCalf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp" />
@@ -511,22 +541,50 @@
 
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/tvSendOtp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dp_50"
-            android:layout_marginTop="@dimen/dp_15"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:background="@drawable/curve_fill_blue"
-            android:clickable="true"
-            android:fontFamily="@font/poppins_medium"
-            android:paddingHorizontal="@dimen/dp_20"
-            android:paddingVertical="@dimen/dp_10"
-            android:text="Next"
-            android:textAlignment="center"
-            android:textColor="@color/white" />
+            android:layout_marginBottom="@dimen/dp_5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginHorizontal="@dimen/dp_3"
+                android:layout_weight="0.5"
+                android:id="@+id/tvSaveDraft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@drawable/curve_fill_blue"
+                android:backgroundTint="@color/green"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingVertical="@dimen/dp_10"
+                android:text="Save As Draft"
+                android:onClick="@{ClickAction::SaveAsDraft}"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/tvSendOtp"
+                android:layout_marginHorizontal="@dimen/dp_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@drawable/curve_fill_blue"
+                android:clickable="true"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="@dimen/dp_20"
+                android:paddingVertical="@dimen/dp_10"
+                android:text="@string/save_next"
+                android:textSize="20sp"
+                android:onClick="@{ClickAction::SaveAndNext}"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     </RelativeLayout>

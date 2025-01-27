@@ -77,7 +77,8 @@ object LocalSchemeData {
                 Form("index", "RgmSemenStation", 237, "Semen Stations", 204),
                 Form("index", "RgmTrainingCenters", 238, "Training Centers", 204),
                 Form("index", "RgmBullMotherFarms", 239, "Bull Mother Farms", 204),
-                Form("index", "RgmBreedMultiplication", 240, "Breed Multiplication", 204)
+                Form("index", "RgmBreedMultiplication", 240, "Breed Multiplication", 204),
+                Form("index", "RgmVitroFertilization", 241, "Vitro Fertilization", 204)
             )
         )
     )

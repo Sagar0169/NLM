@@ -69,8 +69,8 @@
                 android:layout_below="@id/ll1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dp_20"
+                style="@style/ParentBackGroundStyle"
                 android:background="@drawable/employee_home_bg"
-                android:backgroundTint="@color/white"
                 android:elevation="@dimen/dp_5"
                 android:orientation="vertical"
                 android:padding="@dimen/dp_10">

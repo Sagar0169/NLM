@@ -347,6 +347,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="donors_nos_msp1"><![CDATA[Donors (nos) > MSP]]></string>
     <string name="format_for_national_level_monitors_to_be_filled_by_ia_component_a">Format for National Level Monitors\n(To be filled by IA) (Component A)</string>
     <string name="to_be_filled_by_ia">To be filled by IA</string>
+    <string name="to_be_filled_by_nlm">To be filled by NLM</string>
     <string name="no_data_found">No data found</string>
     <string name="add_new_implementing_agency">Add New Implementing Agency</string>
     <string name="you_are_not_authorized_to_access_that_location">You are not authorized to access that location</string>
@@ -374,6 +375,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="save_as_draft">Save as draft</string>
     <string name="import_of_exotic_sheep_and_goat_gernplasm">Import of exotic sheep and goat gernplasm</string>
     <string name="implementing_agency_document">implementing_agency</string>
+    <string name="rgm_document">implementing_agency</string>
     <string name="rsp_laboratory_semen_document">rsp-laboratory-semen</string>
     <string name="fsp_plant_storage_document">FspPlantStorage</string>
     <string name="fp_from_non_forest_document">fpfrom_non_forest</string>
@@ -445,5 +447,12 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="block_level_indicators">Block level Indicators</string>
     <string name="enter_block_name">Enter Block Name</string>
     <string name="format_for_national_level_monitors_to_be_filled_by_nlm_dairying_through_cooperatives_component_b_of_npdd">Format for National Level Monitors(To be filled by NLM) (Dairying through Cooperatives, Component B of NPDD)</string>
+    <string name="agency_name">Agency Name<font color="#FF0000">*</font></string>
+    <string name="location_of_ia">Location of IA<font color="#FF0000">*</font></string>
+    <string name="ceo_name">CEO Name<font color="#FF0000">*</font></string>
+    <string name="infrastructure">Infrastructure<font color="#FF0000">*</font></string>
+    <string name="organisational">Organisational<font color="#FF0000">*</font></string>
+    <string name="funds">Funds<font color="#FF0000">*</font></string>
+    <string name="name_of_the_lab">Name of the Lab</string>
 </resources>
 

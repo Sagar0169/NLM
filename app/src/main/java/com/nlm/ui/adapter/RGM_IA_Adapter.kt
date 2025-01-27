@@ -51,15 +51,17 @@ class RGM_IA_Adapter(private val implementingAgencyList: List<RGM_IA>, private v
     holder.mBinding.etStatus.text=item.Status_IA
     holder.mBinding.etStatusNlm.text=item.Status_NLM
     holder.mBinding.etCreated.text=item.Created
+    holder.mBinding.etRemarksNLM.text=item.Remarks_of_nlm
+    holder.mBinding.etVist.text=item.Visit
     holder.mBinding.ivView.setOnClickListener {
         val intent = Intent(holder.itemView.context, RGMStateImplementingAgency::class.java)
-        intent.putExtra("nodalOfficer", item)
+        intent.putExtra("view", item)
         intent.putExtra("isFrom", 2)
         holder.itemView.context.startActivity(intent)
     }
     holder.mBinding.ivEdit.setOnClickListener {
         val intent = Intent(holder.itemView.context, RGMStateImplementingAgency::class.java)
-        intent.putExtra("nodalOfficer", item)
+        intent.putExtra("edit", item)
         intent.putExtra("isFrom", 3)
         holder.itemView.context.startActivity(intent)
     }

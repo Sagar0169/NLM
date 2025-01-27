@@ -601,6 +601,7 @@ data class ImplementingAgencyDocument(
     val nlm_document: String? = null,
     val fp_from_non_forest_id: Int? = null,
     val dairy_plant_visit_report_id: Int? = null,
+    val rgm_implementing_agency_id: Int? = null,
     val nlm_b_component_id: Int?=null,
     val is_edit: Boolean?=null,
     val is_ia:Boolean?=null,

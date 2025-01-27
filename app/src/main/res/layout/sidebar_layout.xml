@@ -10,15 +10,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       android:background="@color/white"
+       style="@style/ParentViewBackGroundStyle"
         >
 
         <RelativeLayout
-
+            style="@style/ParentViewBackGroundStyle"
             android:id="@+id/rlHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/dp_15"
             android:paddingVertical="@dimen/dp_5">
@@ -147,7 +147,7 @@
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="10dp"
                     android:text="@string/home"
-                    android:textColor="@color/black"
+                    style="@style/TextViewStyle"
                     android:textSize="16sp"
                     app:drawableStartCompat="@drawable/ic_dashboard" />
 
@@ -756,7 +756,7 @@
                          android:layout_weight="8"
                          android:paddingVertical="10dp"
                          android:text="Dark Theme"
-                         android:textColor="@color/black"
+                         style="@style/TextViewStyle"
                          android:textSize="16sp" />
                      <Switch
                          android:id="@+id/themeSwitch"
@@ -780,7 +780,7 @@
 
                     android:paddingVertical="10dp"
                     android:text="Terms and condition"
-                    android:textColor="@color/black"
+                    style="@style/TextViewStyle"
                     android:textSize="16sp" />
 
 
@@ -795,7 +795,7 @@
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="5dp"
                     android:text="Privacy Policy"
-                    android:textColor="@color/black"
+                    style="@style/TextViewStyle"
                     android:textSize="16sp" />
 
 

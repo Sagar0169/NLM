@@ -5,13 +5,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
+import com.nlm.callBack.CallBackDeleteAtId
+import com.nlm.callBack.CallBackItemTypeRGMStateIACompositionList
 import com.nlm.databinding.ItemAgencyWiseBinding
 import com.nlm.databinding.ItemAnyOfAssetsRgmBinding
+import com.nlm.model.RgmImplementingAgencyAgencyWiseAiDone
+import com.nlm.model.RgmImplementingAgencyAgencyWiseCalfBorn
 
 class AgencyWiseAdapter(
-    private val programmeList: MutableList<Array<String>>,
+    private val RGMAgencyWiseAiList: MutableList<RgmImplementingAgencyAgencyWiseAiDone>,
+    private val RGMAgencyWiseCalfList: MutableList<RgmImplementingAgencyAgencyWiseCalfBorn>,
     private val isFrom: Int,
-    private val isNOOfCamps: Boolean
+    private val isNOOfCamps: Boolean,
+    private val callBackEdit: CallBackItemTypeRGMStateIACompositionList,
+    private val callBackDeleteAtId: CallBackDeleteAtId,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     // View type constants
@@ -53,54 +60,28 @@ class AgencyWiseAdapter(
                 }
 
                 // Handle visibility of add/delete buttons
-                handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
+
 
                 // Add new row for this layout
-                holder.binding.btnAdd.setOnClickListener {
-                    programmeList.add(arrayOf("", ""))
-                    notifyItemInserted(programmeList.size - 1)
-                    notifyItemChanged(position)
-                }
 
-                // Delete row for this layout
-                holder.binding.btnDelete.setOnClickListener {
-                    if (programmeList.size > 1) {
-                        programmeList.removeAt(position)
-                        notifyItemRemoved(position)
-                        notifyItemRangeChanged(position, programmeList.size)
-                    }
-                }
             }
 
             is AgencyWiseViewHolder -> {
 
                 // Handle visibility of add/delete buttons
-                handleButtonVisibility(holder.binding.btnAdd, holder.binding.btnDelete, position)
 
-                // Add new row for this layout
-                holder.binding.btnAdd.setOnClickListener {
-                    programmeList.add(arrayOf("", "", "", "", ""))
-                    notifyItemInserted(programmeList.size - 1)
-                    notifyItemChanged(position)
-                }
 
                 // Delete row for this layout
-                holder.binding.btnDelete.setOnClickListener {
-                    if (programmeList.size > 1) {
-                        programmeList.removeAt(position)
-                        notifyItemRemoved(position)
-                        notifyItemRangeChanged(position, programmeList.size)
-                    }
-                }
+
             }
         }
     }
 
-    override fun getItemCount(): Int = programmeList.size
+    override fun getItemCount(): Int = RGMAgencyWiseAiList.size
 
     // Helper method to manage button visibility
     private fun handleButtonVisibility(btnAdd: ImageButton, btnDelete: ImageButton, position: Int) {
-        if (position == programmeList.size - 1) {
+        if (position == RGMAgencyWiseAiList.size - 1) {
             // Last item, show Add button, hide Delete button
             btnAdd.visibility = View.VISIBLE
             btnDelete.visibility = View.GONE

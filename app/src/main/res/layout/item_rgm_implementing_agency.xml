@@ -130,7 +130,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/inter_medium"
-                                android:text="State"
+                                android:text="State Name"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
@@ -169,7 +169,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/inter_medium"
-                                android:text="District"
+                                android:text="District Name"
 
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
@@ -191,7 +191,6 @@
                                 android:layout_weight="1"
                                 android:drawablePadding="@dimen/dp_5"
                                 android:fontFamily="@font/inter_light"
-
                                 android:text="@string/na"
                                 android:textColor="@color/textGrey"
                                 android:textSize="14sp" />
@@ -209,7 +208,7 @@
                                 android:fontFamily="@font/inter_medium"
                                 android:textColor="@color/black"
                                 android:id="@+id/Ceo_name"
-                                android:text="CEO Name"
+                                android:text="Created At"
                                 android:textSize="14sp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -223,10 +222,9 @@
                                 android:textSize="14sp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etCeo_name"
+                                android:id="@+id/etCreated"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-
                                 android:layout_marginEnd="@dimen/dp_3"
                                 android:layout_weight="1"
                                 android:drawablePadding="@dimen/dp_5"
@@ -330,7 +328,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/inter_medium"
-                                android:text="Created"
+                                android:text="Visit"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
@@ -345,7 +343,7 @@
                                 android:textSize="14sp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/etCreated"
+                                android:id="@+id/etVist"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/dp_3"
@@ -357,7 +355,44 @@
                                 android:textColor="@color/textGrey"
                                 android:textSize="14sp" />
                         </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:orientation="horizontal">
 
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_medium"
+                                android:text="Remarks of NLM"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:fontFamily="@font/poppins_bold"
+                                android:gravity="center"
+                                android:text=":"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/etRemarksNLM"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/dp_3"
+                                android:layout_weight="1"
+                                android:drawablePadding="@dimen/dp_5"
+                                android:fontFamily="@font/inter_light"
+
+                                android:text="@string/na"
+                                android:textColor="@color/textGrey"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
 
 

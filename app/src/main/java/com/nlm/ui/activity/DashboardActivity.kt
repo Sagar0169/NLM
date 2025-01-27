@@ -9,12 +9,15 @@ import android.graphics.drawable.RotateDrawable
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+
 import com.nlm.R
 import com.nlm.databinding.ActivityDashboardBinding
 import com.nlm.model.LogoutRequest
@@ -75,13 +78,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     val matchingSchemeIds = mutableListOf<Int>()
     val matchingFormIds = mutableListOf<Int>()
 
-    private lateinit var themeSwitch: SwitchCompat
+    private lateinit var themeSwitch: Switch
     private lateinit var sharedPreferences: SharedPreferences
 //NOTE: UPDATE THE LOCAL SCHEME DATA WHEN NEW ID OR FORM IS ADDED
     override val layoutId: Int
         get() = R.layout.activity_dashboard
 
     override fun initView() {
+
         mBinding = viewDataBinding
         compareSchemeIds()
         viewModel.init()
@@ -94,17 +98,22 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         requestLocationPermissions()
         }
 
-//        viewModel.getDashboardApi(
-//            this@DashboardActivity,
-//            LogoutRequest(
-//                getPreferenceOfScheme(
-//                    this@DashboardActivity,
-//                    AppConstants.SCHEME,
-//                    Result::class.java
-//                ).user_id
-//            )
-//        )
         setDefaultDrawables()
+        // Check current theme
+
+
+
+        mBinding?.leftDrawerMenu?.themeSwitch?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // Enable dark mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                // Enable light mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            // Save preference in SharedPreferences
+            Utility.saveThemeMode(this, isChecked)
+        }
 
         mBinding?.drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -731,7 +740,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                                 }
 
                                 236 -> {
-                                    mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
+
+                                    mBinding?.leftDrawerMenu?.tvAiCenter?.showView()
                                 }
 
                                 237 -> {
@@ -749,7 +759,12 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                                 240 -> {
                                     mBinding?.leftDrawerMenu?.tvBreedMultiplication?.showView()
                                 }
+                                241 -> {
+
+                                    mBinding?.leftDrawerMenu?.tvVitroFertilization?.showView()
+                                }
                             }
+
                         }
                     }
                     1 -> {

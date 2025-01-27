@@ -61,7 +61,8 @@ import java.util.regex.Pattern
 import kotlin.math.*
 
 object Utility {
-
+    private const val PREF_NAME = "AppPreferences"
+    private const val THEME_KEY = "ThemeMode"
     fun getMessageType(messageType: String): String {
         return when (messageType) {
             AppConstants.TEXT -> {
@@ -811,6 +812,17 @@ object Utility {
     fun getPreferenceBoolean(context: Context?, key: String): Boolean? {
         val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sp.getBoolean(key, false)
+    }
+
+
+    fun saveThemeMode(context: Context, isDarkMode: Boolean) {
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean(THEME_KEY, isDarkMode).apply()
+    }
+
+    fun isDarkMode(context: Context): Boolean {
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean(THEME_KEY, false) // Default is light mode
     }
 
     fun maskAadharNumber(aadharNumber: String): String {

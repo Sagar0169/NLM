@@ -21,6 +21,11 @@ import com.nlm.model.ImportOfExoticGoatDetailImport
 import com.nlm.model.ImportOfExoticGoatVerifiedNlm
 import com.nlm.model.NlmEdpFormatForNlm
 import com.nlm.model.NlmEdpMonitoring
+import com.nlm.model.RgmImplementingAgencyAgencyWiseAiDone
+import com.nlm.model.RgmImplementingAgencyAgencyWiseCalfBorn
+import com.nlm.model.RgmImplementingAgencyAnyOfTheAsset
+import com.nlm.model.RgmImplementingAgencyCompositionOfGoverningBody
+import com.nlm.model.RgmImplementingAgencyNumberOfFertility
 import com.nlm.model.RspAddAverage
 import com.nlm.model.RspAddBucksList
 import com.nlm.model.RspAddEquipment
@@ -32,6 +37,21 @@ import com.nlm.model.StateSemenInfraGoat
 //}
 interface CallBackItemTypeIACompositionListEdit {
     fun onClickItem(selectedItem: IdAndDetails,position:Int,isFrom:Int)
+}
+interface CallBackItemTypeRGMStateIACompositionList {
+    fun onClickItem(selectedItem: RgmImplementingAgencyCompositionOfGoverningBody, position:Int, isFrom:Int)
+}
+interface CallBackItemTypeRGMStateIAAgencyWiseCalf {
+    fun onClickItem(selectedItem: RgmImplementingAgencyAgencyWiseCalfBorn, position:Int, isFrom:Int)
+}
+interface CallBackItemTypeRGMStateIAAgencyWiseAi {
+    fun onClickItem(selectedItem: RgmImplementingAgencyAgencyWiseAiDone, position:Int, isFrom:Int)
+}
+interface CallBackItemTypeRGMStateIAAnyOfTheAssetEdit {
+    fun onClickItem(selectedItem: RgmImplementingAgencyAnyOfTheAsset, position:Int, isFrom:Int)
+}
+interface CallBackItemTypeRGMStateIANumberOfFertilityCampsEdit {
+    fun onClickItem(selectedItem: RgmImplementingAgencyNumberOfFertility, position:Int, isFrom:Int)
 }
 interface CallBackItemUploadDocEdit {
     fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position:Int)
