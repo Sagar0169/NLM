@@ -118,6 +118,7 @@ data class RGM_IA(
     val Created: String,
     val Visit: String,
     val Remarks_of_nlm: String,
+    val id:Int?=null
     ) : Serializable
 data class All_Users(
 

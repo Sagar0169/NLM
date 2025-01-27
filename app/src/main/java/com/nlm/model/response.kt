@@ -1162,6 +1162,14 @@ data class RspAddBucksList(
     val rsp_laboratory_semen_id: Int? = null,
 )
 
+data class RspBreedList(
+    val breed_maintained: String?,
+    val no_of_animals: String? = null,
+    val average_age: String? = null,
+    val id: Int?,
+    val rsp_laboratory_semen_id: Int? = null,
+)
+
 data class NlmEdpResponse(
     val _result: NlmEdpResult,
     val _resultflag: Int,

@@ -40,9 +40,9 @@ import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.callBack.CallBackSemenDoseAvg
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
-import com.nlm.databinding.FragmentDetailsOfSemenStationBinding
+import com.nlm.databinding.FragmentTrainingCenterIABinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
-import com.nlm.databinding.ItemRspBreedWiseBinding
+import com.nlm.databinding.ItemRspTrainingMaitriBinding
 import com.nlm.databinding.ItemStateSemenInfragoatBinding
 import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.FpFromNonForestFilledByNlmTeam
@@ -61,6 +61,8 @@ import com.nlm.ui.adapter.NlmEDPFormatAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentAdapter
 import com.nlm.ui.adapter.RSPSupportingDocumentIAAdapter
 import com.nlm.ui.adapter.RspBreedWiseAdapter
+import com.nlm.ui.adapter.RspTrainingFacultyAdapter
+import com.nlm.ui.adapter.RspTrainingmairtriAdapter
 import com.nlm.ui.adapter.StateSemenInfrastructureAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
@@ -85,13 +87,13 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 
-class DetailsOfSemenStationFragment(
+class TrainingCenterIAFragment(
     private val viewEdit: String?,
     private val itemId: Int?,
     private val dId: Int?
-) : BaseFragment<FragmentDetailsOfSemenStationBinding>(), CallBackDeleteFSPAtId, CallBackBreedAvg,
+) : BaseFragment<FragmentTrainingCenterIABinding>(), CallBackDeleteFSPAtId, CallBackBreedAvg,
     CallBackDeleteAtId, CallBackItemUploadDocEdit {
-    private var mBinding: FragmentDetailsOfSemenStationBinding? = null
+    private var mBinding: FragmentTrainingCenterIABinding? = null
     private lateinit var stateAdapter: BottomSheetAdapter
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private lateinit var viewDocumentList: ArrayList<ImplementingAgencyDocument>
@@ -102,7 +104,9 @@ class DetailsOfSemenStationFragment(
     private var listener: OnNextButtonClickListener? = null
 
     private lateinit var addBucksList: MutableList<RspBreedList>
-    private var addBuckAdapter: RspBreedWiseAdapter? = null
+    private lateinit var maitriList: MutableList<RspBreedList>
+    private var addBuckAdapter: RspTrainingFacultyAdapter? = null
+    private var maitriAdapter: RspTrainingmairtriAdapter? = null
     private var addDocumentAdapter: RSPSupportingDocumentAdapter? = null
     private var addDocumentIAAdapter: RSPSupportingDocumentIAAdapter? = null
     private var districtIdIA: Int? = null // Store selected state
@@ -151,9 +155,15 @@ class DetailsOfSemenStationFragment(
         }
     }
 
+    private val controllingAgency = listOf(
+        ResultGetDropDown(-1, "DAH"),
+        ResultGetDropDown(-1, "LDB"),
+        ResultGetDropDown(-1, "Dairy Federation"),
+        ResultGetDropDown(-1, "NGO")
+    )
 
     override val layoutId: Int
-        get() = R.layout.fragment_details_of__semen__station
+        get() = R.layout.fragment_training_center_i_a
 
     override fun init() {
         mBinding = viewDataBinding
@@ -161,6 +171,8 @@ class DetailsOfSemenStationFragment(
         DocumentList = arrayListOf()
         viewModel.init()
         DocumentList = arrayListOf()
+        addBucksList = arrayListOf()
+        maitriList = arrayListOf()
         totalListDocument = arrayListOf()
         viewDocumentList = arrayListOf()
         mBinding?.tvState?.text = getPreferenceOfScheme(
@@ -170,6 +182,8 @@ class DetailsOfSemenStationFragment(
         )?.state_name
         mBinding?.tvState?.isEnabled = false
         nlmAdapter()
+        facultyAdapter()
+        maitriAdapter()
         if (viewEdit == "view" || getPreferenceOfScheme(
                 requireContext(),
                 AppConstants.SCHEME,
@@ -179,28 +193,21 @@ class DetailsOfSemenStationFragment(
 
             mBinding?.tvState?.isEnabled = false
             mBinding?.tvDistrict?.isEnabled = false
-            mBinding?.etLocation?.isEnabled = false
-            mBinding?.etPincode?.isEnabled = false
-            mBinding?.etPhone?.isEnabled = false
-            mBinding?.etGrading?.isEnabled = false
-            mBinding?.etAddress?.isEnabled = false
-            mBinding?.rbIsoYes?.isEnabled = false
-            mBinding?.rbIsoNo?.isEnabled = false
-            mBinding?.rbA?.isEnabled = false
-            mBinding?.rbB?.isEnabled = false
-            mBinding?.etAreaunder?.isEnabled = false
-            mBinding?.etAreafodder?.isEnabled = false
-            mBinding?.etInChargeSanctioned?.isEnabled = false
-            mBinding?.etInChargeFilled?.isEnabled = false
-            mBinding?.etVeterinaySanctioned?.isEnabled = false
-            mBinding?.etVeterinaryFilled?.isEnabled = false
-            mBinding?.etQualitySanctioned?.isEnabled = false
-            mBinding?.etQualityFilled?.isEnabled = false
-            mBinding?.etBullSanctioned?.isEnabled = false
-            mBinding?.etBullFilled?.isEnabled = false
-            mBinding?.etOtherSanctioned?.isEnabled = false
-            mBinding?.etOtherFilled?.isEnabled = false
+            mBinding?.etVillage?.isEnabled = false
+            mBinding?.etTaluka?.isEnabled = false
+            mBinding?.etYearOfSetting?.isEnabled = false
+            mBinding?.tvControllingAgency?.isEnabled = false
+            mBinding?.etAccredited?.isEnabled = false
+            mBinding?.rbInfraSufficient?.isEnabled = false
+            mBinding?.rbInfraNonSufficient?.isEnabled = false
+            mBinding?.tvAddFaculty?.isEnabled = false
+            mBinding?.tvMAITRIs?.isEnabled = false
+            mBinding?.rbReadingYes?.isEnabled = false
+            mBinding?.rbReadingNo?.isEnabled = false
+            mBinding?.etCommentsOfNLM?.isEnabled = false
             mBinding?.tvAddMore2?.isEnabled = false
+            mBinding?.tvAddFaculty?.hideView()
+            mBinding?.tvMAITRIs?.hideView()
             mBinding?.tvAddMore2?.hideView()
             mBinding?.tvSaveDraft?.hideView()
             mBinding?.tvSendOtp?.hideView()
@@ -221,6 +228,30 @@ class DetailsOfSemenStationFragment(
         )
         mBinding?.recyclerView2?.adapter = addDocumentAdapter
         mBinding?.recyclerView2?.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun facultyAdapter() {
+        addBuckAdapter = RspTrainingFacultyAdapter(
+            requireContext(),
+            addBucksList,
+            viewEdit,
+            this,
+            this
+        )
+        mBinding?.rvFaculty?.adapter = addBuckAdapter
+        mBinding?.rvFaculty?.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun maitriAdapter() {
+        maitriAdapter = RspTrainingmairtriAdapter(
+            requireContext(),
+            maitriList,
+            viewEdit,
+            this,
+            this
+        )
+        mBinding?.rvMAITRIs?.adapter = maitriAdapter
+        mBinding?.rvMAITRIs?.layoutManager = LinearLayoutManager(context)
     }
 
     private fun viewEditApi() {
@@ -330,10 +361,10 @@ class DetailsOfSemenStationFragment(
                                 return@observe
                             }
                             districtId = userResponseModel._result.district_code
-                            mBinding?.etLocation?.setText(userResponseModel._result.location)
-                            mBinding?.tvDistrict?.text = userResponseModel._result.district_name
-                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
-                            mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
+//                            mBinding?.etLocation?.setText(userResponseModel._result.location)
+//                            mBinding?.tvDistrict?.text = userResponseModel._result.district_name
+//                            mBinding?.tvDistrict?.setTextColor(Color.parseColor("#000000"))
+//                            mBinding?.etPincode?.setText(userResponseModel._result.pin_code.toString())
 //                            mBinding?.etPhone?.setText(userResponseModel._result.phone_no.toString())
 //                            mBinding?.etYear?.setText(userResponseModel._result.year_of_establishment)
 //                            mBinding?.etAddress?.setText(userResponseModel._result.address)
@@ -428,9 +459,9 @@ class DetailsOfSemenStationFragment(
         selectedItem: RspBreedList?,
         position: Int?
     ) {
-        val bindingDialog: ItemRspBreedWiseBinding = DataBindingUtil.inflate(
+        val bindingDialog: ItemRspTrainingMaitriBinding = DataBindingUtil.inflate(
             layoutInflater,
-            R.layout.item_rsp_breed_wise,
+            R.layout.item_rsp_training_faculty,
             null,
             false
         )
@@ -451,22 +482,23 @@ class DetailsOfSemenStationFragment(
         bindingDialog.btnEdit.hideView()
         bindingDialog.tvSubmit.showView()
         if (selectedItem != null && isFrom == 2) {
-            bindingDialog.tvYear.setText(selectedItem.breed_maintained)
-            bindingDialog.tvBreed.setText(selectedItem.no_of_animals.toString())
-            bindingDialog.etInsemination.setText(selectedItem.average_age)
+            bindingDialog.etNameOfProgramme.setText(selectedItem.breed_maintained)
+            bindingDialog.etDuration.setText(selectedItem.no_of_animals.toString())
+            bindingDialog.et2023.setText(selectedItem.average_age)
         }
         bindingDialog.tvSubmit.setOnClickListener {
-            if (bindingDialog.tvYear.text.toString()
-                    .isNotEmpty() || bindingDialog.tvBreed.text.toString().isNotEmpty()
-                || bindingDialog.etInsemination.text.toString().isNotEmpty()
+            if (bindingDialog.etNameOfProgramme.text.toString()
+                    .isNotEmpty() || bindingDialog.etDuration.text.toString()
+                    .isNotEmpty()
+                || bindingDialog.et2023.text.toString().isNotEmpty()
             ) {
                 if (selectedItem != null) {
                     if (position != null) {
                         addBucksList[position] =
                             RspBreedList(
-                                bindingDialog.tvYear.text.toString(),
-                                bindingDialog.tvBreed.text.toString(),
-                                bindingDialog.etInsemination.text.toString(),
+                                bindingDialog.etNameOfProgramme.text.toString(),
+                                bindingDialog.etDuration.text.toString(),
+                                bindingDialog.et2023.text.toString(),
                                 id = selectedItem.id,
                                 selectedItem.rsp_laboratory_semen_id
                             )
@@ -476,9 +508,9 @@ class DetailsOfSemenStationFragment(
                 } else {
                     addBucksList.add(
                         RspBreedList(
-                            bindingDialog.tvYear.text.toString(),
-                            bindingDialog.tvBreed.text.toString(),
-                            bindingDialog.etInsemination.text.toString(),
+                            bindingDialog.etNameOfProgramme.text.toString(),
+                            bindingDialog.etDuration.text.toString(),
+                            bindingDialog.et2023.text.toString(),
                             id = null,
                         )
                     )
@@ -497,6 +529,82 @@ class DetailsOfSemenStationFragment(
         dialog.show()
     }
 
+
+    private fun addMaitri(
+        context: Context,
+        isFrom: Int,
+        selectedItem: RspBreedList?,
+        position: Int?
+    ) {
+        val bindingDialog: ItemRspTrainingMaitriBinding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.item_rsp_training_maitri,
+            null,
+            false
+        )
+        val dialog = Dialog(context, android.R.style.Theme_Translucent_NoTitleBar)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setContentView(bindingDialog.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window!!.setGravity(Gravity.CENTER)
+        val lp: WindowManager.LayoutParams = dialog.window!!.attributes
+        lp.dimAmount = 0.5f
+        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        bindingDialog.btnDelete.hideView()
+        bindingDialog.btnEdit.hideView()
+        bindingDialog.tvSubmit.showView()
+        if (selectedItem != null && isFrom == 2) {
+            bindingDialog.etNameOfProgramme.setText(selectedItem.breed_maintained)
+            bindingDialog.etDuration.setText(selectedItem.no_of_animals.toString())
+            bindingDialog.et2023.setText(selectedItem.average_age)
+        }
+        bindingDialog.tvSubmit.setOnClickListener {
+            if (bindingDialog.etNameOfProgramme.text.toString()
+                    .isNotEmpty() || bindingDialog.etDuration.text.toString()
+                    .isNotEmpty()
+                || bindingDialog.et2023.text.toString().isNotEmpty()
+            ) {
+                if (selectedItem != null) {
+                    if (position != null) {
+                        maitriList[position] =
+                            RspBreedList(
+                                bindingDialog.etNameOfProgramme.text.toString(),
+                                bindingDialog.etDuration.text.toString(),
+                                bindingDialog.et2023.text.toString(),
+                                id = selectedItem.id,
+                                selectedItem.rsp_laboratory_semen_id
+                            )
+                        maitriAdapter?.notifyItemChanged(position)
+                    }
+
+                } else {
+                    maitriList.add(
+                        RspBreedList(
+                            bindingDialog.etNameOfProgramme.text.toString(),
+                            bindingDialog.etDuration.text.toString(),
+                            bindingDialog.et2023.text.toString(),
+                            id = null,
+                        )
+                    )
+                    maitriList.size.minus(1).let {
+                        maitriAdapter?.notifyItemInserted(it)
+                    }
+                }
+                dialog.dismiss()
+            } else {
+                showSnackbar(
+                    mBinding!!.clParent,
+                    getString(R.string.please_enter_atleast_one_field)
+                )
+            }
+        }
+        dialog.show()
+    }
 
     inner class ClickActions {
         fun saveAsDraft(view: View) {
@@ -537,12 +645,21 @@ class DetailsOfSemenStationFragment(
             showBottomSheetDialog("District")
         }
 
+
+        fun controllingAgency(view: View) {
+            showBottomSheetDialog("ControllingAgency")
+        }
+
         fun addDocDialog(view: View) {
             addDocumentDialog(requireContext(), null, null)
         }
 
         fun otherManpowerPositionDialog(view: View) {
             addBucks(requireContext(), 1, null, null)
+        }
+
+        fun addMaitri(view: View) {
+            addMaitri(requireContext(), 1, null, null)
         }
     }
 
@@ -567,10 +684,10 @@ class DetailsOfSemenStationFragment(
 
         // Initialize based on type
         when (type) {
-//            "typeSemen" -> {
-//                selectedList = typeSemen
-//                selectedTextView = mBinding!!.tvSemenStation
-//            }
+            "ControllingAgency" -> {
+                selectedList = controllingAgency
+                selectedTextView = mBinding!!.tvControllingAgency
+            }
 //
 //            "StateNDD" -> {
 //                selectedList = stateList
@@ -600,7 +717,9 @@ class DetailsOfSemenStationFragment(
         stateAdapter = BottomSheetAdapter(requireContext(), selectedList) { selectedItem, id ->
             // Handle state item click
             selectedTextView.text = selectedItem
-            districtId = id
+            if (id != -1) {
+                districtId = id
+            }
             selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             bottomSheetDialog.dismiss()
         }

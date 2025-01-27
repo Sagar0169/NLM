@@ -85,7 +85,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         get() = R.layout.activity_dashboard
 
     override fun initView() {
-
         mBinding = viewDataBinding
         compareSchemeIds()
         viewModel.init()
@@ -740,8 +739,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                                 }
 
                                 236 -> {
-
-                                    mBinding?.leftDrawerMenu?.tvAiCenter?.showView()
+                                    mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
                                 }
 
                                 237 -> {

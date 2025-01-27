@@ -61,8 +61,8 @@ class RGM_IA_Adapter(private val implementingAgencyList: List<RGM_IA>, private v
     }
     holder.mBinding.ivEdit.setOnClickListener {
         val intent = Intent(holder.itemView.context, RGMStateImplementingAgency::class.java)
-        intent.putExtra("edit", item)
-        intent.putExtra("isFrom", 3)
+        intent.putExtra("View/Edit", "edit")
+        intent.putExtra("itemId", item.id)
         holder.itemView.context.startActivity(intent)
     }
 }

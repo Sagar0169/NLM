@@ -377,6 +377,7 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="implementing_agency_document">implementing_agency</string>
     <string name="rgm_document">implementing_agency</string>
     <string name="rsp_laboratory_semen_document">rsp-laboratory-semen</string>
+    <string name="rgm_ai_center_document">rgm-ai-center</string>
     <string name="fsp_plant_storage_document">FspPlantStorage</string>
     <string name="fp_from_non_forest_document">fpfrom_non_forest</string>
     <string name="assistance_for_ea_document">assistance-for-ea</string>
@@ -389,7 +390,8 @@ Contact information entered can be made available to law enforcement agencies if
     <string name="state_central_lab_visit_document">state_central_lab_visit</string>
     <string name="milk_processing_document">milk_processing</string>
     <string name="milk_product_marketing_document">milk_product_marketing</string>
-    <string name="productivity_enhancement_services_document">productivity_enhancement_services</string>l
+    <string name="productivity_enhancement_services_document">productivity_enhancement_services</string>
+    l
     <string name="state_semen_bank_document">state_semen_bank</string>
     <string name="mobile_veterinary_unit_state">mobile_veterinary_unit_state</string>
     <string name="mobile_veterinary_unit_district">MobileVeterinaryUnitDistrict</string>

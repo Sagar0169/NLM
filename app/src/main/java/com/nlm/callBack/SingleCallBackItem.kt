@@ -29,6 +29,7 @@ import com.nlm.model.RgmImplementingAgencyNumberOfFertility
 import com.nlm.model.RspAddAverage
 import com.nlm.model.RspAddBucksList
 import com.nlm.model.RspAddEquipment
+import com.nlm.model.RspBreedList
 import com.nlm.model.StateSemenBankOtherAddManpower
 import com.nlm.model.StateSemenInfraGoat
 
@@ -83,6 +84,10 @@ interface CallBackAvilabilityEquipment {
 }
 interface CallBackSemenDoseAvg {
     fun onClickItem(selectedItem: RspAddBucksList, position:Int, isFrom:Int)
+}
+
+interface CallBackBreedAvg {
+    fun onClickItem(selectedItem: RspBreedList, position:Int, isFrom:Int)
 }
 
 interface CallBackNddScheme {

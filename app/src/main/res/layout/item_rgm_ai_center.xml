@@ -34,9 +34,9 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Name of AI Center"
                     android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="AI Center Name"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -55,9 +55,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
-                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -73,9 +73,9 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Name of State"
                     android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="State Name"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -94,9 +94,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
-                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -112,9 +112,9 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Name of District"
                     android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="District Name"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -133,9 +133,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
-                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -146,16 +146,17 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llDistrict"
                 android:layout_marginTop="@dimen/dp_5"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tvBlock"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_medium"
                     android:text="Location of AI Center"
                     android:textColor="@color/black"
-                    android:layout_weight="1"
                     android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -173,10 +174,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
                     android:textColor="@color/grey"
-                    android:layout_weight="1"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -186,15 +187,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/llBlock"
                 android:layout_marginTop="@dimen/dp_5"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tvFarmer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_medium"
                     android:text="Date of Visit"
-                    android:layout_weight="1"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -213,9 +215,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_light"
                     android:text="Delhi"
-                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -232,10 +234,10 @@
                     android:id="@+id/tvCreatedByTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_medium"
                     android:text="Created By"
                     android:textColor="@color/black"
-                    android:layout_weight="1"
                     android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -253,9 +255,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_light"
                     android:text="Super Admin"
-                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -272,9 +274,9 @@
                     android:id="@+id/tvNlm"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_medium"
                     android:text="NLM Status"
-                    android:layout_weight="1"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -293,9 +295,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_light"
                     android:text="Submitted"
-                    android:layout_weight="1"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -311,9 +313,9 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_medium"
                     android:text="Created On"
-                    android:layout_weight="1"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -332,9 +334,89 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
                     android:fontFamily="@font/inter_light"
                     android:text="2024-08-28"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llVisit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llCreated"
+                android:layout_marginTop="@dimen/dp_5"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Visit"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvVisit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_light"
+                    android:text="N/A"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llNLMRemark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llVisit"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/dp_5"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Remarks Of NLM"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvNLMRemark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_light"
+                    android:text="N/A"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -344,7 +426,7 @@
                 android:id="@+id/llActions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/llCreated"
+                android:layout_below="@id/llNLMRemark"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="-5dp"
