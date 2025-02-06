@@ -26,7 +26,6 @@ class SemenStation : BaseActivity<ActivitySemenStationBinding>() {
     private var dId: Int? = null
     override val layoutId: Int
         get() = R.layout.activity_semen_station
-    var details_Semen_Station = details_Semen_Station()
     override fun initView() {
         mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()

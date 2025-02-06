@@ -1,46 +1,40 @@
 package com.nlm.ui.activity.rashtriya_gokul_mission
 
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayout
 import com.nlm.R
 import com.nlm.databinding.ActivityBullMotherFarmsBinding
-import com.nlm.ui.adapter.BottomSheetAdapter
-import com.nlm.ui.adapter.StateAdapter
-import com.nlm.ui.adapter.SupportingDocumentAdapter
-import com.nlm.utilities.BaseActivity
+import com.nlm.model.BackgroundData
+import com.nlm.model.FacialAttributeData
+import com.nlm.model.LocationData
+import com.nlm.model.PhysicalAttributesData
+import com.nlm.model.Result
 
-class BullMotherFarms :BaseActivity<ActivityBullMotherFarmsBinding>() {
+import com.nlm.model.details_Semen_Station
+import com.nlm.ui.fragment.BullOfMotherNLMFragment
+import com.nlm.ui.fragment.DetailsOfSemenStationFragment
+import com.nlm.ui.fragment.SemenStationManpowerFragment
+import com.nlm.utilities.AppConstants
+
+import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.Preferences.getPreferenceOfScheme
+
+class BullMotherFarms : BaseActivity<ActivityBullMotherFarmsBinding>() {
     private var mBinding: ActivityBullMotherFarmsBinding? = null
-    private lateinit var adapter: SupportingDocumentAdapter
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var programmeList: MutableList<Array<String>>
+    private var viewEdit: String? = null
+    var itemId: Int? = null
+    private var dId: Int? = null
     override val layoutId: Int
         get() = R.layout.activity_bull_mother_farms
-    private lateinit var bottomSheetAdapter: StateAdapter
-    private lateinit var bottomSheetDialog: BottomSheetDialog
-
-    private val state = listOf(
-        "Left Artificial", "Right Artificial", "Left Squint", "Right Squint", "Others"
-    )
-
-    private val district = listOf(
-        "Black", "Brown", "Blue", "Reddish", "Green", "Other"
-    )
-
     override fun initView() {
-        mBinding=viewDataBinding
+        mBinding = viewDataBinding
         mBinding?.clickAction = ClickActions()
-        recyclerView = mBinding?.recyclerView1!!
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        programmeList = mutableListOf()
-        programmeList.add(arrayOf(""))
-        adapter = SupportingDocumentAdapter(programmeList)
-        recyclerView.adapter = adapter
-
+        viewEdit = intent.getStringExtra("View/Edit")
+        itemId = intent.getIntExtra("itemId", 0)
+        dId = intent.getIntExtra("dId", 0)
+        setupTabLayout()
+        loadFragment(BullOfMothersIAFragment(viewEdit, itemId,dId))
     }
 
     override fun setVariables() {
@@ -50,62 +44,67 @@ class BullMotherFarms :BaseActivity<ActivityBullMotherFarmsBinding>() {
     override fun setObservers() {
 
     }
+
+    private fun loadFragment(fragment: Fragment) {
+
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameLayout, fragment)
+        transaction.commit()
+    }
+
     inner class ClickActions {
-        fun state(view: View){showBottomSheetDialog("state")}
-        fun Farm(view: View){showBottomSheetDialog("district")}
-        fun breed(view: View){showBottomSheetDialog("district")}
-        fun status(view: View){showBottomSheetDialog("district")}
-        fun backPress(view: View){
-            onBackPressed()
+        fun backPress(view: View) {
+            onBackPressedDispatcher.onBackPressed()
         }
+
     }
-    private fun showBottomSheetDialog(type: String) {
-        bottomSheetDialog = BottomSheetDialog(this)
-        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
-        view.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
 
-        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
-        val close = view.findViewById<TextView>(R.id.tvClose)
+    private fun setupTabLayout() {
+        mBinding?.tabLayout?.apply {
+            addTab(newTab().setText("To Be Filled By IA"))
+            if (getPreferenceOfScheme(
+                    this@BullMotherFarms,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.role_id == 8
+            ) {
+                addTab(newTab().setText("To Be Filled By NLM"))
 
-        close.setOnClickListener {
-            bottomSheetDialog.dismiss()
-        }
-
-        // Define a variable for the selected list and TextView
-        val selectedList: List<String>
-        val selectedTextView: TextView
-
-        // Initialize based on type
-        when (type) {
-
-
-            "state" -> {
-                selectedList = state
-                selectedTextView = mBinding!!.etState
-            }
-
-            "district" -> {
-                selectedList = district
-                selectedTextView = mBinding!!.etFarm
             }
 
 
+            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tab?.position) {
+                        0 -> {
+                            onTabClicks()
+                            loadFragment(BullOfMothersIAFragment(viewEdit, itemId,dId))
+                        }
 
-            else -> return
+                        1 -> {
+                            onTabClicks()
+                            loadFragment(BullOfMotherNLMFragment(viewEdit, itemId,dId))
+
+                        }
+
+
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                    // Optional: handle tab unselected
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                    // Optional: handle tab reselected
+                }
+            })
         }
-        bottomSheetAdapter = StateAdapter(selectedList,this) { selectedItem ->
-            selectedTextView.text = selectedItem
-            bottomSheetDialog.dismiss()
-        }
-
-        rvBottomSheet.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvBottomSheet.adapter = bottomSheetAdapter
-        bottomSheetDialog.setContentView(view)
-
-        bottomSheetDialog.show()
     }
+
+    fun onTabClicks() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
+    }
+
+
 }

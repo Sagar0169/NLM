@@ -35,6 +35,8 @@ import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.CommonUtils
+import com.nlm.utilities.CommonUtils.showToast
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
@@ -77,6 +79,7 @@ class AddVaccinationProgrammeStateLevel :
     private var layoutManager: LinearLayoutManager? = null
     private var latitude: Double? = null
     private var longitude: Double? = null
+    private var remarkRadio: Int? = 0
 
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -114,10 +117,45 @@ class AddVaccinationProgrammeStateLevel :
         viewModel.init()
         viewEdit = intent.getStringExtra("View/Edit")
         itemId = intent.getIntExtra("itemId", 0)
+        mBinding?.rgRemarksOfNlm?.setOnCheckedChangeListener { group, checkedId ->
+            remarkRadio = when (checkedId) {
+                R.id.rbCooperation -> {
+                    mBinding?.tvStateHeading?.showView()
+                    mBinding?.llContent?.showView()
+                    1
+                }
+                R.id.rbNonCoorperation -> {
+                    mBinding?.tvStateHeading?.hideView()
+                    mBinding?.llContent?.hideView()
+                    mBinding?.tvComments?.hideView()
+                    mBinding?.etCommentsOfNLM?.hideView()
+                    2
+                }
+                R.id.rbPartialData -> {
+                    mBinding?.tvStateHeading?.showView()
+                    mBinding?.llContent?.showView()
+                    3
+                }
+                R.id.rbNotProvided -> {
+                    mBinding?.tvStateHeading?.hideView()
+                    mBinding?.llContent?.hideView()
+                    mBinding?.tvComments?.hideView()
+                    mBinding?.etCommentsOfNLM?.hideView()
+                    4
+                }
+                else -> null
+            }
+        }
+
     }
 
     override fun setVariables() {
         if (viewEdit == "view") {
+            mBinding?.rbCooperation?.isEnabled = false
+            mBinding?.rbNonCoorperation?.isEnabled = false
+            mBinding?.rbPartialData?.isEnabled = false
+            mBinding?.rbNotProvided?.isEnabled = false
+            mBinding?.etRemarks?.isEnabled = false
             mBinding?.etInput1a?.isEnabled = false
             mBinding?.etInput1b?.isEnabled = false
             mBinding?.etInput1c?.isEnabled = false
@@ -592,6 +630,7 @@ private fun GlideImage(imageView:ShapeableImageView,   uploadedDocumentName:Stri
     }
 
     private fun saveDataApi(itemId: Int?, draft: Int?) {
+
 
         if (hasLocationPermissions()) {
             val intent = Intent(this, LocationService::class.java)
