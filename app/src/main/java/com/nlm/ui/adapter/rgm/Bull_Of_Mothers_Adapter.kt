@@ -78,29 +78,6 @@ class Bull_Of_Mothers_Adapter(private val implementingAgencyList: List<Bull_Moth
     }
 
 
-
-    holder.mBinding.ivView.setOnClickListener {
-        val intent = Intent(holder.itemView.context, SemenStation::class.java)
-        intent.putExtra("nodalOfficer", item)
-        intent.putExtra("isFrom", 2)
-        holder.itemView.context.startActivity(intent)
-    }
-    holder.mBinding.ivEdit.setOnClickListener {
-        val intent = Intent(holder.itemView.context, SemenStation::class.java)
-        intent.putExtra("nodalOfficer", item)
-        intent.putExtra("isFrom", 3)
-        holder.itemView.context.startActivity(intent)
-    }
-
-
-
-
-
-
-//
-//        holder.tvStateName.setOnClickListener {
-//            callBackItemDistrict.onClickItemDistrict(stateName)
-//        }
     }
 
     // Return the total number of items

@@ -53,7 +53,8 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
-class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccinationProgrammeDistrictLevelBinding>()  {
+class AddVaccinationProgrammeDistrictLevel :
+    BaseActivity<ActivityAddVaccinationProgrammeDistrictLevelBinding>() {
 
     private var mBinding: ActivityAddVaccinationProgrammeDistrictLevelBinding? = null
     private var viewModel = ViewModel()
@@ -66,9 +67,10 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
     private var uploadedDocumentName: String? = null
     private var dialogDocName: TextView? = null
     private var documentName: String? = null
-    private var isImageSet:Boolean=false
-    var filePath:String?=null
-//    private lateinit var selectedImageUri:Uri
+    private var isImageSet: Boolean = false
+    var filePath: String? = null
+
+    //    private lateinit var selectedImageUri:Uri
     var body: MultipartBody.Part? = null
     var isFromApplication = 0
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -82,6 +84,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
     private var TableName: String? = null
     private var latitude: Double? = null
     private var longitude: Double? = null
+    private var remarkRadio: Int? = 0
 
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -105,6 +108,40 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
         viewModel.init()
         viewEdit = intent.getStringExtra("View/Edit")
         itemId = intent.getIntExtra("itemId", 0)
+        mBinding?.rgRemarksOfNlm?.setOnCheckedChangeListener { group, checkedId ->
+            remarkRadio = when (checkedId) {
+                R.id.rbCooperation -> {
+                    mBinding?.tvStateHeading?.showView()
+                    mBinding?.llContent?.showView()
+                    1
+                }
+
+                R.id.rbNonCoorperation -> {
+                    mBinding?.tvStateHeading?.hideView()
+                    mBinding?.llContent?.hideView()
+                    mBinding?.tvComments?.hideView()
+                    mBinding?.etCommentsOfNLM?.hideView()
+                    2
+                }
+
+                R.id.rbPartialData -> {
+                    mBinding?.tvStateHeading?.showView()
+                    mBinding?.llContent?.showView()
+                    3
+                }
+
+                R.id.rbNotProvided -> {
+                    mBinding?.tvStateHeading?.hideView()
+                    mBinding?.llContent?.hideView()
+                    mBinding?.tvComments?.hideView()
+                    mBinding?.etCommentsOfNLM?.hideView()
+                    4
+                }
+
+                else -> null
+            }
+        }
+
     }
 
     override fun onResume() {
@@ -143,6 +180,10 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             mBinding?.tvState?.isEnabled = true
         }
         if (viewEdit == "view") {
+            mBinding?.rbCooperation?.isEnabled = false
+            mBinding?.rbNonCoorperation?.isEnabled = false
+            mBinding?.rbPartialData?.isEnabled = false
+            mBinding?.rbNotProvided?.isEnabled = false
             mBinding?.tvState?.isEnabled = false
             mBinding?.tvDistrict?.isEnabled = false
             mBinding?.etInputOne?.isEnabled = false
@@ -216,14 +257,12 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                     mBinding?.llUploadFive?.hideView()
 
                 } else {
-                    isImageSet=true
+                    isImageSet = true
                     uploadedDocumentName = userResponseModel._result.document_name
                     dialogDocName?.text = userResponseModel._result.document_name
-                    TableName=userResponseModel._result.table_name
+                    TableName = userResponseModel._result.table_name
                     when (isFromApplication) {
                         1 -> {
-
-
 
 
                             mBinding?.tvDocumentNameOne?.text = uploadedDocumentName
@@ -278,7 +317,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                 if (userResponseModel._resultflag == 0) {
                     mBinding?.clParent?.let { it1 -> showSnackbar(it1, userResponseModel.message) }
                 } else {
-                    TableName=userResponseModel.fileurl
+                    TableName = userResponseModel.fileurl
                     if (savedAsDraft) {
                         onBackPressedDispatcher.onBackPressed()
                         mBinding?.clParent?.let { it1 ->
@@ -309,46 +348,75 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                             mBinding?.etChooseFileOne?.text = "No file chosen"
                         } else {
                             mBinding?.llUploadOne?.showView()
-                            mBinding?.tvDocumentNameOne?.text = userResponseModel._result.mechanisim_followed_uploads
-                            mBinding?.ivPicOne?.let { it1 -> GlideImage(it1,userResponseModel._result.mechanisim_followed_uploads)
-                                mBinding?.etChooseFileOne?.text = "Uploaded"}
+                            mBinding?.tvDocumentNameOne?.text =
+                                userResponseModel._result.mechanisim_followed_uploads
+                            mBinding?.ivPicOne?.let { it1 ->
+                                GlideImage(
+                                    it1,
+                                    userResponseModel._result.mechanisim_followed_uploads
+                                )
+                                mBinding?.etChooseFileOne?.text = "Uploaded"
+                            }
                         }
 
                         if (userResponseModel._result.trained_staff_engaged_uploads.isNullOrEmpty()) {
-                            mBinding?.etChooseFileTwo?.text ="No file chosen"
+                            mBinding?.etChooseFileTwo?.text = "No file chosen"
                         } else {
                             mBinding?.llUploadTwo?.showView()
-                            mBinding?.tvDocumentNameTwo?.text = userResponseModel._result.trained_staff_engaged_uploads
-                            mBinding?.ivPicTwo?.let { it1 -> GlideImage(it1,userResponseModel._result.trained_staff_engaged_uploads)
-                                mBinding?.etChooseFileTwo?.text ="Uploaded"
+                            mBinding?.tvDocumentNameTwo?.text =
+                                userResponseModel._result.trained_staff_engaged_uploads
+                            mBinding?.ivPicTwo?.let { it1 ->
+                                GlideImage(
+                                    it1,
+                                    userResponseModel._result.trained_staff_engaged_uploads
+                                )
+                                mBinding?.etChooseFileTwo?.text = "Uploaded"
                             }
                         }
 
                         if (userResponseModel._result.mass_education_campaign_uploads.isNullOrEmpty()) {
-                            mBinding?.etChooseFileThree?.text =   "No file chosen"
-                        }else {
+                            mBinding?.etChooseFileThree?.text = "No file chosen"
+                        } else {
                             mBinding?.llUploadThree?.showView()
-                            mBinding?.tvDocumentNameThree?.text = userResponseModel._result.mass_education_campaign_uploads
-                            mBinding?.ivPicThree?.let { it1 -> GlideImage(it1,userResponseModel._result.mass_education_campaign_uploads)
-                                mBinding?.etChooseFileThree?.text =   "Uploaded"}
+                            mBinding?.tvDocumentNameThree?.text =
+                                userResponseModel._result.mass_education_campaign_uploads
+                            mBinding?.ivPicThree?.let { it1 ->
+                                GlideImage(
+                                    it1,
+                                    userResponseModel._result.mass_education_campaign_uploads
+                                )
+                                mBinding?.etChooseFileThree?.text = "Uploaded"
+                            }
                         }
 
                         if (userResponseModel._result.are_functionaries_aware_uploads.isNullOrEmpty()) {
-                            mBinding?.etChooseFileFour?.text =  "No file chosen"
-                        } else{
+                            mBinding?.etChooseFileFour?.text = "No file chosen"
+                        } else {
                             mBinding?.llUploadFour?.showView()
-                            mBinding?.tvDocumentNameFour?.text = userResponseModel._result.are_functionaries_aware_uploads
-                            mBinding?.ivPicFour?.let { it1 -> GlideImage(it1,userResponseModel._result.are_functionaries_aware_uploads)
-                                mBinding?.etChooseFileFour?.text =  "Uploaded"}
+                            mBinding?.tvDocumentNameFour?.text =
+                                userResponseModel._result.are_functionaries_aware_uploads
+                            mBinding?.ivPicFour?.let { it1 ->
+                                GlideImage(
+                                    it1,
+                                    userResponseModel._result.are_functionaries_aware_uploads
+                                )
+                                mBinding?.etChooseFileFour?.text = "Uploaded"
+                            }
                         }
 
-                        if (userResponseModel._result.investigate_suspected_outbreak_uploads.isNullOrEmpty()){
-                            mBinding?.etChooseFileFive?.text =   "No file chosen"
+                        if (userResponseModel._result.investigate_suspected_outbreak_uploads.isNullOrEmpty()) {
+                            mBinding?.etChooseFileFive?.text = "No file chosen"
                         } else {
                             mBinding?.llUploadFive?.showView()
-                            mBinding?.tvDocumentNameFive?.text =  userResponseModel._result.investigate_suspected_outbreak_uploads
-                            mBinding?.ivPicFive?.let { it1 -> GlideImage(it1,userResponseModel._result.investigate_suspected_outbreak_uploads)
-                                mBinding?.etChooseFileFive?.text =   "Uploaded"}
+                            mBinding?.tvDocumentNameFive?.text =
+                                userResponseModel._result.investigate_suspected_outbreak_uploads
+                            mBinding?.ivPicFive?.let { it1 ->
+                                GlideImage(
+                                    it1,
+                                    userResponseModel._result.investigate_suspected_outbreak_uploads
+                                )
+                                mBinding?.etChooseFileFive?.text = "Uploaded"
+                            }
                         }
 
                     }
@@ -375,7 +443,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             openOnlyPdfAccordingToPosition()
         }
 
-        fun deleteDocumentOne(view: View){
+        fun deleteDocumentOne(view: View) {
             mBinding?.llUploadOne?.hideView()
             mBinding?.tvDocumentNameOne?.text = null
             mBinding?.etChooseFileOne?.text = ""
@@ -387,7 +455,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             openOnlyPdfAccordingToPosition()
         }
 
-        fun deleteDocumentTwo(view: View){
+        fun deleteDocumentTwo(view: View) {
             mBinding?.llUploadTwo?.hideView()
             mBinding?.tvDocumentNameTwo?.text = null
             mBinding?.etChooseFileTwo?.text = ""
@@ -399,7 +467,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             openOnlyPdfAccordingToPosition()
         }
 
-        fun deleteDocumentThree(view: View){
+        fun deleteDocumentThree(view: View) {
             mBinding?.llUploadThree?.hideView()
             mBinding?.tvDocumentNameThree?.text = null
             mBinding?.etChooseFileThree?.text = ""
@@ -411,7 +479,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             openOnlyPdfAccordingToPosition()
         }
 
-        fun deleteDocumentFour(view: View){
+        fun deleteDocumentFour(view: View) {
             mBinding?.llUploadFour?.hideView()
             mBinding?.tvDocumentNameFour?.text = null
             mBinding?.etChooseFileFour?.text = ""
@@ -423,7 +491,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             openOnlyPdfAccordingToPosition()
         }
 
-        fun deleteDocumentFive(view: View){
+        fun deleteDocumentFive(view: View) {
             mBinding?.llUploadFive?.hideView()
             mBinding?.tvDocumentNameFive?.text = null
             mBinding?.etChooseFileFive?.text = ""
@@ -460,8 +528,12 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             }
         }
     }
-    private fun GlideImage(imageView: ShapeableImageView, uploadedDocumentName:String?){
-        val url=getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(uploadedDocumentName)
+
+    private fun GlideImage(imageView: ShapeableImageView, uploadedDocumentName: String?) {
+        val url =
+            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(
+                TableName
+            ).plus("/").plus(uploadedDocumentName)
         val (isSupported, fileExtension) = getFileType(uploadedDocumentName.toString())
 
         if (isSupported) {
@@ -471,19 +543,19 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                 "pdf" -> {
                     val downloader = AndroidDownloader(this)
                     imageView.let {
-                        Glide.with(this).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf).into(
-                            it
-                        )
+                        Glide.with(this).load(R.drawable.ic_pdf).placeholder(R.drawable.ic_pdf)
+                            .into(
+                                it
+                            )
 
                     }
                     imageView.setOnClickListener {
                         if (!uploadedDocumentName.isNullOrEmpty()) {
                             downloader.downloadFile(url, uploadedDocumentName!!)
-                            mBinding?.let { it1 -> showSnackbar(it1.clParent,"Download started") }
+                            mBinding?.let { it1 -> showSnackbar(it1.clParent, "Download started") }
 
-                        }
-                        else{
-                            mBinding?.let { it1 -> showSnackbar(it1.clParent,"No document found") }
+                        } else {
+                            mBinding?.let { it1 -> showSnackbar(it1.clParent, "No document found") }
                         }
                     }
 
@@ -491,9 +563,10 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
 
                 "png" -> {
                     imageView.let {
-                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
-                            it
-                        )
+                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder)
+                            .into(
+                                it
+                            )
                         imageView.setOnClickListener {
                             Utility.showImageDialog(
                                 this,
@@ -506,9 +579,10 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
 
                 "jpg" -> {
                     imageView.let {
-                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
-                            it
-                        )
+                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder)
+                            .into(
+                                it
+                            )
                         imageView.setOnClickListener {
                             Utility.showImageDialog(
                                 this,
@@ -517,11 +591,13 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                         }
                     }
                 }
+
                 "jpeg" -> {
                     imageView.let {
-                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder).into(
-                            it
-                        )
+                        Glide.with(this).load(url).placeholder(R.drawable.ic_image_placeholder)
+                            .into(
+                                it
+                            )
                         imageView.setOnClickListener {
                             Utility.showImageDialog(
                                 this,
@@ -533,6 +609,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             }
         }
     }
+
     private fun viewEditApi() {
 
         viewModel.getDistrictVaccinationProgrammeAdd(
@@ -567,66 +644,66 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                 delay(1000) // Delay for 2 seconds
                 if (latitude != null && longitude != null) {
 
-        if (valid()) {
-            viewModel.getDistrictVaccinationProgrammeAdd(
-                context = this@AddVaccinationProgrammeDistrictLevel,
-                loader = true,
-                request = DistrictVaccinationProgrammeAddRequest(
-                    id = itemId,
-                    role_id = getPreferenceOfScheme(
-                        this@AddVaccinationProgrammeDistrictLevel,
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.role_id,
-                    state_code = getPreferenceOfScheme(
-                        this@AddVaccinationProgrammeDistrictLevel,
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.state_code,
-                    district_code = districtId,
-                    user_id = getPreferenceOfScheme(
-                        this@AddVaccinationProgrammeDistrictLevel,
-                        AppConstants.SCHEME,
-                        Result::class.java
-                    )?.user_id,
-                    status = draft,
-                    mechanisim_followed_inputs = mBinding?.etInputOne?.text.toString()
-                        .trim(),
-                    mechanisim_followed_remarks = mBinding?.etRemarkOne?.text.toString()
-                        .trim(),
-                    trained_staff_engaged_inputs = mBinding?.etInputTwo?.text.toString()
-                        .trim(),
-                    trained_staff_engaged_remarks = mBinding?.etRemarkTwo?.text.toString()
-                        .trim(),
-                    mass_education_campaign_inputs = mBinding?.etInputThree?.text.toString()
-                        .trim(),
-                    mass_education_campaign_remarks = mBinding?.etRemarkThree?.text.toString()
-                        .trim(),
-                    are_functionaries_aware_inputs = mBinding?.etInputFour?.text.toString()
-                        .trim(),
-                    are_functionaries_aware_remarks = mBinding?.etRemarkFour?.text.toString()
-                        .trim(),
-                    investigate_suspected_outbreak_inputs = mBinding?.etInputFive?.text.toString()
-                        .trim(),
-                    investigate_suspected_outbreak_remarks = mBinding?.etInputFive?.text.toString()
-                        .trim(),
-                    mechanisim_followed_uploads = mBinding?.tvDocumentNameOne?.text.toString()
-                        .trim(),
-                    trained_staff_engaged_uploads = mBinding?.tvDocumentNameTwo?.text.toString()
-                        .trim(),
-                    mass_education_campaign_uploads = mBinding?.tvDocumentNameThree?.text.toString()
-                        .trim(),
-                    are_functionaries_aware_uploads = mBinding?.tvDocumentNameFour?.text.toString()
-                        .trim(),
-                    investigate_suspected_outbreak_uploads = mBinding?.tvDocumentNameFive?.text.toString()
-                        .trim(),
-                    longitude = longitude,
-                    latitude = latitude
-                )
-            )
-        }
+                    if (valid()) {
+                        viewModel.getDistrictVaccinationProgrammeAdd(
+                            context = this@AddVaccinationProgrammeDistrictLevel,
+                            loader = true,
+                            request = DistrictVaccinationProgrammeAddRequest(
+                                id = itemId,
+                                role_id = getPreferenceOfScheme(
+                                    this@AddVaccinationProgrammeDistrictLevel,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.role_id,
+                                state_code = getPreferenceOfScheme(
+                                    this@AddVaccinationProgrammeDistrictLevel,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.state_code,
+                                district_code = districtId,
+                                user_id = getPreferenceOfScheme(
+                                    this@AddVaccinationProgrammeDistrictLevel,
+                                    AppConstants.SCHEME,
+                                    Result::class.java
+                                )?.user_id,
+                                status = draft,
+                                mechanisim_followed_inputs = mBinding?.etInputOne?.text.toString()
+                                    .trim(),
+                                mechanisim_followed_remarks = mBinding?.etRemarkOne?.text.toString()
+                                    .trim(),
+                                trained_staff_engaged_inputs = mBinding?.etInputTwo?.text.toString()
+                                    .trim(),
+                                trained_staff_engaged_remarks = mBinding?.etRemarkTwo?.text.toString()
+                                    .trim(),
+                                mass_education_campaign_inputs = mBinding?.etInputThree?.text.toString()
+                                    .trim(),
+                                mass_education_campaign_remarks = mBinding?.etRemarkThree?.text.toString()
+                                    .trim(),
+                                are_functionaries_aware_inputs = mBinding?.etInputFour?.text.toString()
+                                    .trim(),
+                                are_functionaries_aware_remarks = mBinding?.etRemarkFour?.text.toString()
+                                    .trim(),
+                                investigate_suspected_outbreak_inputs = mBinding?.etInputFive?.text.toString()
+                                    .trim(),
+                                investigate_suspected_outbreak_remarks = mBinding?.etInputFive?.text.toString()
+                                    .trim(),
+                                mechanisim_followed_uploads = mBinding?.tvDocumentNameOne?.text.toString()
+                                    .trim(),
+                                trained_staff_engaged_uploads = mBinding?.tvDocumentNameTwo?.text.toString()
+                                    .trim(),
+                                mass_education_campaign_uploads = mBinding?.tvDocumentNameThree?.text.toString()
+                                    .trim(),
+                                are_functionaries_aware_uploads = mBinding?.tvDocumentNameFour?.text.toString()
+                                    .trim(),
+                                investigate_suspected_outbreak_uploads = mBinding?.tvDocumentNameFive?.text.toString()
+                                    .trim(),
+                                longitude = longitude,
+                                latitude = latitude
+                            )
+                        )
+                    }
                 } else {
-                    showSnackbar(mBinding?.clParent!!,"Please wait for a sec and click again")
+                    showSnackbar(mBinding?.clParent!!, "Please wait for a sec and click again")
                 }
             }
         } else {
@@ -635,7 +712,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
     }
 
     private fun valid(): Boolean {
-        if (mBinding?.tvDistrict?.text.toString().isEmpty()) {
+        if (mBinding?.tvDistrict?.text == getString(R.string.please_select)) {
             mBinding?.clParent?.let {
                 showSnackbar(it, getString(R.string.please_select_district))
             }
@@ -817,6 +894,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
 
         return rotateDrawable
     }
+
     override fun showImage(bitmap: Bitmap) {
         // Override to display the image in this activity
         Log.d("TAG", isFromApplication.toString())
@@ -901,11 +979,10 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
     }
 
 
-
-
     private fun openOnlyPdfAccordingToPosition() {
         checkStoragePermission(this)
     }
+
     @SuppressLint("Range")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -925,12 +1002,12 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                         filePath?.substringAfterLast('.', "").orEmpty().lowercase()
                     // Validate file extension
                     if (fileExtension in listOf("png", "jpg", "jpeg")) {
-                      val file = filePath?.let { File(it) }
+                        val file = filePath?.let { File(it) }
 
                         // Check file size (5 MB = 5 * 1024 * 1024 bytes)
                         file?.let {
                             val fileSizeInMB = it.length() / (1024 * 1024.0) // Convert to MB
-                            if (fileSizeInMB <= 5 ) {
+                            if (fileSizeInMB <= 5) {
                                 when (isFromApplication) {
 
                                     1 -> {
@@ -1015,11 +1092,16 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                                     else -> {}
                                 }
                             } else {
-                                mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                mBinding?.let {
+                                    showSnackbar(
+                                        it.clParent,
+                                        "File size exceeds 5 MB"
+                                    )
+                                }
                             }
                         }
                     } else {
-                        mBinding?.let { showSnackbar(it.clParent,"Format not supported") }
+                        mBinding?.let { showSnackbar(it.clParent, "Format not supported") }
                     }
                 }
 
@@ -1038,7 +1120,8 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
                                     it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
                                 val fileSizeInBytes =
                                     it.getLong(it.getColumnIndex(MediaStore.MediaColumns.SIZE))
-                                val fileSizeInMB = fileSizeInBytes / (1024 * 1024.0) // Convert to MB
+                                val fileSizeInMB =
+                                    fileSizeInBytes / (1024 * 1024.0) // Convert to MB
 
                                 // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
                                 if (fileSizeInMB <= 5) {
@@ -1079,7 +1162,12 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
 
                                     }
                                 } else {
-                                    mBinding?.let { showSnackbar(it.clParent,"File size exceeds 5 MB") }
+                                    mBinding?.let {
+                                        showSnackbar(
+                                            it.clParent,
+                                            "File size exceeds 5 MB"
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -1088,6 +1176,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             }
         }
     }
+
     private fun uploadImage(file: File) {
         lifecycleScope.launch {
             val reqFile = file.asRequestBody("image/*".toMediaTypeOrNull())
@@ -1110,6 +1199,7 @@ class AddVaccinationProgrammeDistrictLevel : BaseActivity<ActivityAddVaccination
             )
         }
     }
+
     private fun uploadDocument(documentName: String?, uri: Uri) {
         val requestBody = convertToRequestBody(this, uri)
         body = MultipartBody.Part.createFormData(
