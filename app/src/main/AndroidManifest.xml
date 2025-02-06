@@ -51,12 +51,12 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.fragment.TrainingCenterNLMFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
-        <activity
-            android:name=".ui.fragment.TrainingCenterIAFragement"
-            android:exported="false" />
+
         <activity
             android:name=".ui.activity.ImageGeoLocationActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <service
@@ -64,256 +64,340 @@
             android:exported="false" /> <!-- Theme is optional and only needed if default theme has no action bar. -->
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name=".ui.activity.livestock_health_disease.ascad.AddAscadDistrictActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.ascad.AddAscadStateActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitVillage"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitBlock"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".biometric.ComposeActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitDistrict"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.AddNewMobileVeterinaryUnitState"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeFarmerLevel"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeDistrictLevel"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.vaccination_programme.AddVaccinationProgrammeStateLevel"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.AddAnimalHusbandryActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.vaccination_programme.VaccinationProgrammerListActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.ascad.AscadListActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.ascad.AscadActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.AddNLMExtensionActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmAnimalHidfActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmFpFromNonForestListActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.NlmComponentBDairyDevelopment"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.NlmComponentBList"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.EditProfileActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.ReportsOfNlmComponentActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.FilterStateActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.AddRgmAiCenterAcitivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.RGMAiCenterActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.RGMStateImplementingAgency"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.SemenStationList"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.NLMComponentANDDActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.AddNLMComponentA"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.SemenStation"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.BullOfMothersList"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.BullMotherFarms"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.ImportOfExoticGoatList"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.ImportOfExoticGoatForms"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.AddRGMVitroFertilizatonActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.RGMVitroFertilizationActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
-            android:launchMode="singleTop" />
+           />
         <activity
             android:name=".ui.activity.national_livestock_mission.ArtificialInseminationList"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.ArtificialInseminationForms"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.StateSemenBankForms"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.StateSemenBankList"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.RSPLabList"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.RspLabSemenForms"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.AddNlmAssistanceForQFSPActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmAssistanceForQFSPActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.AddNewFspPlantStorageActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmFspPlantStorageActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.AddNlmFpForestLandActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.AddNlmFpFromNonForestActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmFpForestLandActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.AddNewAssistanceForEaActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmAssistanceForEa"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.AddNlmEdpActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NlmEdpActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.vaccination_programme.VaccinationProgrammerActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryListActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.livestock_health_disease.mobile_veterinary_units.MobileVeterinaryActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.AddImplementingAgency"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.NodalOfficerDetailActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ImplementingAgencyMasterActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NLMIAForm"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_livestock_mission.NationalLiveStockMissionIAList"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.UserActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.UserFormActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.AboutUsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.AddMilkUnionVisit"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.DairyPlantVisitNDDActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.AddDairyPlantVisit"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.AddDCSCenterVisit"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.StateCenterLabVisitNDDActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.BreedMultiplicationRGMActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.AddBreedMultiplication"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.TrainingCentersRGMActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.rashtriya_gokul_mission.AddTrainingCenters"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.MilkProcessingNDDActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.MilkProductMarketingNDDActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.ProductivityEnhancementServicesNDDActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.AddProductivityEnhancementServices"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.AddStateCenterLabtVisit"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.AddMilkProcessing"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.AddMilkProductMarketing"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.DCSCenterVisitNDDActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.ChangePasswordActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.LoginActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.SplashActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -335,12 +419,15 @@
 
         <activity
             android:name=".ui.activity.DashboardActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.activity.national_dairy_development.MilkUnionVisitNDDActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <provider

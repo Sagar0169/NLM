@@ -42,11 +42,14 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
             mBinding?.etAnyOther?.isEnabled=false
             mBinding?.etAnyOfTheAsset?.isEnabled=false
 
-            ViewEditApi()
+            ViewEditApi(viewEdit)
         }
         else if (viewEdit=="edit"){
-            ViewEditApi()
+            ViewEditApi(viewEdit)
 
+        }
+        else{
+            ViewEditApi("edit")
         }
 
     }
@@ -74,7 +77,7 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
                         savedAsDraftClick?.onSaveAsDraft()
                     }else
                     {
-                        if (viewEdit=="view"||viewEdit=="edit")
+                        if (viewEdit=="view"||viewEdit=="edit"||viewEdit=="add")
                         {
                             if (savedAsEdit)
                             {
@@ -86,6 +89,7 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
                                 mBinding?.etFunds?.setText(userResponseModel._result.funds)
                                 mBinding?.etAnyOther?.setText(userResponseModel._result.any_other)
                                 mBinding?.etAnyOfTheAsset?.setText(userResponseModel._result.any_assets_created)
+
                             }
                         }
                         else{
@@ -93,7 +97,9 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
                             listener?.onNextButtonClick()
 
                     }
-                        showSnackbar(mBinding!!.clParent, userResponseModel.message)}}
+                        if(viewEdit!="add")
+                        {
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)}}}
             }
         }
     }
@@ -111,7 +117,7 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
 
           }
           else {
-              if (viewEdit=="edit")
+              if (viewEdit=="edit"|| viewEdit=="add")
               {
                   savedAsEdit=true
               }
@@ -146,7 +152,7 @@ class NLSIAConstraintsFacedByIAFragment(private val viewEdit: String?,private va
         listener = null
         savedAsDraftClick = null
     }
-    private fun ViewEditApi(){
+    private fun ViewEditApi(viewEdit: String?){
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(
                 part = "part6",

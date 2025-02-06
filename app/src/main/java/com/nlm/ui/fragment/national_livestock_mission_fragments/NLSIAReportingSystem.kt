@@ -67,11 +67,15 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
             mBinding?.etSubmission1?.isEnabled=false
             mBinding?.etSubmission2?.isEnabled=false
             mBinding?.etStudiesConducted?.isEnabled=false
-            ViewEditApi()
+            ViewEditApi(viewEdit)
         }
         else if (viewEdit=="edit"){
-            ViewEditApi()
+            ViewEditApi(viewEdit)
 
+        }
+        else{
+
+            ViewEditApi("edit")
         }
         nlmIAFundsRecievedAdapter()
     }
@@ -133,7 +137,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
 
                         }
                         }
-                       else if (viewEdit=="edit")
+                       else if (viewEdit=="edit" || viewEdit=="add")
                         {
                             if (savedAsEdit)
                             {
@@ -165,7 +169,9 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
 
                     listener?.onNextButtonClick()
                   }
-                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        if(viewEdit!="add")
+                        {
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)}
                 }}
             }
         }}
@@ -185,7 +191,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
 
             }
             else {
-                if (viewEdit=="edit")
+                if (viewEdit=="edit"|| viewEdit=="add")
                 {
                     savedAsEdit=true
                 }
@@ -313,7 +319,7 @@ class NLSIAReportingSystem (private val viewEdit: String?,private val itemId:Int
         listener = null
         savedAsDraftClick = null
     }
-    private fun ViewEditApi(){
+    private fun ViewEditApi(viewEdit: String?=null){
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(
                 part = "part4",

@@ -56,12 +56,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 ).let { EncryptionHelper.decrypt(it) }
             )
         }
-
-
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
         mBinding?.checkBoxRememberMe?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 Utility.savePreferencesString(this@LoginActivity, AppConstants.REMEMBER_MEE, "isChecked")
@@ -69,6 +63,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 Utility.savePreferencesString(this@LoginActivity, AppConstants.REMEMBER_MEE, "unchecked")
             }
         }
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+
 
 
 
@@ -214,28 +214,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             userResponseModel._result.siteurl
                         )
                     )
-
-                    // Save user ID and password in preferences for testing (unencrypted for now)
-                    val userName = mBinding?.etUsername?.text.toString().trim()
-                    val password = mBinding?.etPassword?.text.toString().trim()
-
-                    if (userName.isNotEmpty() && password.isNotEmpty()) {
-                        val encryptedUserName = EncryptionHelper.encrypt(userName)
-                        val encryptedPassword = EncryptionHelper.encrypt(password)
-
-                        // Save encrypted data in SharedPreferences
-                        Utility.savePreferencesString(
-                            this,
-                            AppConstants.USERNAME,
-                            encryptedUserName
-                        )
-                        Utility.savePreferencesString(
-                            this,
-                            AppConstants.PASSWORD,
-                            encryptedPassword
-                        )
-                    }
-
                     userResponseModel._result.token?.let { it1 ->
                         Utility.savePreferencesString(
                             this, PrefEntities.TOKEN,

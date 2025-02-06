@@ -100,8 +100,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         setDefaultDrawables()
         // Check current theme
 
-
-
+        mBinding?.leftDrawerMenu?.llDarkTheme?.hideView()
+        val isDarkMode = Utility.isDarkMode(this)
+        mBinding?.leftDrawerMenu?.themeSwitch?.isChecked = isDarkMode
         mBinding?.leftDrawerMenu?.themeSwitch?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // Enable dark mode
@@ -739,7 +740,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                                 }
 
                                 236 -> {
-                                    mBinding?.leftDrawerMenu?.tvArtificialInsemination?.showView()
+                                    mBinding?.leftDrawerMenu?.tvAiCenter?.showView()
                                 }
 
                                 237 -> {

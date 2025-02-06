@@ -66,14 +66,17 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
             mBinding?.tvSendOtp?.hideView()
              mBinding?.tvAddMore1?.hideView()
              mBinding?.tvAddMore2?.hideView()
-            ViewEditApi()
+            ViewEditApi(viewEdit)
 
         }
         else   if (viewEdit=="edit")
         {
 
-            ViewEditApi()
+            ViewEditApi(viewEdit)
 
+        }
+        else{
+            ViewEditApi("edit")
         }
         nlmIACompositionOFGoverningAdapter()
         nlmIAProjectMonitoringCommitteeAdapter()
@@ -146,7 +149,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
 
                             }
                         }
-                       else if (viewEdit=="edit")
+                       else if (viewEdit=="edit" || viewEdit=="add")
                         {
                             if (savedAsEdit)
                             {
@@ -178,8 +181,9 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
                         else{
                             listener?.onNextButtonClick()
                         }
-
-                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        if(viewEdit!="add")
+                        {
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)}
                 }}
             }
         }}
@@ -206,6 +210,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
 
     inner class ClickActions {
         fun saveAndNext(view: View) {
+
             if (viewEdit=="view")
             {
                 listener?.onNextButtonClick()
@@ -218,7 +223,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
 
             }
             else {
-                if (viewEdit=="edit")
+                if (viewEdit=="edit" || viewEdit=="add")
                 {
                     savedAsEdit=true
                 }
@@ -371,7 +376,7 @@ class NLSIAGoverningBodyBoardOfDirectorsFragment(private val viewEdit: String?,p
         listener = null
         savedAsDraftClick = null
     }
-    private fun ViewEditApi(){
+    private fun ViewEditApi(viewEdit: String?){
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(
                 part = "part3",

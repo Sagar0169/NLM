@@ -35,6 +35,7 @@ import com.nlm.services.LocationService
 import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.CommonUtils.showToast
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
@@ -76,7 +77,7 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
     private var savedAsDraft: Boolean = false
     private var latitude: Double? = null
     private var longitude: Double? = null
-
+    private var remarkRadio: Int? = 0
     private val locationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent?.let {
@@ -150,6 +151,30 @@ class AddNewMobileVeterinaryUnitState : BaseActivity<ActivityAddNewMobileVeterin
 
             viewEditApi()
         }
+//        mBinding?.rgRemarksOfNlm?.setOnCheckedChangeListener { group, checkedId ->
+//            remarkRadio = when (checkedId) {
+//                R.id.rbCooperation -> {
+//                    mBinding?.llForm?.showView()
+//
+//                    1
+//                }
+//                R.id.rbNonCoorperation -> {
+//                    mBinding?.llForm?.hideView()
+//
+//                    2
+//                }
+//                R.id.rbPartialData -> {
+//                    mBinding?.llForm?.showView()
+//                    3
+//                }
+//                R.id.rbNotProvided -> {
+//                    mBinding?.llForm?.hideView()
+//                    4
+//                }
+//                else -> null
+//            }
+//
+//        }
         if (viewEdit == "edit") {
             viewEditApi()
         }

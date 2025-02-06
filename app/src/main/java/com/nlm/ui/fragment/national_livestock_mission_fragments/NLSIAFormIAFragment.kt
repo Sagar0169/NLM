@@ -26,7 +26,7 @@ import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.viewModel.ViewModel
 
-class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAFormBinding>() {
+class NLSIAFormIAFragment(private var viewEdit: String?,private val itemId:Int?) : BaseFragment<FragmentNLSIAFormBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_n_l_s_i_a_form
     private var viewModel = ViewModel()
@@ -69,7 +69,12 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
             ViewEditApi(viewEdit)
         }
         else if(viewEdit=="edit"){
+
             ViewEditApi(viewEdit)
+        }
+        else{
+
+            ViewEditApi("edit")
         }
 
     }
@@ -90,7 +95,11 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
           {
 
               if(userResponseModel._resultflag==0){
-                  showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                  if (viewEdit!="add")
+                  {
+                      showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                  }
+
               }
               else{
                   if (savedAsDraft)
@@ -99,7 +108,7 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                   }
                   else{
 
-                      if (viewEdit=="view"||viewEdit=="edit")
+                      if (viewEdit=="view"||viewEdit=="edit" )
                       {
                           if (savedAsEdit)
                           {
@@ -137,8 +146,9 @@ class NLSIAFormIAFragment(private val viewEdit: String?,private val itemId:Int?)
                           {
                               listener?.onNextButtonClick()
                           }
-
-                          showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                            if(viewEdit!="add")
+                            {
+                          showSnackbar(mBinding!!.clParent, userResponseModel.message)}
                       }
 
                   }

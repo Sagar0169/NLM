@@ -5,14 +5,18 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.nlm.R
+import com.nlm.callBack.OnBackSaveAsDraft
+import com.nlm.callBack.OnNextButtonClickListener
 import com.nlm.databinding.ActivityAddRgmvitroFertilizatonBinding
 import com.nlm.model.NlmEdp
 import com.nlm.ui.adapter.NlmEdpAdapter
+import com.nlm.ui.fragment.RGMIAOtherStaffFragment
 import com.nlm.ui.fragment.VitroPartOneFragment
 import com.nlm.ui.fragment.VitroPartTwoFragment
 import com.nlm.utilities.BaseActivity
 
-class AddRGMVitroFertilizatonActivity : BaseActivity<ActivityAddRgmvitroFertilizatonBinding>() {
+class AddRGMVitroFertilizatonActivity : BaseActivity<ActivityAddRgmvitroFertilizatonBinding>(),
+    OnNextButtonClickListener, OnBackSaveAsDraft {
     private var mBinding: ActivityAddRgmvitroFertilizatonBinding? = null
     private lateinit var onlyCreatedAdapter: NlmEdpAdapter
     private lateinit var onlyCreated: List<NlmEdp>
@@ -101,5 +105,27 @@ class AddRGMVitroFertilizatonActivity : BaseActivity<ActivityAddRgmvitroFertiliz
     }
 
     override fun setObservers() {
+    }
+    override fun onSaveAsDraft() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+    private fun moveToNextTab() {
+        val currentTab = mBinding?.tabLayout?.selectedTabPosition ?: 0
+        val nextTab = currentTab + 1
+        if (nextTab < (mBinding?.tabLayout?.tabCount ?: 0)) {
+            mBinding?.tabLayout?.getTabAt(nextTab)?.select()
+        }
+    }
+
+    override fun onNextButtonClick() {
+        moveToNextTab()
+    }
+
+    override fun onNavigateToFirstFragment() {
+        // Load the first fragment (Implementing Agency)
+        loadFragment(VitroPartOneFragment(viewEdit,itemId))
+
+        // Select the first tab
+        mBinding?.tabLayout?.getTabAt(0)?.select()
     }
 }

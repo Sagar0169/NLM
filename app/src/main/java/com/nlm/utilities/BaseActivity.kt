@@ -29,6 +29,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -118,6 +119,11 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Utility.isDarkMode(this)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
         context = this
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         window.statusBarColor = Color.TRANSPARENT
@@ -275,7 +281,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     abstract fun setObservers()
 
-    private fun showToast(message: String?) {
+    fun showToast(message: String?) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 

@@ -10,11 +10,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       style="@style/ParentViewBackGroundStyle"
+          android:background="@color/white"
         >
 
         <RelativeLayout
-            style="@style/ParentViewBackGroundStyle"
+            android:background="@color/white"
             android:id="@+id/rlHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="10dp"
                     android:text="@string/home"
-                    style="@style/TextViewStyle"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:drawableStartCompat="@drawable/ic_dashboard" />
 
@@ -742,6 +742,7 @@
                         android:textSize="16sp" />
                 </LinearLayout>
                  <LinearLayout
+                     android:id="@+id/llDarkTheme"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:orientation="horizontal">
@@ -756,7 +757,7 @@
                          android:layout_weight="8"
                          android:paddingVertical="10dp"
                          android:text="Dark Theme"
-                         style="@style/TextViewStyle"
+                         android:textColor="@color/black"
                          android:textSize="16sp" />
                      <Switch
                          android:id="@+id/themeSwitch"
@@ -777,10 +778,10 @@
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="@dimen/dp_20"
-
+                    android:textColor="@color/black"
                     android:paddingVertical="10dp"
                     android:text="Terms and condition"
-                    style="@style/TextViewStyle"
+
                     android:textSize="16sp" />
 
 
@@ -795,7 +796,7 @@
                     android:paddingHorizontal="@dimen/dp_20"
                     android:paddingVertical="5dp"
                     android:text="Privacy Policy"
-                    style="@style/TextViewStyle"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
 

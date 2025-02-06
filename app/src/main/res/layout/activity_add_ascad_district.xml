@@ -991,6 +991,43 @@
                     </LinearLayout>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_marginHorizontal="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Draft Guidelines for preparation of Visit Report by NLMs"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_18" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.2dp"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/field_visit_report_should_be_clear_and_"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.2dp"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@color/black" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llSaveDraftAndSubmit"

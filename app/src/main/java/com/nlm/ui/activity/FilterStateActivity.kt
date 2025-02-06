@@ -1060,6 +1060,43 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
 
 
             }
+            53 -> {
+                binding!!.tvState.showView()
+                binding!!.tvTitleState.showView()
+                binding!!.tvTitleDistrict.showView()
+                binding!!.tvDistrict.showView()
+                binding!!.tvTitleVillageName.showView()
+                binding!!.etVillageName.showView()
+
+
+                binding!!.tvState.text = getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_name.toString()
+                if (getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_name?.isNotEmpty() == true
+                ) {
+                    binding!!.tvState.isEnabled = false
+                    binding!!.tvState.setTextColor(ContextCompat.getColor(this, R.color.black))
+
+                    stateId = getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code
+                }
+                if (block != null) {
+                    binding?.etBlock?.setText(block)
+                }
+                if (districtName!="") {
+                    binding?.tvDistrict?.text = districtName
+                    binding!!.tvDistrict.setTextColor(ContextCompat.getColor(this, R.color.black))
+                }
+            }
 
             else -> {
                 binding!!.tvTitleState.showView()
@@ -1121,7 +1158,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
         }
         viewModel.getDropDownApi(
             this, loader, GetDropDownRequest(
-                20,
+                100,
                 "Districts",
                 currentPage,
                 getPreferenceOfScheme(
@@ -1318,12 +1355,12 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                     if (currentPage == 1) {
                         stateList.clear()
 
-                        val remainingCount = userResponseModel.total_count % 10
+                        val remainingCount = userResponseModel.total_count % 100
                         totalPage = if (remainingCount == 0) {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count
                         } else {
-                            val count = userResponseModel.total_count / 10
+                            val count = userResponseModel.total_count / 100
                             count + 1
                         }
                     }
@@ -1387,6 +1424,13 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
             if (isFrom == 43 && stateId != null) {
                 // Prepare intent to send the result back
                 binding!!.etBlock.setText("")
+                binding!!.tvDistrict.text = "Please Select"
+                districtName="Please Select"
+                districtId = null
+            }
+            if (isFrom == 53 && stateId != null) {
+                // Prepare intent to send the result back
+                binding!!.etVillageName.setText("")
                 binding!!.tvDistrict.text = "Please Select"
                 districtName="Please Select"
                 districtId = null
@@ -1546,7 +1590,7 @@ class FilterStateActivity : BaseActivity<ActivityFilterStateBinding>() {
                 setResult(RESULT_OK, resultIntent) // Send result
                 finish()
             }
-            if (isFrom == 41||isFrom==42||isFrom==43||isFrom==44 && stateId != null) {
+            if (isFrom == 41||isFrom==42||isFrom==43||isFrom==44 ||isFrom==53 && stateId != null) {
                 // Prepare intent to send the result back
                 val resultIntent = Intent()
                 resultIntent.putExtra("block", binding!!.etBlock.text.toString())

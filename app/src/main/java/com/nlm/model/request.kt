@@ -40,7 +40,7 @@ data class ApplicationStatusRequest(
     val application_number: String
 )
 
-data class ImplementingAgencyRequest(
+data class  ImplementingAgencyRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
@@ -986,6 +986,8 @@ data class VaccinationProgrammerListRequest(
     val role_id: Int?,
     val state_code: Int?,
     val user_id: Int?,
+    val village: String?,
+    val district_code: Int?=null,
 )
 
 data class MobileVeterinaryUnitsListRequest(
@@ -1812,4 +1814,140 @@ data class MilkUnionAddRequest(
     val user_id: String?=null,
     val visit: Int?=null
 )
+data class RGMStateImplementingAgencyDataClass(
+    val name: String = "",
+    val states: String = "",
+    val district: String = "",
+    val locationOfIA: String = "",
+    val ceoName: String = "",
+    //other Staff
+    val noOfSanctionedPosts: Int = 0,
+    val noOfPostFilledRegular: Int = 0,
+    val noOfPostFilledDeputationContract: Int = 0,
+    val noOfPostVacant: Int = 0,
+
+    // Assets of IA
+    val frozenBullSemenProductionStationsNumber: Int = 0,
+    val frozenBullSemenProductionStationsLocation: Int = 0,
+    val semenBanksNumber: Int = 0,
+    val semenBanksLocation: Int = 0,
+    val liquidNitrogenProductionUnitsNumber: Int = 0,
+    val liquidNitrogenProductionUnitsLocation: Int = 0,
+    val liquidNitrogenStorageAndDistributionSystemNumber: Int = 0,
+    val liquidNitrogenStorageAndDistributionSystemLocation: Int = 0,
+    val trainingCentersNumber: Int = 0,
+    val trainingCentersLocation: Int = 0,
+    val breedingFarmsNumber: Int = 0,
+    val breedingFarmsLocation: Int = 0,
+    val ivfLabsNumber: Int = 0,
+    val ivfLabsLocation: Int = 0,
+    val othersNumber: Int = 0,
+    val othersLocation: Int = 0,
+
+    // Composition of Governing Body / Board of Director
+    val governingBodyComposition: List<GoverningBodyMember> = emptyList(),
+
+    // Project Monitoring Committee
+    val projectMonitoringCommittee: List<MonitoringCommitteeMember> = emptyList(),
+
+    // Committee meetings
+    val governingBodyFrequencyOfMeetings: String = "",
+    val governingBodyMeetingsHeld: String = "",
+    val stateTechnicalMonitoringCommitteeFrequencyOfMeetings: String = "",
+    val stateTechnicalMonitoringCommitteeMeetingsHeld: String = "",
+    val governingBodyYearOne: String = "",
+    val governingBodyYearTwo: String = "",
+    val governingBodyYearThree: String = "",
+    val stateTechnicalMonitoringCommitteeYearOne: String = "",
+    val stateTechnicalMonitoringCommitteeYearTwo: String = "",
+    val stateTechnicalMonitoringCommitteeYearThree: String = "",
+
+    // Monitoring and Reporting System
+    val frequencyOfMonitoring: String = "",
+    val reportingMechanismToStateGovt: String = "",
+    val regularityOfReporting: String = "",
+    val submissionFrequencyMonthly:  String = "",
+    val submissionFrequencyQuarterly:  String = "",
+    val submissionFrequencyYearly:  String = "",
+
+    // Funds Received
+    val fundsReceived: List<FundsReceived> = emptyList(),
+
+    // Agency-wise AI and calves born
+    val agencyWiseAIDone: List<AgencyDataAI> = emptyList(),
+    val agencyWiseCalfBorn: List<AgencyDataCalfBorn> = emptyList(),
+
+    // Implementation of NAIP
+    val naipComponents: List<NAIPComponent> = emptyList(),
+    val noOfMAITRIsTrained2022_23:String = "",
+    val noOfMAITRIsTrained2023_24:String = "",
+    val noOfMAITRIsInducted2022_23:String = "",
+    val noOfMAITRIsInducted2023_24:String = "",
+    val noOfMAITRIsDroppedOut:String = "",
+    val noOfMAITRIsPercentage:String = "",
+
+    // LN2 production, storage, and distribution system
+    val ln2ProductionDetails: LN2Details = LN2Details()
+)
+
+data class GoverningBodyMember(
+    val designation: String = "",
+    val organization: String = ""
+)
+
+data class MonitoringCommitteeMember(
+    val designation: String = "",
+    val organization: String = ""
+)
+
+data class SubmissionFrequency(
+    val monthly: Boolean = false,
+    val quarterly: Boolean = false,
+    val annual: Boolean = false
+)
+
+data class FundsReceived(
+
+    val fromDAHDYearOne: Int = 0,
+    val fromDAHDYearTwo: Int = 0,
+    val fromDAHDYearThree: Int = 0,
+    val statusOfUCYearOne: String = "",
+    val statusOfUCYearTwo: String = "",
+    val statusOfUCYearThree: String = "",
+    val fromStateYearOne: Int = 0,
+    val fromStateYearTwo: Int = 0,
+    val fromStateYearThree: Int = 0,
+    val fromOtherSourcesYearOne: Int = 0,
+    val fromOtherSourcesYearTwo: Int = 0,
+    val fromOtherSourcesYearThree: Int = 0
+)
+
+data class AgencyDataAI(
+    val agencyName: String = "",
+    val yearWiseData: Map<String, Int> = emptyMap()
+)
+data class AgencyDataCalfBorn(
+    val agencyName: String = "",
+    val yearWiseData: Map<String, Int> = emptyMap()
+)
+
+data class NAIPComponent(
+    val noOfAiTechniciansInvolved: String = "",
+    val noOfSemenDosesProcured: String = "",
+
+)
+
+data class MAITRITrainingData(
+    val upto2022_23: Int = 0,
+    val during2023_24: Int = 0,
+
+)
+
+data class LN2Details(
+    val captiveProduction: Int = 0,
+    val requirement: Int = 0,
+    val constraints: String = ""
+)
+
+
 

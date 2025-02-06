@@ -1,4 +1,4 @@
-package com.nlm.ui.activity.rashtriya_gokul_mission
+package com.nlm.ui.fragment
 
 import android.app.Activity
 import android.app.Dialog
@@ -9,43 +9,44 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RotateDrawable
+import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.tabs.TabLayout
 import com.nlm.R
 import com.nlm.callBack.CallBackDeleteAtId
 import com.nlm.callBack.CallBackItemUploadDocEdit
 import com.nlm.callBack.OnBackSaveAsDraft
 import com.nlm.callBack.OnNextButtonClickListener
-import com.nlm.databinding.ActivityAddBreedMultiplicationBinding
+import com.nlm.databinding.FragmentBreedMultiplicationNlmBinding
+import com.nlm.databinding.FragmentNLSIAFeedFodderBinding
+import com.nlm.databinding.FragmentRSPBasicInformationBinding
+import com.nlm.databinding.FragmentVitroPartOneBinding
 import com.nlm.databinding.ItemAddDocumentDialogBinding
 import com.nlm.download_manager.AndroidDownloader
 import com.nlm.model.ImplementingAgencyDocument
 import com.nlm.model.Result
+import com.nlm.ui.adapter.BottomSheetAdapter
 import com.nlm.ui.adapter.StateAdapter
+import com.nlm.ui.adapter.SupportingDocumentAdapter
 import com.nlm.ui.adapter.SupportingDocumentAdapterWithDialog
-import com.nlm.ui.fragment.BreedMultiplicationNDDBFragment
-import com.nlm.ui.fragment.BreedMultiplicationNLMFragment
-import com.nlm.ui.fragment.FundsReceivedRGMFragment
-import com.nlm.ui.fragment.ImplementationOfNAIPRGMFragment
-import com.nlm.ui.fragment.RGMCompositionOfGoverningFragment
-import com.nlm.ui.fragment.RGMDetailsOfCommitteeMeetings
-import com.nlm.ui.fragment.RGMIAOtherStaffFragment
-import com.nlm.ui.fragment.RGMStateImplementingAgencyNLMFragment
 import com.nlm.utilities.AppConstants
-import com.nlm.utilities.BaseActivity
+import com.nlm.utilities.BaseFragment
 import com.nlm.utilities.Preferences.getPreferenceOfScheme
 import com.nlm.utilities.URIPathHelper
 import com.nlm.utilities.Utility
@@ -54,17 +55,24 @@ import com.nlm.utilities.Utility.getFileType
 import com.nlm.utilities.Utility.showSnackbar
 import com.nlm.utilities.hideView
 import com.nlm.utilities.showView
-import com.nlm.utilities.toast
 import okhttp3.MultipartBody
 import java.io.File
 
-class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBinding>(),
+
+class BreedMultiplicationNLMFragment(private val viewEdit: String?, private val itemId:Int?) : BaseFragment<FragmentBreedMultiplicationNlmBinding>(),
     CallBackDeleteAtId,
-    CallBackItemUploadDocEdit
-{
-    private var mBinding: ActivityAddBreedMultiplicationBinding? = null
-    private var viewEdit: String? = null
-    var itemId: Int? = null
+    CallBackItemUploadDocEdit {
+    override val layoutId: Int
+        get() = R.layout.fragment_breed_multiplication_nlm
+    private var mBinding: FragmentBreedMultiplicationNlmBinding?=null
+    private lateinit var bottomSheetAdapter: BottomSheetAdapter
+    private lateinit var stateAdapter: StateAdapter
+    private lateinit var adapter: SupportingDocumentAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var programmeList: MutableList<Array<String>>
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var listener: OnNextButtonClickListener? = null
+    private var savedAsDraftClick: OnBackSaveAsDraft? = null
     private var AddDocumentAdapter: SupportingDocumentAdapterWithDialog? = null
     private lateinit var DocumentList: ArrayList<ImplementingAgencyDocument>
     private var DialogDocName: TextView? = null
@@ -75,48 +83,129 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
     private var DocumentName: String? = null
     var body: MultipartBody.Part? = null
 
-    override val layoutId: Int
-        get() = R.layout.activity_add_breed_multiplication
+    private val stateList = listOf(
+        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+        "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+        "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
+        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep",
+        "Delhi", "Puducherry", "Ladakh", "Lakshadweep", "Jammu and Kashmir"
+    )
 
-    override fun initView() {
-        mBinding = viewDataBinding
+    override fun init() {
+        mBinding=viewDataBinding
         mBinding?.clickAction = ClickActions()
-        viewEdit = intent.getStringExtra("View/Edit")
-        itemId = intent.extras?.getInt("itemId")
         DocumentList= arrayListOf()
-        AddDocumentAdapter = SupportingDocumentAdapterWithDialog(
-           this,
-            DocumentList,
-            viewEdit,
-            this,
-            this
-        )
-        mBinding?.recyclerView1?.adapter = AddDocumentAdapter
-        mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(this)
+//        AddDocumentAdapter = SupportingDocumentAdapterWithDialog(
+//            requireContext(),
+//            DocumentList,
+//            viewEdit,
+//            this,
+//            this
+//        )
+//        mBinding?.recyclerView1?.adapter = AddDocumentAdapter
+//        mBinding?.recyclerView1?.layoutManager = LinearLayoutManager(requireContext())
 
     }
+
     override fun setVariables() {
+
     }
 
     override fun setObservers() {
+
     }
-
-
     inner class ClickActions {
-        fun backPress(view: View) {
-            onBackPressedDispatcher.onBackPressed()
-        }
         fun addDocDialog(view: View) {
-            AddDocumentDialog(this@AddBreedMultiplication, null, null)
+            AddDocumentDialog(requireContext(), null, null)
         }
         fun SaveAndNext(view: View) {
-
+            listener?.onNextButtonClick()
 
         }
         fun SaveAsDraft(view: View) {
+            savedAsDraftClick?.onSaveAsDraft()
+        }
+    }
+    private fun showBottomSheetDialog(type: String) {
+        bottomSheetDialog = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_state, null)
+        view.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
+        val rvBottomSheet = view.findViewById<RecyclerView>(R.id.rvBottomSheet)
+        val close = view.findViewById<TextView>(R.id.tvClose)
+
+        close.setOnClickListener {
+            bottomSheetDialog.dismiss()
         }
 
+        // Define a variable for the selected list and TextView
+        val selectedList: List<String>
+        val selectedTextView: TextView
+
+        // Initialize based on type
+        when (type) {
+            "State" -> {
+                selectedList = stateList
+                selectedTextView = mBinding!!.tvState
+            }
+
+//            "District" -> {
+//                selectedList = stateList
+//                selectedTextView = mBinding!!.tvDistrict
+//            }
+
+            else -> return
+        }
+
+        // Set up the adapter
+        stateAdapter = StateAdapter(selectedList, requireContext()) { selectedItem ->
+            // Handle state item click
+            selectedTextView.text = selectedItem
+            selectedTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            bottomSheetDialog.dismiss()
+        }
+
+        rvBottomSheet.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        rvBottomSheet.adapter = stateAdapter
+        bottomSheetDialog.setContentView(view)
+
+        // Rotate drawable
+        val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_arrow_down)
+        var rotatedDrawable = rotateDrawable(drawable, 180f)
+        selectedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, rotatedDrawable, null)
+
+        // Set a dismiss listener to reset the view visibility
+        bottomSheetDialog.setOnDismissListener {
+            rotatedDrawable = rotateDrawable(drawable, 0f)
+            selectedTextView.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                rotatedDrawable,
+                null
+            )
+        }
+
+        // Show the bottom sheet
+        bottomSheetDialog.show()
+    }
+
+    private fun rotateDrawable(drawable: Drawable?, angle: Float): Drawable? {
+        drawable?.mutate() // Mutate the drawable to avoid affecting other instances
+
+        val rotateDrawable = RotateDrawable()
+        rotateDrawable.drawable = drawable
+        rotateDrawable.fromDegrees = 0f
+        rotateDrawable.toDegrees = angle
+        rotateDrawable.level = 10000 // Needed to apply the rotation
+
+        return rotateDrawable
     }
     private fun AddDocumentDialog(
         context: Context,
@@ -157,7 +246,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
                 bindingDialog.etDescription.isEnabled=false
             }
             if (getPreferenceOfScheme(
-                    this,
+                    requireContext(),
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.role_id == 24 ||selectedItem.is_ia == true
@@ -184,7 +273,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
                             )
                         }
                         val url=
-                            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                            getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
                         val downloader = AndroidDownloader(context)
                         bindingDialog.etDoc.setOnClickListener {
                             if (!UploadedDocumentName.isNullOrEmpty()) {
@@ -201,7 +290,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
 
                     "png" -> {
                         bindingDialog.ivPic.let {
-                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                            Glide.with(context).load(getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
                                 it
                             )
                         }
@@ -209,7 +298,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
 
                     "jpg" -> {
                         bindingDialog.ivPic.let {
-                            Glide.with(context).load(getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
+                            Glide.with(context).load(getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)).placeholder(R.drawable.ic_image_placeholder).into(
                                 it
                             )
                         }
@@ -220,7 +309,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
         bindingDialog.tvChooseFile.setOnClickListener {
             if (bindingDialog.etDescription.text.toString().isNotEmpty()) {
 
-                checkStoragePermission(this)
+                checkStoragePermission(requireContext())
             } else {
 
                 mBinding?.clParent?.let { showSnackbar(it, "please enter description") }
@@ -239,8 +328,8 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
                 else -> {
                     bindingDialog.ivPic.setOnClickListener {
                         Utility.showImageDialog(
-                            this,
-                            getPreferenceOfScheme(this, AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
+                            requireContext(),
+                            getPreferenceOfScheme(requireContext(), AppConstants.SCHEME, Result::class.java)?.siteurl.plus(TableName).plus("/").plus(UploadedDocumentName)
                         )
                     }
                 }
@@ -252,7 +341,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
                     .isNotEmpty() && bindingDialog.etDoc.text.toString().isNotEmpty()
             ) {
                 if (getPreferenceOfScheme(
-                        this,
+                        requireContext(),
                         AppConstants.SCHEME,
                         Result::class.java
                     )?.role_id == 24
@@ -292,7 +381,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
                     }
                 } else {
                     if (getPreferenceOfScheme(
-                            this,
+                            requireContext(),
                             AppConstants.SCHEME,
                             Result::class.java
                         )?.role_id == 8
@@ -335,7 +424,17 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
 
         dialog.show()
     }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as OnNextButtonClickListener
+        savedAsDraftClick = context as OnBackSaveAsDraft
+    }
 
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+        savedAsDraftClick = null
+    }
 
     override fun onClickItem(ID: Int?, position: Int, isFrom: Int) {
         position.let { it1 -> AddDocumentAdapter?.onDeleteButtonClick(it1) }}
@@ -343,7 +442,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
 
 
     override fun onClickItemEditDoc(selectedItem: ImplementingAgencyDocument, position: Int) {
-        AddDocumentDialog(this, selectedItem, position)
+        AddDocumentDialog(requireContext(), selectedItem, position)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -363,7 +462,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
                     val selectedImageUri = data?.data
                     if (selectedImageUri != null) {
                         val uriPathHelper = URIPathHelper()
-                        val filePath = uriPathHelper.getPath(this, selectedImageUri)
+                        val filePath = uriPathHelper.getPath(requireContext(), selectedImageUri)
 
                         val fileExtension =
                             filePath?.substringAfterLast('.', "").orEmpty().lowercase()
@@ -379,11 +478,11 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
                                     uploadData?.setImageURI(selectedImageUri)
 //                                    uploadImage(it) // Proceed to upload
                                 } else {
-                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(requireContext(), "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         } else {
-                            Toast.makeText(this, "Format not supported", Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), "Format not supported", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -397,7 +496,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
                         uploadData?.showView()
                         uploadData?.setImageResource(R.drawable.ic_pdf)
 
-                        val cursor = contentResolver.query(uri, projection, null, null, null)
+                        val cursor = requireContext().contentResolver.query(uri, projection, null, null, null)
                         cursor?.use {
                             if (it.moveToFirst()) {
                                 val documentName =
@@ -409,7 +508,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
                                 // Validate file size (5 MB = 5 * 1024 * 1024 bytes)
                                 if (fileSizeInMB <= 5) {
                                     DocumentName = documentName
-                                    val requestBody = convertToRequestBody(this, uri)
+                                    val requestBody = convertToRequestBody(requireContext(), uri)
                                     body = MultipartBody.Part.createFormData(
                                         "document_name",
                                         documentName,
@@ -428,7 +527,7 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
 //                                        ),
 //                                    )
                                 } else {
-                                    Toast.makeText(this, "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(requireContext(), "File size exceeds 5 MB", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }
@@ -445,8 +544,5 @@ class AddBreedMultiplication : BaseActivity<ActivityAddBreedMultiplicationBindin
         photoFile = imageFile
 //        photoFile?.let { uploadImage(it) }
     }
-
-
-
 
 }

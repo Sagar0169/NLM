@@ -46,7 +46,6 @@ class ComposeActivity : AppCompatActivity() {
             finish()
             return
         }
-
         // Render biometric screen
         setContent {
             NLMTheme {
@@ -95,7 +94,6 @@ class ComposeActivity : AppCompatActivity() {
                             else -> Unit
                         }
                     }
-
                     // Optional: Placeholder UI for debug purposes
                     Column(
                         modifier = Modifier.fillMaxSize(),

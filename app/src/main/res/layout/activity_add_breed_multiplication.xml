@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:id="@+id/clParent"
         android:background="@color/white"
         tools:context=".ui.activity.NodalOfficerDetailActivity">
 
@@ -21,7 +22,7 @@
             android:id="@+id/rlToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_linear"
+            android:background="@color/darkBlue"
             android:paddingTop="40dp"
             android:paddingBottom="@dimen/dp_10"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,21 +58,46 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ScrollView
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/rlToolbar"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/rlToolbar"
             android:background="@color/white"
             android:fillViewport="true">
+
 
             <LinearLayout
                 android:id="@+id/llParent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_15">
+              >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/orange"
+                    android:padding="@dimen/dp_10"
 
+
+                    >
+                    <TextView
+                        android:id="@+id/tvWelcome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="To be filled by NDDB"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_20"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/llIA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp_15"
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,6 +121,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/sp_16" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,10 +145,6 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/sp_16" />
-
-
-
-
 
 
                 <TextView
@@ -161,525 +184,241 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
                     android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular" android:maxLength="50"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:paddingVertical="@dimen/dp_5"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/sp_16" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <LinearLayout
+                    android:id="@+id/llSDRv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/curve_all_corner_black"
                     android:paddingVertical="@dimen/dp_10">
                     <TextView
-                        android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/tvSupportingDocumentView"
+
                         android:fontFamily="@font/opensans_semibold"
-                        android:text="Status of breed Multiplication Farm (Infra completed/ infra yet to be completed)"
+                        android:text="Supporting Documents"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
-
-                    <LinearLayout
+                    <com.nlm.utilities.NonScrollableRecyclerView
+                        android:id="@+id/ShowDocumentRv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
+                        android:layout_marginBottom="@dimen/dp_7"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:paddingTop="8dp" /></LinearLayout>
 
-
-
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="No of cattle sheds"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:maxLines="1"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Heifer shed/ calf pens"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:maxLines="1"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Fodder/feed Godowns"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:maxLines="1"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-
-
-
-                <LinearLayout
+            </LinearLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@drawable/curve_all_corner_black"
-                    android:paddingVertical="@dimen/dp_10">
+                    android:background="@color/orange"
+                    android:padding="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_15"
+
+                    >
                     <TextView
-                        android:layout_weight="0.5"
+                        android:id="@+id/tvWelcome2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/opensans_semibold"
-                        android:text="No of animal inducted (age (order of lactation/ breed/ animals above MSP/ animals below MSP"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dp_7"
-                        android:paddingHorizontal="@dimen/dp_10"
-                        android:paddingVertical="@dimen/dp_5"
-                        android:background="@drawable/curve_all_corner_dark_grey"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Heifer"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:background="@drawable/curve_all_corner_black"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="@string/aboveMsp"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:maxLines="1"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-
-  <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="@string/msp"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:maxLines="1"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-
-
-
-
-
-                        </LinearLayout>
-   <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Lactation I"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:background="@drawable/curve_all_corner_black"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="@string/aboveMsp"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:maxLines="1"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="@string/msp"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:maxLines="1"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-
-
-
-
-
-                        </LinearLayout>
-   <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Lactation–II"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:background="@drawable/curve_all_corner_black"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="@string/aboveMsp"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:maxLines="1"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="@string/msp"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:maxLines="1"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-
-
-
-
-
-                        </LinearLayout>
-   <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Beyond Lactation-II Total"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:background="@drawable/curve_all_corner_black"
-                            android:orientation="vertical"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="@string/aboveMsp"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:maxLines="1"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensans_semibold"
-                                android:text="@string/msp"
-                                android:layout_marginTop="@dimen/dp_7"
-
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_16" />
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginVertical="@dimen/dp_7"
-                                android:background="@drawable/curve_all_corner_grey"
-                                android:fontFamily="@font/opensans_regular"
-                                android:maxLength="50"
-                                android:paddingHorizontal="@dimen/dp_10"
-                                android:paddingVertical="@dimen/dp_5"
-                                android:singleLine="true"
-                                android:maxLines="1"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey"
-                                android:textSize="@dimen/sp_16" />
-
-
-
-
-
-
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:text="Total"
-                            android:layout_marginTop="@dimen/dp_7"
-
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/dp_7"
-                            android:background="@drawable/curve_all_corner_grey"
-                            android:fontFamily="@font/opensans_regular"
-                            android:maxLength="50"
-                            android:paddingHorizontal="@dimen/dp_10"
-                            android:paddingVertical="@dimen/dp_5"
-                            android:singleLine="true"
-                            android:maxLines="1"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/grey"
-                            android:textSize="@dimen/sp_16" />
-
-
-
-
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                        android:text="To be filled by NLM"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_20"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/llNLm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp_15"
+                android:orientation="vertical">
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Name of the beneficiary"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:id="@+id/etNameOftheBeneficiary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Address:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:id="@+id/etAdress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint=""
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:id="@+id/tvTitleState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="State Name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:id="@+id/tvState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:text="Please Select"
+                    android:textColor="@color/grey" />
+                <TextView
+                    android:id="@+id/tvTitleDistrict"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="District Name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:id="@+id/tvDistrict"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:clickable="false"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:text="Please Select"
+                    android:textColor="@color/grey" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Pin Code:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:id="@+id/etPinCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint=""
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/sp_16" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Telephone No:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:id="@+id/etPinCodeNlm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:fontFamily="@font/opensans_regular"
+                    android:hint=""
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/sp_16" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:fontFamily="@font/opensans_semibold"
-                    android:text="Sourcing of animals (breeding  tract/PT registered/  PS registered/CHRS registered/livestock market/ middlemen)"
+                    android:text="Status of subsidy released by NDDB (No. of installment released/ amount released)"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
                 <EditText
+                    android:id="@+id/etStatusOfSubsidy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_7"
+                    android:background="@drawable/curve_all_corner_grey"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="50"
+                    android:paddingHorizontal="@dimen/dp_10"
+                    android:paddingVertical="@dimen/dp_5"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/opensans_semibold"
+                    android:text="Beneficiary self contribution (proof and amount in INR)"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:id="@+id/etBeneficiarySelfContri"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_7"
@@ -691,208 +430,874 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
                     android:textSize="@dimen/sp_16" />
-                <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Arrangement for IVF in case of CB herd"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
-
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular" android:maxLength="50"
                     android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-                <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="AI with sex sorted semen (yes / No)"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@drawable/curve_all_corner_black"
+                    android:paddingVertical="@dimen/dp_10">
+                    <LinearLayout
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:paddingEnd="@dimen/dp_5"
-                        android:text="Yes"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14"
-                        app:buttonTint="@color/darkBlue" />
+                        android:layout_marginVertical="@dimen/dp_15"
+                        android:background="@drawable/curve_all_corner_dark_grey"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Remarks of NLM"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_15"
-                        android:layout_marginTop="@dimen/dp_7"
-                        android:paddingEnd="@dimen/dp_5"
-                        android:text="No"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14"
-                        app:buttonTint="@color/darkBlue" />
+                        <RadioGroup
+                            android:id="@+id/rgRemarksOfNlm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbCooperation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cooperation"
+                                android:textColor="@color/black"
+                                app:buttonTint="@color/black"
+                                android:textSize="@dimen/sp_14" />
 
-                </RadioGroup>
-                <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Whether data on AI/ IVF uploaded on Bharat Pashudhan data base if not
-reasons there for"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNonCoorperation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Non-Cooperation"
+                                android:textColor="@color/black"
+                                app:buttonTint="@color/black"
+                                android:textSize="@dimen/sp_14" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular" android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbPartialData"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Partial Data"
+                                android:textColor="@color/black"
+                                app:buttonTint="@color/black"
+                                android:textSize="@dimen/sp_14" />
 
- <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Land available for fodder production"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                            <androidx.appcompat.widget.AppCompatRadioButton
+                                android:id="@+id/rbNotProvided"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Not Provided"
+                                android:textColor="@color/black"
+                                app:buttonTint="@color/black"
+                                android:textSize="@dimen/sp_14" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular" android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
- <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="
-Disease testing protocol (Brucellosis/ TB/ JD/IBR)/ testing reports available/ name and address of disease testing lab"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular" android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
- <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:fontFamily="@font/opensans_semibold"
-                android:text="Views of NLM"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_7"
-                    android:background="@drawable/curve_all_corner_grey"
-                    android:fontFamily="@font/opensans_regular" android:maxLength="50"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:paddingVertical="@dimen/dp_5"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="@dimen/sp_16" />
-
-
-
+                        </RadioGroup>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:background="@drawable/curve_all_corner_grey"
+                            android:fontFamily="@font/opensans_regular"
+                            android:hint="Remarks"
+                            android:layout_marginBottom="@dimen/dp_10"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_15"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="@dimen/sp_16" />
+                    </LinearLayout></LinearLayout>
 
 
 
 
 
                 <LinearLayout
+                    android:id="@+id/llBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_15"
-                    android:layout_marginBottom="@dimen/dp_10"
-
-                    >
-                    <TextView
-                        android:id="@+id/tvSave"
-                        android:layout_width="0dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/dp_9"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
+                        android:paddingVertical="@dimen/dp_10">
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Status of breed Multiplication Farm (Infra completed/ infra yet to be completed)"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
 
-                        android:background="@drawable/button_bg"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
+                            >
+
+
+
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="No of cattle sheds"
+                                android:layout_marginTop="@dimen/dp_7"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+                            <EditText
+                                android:id="@+id/NoOfCattleSheds"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Heifer shed/ calf pens"
+                                android:layout_marginTop="@dimen/dp_7"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+                            <EditText
+                                android:id="@+id/etHeiferSher"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Fodder/feed Godowns"
+                                android:layout_marginTop="@dimen/dp_7"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+                            <EditText
+                                android:id="@+id/etFodderFeedGodown"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:background="@drawable/curve_all_corner_black"
+                        android:paddingVertical="@dimen/dp_10">
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="No of animal inducted (age (order of lactation/ breed/ animals above MSP/ animals below MSP"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Heifer"
+                                android:layout_marginTop="@dimen/dp_7"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:background="@drawable/curve_all_corner_black"
+                                android:orientation="vertical"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="@string/aboveMsp"
+                                    android:layout_marginTop="@dimen/dp_7"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                                <EditText
+                                    android:id="@+id/etHeiferGreaterMSP"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="@dimen/dp_7"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="@string/msp"
+                                    android:layout_marginTop="@dimen/dp_7"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                                <EditText
+                                    android:id="@+id/etHeiferLesserMSP"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="@dimen/dp_7"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+
+
+
+
+
+
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Lactation I"
+                                android:layout_marginTop="@dimen/dp_7"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:background="@drawable/curve_all_corner_black"
+                                android:orientation="vertical"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="@string/aboveMsp"
+                                    android:layout_marginTop="@dimen/dp_7"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                                <EditText
+                                    android:id="@+id/etLactationOneGreaterMSP"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="@dimen/dp_7"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="@string/msp"
+                                    android:layout_marginTop="@dimen/dp_7"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                                <EditText
+                                    android:id="@+id/etLactationOneLesserMSP"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="@dimen/dp_7"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+
+
+
+
+
+
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Lactation–II"
+                                android:layout_marginTop="@dimen/dp_7"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:background="@drawable/curve_all_corner_black"
+                                android:orientation="vertical"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="@string/aboveMsp"
+                                    android:layout_marginTop="@dimen/dp_7"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                                <EditText
+                                    android:id="@+id/etLactationTwoGreaterMSP"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="@dimen/dp_7"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="@string/msp"
+                                    android:layout_marginTop="@dimen/dp_7"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                                <EditText
+                                    android:id="@+id/etLactationTwoLesserMSP"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="@dimen/dp_7"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+
+
+
+
+
+
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Beyond Lactation-II Total"
+                                android:layout_marginTop="@dimen/dp_7"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:background="@drawable/curve_all_corner_black"
+                                android:orientation="vertical"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="@string/aboveMsp"
+                                    android:layout_marginTop="@dimen/dp_7"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                                <EditText
+                                    android:id="@+id/etBeyondLactationGreaterMSP"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="@dimen/dp_7"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/opensans_semibold"
+                                    android:text="@string/msp"
+                                    android:layout_marginTop="@dimen/dp_7"
+
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/sp_16" />
+                                <EditText
+                                    android:id="@+id/etBeyondLactationLesserMSP"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginVertical="@dimen/dp_7"
+                                    android:background="@drawable/curve_all_corner_grey"
+                                    android:fontFamily="@font/opensans_regular"
+                                    android:maxLength="50"
+                                    android:paddingHorizontal="@dimen/dp_10"
+                                    android:paddingVertical="@dimen/dp_5"
+                                    android:singleLine="true"
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/grey"
+                                    android:textSize="@dimen/sp_16" />
+
+
+
+
+
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="Total"
+                                android:layout_marginTop="@dimen/dp_7"
+
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_16" />
+                            <EditText
+                                android:id="@+id/etTotal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:background="@drawable/curve_all_corner_grey"
+                                android:fontFamily="@font/opensans_regular"
+                                android:maxLength="50"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:paddingVertical="@dimen/dp_5"
+                                android:singleLine="true"
+                                android:maxLines="1"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/grey"
+                                android:textSize="@dimen/sp_16" />
+
+
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Sourcing of animals (breeding  tract/PT registered/  PS registered/CHRS registered/livestock market/ middlemen)"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etSourcingOfAnimals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular" android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Arrangement for IVF in case of CB herd"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etArrangementForIvf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular" android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="AI with sex sorted semen (yes / No)"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:paddingEnd="@dimen/dp_5"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14"
+                            app:buttonTint="@color/darkBlue" />
+
+                        <androidx.appcompat.widget.AppCompatRadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_15"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:paddingEnd="@dimen/dp_5"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14"
+                            app:buttonTint="@color/darkBlue" />
+
+
+                    </RadioGroup>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Whether data on AI/ IVF uploaded on Bharat Pashudhan data base if not
+reasons there for"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etWhetherDataOnAI"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular" android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Land available for fodder production"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etLandAvailable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="
+Disease testing protocol (Brucellosis/ TB/ JD/IBR)/ testing reports available/ name and address of disease testing lab"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etDiseaseTesting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular" android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:fontFamily="@font/opensans_semibold"
+                        android:text="Views of NLM"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <EditText
+                        android:id="@+id/etViewsNlm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:background="@drawable/curve_all_corner_grey"
+                        android:fontFamily="@font/opensans_regular" android:maxLength="50"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_5"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
+                        android:textSize="@dimen/sp_16" />
+
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/curve_all_corner_black"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/dp_10"
+                        android:paddingVertical="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_7"
+                            android:fontFamily="@font/opensans_semibold"
+                            android:text="Supporting Documents"
+
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dp_7"
+                            android:background="@drawable/curve_all_corner_dark_grey"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/dp_10"
+                            android:paddingVertical="@dimen/dp_5">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/opensans_semibold"
+                                android:text="@string/document_size_warning"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14" />
+                            <TextView
+                                android:id="@+id/tvAddMore3"
+                                android:onClick="@{ClickAction::addDocDialog}"
+                                android:layout_marginVertical="@dimen/dp_7"
+                                android:layout_width="wrap_content"
+                                android:layout_gravity="end"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/curve_fill_blue"
+                                android:clickable="true"
+                                android:fontFamily="@font/poppins_medium"
+                                android:paddingHorizontal="@dimen/dp_20"
+                                android:paddingVertical="@dimen/dp_10"
+                                android:text="Add Documents"
+                                android:textColor="@color/white" />
+                            <com.nlm.utilities.NonScrollableRecyclerView
+                                android:id="@+id/recyclerView1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="8dp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_weight="0.5"
+                        android:id="@+id/tvSaveDraft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
+                        android:backgroundTint="@color/green"
                         android:clickable="true"
-                        android:fontFamily="@font/khula_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
                         android:text="Save As Draft"
-                        android:textSize="@dimen/sp_20"
+                        android:onClick="@{ClickAction::SaveAsDraft}"
+                        android:textSize="20sp"
                         android:textAlignment="center"
                         android:textColor="@color/white" />
                     <TextView
                         android:id="@+id/tvSendOtp"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_marginHorizontal="@dimen/dp_3"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_9"
-
-                        android:background="@drawable/button_bg"
+                        android:layout_weight="0.5"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:background="@drawable/curve_fill_blue"
                         android:clickable="true"
-                        android:fontFamily="@font/khula_semibold"
+                        android:fontFamily="@font/poppins_medium"
                         android:paddingHorizontal="@dimen/dp_20"
                         android:paddingVertical="@dimen/dp_10"
-                        android:text="Submit"
-                        android:textSize="@dimen/sp_20"
+                        android:text="@string/save_next"
+                        android:textSize="20sp"
+                        android:onClick="@{ClickAction::SaveAndNext}"
                         android:textAlignment="center"
                         android:textColor="@color/white" />
-
-
                 </LinearLayout>
-
             </LinearLayout>
 
-        </ScrollView>
+
+        </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </layout>

@@ -119,10 +119,14 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
             mBinding?.etNumberOfFodder?.isEnabled = false
             mBinding?.etAvailibilityOfConcentrate?.isEnabled = false
 
-            ViewEditApi()
+            ViewEditApi(viewEdit)
         } else if (viewEdit == "edit") {
-            ViewEditApi()
+            ViewEditApi(viewEdit)
 
+        }
+        else{
+
+            ViewEditApi("edit")
         }
         AddDocumentAdapter = SupportingDocumentAdapterWithDialog(
             requireContext(),
@@ -155,7 +159,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
                     if (savedAsDraft) {
                         savedAsDraftClick?.onSaveAsDraft()
                     } else {
-                        if (viewEdit == "view" || viewEdit == "edit") {
+                        if (viewEdit == "view" || viewEdit == "edit"||viewEdit=="add") {
                             if (savedAsEdit) {
                                 savedAsDraftClick?.onSaveAsDraft()
                             } else {
@@ -180,7 +184,9 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
                         } else {
                             savedAsDraftClick?.onSaveAsDraft()
                         }
-                        showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        if(viewEdit!="add")
+                        {
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)}
                     }
                 }
             }
@@ -232,7 +238,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
                 listener?.onNavigateToFirstFragment()
 
             } else {
-                if (viewEdit == "edit") {
+                if (viewEdit == "edit"|| viewEdit=="add") {
                     savedAsEdit = true
                 }
                 saveDataApi(0)
@@ -757,7 +763,7 @@ class NLSIAFeedFodderFragment(private val viewEdit: String?, private val itemId:
         }
     }
 
-    private fun ViewEditApi() {
+    private fun ViewEditApi(viewEdit: String?) {
         viewModel.getImplementingAgencyAddApi(
             requireContext(), true,
             ImplementingAgencyAddRequest(

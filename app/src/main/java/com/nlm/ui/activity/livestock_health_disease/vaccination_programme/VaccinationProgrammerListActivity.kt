@@ -1,6 +1,7 @@
 package com.nlm.ui.activity.livestock_health_disease.vaccination_programme
 
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,8 @@ import com.nlm.model.StateVaccinationProgrammeAddRequest
 import com.nlm.model.VaccinationProgrammerListData
 import com.nlm.model.VaccinationProgrammerListRequest
 import com.nlm.ui.activity.FilterStateActivity
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList
+import com.nlm.ui.activity.national_livestock_mission.NationalLiveStockMissionIAList.Companion.FILTER_REQUEST_CODE
 import com.nlm.ui.adapter.VaccinationProgrammerAdapter
 import com.nlm.utilities.AppConstants
 import com.nlm.utilities.BaseActivity
@@ -38,6 +41,12 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
     private var itemPosition: Int? = null
     private var totalPage = 1
     private var loading = true
+    var block: String = ""
+    var village: String = ""
+    var stateId: Int = 0
+    var districtName: String = ""
+    var disctrictId: Int = 0
+    private var isFromList: Int = 0
 
     override val layoutId: Int
         get() = R.layout.activity_vaccination_programmer_list
@@ -51,18 +60,21 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
             getString(R.string.state) -> {
                 mBinding?.tvHeading?.text = getString(R.string.list_of_state_vaccination_programme)
                 vaccinationProgrammerAdapter(stateVaccinationProgrammerList)
+                isFromList = 41
             }
 
             getString(R.string.district) -> {
                 mBinding?.tvHeading?.text =
                     getString(R.string.list_of_district_vaccination_programme)
                 vaccinationProgrammerAdapter(districtVaccinationProgrammerList)
+                isFromList = 42
             }
 
             getString(R.string.farmer_level) -> {
                 mBinding?.tvHeading?.text =
                     getString(R.string.list_of_beneficiary_farmer_vaccination_programme)
                 vaccinationProgrammerAdapter(farmerVaccinationProgrammerList)
+                isFromList = 53
             }
         }
         swipeForRefreshVaccinationProgrammer()
@@ -73,15 +85,26 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
         currentPage = 1
         when (isFrom) {
             getString(R.string.state) -> {
-                stateVaccinationProgrammerAPICall(paginate = false, loader = true)
+                stateVaccinationProgrammerAPICall(paginate = false, loader = true,disctrictId,
+                    block,
+                    village)
             }
 
             getString(R.string.district) -> {
-                districtVaccinationProgrammerAPICall(paginate = false, loader = true)
+                districtVaccinationProgrammerAPICall(paginate = false, loader = true,disctrictId,
+                    block,
+                    village)
             }
 
             getString(R.string.farmer_level) -> {
-                farmerVaccinationProgrammerAPICall(paginate = false, loader = true)
+                farmerVaccinationProgrammerAPICall(paginate = false, loader = true,getPreferenceOfScheme(
+                    this,
+                    AppConstants.SCHEME,
+                    Result::class.java
+                )?.state_code ,   disctrictId,
+                    block,
+                    village)
+
             }
         }
     }
@@ -91,15 +114,25 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
             currentPage = 1
             when (isFrom) {
                 getString(R.string.state) -> {
-                    stateVaccinationProgrammerAPICall(paginate = false, loader = true)
+                    stateVaccinationProgrammerAPICall(paginate = false, loader = true,disctrictId,
+                        block,
+                        village)
                 }
 
                 getString(R.string.district) -> {
-                    districtVaccinationProgrammerAPICall(paginate = false, loader = true)
+                    districtVaccinationProgrammerAPICall(paginate = false, loader = true,disctrictId,
+                        block,
+                        village)
                 }
 
                 getString(R.string.farmer_level) -> {
-                    farmerVaccinationProgrammerAPICall(paginate = false, loader = true)
+                    farmerVaccinationProgrammerAPICall(paginate = false, loader = true,getPreferenceOfScheme(
+                        this,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code,disctrictId,
+                        block,
+                        village)
                 }
             }
             mBinding?.srlVaccinationProgrammer?.isRefreshing = false
@@ -112,12 +145,16 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
         }
 
         fun filter(view: View) {
-            startActivity(
-                Intent(
-                    this@VaccinationProgrammerListActivity,
-                    FilterStateActivity::class.java
-                ).putExtra("isFrom", isFrom)
-            )
+
+            val intent =
+                Intent(this@VaccinationProgrammerListActivity, FilterStateActivity::class.java)
+            intent.putExtra("isFrom", isFromList)
+            intent.putExtra("selectedStateId", stateId) // previously selected state ID
+            intent.putExtra("districtId", disctrictId) // previously selected state ID
+            intent.putExtra("block", block)
+            intent.putExtra("districtName", districtName)
+            intent.putExtra("village", village)
+            startActivityForResult(intent, FILTER_REQUEST_CODE)
         }
 
         fun add(view: View) {
@@ -163,7 +200,9 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
         mBinding?.rvVaccinationProgrammer?.addOnScrollListener(recyclerScrollListener)
     }
 
-    private fun stateVaccinationProgrammerAPICall(paginate: Boolean, loader: Boolean) {
+    private fun stateVaccinationProgrammerAPICall(paginate: Boolean, loader: Boolean, district: Int,
+                                                  block: String,
+                                                  village: String) {
         if (paginate) {
             currentPage++
         }
@@ -185,12 +224,15 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                     Result::class.java
                 )?.state_code,
                 page = currentPage,
+                village = village,
                 limit = 10,
             )
         )
     }
 
-    private fun districtVaccinationProgrammerAPICall(paginate: Boolean, loader: Boolean) {
+    private fun districtVaccinationProgrammerAPICall(paginate: Boolean, loader: Boolean  ,district: Int,
+                                                     block: String,
+                                                     village: String) {
         if (paginate) {
             currentPage++
         }
@@ -212,12 +254,14 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                     Result::class.java
                 )?.state_code,
                 page = currentPage,
+                village = village,
+                district_code=district,
                 limit = 10,
             )
         )
     }
 
-    private fun farmerVaccinationProgrammerAPICall(paginate: Boolean, loader: Boolean) {
+    private fun farmerVaccinationProgrammerAPICall(paginate: Boolean, loader: Boolean, Stateid:Int?,  district: Int, block: String, village: String) {
         if (paginate) {
             currentPage++
         }
@@ -233,12 +277,10 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                     AppConstants.SCHEME,
                     Result::class.java
                 )?.user_id,
-                state_code = getPreferenceOfScheme(
-                    this,
-                    AppConstants.SCHEME,
-                    Result::class.java
-                )?.state_code,
+                state_code =Stateid,
+                district_code = district,
                 page = currentPage,
+                village=village,
                 limit = 10,
             )
         )
@@ -261,21 +303,32 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                                     getString(R.string.state) -> {
                                         stateVaccinationProgrammerAPICall(
                                             paginate = true,
-                                            loader = true
+                                            loader = true,disctrictId,
+                                            block,
+                                            village
                                         )
                                     }
 
                                     getString(R.string.district) -> {
                                         districtVaccinationProgrammerAPICall(
                                             paginate = true,
-                                            loader = true
+                                            loader = true,disctrictId,
+                                            block,
+                                            village
                                         )
                                     }
 
                                     getString(R.string.farmer_level) -> {
                                         farmerVaccinationProgrammerAPICall(
                                             paginate = true,
-                                            loader = true
+                                            loader = true,
+                                            getPreferenceOfScheme(
+                                                this@VaccinationProgrammerListActivity,
+                                                AppConstants.SCHEME,
+                                                Result::class.java
+                                            )?.state_code,disctrictId,
+                                            block,
+                                            village
                                         )
                                     }
                                 }
@@ -529,6 +582,59 @@ class VaccinationProgrammerListActivity : BaseActivity<ActivityVaccinationProgra
                 )
                 itemPosition = position
             }
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == FILTER_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Retrieve the data passed from FilterStateActivity
+            disctrictId = data?.getIntExtra("districtId", 0)!!
+            stateId = data.getIntExtra("stateId", 0)
+            block = data.getStringExtra("block").toString()
+            village = data.getStringExtra("village").toString()
+            districtName = data.getStringExtra("districtName").toString()
+            //Need to add year also
+            // Log the data
+            when (isFrom) {
+                getString(R.string.state) -> {
+                    stateVaccinationProgrammerAPICall(
+                        paginate = false,
+                        loader = true,
+                        disctrictId,
+                        block,
+                        village
+                    )
+                }
+
+                getString(R.string.district) -> {
+                    districtVaccinationProgrammerAPICall(
+                        paginate = false,
+                        loader = true, disctrictId, block, village
+                    )
+                }
+
+                getString(R.string.farmer_level) -> {
+                    getPreferenceOfScheme(
+                        this@VaccinationProgrammerListActivity,
+                        AppConstants.SCHEME,
+                        Result::class.java
+                    )?.state_code?.let {
+                        farmerVaccinationProgrammerAPICall(
+                            paginate = false,
+                            loader = true,
+                            disctrictId,
+                            it,
+                            block,
+                            village
+                        )
+                    }
+                }
+
+
+            }
+//            Log.d("FilterResult", "Received data from FilterStateActivity: $d")
+//            Log.d("FilterResult", "Received data from FilterStateActivity: $block")
         }
     }
 }

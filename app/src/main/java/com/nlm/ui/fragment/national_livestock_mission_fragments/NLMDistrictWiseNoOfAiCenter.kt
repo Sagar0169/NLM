@@ -1,5 +1,6 @@
 package com.nlm.ui.fragment.national_livestock_mission_fragments
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -85,11 +86,15 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
             mBinding?.etTotalNoOfParavetTrained?.isEnabled=false
             mBinding?.etPresentSystem?.isEnabled=false
 
-            ViewEditApi()
+            ViewEditApi(viewEdit)
         }
         else if (viewEdit=="edit"){
-            ViewEditApi()
+            ViewEditApi(viewEdit)
 
+        }
+        else{
+
+            ViewEditApi("edit")
         }
         NlmIADistrictWiseNoAdapterFun()
     }
@@ -101,6 +106,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
    }
    override fun setVariables() {
    }
+    @SuppressLint("NotifyDataSetChanged")
     override fun setObservers() {
         viewModel.implementingAgencyAddResult.observe(viewLifecycleOwner){
             val userResponseModel = it
@@ -162,7 +168,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                         }
                             showSnackbar(mBinding!!.clParent, userResponseModel.message)
                         }
-                       else if (viewEdit=="edit")
+                       else if (viewEdit=="edit"|| viewEdit=="add")
                         {
                             if (savedAsEdit)
                             {
@@ -196,12 +202,19 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
                                 mNlmIADistrictWiseNoAdapter.notifyDataSetChanged()
 
                             }
-                            showSnackbar(mBinding!!.clParent, userResponseModel.message)}
+                            if(viewEdit!="add")
+                            {
+                                showSnackbar(mBinding!!.clParent, userResponseModel.message)}
+                        }
                         else{
                     listener?.onNextButtonClick()
 
                 }
-                        showSnackbar(mBinding!!.clParent, userResponseModel.message)}}
+                        if(viewEdit!="add")
+                        {
+                            showSnackbar(mBinding!!.clParent, userResponseModel.message)}
+
+                    }}
             }}
         }
         viewModel.getDropDownResult.observe(viewLifecycleOwner) {
@@ -252,7 +265,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
 
             }
             else {
-                if (viewEdit=="edit")
+                if (viewEdit=="edit" || viewEdit=="add")
                 {
                     savedAsEdit=true
                 }
@@ -436,7 +449,7 @@ class NLMDistrictWiseNoOfAiCenter(private val viewEdit: String?,private val item
         listener = null
         savedAsDraftClick = null
     }
-    private fun ViewEditApi(){
+    private fun ViewEditApi(viewEdit: String?){
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(
                 part = "part5",

@@ -72,11 +72,15 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
             mBinding?.etTotalAiLocation?.isEnabled=false
             mBinding?.etTotalNoOfReginalSemenBank?.isEnabled=false
 
-            ViewEditApi()
+            ViewEditApi(viewEdit)
         }
-        if(viewEdit=="edit"){
-            ViewEditApi()
+        else if(viewEdit=="edit"){
+            ViewEditApi(viewEdit)
         }
+        else{
+            ViewEditApi("edit")
+        }
+
 
     }
     override fun setVariables() {
@@ -111,7 +115,7 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
 
                     }else
                     {
-                        if (viewEdit == "view" || viewEdit == "edit") {
+                        if (viewEdit == "view" || viewEdit == "edit" || viewEdit=="add") {
                             if (savedAsEdit)
                             {
                                 listener?.onNextButtonClick()
@@ -150,14 +154,16 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
                             Utility.clearAllFormFilledID(requireContext())
                             listener?.onNextButtonClick()
                         }
-
-                    showSnackbar(mBinding!!.clParent, userResponseModel.message)
+                        if(viewEdit!="add")
+                        {
+                    showSnackbar(mBinding!!.clParent, userResponseModel.message)}
                 }}
             }
         }}
     }
     inner class ClickActions {
         fun save(view: View){
+            savedAsEdit=true
             if (viewEdit=="view")
             {
                 listener?.onNextButtonClick()
@@ -195,7 +201,7 @@ class NLSIAInfrastructureSheepGoat(private val viewEdit: String?,private val ite
             savedAsDraft=true}
         }
     }
-    private fun ViewEditApi(){
+    private fun ViewEditApi(viewEdit: String?){
         viewModel.getImplementingAgencyAddApi(requireContext(),true,
             ImplementingAgencyAddRequest(
                 part = "part2",
