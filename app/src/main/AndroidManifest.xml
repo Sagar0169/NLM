@@ -48,6 +48,7 @@
         android:theme="@style/Base.Theme.Nlm"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="adjustResize|stateHidden"
+        android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
         <activity
             android:name=".ui.fragment.TrainingCenterNLMFragment"

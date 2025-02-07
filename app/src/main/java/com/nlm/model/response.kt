@@ -2108,7 +2108,7 @@ data class NDDDcsBmcListResponse(
 
 data class NDDDcsBmcListResult(
     val `data`: List<NDDDcsBmcListData>,
-    val is_add: Boolean,
+    val is_add: Boolean?,
     val total_count: Int
 )
 

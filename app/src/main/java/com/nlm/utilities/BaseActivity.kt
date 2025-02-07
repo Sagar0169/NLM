@@ -514,7 +514,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
             dialog.dismiss()
         }
         dialog.show()
-
     }
     private fun dispatchTakePictureIntent() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)

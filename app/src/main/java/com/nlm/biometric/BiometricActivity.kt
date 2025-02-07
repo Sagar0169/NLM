@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -47,6 +48,73 @@ class ComposeActivity : AppCompatActivity() {
             return
         }
         // Render biometric screen
+//        setContent {
+//            NLMTheme {
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colorScheme.background
+//                ) {
+//                    val biometricResult by promptManager.promptResults.collectAsState(initial = null)
+//
+//                    // Automatically show the biometric prompt when the screen is loaded
+//                    LaunchedEffect(Unit) {
+//                        promptManager.showBiometricPrompt(
+//                            title = "Unlock App",
+//                            description = "Authenticate to access your dashboard"
+//                        )
+//                    }
+//
+//                    // Handle biometric result
+//                    LaunchedEffect(biometricResult) {
+//                        when (biometricResult) {
+//                            is BiometricPromptManager.BiometricResult.AuthenticationSuccess -> {
+//                                // Show toast for success
+//                                Toast.makeText(this@ComposeActivity, "Authentication Successful", Toast.LENGTH_SHORT).show()
+//                                // Navigate to Dashboard
+//                                Log.d("Biometric", "Authentication Successful")
+//                                startActivity(Intent(this@ComposeActivity, DashboardActivity::class.java))
+//                                finish()
+//                            }
+//                            is BiometricPromptManager.BiometricResult.AuthenticationError,
+//                            BiometricPromptManager.BiometricResult.AuthenticationFailed -> {
+//
+//                                Log.d("Biometric", "AuthenticationFailed")
+//                                // Show toast for failure
+//                                Toast.makeText(this@ComposeActivity, "Authentication Failed", Toast.LENGTH_SHORT).show()
+//                                finish() // Close the activity
+//                            }
+//                            is BiometricPromptManager.BiometricResult.AuthenticationNotSet -> {
+//                                Log.d("Biometric", "Authentication Not Set")
+//                                if (Build.VERSION.SDK_INT >= 30) {
+//                                    val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
+//                                        putExtra(
+//                                            Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+//                                            BIOMETRIC_STRONG or DEVICE_CREDENTIAL
+//                                        )
+//                                    }
+//                                    startActivity(enrollIntent)
+//                                    finish()
+//                                }
+//                            }
+//                            else -> Unit
+//                        }
+//                    }
+//                    // Optional: Placeholder UI for debug purposes
+//                    Column(
+//                        modifier = Modifier.fillMaxSize(),
+//                        verticalArrangement = Arrangement.Center,
+//                        horizontalAlignment = Alignment.CenterHorizontally
+//                    ) {
+//                        // No UI required as Toast messages handle the feedback
+//                    }
+//                }
+//            }
+//        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Render biometric screen
         setContent {
             NLMTheme {
                 Surface(
@@ -70,16 +138,20 @@ class ComposeActivity : AppCompatActivity() {
                                 // Show toast for success
                                 Toast.makeText(this@ComposeActivity, "Authentication Successful", Toast.LENGTH_SHORT).show()
                                 // Navigate to Dashboard
+                                Log.d("Biometric", "Authentication Successful")
                                 startActivity(Intent(this@ComposeActivity, DashboardActivity::class.java))
                                 finish()
                             }
                             is BiometricPromptManager.BiometricResult.AuthenticationError,
                             BiometricPromptManager.BiometricResult.AuthenticationFailed -> {
+
+                                Log.d("Biometric", "AuthenticationFailed")
                                 // Show toast for failure
                                 Toast.makeText(this@ComposeActivity, "Authentication Failed", Toast.LENGTH_SHORT).show()
                                 finish() // Close the activity
                             }
                             is BiometricPromptManager.BiometricResult.AuthenticationNotSet -> {
+                                Log.d("Biometric", "Authentication Not Set")
                                 if (Build.VERSION.SDK_INT >= 30) {
                                     val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
                                         putExtra(

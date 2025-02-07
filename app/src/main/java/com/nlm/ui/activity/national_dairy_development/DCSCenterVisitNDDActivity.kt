@@ -96,7 +96,7 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
                             count + 1
                         }
                     }
-                    if (userResponseModel._result.is_add) {
+                    if (userResponseModel._result.is_add == true) {
                         mBinding?.fabAdd?.showView()
                     } else {
                         mBinding?.fabAdd?.hideView()
@@ -106,7 +106,7 @@ class DCSCenterVisitNDDActivity : BaseActivity<ActivityDcsCenterVisitNddBinding>
                     mBinding?.tvNoDataFound?.hideView()
                     mBinding?.recyclerView?.showView()
                 } else {
-                    if (userResponseModel._result.is_add) {
+                    if (userResponseModel._result.is_add == true) {
                         mBinding?.fabAdd?.showView()
                     } else {
                         mBinding?.fabAdd?.hideView()
